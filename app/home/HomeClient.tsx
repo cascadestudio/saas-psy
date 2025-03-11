@@ -21,64 +21,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Badge } from "@/components/ui/badge";
-
-// Sample questionnaire data
-const questionnaires = [
-  {
-    id: 1,
-    title: "Beck Depression Inventory (BDI)",
-    description:
-      "A 21-question multiple-choice self-report inventory for measuring the severity of depression",
-    category: "Depression",
-    questions: 21,
-    estimatedTime: "10-15 minutes",
-  },
-  {
-    id: 2,
-    title: "Hamilton Anxiety Rating Scale (HAM-A)",
-    description:
-      "A psychological questionnaire used to rate the severity of a patient's anxiety",
-    category: "Anxiety",
-    questions: 14,
-    estimatedTime: "10-15 minutes",
-  },
-  {
-    id: 3,
-    title: "ADHD Rating Scale",
-    description:
-      "A questionnaire used to evaluate symptoms of attention-deficit/hyperactivity disorder",
-    category: "ADHD",
-    questions: 18,
-    estimatedTime: "5-10 minutes",
-  },
-  {
-    id: 4,
-    title: "Pittsburgh Sleep Quality Index (PSQI)",
-    description:
-      "A self-report questionnaire that assesses sleep quality over a one-month interval",
-    category: "Sleep",
-    questions: 19,
-    estimatedTime: "5-10 minutes",
-  },
-  {
-    id: 5,
-    title: "Generalized Anxiety Disorder 7 (GAD-7)",
-    description:
-      "A self-reported questionnaire for screening and severity measuring of generalized anxiety disorder",
-    category: "Anxiety",
-    questions: 7,
-    estimatedTime: "2-5 minutes",
-  },
-  {
-    id: 6,
-    title: "Patient Health Questionnaire (PHQ-9)",
-    description:
-      "A multipurpose instrument for screening, diagnosing, monitoring and measuring the severity of depression",
-    category: "Depression",
-    questions: 9,
-    estimatedTime: "2-5 minutes",
-  },
-];
+import { questionnaires } from "@/app/data";
 
 // Get unique categories for filter
 const categories = Array.from(new Set(questionnaires.map((q) => q.category)));
