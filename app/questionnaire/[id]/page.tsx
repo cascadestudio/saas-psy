@@ -11,15 +11,13 @@ import {
 import { EmailDialogForm } from "./EmailDialogForm";
 import { questionnaires } from "@/app/data";
 
-interface PageProps {
-  params: {
-    id: string;
-  };
-}
-
-export default function QuestionnairePage({ params }: PageProps) {
-  const id = Number.parseInt(params.id);
-  const questionnaire = questionnaires.find((q) => q.id === id);
+export default async function QuestionnairePage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params;
+  const questionnaire = questionnaires.find((q) => q.id === Number(id));
 
   if (!questionnaire) {
     return (
