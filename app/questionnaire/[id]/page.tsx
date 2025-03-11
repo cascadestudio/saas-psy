@@ -140,11 +140,14 @@ const questionnaires = [
   },
 ];
 
-export default function QuestionnairePage({
-  params,
-}: {
-  params: { id: string };
-}) {
+interface PageProps {
+  params: {
+    id: string;
+  };
+  searchParams: { [key: string]: string | string[] | undefined };
+}
+
+export default function QuestionnairePage({ params }: PageProps) {
   const [isEmailSent, setIsEmailSent] = useState(false);
 
   const id = Number.parseInt(params.id);
