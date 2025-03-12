@@ -70,9 +70,12 @@ export default function QuestionnaireForm() {
     <div className="container mx-auto py-8 px-4">
       <Card>
         <CardHeader>
-          <CardTitle>{questionnaire.title}</CardTitle>
+          <CardTitle>
+            Bonjour Jean-Pierre, veuillez répondre à ce questionnaire
+          </CardTitle>
           <p className="text-sm text-muted-foreground mt-2">
-            {questionnaire.description}
+            Les réponses de ce questionnaire seront uniquement visibles par
+            votre psychologue.
           </p>
         </CardHeader>
         <CardContent>
@@ -80,7 +83,7 @@ export default function QuestionnaireForm() {
             {/* This is a minimalist form with just a few example fields */}
             <div className="space-y-6">
               <div className="space-y-2">
-                <Label htmlFor="name">Votre nom</Label>
+                <Label htmlFor="name">1. Téléphoner en public (P)</Label>
                 <Input
                   id="name"
                   name="name"
@@ -90,7 +93,9 @@ export default function QuestionnaireForm() {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="email">Votre email</Label>
+                <Label htmlFor="email">
+                  2. Participer au sein d’un petit groupe (P)
+                </Label>
                 <Input
                   id="email"
                   name="email"
