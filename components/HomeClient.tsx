@@ -146,7 +146,7 @@ export default function Home() {
               </CardHeader>
               <CardContent className="flex-grow">
                 <div className="flex justify-between text-sm text-muted-foreground">
-                  <span>{questionnaire.questions} questions</span>
+                  <span>{questionnaire.questions.length} questions</span>
                   <span>{questionnaire.estimatedTime}</span>
                 </div>
               </CardContent>

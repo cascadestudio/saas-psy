@@ -46,25 +46,23 @@ export default async function QuestionnairePage({
           <div className="flex items-center gap-6">
             <div className="flex items-center">
               <FileText className="h-5 w-5 mr-2 text-muted-foreground" />
-              <span>{questionnaire.questions} questions</span>
+              <span>{questionnaire.questions.length} questions</span>
             </div>
             <div className="flex items-center">
               <Clock className="h-5 w-5 mr-2 text-muted-foreground" />
               <span>{questionnaire.estimatedTime}</span>
             </div>
           </div>
-
           <div>
             <h3 className="text-lg font-medium mb-2">Description</h3>
             <p className="text-muted-foreground">
               {questionnaire.longDescription}
             </p>
           </div>
-
           <div>
             <h3 className="text-lg font-medium mb-2">Questions d'exemple</h3>
             <ul className="list-disc pl-5 text-muted-foreground">
-              {questionnaire.sampleQuestions.map((question, index) => (
+              {questionnaire.questions.slice(0, 5).map((question, index) => (
                 <li key={index} className="mb-1">
                   {question}
                 </li>
