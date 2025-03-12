@@ -70,8 +70,6 @@ export default function Home() {
 
   return (
     <div className="container mx-auto py-8 px-4 sm:px-6 md:px-8">
-      <h1 className="text-3xl font-bold mb-8">Psychological Questionnaires</h1>
-
       <div className="flex flex-col sm:flex-row gap-4 mb-8">
         <div className="relative flex-1">
           <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
