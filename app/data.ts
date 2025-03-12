@@ -1,5 +1,23 @@
 export const questionnaires = [
   {
+    id: 7,
+    title: "Échelle d'anxiété sociale de Liebowitz",
+    description:
+      "Un questionnaire clinique de 24 items qui mesure la peur et l'évitement dans des situations sociales et de performance",
+    category: "Anxiété sociale",
+    questions: 24,
+    estimatedTime: "10-15 minutes",
+    longDescription:
+      "L'Échelle d'anxiété sociale de Liebowitz (LSAS) est un questionnaire développé par le psychiatre Michael Liebowitz pour évaluer la gravité de l'anxiété sociale. Il mesure à la fois la peur et l'évitement dans 24 situations sociales différentes. Chaque situation est évaluée deux fois : une fois pour le niveau d'anxiété qu'elle provoque (de 0 à 3, où 0 signifie aucune anxiété et 3 une anxiété sévère) et une fois pour la fréquence d'évitement de la situation (également de 0 à 3). Le LSAS est largement utilisé en recherche clinique et en pratique pour évaluer l'efficacité des traitements pour l'anxiété sociale.",
+    sampleQuestions: [
+      "Téléphoner en public",
+      "Participer à un petit groupe",
+      "Manger dans un lieu public",
+      "Parler à des personnes en position d'autorité",
+      "Exprimer son désaccord avec quelqu'un qu'on ne connaît pas très bien",
+    ],
+  },
+  {
     id: 1,
     title: "Inventaire de Dépression de Beck (BDI)",
     description:
