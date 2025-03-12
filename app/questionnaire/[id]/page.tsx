@@ -1,15 +1,13 @@
 import { questionnaires } from "@/app/data";
 import QuestionnaireForm from "./QuestionnaireForm";
 
-export default function QuestionnairePage({
+export default async function QuestionnairePage({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }) {
-  const questionnaireId = params.id;
-  const questionnaire = questionnaires.find(
-    (q) => q.id === Number(questionnaireId)
-  );
+  const { id } = await params;
+  const questionnaire = questionnaires.find((q) => q.id === Number(id));
 
   return <QuestionnaireForm questionnaire={questionnaire || null} />;
 }
