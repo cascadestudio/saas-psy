@@ -152,7 +152,7 @@ export default function Home() {
               </CardContent>
               <CardFooter>
                 <Link
-                  href={`/questionnaire/${questionnaire.id}`}
+                  href={`/questionnaire/description/${questionnaire.id}`}
                   className="w-full"
                 >
                   <Button className="w-full">Voir les détails</Button>
