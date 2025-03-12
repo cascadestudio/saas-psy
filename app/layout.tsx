@@ -42,7 +42,7 @@ export default function RootLayout({
                 <Link href={"/"}>
                   <h1 className="text-xl font-bold">Appsy</h1>
                 </Link>
-                <HeaderAuth />
+                {/* <HeaderAuth /> */}
               </nav>
               <div className="flex flex-col gap-20 max-w-5xl p-5">
                 {children}

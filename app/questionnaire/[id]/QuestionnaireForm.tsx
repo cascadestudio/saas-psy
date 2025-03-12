@@ -51,12 +51,39 @@ export default function QuestionnaireForm({
     e.preventDefault();
     setIsSubmitting(true);
 
-    // This is a placeholder for the actual submission logic
-    // You'll implement this later
-    setTimeout(() => {
-      setIsSubmitting(false);
+    // Get form data
+    const formData = new FormData(e.currentTarget);
+    const formEntries = Object.fromEntries(formData.entries());
+
+    // Get patient name from the form
+    const patientName = formEntries.name as string;
+
+    try {
+      // Send the form data to our API endpoint
+      const response = await fetch("/api/submit-questionnaire", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          questionnaireId: questionnaire.id,
+          questionnaireTitle: questionnaire.title,
+          patientName,
+          formData: formEntries,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to submit questionnaire");
+      }
+
       setIsSubmitted(true);
-    }, 1000);
+    } catch (error) {
+      console.error("Error submitting questionnaire:", error);
+      // Handle error (you could add error state and display a message)
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   if (isSubmitted) {
