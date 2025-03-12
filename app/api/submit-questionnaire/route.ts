@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
+import { questionnaires } from "@/app/data";
 
 // Initialize Resend with your API key
 const resend = new Resend(process.env.RESEND_API_KEY);
@@ -9,6 +10,53 @@ export async function POST(request: Request) {
     // Parse the request body
     const body = await request.json();
     const { questionnaireId, questionnaireTitle, patientName, formData } = body;
+
+    // Find the questionnaire data to access scoring information
+    const questionnaire = questionnaires.find((q) => q.id === questionnaireId);
+
+    // Calculate the score
+    let totalScore = 0;
+    let anxietyScore = 0;
+    let avoidanceScore = 0;
+    let interpretation = "";
+    let scoreDetails = "";
+
+    if (questionnaire) {
+      // Extract all anxiety and avoidance scores
+      const anxietyValues = Object.entries(formData)
+        .filter(([key]) => key.startsWith("anxiety_"))
+        .map(([_, value]) => parseInt(value as string, 10));
+
+      const avoidanceValues = Object.entries(formData)
+        .filter(([key]) => key.startsWith("avoidance_"))
+        .map(([_, value]) => parseInt(value as string, 10));
+
+      // Calculate sub-scores
+      anxietyScore = anxietyValues.reduce((sum, value) => sum + value, 0);
+      avoidanceScore = avoidanceValues.reduce((sum, value) => sum + value, 0);
+
+      // Calculate total score
+      totalScore = anxietyScore + avoidanceScore;
+
+      // Determine interpretation based on scoring ranges
+      if (questionnaire.scoring?.ranges) {
+        const matchingRange = questionnaire.scoring.ranges.find(
+          (range) => totalScore >= range.min && totalScore <= range.max
+        );
+
+        if (matchingRange) {
+          interpretation = matchingRange.interpretation;
+        }
+      }
+
+      // Create score details
+      scoreDetails = `
+Score total: ${totalScore}/144
+Score d'anxiété: ${anxietyScore}/72
+Score d'évitement: ${avoidanceScore}/72
+Interprétation: ${interpretation}
+      `;
+    }
 
     // Format the form data for the email
     const formDataString = Object.entries(formData)
@@ -21,11 +69,17 @@ export async function POST(request: Request) {
       to: ["contact@cascadestudio.fr"],
       subject: `Résultat du questionnaire ${questionnaireTitle} pour ${patientName}`,
       text: `
-Patient Name: ${patientName}
+Patient: ${patientName}
 Questionnaire: ${questionnaireTitle} (ID: ${questionnaireId})
 
-Form Responses:
+RÉSULTATS:
+${scoreDetails}
+
+Réponses détaillées:
 ${formDataString}
+
+Commentaires additionnels:
+${formData.comments || "Aucun commentaire"}
       `,
     });
 
@@ -37,7 +91,16 @@ ${formDataString}
       );
     }
 
-    return NextResponse.json({ success: true, data });
+    return NextResponse.json({
+      success: true,
+      data,
+      score: {
+        total: totalScore,
+        anxiety: anxietyScore,
+        avoidance: avoidanceScore,
+        interpretation,
+      },
+    });
   } catch (error) {
     console.error("Error processing request:", error);
     return NextResponse.json(

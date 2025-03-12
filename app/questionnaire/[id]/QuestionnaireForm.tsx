@@ -9,9 +9,9 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
 type QuestionnaireFormProps = {
   questionnaire: {
@@ -19,10 +19,17 @@ type QuestionnaireFormProps = {
     title: string;
     description: string;
     category: string;
-    questions: number;
+    questions: string[];
     estimatedTime: string;
     longDescription: string;
-    sampleQuestions: string[];
+    answerScales?: {
+      anxiety: { value: number; label: string }[];
+      avoidance: { value: number; label: string }[];
+    };
+    scoring?: {
+      ranges: { min: number; max: number; interpretation: string }[];
+      method: string;
+    };
   } | null;
 };
 
@@ -55,9 +62,6 @@ export default function QuestionnaireForm({
     const formData = new FormData(e.currentTarget);
     const formEntries = Object.fromEntries(formData.entries());
 
-    // Get patient name from the form
-    const patientName = formEntries.name as string;
-
     try {
       // Send the form data to our API endpoint
       const response = await fetch("/api/submit-questionnaire", {
@@ -68,7 +72,6 @@ export default function QuestionnaireForm({
         body: JSON.stringify({
           questionnaireId: questionnaire.id,
           questionnaireTitle: questionnaire.title,
-          patientName,
           formData: formEntries,
         }),
       });
@@ -115,29 +118,98 @@ export default function QuestionnaireForm({
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit}>
-            {/* This is a minimalist form with just a few example fields */}
             <div className="space-y-6">
-              <div className="space-y-2">
-                <Label htmlFor="name">1. Téléphoner en public (P)</Label>
-                <Input
-                  id="name"
-                  name="name"
-                  required
-                  placeholder="Entrez votre nom"
-                />
+              <div className="border-t pt-4">
+                <h3 className="font-medium text-lg mb-4">Instructions</h3>
+                <p className="mb-4">
+                  Ce questionnaire évalue deux aspects de l'anxiété sociale :
+                </p>
+                <ul className="list-disc pl-5 mb-4 space-y-1">
+                  <li>
+                    <strong>Peur/Anxiété</strong> : Le niveau d'anxiété que vous
+                    ressentez dans chaque situation
+                  </li>
+                  <li>
+                    <strong>Évitement</strong> : La fréquence à laquelle vous
+                    évitez chaque situation
+                  </li>
+                </ul>
+                <p className="mb-4">
+                  Pour chaque situation, veuillez évaluer à la fois votre niveau
+                  d'anxiété et votre fréquence d'évitement.
+                </p>
               </div>
 
-              <div className="space-y-2">
-                <Label htmlFor="email">
-                  2. Participer au sein d'un petit groupe (P)
-                </Label>
-                <Input
-                  id="email"
-                  name="email"
-                  type="email"
-                  required
-                  placeholder="Entrez votre email"
-                />
+              <div className="border-t pt-4">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                  <div></div>
+                  <div className="text-center font-medium">Peur/Anxiété</div>
+                  <div className="text-center font-medium">Évitement</div>
+                </div>
+
+                {questionnaire.questions.map((question, index) => (
+                  <div key={index} className="border-t pt-4 pb-2">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-start">
+                      <div className="font-medium">
+                        {index + 1}. {question}
+                      </div>
+
+                      <div>
+                        <RadioGroup
+                          name={`anxiety_${index}`}
+                          required
+                          className="space-y-1"
+                        >
+                          {questionnaire.answerScales?.anxiety.map((scale) => (
+                            <div
+                              key={scale.value}
+                              className="flex items-center space-x-2"
+                            >
+                              <RadioGroupItem
+                                value={scale.value.toString()}
+                                id={`anxiety_${index}_${scale.value}`}
+                              />
+                              <Label
+                                htmlFor={`anxiety_${index}_${scale.value}`}
+                                className="text-sm"
+                              >
+                                {scale.label}
+                              </Label>
+                            </div>
+                          ))}
+                        </RadioGroup>
+                      </div>
+
+                      <div>
+                        <RadioGroup
+                          name={`avoidance_${index}`}
+                          required
+                          className="space-y-1"
+                        >
+                          {questionnaire.answerScales?.avoidance.map(
+                            (scale) => (
+                              <div
+                                key={scale.value}
+                                className="flex items-center space-x-2"
+                              >
+                                <RadioGroupItem
+                                  value={scale.value.toString()}
+                                  id={`avoidance_${index}_${scale.value}`}
+                                />
+                                <Label
+                                  htmlFor={`avoidance_${index}_${scale.value}`}
+                                  className="text-sm"
+                                >
+                                  {scale.label}
+                                </Label>
+                              </div>
+                            )
+                          )}
+                        </RadioGroup>
+                      </div>
+                    </div>
+                  </div>
+                ))}
               </div>
 
               <div className="space-y-2">
@@ -149,11 +221,6 @@ export default function QuestionnaireForm({
                   className="min-h-[100px]"
                 />
               </div>
-
-              <p className="text-sm text-muted-foreground italic">
-                Note: Ceci est une version minimaliste du formulaire. Les
-                questions spécifiques seront implémentées ultérieurement.
-              </p>
             </div>
 
             <CardFooter className="px-0 pt-6">
