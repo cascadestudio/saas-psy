@@ -40,9 +40,7 @@ export default function RootLayout({
             <div className="flex-1 w-full flex flex-col gap-20 items-center">
               <nav className="px-4 w-full flex items-center justify-between border-b border-b-foreground/10 h-16">
                 <Link href={"/"}>
-                  <h1 className="text-xl font-bold">
-                    Psychological Questionnaires
-                  </h1>
+                  <h1 className="text-xl font-bold">Appsy</h1>
                 </Link>
                 <HeaderAuth />
               </nav>

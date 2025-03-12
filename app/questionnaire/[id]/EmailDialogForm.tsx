@@ -60,12 +60,10 @@ export function EmailDialogForm() {
 
       setIsEmailSent(true);
       setOpen(false);
-      toast.success(
-        "The questionnaire has been sent to the patient successfully."
-      );
+      toast.success("Le questionnaire a été envoyé au patient avec succès.");
     } catch (error) {
       console.error("Error sending email:", error);
-      toast.error("Failed to send the questionnaire. Please try again.");
+      toast.error("Échec de l'envoi du questionnaire. Veuillez réessayer.");
     } finally {
       setIsLoading(false);
     }
@@ -76,50 +74,52 @@ export function EmailDialogForm() {
       <DialogTrigger asChild>
         <Button className="w-full">
           <Send className="mr-2 h-4 w-4" />
-          Send to Patient
+          Envoyer au Patient
         </Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Send Questionnaire to Patient</DialogTitle>
+          <DialogTitle>Envoyer le Questionnaire au Patient</DialogTitle>
           <DialogDescription>
-            The questionnaire will be sent to the patient's email address.
+            Le questionnaire sera envoyé à l'adresse e-mail du patient.
           </DialogDescription>
         </DialogHeader>
         <form onSubmit={handleSendEmail}>
           <div className="space-y-4 py-4">
             <div className="space-y-2">
-              <Label htmlFor="patient-name">Patient Name</Label>
+              <Label htmlFor="patient-name">Nom du Patient</Label>
               <Input
                 id="patient-name"
                 name="patient-name"
-                placeholder="Enter patient name"
+                placeholder="Entrez le nom du patient"
                 required
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="patient-email">Patient Email</Label>
+              <Label htmlFor="patient-email">Email du Patient</Label>
               <Input
                 id="patient-email"
                 name="patient-email"
                 type="email"
-                placeholder="Enter patient email"
+                placeholder="Entrez l'email du patient"
                 required
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="message">Additional Message (Optional)</Label>
+              <Label htmlFor="message">
+                Message Supplémentaire (Optionnel)
+              </Label>
               <Textarea
                 id="message"
                 name="message"
-                placeholder="Add a personal message to the patient"
+                placeholder="Ajoutez un message personnel au patient"
                 className="min-h-[100px]"
               />
             </div>
           </div>
           <DialogFooter>
             <Button type="submit" disabled={isLoading}>
-              {isLoading ? "Sending..." : "Send Questionnaire"}
+              {isLoading ? "Envoi en cours..." : "Envoyer le Questionnaire"}
             </Button>
           </DialogFooter>
         </form>

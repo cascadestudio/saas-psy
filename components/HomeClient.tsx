@@ -75,7 +75,7 @@ export default function Home() {
           <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
           <Input
             type="search"
-            placeholder="Search questionnaires..."
+            placeholder="Rechercher des questionnaires..."
             className="pl-8"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
@@ -93,7 +93,7 @@ export default function Home() {
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="outline">
-                Filter by Category
+                Filtrer par Catégorie
                 {selectedCategories.length > 0 && (
                   <Badge variant="secondary" className="ml-2">
                     {selectedCategories.length}
@@ -116,7 +116,7 @@ export default function Home() {
 
           {(searchTerm || selectedCategories.length > 0) && (
             <Button variant="ghost" onClick={clearFilters}>
-              Clear
+              Effacer
             </Button>
           )}
         </div>
@@ -125,10 +125,10 @@ export default function Home() {
       {filteredQuestionnaires.length === 0 ? (
         <div className="text-center py-12">
           <p className="text-lg text-muted-foreground">
-            No questionnaires found matching your criteria.
+            Aucun questionnaire ne correspond à vos critères.
           </p>
           <Button variant="link" onClick={clearFilters}>
-            Clear filters
+            Effacer les filtres
           </Button>
         </div>
       ) : (
@@ -155,7 +155,7 @@ export default function Home() {
                   href={`/questionnaire/${questionnaire.id}`}
                   className="w-full"
                 >
-                  <Button className="w-full">View Details</Button>
+                  <Button className="w-full">Voir les détails</Button>
                 </Link>
               </CardFooter>
             </Card>
