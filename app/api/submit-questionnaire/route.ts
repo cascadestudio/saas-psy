@@ -19,7 +19,7 @@ export async function POST(request: Request) {
     const { data, error } = await resend.emails.send({
       from: "Acme <onboarding@resend.dev>",
       to: ["contact@cascadestudio.fr"],
-      subject: `Questionnaire Submission: ${questionnaireTitle} - ${patientName}`,
+      subject: `Résultat du questionnaire ${questionnaireTitle} pour ${patientName}`,
       text: `
 Patient Name: ${patientName}
 Questionnaire: ${questionnaireTitle} (ID: ${questionnaireId})
