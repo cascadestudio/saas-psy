@@ -60,7 +60,9 @@ export function EmailDialogForm() {
 
       setIsEmailSent(true);
       setOpen(false);
-      toast("The questionnaire has been sent to the patient successfully.");
+      toast.success(
+        "The questionnaire has been sent to the patient successfully."
+      );
     } catch (error) {
       console.error("Error sending email:", error);
       toast.error("Failed to send the questionnaire. Please try again.");
