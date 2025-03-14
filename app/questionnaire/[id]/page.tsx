@@ -5,18 +5,21 @@ export default async function QuestionnairePage({
   params,
   searchParams,
 }: {
-  params: { id: string };
-  searchParams: {
+  params: Promise<{ id: string }>;
+  searchParams: Promise<{
     psychologistEmail?: string;
     patientFirstname?: string;
     patientLastname?: string;
-  };
+  }>;
 }) {
-  const { id } = params;
+  const { id } = await params;
+  const {
+    psychologistEmail = null,
+    patientFirstname = null,
+    patientLastname = null,
+  } = await searchParams;
+
   const questionnaire = questionnaires.find((q) => q.id === Number(id));
-  const psychologistEmail = searchParams.psychologistEmail || null;
-  const patientFirstname = searchParams.patientFirstname || null;
-  const patientLastname = searchParams.patientLastname || null;
 
   return (
     <QuestionnaireForm
