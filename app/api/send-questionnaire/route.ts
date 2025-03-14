@@ -1,6 +1,6 @@
 import { Resend } from "resend";
 import { NextResponse } from "next/server";
-import { EmailTemplate } from "@/components/SendQuestionnaireEmailTemplate";
+import { SendQuestionnaireEmailTemplate } from "@/components/SendQuestionnaireEmailTemplate";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -20,12 +20,12 @@ export async function POST(request: Request) {
 
     const { data, error } = await resend.emails.send({
       //   from: "Acme <onboarding@resend.dev>",
-      from: "Cascade <contact@cascadestudio.fr>",
+      from: "Appsy <contact@cascadestudio.fr>",
       //   to: ["contact@cascadestudio.fr"],
       to: [patientEmail],
       //   to: ["delivered@resend.dev"], // Test address that always works
-      subject: "Votre Questionnaire de Santé",
-      react: await EmailTemplate({
+      subject: "Votre questionnaire de santé",
+      react: await SendQuestionnaireEmailTemplate({
         patientFirstname,
         patientLastname,
         message,

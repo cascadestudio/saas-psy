@@ -73,7 +73,7 @@ Interprétation: ${interpretation}
 
     // Send the email
     const { data, error } = await resend.emails.send({
-      from: "Cascade <contact@cascadestudio.fr>",
+      from: "Appsy <contact@cascadestudio.fr>",
       to: [psychologistEmail],
       subject: `Résultat du questionnaire ${questionnaireTitle} pour ${patientFirstname} ${patientLastname}`,
       react: await SubmitQuestionnaireEmailTemplate({

@@ -123,6 +123,7 @@ const buttonStyle = {
   display: "block",
   width: "100%",
   margin: "20px 0",
+  padding: "10px 20px",
 };
 
 const linkTextStyle = {
