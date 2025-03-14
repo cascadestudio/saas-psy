@@ -19,8 +19,10 @@ import { toast } from "sonner";
 import { useParams } from "next/navigation";
 
 interface EmailFormData {
-  patientName: string;
+  patientFirstname: string;
+  patientLastname: string;
   patientEmail: string;
+  psychologistEmail: string;
   message: string;
 }
 
@@ -37,8 +39,10 @@ export function EmailDialogForm() {
 
     const formData = new FormData(e.currentTarget);
     const data: EmailFormData = {
-      patientName: formData.get("patient-name") as string,
+      patientFirstname: formData.get("patient-firstname") as string,
+      patientLastname: formData.get("patient-lastname") as string,
       patientEmail: formData.get("patient-email") as string,
+      psychologistEmail: formData.get("psychologist-email") as string,
       message: (formData.get("message") as string) || "",
     };
 
@@ -81,16 +85,37 @@ export function EmailDialogForm() {
         <DialogHeader>
           <DialogTitle>Envoyer le Questionnaire au Patient</DialogTitle>
           <DialogDescription>
-            Le questionnaire sera envoyé à l'adresse e-mail du patient.
+            Le questionnaire sera envoyé à l'adresse e-mail du patient. Vous
+            recevrez un e-mail contenant les résultats du questionnaire lorsque
+            le patient validera le questionnaire.
           </DialogDescription>
         </DialogHeader>
         <form onSubmit={handleSendEmail}>
           <div className="space-y-4 py-4">
             <div className="space-y-2">
+              <Label htmlFor="patient-email">Votre email (psychologue)</Label>
+              <Input
+                id="psychologist-email"
+                name="psychologist-email"
+                type="email"
+                placeholder="Entrez votre email"
+                required
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="patient-name">Prénom du Patient</Label>
+              <Input
+                id="patient-firstname"
+                name="patient-firstname"
+                placeholder="Entrez le prénom du patient"
+                required
+              />
+            </div>
+            <div className="space-y-2">
               <Label htmlFor="patient-name">Nom du Patient</Label>
               <Input
-                id="patient-name"
-                name="patient-name"
+                id="patient-lastname"
+                name="patient-lastname"
                 placeholder="Entrez le nom du patient"
                 required
               />
@@ -105,6 +130,7 @@ export function EmailDialogForm() {
                 required
               />
             </div>
+
             <div className="space-y-2">
               <Label htmlFor="message">
                 Message Supplémentaire (Optionnel)

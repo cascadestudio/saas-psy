@@ -6,9 +6,15 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(request: Request) {
   try {
-    const { patientName, patientEmail, message, questionnaireId } =
-      await request.json();
-    console.log(patientName, patientEmail, message);
+    const {
+      patientFirstname,
+      patientLastname,
+      patientEmail,
+      psychologistEmail,
+      message,
+      questionnaireId,
+    } = await request.json();
+
     // Generate the questionnaire URL
     const questionnaireUrl = `${process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"}/questionnaire/${questionnaireId}`;
 
@@ -20,7 +26,8 @@ export async function POST(request: Request) {
       //   to: ["delivered@resend.dev"], // Test address that always works
       subject: "Votre Questionnaire de Santé",
       react: await EmailTemplate({
-        patientName,
+        patientFirstname,
+        patientLastname,
         message,
         questionnaireUrl,
       }),
