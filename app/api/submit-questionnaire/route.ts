@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 import { questionnaires } from "@/app/data";
+import { SubmitQuestionnaireEmailTemplate } from "@/components/SubmitQuestionnaireEmailTemplate";
 
 // Initialize Resend with your API key
 const resend = new Resend(process.env.RESEND_API_KEY);
@@ -9,7 +10,14 @@ export async function POST(request: Request) {
   try {
     // Parse the request body
     const body = await request.json();
-    const { questionnaireId, questionnaireTitle, patientName, formData } = body;
+    const {
+      questionnaireId,
+      questionnaireTitle,
+      formData,
+      psychologistEmail,
+      patientFirstname,
+      patientLastname,
+    } = body;
 
     // Find the questionnaire data to access scoring information
     const questionnaire = questionnaires.find((q) => q.id === questionnaireId);
@@ -65,22 +73,25 @@ Interprétation: ${interpretation}
 
     // Send the email
     const { data, error } = await resend.emails.send({
-      from: "Acme <onboarding@resend.dev>",
-      to: ["contact@cascadestudio.fr"],
-      subject: `Résultat du questionnaire ${questionnaireTitle} pour ${patientName}`,
-      text: `
-Patient: ${patientName}
-Questionnaire: ${questionnaireTitle} (ID: ${questionnaireId})
-
-RÉSULTATS:
-${scoreDetails}
-
-Réponses détaillées:
-${formDataString}
-
-Commentaires additionnels:
-${formData.comments || "Aucun commentaire"}
-      `,
+      from: "Cascade <contact@cascadestudio.fr>",
+      to: [psychologistEmail],
+      subject: `Résultat du questionnaire ${questionnaireTitle} pour ${patientFirstname} ${patientLastname}`,
+      react: await SubmitQuestionnaireEmailTemplate({
+        patientFirstname,
+        patientLastname,
+        questionnaireTitle,
+        scoreDetails: {
+          total: totalScore,
+          anxiety: anxietyScore,
+          avoidance: avoidanceScore,
+          interpretation,
+          maxTotal: 144,
+          maxAnxiety: 72,
+          maxAvoidance: 72,
+        },
+        formResponses: formDataString,
+        comments: formData.comments || undefined,
+      }),
     });
 
     if (error) {

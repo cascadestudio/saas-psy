@@ -31,10 +31,16 @@ type QuestionnaireFormProps = {
       method: string;
     };
   } | null;
+  psychologistEmail: string | null;
+  patientFirstname: string | null;
+  patientLastname: string | null;
 };
 
 export default function QuestionnaireForm({
   questionnaire,
+  psychologistEmail,
+  patientFirstname,
+  patientLastname,
 }: QuestionnaireFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -72,6 +78,9 @@ export default function QuestionnaireForm({
         body: JSON.stringify({
           questionnaireId: questionnaire.id,
           questionnaireTitle: questionnaire.title,
+          patientFirstname,
+          patientLastname,
+          psychologistEmail,
           formData: formEntries,
         }),
       });
@@ -109,7 +118,8 @@ export default function QuestionnaireForm({
       <Card>
         <CardHeader>
           <CardTitle>
-            Bonjour Jean-Pierre, veuillez répondre à ce questionnaire
+            Bonjour {patientFirstname} {patientLastname}, veuillez répondre à ce
+            questionnaire
           </CardTitle>
           <p className="text-sm text-muted-foreground mt-2">
             Les réponses de ce questionnaire seront uniquement visibles par

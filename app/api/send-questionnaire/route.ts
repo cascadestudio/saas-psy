@@ -1,6 +1,6 @@
 import { Resend } from "resend";
 import { NextResponse } from "next/server";
-import { EmailTemplate } from "@/components/EmailTemplate";
+import { EmailTemplate } from "@/components/SendQuestionnaireEmailTemplate";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -15,8 +15,8 @@ export async function POST(request: Request) {
       questionnaireId,
     } = await request.json();
 
-    // Generate the questionnaire URL
-    const questionnaireUrl = `${process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"}/questionnaire/${questionnaireId}`;
+    // Generate the questionnaire URL with psychologistEmail as a query parameter
+    const questionnaireUrl = `${process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"}/questionnaire/${questionnaireId}?psychologistEmail=${encodeURIComponent(psychologistEmail)}&patientFirstname=${encodeURIComponent(patientFirstname)}&patientLastname=${encodeURIComponent(patientLastname)}`;
 
     const { data, error } = await resend.emails.send({
       //   from: "Acme <onboarding@resend.dev>",
