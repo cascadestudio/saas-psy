@@ -9,7 +9,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { EmailDialogForm } from "./EmailDialogForm";
-import { questionnaires } from "@/app/data";
+import { questionnaires } from "@/app/questionnairesData";
 
 export default async function QuestionnairePage({
   params,

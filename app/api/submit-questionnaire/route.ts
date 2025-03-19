@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
-import { questionnaires } from "@/app/data";
+import { questionnaires } from "@/app/questionnairesData";
 import { ResultQuestionnaireEmailTemplate } from "@/components/ResultQuestionnaireEmailTemplate";
 
 // Initialize Resend with your API key

@@ -1,4 +1,4 @@
-import { questionnaires } from "@/app/data";
+import { questionnaires } from "@/app/questionnairesData";
 import QuestionnaireForm from "./QuestionnaireForm";
 
 export default async function QuestionnairePage({
