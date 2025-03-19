@@ -1,29 +1,31 @@
+import { notFound } from "next/navigation";
 import { questionnaires } from "@/app/questionnairesData";
-import QuestionnaireForm from "./QuestionnaireForm";
+import QuestionnaireFactory from "@/components/questionnaires/QuestionnaireFactory";
 
 export default async function QuestionnairePage({
   params,
   searchParams,
 }: {
   params: Promise<{ id: string }>;
-  searchParams: Promise<{
-    psychologistEmail?: string;
-    patientFirstname?: string;
-    patientLastname?: string;
-  }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
-  const { id } = await params;
+  let { id } = await params;
   const {
     psychologistEmail = null,
     patientFirstname = null,
     patientLastname = null,
   } = await searchParams;
 
-  const questionnaire = questionnaires.find((q) => q.id === Number(id));
+  const questionnaire =
+    questionnaires.find((q) => q.id === parseInt(id, 10)) || null;
+
+  if (!questionnaire) {
+    return notFound();
+  }
 
   return (
-    <QuestionnaireForm
-      questionnaire={questionnaire || null}
+    <QuestionnaireFactory
+      questionnaire={questionnaire}
       psychologistEmail={psychologistEmail}
       patientFirstname={patientFirstname}
       patientLastname={patientLastname}
