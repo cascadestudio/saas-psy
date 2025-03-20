@@ -1,6 +1,6 @@
 export const questionnaires = [
   {
-    id: 1,
+    id: "echelle-d-anxiete-sociale-de-liebowitz",
     title: "Échelle d'anxiété sociale de Liebowitz",
     description:
       "Un questionnaire clinique de 24 items qui mesure la peur et l'évitement dans des situations sociales et de performance",

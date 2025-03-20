@@ -9,10 +9,10 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-
+import { toast } from "sonner";
 export type QuestionnaireProps = {
   questionnaire: {
-    id: number;
+    id: string;
     title: string;
     description: string;
     category: string;
@@ -36,7 +36,7 @@ export default function BaseQuestionnaire({
   psychologistEmail,
   patientFirstname,
   patientLastname,
-  children, // Accept children for question rendering
+  children,
 }: QuestionnaireProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -88,9 +88,10 @@ export default function BaseQuestionnaire({
       setIsSubmitted(true);
     } catch (error) {
       console.error("Error submitting questionnaire:", error);
-      // Handle error (you could add error state and display a message)
+      toast.error("Une erreur est survenue lors de l'envoi du questionnaire.");
     } finally {
       setIsSubmitting(false);
+      toast.success("Questionnaire envoyé avec succès.");
     }
   };
 

@@ -16,8 +16,7 @@ export default async function QuestionnairePage({
     patientLastname = null,
   } = await searchParams;
 
-  const questionnaire =
-    questionnaires.find((q) => q.id === parseInt(id, 10)) || null;
+  const questionnaire = questionnaires.find((q) => q.id === id) || null;
 
   if (!questionnaire) {
     return notFound();

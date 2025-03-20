@@ -17,7 +17,7 @@ export default async function QuestionnairePage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const questionnaire = questionnaires.find((q) => q.id === Number(id));
+  const questionnaire = questionnaires.find((q) => q.id === id);
 
   if (!questionnaire) {
     return (
