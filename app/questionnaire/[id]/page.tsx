@@ -10,10 +10,18 @@ export default async function QuestionnairePage({
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
   let { id } = await params;
-  const { psychologistEmail, patientFirstname, patientLastname } =
-    await searchParams;
+  const {
+    psychologistEmail = process.env.NODE_ENV === "development"
+      ? "contact@cascadestudio.fr"
+      : undefined,
+    patientFirstname = process.env.NODE_ENV === "development"
+      ? "John"
+      : undefined,
+    patientLastname = process.env.NODE_ENV === "development"
+      ? "Doe"
+      : undefined,
+  } = await searchParams;
 
-  // Validate required parameters
   if (
     !psychologistEmail ||
     !patientFirstname ||
@@ -22,7 +30,7 @@ export default async function QuestionnairePage({
     typeof patientFirstname !== "string" ||
     typeof patientLastname !== "string"
   ) {
-    return notFound(); // or some other error handling
+    return notFound();
   }
 
   const questionnaire = questionnaires.find((q) => q.id === id) || null;

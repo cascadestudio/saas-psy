@@ -1,13 +1,16 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { useRouter, useParams } from "next/navigation";
 
 const DevTools = () => {
+  const params = useParams();
+  const questionnaireId = params.id as string;
+
   if (process.env.NODE_ENV !== "development") return null;
   const router = useRouter();
 
   const handleDevShortcut = () => {
-    router.push("/questionnaire");
+    router.push(`/questionnaire/${questionnaireId}`);
   };
 
   const handleDevResultsShortcut = () => {
