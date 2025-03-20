@@ -10,7 +10,8 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { toast } from "sonner";
-import DevTools from "./DevTools";
+import { QuestionnaireResults } from "./QuestionnaireResults";
+
 export type QuestionnaireProps = {
   questionnaire: {
     id: string;
@@ -45,6 +46,7 @@ export default function BaseQuestionnaire({
 }: QuestionnaireProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [submissionData, setSubmissionData] = useState<any>(null);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -54,6 +56,34 @@ export default function BaseQuestionnaire({
     const formData = new FormData(e.currentTarget);
     const formEntries = Object.fromEntries(formData.entries());
 
+    // Calculate scores here based on your scoring logic
+    const scoreDetails = {
+      total: 0, // Calculate this based on your scoring method
+      interpretation: "", // Set this based on the total score
+      // Add anxiety and avoidance if needed
+    };
+
+    const submissionData = {
+      questionnaireId: questionnaire.id,
+      questionnaireTitle: questionnaire.title,
+      patientFirstname,
+      patientLastname,
+      psychologistEmail,
+      formData: formEntries,
+      scoreDetails,
+      // Add comments if needed
+    };
+
+    // Skip API call in development mode
+    if (process.env.NODE_ENV === "development") {
+      console.log("Dev mode: Skipping API call", submissionData);
+      setSubmissionData(submissionData);
+      setIsSubmitted(true);
+      setIsSubmitting(false);
+      toast.success("Questionnaire envoyé avec succès (mode développement)");
+      return;
+    }
+
     try {
       // Send the form data to our API endpoint
       const response = await fetch("/api/submit-questionnaire", {
@@ -61,20 +91,14 @@ export default function BaseQuestionnaire({
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          questionnaireId: questionnaire.id,
-          questionnaireTitle: questionnaire.title,
-          patientFirstname,
-          patientLastname,
-          psychologistEmail,
-          formData: formEntries,
-        }),
+        body: JSON.stringify(submissionData),
       });
 
       if (!response.ok) {
         throw new Error("Failed to submit questionnaire");
       }
 
+      setSubmissionData(submissionData);
       setIsSubmitted(true);
     } catch (error) {
       console.error("Error submitting questionnaire:", error);
@@ -85,19 +109,8 @@ export default function BaseQuestionnaire({
     }
   };
 
-  if (isSubmitted) {
-    return (
-      <div className="container mx-auto py-8 px-4">
-        <Card>
-          <CardHeader>
-            <CardTitle>Merci pour votre participation</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p>Votre questionnaire a été soumis avec succès.</p>
-          </CardContent>
-        </Card>
-      </div>
-    );
+  if (isSubmitted && submissionData) {
+    return <QuestionnaireResults data={submissionData} />;
   }
 
   return (
@@ -124,7 +137,6 @@ export default function BaseQuestionnaire({
             <Button className="w-full" type="submit" disabled={isSubmitting}>
               {isSubmitting ? "Envoi en cours..." : "Soumettre"}
             </Button>
-            <DevTools />
           </CardFooter>
         </form>
       </Card>
