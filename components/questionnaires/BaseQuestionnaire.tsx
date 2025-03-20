@@ -10,6 +10,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { toast } from "sonner";
+import DevTools from "./DevTools";
 export type QuestionnaireProps = {
   questionnaire: {
     id: string;
@@ -123,6 +124,7 @@ export default function BaseQuestionnaire({
             <Button className="w-full" type="submit" disabled={isSubmitting}>
               {isSubmitting ? "Envoi en cours..." : "Soumettre"}
             </Button>
+            <DevTools />
           </CardFooter>
         </form>
       </Card>
