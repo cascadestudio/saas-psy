@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { Resend } from "resend";
 import { questionnaires } from "@/app/questionnairesData";
 import { ResultQuestionnaireEmailTemplate } from "@/components/ResultQuestionnaireEmailTemplate";
+import { calculateQuestionnaireScore } from "@/app/utils/questionnaire-scoring";
 
 // Initialize Resend with your API key
 const resend = new Resend(process.env.RESEND_API_KEY);
@@ -21,57 +22,23 @@ export async function POST(request: Request) {
 
     // Find the questionnaire data to access scoring information
     const questionnaire = questionnaires.find((q) => q.id === questionnaireId);
-
-    // Calculate the score
-    let totalScore = 0;
-    let anxietyScore = 0;
-    let avoidanceScore = 0;
-    let interpretation = "";
-    let scoreDetails = "";
-
-    if (questionnaire) {
-      // Extract all anxiety and avoidance scores
-      const anxietyValues = Object.entries(formData)
-        .filter(([key]) => key.startsWith("anxiety_"))
-        .map(([_, value]) => parseInt(value as string, 10));
-
-      const avoidanceValues = Object.entries(formData)
-        .filter(([key]) => key.startsWith("avoidance_"))
-        .map(([_, value]) => parseInt(value as string, 10));
-
-      // Calculate sub-scores
-      anxietyScore = anxietyValues.reduce((sum, value) => sum + value, 0);
-      avoidanceScore = avoidanceValues.reduce((sum, value) => sum + value, 0);
-
-      // Calculate total score
-      totalScore = anxietyScore + avoidanceScore;
-
-      // Determine interpretation based on scoring ranges
-      if (questionnaire.scoring?.ranges) {
-        const matchingRange = questionnaire.scoring.ranges.find(
-          (range) => totalScore >= range.min && totalScore <= range.max
-        );
-
-        if (matchingRange) {
-          interpretation = matchingRange.interpretation;
-        }
-      }
-
-      // Create score details
-      scoreDetails = `
-Score total: ${totalScore}/144
-Score d'anxiété: ${anxietyScore}/72
-Score d'évitement: ${avoidanceScore}/72
-Interprétation: ${interpretation}
-      `;
+    if (!questionnaire) {
+      return NextResponse.json(
+        { error: "Questionnaire not found" },
+        { status: 404 }
+      );
     }
 
-    // Format the form data for the email
+    // Calculate scores using the utility function
+    const scoreResult = calculateQuestionnaireScore(questionnaire, formData);
+
+    // Format form responses for email
     const formDataString = Object.entries(formData)
+      .filter(([key]) => !key.includes("comments"))
       .map(([key, value]) => `${key}: ${value}`)
       .join("\n");
 
-    // Send the email
+    // Send email
     const { data, error } = await resend.emails.send({
       from: "Appsy <contact@cascadestudio.fr>",
       to: [psychologistEmail],
@@ -81,36 +48,28 @@ Interprétation: ${interpretation}
         patientLastname,
         questionnaireTitle,
         scoreDetails: {
-          total: totalScore,
-          anxiety: anxietyScore,
-          avoidance: avoidanceScore,
-          interpretation,
-          maxTotal: 144,
-          maxAnxiety: 72,
-          maxAvoidance: 72,
+          total: scoreResult.totalScore,
+          anxiety: scoreResult.anxietyScore,
+          avoidance: scoreResult.avoidanceScore,
+          interpretation: scoreResult.interpretation,
+          maxTotal: scoreResult.maxTotal,
+          maxAnxiety: scoreResult.maxAnxiety,
+          maxAvoidance: scoreResult.maxAvoidance,
         },
         formResponses: formDataString,
-        comments: formData.comments || undefined,
+        comments: formData.comments,
       }),
     });
 
     if (error) {
       console.error("Error sending email:", error);
-      return NextResponse.json(
-        { error: "Failed to send email" },
-        { status: 500 }
-      );
+      return NextResponse.json({ error }, { status: 500 });
     }
 
     return NextResponse.json({
       success: true,
       data,
-      score: {
-        total: totalScore,
-        anxiety: anxietyScore,
-        avoidance: avoidanceScore,
-        interpretation,
-      },
+      score: scoreResult,
     });
   } catch (error) {
     console.error("Error processing request:", error);
