@@ -1,6 +1,6 @@
 import { QuestionnaireProps } from "./BaseQuestionnaire";
 import BaseQuestionnaire from "./BaseQuestionnaire";
-import EchelleDanxieteDeLiebowitch from "./EchelleDanxieteDeLiebowitch";
+import EchelleDanxieteDeLiebowitch from "./questionnairesList/EchelleDanxieteDeLiebowitch";
 
 export default function QuestionnaireFactory(props: QuestionnaireProps) {
   const {

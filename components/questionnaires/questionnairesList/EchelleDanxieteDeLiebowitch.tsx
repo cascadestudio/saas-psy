@@ -1,6 +1,6 @@
 "use client";
 
-import BaseQuestionnaire, { QuestionnaireProps } from "./BaseQuestionnaire";
+import BaseQuestionnaire, { QuestionnaireProps } from "../BaseQuestionnaire";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 
@@ -13,6 +13,8 @@ export default function EchelleDanxieteDeLiebowitch(props: QuestionnaireProps) {
   ) {
     return <BaseQuestionnaire {...props} />;
   }
+
+  const { anxiety, avoidance } = questionnaire.answerScales;
 
   return (
     <BaseQuestionnaire {...props}>
@@ -32,7 +34,7 @@ export default function EchelleDanxieteDeLiebowitch(props: QuestionnaireProps) {
               <div>
                 <h4 className="text-sm font-medium mb-2">Anxiété</h4>
                 <RadioGroup name={`anxiety_${index}`}>
-                  {questionnaire.answerScales.anxiety.map((scale) => (
+                  {anxiety.map((scale) => (
                     <div
                       key={scale.value}
                       className="flex items-center space-x-2"
@@ -53,7 +55,7 @@ export default function EchelleDanxieteDeLiebowitch(props: QuestionnaireProps) {
               <div>
                 <h4 className="text-sm font-medium mb-2">Évitement</h4>
                 <RadioGroup name={`avoidance_${index}`}>
-                  {questionnaire.answerScales.avoidance.map((scale) => (
+                  {avoidance.map((scale) => (
                     <div
                       key={scale.value}
                       className="flex items-center space-x-2"
