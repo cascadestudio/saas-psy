@@ -264,4 +264,48 @@ export const questionnaires = [
         "Additionnez les scores de chaque item (0-4). Le score total varie de 0 à 80. Un score total de 32 ou plus suggère un diagnostic probable de TSPT.",
     },
   },
+  {
+    id: "index-symptomes-ybocs",
+    title: "Y-BOCS - Index des Symptômes Obsessionnels-Compulsifs",
+    description:
+      "Une échelle d'évaluation des symptômes obsessionnels-compulsifs mesurant la sévérité du TOC",
+    category: "Troubles Obsessionnels Compulsifs",
+    estimatedTime: "15-20 minutes",
+    longDescription:
+      "L'échelle Y-BOCS (Yale-Brown Obsessive Compulsive Scale) est l'outil de référence pour évaluer la sévérité des symptômes du trouble obsessionnel-compulsif (TOC). Elle évalue séparément les obsessions et les compulsions selon cinq dimensions : le temps passé, l'interférence, la détresse, la résistance et le contrôle.",
+    questions: [
+      // Obsessions
+      "Temps passé aux obsessions : Combien de temps passez-vous à avoir des pensées obsessionnelles ?",
+      "Interférence due aux obsessions : À quel point vos obsessions interfèrent-elles avec votre vie sociale, professionnelle ou personnelle ?",
+      "Détresse associée aux obsessions : Quel degré de détresse vos obsessions vous causent-elles ?",
+      "Résistance aux obsessions : Quel effort faites-vous pour résister aux obsessions ?",
+      "Contrôle sur les obsessions : Quel contrôle avez-vous sur vos obsessions ?",
+      // Compulsions
+      "Temps passé aux compulsions : Combien de temps passez-vous à effectuer des comportements compulsifs ?",
+      "Interférence due aux compulsions : À quel point vos compulsions interfèrent-elles avec votre vie sociale, professionnelle ou personnelle ?",
+      "Détresse associée aux compulsions : Quel degré de détresse ressentiriez-vous si vous étiez empêché(e) d'accomplir vos compulsions ?",
+      "Résistance aux compulsions : Quel effort faites-vous pour résister aux compulsions ?",
+      "Contrôle sur les compulsions : Quel contrôle avez-vous sur vos compulsions ?",
+    ],
+    answerScales: {
+      intensity: [
+        { value: 0, label: "Aucun symptôme" },
+        { value: 1, label: "Léger" },
+        { value: 2, label: "Modéré" },
+        { value: 3, label: "Sévère" },
+        { value: 4, label: "Extrême" },
+      ],
+    },
+    scoring: {
+      ranges: [
+        { min: 0, max: 7, interpretation: "Symptômes sous-cliniques" },
+        { min: 8, max: 15, interpretation: "TOC léger" },
+        { min: 16, max: 23, interpretation: "TOC modéré" },
+        { min: 24, max: 31, interpretation: "TOC sévère" },
+        { min: 32, max: 40, interpretation: "TOC extrême" },
+      ],
+      method:
+        "Additionnez les scores (0-4) pour chaque item. Le score total varie de 0 à 40. Les scores sont divisés en sous-totaux pour les obsessions (items 1-5) et les compulsions (items 6-10).",
+    },
+  },
 ];

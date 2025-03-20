@@ -10,9 +10,8 @@ export default function QuestionnaireFactory(props: QuestionnaireProps) {
     return <BaseQuestionnaire {...props} />;
   }
 
-  // Choose the appropriate questionnaire component based on ID or title
   switch (questionnaire.id) {
-    case "echelle-d-anxiete-sociale-de-liebowitz": // Échelle d'anxiété sociale de Liebowitz
+    case "echelle-d-anxiete-sociale-de-liebowitz":
       return <EchelleDanxieteDeLiebowitch {...props} />;
 
     case "inventaire-de-depression-de-beck":
@@ -22,6 +21,9 @@ export default function QuestionnaireFactory(props: QuestionnaireProps) {
       return <SingleScaleQuestionnaire {...props} />;
 
     case "traumatismes-pcl5":
+      return <SingleScaleQuestionnaire {...props} />;
+
+    case "index-symptomes-ybocs":
       return <SingleScaleQuestionnaire {...props} />;
 
     case "test-questionnaire":
