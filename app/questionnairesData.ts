@@ -214,4 +214,54 @@ export const questionnaires = [
         "Pour chaque partie (État et Trait), additionnez les scores (1-4) des 20 items. Certains items sont inversés. Le score total pour chaque échelle varie de 20 à 80.",
     },
   },
+  {
+    id: "traumatismes-pcl5",
+    title: "PCL-5 - Liste de Vérification du TSPT",
+    description:
+      "Un questionnaire de 20 items évaluant les symptômes du trouble de stress post-traumatique (TSPT)",
+    category: "Traumatismes",
+    estimatedTime: "5-10 minutes",
+    longDescription:
+      "La PCL-5 (Post-traumatic Stress Disorder Checklist) est un questionnaire d'auto-évaluation de 20 items qui évalue la présence et la sévérité des symptômes du TSPT selon les critères du DSM-5. Cet outil est largement utilisé tant en clinique qu'en recherche pour le dépistage du TSPT, le diagnostic provisoire, et le suivi des changements de symptômes pendant et après le traitement.",
+    questions: [
+      "Avoir des souvenirs répétitifs, pénibles et involontaires de l'expérience stressante",
+      "Faire des rêves répétitifs et pénibles de l'expérience stressante",
+      "Avoir soudainement le sentiment ou l'impression que l'expérience stressante se reproduisait (comme si vous étiez en train de la revivre)",
+      "Se sentir très bouleversé(e) quand quelque chose vous rappelle l'expérience stressante",
+      "Avoir des réactions physiques intenses lorsque quelque chose vous rappelle l'expérience stressante",
+      "Éviter les souvenirs, les pensées ou les sentiments liés à l'expérience stressante",
+      "Éviter les rappels externes de l'expérience stressante",
+      "Avoir du mal à vous rappeler des parties importantes de l'expérience stressante",
+      "Avoir des croyances négatives fortes sur vous-même, les autres ou le monde",
+      "Vous reprocher à vous-même ou aux autres d'avoir causé l'expérience stressante ou ce qui s'est passé par la suite",
+      "Éprouver des émotions négatives intenses comme la peur, l'horreur, la colère, la culpabilité ou la honte",
+      "Perdre l'intérêt pour des activités que vous aimiez auparavant",
+      "Vous sentir distant(e) ou coupé(e) des autres",
+      "Avoir du mal à éprouver des sentiments positifs",
+      "Avoir un comportement irritable ou des explosions de colère",
+      "Prendre des risques inconsidérés ou avoir des conduites autodestructrices",
+      "Être 'super-vigilant(e)', en état d'alerte ou sur vos gardes",
+      "Être nerveux(se) ou sursauter facilement",
+      "Avoir du mal à vous concentrer",
+      "Avoir du mal à vous endormir ou à rester endormi(e)",
+    ],
+    answerScales: {
+      intensity: [
+        { value: 0, label: "Pas du tout" },
+        { value: 1, label: "Un peu" },
+        { value: 2, label: "Modérément" },
+        { value: 3, label: "Beaucoup" },
+        { value: 4, label: "Extrêmement" },
+      ],
+    },
+    scoring: {
+      ranges: [
+        { min: 0, max: 31, interpretation: "Symptômes légers" },
+        { min: 32, max: 43, interpretation: "Symptômes modérés" },
+        { min: 44, max: 80, interpretation: "Symptômes sévères" },
+      ],
+      method:
+        "Additionnez les scores de chaque item (0-4). Le score total varie de 0 à 80. Un score total de 32 ou plus suggère un diagnostic probable de TSPT.",
+    },
+  },
 ];

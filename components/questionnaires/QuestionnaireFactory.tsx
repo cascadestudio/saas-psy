@@ -21,6 +21,9 @@ export default function QuestionnaireFactory(props: QuestionnaireProps) {
     case "stai-anxiete-generalisee":
       return <SingleScaleQuestionnaire {...props} />;
 
+    case "traumatismes-pcl5":
+      return <SingleScaleQuestionnaire {...props} />;
+
     case "test-questionnaire":
       return <SingleScaleQuestionnaire {...props} />;
 
