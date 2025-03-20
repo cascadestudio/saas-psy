@@ -18,6 +18,9 @@ export default function QuestionnaireFactory(props: QuestionnaireProps) {
     case "inventaire-de-depression-de-beck":
       return <InventaireDepressionDeBeck {...props} />;
 
+    case "test-questionnaire":
+      return <InventaireDepressionDeBeck {...props} />; // We can reuse this component since it has the same structure
+
     default:
       return <BaseQuestionnaire {...props} />;
   }

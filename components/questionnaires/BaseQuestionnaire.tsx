@@ -19,7 +19,11 @@ export type QuestionnaireProps = {
     questions: string[];
     estimatedTime: string;
     longDescription: string;
-    answerScales?: Record<string, { value: number; label: string }[]>;
+    answerScales: {
+      anxiety?: { value: number; label: string }[];
+      avoidance?: { value: number; label: string }[];
+      intensity?: { value: number; label: string }[];
+    };
     scoring?: {
       ranges: { min: number; max: number; interpretation: string }[];
       method: string;

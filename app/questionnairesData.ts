@@ -110,4 +110,35 @@ export const questionnaires = [
         "Additionnez les scores de chaque question (0-3). Le score total varie de 0 à 63.",
     },
   },
+  {
+    id: "test-questionnaire",
+    title: "Questionnaire Test",
+    description: "Un questionnaire court de 3 questions pour tester le système",
+    category: "Test",
+    estimatedTime: "2-3 minutes",
+    longDescription:
+      "Ce questionnaire est conçu pour tester le fonctionnement du système avec un minimum de questions.",
+    questions: [
+      "Comment évaluez-vous votre niveau de stress aujourd'hui ?",
+      "À quel point vous sentez-vous motivé(e) ?",
+      "Comment qualifieriez-vous votre qualité de sommeil ?",
+    ],
+    answerScales: {
+      intensity: [
+        { value: 0, label: "Pas du tout" },
+        { value: 1, label: "Un peu" },
+        { value: 2, label: "Modérément" },
+        { value: 3, label: "Beaucoup" },
+      ],
+    },
+    scoring: {
+      ranges: [
+        { min: 0, max: 3, interpretation: "Score faible" },
+        { min: 4, max: 6, interpretation: "Score moyen" },
+        { min: 7, max: 9, interpretation: "Score élevé" },
+      ],
+      method:
+        "Additionnez les scores de chaque question (0-3). Le score total varie de 0 à 9.",
+    },
+  },
 ];
