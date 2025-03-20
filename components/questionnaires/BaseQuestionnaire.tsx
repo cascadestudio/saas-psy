@@ -28,7 +28,7 @@ export type QuestionnaireProps = {
   psychologistEmail: string;
   patientFirstname: string;
   patientLastname: string;
-  children?: ReactNode; // This allows passing rendered questions as children
+  children?: ReactNode;
 };
 
 export default function BaseQuestionnaire({
@@ -116,7 +116,7 @@ export default function BaseQuestionnaire({
             )}
           </CardContent>
           <CardFooter>
-            <Button type="submit" disabled={isSubmitting}>
+            <Button className="w-full" type="submit" disabled={isSubmitting}>
               {isSubmitting ? "Envoi en cours..." : "Soumettre"}
             </Button>
           </CardFooter>

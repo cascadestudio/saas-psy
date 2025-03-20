@@ -42,6 +42,7 @@ export default function EchelleDanxieteDeLiebowitch(props: QuestionnaireProps) {
                       <RadioGroupItem
                         id={`anxiety_${index}_${scale.value}`}
                         value={scale.value.toString()}
+                        required
                       />
                       <Label htmlFor={`anxiety_${index}_${scale.value}`}>
                         {scale.label}
@@ -63,6 +64,7 @@ export default function EchelleDanxieteDeLiebowitch(props: QuestionnaireProps) {
                       <RadioGroupItem
                         id={`avoidance_${index}_${scale.value}`}
                         value={scale.value.toString()}
+                        required
                       />
                       <Label htmlFor={`avoidance_${index}_${scale.value}`}>
                         {scale.label}

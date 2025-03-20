@@ -36,6 +36,7 @@ export default function InventaireDepressionDeBeck(props: QuestionnaireProps) {
                     <RadioGroupItem
                       id={`intensity_${index}_${scale.value}`}
                       value={scale.value.toString()}
+                      required
                     />
                     <Label htmlFor={`intensity_${index}_${scale.value}`}>
                       {scale.label}
