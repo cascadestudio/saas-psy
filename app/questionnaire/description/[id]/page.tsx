@@ -9,7 +9,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { EmailDialogForm } from "./EmailDialogForm";
-import { questionnaires } from "@/app/data";
+import { questionnaires } from "@/app/questionnairesData";
 
 export default async function QuestionnairePage({
   params,
@@ -17,7 +17,7 @@ export default async function QuestionnairePage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const questionnaire = questionnaires.find((q) => q.id === Number(id));
+  const questionnaire = questionnaires.find((q) => q.id === id);
 
   if (!questionnaire) {
     return (

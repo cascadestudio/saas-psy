@@ -21,7 +21,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Badge } from "@/components/ui/badge";
-import { questionnaires } from "@/app/data";
+import { questionnaires } from "@/app/questionnairesData";
 
 // Get unique categories for filter
 const categories = Array.from(new Set(questionnaires.map((q) => q.category)));

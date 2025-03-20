@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
-import { questionnaires } from "@/app/data";
-import { SubmitQuestionnaireEmailTemplate } from "@/components/SubmitQuestionnaireEmailTemplate";
+import { questionnaires } from "@/app/questionnairesData";
+import { ResultQuestionnaireEmailTemplate } from "@/components/ResultQuestionnaireEmailTemplate";
 
 // Initialize Resend with your API key
 const resend = new Resend(process.env.RESEND_API_KEY);
@@ -76,7 +76,7 @@ Interprétation: ${interpretation}
       from: "Appsy <contact@cascadestudio.fr>",
       to: [psychologistEmail],
       subject: `Résultat du questionnaire ${questionnaireTitle} pour ${patientFirstname} ${patientLastname}`,
-      react: await SubmitQuestionnaireEmailTemplate({
+      react: await ResultQuestionnaireEmailTemplate({
         patientFirstname,
         patientLastname,
         questionnaireTitle,

@@ -12,7 +12,7 @@ import {
   Link,
 } from "@react-email/components";
 
-interface SubmitQuestionnaireEmailTemplateProps {
+interface ResultQuestionnaireEmailTemplateProps {
   patientFirstname: string;
   patientLastname: string;
   questionnaireTitle: string;
@@ -29,14 +29,14 @@ interface SubmitQuestionnaireEmailTemplateProps {
   comments?: string;
 }
 
-export const SubmitQuestionnaireEmailTemplate = ({
+export const ResultQuestionnaireEmailTemplate = ({
   patientFirstname,
   patientLastname,
   questionnaireTitle,
   scoreDetails,
   formResponses,
   comments,
-}: SubmitQuestionnaireEmailTemplateProps) => {
+}: ResultQuestionnaireEmailTemplateProps) => {
   const maxTotal = scoreDetails.maxTotal || 144;
   const maxAnxiety = scoreDetails.maxAnxiety || 72;
   const maxAvoidance = scoreDetails.maxAvoidance || 72;
