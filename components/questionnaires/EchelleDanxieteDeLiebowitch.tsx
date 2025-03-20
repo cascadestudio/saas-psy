@@ -4,7 +4,7 @@ import BaseQuestionnaire, { QuestionnaireProps } from "./BaseQuestionnaire";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 
-export default function EchelleDanxieteDeLiebovitch(props: QuestionnaireProps) {
+export default function EchelleDanxieteDeLiebowitch(props: QuestionnaireProps) {
   const { questionnaire } = props;
 
   if (

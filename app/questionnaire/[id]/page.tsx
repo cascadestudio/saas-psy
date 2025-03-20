@@ -10,11 +10,20 @@ export default async function QuestionnairePage({
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
   let { id } = await params;
-  const {
-    psychologistEmail = null,
-    patientFirstname = null,
-    patientLastname = null,
-  } = await searchParams;
+  const { psychologistEmail, patientFirstname, patientLastname } =
+    await searchParams;
+
+  // Validate required parameters
+  if (
+    !psychologistEmail ||
+    !patientFirstname ||
+    !patientLastname ||
+    typeof psychologistEmail !== "string" ||
+    typeof patientFirstname !== "string" ||
+    typeof patientLastname !== "string"
+  ) {
+    return notFound(); // or some other error handling
+  }
 
   const questionnaire = questionnaires.find((q) => q.id === id) || null;
 

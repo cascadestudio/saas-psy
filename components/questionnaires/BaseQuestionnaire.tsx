@@ -24,10 +24,10 @@ export type QuestionnaireProps = {
       ranges: { min: number; max: number; interpretation: string }[];
       method: string;
     };
-  } | null;
-  psychologistEmail: string | null;
-  patientFirstname: string | null;
-  patientLastname: string | null;
+  };
+  psychologistEmail: string;
+  patientFirstname: string;
+  patientLastname: string;
   children?: ReactNode; // This allows passing rendered questions as children
 };
 
@@ -40,21 +40,6 @@ export default function BaseQuestionnaire({
 }: QuestionnaireProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
-
-  if (!questionnaire) {
-    return (
-      <div className="container mx-auto py-8 px-4">
-        <Card>
-          <CardHeader>
-            <CardTitle>Questionnaire non trouvé</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p>Le questionnaire demandé n'existe pas ou a été supprimé.</p>
-          </CardContent>
-        </Card>
-      </div>
-    );
-  }
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
