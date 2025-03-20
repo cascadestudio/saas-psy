@@ -1,7 +1,7 @@
 import { QuestionnaireProps } from "./BaseQuestionnaire";
 import BaseQuestionnaire from "./BaseQuestionnaire";
 import EchelleDanxieteDeLiebowitch from "./questionnairesList/EchelleDanxieteDeLiebowitch";
-import InventaireDepressionDeBeck from "./questionnairesList/InventaireDepressionDeBeck";
+import SingleScaleQuestionnaire from "./questionnairesList/SingleScaleQuestionnaire";
 
 export default function QuestionnaireFactory(props: QuestionnaireProps) {
   const { questionnaire } = props;
@@ -16,10 +16,13 @@ export default function QuestionnaireFactory(props: QuestionnaireProps) {
       return <EchelleDanxieteDeLiebowitch {...props} />;
 
     case "inventaire-de-depression-de-beck":
-      return <InventaireDepressionDeBeck {...props} />;
+      return <SingleScaleQuestionnaire {...props} />;
+
+    case "stai-anxiete-generalisee":
+      return <SingleScaleQuestionnaire {...props} />;
 
     case "test-questionnaire":
-      return <InventaireDepressionDeBeck {...props} />; // We can reuse this component since it has the same structure
+      return <SingleScaleQuestionnaire {...props} />;
 
     default:
       return <BaseQuestionnaire {...props} />;

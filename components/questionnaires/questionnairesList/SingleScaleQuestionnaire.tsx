@@ -4,7 +4,7 @@ import BaseQuestionnaire, { QuestionnaireProps } from "../BaseQuestionnaire";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 
-export default function InventaireDepressionDeBeck(props: QuestionnaireProps) {
+export default function SingleScaleQuestionnaire(props: QuestionnaireProps) {
   const { questionnaire } = props;
 
   if (!questionnaire?.answerScales?.intensity) {
