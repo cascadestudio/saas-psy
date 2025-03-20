@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/card";
 import { EmailDialogForm } from "./EmailDialogForm";
 import { questionnaires } from "@/app/questionnairesData";
-
+import DevTools from "./DevTools";
 export default async function QuestionnairePage({
   params,
 }: {
@@ -74,6 +74,7 @@ export default async function QuestionnairePage({
           <EmailDialogForm />
         </CardFooter>
       </Card>
+      <DevTools />
     </div>
   );
 }
