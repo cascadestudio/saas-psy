@@ -1,14 +1,10 @@
 import { QuestionnaireProps } from "./BaseQuestionnaire";
 import BaseQuestionnaire from "./BaseQuestionnaire";
 import EchelleDanxieteDeLiebowitch from "./questionnairesList/EchelleDanxieteDeLiebowitch";
+import InventaireDepressionDeBeck from "./questionnairesList/InventaireDepressionDeBeck";
 
 export default function QuestionnaireFactory(props: QuestionnaireProps) {
-  const {
-    questionnaire,
-    psychologistEmail,
-    patientFirstname,
-    patientLastname,
-  } = props;
+  const { questionnaire } = props;
 
   if (!questionnaire) {
     return <BaseQuestionnaire {...props} />;
@@ -19,9 +15,8 @@ export default function QuestionnaireFactory(props: QuestionnaireProps) {
     case "echelle-d-anxiete-sociale-de-liebowitz": // Échelle d'anxiété sociale de Liebowitz
       return <EchelleDanxieteDeLiebowitch {...props} />;
 
-    // Add more cases for other questionnaire types
-    // case 2: // Inventaire de Dépression de Beck (BDI)
-    //   return <InventaireDepressionBeck {...props} />;
+    case "inventaire-de-depression-de-beck":
+      return <InventaireDepressionDeBeck {...props} />;
 
     default:
       return <BaseQuestionnaire {...props} />;
