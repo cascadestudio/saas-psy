@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { calculateQuestionnaireScore } from "@/app/utils/questionnaire-scoring";
 import { sendQuestionnaireResults } from "@/app/services/email/sendQuestionnaireResults";
 import { questionnaires } from "@/app/questionnairesData";
-import { formatQuestionnaireResults } from "@/app/utils/formatQuestionnaireResults";
+import { formatQuestionnaireAnswers } from "@/app/utils/formatQuestionnaireAnswers";
 export async function POST(request: Request) {
   try {
     // Parse the request body
@@ -25,28 +25,30 @@ export async function POST(request: Request) {
       questionnaireAnswers
     );
 
-    const displayAnswers = formatQuestionnaireResults(
+    // Format the answers to be readable
+    const readableAnswers = formatQuestionnaireAnswers(
       questionnaire,
       questionnaireAnswers
     );
 
-    console.log("displayAnswers", displayAnswers);
+    console.log("readableAnswers", readableAnswers);
 
     // Send email using the extracted service
-    // const { error } = await sendQuestionnaireResults({
-    //   psychologistEmail,
-    //   patientFirstname,
-    //   patientLastname,
-    //   questionnaireTitle,
-    //   scoreResult,
-    //   questionnaireAnswers,
-    //   patientComments,
-    // });
+    const { error } = await sendQuestionnaireResults({
+      psychologistEmail,
+      patientFirstname,
+      patientLastname,
+      questionnaireTitle,
+      scoreResult,
+      questionnaireAnswers,
+      patientComments,
+      readableAnswers,
+    });
 
-    // if (error) {
-    //   console.error("Error sending email:", error);
-    //   return NextResponse.json({ error }, { status: 500 });
-    // }
+    if (error) {
+      console.error("Error sending email:", error);
+      return NextResponse.json({ error }, { status: 500 });
+    }
 
     return NextResponse.json({
       success: true,

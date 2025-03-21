@@ -19,6 +19,7 @@ interface SendQuestionnaireResultsParams {
   };
   questionnaireAnswers: Record<string, any>;
   patientComments: string;
+  readableAnswers: string[];
 }
 
 export async function sendQuestionnaireResults({
@@ -27,6 +28,7 @@ export async function sendQuestionnaireResults({
   patientLastname,
   questionnaireTitle,
   scoreResult,
+  readableAnswers,
   patientComments,
 }: SendQuestionnaireResultsParams) {
   return await resend.emails.send({
@@ -46,7 +48,7 @@ export async function sendQuestionnaireResults({
         maxAnxiety: scoreResult.maxAnxiety,
         maxAvoidance: scoreResult.maxAvoidance,
       },
-      formResponses: "",
+      readableAnswers: readableAnswers,
       patientComments: patientComments,
     }),
   });

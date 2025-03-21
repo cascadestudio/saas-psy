@@ -25,7 +25,7 @@ interface ResultQuestionnaireEmailTemplateProps {
     maxAnxiety?: number;
     maxAvoidance?: number;
   };
-  formResponses: string;
+  readableAnswers: string[];
   patientComments?: string;
 }
 
@@ -34,7 +34,7 @@ export const ResultQuestionnaireEmailTemplate = ({
   patientLastname,
   questionnaireTitle,
   scoreDetails,
-  formResponses,
+  readableAnswers,
   patientComments,
 }: ResultQuestionnaireEmailTemplateProps) => {
   const maxTotal = scoreDetails.maxTotal || 144;
@@ -87,7 +87,11 @@ export const ResultQuestionnaireEmailTemplate = ({
 
           <Section style={sectionStyle}>
             <Text style={subheadingStyle}>Réponses Détaillées</Text>
-            <Text style={responsesStyle}></Text>
+            <div style={responsesStyle}>
+              {readableAnswers.map((answer, index) => (
+                <Text key={index}>{answer}</Text>
+              ))}
+            </div>
           </Section>
 
           {patientComments && (
@@ -178,14 +182,15 @@ const interpretationStyle = {
 
 const responsesStyle = {
   color: "#333",
-  fontSize: "14px",
-  lineHeight: "20px",
-  fontFamily: "monospace",
+  fontSize: "15px",
+  lineHeight: "22px",
+  fontFamily: "Arial, sans-serif",
   whiteSpace: "pre-wrap" as const,
   backgroundColor: "#f8fafc",
-  padding: "15px",
+  padding: "12px 15px",
   borderRadius: "5px",
-  overflowX: "auto" as const,
+  marginBottom: "10px",
+  borderLeft: "3px solid #e6ebf1",
 };
 
 const commentsStyle = {
