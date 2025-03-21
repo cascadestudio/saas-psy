@@ -10,8 +10,6 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { toast } from "sonner";
-import { QuestionnaireResults } from "./QuestionnaireResults";
-import DevTools from "./DevTools";
 export type QuestionnaireProps = {
   questionnaire: {
     id: string;
@@ -46,7 +44,6 @@ export default function BaseQuestionnaire({
 }: QuestionnaireProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [submissionData, setSubmissionData] = useState<any>(null);
   const formRef = useRef<HTMLFormElement>(null);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -57,11 +54,6 @@ export default function BaseQuestionnaire({
     const formData = new FormData(e.currentTarget);
     const formEntries = Object.fromEntries(formData.entries());
 
-    const scoreDetails = {
-      total: 0,
-      interpretation: "",
-    };
-
     const submissionData = {
       questionnaireId: questionnaire.id,
       questionnaireTitle: questionnaire.title,
@@ -69,7 +61,6 @@ export default function BaseQuestionnaire({
       patientLastname,
       psychologistEmail,
       formData: formEntries,
-      scoreDetails,
     };
 
     try {
@@ -85,7 +76,6 @@ export default function BaseQuestionnaire({
         throw new Error("Failed to submit questionnaire");
       }
 
-      setSubmissionData(submissionData);
       setIsSubmitted(true);
       toast.success("Questionnaire envoyé avec succès.");
     } catch (error) {
@@ -135,18 +125,6 @@ export default function BaseQuestionnaire({
             <Button className="w-full" type="submit" disabled={isSubmitting}>
               {isSubmitting ? "Envoi en cours..." : "Soumettre"}
             </Button>
-            <DevTools
-              formRef={formRef}
-              questionnaireData={{
-                id: questionnaire.id,
-                title: questionnaire.title,
-              }}
-              patientInfo={{
-                firstname: patientFirstname,
-                lastname: patientLastname,
-                psychologistEmail: psychologistEmail,
-              }}
-            />
           </CardFooter>
         </form>
       </Card>

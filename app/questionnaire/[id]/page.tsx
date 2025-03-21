@@ -12,7 +12,7 @@ export default async function QuestionnairePage({
   let { id } = await params;
   const {
     psychologistEmail = process.env.NODE_ENV === "development"
-      ? "contact@cascadestudio.fr"
+      ? process.env.NEXT_PUBLIC_DEV_PSYCHOLOGIST_EMAIL
       : undefined,
     patientFirstname = process.env.NODE_ENV === "development"
       ? "John"
