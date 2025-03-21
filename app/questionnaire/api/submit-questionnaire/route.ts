@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 import { questionnaires } from "@/app/questionnairesData";
-import { ResultQuestionnaireEmailTemplate } from "@/components/ResultQuestionnaireEmailTemplate";
+import { ResultQuestionnaireEmailTemplate } from "./ResultQuestionnaireEmailTemplate";
 import { calculateQuestionnaireScore } from "@/app/utils/questionnaire-scoring";
 
 // Initialize Resend with your API key

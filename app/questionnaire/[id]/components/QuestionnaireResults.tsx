@@ -27,7 +27,7 @@ export function QuestionnaireResults({ data }: ResultsProps) {
   const maxAvoidance = data.scoreDetails?.maxAvoidance || 72;
 
   return (
-    <div className="container mx-auto py-8 px-4 space-y-6">
+    <div className="container mx-auto py-8 px-4 space-y-6 absolute top-0 left-0 w-full h-full">
       <Card>
         <CardHeader>
           <CardTitle>Résultats du Questionnaire</CardTitle>
