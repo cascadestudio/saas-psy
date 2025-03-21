@@ -86,7 +86,7 @@ export default function BaseQuestionnaire({
 
     try {
       // Send the form data to our API endpoint
-      const response = await fetch("/api/submit-questionnaire", {
+      const response = await fetch("/questionnaire/api/submit-questionnaire", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

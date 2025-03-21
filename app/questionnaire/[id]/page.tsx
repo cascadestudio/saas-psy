@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import { questionnaires } from "@/app/questionnairesData";
-import QuestionnaireFactory from "@/components/questionnaires/QuestionnaireFactory";
+import QuestionnaireFactory from "./components/QuestionnaireFactory";
 
 export default async function QuestionnairePage({
   params,
