@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, ReactNode } from "react";
+import { useState, ReactNode, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -44,6 +44,7 @@ export default function BaseQuestionnaire({
 }: QuestionnaireProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const formRef = useRef<HTMLFormElement>(null);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -53,21 +54,22 @@ export default function BaseQuestionnaire({
     const formData = new FormData(e.currentTarget);
     const formEntries = Object.fromEntries(formData.entries());
 
+    const submissionData = {
+      questionnaireId: questionnaire.id,
+      questionnaireTitle: questionnaire.title,
+      patientFirstname,
+      patientLastname,
+      psychologistEmail,
+      formData: formEntries,
+    };
+
     try {
-      // Send the form data to our API endpoint
-      const response = await fetch("/api/submit-questionnaire", {
+      const response = await fetch("/questionnaire/api/submit-questionnaire", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          questionnaireId: questionnaire.id,
-          questionnaireTitle: questionnaire.title,
-          patientFirstname,
-          patientLastname,
-          psychologistEmail,
-          formData: formEntries,
-        }),
+        body: JSON.stringify(submissionData),
       });
 
       if (!response.ok) {
@@ -75,12 +77,12 @@ export default function BaseQuestionnaire({
       }
 
       setIsSubmitted(true);
+      toast.success("Questionnaire envoyé avec succès.");
     } catch (error) {
       console.error("Error submitting questionnaire:", error);
       toast.error("Une erreur est survenue lors de l'envoi du questionnaire.");
     } finally {
       setIsSubmitting(false);
-      toast.success("Questionnaire envoyé avec succès.");
     }
   };
 
@@ -89,11 +91,12 @@ export default function BaseQuestionnaire({
       <div className="container mx-auto py-8 px-4">
         <Card>
           <CardHeader>
-            <CardTitle>Merci pour votre participation</CardTitle>
+            <CardTitle>Questionnaire envoyé avec succès</CardTitle>
+            <p className="text-sm text-muted-foreground mt-2">
+              Merci d'avoir complété ce questionnaire. Vos réponses ont été
+              enregistrées.
+            </p>
           </CardHeader>
-          <CardContent>
-            <p>Votre questionnaire a été soumis avec succès.</p>
-          </CardContent>
         </Card>
       </div>
     );
@@ -112,9 +115,8 @@ export default function BaseQuestionnaire({
             votre psychologue.
           </p>
         </CardHeader>
-        <form onSubmit={handleSubmit}>
+        <form ref={formRef} onSubmit={handleSubmit}>
           <CardContent>
-            {/* Render children (specific questionnaire content) if provided */}
             {children || (
               <p>Veuillez utiliser un composant de questionnaire spécifique.</p>
             )}

@@ -47,7 +47,7 @@ export function EmailDialogForm() {
     };
 
     try {
-      const response = await fetch("/api/send-questionnaire", {
+      const response = await fetch("/questionnaire/api/send-questionnaire", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
