@@ -1,3 +1,5 @@
+import { questionnaires } from "@/app/questionnairesData";
+
 interface ScoreResult {
   totalScore: number;
   anxietyScore?: number;
@@ -10,9 +12,19 @@ interface ScoreResult {
 }
 
 export function calculateQuestionnaireScore(
-  questionnaire: any,
+  questionnaireId: string,
   formData: Record<string, any>
 ): ScoreResult {
+  const questionnaire = questionnaires.find((q) => q.id === questionnaireId);
+  if (!questionnaire) {
+    return {
+      totalScore: 0,
+      interpretation: "Questionnaire non trouvé",
+      scoreDetails: "Questionnaire non trouvé",
+      maxTotal: 0,
+    };
+  }
+
   if (
     questionnaire.answerScales.anxiety &&
     questionnaire.answerScales.avoidance
