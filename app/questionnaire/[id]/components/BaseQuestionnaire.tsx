@@ -56,7 +56,7 @@ export default function BaseQuestionnaire({
 
     // Extract patientComments and remove it from formEntries
     const patientComments = formEntries.patientComments as string;
-    const { patientComments: _, ...formEntriesWithoutComments } = formEntries;
+    const { patientComments: _, ...questionnaireAnswers } = formEntries;
 
     const submissionData = {
       questionnaireId: questionnaire.id,
@@ -64,7 +64,7 @@ export default function BaseQuestionnaire({
       patientFirstname,
       patientLastname,
       psychologistEmail,
-      questionnaireAnswers: formEntriesWithoutComments,
+      questionnaireAnswers: questionnaireAnswers,
       patientComments,
     };
 

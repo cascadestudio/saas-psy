@@ -12,10 +12,9 @@ interface ScoreResult {
 }
 
 export function calculateQuestionnaireScore(
-  questionnaireId: string,
+  questionnaire: any,
   formData: Record<string, any>
 ): ScoreResult {
-  const questionnaire = questionnaires.find((q) => q.id === questionnaireId);
   if (!questionnaire) {
     return {
       totalScore: 0,

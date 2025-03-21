@@ -1,7 +1,8 @@
 import { NextResponse } from "next/server";
 import { calculateQuestionnaireScore } from "@/app/utils/questionnaire-scoring";
 import { sendQuestionnaireResults } from "@/app/services/email/sendQuestionnaireResults";
-
+import { questionnaires } from "@/app/questionnairesData";
+import { formatQuestionnaireResults } from "@/app/utils/formatQuestionnaireResults";
 export async function POST(request: Request) {
   try {
     // Parse the request body
@@ -16,33 +17,39 @@ export async function POST(request: Request) {
       patientLastname,
     } = body;
 
+    const questionnaire = questionnaires.find((q) => q.id === questionnaireId);
+
     // Calculate scores using the utility function
     const scoreResult = calculateQuestionnaireScore(
-      questionnaireId,
+      questionnaire,
       questionnaireAnswers
     );
 
-    console.log("questionnaireAnswers", questionnaireAnswers);
+    const displayAnswers = formatQuestionnaireResults(
+      questionnaire,
+      questionnaireAnswers
+    );
+
+    console.log("displayAnswers", displayAnswers);
 
     // Send email using the extracted service
-    const { data, error } = await sendQuestionnaireResults({
-      psychologistEmail,
-      patientFirstname,
-      patientLastname,
-      questionnaireTitle,
-      scoreResult,
-      questionnaireAnswers,
-      patientComments,
-    });
+    // const { error } = await sendQuestionnaireResults({
+    //   psychologistEmail,
+    //   patientFirstname,
+    //   patientLastname,
+    //   questionnaireTitle,
+    //   scoreResult,
+    //   questionnaireAnswers,
+    //   patientComments,
+    // });
 
-    if (error) {
-      console.error("Error sending email:", error);
-      return NextResponse.json({ error }, { status: 500 });
-    }
+    // if (error) {
+    //   console.error("Error sending email:", error);
+    //   return NextResponse.json({ error }, { status: 500 });
+    // }
 
     return NextResponse.json({
       success: true,
-      data,
       score: scoreResult,
     });
   } catch (error) {
