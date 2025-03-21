@@ -26,7 +26,7 @@ interface ResultQuestionnaireEmailTemplateProps {
     maxAvoidance?: number;
   };
   formResponses: string;
-  comments?: string;
+  patientComments?: string;
 }
 
 export const ResultQuestionnaireEmailTemplate = ({
@@ -35,7 +35,7 @@ export const ResultQuestionnaireEmailTemplate = ({
   questionnaireTitle,
   scoreDetails,
   formResponses,
-  comments,
+  patientComments,
 }: ResultQuestionnaireEmailTemplateProps) => {
   const maxTotal = scoreDetails.maxTotal || 144;
   const maxAnxiety = scoreDetails.maxAnxiety || 72;
@@ -87,20 +87,13 @@ export const ResultQuestionnaireEmailTemplate = ({
 
           <Section style={sectionStyle}>
             <Text style={subheadingStyle}>Réponses Détaillées</Text>
-            <Text style={responsesStyle}>
-              {formResponses.split("\n").map((line, index) => (
-                <React.Fragment key={index}>
-                  {line}
-                  <br />
-                </React.Fragment>
-              ))}
-            </Text>
+            <Text style={responsesStyle}></Text>
           </Section>
 
-          {comments && (
+          {patientComments && (
             <Section style={sectionStyle}>
               <Text style={subheadingStyle}>Commentaires Additionnels</Text>
-              <Text style={commentsStyle}>{comments}</Text>
+              <Text style={commentsStyle}>{patientComments}</Text>
             </Section>
           )}
 

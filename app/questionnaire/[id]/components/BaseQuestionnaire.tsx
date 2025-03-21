@@ -54,13 +54,18 @@ export default function BaseQuestionnaire({
     const formData = new FormData(e.currentTarget);
     const formEntries = Object.fromEntries(formData.entries());
 
+    // Extract patientComments and remove it from formEntries
+    const patientComments = formEntries.patientComments as string;
+    const { patientComments: _, ...formEntriesWithoutComments } = formEntries;
+
     const submissionData = {
       questionnaireId: questionnaire.id,
       questionnaireTitle: questionnaire.title,
       patientFirstname,
       patientLastname,
       psychologistEmail,
-      formData: formEntries,
+      questionnaireAnswers: formEntriesWithoutComments,
+      patientComments,
     };
 
     try {
@@ -120,6 +125,14 @@ export default function BaseQuestionnaire({
             {children || (
               <p>Veuillez utiliser un composant de questionnaire spécifique.</p>
             )}
+            <div className="mt-6 space-y-2">
+              <h3 className="text-md font-medium">Commentaires additionnels</h3>
+              <textarea
+                name="patientComments"
+                className="w-full min-h-[120px] p-3 border rounded-md"
+                placeholder="Si vous souhaitez ajouter des commentaires ou des précisions, vous pouvez les écrire ici..."
+              />
+            </div>
           </CardContent>
           <CardFooter>
             <Button className="w-full" type="submit" disabled={isSubmitting}>

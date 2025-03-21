@@ -9,14 +9,20 @@ export async function POST(request: Request) {
     const {
       questionnaireId,
       questionnaireTitle,
-      formData,
+      questionnaireAnswers,
+      patientComments,
       psychologistEmail,
       patientFirstname,
       patientLastname,
     } = body;
 
     // Calculate scores using the utility function
-    const scoreResult = calculateQuestionnaireScore(questionnaireId, formData);
+    const scoreResult = calculateQuestionnaireScore(
+      questionnaireId,
+      questionnaireAnswers
+    );
+
+    console.log("questionnaireAnswers", questionnaireAnswers);
 
     // Send email using the extracted service
     const { data, error } = await sendQuestionnaireResults({
@@ -25,7 +31,8 @@ export async function POST(request: Request) {
       patientLastname,
       questionnaireTitle,
       scoreResult,
-      formData,
+      questionnaireAnswers,
+      patientComments,
     });
 
     if (error) {
