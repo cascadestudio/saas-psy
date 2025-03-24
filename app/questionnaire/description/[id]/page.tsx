@@ -27,6 +27,24 @@ export default async function QuestionnairePage({
     );
   }
 
+  // Calculate total number of questions
+  const questionCount = questionnaire.questions.reduce((count, question) => {
+    if (typeof question === "string") {
+      return count + 1;
+    }
+    return count + question.items.length;
+  }, 0);
+
+  // Get example questions
+  const exampleQuestions = questionnaire.questions
+    .slice(0, 5)
+    .map((question) => {
+      if (typeof question === "string") {
+        return question;
+      }
+      return question.items[0]; // Show first item from each group
+    });
+
   return (
     <div className="container mx-auto py-8 px-4 sm:px-6 md:px-8">
       <Link href="/" className="flex items-center text-sm mb-6 hover:underline">
@@ -46,7 +64,7 @@ export default async function QuestionnairePage({
           <div className="flex items-center gap-6">
             <div className="flex items-center">
               <FileText className="h-5 w-5 mr-2 text-muted-foreground" />
-              <span>{questionnaire.questions.length} questions</span>
+              <span>{questionCount} questions</span>
             </div>
             <div className="flex items-center">
               <Clock className="h-5 w-5 mr-2 text-muted-foreground" />
@@ -62,7 +80,7 @@ export default async function QuestionnairePage({
           <div>
             <h3 className="text-lg font-medium mb-2">Questions d'exemple</h3>
             <ul className="list-disc pl-5 text-muted-foreground">
-              {questionnaire.questions.slice(0, 5).map((question, index) => (
+              {exampleQuestions.map((question, index) => (
                 <li key={index} className="mb-1">
                   {question}
                 </li>

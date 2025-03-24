@@ -31,8 +31,6 @@ export async function POST(request: Request) {
       questionnaireAnswers
     );
 
-    console.log("readableAnswers", readableAnswers);
-
     // Send email using the extracted service
     const { error } = await sendQuestionnaireResults({
       psychologistEmail,

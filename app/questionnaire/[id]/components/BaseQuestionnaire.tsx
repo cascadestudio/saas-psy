@@ -10,13 +10,19 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { toast } from "sonner";
+
+export type QuestionGroup = {
+  title: string;
+  items: string[];
+};
+
 export type QuestionnaireProps = {
   questionnaire: {
     id: string;
     title: string;
     description: string;
     category: string;
-    questions: string[];
+    questions: (string | QuestionGroup)[]; // Using the QuestionGroup type here
     estimatedTime: string;
     longDescription: string;
     answerScales: {

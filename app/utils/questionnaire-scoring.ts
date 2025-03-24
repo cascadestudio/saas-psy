@@ -9,6 +9,10 @@ interface ScoreResult {
   maxTotal: number;
   maxAnxiety?: number;
   maxAvoidance?: number;
+  stateScore?: number;
+  traitScore?: number;
+  maxState?: number;
+  maxTrait?: number;
 }
 
 export function calculateQuestionnaireScore(
@@ -72,6 +76,42 @@ function calculateSingleScaleScore(
   questionnaire: any,
   formData: Record<string, any>
 ): ScoreResult {
+  // Special handling for STAI questionnaire
+  if (questionnaire.id === "stai-anxiete-generalisee") {
+    // Get all values and split them into state and trait groups
+    const stateValues = Object.entries(formData)
+      .filter(([key]) => key.startsWith("intensity_0_")) // First group (state)
+      .map(([_, value]) => parseInt(value as string, 10));
+
+    const traitValues = Object.entries(formData)
+      .filter(([key]) => key.startsWith("intensity_1_")) // Second group (trait)
+      .map(([_, value]) => parseInt(value as string, 10));
+
+    const stateScore = stateValues.reduce((sum, value) => sum + value, 0);
+    const traitScore = traitValues.reduce((sum, value) => sum + value, 0);
+
+    // Get interpretations for both scores
+    const stateInterpretation = getInterpretation(questionnaire, stateScore);
+    const traitInterpretation = getInterpretation(questionnaire, traitScore);
+
+    return {
+      totalScore: stateScore, // Using state score as primary score
+      stateScore,
+      traitScore,
+      interpretation: `État: ${stateInterpretation}\nTrait: ${traitInterpretation}`,
+      scoreDetails: formatSTAIDetails(
+        stateScore,
+        traitScore,
+        stateInterpretation,
+        traitInterpretation
+      ),
+      maxTotal: 80,
+      maxState: 80,
+      maxTrait: 80,
+    };
+  }
+
+  // Original single scale logic for other questionnaires
   const values = Object.entries(formData)
     .filter(([key]) => key.startsWith("intensity_"))
     .map(([_, value]) => parseInt(value as string, 10));
@@ -131,5 +171,20 @@ function formatSingleScaleDetails(
   return `
 Score total: ${totalScore}/${maxTotal}
 Interprétation: ${interpretation}
+  `.trim();
+}
+
+function formatSTAIDetails(
+  stateScore: number,
+  traitScore: number,
+  stateInterpretation: string,
+  traitInterpretation: string
+): string {
+  return `
+Score Anxiété-État: ${stateScore}/80
+Interprétation État: ${stateInterpretation}
+
+Score Anxiété-Trait: ${traitScore}/80
+Interprétation Trait: ${traitInterpretation}
   `.trim();
 }

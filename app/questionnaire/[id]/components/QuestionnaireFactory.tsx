@@ -2,6 +2,7 @@ import { QuestionnaireProps } from "./BaseQuestionnaire";
 import BaseQuestionnaire from "./BaseQuestionnaire";
 import EchelleDanxieteDeLiebowitch from "./questionnairesList/EchelleDanxieteDeLiebowitch";
 import SingleScaleQuestionnaire from "./questionnairesList/SingleScaleQuestionnaire";
+import STAIQuestionnaire from "./questionnairesList/STAIQuestionnaire";
 
 export default function QuestionnaireFactory(props: QuestionnaireProps) {
   const { questionnaire } = props;
@@ -18,7 +19,7 @@ export default function QuestionnaireFactory(props: QuestionnaireProps) {
       return <SingleScaleQuestionnaire {...props} />;
 
     case "stai-anxiete-generalisee":
-      return <SingleScaleQuestionnaire {...props} />;
+      return <STAIQuestionnaire {...props} />;
 
     case "traumatismes-pcl5":
       return <SingleScaleQuestionnaire {...props} />;
