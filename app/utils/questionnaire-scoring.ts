@@ -34,6 +34,11 @@ export function calculateQuestionnaireScore(
   ) {
     return calculateDualScaleScore(questionnaire, formData);
   }
+
+  if (questionnaire.id === "stai-anxiete-generalisee") {
+    return calculateSTAIScore(questionnaire, formData);
+  }
+
   return calculateSingleScaleScore(questionnaire, formData);
 }
 
@@ -180,11 +185,57 @@ function formatSTAIDetails(
   stateInterpretation: string,
   traitInterpretation: string
 ): string {
-  return `
-Score Anxiété-État: ${stateScore}/80
-Interprétation État: ${stateInterpretation}
+  return `Anxiété-État (situationnelle):
+Score: ${stateScore}/80
+Interprétation: ${stateInterpretation}
 
-Score Anxiété-Trait: ${traitScore}/80
-Interprétation Trait: ${traitInterpretation}
-  `.trim();
+Anxiété-Trait (générale):
+Score: ${traitScore}/80
+Interprétation: ${traitInterpretation}`;
+}
+
+function getSTAIInterpretation(score: number): string {
+  if (score <= 35) return "Anxiété très faible";
+  if (score <= 45) return "Anxiété faible";
+  if (score <= 55) return "Anxiété modérée";
+  if (score <= 65) return "Anxiété élevée";
+  return "Anxiété très élevée";
+}
+
+function calculateSTAIScore(
+  questionnaire: any,
+  formData: Record<string, any>
+): ScoreResult {
+  // Get all values and split them into state and trait groups
+  const stateValues = Object.entries(formData)
+    .filter(([key]) => key.startsWith("intensity_0_")) // First group (state)
+    .map(([_, value]) => parseInt(value as string, 10));
+
+  const traitValues = Object.entries(formData)
+    .filter(([key]) => key.startsWith("intensity_1_")) // Second group (trait)
+    .map(([_, value]) => parseInt(value as string, 10));
+
+  // Calculate scores
+  const stateScore = stateValues.reduce((sum, value) => sum + value, 0);
+  const traitScore = traitValues.reduce((sum, value) => sum + value, 0);
+
+  // Get interpretations using the new function
+  const stateInterpretation = getSTAIInterpretation(stateScore);
+  const traitInterpretation = getSTAIInterpretation(traitScore);
+
+  return {
+    totalScore: stateScore + traitScore, // Total of both scores
+    stateScore,
+    traitScore,
+    interpretation: `État: ${stateInterpretation}\nTrait: ${traitInterpretation}`,
+    scoreDetails: formatSTAIDetails(
+      stateScore,
+      traitScore,
+      stateInterpretation,
+      traitInterpretation
+    ),
+    maxTotal: 160, // Maximum possible total (80 + 80)
+    maxState: 80,
+    maxTrait: 80,
+  };
 }

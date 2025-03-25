@@ -24,6 +24,8 @@ interface ResultQuestionnaireEmailTemplateProps {
     maxTotal?: number;
     maxAnxiety?: number;
     maxAvoidance?: number;
+    stateScore?: number;
+    traitScore?: number;
   };
   readableAnswers: string[];
   patientComments?: string;
@@ -37,9 +39,8 @@ export const ResultQuestionnaireEmailTemplate = ({
   readableAnswers,
   patientComments,
 }: ResultQuestionnaireEmailTemplateProps) => {
-  const maxTotal = scoreDetails.maxTotal || 144;
-  const maxAnxiety = scoreDetails.maxAnxiety || 72;
-  const maxAvoidance = scoreDetails.maxAvoidance || 72;
+  const maxTotal = scoreDetails.maxTotal;
+  const isSTAI = questionnaireTitle.includes("STAI");
 
   return (
     <Html>
@@ -65,19 +66,31 @@ export const ResultQuestionnaireEmailTemplate = ({
 
           <Section style={sectionStyle}>
             <Text style={subheadingStyle}>Résultats</Text>
-            <Text style={scoreStyle}>
-              <strong>Score total:</strong> {scoreDetails.total}/{maxTotal}
-            </Text>
-            {scoreDetails.anxiety !== undefined && (
+            {isSTAI ? (
+              <>
+                <Text style={scoreStyle}>
+                  <strong>Score Anxiété-État:</strong> {scoreDetails.stateScore}
+                  /80
+                </Text>
+                <Text style={scoreStyle}>
+                  <strong>Score Anxiété-Trait:</strong>{" "}
+                  {scoreDetails.traitScore}/80
+                </Text>
+              </>
+            ) : scoreDetails.anxiety !== undefined ? (
+              <>
+                <Text style={scoreStyle}>
+                  <strong>Score d'anxiété:</strong> {scoreDetails.anxiety}/
+                  {scoreDetails.maxAnxiety}
+                </Text>
+                <Text style={scoreStyle}>
+                  <strong>Score d'évitement:</strong> {scoreDetails.avoidance}/
+                  {scoreDetails.maxAvoidance}
+                </Text>
+              </>
+            ) : (
               <Text style={scoreStyle}>
-                <strong>Score d'anxiété:</strong> {scoreDetails.anxiety}/
-                {maxAnxiety}
-              </Text>
-            )}
-            {scoreDetails.avoidance !== undefined && (
-              <Text style={scoreStyle}>
-                <strong>Score d'évitement:</strong> {scoreDetails.avoidance}/
-                {maxAvoidance}
+                <strong>Score total:</strong> {scoreDetails.total}/{maxTotal}
               </Text>
             )}
             <Text style={interpretationStyle}>
@@ -89,7 +102,9 @@ export const ResultQuestionnaireEmailTemplate = ({
             <Text style={subheadingStyle}>Réponses Détaillées</Text>
             <div style={responsesStyle}>
               {readableAnswers.map((answer, index) => (
-                <Text key={index}>{answer}</Text>
+                <Text key={index} style={answerStyle}>
+                  {answer}
+                </Text>
               ))}
             </div>
           </Section>
@@ -209,4 +224,10 @@ const footerStyle = {
   lineHeight: "16px",
   textAlign: "center" as const,
   margin: "20px 0",
+};
+
+const answerStyle = {
+  whiteSpace: "pre-line",
+  marginBottom: "8px",
+  lineHeight: "1.5",
 };

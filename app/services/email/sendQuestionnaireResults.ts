@@ -12,6 +12,8 @@ interface SendQuestionnaireResultsParams {
     totalScore: number;
     anxietyScore?: number;
     avoidanceScore?: number;
+    stateScore?: number;
+    traitScore?: number;
     interpretation: string;
     maxTotal: number;
     maxAnxiety?: number;
@@ -43,6 +45,8 @@ export async function sendQuestionnaireResults({
         total: scoreResult.totalScore,
         anxiety: scoreResult.anxietyScore,
         avoidance: scoreResult.avoidanceScore,
+        stateScore: scoreResult.stateScore,
+        traitScore: scoreResult.traitScore,
         interpretation: scoreResult.interpretation,
         maxTotal: scoreResult.maxTotal,
         maxAnxiety: scoreResult.maxAnxiety,

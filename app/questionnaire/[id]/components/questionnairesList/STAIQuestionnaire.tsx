@@ -16,6 +16,15 @@ export default function STAIQuestionnaire(props: QuestionnaireProps) {
 
   const { intensity } = questionnaire.answerScales;
 
+  // Add this dev testing helper
+  const getDevDefaultValue = (groupIndex: number, questionIndex: number) => {
+    // Only apply default values in development
+    if (process.env.NODE_ENV !== "development") return undefined;
+
+    // Alternate between different values for testing
+    return (((groupIndex + questionIndex) % 4) + 1).toString();
+  };
+
   return (
     <BaseQuestionnaire {...props}>
       <div className="space-y-12">
@@ -31,6 +40,11 @@ export default function STAIQuestionnaire(props: QuestionnaireProps) {
                   <div>
                     <RadioGroup
                       name={`intensity_${groupIndex}_${questionIndex}`}
+                      // DEV TESTING
+                      defaultValue={getDevDefaultValue(
+                        groupIndex,
+                        questionIndex
+                      )}
                     >
                       {intensity.map((scale) => (
                         <div

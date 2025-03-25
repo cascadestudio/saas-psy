@@ -1,3 +1,5 @@
+import { QuestionGroup } from "@/app/questionnaire/[id]/components/BaseQuestionnaire";
+
 export function formatQuestionnaireAnswers(questionnaire: any, answers: any) {
   if (Object.keys(questionnaire.answerScales).length === 1) {
     const scaleName = Object.keys(questionnaire.answerScales)[0];
@@ -31,5 +33,27 @@ export function formatQuestionnaireAnswers(questionnaire: any, answers: any) {
 
       return `${question}:\n- Anxiété: ${anxietyLabel}\n- Évitement: ${avoidanceLabel}`;
     });
+  }
+
+  // Add special handling for STAI questionnaire
+  if (questionnaire.id === "stai-anxiete-generalisee") {
+    const formattedGroups = (questionnaire.questions as QuestionGroup[]).map(
+      (group, groupIndex) => {
+        const groupAnswers = group.items.map((question, questionIndex) => {
+          const answerValue =
+            answers[`intensity_${groupIndex}_${questionIndex}`];
+          const answerLabel =
+            questionnaire.answerScales.intensity.find(
+              (s: any) => s.value.toString() === answerValue
+            )?.label || "Non répondu";
+
+          return `${questionIndex + 1}. ${question} : ${answerLabel}`;
+        });
+
+        return [`${group.title}`, ...groupAnswers].join("\n");
+      }
+    );
+
+    return formattedGroups;
   }
 }
