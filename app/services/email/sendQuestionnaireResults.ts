@@ -8,13 +8,14 @@ interface SendQuestionnaireResultsParams {
   patientFirstname: string;
   patientLastname: string;
   questionnaireTitle: string;
+  questionnaireId: string;
   scoreResult: {
     totalScore: number;
     anxietyScore?: number;
     avoidanceScore?: number;
     stateScore?: number;
     traitScore?: number;
-    interpretation: string;
+    interpretation: string | { trait: string; state: string };
     maxTotal: number;
     maxAnxiety?: number;
     maxAvoidance?: number;
@@ -31,28 +32,20 @@ export async function sendQuestionnaireResults({
   scoreResult,
   readableAnswers,
   patientComments,
+  questionnaireId,
 }: SendQuestionnaireResultsParams) {
   return await resend.emails.send({
     from: "Appsy <contact@cascadestudio.fr>",
     to: [psychologistEmail],
     subject: `Résultat du questionnaire ${questionnaireTitle} pour ${patientFirstname} ${patientLastname}`,
     react: await ResultQuestionnaireEmailTemplate({
+      questionnaireId,
       patientFirstname,
       patientLastname,
       questionnaireTitle,
-      scoreDetails: {
-        total: scoreResult.totalScore,
-        anxiety: scoreResult.anxietyScore,
-        avoidance: scoreResult.avoidanceScore,
-        stateScore: scoreResult.stateScore,
-        traitScore: scoreResult.traitScore,
-        interpretation: scoreResult.interpretation,
-        maxTotal: scoreResult.maxTotal,
-        maxAnxiety: scoreResult.maxAnxiety,
-        maxAvoidance: scoreResult.maxAvoidance,
-      },
-      readableAnswers: readableAnswers,
-      patientComments: patientComments,
+      scoreResult,
+      readableAnswers,
+      patientComments,
     }),
   });
 }

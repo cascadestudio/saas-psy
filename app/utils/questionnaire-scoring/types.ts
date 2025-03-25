@@ -2,7 +2,7 @@ export interface ScoreResult {
   totalScore: number;
   anxietyScore?: number;
   avoidanceScore?: number;
-  interpretation: string;
+  interpretation: string | { trait: string; state: string };
   scoreDetails: string;
   maxTotal: number;
   maxAnxiety?: number;

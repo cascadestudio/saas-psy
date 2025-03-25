@@ -26,7 +26,10 @@ export function calculateSTAIScore(
     totalScore: stateScore + traitScore, // Total of both scores
     stateScore,
     traitScore,
-    interpretation: `État: ${stateInterpretation}\nTrait: ${traitInterpretation}`,
+    interpretation: {
+      trait: traitInterpretation,
+      state: stateInterpretation,
+    },
     scoreDetails: formatSTAIDetails(
       stateScore,
       traitScore,

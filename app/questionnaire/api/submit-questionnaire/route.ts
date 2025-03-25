@@ -33,6 +33,7 @@ export async function POST(request: Request) {
 
     // Send email using the extracted service
     const { error } = await sendQuestionnaireResults({
+      questionnaireId,
       psychologistEmail,
       patientFirstname,
       patientLastname,

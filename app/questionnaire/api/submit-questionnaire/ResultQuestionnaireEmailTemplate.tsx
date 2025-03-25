@@ -16,16 +16,17 @@ interface ResultQuestionnaireEmailTemplateProps {
   patientFirstname: string;
   patientLastname: string;
   questionnaireTitle: string;
-  scoreDetails: {
-    total: number;
-    anxiety?: number;
-    avoidance?: number;
-    interpretation: string;
-    maxTotal?: number;
-    maxAnxiety?: number;
-    maxAvoidance?: number;
+  questionnaireId: string;
+  scoreResult: {
+    totalScore: number;
+    anxietyScore?: number;
+    avoidanceScore?: number;
     stateScore?: number;
     traitScore?: number;
+    interpretation: string | { trait: string; state: string };
+    maxTotal: number;
+    maxAnxiety?: number;
+    maxAvoidance?: number;
   };
   readableAnswers: string[];
   patientComments?: string;
@@ -35,12 +36,12 @@ export const ResultQuestionnaireEmailTemplate = ({
   patientFirstname,
   patientLastname,
   questionnaireTitle,
-  scoreDetails,
+  scoreResult,
   readableAnswers,
   patientComments,
+  questionnaireId,
 }: ResultQuestionnaireEmailTemplateProps) => {
-  const maxTotal = scoreDetails.maxTotal;
-  const isSTAI = questionnaireTitle.includes("STAI");
+  const maxTotal = scoreResult.maxTotal;
 
   return (
     <Html>
@@ -66,35 +67,45 @@ export const ResultQuestionnaireEmailTemplate = ({
 
           <Section style={sectionStyle}>
             <Text style={subheadingStyle}>Résultats</Text>
-            {isSTAI ? (
+            {questionnaireId === "stai-anxiete-generalisee" ? (
               <>
-                <Text style={scoreStyle}>
-                  <strong>Score Anxiété-État:</strong> {scoreDetails.stateScore}
+                <Text style={textStyle}>
+                  <strong>Score Anxiété-État:</strong> {scoreResult.stateScore}
                   /80
                 </Text>
-                <Text style={scoreStyle}>
-                  <strong>Score Anxiété-Trait:</strong>{" "}
-                  {scoreDetails.traitScore}/80
+                <Text style={textStyle}>
+                  <strong>Score Anxiété-Trait:</strong> {scoreResult.traitScore}
+                  /80
                 </Text>
               </>
-            ) : scoreDetails.anxiety !== undefined ? (
+            ) : scoreResult.anxietyScore !== undefined ? (
               <>
                 <Text style={scoreStyle}>
-                  <strong>Score d'anxiété:</strong> {scoreDetails.anxiety}/
-                  {scoreDetails.maxAnxiety}
+                  <strong>Score d'anxiété:</strong> {scoreResult.anxietyScore}/
+                  {scoreResult.maxAnxiety}
                 </Text>
                 <Text style={scoreStyle}>
-                  <strong>Score d'évitement:</strong> {scoreDetails.avoidance}/
-                  {scoreDetails.maxAvoidance}
+                  <strong>Score d'évitement:</strong>{" "}
+                  {scoreResult.avoidanceScore}/{scoreResult.maxAvoidance}
                 </Text>
               </>
             ) : (
               <Text style={scoreStyle}>
-                <strong>Score total:</strong> {scoreDetails.total}/{maxTotal}
+                <strong>Score total:</strong> {scoreResult.totalScore}/
+                {maxTotal}
               </Text>
             )}
             <Text style={interpretationStyle}>
-              <strong>Interprétation:</strong> {scoreDetails.interpretation}
+              <strong>Interprétation:</strong>{" "}
+              {questionnaireId === "stai-anxiete-generalisee" &&
+              typeof scoreResult.interpretation !== "string" ? (
+                <>
+                  <br /> Trait : {scoreResult.interpretation.trait} <br /> État
+                  : {scoreResult.interpretation.state}
+                </>
+              ) : typeof scoreResult.interpretation === "string" ? (
+                scoreResult.interpretation
+              ) : null}
             </Text>
           </Section>
 
