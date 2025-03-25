@@ -18,8 +18,8 @@ export default function STAIQuestionnaire(props: QuestionnaireProps) {
     // Only apply default values in development
     if (process.env.NODE_ENV !== "development") return undefined;
 
-    // Alternate between different values for testing
-    return (((groupIndex + questionIndex) % 4) + 1).toString();
+    // Generate a random value between 1 and 4 (inclusive)
+    return (Math.floor(Math.random() * 4) + 1).toString();
   };
 
   return (

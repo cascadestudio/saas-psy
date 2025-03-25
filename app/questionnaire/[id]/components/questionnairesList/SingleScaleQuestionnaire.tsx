@@ -18,8 +18,8 @@ export default function SingleScaleQuestionnaire(props: QuestionnaireProps) {
     // Only apply default values in development
     if (process.env.NODE_ENV !== "development") return undefined;
 
-    // Alternate between different values for testing
-    return (questionIndex % 4).toString();
+    // Generate a random value based on the scale range (assuming 0-3 for most scales)
+    return Math.floor(Math.random() * intensity.length).toString();
   };
 
   return (

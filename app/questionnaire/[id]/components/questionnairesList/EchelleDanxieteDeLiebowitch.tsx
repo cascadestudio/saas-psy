@@ -21,7 +21,8 @@ export default function EchelleDanxieteDeLiebowitch(props: QuestionnaireProps) {
     // Only apply default values in development
     if (process.env.NODE_ENV !== "development") return undefined;
 
-    return (questionIndex % 4).toString();
+    // Generate a random value between 0 and 3 (inclusive)
+    return Math.floor(Math.random() * 4).toString();
   };
 
   return (
