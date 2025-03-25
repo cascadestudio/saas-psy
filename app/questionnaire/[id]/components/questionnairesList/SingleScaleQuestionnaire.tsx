@@ -1,6 +1,7 @@
 "use client";
 
-import BaseQuestionnaire, { QuestionnaireProps } from "../BaseQuestionnaire";
+import BaseQuestionnaire from "../BaseQuestionnaire";
+import { QuestionnaireProps } from "@/app/types";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 
@@ -13,6 +14,14 @@ export default function SingleScaleQuestionnaire(props: QuestionnaireProps) {
 
   const { intensity } = questionnaire.answerScales;
 
+  const getDevDefaultValue = (questionIndex: number) => {
+    // Only apply default values in development
+    if (process.env.NODE_ENV !== "development") return undefined;
+
+    // Alternate between different values for testing
+    return (questionIndex % 4).toString();
+  };
+
   return (
     <BaseQuestionnaire {...props}>
       <div className="space-y-8">
@@ -20,15 +29,18 @@ export default function SingleScaleQuestionnaire(props: QuestionnaireProps) {
           Évaluez l'intensité de vos symptômes pour chaque situation
         </h2>
 
-        {questionnaire.questions.map((question, index) => (
+        {questionnaire.questions.map((question: any, index: any) => (
           <div key={index} className="border p-4 rounded-md">
             <h3 className="font-medium mb-4">
               {index + 1}. {question}
             </h3>
 
             <div>
-              <RadioGroup name={`intensity_${index}`}>
-                {intensity.map((scale) => (
+              <RadioGroup
+                name={`intensity_${index}`}
+                defaultValue={getDevDefaultValue(index)}
+              >
+                {intensity.map((scale: any) => (
                   <div
                     key={scale.value}
                     className="flex items-center space-x-2"
