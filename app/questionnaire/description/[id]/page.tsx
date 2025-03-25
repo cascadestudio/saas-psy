@@ -11,6 +11,7 @@ import {
 import { EmailDialogForm } from "./EmailDialogForm";
 import { questionnaires } from "@/app/questionnairesData";
 import DevTools from "./DevTools";
+import { questionCount } from "@/app/utils/utils";
 export default async function QuestionnairePage({
   params,
 }: {
@@ -26,14 +27,6 @@ export default async function QuestionnairePage({
       </div>
     );
   }
-
-  // Calculate total number of questions
-  const questionCount = questionnaire.questions.reduce((count, question) => {
-    if (typeof question === "string") {
-      return count + 1;
-    }
-    return count + question.items.length;
-  }, 0);
 
   // Get example questions
   const exampleQuestions = questionnaire.questions
@@ -64,7 +57,7 @@ export default async function QuestionnairePage({
           <div className="flex items-center gap-6">
             <div className="flex items-center">
               <FileText className="h-5 w-5 mr-2 text-muted-foreground" />
-              <span>{questionCount} questions</span>
+              <span>{questionCount(questionnaire)} questions</span>
             </div>
             <div className="flex items-center">
               <Clock className="h-5 w-5 mr-2 text-muted-foreground" />

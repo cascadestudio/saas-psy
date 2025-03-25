@@ -22,7 +22,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Badge } from "@/components/ui/badge";
 import { questionnaires } from "@/app/questionnairesData";
-
+import { questionCount } from "@/app/utils/utils";
 // Get unique categories for filter
 const categories = Array.from(new Set(questionnaires.map((q) => q.category)));
 
@@ -146,7 +146,7 @@ export default function Home() {
               </CardHeader>
               <CardContent className="flex-grow">
                 <div className="flex justify-between text-sm text-muted-foreground">
-                  <span>{questionnaire.questions.length} questions</span>
+                  <span>{questionCount(questionnaire)} questions</span>
                   <span>{questionnaire.estimatedTime}</span>
                 </div>
               </CardContent>
