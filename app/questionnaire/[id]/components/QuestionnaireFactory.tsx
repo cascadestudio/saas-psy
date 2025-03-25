@@ -1,4 +1,4 @@
-import { QuestionnaireProps } from "./BaseQuestionnaire";
+import { QuestionnaireProps } from "@/app/types";
 import BaseQuestionnaire from "./BaseQuestionnaire";
 import EchelleDanxieteDeLiebowitch from "./questionnairesList/EchelleDanxieteDeLiebowitch";
 import SingleScaleQuestionnaire from "./questionnairesList/SingleScaleQuestionnaire";
