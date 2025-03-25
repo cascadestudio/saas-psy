@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { calculateQuestionnaireScore } from "@/app/utils/questionnaire-scoring";
+import { calculateQuestionnaireScore } from "@/app/utils/questionnaire-scoring/questionnaire-scoring";
 import { sendQuestionnaireResults } from "@/app/services/email/sendQuestionnaireResults";
 import { questionnaires } from "@/app/questionnairesData";
 import { formatQuestionnaireAnswers } from "@/app/utils/formatQuestionnaireAnswers";
@@ -38,7 +38,6 @@ export async function POST(request: Request) {
       patientLastname,
       questionnaireTitle,
       scoreResult,
-      questionnaireAnswers,
       patientComments,
       readableAnswers,
     });

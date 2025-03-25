@@ -19,7 +19,6 @@ interface SendQuestionnaireResultsParams {
     maxAnxiety?: number;
     maxAvoidance?: number;
   };
-  questionnaireAnswers: Record<string, any>;
   patientComments: string;
   readableAnswers: string[];
 }
