@@ -28,14 +28,15 @@ export default async function QuestionnairePage({
     );
   }
 
-  // Get example questions
   const exampleQuestions = questionnaire.questions
     .slice(0, 5)
-    .map((question) => {
+    .flatMap((question) => {
       if (typeof question === "string") {
         return question;
+      } else if (question.items && question.items.length > 0) {
+        return question.items.slice(0, 2);
       }
-      return question.items[0]; // Show first item from each group
+      return [];
     });
 
   return (
@@ -73,7 +74,7 @@ export default async function QuestionnairePage({
           <div>
             <h3 className="text-lg font-medium mb-2">Questions d'exemple</h3>
             <ul className="list-disc pl-5 text-muted-foreground">
-              {exampleQuestions.map((question, index) => (
+              {exampleQuestions.map((question: string, index: number) => (
                 <li key={index} className="mb-1">
                   {question}
                 </li>
