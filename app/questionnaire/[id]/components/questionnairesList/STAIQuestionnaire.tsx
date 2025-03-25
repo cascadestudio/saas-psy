@@ -1,11 +1,9 @@
 "use client";
 
-import BaseQuestionnaire, {
-  QuestionnaireProps,
-  QuestionGroup,
-} from "../BaseQuestionnaire";
+import { QuestionnaireProps, QuestionGroup } from "@/app/types";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
+import BaseQuestionnaire from "../BaseQuestionnaire";
 
 export default function STAIQuestionnaire(props: QuestionnaireProps) {
   const { questionnaire } = props;
