@@ -35,7 +35,7 @@ export async function sendQuestionnaireResults({
   questionnaireId,
 }: SendQuestionnaireResultsParams) {
   return await resend.emails.send({
-    from: "Appsy <contact@cascadestudio.fr>",
+    from: "Zazo <contact@cascadestudio.fr>",
     to: [psychologistEmail],
     subject: `Résultat du questionnaire ${questionnaireTitle} pour ${patientFirstname} ${patientLastname}`,
     react: await ResultQuestionnaireEmailTemplate({
