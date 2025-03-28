@@ -23,6 +23,9 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { questionnaires } from "@/app/questionnairesData";
 import { questionCount } from "@/app/utils/utils";
+import { FavoriteButton } from "@/components/FavoriteButton";
+import { createClient } from "@/utils/supabase/client";
+
 // Get unique categories for filter
 const categories = Array.from(new Set(questionnaires.map((q) => q.category)));
 
@@ -31,6 +34,38 @@ export default function Home() {
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [filteredQuestionnaires, setFilteredQuestionnaires] =
     useState(questionnaires);
+  const [favorites, setFavorites] = useState<string[]>([]);
+  const [isLoadingFavorites, setIsLoadingFavorites] = useState(true);
+
+  // Fetch user's favorites
+  useEffect(() => {
+    const fetchFavorites = async () => {
+      try {
+        setIsLoadingFavorites(true);
+
+        // Check if user is logged in
+        const supabase = createClient();
+        const { data: authData } = await supabase.auth.getSession();
+
+        if (!authData.session) {
+          setIsLoadingFavorites(false);
+          return;
+        }
+
+        const response = await fetch("/api/favorites");
+        if (response.ok) {
+          const data = await response.json();
+          setFavorites(data.favorites || []);
+        }
+      } catch (error) {
+        console.error("Error fetching favorites:", error);
+      } finally {
+        setIsLoadingFavorites(false);
+      }
+    };
+
+    fetchFavorites();
+  }, []);
 
   // Filter questionnaires when search term or selected categories change
   useEffect(() => {
@@ -136,8 +171,17 @@ export default function Home() {
           {filteredQuestionnaires.map((questionnaire) => (
             <Card key={questionnaire.id} className="flex flex-col">
               <CardHeader>
-                <div className="text-sm text-muted-foreground mb-1">
-                  {questionnaire.category}
+                <div className="flex justify-between items-start">
+                  <div className="text-sm text-muted-foreground mb-1">
+                    {questionnaire.category}
+                  </div>
+                  {!isLoadingFavorites && (
+                    <FavoriteButton
+                      questionnaireId={questionnaire.id}
+                      initialIsFavorite={favorites.includes(questionnaire.id)}
+                      size="sm"
+                    />
+                  )}
                 </div>
                 <CardTitle>{questionnaire.title}</CardTitle>
                 <CardDescription className="line-clamp-2">

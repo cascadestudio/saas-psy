@@ -12,6 +12,8 @@ import { EmailDialogForm } from "./EmailDialogForm";
 import { questionnaires } from "@/app/questionnairesData";
 import DevTools from "./DevTools";
 import { questionCount } from "@/app/utils/utils";
+import { FavoriteButtonWrapper } from "./FavoriteButtonWrapper";
+
 export default async function QuestionnairePage({
   params,
 }: {
@@ -48,8 +50,11 @@ export default async function QuestionnairePage({
 
       <Card className="mb-8">
         <CardHeader>
-          <div className="text-sm text-muted-foreground mb-1">
-            {questionnaire.category}
+          <div className="flex justify-between items-start">
+            <div className="text-sm text-muted-foreground mb-1">
+              {questionnaire.category}
+            </div>
+            <FavoriteButtonWrapper questionnaireId={id} />
           </div>
           <CardTitle className="text-2xl">{questionnaire.title}</CardTitle>
           <CardDescription>{questionnaire.description}</CardDescription>
