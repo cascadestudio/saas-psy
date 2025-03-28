@@ -31,6 +31,8 @@ export default async function MyQuestionnairesPage() {
     .eq("id", user.id)
     .single();
 
+  console.log("User profile data:", profile);
+
   const favoriteIds = profile?.favorite_questionnaires || [];
 
   // Filter questionnaires to get favorites
