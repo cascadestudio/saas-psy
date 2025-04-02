@@ -20,7 +20,7 @@ export async function POST(request: Request) {
 
     const { data, error } = await resend.emails.send({
       //   from: "Acme <onboarding@resend.dev>",
-      from: "Appsy <contact@cascadestudio.fr>",
+      from: "Zazo <contact@cascadestudio.fr>",
       //   to: ["contact@cascadestudio.fr"],
       to: [patientEmail],
       //   to: ["delivered@resend.dev"], // Test address that always works

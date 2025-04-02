@@ -17,6 +17,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
 import { useParams } from "next/navigation";
+import { useUser } from "@/app/context/UserContext";
 
 interface EmailFormData {
   patientFirstname: string;
@@ -30,6 +31,7 @@ export function EmailDialogForm() {
   const [isEmailSent, setIsEmailSent] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [open, setOpen] = useState(false);
+  const { user } = useUser();
   const params = useParams();
   const questionnaireId = params.id as string;
 
@@ -93,12 +95,15 @@ export function EmailDialogForm() {
         <form onSubmit={handleSendEmail}>
           <div className="space-y-4 py-4">
             <div className="space-y-2">
-              <Label htmlFor="patient-email">Votre email (psychologue)</Label>
+              <Label htmlFor="psychologist-email">
+                Votre email (psychologue)
+              </Label>
               <Input
                 id="psychologist-email"
                 name="psychologist-email"
                 type="email"
                 placeholder="Entrez votre email"
+                defaultValue={user?.email || ""}
                 required
               />
             </div>
