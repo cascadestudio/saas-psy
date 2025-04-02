@@ -25,6 +25,7 @@ import { questionnaires } from "@/app/questionnairesData";
 import { questionCount } from "@/app/utils/utils";
 import { FavoriteButton } from "@/components/FavoriteButton";
 import { createClient } from "@/utils/supabase/client";
+import { QuestionnaireCard } from "@/components/QuestionnaireCard";
 
 // Get unique categories for filter
 const categories = Array.from(new Set(questionnaires.map((q) => q.category)));
@@ -169,40 +170,12 @@ export default function Home() {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredQuestionnaires.map((questionnaire) => (
-            <Card key={questionnaire.id} className="flex flex-col">
-              <CardHeader>
-                <div className="flex justify-between items-start">
-                  <div className="text-sm text-muted-foreground mb-1">
-                    {questionnaire.category}
-                  </div>
-                  {!isLoadingFavorites && (
-                    <FavoriteButton
-                      questionnaireId={questionnaire.id}
-                      initialIsFavorite={favorites.includes(questionnaire.id)}
-                      size="sm"
-                    />
-                  )}
-                </div>
-                <CardTitle>{questionnaire.title}</CardTitle>
-                <CardDescription className="line-clamp-2">
-                  {questionnaire.description}
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="flex-grow">
-                <div className="flex justify-between text-sm text-muted-foreground">
-                  <span>{questionCount(questionnaire)} questions</span>
-                  <span>{questionnaire.estimatedTime}</span>
-                </div>
-              </CardContent>
-              <CardFooter>
-                <Link
-                  href={`/questionnaire/description/${questionnaire.id}`}
-                  className="w-full"
-                >
-                  <Button className="w-full">Voir les détails</Button>
-                </Link>
-              </CardFooter>
-            </Card>
+            <QuestionnaireCard
+              key={questionnaire.id}
+              questionnaire={questionnaire}
+              isLoadingFavorites={isLoadingFavorites}
+              isFavorite={favorites.includes(questionnaire.id)}
+            />
           ))}
         </div>
       )}
