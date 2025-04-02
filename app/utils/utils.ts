@@ -10,3 +10,15 @@ export const questionCount = (questionnaire: any) => {
   }
   return questionnaire.questions.length;
 };
+
+// Extract example questions from a questionnaire
+export const getExampleQuestions = (questionnaire: any) => {
+  return questionnaire.questions.slice(0, 5).flatMap((question: any) => {
+    if (typeof question === "string") {
+      return question;
+    } else if (question.items && question.items.length > 0) {
+      return question.items.slice(0, 2);
+    }
+    return [];
+  });
+};

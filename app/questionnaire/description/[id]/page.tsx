@@ -11,7 +11,7 @@ import {
 import { EmailDialogForm } from "./EmailDialogForm";
 import { questionnaires } from "@/app/questionnairesData";
 import DevTools from "./DevTools";
-import { questionCount } from "@/app/utils/utils";
+import { questionCount, getExampleQuestions } from "@/app/utils/utils";
 import { FavoriteButtonWrapper } from "./FavoriteButtonWrapper";
 
 export default async function QuestionnairePage({
@@ -30,16 +30,7 @@ export default async function QuestionnairePage({
     );
   }
 
-  const exampleQuestions = questionnaire.questions
-    .slice(0, 5)
-    .flatMap((question) => {
-      if (typeof question === "string") {
-        return question;
-      } else if (question.items && question.items.length > 0) {
-        return question.items.slice(0, 2);
-      }
-      return [];
-    });
+  const exampleQuestions = getExampleQuestions(questionnaire);
 
   return (
     <div className="container mx-auto py-8 px-4 sm:px-6 md:px-8">
