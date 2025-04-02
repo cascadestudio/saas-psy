@@ -13,6 +13,7 @@ import { questionnaires } from "@/app/questionnairesData";
 import DevTools from "./DevTools";
 import { questionCount, getExampleQuestions } from "@/app/utils/utils";
 import { FavoriteButtonWrapper } from "./FavoriteButtonWrapper";
+import { QuestionnairePreviewModal } from "./QuestionnairePreviewModal";
 
 export default async function QuestionnairePage({
   params,
@@ -77,6 +78,7 @@ export default async function QuestionnairePage({
               ))}
             </ul>
           </div>
+          <QuestionnairePreviewModal questionnaire={questionnaire} />
         </CardContent>
         <CardFooter>
           <EmailDialogForm />
