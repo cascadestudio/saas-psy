@@ -2,6 +2,7 @@ import { ScoreResult } from "./types";
 import { calculateDualScaleScore } from "./dual-scale-scoring";
 import { calculateSingleScaleScore } from "./single-scale-scoring";
 import { calculateSTAIScore } from "./stai-scoring";
+import { calculateBDIScore } from "./bdi-scoring";
 
 export function calculateQuestionnaireScore(
   questionnaire: any,
@@ -13,6 +14,10 @@ export function calculateQuestionnaireScore(
 
   if (questionnaire.id === "stai-anxiete-generalisee") {
     return calculateSTAIScore(questionnaire, questionnaireAnswers);
+  }
+
+  if (questionnaire.id === "inventaire-de-depression-de-beck") {
+    return calculateBDIScore(questionnaire, questionnaireAnswers);
   }
 
   return calculateSingleScaleScore(questionnaire, questionnaireAnswers);

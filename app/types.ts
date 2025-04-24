@@ -5,16 +5,26 @@ export type QuestionGroup = {
   items: string[];
 };
 
+export type QuestionOption = {
+  value: number;
+  text: string;
+};
+
+export type BDIQuestion = {
+  title: string;
+  options: QuestionOption[];
+};
+
 export type QuestionnaireProps = {
   questionnaire: {
     id: string;
     title: string;
     description: string;
     category: string;
-    questions: (string | QuestionGroup)[]; // Using the QuestionGroup type here
+    questions: (string | QuestionGroup | BDIQuestion)[]; // Updated to include BDIQuestion
     estimatedTime: string;
     longDescription: string;
-    answerScales: {
+    answerScales?: {
       anxiety?: { value: number; label: string }[];
       avoidance?: { value: number; label: string }[];
       intensity?: { value: number; label: string }[];

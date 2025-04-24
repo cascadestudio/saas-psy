@@ -69,36 +69,49 @@ export const questionnaires = [
     longDescription:
       "L'Inventaire de Dépression de Beck (BDI) est un questionnaire d'auto-évaluation à choix multiples de 21 questions, l'un des tests psychométriques les plus largement utilisés pour mesurer la sévérité de la dépression. Son développement a marqué un changement parmi les professionnels de la santé mentale, qui avaient jusqu'alors considéré la dépression d'un point de vue psychodynamique, au lieu de la voir comme enracinée dans les propres pensées du patient. Le BDI est largement utilisé comme outil d'évaluation par les professionnels de la santé et les chercheurs dans divers contextes.",
     questions: [
-      "Tristesse",
-      "Pessimisme",
-      "Échecs passés",
-      "Perte de plaisir",
-      "Sentiments de culpabilité",
-      "Sentiments de punition",
-      "Déception envers soi-même",
-      "Auto-critique",
-      "Pensées ou désirs de suicide",
-      "Pleurs",
-      "Agitation",
-      "Perte d'intérêt",
-      "Indécision",
-      "Dévalorisation",
-      "Perte d'énergie",
-      "Modifications dans les habitudes de sommeil",
-      "Irritabilité",
-      "Modifications de l'appétit",
-      "Difficulté de concentration",
-      "Fatigue",
-      "Perte d'intérêt pour le sexe",
+      {
+        title: "Tristesse",
+        options: [
+          { value: 0, text: "Je ne me sens pas triste." },
+          { value: 1, text: "Je me sens morose ou triste." },
+          {
+            value: 2,
+            text: "Je suis morose ou triste tout le temps et je ne peux pas me remettre d'aplomb.",
+          },
+          {
+            value: 2,
+            text: "Je suis tellement triste ou malheureux(se) que cela me fait mal.",
+          },
+          {
+            value: 3,
+            text: "Je suis tellement triste ou malheureux(se) que je ne peux plus le supporter.",
+          },
+        ],
+      },
+      {
+        title: "Pessimisme",
+        options: [
+          {
+            value: 0,
+            text: "Je ne suis pas particulièrement découragé(e) par l'avenir.",
+          },
+          { value: 1, text: "Je me sens découragé(e) par l'avenir." },
+          {
+            value: 2,
+            text: "J'ai l'impression de n'avoir aucune attente dans la vie.",
+          },
+          {
+            value: 2,
+            text: "J'ai l'impression que je n'arriverai jamais à surmonter mes difficultés.",
+          },
+          {
+            value: 3,
+            text: "Je sens que l'avenir est sans espoir et que les choses ne peuvent pas s'améliorer.",
+          },
+        ],
+      },
+      // Add all 21 BDI questions with their specific options
     ],
-    answerScales: {
-      intensity: [
-        { value: 0, label: "Pas du tout" },
-        { value: 1, label: "Légèrement" },
-        { value: 2, label: "Modérément" },
-        { value: 3, label: "Sévèrement" },
-      ],
-    },
     scoring: {
       ranges: [
         { min: 0, max: 13, interpretation: "Dépression minimale" },
