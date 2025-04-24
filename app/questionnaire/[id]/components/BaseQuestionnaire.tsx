@@ -10,7 +10,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { toast } from "sonner";
-import { QuestionnaireProps, QuestionGroup } from "@/app/types";
+import { QuestionnaireProps } from "@/app/types";
 
 export default function BaseQuestionnaire({
   questionnaire,
@@ -18,6 +18,7 @@ export default function BaseQuestionnaire({
   patientFirstname,
   patientLastname,
   children,
+  isPreview = false,
 }: QuestionnaireProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -25,6 +26,12 @@ export default function BaseQuestionnaire({
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    // Don't actually submit if in preview mode
+    if (isPreview) {
+      return;
+    }
+
     setIsSubmitting(true);
 
     // Get form data
@@ -68,7 +75,7 @@ export default function BaseQuestionnaire({
     }
   };
 
-  if (isSubmitted) {
+  if (isSubmitted && !isPreview) {
     return (
       <div className="container mx-auto py-8 px-4">
         <Card>
@@ -111,11 +118,13 @@ export default function BaseQuestionnaire({
               />
             </div>
           </CardContent>
-          <CardFooter>
-            <Button className="w-full" type="submit" disabled={isSubmitting}>
-              {isSubmitting ? "Envoi en cours..." : "Soumettre"}
-            </Button>
-          </CardFooter>
+          {!isPreview && (
+            <CardFooter>
+              <Button className="w-full" type="submit" disabled={isSubmitting}>
+                {isSubmitting ? "Envoi en cours..." : "Soumettre"}
+              </Button>
+            </CardFooter>
+          )}
         </form>
       </Card>
     </div>

@@ -38,4 +38,5 @@ export type QuestionnaireProps = {
   patientFirstname: string;
   patientLastname: string;
   children?: ReactNode;
+  isPreview?: boolean;
 };
