@@ -110,7 +110,273 @@ export const questionnaires = [
           },
         ],
       },
-      // Add all 21 BDI questions with their specific options
+      {
+        title: "Échec personnel",
+        options: [
+          {
+            value: 0,
+            text: "Je n'ai pas l'impression d'avoir échoué dans la vie ou d'être un(e) raté(e).",
+          },
+          {
+            value: 1,
+            text: "J'ai l'impression d'avoir subi plus d'échecs que la moyenne des gens.",
+          },
+          {
+            value: 2,
+            text: "Quand je pense à ma vie passée, je ne vois que des échecs.",
+          },
+          {
+            value: 2,
+            text: "J'ai l'impression d'avoir complètement échoué dans la vie.",
+          },
+          { value: 3, text: "Je suis un(e) raté(e) complet(e)." },
+        ],
+      },
+      {
+        title: "Insatisfaction",
+        options: [
+          {
+            value: 0,
+            text: "Je tire autant de satisfaction de la vie qu'auparavant.",
+          },
+          {
+            value: 1,
+            text: "Je ne tire plus autant de satisfaction de la vie qu'auparavant.",
+          },
+          {
+            value: 2,
+            text: "Je ne tire plus de satisfaction de quoi que ce soit.",
+          },
+          { value: 3, text: "Tout me rend insatisfait ou m'ennuie." },
+        ],
+      },
+      {
+        title: "Culpabilité",
+        options: [
+          { value: 0, text: "Je ne me sens pas particulièrement coupable." },
+          { value: 1, text: "Je me sens coupable une bonne partie du temps." },
+          { value: 2, text: "Je me sens coupable la plupart du temps." },
+          { value: 3, text: "Je me sens tout le temps coupable." },
+        ],
+      },
+      {
+        title: "Sentiment d'être puni(e)",
+        options: [
+          { value: 0, text: "Je n'ai pas l'impression d'être puni(e)." },
+          { value: 1, text: "J'ai l'impression que je pourrais être puni(e)." },
+          { value: 2, text: "Je m'attends à être puni(e)." },
+          { value: 3, text: "J'ai l'impression d'être puni(e)." },
+        ],
+      },
+      {
+        title: "Déception envers soi-même",
+        options: [
+          { value: 0, text: "Je ne suis pas déçu(e) de moi-même." },
+          { value: 1, text: "Je suis déçu(e) de moi-même." },
+          { value: 2, text: "Je suis dégoûté(e) de moi-même." },
+          { value: 3, text: "Je me hais." },
+        ],
+      },
+      {
+        title: "Auto-accusation",
+        options: [
+          { value: 0, text: "Je ne pense pas être pire que les autres." },
+          {
+            value: 1,
+            text: "Je suis critique envers moi-même concernant mes faiblesses ou mes erreurs.",
+          },
+          { value: 2, text: "Je me blâme tout le temps pour mes fautes." },
+          {
+            value: 3,
+            text: "Je me blâme pour tous les malheurs qui arrivent.",
+          },
+        ],
+      },
+      {
+        title: "Idées suicidaires",
+        options: [
+          { value: 0, text: "Je ne pense pas du tout à me faire du mal." },
+          {
+            value: 1,
+            text: "Je pense parfois à me faire du mal, mais je ne le ferais pas.",
+          },
+          { value: 2, text: "Je pense que la mort me libérerait." },
+          { value: 2, text: "J'ai des plans précis pour me suicider." },
+          { value: 3, text: "Je me tuerais si j'en avais l'occasion." },
+        ],
+      },
+      {
+        title: "Pleurs",
+        options: [
+          { value: 0, text: "Je ne pleure pas plus que d'habitude." },
+          { value: 1, text: "Je pleure plus qu'avant." },
+          { value: 2, text: "Je pleure pour la moindre petite chose." },
+          {
+            value: 3,
+            text: "Je voudrais pleurer mais je n'en suis pas capable.",
+          },
+        ],
+      },
+      {
+        title: "Irritabilité",
+        options: [
+          {
+            value: 0,
+            text: "Je ne suis pas plus irritable qu'habituellement.",
+          },
+          { value: 1, text: "Je suis plus irritable que d'habitude." },
+          { value: 2, text: "Je suis beaucoup plus irritable que d'habitude." },
+          { value: 3, text: "Je suis constamment irritable." },
+        ],
+      },
+      {
+        title: "Retrait social",
+        options: [
+          { value: 0, text: "Je n'ai pas perdu d'intérêt pour les autres." },
+          { value: 1, text: "Je m'intéresse moins aux autres qu'avant." },
+          {
+            value: 2,
+            text: "J'ai perdu la plupart de mon intérêt pour les autres.",
+          },
+          { value: 3, text: "J'ai perdu tout intérêt pour les autres." },
+        ],
+      },
+      {
+        title: "Indécision",
+        options: [
+          { value: 0, text: "Je prends des décisions aussi bien qu'avant." },
+          {
+            value: 1,
+            text: "Je remets les décisions au lendemain plus que d'habitude.",
+          },
+          {
+            value: 2,
+            text: "J'ai beaucoup plus de difficultés à prendre des décisions qu'auparavant.",
+          },
+          { value: 3, text: "Je n'arrive plus à prendre de décisions." },
+        ],
+      },
+      {
+        title: "Dévalorisation",
+        options: [
+          {
+            value: 0,
+            text: "Je n'ai pas l'impression de paraître pire qu'avant.",
+          },
+          {
+            value: 1,
+            text: "Je m'inquiète de paraître vieux (vieille) ou peu attrayant(e).",
+          },
+          {
+            value: 2,
+            text: "J'ai l'impression qu'il y a des changements permanents dans mon apparence qui me rendent peu attrayant(e).",
+          },
+          { value: 3, text: "Je me trouve laid(e)." },
+        ],
+      },
+      {
+        title: "Difficulté de travail",
+        options: [
+          { value: 0, text: "Je travaille aussi bien qu'avant." },
+          {
+            value: 1,
+            text: "J'ai besoin de faire des efforts supplémentaires pour commencer à faire quelque chose.",
+          },
+          {
+            value: 1,
+            text: "Je ne travaille pas aussi bien qu'avant.",
+          },
+          {
+            value: 2,
+            text: "Je dois me forcer pour faire quoi que ce soit.",
+          },
+          { value: 3, text: "Je ne peux faire aucun travail." },
+        ],
+      },
+      {
+        title: "Troubles du sommeil",
+        options: [
+          { value: 0, text: "Je dors aussi bien que d'habitude." },
+          { value: 1, text: "Je ne dors pas aussi bien qu'avant." },
+          {
+            value: 2,
+            text: "Je me réveille une à deux heures plus tôt que d'habitude et j'ai du mal à me rendormir.",
+          },
+          {
+            value: 3,
+            text: "Je me réveille plusieurs heures plus tôt que d'habitude et je ne peux me rendormir.",
+          },
+        ],
+      },
+      {
+        title: "Fatigue",
+        options: [
+          { value: 0, text: "Je ne me fatigue pas plus que d'habitude." },
+          { value: 1, text: "Je me fatigue plus facilement que d'habitude." },
+          {
+            value: 2,
+            text: "Je me fatigue en faisant presque n'importe quoi.",
+          },
+          {
+            value: 3,
+            text: "Je suis trop fatigué(e) pour faire quoi que ce soit.",
+          },
+        ],
+      },
+      {
+        title: "Perte d'appétit",
+        options: [
+          { value: 0, text: "Mon appétit n'est pas pire que d'habitude." },
+          { value: 1, text: "Mon appétit n'est pas aussi bon qu'il l'était." },
+          { value: 2, text: "Mon appétit a beaucoup diminué." },
+          { value: 3, text: "Je n'ai plus d'appétit du tout." },
+        ],
+      },
+      {
+        title: "Perte de poids",
+        options: [
+          { value: 0, text: "Je n'ai pas perdu de poids dernièrement." },
+          { value: 1, text: "J'ai perdu plus de 2 kilos." },
+          { value: 2, text: "J'ai perdu plus de 4 kilos." },
+          { value: 3, text: "J'ai perdu plus de 7 kilos." },
+        ],
+      },
+      {
+        title: "Préoccupations somatiques",
+        options: [
+          {
+            value: 0,
+            text: "Je ne suis pas plus préoccupé(e) par ma santé que d'habitude.",
+          },
+          {
+            value: 1,
+            text: "Je suis préoccupé(e) par des maux et des douleurs, des problèmes d'estomac ou de constipation.",
+          },
+          {
+            value: 2,
+            text: "Je suis tellement préoccupé(e) par ce que je ressens ou comment je me sens qu'il est difficile de penser à autre chose.",
+          },
+          {
+            value: 3,
+            text: "Je suis complètement absorbé(e) par ce que je ressens.",
+          },
+        ],
+      },
+      {
+        title: "Perte de libido",
+        options: [
+          {
+            value: 0,
+            text: "Je n'ai pas remarqué de changement récent dans mon intérêt pour le sexe.",
+          },
+          { value: 1, text: "Je m'intéresse moins au sexe qu'auparavant." },
+          {
+            value: 2,
+            text: "Je m'intéresse beaucoup moins au sexe maintenant.",
+          },
+          { value: 3, text: "J'ai perdu tout intérêt pour le sexe." },
+        ],
+      },
     ],
     scoring: {
       ranges: [

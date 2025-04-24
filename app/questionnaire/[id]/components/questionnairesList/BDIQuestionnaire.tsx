@@ -25,9 +25,7 @@ export default function BDIQuestionnaire(props: QuestionnaireProps) {
 
         {questionnaire.questions.map((question: any, index: number) => (
           <div key={index} className="border p-4 rounded-md">
-            <h3 className="font-medium mb-4">
-              {index + 1}. {question.title}
-            </h3>
+            <h3 className="font-medium mb-4">{index + 1}.</h3>
 
             <div>
               <RadioGroup
@@ -36,7 +34,7 @@ export default function BDIQuestionnaire(props: QuestionnaireProps) {
               >
                 {question.options.map((option: any) => (
                   <div
-                    key={option.value}
+                    key={option.text}
                     className="flex items-start space-x-2 mb-2"
                   >
                     <RadioGroupItem

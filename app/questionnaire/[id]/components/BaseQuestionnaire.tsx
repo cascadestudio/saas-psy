@@ -106,17 +106,19 @@ export default function BaseQuestionnaire({
         </CardHeader>
         <form ref={formRef} onSubmit={handleSubmit}>
           <CardContent>
-            {children || (
-              <p>Veuillez utiliser un composant de questionnaire spécifique.</p>
+            {children}
+            {!isPreview && (
+              <div className="mt-6 space-y-2">
+                <h3 className="text-md font-medium">
+                  Commentaires additionnels
+                </h3>
+                <textarea
+                  name="patientComments"
+                  className="w-full min-h-[120px] p-3 border rounded-md"
+                  placeholder="Si vous souhaitez ajouter des commentaires ou des précisions, vous pouvez les écrire ici..."
+                />
+              </div>
             )}
-            <div className="mt-6 space-y-2">
-              <h3 className="text-md font-medium">Commentaires additionnels</h3>
-              <textarea
-                name="patientComments"
-                className="w-full min-h-[120px] p-3 border rounded-md"
-                placeholder="Si vous souhaitez ajouter des commentaires ou des précisions, vous pouvez les écrire ici..."
-              />
-            </div>
           </CardContent>
           {!isPreview && (
             <CardFooter>
