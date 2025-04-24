@@ -27,11 +27,6 @@ export default function BaseQuestionnaire({
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    // Don't actually submit if in preview mode
-    if (isPreview) {
-      return;
-    }
-
     setIsSubmitting(true);
 
     // Get form data

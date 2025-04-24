@@ -1,4 +1,4 @@
-import { QuestionGroup } from "@/app/types";
+import { QuestionGroup, BDIQuestion } from "@/app/types";
 
 export function formatQuestionnaireAnswers(questionnaire: any, answers: any) {
   // For multi-scale questionnaires like Liebowitz
@@ -39,6 +39,27 @@ export function formatQuestionnaireAnswers(questionnaire: any, answers: any) {
         });
       }
     );
+  }
+
+  // Add special handling for BDI questionnaire
+  if (questionnaire.id === "inventaire-de-depression-de-beck") {
+    console.log("BDI questionnaire handling activated");
+    return (questionnaire.questions as BDIQuestion[]).map((question, index) => {
+      const answerValue = answers[`bdi_${index}`];
+      if (!answerValue) {
+        return `${index + 1}. ${question.title} : Non répondu`;
+      }
+
+      const selectedOption = question.options.find(
+        (option) => option.value.toString() === answerValue
+      );
+
+      if (!selectedOption) {
+        return `${index + 1}. ${question.title} : Non répondu`;
+      }
+
+      return `${index + 1}. ${question.title} : ${selectedOption.text} (${selectedOption.value})`;
+    });
   }
 
   // Default case: single-scale questionnaires

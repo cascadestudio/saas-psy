@@ -79,10 +79,6 @@ export const questionnaires = [
             text: "Je suis morose ou triste tout le temps et je ne peux pas me remettre d'aplomb.",
           },
           {
-            value: 2,
-            text: "Je suis tellement triste ou malheureux(se) que cela me fait mal.",
-          },
-          {
             value: 3,
             text: "Je suis tellement triste ou malheureux(se) que je ne peux plus le supporter.",
           },
@@ -98,11 +94,7 @@ export const questionnaires = [
           { value: 1, text: "Je me sens découragé(e) par l'avenir." },
           {
             value: 2,
-            text: "J'ai l'impression de n'avoir aucune attente dans la vie.",
-          },
-          {
-            value: 2,
-            text: "J'ai l'impression que je n'arriverai jamais à surmonter mes difficultés.",
+            text: "J'ai l'impression de n'avoir aucune attente dans la vie ou que je n'arriverai jamais à surmonter mes difficultés.",
           },
           {
             value: 3,
@@ -124,10 +116,6 @@ export const questionnaires = [
           {
             value: 2,
             text: "Quand je pense à ma vie passée, je ne vois que des échecs.",
-          },
-          {
-            value: 2,
-            text: "J'ai l'impression d'avoir complètement échoué dans la vie.",
           },
           { value: 3, text: "Je suis un(e) raté(e) complet(e)." },
         ],
@@ -200,8 +188,10 @@ export const questionnaires = [
             value: 1,
             text: "Je pense parfois à me faire du mal, mais je ne le ferais pas.",
           },
-          { value: 2, text: "Je pense que la mort me libérerait." },
-          { value: 2, text: "J'ai des plans précis pour me suicider." },
+          {
+            value: 2,
+            text: "Je pense que la mort me libérerait ou j'ai des plans précis pour me suicider.",
+          },
           { value: 3, text: "Je me tuerais si j'en avais l'occasion." },
         ],
       },
@@ -280,11 +270,7 @@ export const questionnaires = [
           { value: 0, text: "Je travaille aussi bien qu'avant." },
           {
             value: 1,
-            text: "J'ai besoin de faire des efforts supplémentaires pour commencer à faire quelque chose.",
-          },
-          {
-            value: 1,
-            text: "Je ne travaille pas aussi bien qu'avant.",
+            text: "J'ai besoin de faire des efforts supplémentaires pour commencer à faire quelque chose ou je ne travaille pas aussi bien qu'avant.",
           },
           {
             value: 2,

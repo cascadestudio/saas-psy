@@ -31,6 +31,7 @@ export default function BDIQuestionnaire(props: QuestionnaireProps) {
               <RadioGroup
                 name={`bdi_${index}`}
                 defaultValue={getDevDefaultValue(index)}
+                required
               >
                 {question.options.map((option: any) => (
                   <div
@@ -40,7 +41,6 @@ export default function BDIQuestionnaire(props: QuestionnaireProps) {
                     <RadioGroupItem
                       id={`bdi_${index}_${option.value}`}
                       value={option.value.toString()}
-                      required
                       className="mt-1"
                     />
                     <Label
