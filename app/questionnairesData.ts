@@ -540,7 +540,7 @@ export const questionnaires = [
           min: 33,
           max: 80,
           interpretation:
-            "Présence éventuelle d’un trouble de stress post-traumatique",
+            "Présence éventuelle d'un trouble de stress post-traumatique",
         },
       ],
       method:
@@ -557,30 +557,181 @@ export const questionnaires = [
     longDescription:
       "L'échelle Y-BOCS (Yale-Brown Obsessive Compulsive Scale) est l'outil de référence pour évaluer la sévérité des symptômes du trouble obsessionnel-compulsif (TOC). Elle évalue séparément les obsessions et les compulsions selon cinq dimensions : le temps passé, l'interférence, la détresse, la résistance et le contrôle.",
     instructions:
-      "Les questions 1 à 5 ont trait à vos obsessions. Les obsessions sont des idées, des images ou des  impulsions qui s’insinuent dans votre esprit contre votre gré en dépit de vos  efforts pour leur résister. Elles ont habituellement comme thèmes la violence,  la menace et le danger.  Des obsessions  courantes sont une peur excessive de la contamination, un pressentiment  récurrent de danger, un souci exagéré d’ordre ou de symétrie, une minutie  extrême ou la peur de perdre des choses importantes. Les questions 6 à 10 ont trait à vos comportements compulsif. Les compulsions sont des actes que le sujet est poussé  à accomplir pour atténuer son angoisse ou son malaise. Ces actes prennent  souvent la forme de comportements répétitifs, réglés et intentionnels appelés  rituels. L’acte lui-même peut sembler approprié, mais il devient un rituel  quand il est accompli à l’excès. Des exemples de compulsions sont des rituels  de lavage ou de désinfection, des vérifications interminables, des répétitions  incessantes, le besoin de constamment ranger ou redresser des objets et le  collectionnisme. Certains rituels sont d’ordre intellectuel, par exemple  ressasser toujours les mêmes choses.",
+      "Les questions 1 à 5 ont trait à vos obsessions.\n**Les obsessions** sont des idées, des images ou des impulsions qui s'insinuent dans votre esprit contre votre gré en dépit de vos efforts pour leur résister. Elles ont habituellement comme thèmes la violence, la menace et le danger. Des obsessions courantes sont une peur excessive de la contamination, un pressentiment récurrent de danger, un souci exagéré d'ordre ou de symétrie, une minutie extrême ou la peur de perdre des choses importantes.\n\nLes questions 6 à 10 ont trait à vos comportements compulsif.\n**Les compulsions** sont des actes que le sujet est poussé à accomplir pour atténuer son angoisse ou son malaise. Ces actes prennent souvent la forme de comportements répétitifs, réglés et intentionnels appelés rituels. L'acte lui-même peut sembler approprié, mais il devient un rituel quand il est accompli à l'excès. Des exemples de compulsions sont des rituels de lavage ou de désinfection, des vérifications interminables, des répétitions incessantes, le besoin de constamment ranger ou redresser des objets et le collectionnisme. Certains rituels sont d'ordre intellectuel, par exemple ressasser toujours les mêmes choses.",
     questions: [
-      // Obsessions
-      "Temps passé aux obsessions : Combien de temps passez-vous à avoir des pensées obsessionnelles ?",
-      "Interférence due aux obsessions : À quel point vos obsessions interfèrent-elles avec votre vie sociale, professionnelle ou personnelle ?",
-      "Détresse associée aux obsessions : Quel degré de détresse vos obsessions vous causent-elles ?",
-      "Résistance aux obsessions : Quel effort faites-vous pour résister aux obsessions ?",
-      "Contrôle sur les obsessions : Quel contrôle avez-vous sur vos obsessions ?",
-      // Compulsions
-      "Temps passé aux compulsions : Combien de temps passez-vous à effectuer des comportements compulsifs ?",
-      "Interférence due aux compulsions : À quel point vos compulsions interfèrent-elles avec votre vie sociale, professionnelle ou personnelle ?",
-      "Détresse associée aux compulsions : Quel degré de détresse ressentiriez-vous si vous étiez empêché(e) d'accomplir vos compulsions ?",
-      "Résistance aux compulsions : Quel effort faites-vous pour résister aux compulsions ?",
-      "Contrôle sur les compulsions : Quel contrôle avez-vous sur vos compulsions ?",
+      {
+        title: "1. Temps accaparé par les pensées obsédantes:",
+        options: [
+          { value: 0, text: "Aucune" },
+          { value: 1, text: "Moins d'une heure par jour/occasionnelles" },
+          { value: 2, text: "Entre une et trois heures par jour/fréquentes" },
+          {
+            value: 3,
+            text: "Entre trois et huit heures par jour/très fréquentes",
+          },
+          { value: 4, text: "Plus de huit heures par jour/presque constantes" },
+        ],
+      },
+      {
+        title: "2. Interférence causée par les pensées obsédantes:",
+        options: [
+          { value: 0, text: "Aucune interférence" },
+          {
+            value: 1,
+            text: "Nuisent un peu à mes activités sociales ou autres, mais ne m'empêchent pas de fonctionner normalement",
+          },
+          {
+            value: 2,
+            text: "Nuisent sans aucun doute à mes activités sociales ou professionnelles, mais j'arrive quand même à fonctionner",
+          },
+          {
+            value: 3,
+            text: "Nuisent considérablement à ma vie sociale ou à mon travail",
+          },
+          { value: 4, text: "M'empêchent de fonctionner" },
+        ],
+      },
+      {
+        title: "3. Détresse occasionnée par les pensées obsédantes:",
+        options: [
+          { value: 0, text: "Pas du tout" },
+          { value: 1, text: "Un peu" },
+          { value: 2, text: "À un niveau tolérable" },
+          { value: 3, text: "Énormément" },
+          {
+            value: 4,
+            text: "Je me sens presque constamment dans un état de détresse invalidante",
+          },
+        ],
+      },
+      {
+        title: "4. Résistance opposée aux obsessions:",
+        options: [
+          { value: 0, text: "J'essaie toujours de leur résister" },
+          { value: 1, text: "J'essaie de leur résister la plupart du temps" },
+          { value: 2, text: "Je fais certains efforts pour leur résister" },
+          {
+            value: 3,
+            text: "Je cède à toutes mes obsessions sans essayer de les dominer, mais un peu à contrecœur",
+          },
+          {
+            value: 4,
+            text: "Je cède complètement et volontairement à toutes mes obsessions",
+          },
+        ],
+      },
+      {
+        title: "5. Degré d'emprise sur les pensées obsédantes:",
+        options: [
+          { value: 0, text: "Je les maîtrise complètement" },
+          {
+            value: 1,
+            text: "J'arrive généralement à les refreiner ou à les détourner avec des efforts et de la concentration",
+          },
+          {
+            value: 2,
+            text: "J'arrive parfois à les refréner ou à les détourner",
+          },
+          {
+            value: 3,
+            text: "J'arrive rarement et avec peine à les refréner ou à les chasser de mon esprit",
+          },
+          {
+            value: 4,
+            text: "Je n'ai aucune emprise sur mes obsessions, j'arrive rarement à détourner mon attention même momentanément",
+          },
+        ],
+      },
+      {
+        title: "6. Temps accaparé par les comportements compulsifs:",
+        options: [
+          { value: 0, text: "Aucune" },
+          { value: 1, text: "Moins d'une heure par jour/occasionnels" },
+          { value: 2, text: "Entre une et trois heures par jour/fréquents" },
+          {
+            value: 3,
+            text: "Entre trois et huit heures par jour/très fréquents",
+          },
+          {
+            value: 4,
+            text: "Plus de huit heures par jour/presque constants (trop nombreux pour les compter)",
+          },
+        ],
+      },
+      {
+        title: "7. Interférence causée par les comportements compulsifs:",
+        options: [
+          { value: 0, text: "Aucune interférence" },
+          {
+            value: 1,
+            text: "Nuisent un peu à mes activités sociales ou autres, mais ne m'empêchent pas de fonctionner normalement",
+          },
+          {
+            value: 2,
+            text: "Nuisent sans aucun doute à mes activités sociales ou professionnelles, mais j'arrive quand même à fonctionner",
+          },
+          {
+            value: 3,
+            text: "Nuisent considérablement à ma vie sociale ou à mon travail",
+          },
+          { value: 4, text: "M'empêchent de fonctionner" },
+        ],
+      },
+      {
+        title: "8. Détresse occasionnée par les comportements compulsifs:",
+        options: [
+          { value: 0, text: "Je ne me sentirais nullement angoissé(e)" },
+          { value: 1, text: "Je me sentirais un peu angoissé(e)" },
+          {
+            value: 2,
+            text: "Je me sentirais angoissé(e) mais à un niveau tolérable",
+          },
+          { value: 3, text: "Je me sentirais très angoissé(e)" },
+          {
+            value: 4,
+            text: "Je me sentirais extrêmement angoissé(e) au point d'être incapable de fonctionner",
+          },
+        ],
+      },
+      {
+        title: "9. Résistance opposée aux compulsions:",
+        options: [
+          { value: 0, text: "J'essaie toujours de leur résister" },
+          { value: 1, text: "J'essaie de leur résister la plupart du temps" },
+          { value: 2, text: "Je fais certains efforts pour leur résister" },
+          {
+            value: 3,
+            text: "Je cède à toutes mes compulsions sans essayer de les dominer, mais un peu à contrecœur",
+          },
+          {
+            value: 4,
+            text: "Je cède complètement et volontairement à toutes mes compulsions",
+          },
+        ],
+      },
+      {
+        title: "10. Degré d'emprise sur les compulsions:",
+        options: [
+          { value: 0, text: "Je les maîtrise complètement" },
+          {
+            value: 1,
+            text: "Je me sens poussé(e) à accomplir un acte compulsif mais j'arrive généralement à me dominer",
+          },
+          {
+            value: 2,
+            text: "Je ressens une forte envie d'accomplir un acte compulsif mais j'arrive à me dominer avec beaucoup d'efforts",
+          },
+          {
+            value: 3,
+            text: "J'éprouve un besoin pressant d'accomplir un acte compulsif, j'arrive seulement à en retarder l'accomplissement et avec peine",
+          },
+          {
+            value: 4,
+            text: "J'éprouve un besoin irrésistible d'accomplir un acte compulsif, je n'ai aucune emprise sur mes compulsions, j'arrive rarement à me retenir ne serait-ce que quelques instants",
+          },
+        ],
+      },
     ],
-    answerScales: {
-      intensity: [
-        { value: 0, label: "Aucun symptôme" },
-        { value: 1, label: "Léger" },
-        { value: 2, label: "Modéré" },
-        { value: 3, label: "Sévère" },
-        { value: 4, label: "Extrême" },
-      ],
-    },
     scoring: {
       ranges: [
         { min: 0, max: 7, interpretation: "Symptômes sous-cliniques" },
