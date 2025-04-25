@@ -20,6 +20,7 @@ export type QuestionnaireProps = {
     id: string;
     title: string;
     description: string;
+    instructions?: string;
     category: string;
     questions: (string | QuestionGroup | BDIQuestion)[]; // Updated to include BDIQuestion
     estimatedTime: string;

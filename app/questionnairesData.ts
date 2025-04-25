@@ -496,6 +496,8 @@ export const questionnaires = [
     estimatedTime: "5-10 minutes",
     longDescription:
       "La PCL-5 (Post-traumatic Stress Disorder Checklist) est un questionnaire d'auto-évaluation de 20 items qui évalue la présence et la sévérité des symptômes du TSPT selon les critères du DSM-5. Cet outil est largement utilisé tant en clinique qu'en recherche pour le dépistage du TSPT, le diagnostic provisoire, et le suivi des changements de symptômes pendant et après le traitement.",
+    instructions:
+      "Dans le dernier mois, dans quelle mesure avez-vous été affecté par :",
     questions: [
       "Des souvenirs répétés, pénibles et involontaires de l'expérience stressante ?",
       "Des rêves répétés et pénibles de l'expérience stressante ?",

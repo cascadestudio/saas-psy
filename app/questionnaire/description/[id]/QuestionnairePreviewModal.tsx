@@ -48,8 +48,8 @@ export function QuestionnairePreviewModal({
   const previewProps: QuestionnaireProps = {
     questionnaire: questionnaire,
     psychologistEmail: "preview@example.com",
-    patientFirstname: "Prénom",
-    patientLastname: "Nom",
+    patientFirstname: "[Prénom]",
+    patientLastname: "[Nom]",
     children: undefined,
     // Add a preview flag to disable actual form submission
     isPreview: true,

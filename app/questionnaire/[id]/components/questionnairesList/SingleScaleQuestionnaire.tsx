@@ -26,7 +26,8 @@ export default function SingleScaleQuestionnaire(props: QuestionnaireProps) {
     <BaseQuestionnaire {...props}>
       <div className="space-y-8">
         <h2 className="text-lg font-medium">
-          Évaluez l'intensité de vos symptômes pour chaque situation
+          {questionnaire.instructions ||
+            "Évaluez l'intensité de vos symptômes pour chaque situation"}
         </h2>
 
         {questionnaire.questions.map((question: any, index: any) => (
