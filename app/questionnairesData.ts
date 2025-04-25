@@ -529,12 +529,20 @@ export const questionnaires = [
     },
     scoring: {
       ranges: [
-        { min: 0, max: 31, interpretation: "Symptômes légers" },
-        { min: 32, max: 43, interpretation: "Symptômes modérés" },
-        { min: 44, max: 80, interpretation: "Symptômes sévères" },
+        {
+          min: 0,
+          max: 32,
+          interpretation: "Pas de trouble de stress post-traumatique",
+        },
+        {
+          min: 33,
+          max: 80,
+          interpretation:
+            "Présence éventuelle d’un trouble de stress post-traumatique",
+        },
       ],
       method:
-        "Additionnez les scores de chaque item (0-4). Le score total varie de 0 à 80. Un score total de 32 ou plus suggère un diagnostic probable de TSPT.",
+        "Additionnez les scores de chaque item (0-4). Le score total varie de 0 à 80. Un score total de 33 ou plus suggère un diagnostic probable de TSPT. Critère B - Symptômes d'Intrusion : Questions 1 à 5. Si une question ou + présente un score de 2 ou + = Critère validé. Critère C - Symptômes d'évitement : Questions 6 à 7. Si une question ou + présente un score de 2 ou + = Critère validé. Critère D - Symptômes d'engourdissement émotionnel : Questions 8 à 14. Si deux questions ou + présentent un score de 2 ou + = Critère validé. Critère E - Symptômes neurovégétatifs : Questions 15 à 20. Si deux questions ou + présentent un score de 2 ou + = Critère validé. Si les 4 critères sont validés, la personne présente potentiellement un TSPT si elle a été précédemment exposée à un évènement traumatogène.",
     },
   },
   {
