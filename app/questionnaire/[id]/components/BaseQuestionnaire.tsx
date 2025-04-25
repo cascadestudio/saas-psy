@@ -101,6 +101,10 @@ export default function BaseQuestionnaire({
         </CardHeader>
         <form ref={formRef} onSubmit={handleSubmit}>
           <CardContent>
+            <p className=" mb-8">
+              {questionnaire.instructions ||
+                "Évaluez l'intensité de vos symptômes pour chaque situation"}
+            </p>
             {children}
             {!isPreview && (
               <div className="mt-6 space-y-2">
