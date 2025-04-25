@@ -18,11 +18,6 @@ export default function BDIQuestionnaire(props: QuestionnaireProps) {
   return (
     <BaseQuestionnaire {...props}>
       <div className="space-y-8">
-        <h2 className="text-lg font-medium">
-          Choisissez l'énoncé qui décrit le mieux comment vous vous êtes
-          senti(e) au cours des deux dernières semaines
-        </h2>
-
         {questionnaire.questions.map((question: any, index: number) => (
           <div key={index} className="border p-4 rounded-md">
             <h3 className="font-medium mb-4">{index + 1}.</h3>

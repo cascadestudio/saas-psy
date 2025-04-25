@@ -26,7 +26,7 @@ export default function QuestionnaireFactory(props: QuestionnaireProps) {
       return <SingleScaleQuestionnaire {...props} />;
 
     case "index-symptomes-ybocs":
-      return <SingleScaleQuestionnaire {...props} />;
+      return <BDIQuestionnaire {...props} />;
 
     case "test-questionnaire":
       return <SingleScaleQuestionnaire {...props} />;
