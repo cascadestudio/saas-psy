@@ -68,16 +68,20 @@ export default async function QuestionnairePage({
               {questionnaire.longDescription}
             </p>
           </div>
-          <div>
-            <h3 className="text-lg font-medium mb-2">Questions d'exemple</h3>
-            <ul className="list-disc pl-5 text-muted-foreground">
-              {exampleQuestions.map((question: string, index: number) => (
-                <li key={index} className="mb-1">
-                  {question}
-                </li>
-              ))}
-            </ul>
-          </div>
+          {exampleQuestions.length > 0 && (
+            <div>
+              <h3 className="text-lg font-medium mb-2">
+                Exemples de questions
+              </h3>
+              <ul className="list-disc pl-5 text-muted-foreground">
+                {exampleQuestions.map((question: string, index: number) => (
+                  <li key={index} className="mb-1">
+                    {question}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
           <QuestionnairePreviewModal questionnaire={questionnaire} />
         </CardContent>
         <CardFooter>

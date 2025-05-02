@@ -77,8 +77,8 @@ export default function BaseQuestionnaire({
           <CardHeader>
             <CardTitle>Questionnaire envoyé avec succès</CardTitle>
             <p className="text-sm text-muted-foreground mt-2">
-              Merci d'avoir complété ce questionnaire. Vos réponses ont été
-              enregistrées.
+              Merci d’avoir complété ce questionnaire. Vos réponses ont bien été
+              transmises à votre praticien.
             </p>
           </CardHeader>
         </Card>
