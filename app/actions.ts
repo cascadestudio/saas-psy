@@ -10,8 +10,7 @@ export const signUpAction = async (formData: FormData) => {
   const email = formData.get("email")?.toString();
   const password = formData.get("password")?.toString();
   const supabase = await createClient();
-  const siteUrl =
-    process.env.NEXT_PUBLIC_BASE_URL || (await headers()).get("origin");
+  const siteUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
   if (!email || !password) {
     return encodedRedirect(
