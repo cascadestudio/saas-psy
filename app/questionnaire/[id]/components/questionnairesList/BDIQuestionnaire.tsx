@@ -20,7 +20,9 @@ export default function BDIQuestionnaire(props: QuestionnaireProps) {
       <div className="space-y-8">
         {questionnaire.questions.map((question: any, index: number) => (
           <div key={index} className="border p-4 rounded-md">
-            <h3 className="font-medium mb-4">{index + 1}.</h3>
+            <h3 className="font-medium mb-4">
+              {index + 1}. {question.title}
+            </h3>
 
             <div>
               <RadioGroup

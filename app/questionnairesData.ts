@@ -660,7 +660,7 @@ export const questionnaires = [
       "Les questions 1 à 5 ont trait à vos obsessions.\n**Les obsessions** sont des idées, des images ou des impulsions qui s'insinuent dans votre esprit contre votre gré en dépit de vos efforts pour leur résister. Elles ont habituellement comme thèmes la violence, la menace et le danger. Des obsessions courantes sont une peur excessive de la contamination, un pressentiment récurrent de danger, un souci exagéré d'ordre ou de symétrie, une minutie extrême ou la peur de perdre des choses importantes.\n\nLes questions 6 à 10 ont trait à vos comportements compulsif.\n**Les compulsions** sont des actes que le sujet est poussé à accomplir pour atténuer son angoisse ou son malaise. Ces actes prennent souvent la forme de comportements répétitifs, réglés et intentionnels appelés rituels. L'acte lui-même peut sembler approprié, mais il devient un rituel quand il est accompli à l'excès. Des exemples de compulsions sont des rituels de lavage ou de désinfection, des vérifications interminables, des répétitions incessantes, le besoin de constamment ranger ou redresser des objets et le collectionnisme. Certains rituels sont d'ordre intellectuel, par exemple ressasser toujours les mêmes choses.",
     questions: [
       {
-        title: "1. Temps accaparé par les pensées obsédantes:",
+        title: "Temps accaparé par les pensées obsédantes:",
         options: [
           { value: 0, text: "Aucune" },
           { value: 1, text: "Moins d'une heure par jour/occasionnelles" },
@@ -673,7 +673,7 @@ export const questionnaires = [
         ],
       },
       {
-        title: "2. Interférence causée par les pensées obsédantes:",
+        title: "Interférence causée par les pensées obsédantes:",
         options: [
           { value: 0, text: "Aucune interférence" },
           {
@@ -692,7 +692,7 @@ export const questionnaires = [
         ],
       },
       {
-        title: "3. Détresse occasionnée par les pensées obsédantes:",
+        title: "Détresse occasionnée par les pensées obsédantes:",
         options: [
           { value: 0, text: "Pas du tout" },
           { value: 1, text: "Un peu" },
@@ -705,7 +705,7 @@ export const questionnaires = [
         ],
       },
       {
-        title: "4. Résistance opposée aux obsessions:",
+        title: "Résistance opposée aux obsessions:",
         options: [
           { value: 0, text: "J'essaie toujours de leur résister" },
           { value: 1, text: "J'essaie de leur résister la plupart du temps" },
@@ -721,7 +721,7 @@ export const questionnaires = [
         ],
       },
       {
-        title: "5. Degré d'emprise sur les pensées obsédantes:",
+        title: "Degré d'emprise sur les pensées obsédantes:",
         options: [
           { value: 0, text: "Je les maîtrise complètement" },
           {
@@ -743,7 +743,7 @@ export const questionnaires = [
         ],
       },
       {
-        title: "6. Temps accaparé par les comportements compulsifs:",
+        title: "Temps accaparé par les comportements compulsifs:",
         options: [
           { value: 0, text: "Aucune" },
           { value: 1, text: "Moins d'une heure par jour/occasionnels" },
@@ -759,7 +759,7 @@ export const questionnaires = [
         ],
       },
       {
-        title: "7. Interférence causée par les comportements compulsifs:",
+        title: "Interférence causée par les comportements compulsifs:",
         options: [
           { value: 0, text: "Aucune interférence" },
           {
@@ -778,7 +778,7 @@ export const questionnaires = [
         ],
       },
       {
-        title: "8. Détresse occasionnée par les comportements compulsifs:",
+        title: "Détresse occasionnée par les comportements compulsifs:",
         options: [
           { value: 0, text: "Je ne me sentirais nullement angoissé(e)" },
           { value: 1, text: "Je me sentirais un peu angoissé(e)" },
@@ -794,7 +794,7 @@ export const questionnaires = [
         ],
       },
       {
-        title: "9. Résistance opposée aux compulsions:",
+        title: "Résistance opposée aux compulsions:",
         options: [
           { value: 0, text: "J'essaie toujours de leur résister" },
           { value: 1, text: "J'essaie de leur résister la plupart du temps" },
@@ -810,7 +810,7 @@ export const questionnaires = [
         ],
       },
       {
-        title: "10. Degré d'emprise sur les compulsions:",
+        title: "Degré d'emprise sur les compulsions:",
         options: [
           { value: 0, text: "Je les maîtrise complètement" },
           {
