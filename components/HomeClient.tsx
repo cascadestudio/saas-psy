@@ -1,18 +1,10 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Link from "next/link";
 import { Search, X } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+
 import { Input } from "@/components/ui/input";
 import {
   DropdownMenu,
@@ -22,8 +14,6 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Badge } from "@/components/ui/badge";
 import { questionnaires } from "@/app/questionnairesData";
-import { questionCount } from "@/app/utils/utils";
-import { FavoriteButton } from "@/components/FavoriteButton";
 import { createClient } from "@/utils/supabase/client";
 import { QuestionnaireCard } from "@/components/QuestionnaireCard";
 
