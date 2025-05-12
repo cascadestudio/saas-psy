@@ -8,31 +8,129 @@ export const questionnaires = [
     estimatedTime: "10-15 minutes",
     longDescription:
       "L'Échelle d'anxiété sociale de Liebowitz (LSAS) est un questionnaire développé par le psychiatre Michael Liebowitz pour évaluer la gravité de l'anxiété sociale. Il mesure à la fois la peur et l'évitement dans 24 situations sociales différentes. Chaque situation est évaluée deux fois : une fois pour le niveau d'anxiété qu'elle provoque (de 0 à 3, où 0 signifie aucune anxiété et 3 une anxiété sévère) et une fois pour la fréquence d'évitement de la situation (également de 0 à 3). Le LSAS est largement utilisé en recherche clinique et en pratique pour évaluer l'efficacité des traitements pour l'anxiété sociale.",
+    instructions:
+      "Évaluez votre niveau d'anxiété et d'évitement pour chaque situation",
     questions: [
-      "Téléphoner en public",
-      "Participer à un petit groupe",
-      "Manger dans un lieu public",
-      "Boire en compagnie dans un lieu public",
-      "Parler à des personnes qui détiennent une autorité",
-      "Jouer, donner une représentation ou une conférence devant un public",
-      "Aller à une soirée",
-      "Travailler en étant observé",
-      "Écrire en étant observé",
-      "Appeler quelqu'un que vous ne connaissez pas très bien",
-      "Parler à des personnes que vous ne connaissez pas très bien",
-      "Rencontrer des inconnus",
-      "Uriner dans des toilettes publiques",
-      "Entrer dans une pièce alors que tout le monde est déjà assis",
-      "Être le centre d'attention",
-      "Prendre la parole à une réunion",
-      "Passer un examen",
-      "Exprimer son désaccord ou sa désapprobation à des personnes que vous ne connaissez pas très bien",
-      "Regarder dans les yeux des personnes que vous ne connaissez pas très bien",
-      "Faire un compte rendu à un groupe",
-      "Essayer de séduire quelqu'un",
-      "Rapporter des marchandises dans un magasin",
-      "Donner une soirée",
-      "Résister aux pressions d'un vendeur insistant",
+      {
+        id: 1,
+        text: "Téléphoner en public",
+        type: "performance",
+      },
+      {
+        id: 2,
+        text: "Participer à un petit groupe",
+        type: "interaction",
+      },
+      {
+        id: 3,
+        text: "Manger dans un lieu public",
+        type: "performance",
+      },
+      {
+        id: 4,
+        text: "Boire en compagnie dans un lieu public",
+        type: "performance",
+      },
+      {
+        id: 5,
+        text: "Parler à des personnes qui détiennent une autorité",
+        type: "interaction",
+      },
+      {
+        id: 6,
+        text: "Jouer, donner une représentation ou une conférence devant un public",
+        type: "performance",
+      },
+      {
+        id: 7,
+        text: "Aller à une soirée",
+        type: "interaction",
+      },
+      {
+        id: 8,
+        text: "Travailler en étant observé",
+        type: "performance",
+      },
+      {
+        id: 9,
+        text: "Écrire en étant observé",
+        type: "performance",
+      },
+      {
+        id: 10,
+        text: "Appeler quelqu'un que vous ne connaissez pas très bien",
+        type: "interaction",
+      },
+      {
+        id: 11,
+        text: "Parler à des personnes que vous ne connaissez pas très bien",
+        type: "interaction",
+      },
+      {
+        id: 12,
+        text: "Rencontrer des inconnus",
+        type: "interaction",
+      },
+      {
+        id: 13,
+        text: "Uriner dans des toilettes publiques",
+        type: "performance",
+      },
+      {
+        id: 14,
+        text: "Entrer dans une pièce alors que tout le monde est déjà assis",
+        type: "performance",
+      },
+      {
+        id: 15,
+        text: "Être le centre d'attention",
+        type: "performance",
+      },
+      {
+        id: 16,
+        text: "Prendre la parole à une réunion",
+        type: "performance",
+      },
+      {
+        id: 17,
+        text: "Passer un examen",
+        type: "performance",
+      },
+      {
+        id: 18,
+        text: "Exprimer son désaccord ou sa désapprobation à des personnes que vous ne connaissez pas très bien",
+        type: "interaction",
+      },
+      {
+        id: 19,
+        text: "Regarder dans les yeux des personnes que vous ne connaissez pas très bien",
+        type: "interaction",
+      },
+      {
+        id: 20,
+        text: "Faire un compte rendu à un groupe",
+        type: "performance",
+      },
+      {
+        id: 21,
+        text: "Essayer de séduire quelqu'un",
+        type: "interaction",
+      },
+      {
+        id: 22,
+        text: "Rapporter des marchandises dans un magasin",
+        type: "performance",
+      },
+      {
+        id: 23,
+        text: "Donner une soirée",
+        type: "interaction",
+      },
+      {
+        id: 24,
+        text: "Résister aux pressions d'un vendeur insistant",
+        type: "interaction",
+      },
     ],
     answerScales: {
       anxiety: [

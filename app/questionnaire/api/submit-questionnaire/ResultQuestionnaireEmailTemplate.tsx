@@ -23,10 +23,18 @@ interface ResultQuestionnaireEmailTemplateProps {
     avoidanceScore?: number;
     stateScore?: number;
     traitScore?: number;
+    anxietyPerformanceScore?: number;
+    anxietyInteractionScore?: number;
+    avoidancePerformanceScore?: number;
+    avoidanceInteractionScore?: number;
     interpretation: string | { trait: string; state: string };
     maxTotal: number;
     maxAnxiety?: number;
     maxAvoidance?: number;
+    maxPerformanceAnxiety?: number;
+    maxInteractionAnxiety?: number;
+    maxPerformanceAvoidance?: number;
+    maxInteractionAvoidance?: number;
   };
   readableAnswers: string[];
   patientComments?: string;
@@ -78,18 +86,61 @@ export const ResultQuestionnaireEmailTemplate = ({
                   /80
                 </Text>
               </>
-            ) : scoreResult.anxietyScore !== undefined ? (
+            ) : questionnaireId === "echelle-d-anxiete-sociale-de-liebowitz" ? (
               <>
-                <Text style={scoreStyle}>
-                  <strong>Score d'anxiété:</strong> {scoreResult.anxietyScore}/
-                  {scoreResult.maxAnxiety}
+                {/* <Text style={scoreStyle}>
+                  <strong>Score total:</strong> {scoreResult.totalScore}/
+                  {maxTotal}
+                </Text> */}
+
+                <Text style={subheadingStyle}>
+                  Détails des scores d'anxiété
                 </Text>
                 <Text style={scoreStyle}>
-                  <strong>Score d'évitement:</strong>{" "}
+                  <strong>Score total d'anxiété:</strong>{" "}
+                  {scoreResult.anxietyScore}/{scoreResult.maxAnxiety}
+                </Text>
+                <Text style={scoreStyle}>
+                  <strong>Score d'anxiété de performance:</strong>{" "}
+                  {scoreResult.anxietyPerformanceScore}/
+                  {scoreResult.maxPerformanceAnxiety}
+                </Text>
+                <Text style={scoreStyle}>
+                  <strong>Score d'anxiété d'interaction:</strong>{" "}
+                  {scoreResult.anxietyInteractionScore}/
+                  {scoreResult.maxInteractionAnxiety}
+                </Text>
+
+                <Text style={subheadingStyle}>
+                  Détails des scores d'évitement
+                </Text>
+                <Text style={scoreStyle}>
+                  <strong>Score total d'évitement:</strong>{" "}
                   {scoreResult.avoidanceScore}/{scoreResult.maxAvoidance}
+                </Text>
+                <Text style={scoreStyle}>
+                  <strong>Score d'évitement de performance:</strong>{" "}
+                  {scoreResult.avoidancePerformanceScore}/
+                  {scoreResult.maxPerformanceAvoidance}
+                </Text>
+                <Text style={scoreStyle}>
+                  <strong>Score d'évitement d'interaction:</strong>{" "}
+                  {scoreResult.avoidanceInteractionScore}/
+                  {scoreResult.maxInteractionAvoidance}
                 </Text>
               </>
             ) : (
+              // ) : scoreResult.anxietyScore !== undefined ? (
+              //   <>
+              //     <Text style={scoreStyle}>
+              //       <strong>Score d'anxiété:</strong> {scoreResult.anxietyScore}/
+              //       {scoreResult.maxAnxiety}
+              //     </Text>
+              //     <Text style={scoreStyle}>
+              //       <strong>Score d'évitement:</strong>{" "}
+              //       {scoreResult.avoidanceScore}/{scoreResult.maxAvoidance}
+              //     </Text>
+              //   </>
               <Text style={scoreStyle}>
                 <strong>Score total:</strong> {scoreResult.totalScore}/
                 {maxTotal}

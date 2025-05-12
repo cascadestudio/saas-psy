@@ -28,15 +28,13 @@ export default function EchelleDanxieteDeLiebowitch(props: QuestionnaireProps) {
   return (
     <BaseQuestionnaire {...props}>
       <div className="space-y-8">
-        <h2 className="text-lg font-medium">
-          Évaluez votre niveau d'anxiété et d'évitement pour chaque situation
-        </h2>
-
-        {questionnaire.questions.map((question: any, index: any) => (
+        {questionnaire.questions.map((question: any, index: number) => (
           <div key={index} className="border p-4 rounded-md">
-            <h3 className="font-medium mb-4">
-              {index + 1}. {question}
-            </h3>
+            <div className="flex justify-between items-center mb-4">
+              <h3 className="font-medium">
+                {index + 1}. {question.text}
+              </h3>
+            </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {/* Anxiety section */}
