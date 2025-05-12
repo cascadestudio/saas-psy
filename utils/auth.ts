@@ -1,4 +1,4 @@
-import { createClient } from "@/utils/supabase/server";
+import { adminClient } from "@/utils/supabase/admin";
 
 export async function createUserProfile(
   userId: string,
@@ -6,10 +6,9 @@ export async function createUserProfile(
   firstName?: string,
   lastName?: string
 ) {
-  const supabase = await createClient();
   console.log("Creating profile for user:", userId, email);
 
-  const { error, data } = await supabase.from("profiles").insert([
+  const { error, data } = await adminClient.from("profiles").insert([
     {
       id: userId,
       email,
@@ -30,21 +29,3 @@ export async function createUserProfile(
   console.log("Profile created successfully");
   return true;
 }
-
-// export async function ensureUserProfile(userId: string, email: string) {
-//   const supabase = await createClient();
-
-//   // Check if profile exists
-//   const { data, error: fetchError } = await supabase
-//     .from("profiles")
-//     .select("id")
-//     .eq("id", userId)
-//     .single();
-
-//   // If profile doesn't exist, create it
-//   if (fetchError || !data) {
-//     return createUserProfile(userId, email);
-//   }
-
-//   return true;
-// }
