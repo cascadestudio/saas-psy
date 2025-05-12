@@ -79,20 +79,17 @@ export async function GET(request: Request) {
       .from("profiles")
       .select("favorite_questionnaires")
       .eq("id", user.id)
-      .single();
+      .maybeSingle();
 
     if (error) {
       throw error;
     }
 
     return NextResponse.json({
-      favorites: data.favorite_questionnaires || [],
+      favorites: data?.favorite_questionnaires || [],
     });
   } catch (error) {
     console.error("Error fetching favorites:", error);
-    return NextResponse.json(
-      { error: "Échec de la récupération des favoris" },
-      { status: 500 }
-    );
+    return NextResponse.json({ favorites: [] }, { status: 200 });
   }
 }
