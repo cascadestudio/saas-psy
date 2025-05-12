@@ -17,4 +17,6 @@ export interface ScoreResult {
   maxInteractionAnxiety?: number;
   maxPerformanceAvoidance?: number;
   maxInteractionAvoidance?: number;
+  maxState?: number;
+  maxTrait?: number;
 }

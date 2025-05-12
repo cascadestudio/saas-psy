@@ -15,6 +15,18 @@ export type BDIQuestion = {
   options: QuestionOption[];
 };
 
+export type LiebovitshQuestion = {
+  title: string;
+  options: QuestionOption[];
+  category?: string;
+};
+
+export type BaseQuestion = {
+  id: number;
+  text: string;
+  type: string;
+};
+
 export type QuestionnaireProps = {
   questionnaire: {
     id: string;
@@ -22,7 +34,13 @@ export type QuestionnaireProps = {
     description: string;
     instructions?: string;
     category: string;
-    questions: (string | QuestionGroup | BDIQuestion)[]; // Updated to include BDIQuestion
+    questions: (
+      | string
+      | QuestionGroup
+      | BDIQuestion
+      | LiebovitshQuestion
+      | BaseQuestion
+    )[];
     estimatedTime: string;
     longDescription: string;
     answerScales?: {
