@@ -1,0 +1,113 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:16-alpine
+    container_name: saas-psy-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+      POSTGRES_DB: ${POSTGRES_DB:-saas_psy}
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - saas-psy-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-postgres}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # NestJS API
+  api:
+    build:
+      context: ./apps/api
+      dockerfile: ../../docker/Dockerfile.api
+    container_name: saas-psy-api
+    restart: unless-stopped
+    ports:
+      - "${API_PORT:-3001}:3001"
+    environment:
+      NODE_ENV: ${NODE_ENV:-development}
+      DATABASE_URL: postgresql://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-postgres}@postgres:5432/${POSTGRES_DB:-saas_psy}
+      JWT_SECRET: ${JWT_SECRET:-your-super-secret-jwt-key-change-in-production}
+      JWT_EXPIRES_IN: ${JWT_EXPIRES_IN:-7d}
+      PORT: 3001
+      CORS_ORIGIN: ${CORS_ORIGIN:-http://localhost:3000}
+      EMAIL_FROM: ${EMAIL_FROM:-noreply@saas-psy.com}
+      RESEND_API_KEY: ${RESEND_API_KEY:-}
+      NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL:-http://localhost:3000}
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - saas-psy-network
+    volumes:
+      - ./apps/api:/app
+      - ./packages/core:/packages/core
+      - /app/node_modules
+    command: npm run start:dev
+
+  # Next.js Web App (optional - usually run separately in dev)
+  web:
+    build:
+      context: ./apps/web
+      dockerfile: ../../docker/Dockerfile.web
+    container_name: saas-psy-web
+    restart: unless-stopped
+    ports:
+      - "${WEB_PORT:-3000}:3000"
+    environment:
+      NODE_ENV: ${NODE_ENV:-development}
+      NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost:3001/api}
+      NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL:-http://localhost:3000}
+      NEXTAUTH_URL: ${NEXTAUTH_URL:-http://localhost:3000}
+      NEXTAUTH_SECRET: ${NEXTAUTH_SECRET:-your-super-secret-nextauth-key}
+      DATABASE_URL: postgresql://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-postgres}@postgres:5432/${POSTGRES_DB:-saas_psy}
+      RESEND_API_KEY: ${RESEND_API_KEY:-}
+    depends_on:
+      - api
+    networks:
+      - saas-psy-network
+    volumes:
+      - ./apps/web:/app
+      - ./packages/core:/packages/core
+      - /app/node_modules
+      - /app/.next
+    command: npm run dev
+    profiles:
+      - full  # Only starts with docker-compose --profile full up
+
+  # pgAdmin (Optional - Database Management UI)
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: saas-psy-pgadmin
+    restart: unless-stopped
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_EMAIL:-admin@saas-psy.com}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PASSWORD:-admin}
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    ports:
+      - "${PGADMIN_PORT:-5050}:80"
+    depends_on:
+      - postgres
+    networks:
+      - saas-psy-network
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+    profiles:
+      - tools  # Only starts with docker-compose --profile tools up
+
+volumes:
+  postgres_data:
+    driver: local
+  pgadmin_data:
+    driver: local
+
+networks:
+  saas-psy-network:
+    driver: bridge

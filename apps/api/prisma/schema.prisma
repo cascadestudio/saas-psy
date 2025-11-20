@@ -1,0 +1,196 @@
+// Prisma schema for SaaS Psy
+// Healthcare-compliant data model
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ============================================
+// AUTHENTICATION & USERS
+// ============================================
+
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  emailVerified DateTime? @map("email_verified")
+  passwordHash  String    @map("password_hash")
+  
+  firstName     String?   @map("first_name")
+  lastName      String?   @map("last_name")
+  role          UserRole  @default(PRACTITIONER)
+  
+  createdAt     DateTime  @default(now()) @map("created_at")
+  updatedAt     DateTime  @updatedAt @map("updated_at")
+  
+  // Relations
+  profile       Profile?
+  sessions      Session[]
+  auditLogs     AuditLog[]
+  
+  @@map("users")
+}
+
+enum UserRole {
+  PRACTITIONER  // Psychologist
+  ADMIN
+  PATIENT       // Future: if patients get accounts
+}
+
+model Profile {
+  id                      String   @id @default(cuid())
+  userId                  String   @unique @map("user_id")
+  user                    User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  favoriteQuestionnaires  String[] @map("favorite_questionnaires")
+  preferences             Json?    @default("{}")
+  
+  createdAt               DateTime @default(now()) @map("created_at")
+  updatedAt               DateTime @updatedAt @map("updated_at")
+  
+  @@map("profiles")
+}
+
+// ============================================
+// QUESTIONNAIRES
+// ============================================
+
+model Questionnaire {
+  id                String   @id // e.g., "bdi", "stai-y-a"
+  title             String
+  description       String
+  longDescription   String   @map("long_description")
+  category          String
+  estimatedTime     String   @map("estimated_time")
+  
+  // Questionnaire structure
+  questions         Json     // Stores the full questionnaire structure
+  answerScales      Json?    @map("answer_scales")
+  scoring           Json?    // Scoring configuration
+  
+  // Metadata
+  isPublished       Boolean  @default(true) @map("is_published")
+  requiresAuth      Boolean  @default(false) @map("requires_auth")
+  copyrightInfo     String?  @map("copyright_info")
+  
+  createdAt         DateTime @default(now()) @map("created_at")
+  updatedAt         DateTime @updatedAt @map("updated_at")
+  
+  // Relations
+  sessions          Session[]
+  
+  @@map("questionnaires")
+}
+
+// ============================================
+// SESSIONS (Passations)
+// ============================================
+
+model Session {
+  id                String         @id @default(cuid())
+  
+  // Questionnaire reference
+  questionnaireId   String         @map("questionnaire_id")
+  questionnaire     Questionnaire  @relation(fields: [questionnaireId], references: [id])
+  
+  // Patient information (pseudo-anonymized)
+  patientFirstName  String         @map("patient_first_name")
+  patientLastName   String         @map("patient_last_name")
+  patientEmail      String?        @map("patient_email")
+  patientPseudoId   String?        @map("patient_pseudo_id") // Future: anonymized ID
+  
+  // Practitioner who sent it
+  practitionerId    String         @map("practitioner_id")
+  practitioner      User           @relation(fields: [practitionerId], references: [id])
+  
+  // Session status
+  status            SessionStatus  @default(CREATED)
+  
+  // Responses
+  responses         Json?          // Stores all answers
+  score             Json?          // Calculated score
+  interpretation    String?        // Auto-generated interpretation
+  patientComments   String?        @map("patient_comments")
+  
+  // Timestamps
+  sentAt            DateTime?      @map("sent_at")
+  startedAt         DateTime?      @map("started_at")
+  completedAt       DateTime?      @map("completed_at")
+  createdAt         DateTime       @default(now()) @map("created_at")
+  updatedAt         DateTime       @updatedAt @map("updated_at")
+  
+  // Expiration
+  expiresAt         DateTime?      @map("expires_at")
+  
+  @@map("sessions")
+  @@index([practitionerId])
+  @@index([questionnaireId])
+  @@index([status])
+}
+
+enum SessionStatus {
+  CREATED      // Session created, not sent yet
+  SENT         // Email sent to patient
+  STARTED      // Patient started filling
+  COMPLETED    // Patient completed
+  EXPIRED      // Session expired
+  CANCELLED    // Cancelled by practitioner
+}
+
+// ============================================
+// AUDIT & COMPLIANCE (HDS preparation)
+// ============================================
+
+model AuditLog {
+  id          String   @id @default(cuid())
+  
+  userId      String?  @map("user_id")
+  user        User?    @relation(fields: [userId], references: [id])
+  
+  action      String   // e.g., "USER_LOGIN", "SESSION_CREATED", "DATA_ACCESSED"
+  resource    String   // e.g., "Session", "User", "Profile"
+  resourceId  String?  @map("resource_id")
+  
+  metadata    Json?    // Additional context
+  ipAddress   String?  @map("ip_address")
+  userAgent   String?  @map("user_agent")
+  
+  timestamp   DateTime @default(now())
+  
+  @@map("audit_logs")
+  @@index([userId])
+  @@index([action])
+  @@index([timestamp])
+}
+
+// ============================================
+// EMAIL LOG (for tracking)
+// ============================================
+
+model EmailLog {
+  id          String   @id @default(cuid())
+  
+  to          String
+  from        String
+  subject     String
+  
+  sessionId   String?  @map("session_id")
+  status      String   // "sent", "failed", "bounced"
+  
+  provider    String   // "resend", etc.
+  providerId  String?  @map("provider_id") // External email ID
+  
+  error       String?
+  metadata    Json?
+  
+  sentAt      DateTime @default(now()) @map("sent_at")
+  
+  @@map("email_logs")
+  @@index([sessionId])
+  @@index([to])
+}
+
