@@ -1,16 +1,29 @@
-import { createClient } from "@/utils/supabase/server";
+"use client";
+
 import { InfoIcon } from "lucide-react";
 import { redirect } from "next/navigation";
+import { useUser } from "@/app/context/UserContext";
+import { useEffect } from "react";
 
-export default async function ProtectedPage() {
-  const supabase = await createClient();
+export default function ProtectedPage() {
+  const { user, isLoading } = useUser();
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  useEffect(() => {
+    if (!isLoading && !user) {
+      redirect("/sign-in");
+    }
+  }, [user, isLoading]);
+
+  if (isLoading) {
+    return (
+      <div className="flex-1 w-full flex items-center justify-center">
+        <p>Chargement...</p>
+      </div>
+    );
+  }
 
   if (!user) {
-    return redirect("/sign-in");
+    return null;
   }
 
   return (

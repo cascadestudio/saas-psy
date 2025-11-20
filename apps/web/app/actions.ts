@@ -1,16 +1,14 @@
 "use server";
 
 import { encodedRedirect } from "@/utils/utils";
-import { createClient } from "@/utils/supabase/server";
-import { headers } from "next/headers";
 import { redirect } from "next/navigation";
-import { createUserProfile } from "@/utils/auth";
+import { api, ApiError } from "@/lib/api-client";
 
 export const signUpAction = async (formData: FormData) => {
   const email = formData.get("email")?.toString();
   const password = formData.get("password")?.toString();
-  const supabase = await createClient();
-  const siteUrl = process.env.NEXT_PUBLIC_BASE_URL;
+  const firstName = formData.get("firstName")?.toString();
+  const lastName = formData.get("lastName")?.toString();
 
   if (!email || !password) {
     return encodedRedirect(
@@ -20,25 +18,27 @@ export const signUpAction = async (formData: FormData) => {
     );
   }
 
-  const { error, data } = await supabase.auth.signUp({
-    email,
-    password,
-    options: {
-      emailRedirectTo: `${siteUrl}/auth/callback`,
-    },
-  });
+  try {
+    await api.auth.register({
+      email,
+      password,
+      firstName,
+      lastName,
+    });
 
-  if (error) {
-    console.error(error.code + " " + error.message);
-    return encodedRedirect("error", "/sign-up", error.message);
-  } else {
-    if (data.user) {
-      await createUserProfile(data.user.id, data.user.email || "");
-    }
     return encodedRedirect(
       "success",
+      "/sign-in",
+      "Inscription réussie ! Vous pouvez maintenant vous connecter."
+    );
+  } catch (error) {
+    if (error instanceof ApiError) {
+      return encodedRedirect("error", "/sign-up", error.message);
+    }
+    return encodedRedirect(
+      "error",
       "/sign-up",
-      "Merci pour votre inscription ! Nous vous avons envoyé un email contenant un lien de vérification."
+      "Une erreur est survenue lors de l'inscription"
     );
   }
 };
@@ -46,63 +46,51 @@ export const signUpAction = async (formData: FormData) => {
 export const signInAction = async (formData: FormData) => {
   const email = formData.get("email") as string;
   const password = formData.get("password") as string;
-  const supabase = await createClient();
 
-  const { error } = await supabase.auth.signInWithPassword({
-    email,
-    password,
-  });
-
-  if (error) {
-    return encodedRedirect("error", "/sign-in", error.message);
+  if (!email || !password) {
+    return encodedRedirect(
+      "error",
+      "/sign-in",
+      "L'email et le mot de passe sont requis"
+    );
   }
 
-  return redirect("/");
+  try {
+    await api.auth.login(email, password);
+    return redirect("/");
+  } catch (error) {
+    if (error instanceof ApiError) {
+      return encodedRedirect("error", "/sign-in", error.message);
+    }
+    return encodedRedirect(
+      "error",
+      "/sign-in",
+      "Email ou mot de passe incorrect"
+    );
+  }
 };
 
 export const forgotPasswordAction = async (formData: FormData) => {
   const email = formData.get("email")?.toString();
-  const supabase = await createClient();
-  const siteUrl =
-    process.env.NEXT_PUBLIC_BASE_URL || (await headers()).get("origin");
-  const callbackUrl = formData.get("callbackUrl")?.toString();
 
   if (!email) {
     return encodedRedirect("error", "/forgot-password", "L'email est requis");
   }
 
-  const { error } = await supabase.auth.resetPasswordForEmail(email, {
-    redirectTo: `${siteUrl}/auth/callback?redirect_to=/protected/reset-password`,
-  });
-
-  if (error) {
-    console.error(error.message);
-    return encodedRedirect(
-      "error",
-      "/forgot-password",
-      "Impossible de réinitialiser le mot de passe"
-    );
-  }
-
-  if (callbackUrl) {
-    return redirect(callbackUrl);
-  }
-
+  // TODO: Implement password reset in NestJS API
   return encodedRedirect(
     "success",
     "/forgot-password",
-    "Vérifiez votre email pour un lien de réinitialisation de mot de passe."
+    "Si un compte existe avec cet email, vous recevrez un lien de réinitialisation."
   );
 };
 
 export const resetPasswordAction = async (formData: FormData) => {
-  const supabase = await createClient();
-
   const password = formData.get("password") as string;
   const confirmPassword = formData.get("confirmPassword") as string;
 
   if (!password || !confirmPassword) {
-    encodedRedirect(
+    return encodedRedirect(
       "error",
       "/protected/reset-password",
       "Le mot de passe et sa confirmation sont requis"
@@ -110,26 +98,15 @@ export const resetPasswordAction = async (formData: FormData) => {
   }
 
   if (password !== confirmPassword) {
-    encodedRedirect(
+    return encodedRedirect(
       "error",
       "/protected/reset-password",
       "Les mots de passe ne correspondent pas"
     );
   }
 
-  const { error } = await supabase.auth.updateUser({
-    password: password,
-  });
-
-  if (error) {
-    encodedRedirect(
-      "error",
-      "/protected/reset-password",
-      "La mise à jour du mot de passe a échoué"
-    );
-  }
-
-  encodedRedirect(
+  // TODO: Implement password reset in NestJS API
+  return encodedRedirect(
     "success",
     "/protected/reset-password",
     "Mot de passe mis à jour"
@@ -137,7 +114,6 @@ export const resetPasswordAction = async (formData: FormData) => {
 };
 
 export const signOutAction = async () => {
-  const supabase = await createClient();
-  await supabase.auth.signOut();
+  api.auth.logout();
   return redirect("/sign-in");
 };

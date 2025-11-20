@@ -1,4 +1,5 @@
-import { createClient } from "@/utils/supabase/server";
+"use client";
+
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -12,28 +13,31 @@ import {
 } from "@/components/ui/card";
 import { questionnaires } from "@/app/questionnairesData";
 import { questionCount } from "@/app/utils/utils";
+import { useUser } from "@/app/context/UserContext";
+import { useEffect } from "react";
 
-export default async function MyQuestionnairesPage() {
-  const supabase = await createClient();
+export default function MyQuestionnairesPage() {
+  const { user, isLoading } = useUser();
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  useEffect(() => {
+    if (!isLoading && !user) {
+      redirect("/sign-in");
+    }
+  }, [user, isLoading]);
 
-  if (!user) {
-    return redirect("/sign-in");
+  if (isLoading) {
+    return (
+      <div className="flex-1 w-full flex items-center justify-center">
+        <p>Chargement...</p>
+      </div>
+    );
   }
 
-  // Get user profile with favorites
-  const { data: profile } = await supabase
-    .from("profiles")
-    .select("favorite_questionnaires")
-    .eq("id", user.id)
-    .single();
+  if (!user) {
+    return null;
+  }
 
-  console.log("User profile data:", profile);
-
-  const favoriteIds = profile?.favorite_questionnaires || [];
+  const favoriteIds = user.profile?.favoriteQuestionnaires || [];
 
   // Filter questionnaires to get favorites
   const favoriteQuestionnaires = questionnaires.filter((q) =>

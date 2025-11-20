@@ -2,7 +2,7 @@
 
 import { FavoriteButton } from "@/components/FavoriteButton";
 import { useEffect, useState } from "react";
-import { createClient } from "@/utils/supabase/client";
+import { useUser } from "@/app/context/UserContext";
 
 interface FavoriteButtonWrapperProps {
   questionnaireId: string;
@@ -13,24 +13,18 @@ export function FavoriteButtonWrapper({
 }: FavoriteButtonWrapperProps) {
   const [isFavorite, setIsFavorite] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { user } = useUser();
 
   useEffect(() => {
-    const checkAuthAndFetchFavorites = async () => {
+    const fetchFavorites = async () => {
       try {
         setIsLoading(true);
 
         // Check if user is logged in
-        const supabase = createClient();
-        const { data: authData } = await supabase.auth.getSession();
-
-        if (!authData.session) {
-          setIsLoggedIn(false);
+        if (!user) {
           setIsLoading(false);
           return;
         }
-
-        setIsLoggedIn(true);
 
         // Fetch favorites
         const response = await fetch("/api/favorites");
@@ -45,14 +39,14 @@ export function FavoriteButtonWrapper({
       }
     };
 
-    checkAuthAndFetchFavorites();
-  }, [questionnaireId]);
+    fetchFavorites();
+  }, [questionnaireId, user]);
 
   if (isLoading) {
     return null;
   }
 
-  if (!isLoggedIn) {
+  if (!user) {
     return null;
   }
 

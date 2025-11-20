@@ -1,4 +1,5 @@
-import { createClient } from "@/utils/supabase/server";
+"use client";
+
 import { redirect } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import {
@@ -10,16 +11,28 @@ import {
 } from "@/components/ui/card";
 import Link from "next/link";
 import { UserProfileForm } from "./components/user-profile-form";
+import { useUser } from "@/app/context/UserContext";
+import { useEffect } from "react";
 
-export default async function DashboardPage() {
-  const supabase = await createClient();
+export default function DashboardPage() {
+  const { user, isLoading } = useUser();
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  useEffect(() => {
+    if (!isLoading && !user) {
+      redirect("/sign-in");
+    }
+  }, [user, isLoading]);
+
+  if (isLoading) {
+    return (
+      <div className="flex-1 w-full flex items-center justify-center">
+        <p>Chargement...</p>
+      </div>
+    );
+  }
 
   if (!user) {
-    return redirect("/sign-in");
+    return null;
   }
 
   return (

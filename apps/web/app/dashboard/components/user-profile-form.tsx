@@ -1,44 +1,41 @@
 "use client";
 
 import { useState } from "react";
-import { User } from "@supabase/supabase-js";
-import { createClient } from "@/utils/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { api } from "@/lib/api-client";
 import { toast } from "sonner";
-import { useUser } from "@/app/context/UserContext";
 
 interface UserProfileFormProps {
-  user: User;
+  user: any;
 }
 
 export function UserProfileForm({ user }: UserProfileFormProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [email, setEmail] = useState(user.email || "");
-  const { refreshUser } = useUser();
+  const [firstName, setFirstName] = useState(user.firstName || "");
+  const [lastName, setLastName] = useState(user.lastName || "");
 
-  async function handleSubmit(e: React.FormEvent) {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
 
     try {
-      const supabase = createClient();
-      const { error } = await supabase.auth.updateUser({ email });
-
-      if (error) {
-        throw error;
-      }
+      await api.profiles.updateProfile({
+        email,
+        firstName,
+        lastName,
+      });
 
       toast.success("Profil mis à jour avec succès");
-      refreshUser();
     } catch (error) {
-      console.error("Error updating user:", error);
-      toast.error("Échec de la mise à jour du profil");
+      console.error("Error updating profile:", error);
+      toast.error("Erreur lors de la mise à jour du profil");
     } finally {
       setIsLoading(false);
     }
-  }
+  };
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
@@ -49,12 +46,34 @@ export function UserProfileForm({ user }: UserProfileFormProps) {
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          required
+          disabled={isLoading}
+        />
+      </div>
+
+      <div className="space-y-2">
+        <Label htmlFor="firstName">Prénom</Label>
+        <Input
+          id="firstName"
+          type="text"
+          value={firstName}
+          onChange={(e) => setFirstName(e.target.value)}
+          disabled={isLoading}
+        />
+      </div>
+
+      <div className="space-y-2">
+        <Label htmlFor="lastName">Nom</Label>
+        <Input
+          id="lastName"
+          type="text"
+          value={lastName}
+          onChange={(e) => setLastName(e.target.value)}
+          disabled={isLoading}
         />
       </div>
 
       <Button type="submit" disabled={isLoading}>
-        {isLoading ? "Mise à jour..." : "Mettre à jour le profil"}
+        {isLoading ? "Mise à jour..." : "Mettre à jour"}
       </Button>
     </form>
   );

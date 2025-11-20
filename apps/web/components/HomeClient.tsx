@@ -14,8 +14,8 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Badge } from "@/components/ui/badge";
 import { questionnaires } from "@/app/questionnairesData";
-import { createClient } from "@/utils/supabase/client";
 import { QuestionnaireCard } from "@/components/QuestionnaireCard";
+import { useUser } from "@/app/context/UserContext";
 
 // Get unique categories for filter
 const categories = Array.from(new Set(questionnaires.map((q) => q.category)));
@@ -27,6 +27,7 @@ export default function Home() {
     useState(questionnaires);
   const [favorites, setFavorites] = useState<string[]>([]);
   const [isLoadingFavorites, setIsLoadingFavorites] = useState(true);
+  const { user } = useUser();
 
   // Fetch user's favorites
   useEffect(() => {
@@ -35,10 +36,7 @@ export default function Home() {
         setIsLoadingFavorites(true);
 
         // Check if user is logged in
-        const supabase = createClient();
-        const { data: authData } = await supabase.auth.getSession();
-
-        if (!authData.session) {
+        if (!user) {
           setIsLoadingFavorites(false);
           return;
         }
@@ -56,7 +54,7 @@ export default function Home() {
     };
 
     fetchFavorites();
-  }, []);
+  }, [user]);
 
   // Filter questionnaires when search term or selected categories change
   useEffect(() => {
