@@ -97,7 +97,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
 
     // Also update in localStorage
     if (typeof window !== "undefined") {
-      localStorage.setItem("saas-psy-demo-user", JSON.stringify(updatedUser));
+      localStorage.setItem("melya-demo-user", JSON.stringify(updatedUser));
     }
   };
 

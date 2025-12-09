@@ -29,7 +29,7 @@ const DEMO_CREDENTIALS = {
   password: "demo2025",
 };
 
-const USER_STORAGE_KEY = "saas-psy-demo-user";
+const USER_STORAGE_KEY = "melya-demo-user";
 
 /**
  * Mock login function

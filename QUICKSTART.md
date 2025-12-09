@@ -1,6 +1,6 @@
 # 🚀 Quick Start Guide
 
-Get started with SaaS Psy in 5 minutes!
+Get started with Melya in 5 minutes!
 
 ## Prerequisites
 
@@ -57,7 +57,7 @@ npm run dev:all
 ## 📂 Project structure
 
 ```
-saas-psy/
+melya/
 ├── apps/
 │   ├── web/     # Next.js frontend (port 3000)
 │   └── api/     # NestJS backend (port 3001)

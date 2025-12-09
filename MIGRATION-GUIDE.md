@@ -159,7 +159,7 @@ npm run build:web
 
 3. **Move scoring logic to packages/core**
    - Already started in `packages/core/src/scoring/`
-   - Import from `@saas-psy/core` in both apps
+   - Import from `@melya/core` in both apps
 
 4. **Create API endpoints**
    - Auth (login, register, etc.)
@@ -186,7 +186,7 @@ cd apps/api
 npm run prisma:generate
 ```
 
-### Module not found @saas-psy/core
+### Module not found @melya/core
 
 ```bash
 # Build the core package

@@ -1,7 +1,7 @@
 {
-  "name": "core",
+  "name": "@melya/core",
   "version": "1.0.0",
-  "description": "Shared types, utilities, and scoring logic for SaaS Psy",
+  "description": "Shared types, utilities, and scoring logic for Melya",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {

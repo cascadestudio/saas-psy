@@ -18,7 +18,7 @@ export const configValidationSchema = Joi.object({
   CORS_ORIGIN: Joi.string().default('http://localhost:3000'),
 
   // Email
-  EMAIL_FROM: Joi.string().email().default('noreply@saas-psy.com'),
+  EMAIL_FROM: Joi.string().email().default('noreply@melya.fr'),
   RESEND_API_KEY: Joi.string().optional(),
 
   // Frontend

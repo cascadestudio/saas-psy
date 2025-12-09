@@ -12,8 +12,8 @@ const defaultUrl = process.env.VERCEL_URL
 
 export const metadata = {
   metadataBase: new URL(defaultUrl),
-  title: "Saas Psy",
-  description: "Saas Psy",
+  title: "Melya",
+  description: "Melya",
 };
 
 const geistSans = Geist({
@@ -40,7 +40,7 @@ export default function RootLayout({
               <div className="flex-1 w-full flex flex-col gap-20 items-center">
                 <nav className="px-4 w-full flex items-center justify-between border-b border-b-foreground/10 h-16">
                   <Link href={"/"}>
-                    <h1 className="text-xl font-bold">Zazo</h1>
+                    <h1 className="text-xl font-bold">Melya</h1>
                   </Link>
                   <HeaderAuth />
                   <ThemeSwitcher />

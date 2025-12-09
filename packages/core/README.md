@@ -1,6 +1,6 @@
-# @saas-psy/core
+# @melya/core
 
-Shared types, utilities, and scoring logic for SaaS Psy monorepo.
+Shared types, utilities, and scoring logic for Melya monorepo.
 
 ## Purpose
 
@@ -12,7 +12,7 @@ This package contains:
 ## Usage
 
 ```typescript
-import { calculateScore, ScoreResult, SessionStatus } from '@saas-psy/core';
+import { calculateScore, ScoreResult, SessionStatus } from '@melya/core';
 
 // In API or Web
 const score = calculateScore(questionnaire, answers);

@@ -1,4 +1,4 @@
-# Projet SaaS Psy – Plateforme de Questionnaires Psychométriques
+# Projet Melya – Plateforme de Questionnaires Psychométriques
 
 SaaS pour psychologues destiné à automatiser tout le cycle des questionnaires psychométriques : envoi, passation en ligne, scoring automatique, interprétation et historique longitudinal.
 
@@ -94,7 +94,7 @@ SaaS pour psychologues destiné à automatiser tout le cycle des questionnaires 
 ## 📁 Structure du monorepo
 
 ```
-saas-psy/
+melya/
 ├── apps/
 │   ├── web/                    # Next.js frontend
 │   │   ├── app/                # App Router
@@ -142,7 +142,7 @@ saas-psy/
 ```bash
 # Clone le repository
 git clone <repository-url>
-cd saas-psy
+cd melya
 
 # Installe toutes les dépendances
 npm install
@@ -164,12 +164,12 @@ brew install postgresql@16
 brew services start postgresql@16
 
 # Créer la base de données
-createdb saas_psy
+createdb melya
 
 # Linux (Debian/Ubuntu)
 sudo apt install postgresql-16
 sudo systemctl start postgresql
-sudo -u postgres createdb saas_psy
+sudo -u postgres createdb melya
 ```
 
 ### Démarrage quotidien
@@ -227,7 +227,7 @@ npm run prisma:studio    # Ouvre Prisma Studio (DB GUI)
 - **API**: http://localhost:3001/api
 - **API Health**: http://localhost:3001/api/health
 - **Prisma Studio**: `npm run prisma:studio` (GUI pour la DB)
-- **PostgreSQL**: `psql saas_psy` (CLI natif)
+- **PostgreSQL**: `psql melya` (CLI natif)
 
 ---
 
@@ -246,7 +246,7 @@ npm run prisma:studio    # Ouvre Prisma Studio (DB GUI)
 | **EmailModule** | Envoi d'emails (Resend) |
 | **AuditModule** | Journalisation des actions (HDS compliance) |
 
-### Package Core (@saas-psy/core)
+### Package Core (@melya/core)
 
 Package partagé entre frontend et backend contenant :
 - **Types** : Interfaces TypeScript (User, Session, Questionnaire, etc.)
@@ -347,7 +347,7 @@ Ce projet est actuellement en développement privé. Si vous souhaitez contribue
 
 ## 📄 License
 
-Private - SaaS Psy © 2025
+Private - Melya © 2025
 
 ---
 
