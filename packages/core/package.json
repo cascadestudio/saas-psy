@@ -1,5 +1,5 @@
 {
-  "name": "@saas-psy/core",
+  "name": "core",
   "version": "1.0.0",
   "description": "Shared types, utilities, and scoring logic for SaaS Psy",
   "main": "dist/index.js",
@@ -15,4 +15,3 @@
     "typescript": "^5.7.2"
   }
 }
-
