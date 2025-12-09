@@ -10,9 +10,11 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import Link from "next/link";
-import { UserProfileForm } from "./components/user-profile-form";
 import { useUser } from "@/app/context/UserContext";
 import { useEffect } from "react";
+import { DashboardStats } from "./components/dashboard-stats";
+import { RecentSessions } from "./components/recent-sessions";
+import { Send, Users, BarChart3 } from "lucide-react";
 
 export default function DashboardPage() {
   const { user, isLoading } = useUser();
@@ -36,31 +38,46 @@ export default function DashboardPage() {
   }
 
   return (
-    <div className="flex-1 w-full flex flex-col gap-6">
-      <h1 className="font-bold text-3xl">Tableau de bord</h1>
+    <div className="flex-1 w-full flex flex-col gap-6 p-6">
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="font-bold text-3xl">Tableau de bord</h1>
+          <p className="text-muted-foreground mt-1">
+            Bienvenue, {user.fullName || user.email}
+          </p>
+        </div>
+        <Button asChild size="lg">
+          <Link href="/send-questionnaire">
+            <Send className="mr-2 h-4 w-4" />
+            Envoyer un questionnaire
+          </Link>
+        </Button>
+      </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <DashboardStats />
+
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <RecentSessions />
+
         <Card>
           <CardHeader>
-            <CardTitle>Profil Utilisateur</CardTitle>
+            <CardTitle>Actions rapides</CardTitle>
             <CardDescription>
-              Gérez vos informations personnelles
+              Accédez rapidement aux fonctionnalités principales
             </CardDescription>
           </CardHeader>
-          <CardContent>
-            <UserProfileForm user={user} />
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader>
-            <CardTitle>Questionnaires</CardTitle>
-            <CardDescription>Accédez à vos questionnaires</CardDescription>
-          </CardHeader>
-          <CardContent className="flex flex-col gap-4">
-            <p>Consultez et gérez vos questionnaires</p>
-            <Button asChild>
-              <Link href="/my-questionnaires">Voir mes questionnaires</Link>
+          <CardContent className="flex flex-col gap-3">
+            <Button asChild variant="outline" className="justify-start">
+              <Link href="/patients">
+                <Users className="mr-2 h-4 w-4" />
+                Gérer mes patients
+              </Link>
+            </Button>
+            <Button asChild variant="outline" className="justify-start">
+              <Link href="/my-questionnaires">
+                <BarChart3 className="mr-2 h-4 w-4" />
+                Voir mes questionnaires favoris
+              </Link>
             </Button>
           </CardContent>
         </Card>

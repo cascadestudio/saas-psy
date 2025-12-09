@@ -2,15 +2,15 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { api, ApiError } from "@/lib/api-client";
+import { useUser } from "@/app/context/UserContext";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { SubmitButton } from "@/components/submit-button";
 import { FormMessage, Message } from "@/components/form-message";
-import Link from "next/link";
 
 export function SignInForm() {
   const router = useRouter();
+  const { login } = useUser();
   const [message, setMessage] = useState<Message | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -30,56 +30,74 @@ export function SignInForm() {
     }
 
     try {
-      await api.auth.login(email, password);
-      router.push("/");
-      router.refresh();
-    } catch (error) {
-      if (error instanceof ApiError) {
-        setMessage({ error: error.message });
+      const result = await login(email, password);
+      if (result.success) {
+        router.push("/dashboard");
+        router.refresh();
       } else {
-        setMessage({ error: "Email ou mot de passe incorrect" });
+        setMessage({ error: result.error || "Email ou mot de passe incorrect" });
       }
+    } catch (error) {
+      setMessage({ error: "Une erreur est survenue" });
     } finally {
       setIsLoading(false);
     }
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="flex flex-col min-w-64 max-w-64 mx-auto"
-    >
-      <h1 className="text-2xl font-medium">Se connecter</h1>
-      <p className="text-sm text-foreground">
-        Vous n'avez pas de compte ?{" "}
-        <Link className="text-foreground font-medium underline" href="/sign-up">
-          S'inscrire
-        </Link>
-      </p>
-      <div className="flex flex-col gap-2 [&>input]:mb-3 mt-8">
-        <Label htmlFor="email">Email</Label>
-        <Input name="email" type="email" placeholder="you@example.com" required />
-        <div className="flex justify-between items-center">
-          <Label htmlFor="password">Mot de passe</Label>
-          <Link
-            className="text-xs text-foreground underline"
-            href="/forgot-password"
-          >
-            Mot de passe oublié ?
-          </Link>
+    <div className="flex flex-col min-w-80 max-w-md mx-auto">
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-col gap-6 p-8 border rounded-lg bg-card"
+      >
+        <div className="flex flex-col gap-2 text-center">
+          <h1 className="text-2xl font-semibold">Connexion Démo</h1>
+          <p className="text-sm text-muted-foreground">
+            Prototype de démonstration SaaS Psy
+          </p>
         </div>
-        <Input
-          type="password"
-          name="password"
-          placeholder="Votre mot de passe"
-          required
-        />
-        <SubmitButton pendingText="Connexion..." isLoading={isLoading}>
-          Se connecter
-        </SubmitButton>
-        {message && <FormMessage message={message} />}
-      </div>
-    </form>
+
+        <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-2">
+            <Label htmlFor="email">Email</Label>
+            <Input
+              name="email"
+              type="email"
+              placeholder="demo@psychologue.fr"
+              defaultValue="demo@psychologue.fr"
+              required
+            />
+          </div>
+
+          <div className="flex flex-col gap-2">
+            <Label htmlFor="password">Mot de passe</Label>
+            <Input
+              type="password"
+              name="password"
+              placeholder="demo2025"
+              defaultValue="demo2025"
+              required
+            />
+          </div>
+
+          <SubmitButton pendingText="Connexion..." isLoading={isLoading}>
+            Se connecter
+          </SubmitButton>
+
+          {message && <FormMessage message={message} />}
+        </div>
+
+        <div className="border-t pt-4">
+          <p className="text-xs text-muted-foreground text-center">
+            <strong>Identifiants de démo :</strong>
+            <br />
+            Email: demo@psychologue.fr
+            <br />
+            Mot de passe: demo2025
+          </p>
+        </div>
+      </form>
+    </div>
   );
 }
 
