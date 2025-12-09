@@ -474,3 +474,15 @@ function SendQuestionnaireContent() {
     </div>
   );
 }
+
+export default function SendQuestionnairePage() {
+  return (
+    <Suspense fallback={
+      <div className="flex-1 w-full flex items-center justify-center">
+        <p>Chargement...</p>
+      </div>
+    }>
+      <SendQuestionnaireContent />
+    </Suspense>
+  );
+}
