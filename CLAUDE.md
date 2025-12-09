@@ -55,14 +55,39 @@ SaaS pour psychologues destiné à automatiser tout le cycle des questionnaires 
 ### Backend
 - **NestJS** (API REST)
 - **Prisma** ORM
-- **PostgreSQL 16**
+- **PostgreSQL 16** (Scaleway Managed Database - certifié HDS)
 - JWT Authentication
 - TypeScript
 
 ### Infrastructure
+
+**Production (Scaleway - certifié HDS)** :
+- **Frontend** : Scaleway Object Storage + CDN (Next.js static)
+- **Backend** : Scaleway Serverless Containers (auto-scaling, pay-per-use)
+- **Database** : Scaleway PostgreSQL Managed Database (certifié HDS)
+- **Région** : France (Paris) uniquement
+- **CI/CD** : GitHub Actions
+
+**Pourquoi Serverless Containers ?**
+- ✅ Auto-scaling (0 → N instances selon le trafic)
+- ✅ Pay-per-use (pas de coût si pas de trafic, idéal MVP)
+- ✅ Zéro maintenance serveur (Scaleway gère tout)
+- ✅ Cold start acceptable (~1-2s, OK pour SaaS métier)
+- ✅ Multi-environnements pas cher (dev/staging/prod)
+
+**Développement local (Solo Dev)** :
+- **PostgreSQL natif** (recommandé pour performances optimales)
 - **Monorepo** (npm workspaces)
-- **Docker** & **Docker Compose**
+- **Docker** : uniquement pour le Dockerfile de production (NestJS)
 - **Turbo** (optional, pour build pipeline)
+
+**Note** : En solo dev, NestJS et Next.js tournent directement sur ta machine pour hot reload optimal. Docker n'est utilisé qu'en production pour Scaleway Serverless Containers.
+
+**⚠️ Pourquoi Scaleway full stack et pas Vercel ?**
+- HIPAA (USA) ≠ HDS (France) : aucune valeur légale en France
+- Vercel héberge en USA/Global → données transitent hors France (non-conforme)
+- Obligation légale : Article L.1111-8 Code Santé Publique impose certification HDS
+- Scaleway = 100% France + certification HDS complète + contrat unique
 
 ---
 
@@ -94,10 +119,8 @@ saas-psy/
 │       │   ├── scoring/        # Scoring algorithms
 │       │   └── utils/          # Utilities
 │       └── package.json
-├── docker/
-│   ├── Dockerfile.api          # API Dockerfile
-│   └── Dockerfile.web          # Web Dockerfile
-├── docker-compose.yml          # Docker orchestration
+├── apps/api/
+│   └── Dockerfile              # Production Dockerfile (Scaleway)
 ├── package.json                # Root workspace config
 ├── turbo.json                  # Turbo config
 └── README.md
@@ -110,8 +133,9 @@ saas-psy/
 ### Prérequis
 
 - **Node.js** 20+
-- **Docker** & **Docker Compose**
+- **PostgreSQL 16** (installation native recommandée)
 - **npm** (ou pnpm)
+- **Docker** (optionnel, uniquement pour build de production)
 
 ### Installation
 
@@ -132,40 +156,43 @@ cp apps/web/.env.example apps/web/.env
 # Édite .env, apps/api/.env et apps/web/.env avec tes valeurs
 ```
 
-### Démarrage avec Docker
+### Setup PostgreSQL (une fois)
 
 ```bash
-# Démarre PostgreSQL uniquement
-docker-compose up -d postgres
+# macOS
+brew install postgresql@16
+brew services start postgresql@16
 
-# Génère le client Prisma et migre la DB
+# Créer la base de données
+createdb saas_psy
+
+# Linux (Debian/Ubuntu)
+sudo apt install postgresql-16
+sudo systemctl start postgresql
+sudo -u postgres createdb saas_psy
+```
+
+### Démarrage quotidien
+
+```bash
+# PostgreSQL démarre automatiquement au boot
+# Si besoin de le démarrer manuellement :
+# brew services start postgresql@16  (macOS)
+# sudo systemctl start postgresql   (Linux)
+
+# Génère le client Prisma et migre la DB (première fois)
 cd apps/api
 npm run prisma:generate
 npm run prisma:migrate:dev
-
-# Retourne à la racine
 cd ../..
 
-# Démarre l'API en mode développement
+# Lance l'API (Terminal 1)
 npm run dev:api
 
-# Dans un autre terminal, démarre le frontend
+# Lance le frontend (Terminal 2)
 npm run dev
-```
 
-### Démarrage sans Docker
-
-```bash
-# Assure-toi d'avoir PostgreSQL installé localement
-
-# Configure DATABASE_URL dans apps/api/.env
-# DATABASE_URL="postgresql://user:password@localhost:5432/saas_psy"
-
-# Génère Prisma client et migre
-npm run prisma:generate
-npm run prisma:migrate
-
-# Démarre tout
+# Ou les deux en même temps (Terminal unique)
 npm run dev:all
 ```
 
@@ -192,10 +219,6 @@ npm run prisma:generate  # Génère le client Prisma
 npm run prisma:migrate   # Crée et applique les migrations
 npm run prisma:studio    # Ouvre Prisma Studio (DB GUI)
 
-# Docker
-npm run docker:up        # Démarre les services Docker
-npm run docker:down      # Arrête les services Docker
-npm run docker:logs      # Affiche les logs
 ```
 
 ### Accès aux services
@@ -203,8 +226,8 @@ npm run docker:logs      # Affiche les logs
 - **Frontend**: http://localhost:3000
 - **API**: http://localhost:3001/api
 - **API Health**: http://localhost:3001/api/health
-- **Prisma Studio**: Exécute `npm run prisma:studio`
-- **pgAdmin** (optionnel): http://localhost:5050
+- **Prisma Studio**: `npm run prisma:studio` (GUI pour la DB)
+- **PostgreSQL**: `psql saas_psy` (CLI natif)
 
 ---
 
