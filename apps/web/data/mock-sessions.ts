@@ -162,6 +162,41 @@ export const mockSessions: MockSession[] = [
     completedAt: null,
     batchId: null,
   },
+
+  // Additional in-progress sessions for demo
+  {
+    id: "s13",
+    patientId: "p1",
+    questionnaireId: "echelle-d-anxiete-sociale-de-liebowitz",
+    status: "in_progress",
+    score: null,
+    interpretation: null,
+    sentAt: "2024-12-09T10:00:00Z",
+    completedAt: null,
+    batchId: null,
+  },
+  {
+    id: "s14",
+    patientId: "p2",
+    questionnaireId: "traumatismes-pcl5",
+    status: "in_progress",
+    score: null,
+    interpretation: null,
+    sentAt: "2024-12-08T14:30:00Z",
+    completedAt: null,
+    batchId: null,
+  },
+  {
+    id: "s15",
+    patientId: "p3",
+    questionnaireId: "stai-anxiete-generalisee",
+    status: "in_progress",
+    score: null,
+    interpretation: null,
+    sentAt: "2024-12-10T09:00:00Z",
+    completedAt: null,
+    batchId: null,
+  },
 ];
 
 /**

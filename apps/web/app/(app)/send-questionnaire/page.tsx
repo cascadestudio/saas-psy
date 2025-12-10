@@ -119,7 +119,7 @@ function SendQuestionnaireContent() {
 
   const handleSend = () => {
     if (!selectedPatient || selectedQuestionnaireIds.length === 0) {
-      toast.error("Veuillez sélectionner un patient et au moins un questionnaire");
+      toast.error("Veuillez sélectionner un patient et au moins une échelle");
       return;
     }
 
@@ -143,15 +143,15 @@ function SendQuestionnaireContent() {
       });
     });
 
-    toast.success("Questionnaire(s) envoyé(s) avec succès", {
-      description: `${selectedQuestionnaireIds.length} questionnaire(s) envoyé(s) à ${selectedPatient.initials}`,
+    toast.success("Échelle(s) envoyée(s) avec succès", {
+      description: `${selectedQuestionnaireIds.length} échelle(s) envoyée(s) à ${selectedPatient.initials}`,
     });
 
     router.push(`/patients/${selectedPatient.id}`);
   };
 
   return (
-    <div className="flex-1 w-full flex flex-col gap-6 p-6">
+    <div className="container mx-auto px-4 py-6 space-y-6">
       <div className="flex items-center gap-4">
         <Button asChild variant="ghost" size="icon">
           <Link href="/dashboard">
@@ -159,7 +159,7 @@ function SendQuestionnaireContent() {
           </Link>
         </Button>
         <div className="flex-1">
-          <h1 className="font-bold text-3xl">Envoyer un questionnaire</h1>
+          <h1 className="font-bold text-3xl">Envoyer une échelle</h1>
           <p className="text-muted-foreground mt-1">
             Processus simplifié en 3 étapes
           </p>
@@ -329,20 +329,28 @@ function SendQuestionnaireContent() {
               <div className="bg-blue-50 dark:bg-blue-950 border border-blue-200 dark:border-blue-800 rounded-lg p-4 mb-4">
                 <p className="text-sm text-blue-900 dark:text-blue-100">
                   <strong>Multi-sélection activée :</strong> Le patient recevra
-                  tous les questionnaires sélectionnés dans un seul email et pourra
+                  toutes les échelles sélectionnées dans un seul email et pourra
                   les compléter dans l'ordre de son choix.
                 </p>
               </div>
 
               <div className="flex items-center justify-between mb-4">
                 <p className="text-sm font-medium">
-                  {selectedQuestionnaireIds.length} questionnaire(s)
-                  sélectionné(s)
+                  {selectedQuestionnaireIds.length} échelle(s)
+                  sélectionnée(s)
                 </p>
               </div>
 
               <div className="grid grid-cols-1 gap-3">
-                {questionnaires.map((questionnaire) => (
+                {[...questionnaires]
+                  .sort((a, b) => {
+                    const aIsFavorite = user?.profile?.favoriteQuestionnaires?.includes(a.id) || false;
+                    const bIsFavorite = user?.profile?.favoriteQuestionnaires?.includes(b.id) || false;
+                    if (aIsFavorite && !bIsFavorite) return -1;
+                    if (!aIsFavorite && bIsFavorite) return 1;
+                    return 0;
+                  })
+                  .map((questionnaire) => (
                   <div
                     key={questionnaire.id}
                     className={`border rounded-lg p-4 cursor-pointer transition-all ${
@@ -363,7 +371,12 @@ function SendQuestionnaireContent() {
                         onClick={(e) => e.stopPropagation()}
                       />
                       <div className="flex-1">
-                        <p className="font-medium">{questionnaire.title}</p>
+                        <div className="flex items-center gap-2">
+                          <p className="font-medium">{questionnaire.title}</p>
+                          {user?.profile?.favoriteQuestionnaires?.includes(questionnaire.id) && (
+                            <span className="text-yellow-500">⭐</span>
+                          )}
+                        </div>
                         <p className="text-sm text-muted-foreground mt-1">
                           {questionnaire.description}
                         </p>

@@ -36,20 +36,7 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <main className="min-h-screen flex flex-col items-center">
-              <div className="flex-1 w-full flex flex-col gap-20 items-center">
-                <nav className="px-4 w-full flex items-center justify-between border-b border-b-foreground/10 h-16">
-                  <Link href={"/"}>
-                    <h1 className="text-xl font-bold">Melya</h1>
-                  </Link>
-                  <HeaderAuth />
-                  <ThemeSwitcher />
-                </nav>
-                <div className="flex flex-col gap-20 max-w-5xl p-5">
-                  {children}
-                </div>
-              </div>
-            </main>
+            {children}
           </ThemeProvider>
         </UserProvider>
         <Toaster />

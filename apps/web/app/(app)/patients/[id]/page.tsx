@@ -67,11 +67,13 @@ export default function PatientDetailPage() {
     );
   }
 
-  const sessions = getSessionsByPatientId(patientId);
+  const sessions = getSessionsByPatientId(patientId).sort(
+    (a, b) => new Date(b.sentAt).getTime() - new Date(a.sentAt).getTime()
+  );
   const completedSessions = sessions.filter((s) => s.status === "completed");
 
   return (
-    <div className="flex-1 w-full flex flex-col gap-6 p-6">
+    <div className="container mx-auto px-4 py-6 space-y-6">
       <div className="flex items-center gap-4">
         <Button asChild variant="ghost" size="icon">
           <Link href="/patients">
@@ -87,7 +89,7 @@ export default function PatientDetailPage() {
         <Button asChild size="lg">
           <Link href={`/send-questionnaire?patientId=${patient.id}`}>
             <Send className="mr-2 h-4 w-4" />
-            Envoyer un questionnaire
+            Envoyer une échelle
           </Link>
         </Button>
       </div>
@@ -146,7 +148,7 @@ export default function PatientDetailPage() {
                 </div>
                 <p className="text-xs text-muted-foreground mt-1">
                   {questionnaires.find((q) => q.id === sessions[0].questionnaireId)
-                    ?.title || "Questionnaire"}
+                    ?.title || "Échelle"}
                 </p>
               </>
             ) : (
@@ -171,7 +173,7 @@ export default function PatientDetailPage() {
         <CardHeader>
           <CardTitle>Historique des passations</CardTitle>
           <CardDescription>
-            Toutes les passations de questionnaires pour ce patient
+            Toutes les passations d'échelles pour ce patient
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -183,7 +185,7 @@ export default function PatientDetailPage() {
               <Button asChild>
                 <Link href={`/send-questionnaire?patientId=${patient.id}`}>
                   <Send className="mr-2 h-4 w-4" />
-                  Envoyer le premier questionnaire
+                  Envoyer la première échelle
                 </Link>
               </Button>
             </div>

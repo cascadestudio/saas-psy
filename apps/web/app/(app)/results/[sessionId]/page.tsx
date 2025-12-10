@@ -68,15 +68,15 @@ export default function ResultsPage() {
     )
     .sort(
       (a, b) =>
-        new Date(a.completedAt!).getTime() - new Date(b.completedAt!).getTime()
+        new Date(b.completedAt!).getTime() - new Date(a.completedAt!).getTime()
     );
 
   const currentSessionIndex = sameQuestionnaireSessions.findIndex(
     (s) => s.id === session.id
   );
   const previousSession =
-    currentSessionIndex > 0
-      ? sameQuestionnaireSessions[currentSessionIndex - 1]
+    currentSessionIndex < sameQuestionnaireSessions.length - 1
+      ? sameQuestionnaireSessions[currentSessionIndex + 1]
       : null;
 
   let trend: "up" | "down" | "stable" | null = null;
@@ -226,7 +226,7 @@ export default function ResultsPage() {
                   <div className="flex items-center gap-2">
                     {trend === "down" && (
                       <>
-                        <TrendingDown className="h-5 w-5 text-green-600" />
+                        <TrendingUp className="h-5 w-5 text-green-600" />
                         <span className="text-sm text-green-600">
                           Amélioration de {trendPercentage}% depuis la dernière
                           passation
