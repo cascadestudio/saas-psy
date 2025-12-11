@@ -135,18 +135,6 @@ export function CreatePatientSheet({
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="birthDate">
-              Date de naissance
-            </Label>
-            <Input
-              id="birthDate"
-              name="birthDate"
-              type="date"
-              max={new Date().toISOString().split("T")[0]}
-            />
-          </div>
-
-          <div className="space-y-2">
             <Label htmlFor="notes">
               Notes
             </Label>
