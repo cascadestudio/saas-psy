@@ -14,6 +14,7 @@ import Link from "next/link";
 import { useUser } from "@/app/context/UserContext";
 import { useEffect, useState } from "react";
 import { getAllPatients, type MockPatient } from "@/data/mock-patients";
+import { getSessionsByPatientId } from "@/data/mock-sessions";
 import { questionnaires } from "@/app/questionnairesData";
 import { Search, Send, Star } from "lucide-react";
 import { CreatePatientSheet } from "@/components/CreatePatientSheet";
@@ -131,32 +132,51 @@ export default function DashboardPage() {
                 <div className="border rounded-lg overflow-hidden max-h-[600px] overflow-y-auto">
                   <table className="w-full">
                     <tbody>
-                      {filteredPatients.map((patient) => (
-                        <tr
-                          key={patient.id}
-                          className="border-t first:border-t-0 hover:bg-muted/50 transition-colors cursor-pointer"
-                          onClick={() => window.location.href = `/patients/${patient.id}`}
-                        >
-                          <td className="p-3">
-                            <p className="font-medium">{patient.fullName}</p>
-                          </td>
-                          <td className="p-3 text-right">
-                            <Button
-                              asChild
-                              variant="default"
-                              size="sm"
-                              onClick={(e) => e.stopPropagation()}
-                            >
-                              <Link
-                                href={`/send-questionnaire?patientId=${patient.id}`}
+                      {filteredPatients.map((patient) => {
+                        // Afficher la notification uniquement pour Alice Martin (p1) en exemple
+                        const showNotification = patient.id === "p1";
+                        const sessions = getSessionsByPatientId(patient.id);
+                        const completedCount = sessions.filter(s => s.status === "completed").length;
+                        const inProgressCount = sessions.filter(s => s.status === "in_progress").length;
+                        const sentCount = sessions.filter(s => s.status === "sent").length;
+                        const expiredCount = sessions.filter(s => s.status === "expired").length;
+
+                        const notificationCount = completedCount + inProgressCount + sentCount + expiredCount;
+
+                        return (
+                          <tr
+                            key={patient.id}
+                            className="border-t first:border-t-0 hover:bg-muted/50 transition-colors cursor-pointer"
+                            onClick={() => window.location.href = `/patients/${patient.id}`}
+                          >
+                            <td className="p-3">
+                              <div className="flex items-center gap-2">
+                                <p className="font-medium">{patient.fullName}</p>
+                                {showNotification && notificationCount > 0 && (
+                                  <div className="flex items-center justify-center min-w-[20px] h-5 px-1.5 bg-red-500 text-white text-xs font-semibold rounded-full">
+                                    {notificationCount}
+                                  </div>
+                                )}
+                              </div>
+                            </td>
+                            <td className="p-3 text-right">
+                              <Button
+                                asChild
+                                variant="default"
+                                size="sm"
+                                onClick={(e) => e.stopPropagation()}
                               >
-                                <Send className="mr-2 h-4 w-4" />
-                                Envoyer une échelle
-                              </Link>
-                            </Button>
-                          </td>
-                        </tr>
-                      ))}
+                                <Link
+                                  href={`/send-questionnaire?patientId=${patient.id}`}
+                                >
+                                  <Send className="mr-2 h-4 w-4" />
+                                  Envoyer une échelle
+                                </Link>
+                              </Button>
+                            </td>
+                          </tr>
+                        );
+                      })}
                     </tbody>
                   </table>
                 </div>
