@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Home, Users, Send, LogOut, FileText } from "lucide-react";
+import { Home, Users, LogOut, FileText } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ThemeSwitcher } from "@/components/theme-switcher";
 import { useUser } from "@/app/context/UserContext";
@@ -73,12 +73,6 @@ export default function AppLayout({
             </Link>
           </button>
           <div className="flex flex-1 items-center justify-end space-x-2">
-            <Button asChild variant="secondary" size="sm">
-              <Link href="/send-questionnaire">
-                <Send className="mr-2 h-4 w-4" />
-                Envoyer une échelle
-              </Link>
-            </Button>
             <ThemeSwitcher />
             <Button
               variant="ghost"

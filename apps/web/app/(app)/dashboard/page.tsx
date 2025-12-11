@@ -1,6 +1,6 @@
 "use client";
 
-import { redirect, useRouter } from "next/navigation";
+import { redirect } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -14,14 +14,14 @@ import Link from "next/link";
 import { useUser } from "@/app/context/UserContext";
 import { useEffect, useState } from "react";
 import { getAllPatients, type MockPatient } from "@/data/mock-patients";
-import { getSessionsByPatientId } from "@/data/mock-sessions";
-import { UserPlus, Search } from "lucide-react";
+import { questionnaires } from "@/app/questionnairesData";
+import { UserPlus, Search, Send, Star } from "lucide-react";
 
 export default function DashboardPage() {
   const { user, isLoading } = useUser();
-  const router = useRouter();
   const [searchQuery, setSearchQuery] = useState("");
   const [patients, setPatients] = useState<MockPatient[]>([]);
+  const [favorites, setFavorites] = useState<string[]>([]);
 
   useEffect(() => {
     if (!isLoading && !user) {
@@ -31,6 +31,27 @@ export default function DashboardPage() {
 
   useEffect(() => {
     setPatients(getAllPatients());
+  }, []);
+
+  useEffect(() => {
+    const loadFavorites = () => {
+      const loadedFavorites = localStorage.getItem("favorites");
+      if (loadedFavorites) {
+        setFavorites(JSON.parse(loadedFavorites));
+      } else {
+        const mockFavorites = [
+          "inventaire-de-depression-de-beck",
+          "echelle-d-anxiete-sociale-de-liebowitz",
+          "stai-anxiete-generalisee",
+        ];
+        setFavorites(mockFavorites);
+        localStorage.setItem("favorites", JSON.stringify(mockFavorites));
+      }
+    };
+
+    loadFavorites();
+    window.addEventListener("storage", loadFavorites);
+    return () => window.removeEventListener("storage", loadFavorites);
   }, []);
 
   if (isLoading) {
@@ -54,6 +75,10 @@ export default function DashboardPage() {
     );
   });
 
+  const favoriteQuestionnaires = questionnaires.filter((q) =>
+    favorites.includes(q.id)
+  );
+
   return (
     <div className="container mx-auto px-4 py-6">
         <div className="mb-6">
@@ -63,6 +88,7 @@ export default function DashboardPage() {
           </p>
         </div>
 
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <Card>
           <CardHeader>
             <div className="flex items-center justify-between">
@@ -98,65 +124,36 @@ export default function DashboardPage() {
                     : "Aucun patient dans votre liste"}
                 </p>
               ) : (
-                <div className="border rounded-lg overflow-hidden">
+                <div className="border rounded-lg overflow-hidden max-h-[600px] overflow-y-auto">
                   <table className="w-full">
-                    <thead className="bg-muted">
-                      <tr>
-                        <th className="text-left p-3 font-medium text-sm">
-                          Initiales
-                        </th>
-                        <th className="text-left p-3 font-medium text-sm">Âge</th>
-                        <th className="text-left p-3 font-medium text-sm">Email</th>
-                        <th className="text-left p-3 font-medium text-sm">
-                          Passations
-                        </th>
-                        <th className="text-left p-3 font-medium text-sm">
-                          Dernière passation
-                        </th>
-                      </tr>
-                    </thead>
                     <tbody>
-                      {filteredPatients.map((patient) => {
-                        const sessions = getSessionsByPatientId(patient.id);
-                        const lastSession = sessions.sort(
-                          (a, b) =>
-                            new Date(b.sentAt).getTime() -
-                            new Date(a.sentAt).getTime()
-                        )[0];
-
-                        return (
-                          <tr
-                            key={patient.id}
-                            onClick={() => router.push(`/patients/${patient.id}`)}
-                            className="border-t hover:bg-muted/50 transition-colors cursor-pointer"
-                          >
-                            <td className="p-3">
-                              <div>
-                                <p className="font-medium">{patient.initials}</p>
-                                {patient.fullName && (
-                                  <p className="text-xs text-muted-foreground">
-                                    {patient.fullName}
-                                  </p>
-                                )}
-                              </div>
-                            </td>
-                            <td className="p-3 text-sm">{patient.age} ans</td>
-                            <td className="p-3 text-sm text-muted-foreground">
-                              {patient.email}
-                            </td>
-                            <td className="p-3 text-sm">
-                              {patient.sessionsCount}
-                            </td>
-                            <td className="p-3 text-sm text-muted-foreground">
-                              {lastSession
-                                ? new Date(lastSession.sentAt).toLocaleDateString(
-                                    "fr-FR"
-                                  )
-                                : "-"}
-                            </td>
-                          </tr>
-                        );
-                      })}
+                      {filteredPatients.map((patient) => (
+                        <tr
+                          key={patient.id}
+                          className="border-t first:border-t-0 hover:bg-muted/50 transition-colors"
+                        >
+                          <td className="p-3">
+                            <div>
+                              <p className="font-medium">{patient.initials}</p>
+                              {patient.fullName && (
+                                <p className="text-xs text-muted-foreground">
+                                  {patient.fullName}
+                                </p>
+                              )}
+                            </div>
+                          </td>
+                          <td className="p-3 text-right">
+                            <Button asChild variant="default" size="sm">
+                              <Link
+                                href={`/send-questionnaire?patientId=${patient.id}`}
+                              >
+                                <Send className="mr-2 h-4 w-4" />
+                                Envoyer une échelle
+                              </Link>
+                            </Button>
+                          </td>
+                        </tr>
+                      ))}
                     </tbody>
                   </table>
                 </div>
@@ -164,6 +161,66 @@ export default function DashboardPage() {
             </div>
           </CardContent>
         </Card>
+
+        <Card>
+          <CardHeader>
+            <div className="flex items-center justify-between">
+              <div>
+                <CardTitle>Mes échelles</CardTitle>
+                <CardDescription>
+                  {favoriteQuestionnaires.length} échelle{favoriteQuestionnaires.length > 1 ? "s" : ""} favorite{favoriteQuestionnaires.length > 1 ? "s" : ""}
+                </CardDescription>
+              </div>
+              <Button asChild size="sm" variant="outline">
+                <Link href="/echelles">
+                  Voir tout
+                </Link>
+              </Button>
+            </div>
+          </CardHeader>
+          <CardContent>
+            {favoriteQuestionnaires.length === 0 ? (
+              <p className="text-sm text-muted-foreground text-center py-8">
+                Aucune échelle favorite
+              </p>
+            ) : (
+              <div className="space-y-3">
+                {favoriteQuestionnaires.map((questionnaire) => (
+                  <div
+                    key={questionnaire.id}
+                    className="border rounded-lg p-4 hover:bg-muted/50 transition-colors"
+                  >
+                    <div className="flex items-start justify-between gap-3">
+                      <div className="flex-1">
+                        <div className="flex items-center gap-2 mb-1">
+                          <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                          <h3 className="font-medium text-sm">{questionnaire.title}</h3>
+                        </div>
+                        <p className="text-xs text-muted-foreground line-clamp-2">
+                          {questionnaire.description}
+                        </p>
+                        <div className="flex items-center gap-3 mt-2">
+                          <span className="text-xs text-muted-foreground">
+                            {questionnaire.category}
+                          </span>
+                          <span className="text-xs text-muted-foreground">
+                            ⏱️ {questionnaire.estimatedTime}
+                          </span>
+                        </div>
+                      </div>
+                      <Button asChild size="sm" variant="ghost">
+                        <Link href={`/questionnaire/description/${questionnaire.id}`}>
+                          Détails
+                        </Link>
+                      </Button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </CardContent>
+        </Card>
+        </div>
     </div>
   );
 }
