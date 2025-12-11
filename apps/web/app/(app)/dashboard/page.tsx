@@ -134,18 +134,19 @@ export default function DashboardPage() {
                       {filteredPatients.map((patient) => (
                         <tr
                           key={patient.id}
-                          className="border-t first:border-t-0 hover:bg-muted/50 transition-colors"
+                          className="border-t first:border-t-0 hover:bg-muted/50 transition-colors cursor-pointer"
+                          onClick={() => window.location.href = `/patients/${patient.id}`}
                         >
                           <td className="p-3">
-                            <div>
-                              <p className="font-medium">{patient.fullName}</p>
-                              <p className="text-xs text-muted-foreground">
-                                {patient.email}
-                              </p>
-                            </div>
+                            <p className="font-medium">{patient.fullName}</p>
                           </td>
                           <td className="p-3 text-right">
-                            <Button asChild variant="default" size="sm">
+                            <Button
+                              asChild
+                              variant="default"
+                              size="sm"
+                              onClick={(e) => e.stopPropagation()}
+                            >
                               <Link
                                 href={`/send-questionnaire?patientId=${patient.id}`}
                               >
