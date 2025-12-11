@@ -81,10 +81,8 @@ export default function PatientDetailPage() {
           </Link>
         </Button>
         <div className="flex-1">
-          <h1 className="font-bold text-3xl">{patient.initials}</h1>
-          {patient.fullName && (
-            <p className="text-muted-foreground mt-1">{patient.fullName}</p>
-          )}
+          <h1 className="font-bold text-3xl">{patient.fullName}</h1>
+          <p className="text-muted-foreground mt-1">{patient.email}</p>
         </div>
         <Button asChild size="lg">
           <Link href={`/send-questionnaire?patientId=${patient.id}`}>

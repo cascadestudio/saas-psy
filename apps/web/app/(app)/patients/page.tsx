@@ -15,7 +15,8 @@ import { useUser } from "@/app/context/UserContext";
 import { useEffect, useState } from "react";
 import { getAllPatients, type MockPatient } from "@/data/mock-patients";
 import { getSessionsByPatientId } from "@/data/mock-sessions";
-import { UserPlus, Search } from "lucide-react";
+import { Search } from "lucide-react";
+import { CreatePatientSheet } from "@/components/CreatePatientSheet";
 
 export default function PatientsPage() {
   const { user, isLoading } = useUser();
@@ -32,6 +33,11 @@ export default function PatientsPage() {
     setPatients(getAllPatients());
   }, []);
 
+  const handlePatientCreated = (patientId: string) => {
+    // Refresh patient list
+    setPatients(getAllPatients());
+  };
+
   if (isLoading) {
     return (
       <div className="flex-1 w-full flex items-center justify-center">
@@ -47,7 +53,6 @@ export default function PatientsPage() {
   const filteredPatients = patients.filter((patient) => {
     const query = searchQuery.toLowerCase();
     return (
-      patient.initials.toLowerCase().includes(query) ||
       patient.fullName?.toLowerCase().includes(query) ||
       patient.email.toLowerCase().includes(query)
     );
@@ -63,12 +68,7 @@ export default function PatientsPage() {
             liste
           </p>
         </div>
-        <Button asChild size="lg">
-          <Link href="/patients/create">
-            <UserPlus className="mr-2 h-4 w-4" />
-            Ajouter un patient
-          </Link>
-        </Button>
+        <CreatePatientSheet onPatientCreated={handlePatientCreated} />
       </div>
 
       <Card>
@@ -77,7 +77,7 @@ export default function PatientsPage() {
             <div className="flex-1 relative">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
               <Input
-                placeholder="Rechercher un patient (initiales, nom, email)..."
+                placeholder="Rechercher un patient (nom, email)..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="pl-10"
@@ -99,7 +99,7 @@ export default function PatientsPage() {
                   <thead className="bg-muted">
                     <tr>
                       <th className="text-left p-3 font-medium text-sm">
-                        Initiales
+                        Nom complet
                       </th>
                       <th className="text-left p-3 font-medium text-sm">Âge</th>
                       <th className="text-left p-3 font-medium text-sm">
@@ -131,14 +131,7 @@ export default function PatientsPage() {
                           className="border-t hover:bg-muted/50 transition-colors"
                         >
                           <td className="p-3">
-                            <div>
-                              <p className="font-medium">{patient.initials}</p>
-                              {patient.fullName && (
-                                <p className="text-xs text-muted-foreground">
-                                  {patient.fullName}
-                                </p>
-                              )}
-                            </div>
+                            <p className="font-medium">{patient.fullName}</p>
                           </td>
                           <td className="p-3 text-sm">{patient.age} ans</td>
                           <td className="p-3 text-sm text-muted-foreground">

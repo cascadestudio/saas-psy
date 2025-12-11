@@ -15,7 +15,8 @@ import { useUser } from "@/app/context/UserContext";
 import { useEffect, useState } from "react";
 import { getAllPatients, type MockPatient } from "@/data/mock-patients";
 import { questionnaires } from "@/app/questionnairesData";
-import { UserPlus, Search, Send, Star } from "lucide-react";
+import { Search, Send, Star } from "lucide-react";
+import { CreatePatientSheet } from "@/components/CreatePatientSheet";
 
 export default function DashboardPage() {
   const { user, isLoading } = useUser();
@@ -32,6 +33,11 @@ export default function DashboardPage() {
   useEffect(() => {
     setPatients(getAllPatients());
   }, []);
+
+  const handlePatientCreated = (patientId: string) => {
+    // Refresh patient list
+    setPatients(getAllPatients());
+  };
 
   useEffect(() => {
     const loadFavorites = () => {
@@ -69,7 +75,6 @@ export default function DashboardPage() {
   const filteredPatients = patients.filter((patient) => {
     const query = searchQuery.toLowerCase();
     return (
-      patient.initials.toLowerCase().includes(query) ||
       patient.fullName?.toLowerCase().includes(query) ||
       patient.email.toLowerCase().includes(query)
     );
@@ -98,12 +103,11 @@ export default function DashboardPage() {
                   {patients.length} patient{patients.length > 1 ? "s" : ""} dans votre liste
                 </CardDescription>
               </div>
-              <Button asChild size="sm">
-                <Link href="/patients/create">
-                  <UserPlus className="mr-2 h-4 w-4" />
-                  Ajouter
-                </Link>
-              </Button>
+              <CreatePatientSheet
+                onPatientCreated={handlePatientCreated}
+                buttonSize="sm"
+                buttonText="Ajouter"
+              />
             </div>
           </CardHeader>
           <CardContent className="space-y-4">
@@ -134,12 +138,10 @@ export default function DashboardPage() {
                         >
                           <td className="p-3">
                             <div>
-                              <p className="font-medium">{patient.initials}</p>
-                              {patient.fullName && (
-                                <p className="text-xs text-muted-foreground">
-                                  {patient.fullName}
-                                </p>
-                              )}
+                              <p className="font-medium">{patient.fullName}</p>
+                              <p className="text-xs text-muted-foreground">
+                                {patient.email}
+                              </p>
                             </div>
                           </td>
                           <td className="p-3 text-right">

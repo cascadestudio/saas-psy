@@ -37,7 +37,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-type Step = "patient" | "questionnaires" | "message" | "confirm";
+type Step = "questionnaires" | "message" | "confirm";
 
 function SendQuestionnaireContent() {
   const { user, isLoading } = useUser();
@@ -45,7 +45,7 @@ function SendQuestionnaireContent() {
   const searchParams = useSearchParams();
   const preselectedPatientId = searchParams.get("patientId");
 
-  const [step, setStep] = useState<Step>("patient");
+  const [step, setStep] = useState<Step>("questionnaires");
   const [selectedPatientId, setSelectedPatientId] = useState<string>(
     preselectedPatientId || ""
   );
@@ -144,7 +144,7 @@ function SendQuestionnaireContent() {
     });
 
     toast.success("Échelle(s) envoyée(s) avec succès", {
-      description: `${selectedQuestionnaireIds.length} échelle(s) envoyée(s) à ${selectedPatient.initials}`,
+      description: `${selectedQuestionnaireIds.length} échelle(s) envoyée(s) à ${selectedPatient.fullName}`,
     });
 
     router.push(`/patients/${selectedPatient.id}`);
@@ -161,7 +161,7 @@ function SendQuestionnaireContent() {
         <div className="flex-1">
           <h1 className="font-bold text-3xl">Envoyer une échelle</h1>
           <p className="text-muted-foreground mt-1">
-            Processus simplifié en 3 étapes
+            {selectedPatient ? `Pour ${selectedPatient.fullName}` : "Sélectionnez un patient"}
           </p>
         </div>
       </div>
@@ -169,7 +169,6 @@ function SendQuestionnaireContent() {
       {/* Progress Steps */}
       <div className="flex items-center gap-2">
         {[
-          { key: "patient", label: "Patient" },
           { key: "questionnaires", label: "Questionnaires" },
           { key: "message", label: "Message" },
           { key: "confirm", label: "Confirmation" },
@@ -181,7 +180,6 @@ function SendQuestionnaireContent() {
                   ? "bg-primary text-primary-foreground"
                   : index <
                     [
-                      "patient",
                       "questionnaires",
                       "message",
                       "confirm",
@@ -191,7 +189,7 @@ function SendQuestionnaireContent() {
               }`}
             >
               {index <
-              ["patient", "questionnaires", "message", "confirm"].indexOf(
+              ["questionnaires", "message", "confirm"].indexOf(
                 step
               ) ? (
                 <Check className="h-4 w-4" />
@@ -202,7 +200,7 @@ function SendQuestionnaireContent() {
             <span className="text-sm font-medium hidden md:inline">
               {s.label}
             </span>
-            {index < 3 && (
+            {index < 2 && (
               <div className="flex-1 h-0.5 bg-muted hidden md:block" />
             )}
           </div>
@@ -212,14 +210,11 @@ function SendQuestionnaireContent() {
       <Card>
         <CardHeader>
           <CardTitle>
-            {step === "patient" && "Sélectionner un patient"}
             {step === "questionnaires" && "Choisir les questionnaires"}
             {step === "message" && "Personnaliser le message"}
             {step === "confirm" && "Confirmer l'envoi"}
           </CardTitle>
           <CardDescription>
-            {step === "patient" &&
-              "Choisissez un patient existant ou créez-en un nouveau"}
             {step === "questionnaires" &&
               "Vous pouvez sélectionner plusieurs questionnaires à envoyer en même temps"}
             {step === "message" &&
@@ -229,101 +224,7 @@ function SendQuestionnaireContent() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          {/* Step 1: Patient Selection */}
-          {step === "patient" && (
-            <div className="space-y-4">
-              <div className="space-y-2">
-                <Label>Patient</Label>
-                <Select
-                  value={selectedPatientId}
-                  onValueChange={setSelectedPatientId}
-                >
-                  <SelectTrigger>
-                    <SelectValue placeholder="Sélectionner un patient..." />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {patients.map((patient) => (
-                      <SelectItem key={patient.id} value={patient.id}>
-                        {patient.initials} - {patient.email}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-
-              <div className="border-t pt-4">
-                <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-                  <DialogTrigger asChild>
-                    <Button variant="outline" className="w-full">
-                      <UserPlus className="mr-2 h-4 w-4" />
-                      Créer un nouveau patient
-                    </Button>
-                  </DialogTrigger>
-                  <DialogContent>
-                    <DialogHeader>
-                      <DialogTitle>Créer un nouveau patient</DialogTitle>
-                      <DialogDescription>
-                        Création rapide - vous pourrez compléter les informations
-                        plus tard
-                      </DialogDescription>
-                    </DialogHeader>
-                    <form onSubmit={handleCreatePatient} className="space-y-4">
-                      <div className="space-y-2">
-                        <Label htmlFor="dialog-fullName">Nom complet *</Label>
-                        <Input
-                          id="dialog-fullName"
-                          name="fullName"
-                          placeholder="Martin Dubois"
-                          required
-                        />
-                      </div>
-                      <div className="space-y-2">
-                        <Label htmlFor="dialog-email">Email *</Label>
-                        <Input
-                          id="dialog-email"
-                          name="email"
-                          type="email"
-                          placeholder="patient@example.com"
-                          required
-                        />
-                      </div>
-                      <div className="space-y-2">
-                        <Label htmlFor="dialog-initials">
-                          Initiales (optionnel)
-                        </Label>
-                        <Input
-                          id="dialog-initials"
-                          name="initials"
-                          placeholder="M.D."
-                        />
-                      </div>
-                      <div className="flex gap-2">
-                        <Button type="submit">Créer et continuer</Button>
-                        <Button
-                          type="button"
-                          variant="outline"
-                          onClick={() => setIsDialogOpen(false)}
-                        >
-                          Annuler
-                        </Button>
-                      </div>
-                    </form>
-                  </DialogContent>
-                </Dialog>
-              </div>
-
-              <div className="flex justify-end gap-2 pt-4">
-                <Button
-                  onClick={() => setStep("questionnaires")}
-                  disabled={!selectedPatientId}
-                >
-                  Continuer
-                </Button>
-              </div>
-            </div>
-          )}
-
-          {/* Step 2: Questionnaire Selection */}
+          {/* Step 1: Questionnaire Selection */}
           {step === "questionnaires" && (
             <div className="space-y-4">
               <div className="bg-blue-50 dark:bg-blue-950 border border-blue-200 dark:border-blue-800 rounded-lg p-4 mb-4">
@@ -395,8 +296,10 @@ function SendQuestionnaireContent() {
               </div>
 
               <div className="flex justify-end gap-2 pt-4">
-                <Button onClick={() => setStep("patient")} variant="outline">
-                  Retour
+                <Button asChild variant="outline">
+                  <Link href="/dashboard">
+                    Annuler
+                  </Link>
                 </Button>
                 <Button
                   onClick={() => setStep("message")}
@@ -408,7 +311,7 @@ function SendQuestionnaireContent() {
             </div>
           )}
 
-          {/* Step 3: Personal Message */}
+          {/* Step 2: Personal Message */}
           {step === "message" && (
             <div className="space-y-4">
               <div className="space-y-2">
@@ -437,14 +340,14 @@ function SendQuestionnaireContent() {
             </div>
           )}
 
-          {/* Step 4: Confirmation */}
+          {/* Step 3: Confirmation */}
           {step === "confirm" && (
             <div className="space-y-6">
               <div className="space-y-4 p-4 bg-muted rounded-lg">
                 <div>
                   <p className="text-sm text-muted-foreground">Patient</p>
                   <p className="font-medium">
-                    {selectedPatient?.initials} - {selectedPatient?.email}
+                    {selectedPatient?.fullName} - {selectedPatient?.email}
                   </p>
                 </div>
                 <div>
