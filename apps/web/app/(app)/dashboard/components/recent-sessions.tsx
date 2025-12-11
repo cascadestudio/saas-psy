@@ -8,14 +8,17 @@ import { questionnaires } from "@/app/questionnairesData";
 import Link from "next/link";
 
 const statusColors = {
-  completed: "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200",
+  completed:
+    "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200",
   in_progress: "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200",
+  sent: "bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200",
   expired: "bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200",
 };
 
 const statusLabels = {
   completed: "Complété",
-  in_progress: "En cours",
+  in_progress: "Vu",
+  sent: "Envoyé",
   expired: "Expiré",
 };
 
@@ -50,18 +53,22 @@ export function RecentSessions() {
                       <p className="text-sm font-medium truncate">
                         {patient?.initials || "Patient inconnu"}
                       </p>
-                      <Badge className={statusColors[session.status]} variant="secondary">
+                      <Badge
+                        className={statusColors[session.status]}
+                        variant="secondary"
+                      >
                         {statusLabels[session.status]}
                       </Badge>
                     </div>
                     <p className="text-sm text-muted-foreground truncate">
                       {questionnaire?.title || session.questionnaireId}
                     </p>
-                    {session.status === "completed" && session.score !== null && (
-                      <p className="text-xs text-muted-foreground mt-1">
-                        Score: {session.score} - {session.interpretation}
-                      </p>
-                    )}
+                    {session.status === "completed" &&
+                      session.score !== null && (
+                        <p className="text-xs text-muted-foreground mt-1">
+                          Score: {session.score} - {session.interpretation}
+                        </p>
+                      )}
                   </div>
                   <div className="text-xs text-muted-foreground ml-4">
                     {new Date(session.sentAt).toLocaleDateString("fr-FR", {
