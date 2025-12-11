@@ -1,6 +1,6 @@
 "use client";
 
-import { redirect } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -15,10 +15,11 @@ import { useUser } from "@/app/context/UserContext";
 import { useEffect, useState } from "react";
 import { getAllPatients, type MockPatient } from "@/data/mock-patients";
 import { getSessionsByPatientId } from "@/data/mock-sessions";
-import { Send, UserPlus, Search } from "lucide-react";
+import { UserPlus, Search } from "lucide-react";
 
 export default function DashboardPage() {
   const { user, isLoading } = useUser();
+  const router = useRouter();
   const [searchQuery, setSearchQuery] = useState("");
   const [patients, setPatients] = useState<MockPatient[]>([]);
 
@@ -55,19 +56,11 @@ export default function DashboardPage() {
 
   return (
     <div className="container mx-auto px-4 py-6">
-        <div className="flex items-center justify-between mb-6">
-          <div>
-            <h1 className="font-bold text-3xl">Tableau de bord</h1>
-            <p className="text-muted-foreground mt-1">
-              Bienvenue, {user.fullName || user.email}
-            </p>
-          </div>
-          <Button asChild size="lg">
-            <Link href="/send-questionnaire">
-              <Send className="mr-2 h-4 w-4" />
-              Envoyer une échelle
-            </Link>
-          </Button>
+        <div className="mb-6">
+          <h1 className="font-bold text-3xl">Tableau de bord</h1>
+          <p className="text-muted-foreground mt-1">
+            Bienvenue, {user.fullName || user.email}
+          </p>
         </div>
 
         <Card>
@@ -120,9 +113,6 @@ export default function DashboardPage() {
                         <th className="text-left p-3 font-medium text-sm">
                           Dernière passation
                         </th>
-                        <th className="text-right p-3 font-medium text-sm">
-                          Actions
-                        </th>
                       </tr>
                     </thead>
                     <tbody>
@@ -137,7 +127,8 @@ export default function DashboardPage() {
                         return (
                           <tr
                             key={patient.id}
-                            className="border-t hover:bg-muted/50 transition-colors"
+                            onClick={() => router.push(`/patients/${patient.id}`)}
+                            className="border-t hover:bg-muted/50 transition-colors cursor-pointer"
                           >
                             <td className="p-3">
                               <div>
@@ -162,13 +153,6 @@ export default function DashboardPage() {
                                     "fr-FR"
                                   )
                                 : "-"}
-                            </td>
-                            <td className="p-3 text-right">
-                              <Button asChild variant="ghost" size="sm">
-                                <Link href={`/patients/${patient.id}`}>
-                                  Voir détails
-                                </Link>
-                              </Button>
                             </td>
                           </tr>
                         );

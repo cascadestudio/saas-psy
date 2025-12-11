@@ -22,24 +22,34 @@ export function FavoriteButton({
   const toggleFavorite = async () => {
     try {
       setIsLoading(true);
-      const response = await fetch("/api/favorites", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ questionnaireId }),
-      });
 
-      if (!response.ok) {
-        throw new Error("Failed to update favorite");
+      // TODO: Remplacer par un vrai appel API
+      // Pour le moment, on utilise le localStorage
+      const storedFavorites = localStorage.getItem("favorites");
+      const favorites: string[] = storedFavorites
+        ? JSON.parse(storedFavorites)
+        : [];
+
+      const newIsFavorite = !isFavorite;
+      let updatedFavorites: string[];
+
+      if (newIsFavorite) {
+        // Ajouter aux favoris
+        updatedFavorites = [...favorites, questionnaireId];
+      } else {
+        // Retirer des favoris
+        updatedFavorites = favorites.filter((id) => id !== questionnaireId);
       }
 
-      const data = await response.json();
-      setIsFavorite(data.action === "add");
+      localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+      setIsFavorite(newIsFavorite);
 
       toast.success(
-        data.action === "add" ? "Ajouté aux favoris" : "Retiré des favoris"
+        newIsFavorite ? "Ajouté aux favoris" : "Retiré des favoris"
       );
+
+      // Recharger la page pour mettre à jour l'affichage
+      window.dispatchEvent(new Event("storage"));
     } catch (error) {
       console.error("Error toggling favorite:", error);
       toast.error("Erreur lors de la mise à jour des favoris");

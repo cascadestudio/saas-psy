@@ -151,7 +151,7 @@ function SendQuestionnaireContent() {
   };
 
   return (
-    <div className="container mx-auto px-4 py-6 space-y-6">
+    <div className="container mx-auto px-4 py-6 space-y-6 max-w-4xl">
       <div className="flex items-center gap-4">
         <Button asChild variant="ghost" size="icon">
           <Link href="/dashboard">
@@ -167,7 +167,7 @@ function SendQuestionnaireContent() {
       </div>
 
       {/* Progress Steps */}
-      <div className="flex items-center gap-2 max-w-3xl">
+      <div className="flex items-center gap-2">
         {[
           { key: "patient", label: "Patient" },
           { key: "questionnaires", label: "Questionnaires" },
@@ -209,7 +209,7 @@ function SendQuestionnaireContent() {
         ))}
       </div>
 
-      <Card className="max-w-3xl">
+      <Card>
         <CardHeader>
           <CardTitle>
             {step === "patient" && "Sélectionner un patient"}
@@ -312,7 +312,7 @@ function SendQuestionnaireContent() {
                 </Dialog>
               </div>
 
-              <div className="flex gap-2 pt-4">
+              <div className="flex justify-end gap-2 pt-4">
                 <Button
                   onClick={() => setStep("questionnaires")}
                   disabled={!selectedPatientId}
@@ -394,7 +394,7 @@ function SendQuestionnaireContent() {
                 ))}
               </div>
 
-              <div className="flex gap-2 pt-4">
+              <div className="flex justify-end gap-2 pt-4">
                 <Button onClick={() => setStep("patient")} variant="outline">
                   Retour
                 </Button>
@@ -425,7 +425,7 @@ function SendQuestionnaireContent() {
                 </p>
               </div>
 
-              <div className="flex gap-2 pt-4">
+              <div className="flex justify-end gap-2 pt-4">
                 <Button
                   onClick={() => setStep("questionnaires")}
                   variant="outline"
@@ -471,7 +471,7 @@ function SendQuestionnaireContent() {
                 )}
               </div>
 
-              <div className="flex gap-2">
+              <div className="flex justify-end gap-2">
                 <Button onClick={() => setStep("message")} variant="outline">
                   Retour
                 </Button>
