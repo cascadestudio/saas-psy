@@ -3,7 +3,7 @@
  * Sessions represent questionnaire completions by patients
  */
 
-export type SessionStatus = "completed" | "in_progress" | "expired";
+export type SessionStatus = "completed" | "in_progress" | "sent" | "expired";
 
 export interface MockSession {
   id: string;
@@ -113,7 +113,7 @@ export const mockSessions: MockSession[] = [
     batchId: null,
   },
 
-  // Patient M.L. (p4) - In progress
+  // Patient M.L. (p4) - Viewed/In progress
   {
     id: "s9",
     patientId: "p4",
@@ -122,6 +122,17 @@ export const mockSessions: MockSession[] = [
     score: null,
     interpretation: null,
     sentAt: "2024-12-07T14:00:00Z",
+    completedAt: null,
+    batchId: null,
+  },
+  {
+    id: "s10a",
+    patientId: "p1",
+    questionnaireId: "index-symptomes-ybocs",
+    status: "in_progress",
+    score: null,
+    interpretation: null,
+    sentAt: "2024-12-04T11:00:00Z",
     completedAt: null,
     batchId: null,
   },
@@ -163,12 +174,12 @@ export const mockSessions: MockSession[] = [
     batchId: null,
   },
 
-  // Additional in-progress sessions for demo
+  // Sent sessions examples (not yet started)
   {
     id: "s13",
     patientId: "p1",
     questionnaireId: "echelle-d-anxiete-sociale-de-liebowitz",
-    status: "in_progress",
+    status: "sent",
     score: null,
     interpretation: null,
     sentAt: "2024-12-09T10:00:00Z",
@@ -179,7 +190,7 @@ export const mockSessions: MockSession[] = [
     id: "s14",
     patientId: "p2",
     questionnaireId: "traumatismes-pcl5",
-    status: "in_progress",
+    status: "sent",
     score: null,
     interpretation: null,
     sentAt: "2024-12-08T14:30:00Z",
@@ -190,10 +201,56 @@ export const mockSessions: MockSession[] = [
     id: "s15",
     patientId: "p3",
     questionnaireId: "stai-anxiete-generalisee",
-    status: "in_progress",
+    status: "sent",
     score: null,
     interpretation: null,
     sentAt: "2024-12-10T09:00:00Z",
+    completedAt: null,
+    batchId: null,
+  },
+
+  // Additional in-progress sessions for demo
+  {
+    id: "s16",
+    patientId: "p4",
+    questionnaireId: "inventaire-de-depression-de-beck",
+    status: "in_progress",
+    score: null,
+    interpretation: null,
+    sentAt: "2024-12-06T09:00:00Z",
+    completedAt: null,
+    batchId: null,
+  },
+  {
+    id: "s17",
+    patientId: "p5",
+    questionnaireId: "echelle-d-anxiete-sociale-de-liebowitz",
+    status: "sent",
+    score: null,
+    interpretation: null,
+    sentAt: "2024-12-11T08:00:00Z",
+    completedAt: null,
+    batchId: null,
+  },
+  {
+    id: "s18",
+    patientId: "p2",
+    questionnaireId: "inventaire-de-depression-de-beck",
+    status: "in_progress",
+    score: null,
+    interpretation: null,
+    sentAt: "2024-12-05T10:30:00Z",
+    completedAt: null,
+    batchId: null,
+  },
+  {
+    id: "s19",
+    patientId: "p3",
+    questionnaireId: "echelle-d-anxiete-sociale-de-liebowitz",
+    status: "in_progress",
+    score: null,
+    interpretation: null,
+    sentAt: "2024-12-07T15:00:00Z",
     completedAt: null,
     batchId: null,
   },
@@ -246,7 +303,7 @@ export function getSessionsByStatus(status: SessionStatus): MockSession[] {
 /**
  * Add new session (mock)
  */
-let nextSessionId = 13;
+let nextSessionId = 18;
 export function addSession(
   session: Omit<MockSession, "id">
 ): MockSession {
@@ -266,12 +323,14 @@ export function getSessionStats() {
   const total = mockSessions.length;
   const completed = mockSessions.filter((s) => s.status === "completed").length;
   const inProgress = mockSessions.filter((s) => s.status === "in_progress").length;
+  const sent = mockSessions.filter((s) => s.status === "sent").length;
   const expired = mockSessions.filter((s) => s.status === "expired").length;
 
   return {
     total,
     completed,
     inProgress,
+    sent,
     expired,
   };
 }

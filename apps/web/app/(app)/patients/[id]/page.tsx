@@ -21,12 +21,14 @@ import { ArrowLeft, Send, Calendar, Mail, FileText } from "lucide-react";
 const statusColors = {
   completed: "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200",
   in_progress: "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200",
+  sent: "bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200",
   expired: "bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200",
 };
 
 const statusLabels = {
   completed: "Complété",
-  in_progress: "En cours",
+  in_progress: "Vu",
+  sent: "Envoyé",
   expired: "Expiré",
 };
 
