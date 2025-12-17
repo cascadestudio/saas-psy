@@ -69,13 +69,13 @@ export function FavoriteButton({
     <Button
       variant="ghost"
       size="icon"
-      className={`${sizeClasses[size]} rounded-full`}
+      className={`${sizeClasses[size]} rounded-full hover:bg-primary/10`}
       onClick={toggleFavorite}
       disabled={isLoading}
       aria-label={isFavorite ? "Retirer des favoris" : "Ajouter aux favoris"}
     >
       <Star
-        className={`${isFavorite ? "fill-yellow-400 text-yellow-400" : "text-muted-foreground"}`}
+        className={`${isFavorite ? "fill-primary text-primary" : "text-muted-foreground hover:text-primary"} transition-colors`}
       />
     </Button>
   );

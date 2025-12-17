@@ -2,60 +2,95 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Anthropic Brand Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Lora:wght@400;500;600;700&display=swap');
+
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    /* Anthropic Brand Colors */
+    --background: 48 38% 97%;           /* Light #faf9f5 */
+    --foreground: 60 3% 8%;             /* Dark #141413 */
+
+    --card: 48 38% 97%;                 /* Light #faf9f5 */
+    --card-foreground: 60 3% 8%;        /* Dark #141413 */
+
+    --popover: 48 38% 97%;              /* Light #faf9f5 */
+    --popover-foreground: 60 3% 8%;     /* Dark #141413 */
+
+    --primary: 15 62% 60%;              /* Orange #d97757 */
+    --primary-foreground: 48 38% 97%;   /* Light #faf9f5 */
+
+    --secondary: 50 24% 89%;            /* Light Gray #e8e6dc */
+    --secondary-foreground: 60 3% 8%;   /* Dark #141413 */
+
+    --muted: 50 24% 89%;                /* Light Gray #e8e6dc */
+    --muted-foreground: 49 8% 47%;      /* Mid Gray darker */
+
+    --accent: 210 48% 61%;              /* Blue #6a9bcc */
+    --accent-foreground: 48 38% 97%;    /* Light #faf9f5 */
+
+    --destructive: 0 84% 60%;           /* Red for errors */
+    --destructive-foreground: 48 38% 97%;
+
+    --border: 50 20% 85%;               /* Subtle border */
+    --input: 50 20% 85%;                /* Input border */
+    --ring: 15 62% 60%;                 /* Orange focus ring */
+
     --radius: 0.5rem;
-    --chart-1: 12 76% 61%;
-    --chart-2: 173 58% 39%;
-    --chart-3: 197 37% 24%;
-    --chart-4: 43 74% 66%;
-    --chart-5: 27 87% 67%;
+
+    /* Chart colors using brand accents */
+    --chart-1: 15 62% 60%;              /* Orange */
+    --chart-2: 210 48% 61%;             /* Blue */
+    --chart-3: 88 21% 46%;              /* Green */
+    --chart-4: 49 8% 67%;               /* Mid Gray */
+    --chart-5: 60 3% 8%;                /* Dark */
+
+    /* Additional brand colors for direct use */
+    --brand-orange: 15 62% 60%;
+    --brand-blue: 210 48% 61%;
+    --brand-green: 88 21% 46%;
+    --brand-dark: 60 3% 8%;
+    --brand-light: 48 38% 97%;
+    --brand-mid-gray: 49 8% 67%;
+    --brand-light-gray: 50 24% 89%;
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%;
+    /* Dark mode - inverted Anthropic palette */
+    --background: 60 3% 8%;             /* Dark #141413 */
+    --foreground: 48 38% 97%;           /* Light #faf9f5 */
+
+    --card: 60 4% 12%;                  /* Slightly lighter dark */
+    --card-foreground: 48 38% 97%;      /* Light #faf9f5 */
+
+    --popover: 60 4% 12%;
+    --popover-foreground: 48 38% 97%;
+
+    --primary: 15 62% 60%;              /* Orange stays same */
+    --primary-foreground: 60 3% 8%;     /* Dark text on orange */
+
+    --secondary: 60 4% 18%;             /* Dark secondary */
+    --secondary-foreground: 48 38% 97%;
+
+    --muted: 60 4% 18%;
+    --muted-foreground: 49 8% 67%;      /* Mid Gray */
+
+    --accent: 210 48% 61%;              /* Blue stays same */
+    --accent-foreground: 60 3% 8%;
+
+    --destructive: 0 62% 50%;
+    --destructive-foreground: 48 38% 97%;
+
+    --border: 60 4% 20%;
+    --input: 60 4% 20%;
+    --ring: 15 62% 60%;
+
+    /* Chart colors - slightly adjusted for dark mode */
+    --chart-1: 15 62% 55%;
+    --chart-2: 210 48% 56%;
+    --chart-3: 88 21% 50%;
+    --chart-4: 49 8% 60%;
+    --chart-5: 48 38% 90%;
   }
 }
 
@@ -63,7 +98,35 @@
   * {
     @apply border-border;
   }
+
+  html {
+    font-family: 'Lora', Georgia, serif;
+  }
+
   body {
     @apply bg-background text-foreground;
+    font-family: 'Lora', Georgia, serif;
+  }
+
+  /* Headings use Poppins */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', Arial, sans-serif;
+    @apply font-semibold tracking-tight;
+  }
+
+  /* Buttons and labels use Poppins */
+  button, label, .font-heading {
+    font-family: 'Poppins', Arial, sans-serif;
+  }
+}
+
+/* Utility classes for brand fonts */
+@layer utilities {
+  .font-poppins {
+    font-family: 'Poppins', Arial, sans-serif;
+  }
+
+  .font-lora {
+    font-family: 'Lora', Georgia, serif;
   }
 }
