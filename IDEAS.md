@@ -10,4 +10,4 @@ Feature ideas and improvements for future development.
 
 ## Features to Consider
 
-(Add more ideas here as they come up)
+- **Rajouter un system de notification**: Ajouter un onglet notifications contenant les dernières mis à jour des statut des passation pour que le psy soit au courant des dernières echelles réaliser par les patients (notifs app + mail)
