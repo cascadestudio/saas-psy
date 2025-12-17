@@ -5,7 +5,7 @@ import { redirect } from "next/navigation";
 import { Input } from "@/components/ui/input";
 import { QuestionnaireCard } from "@/components/QuestionnaireCard";
 import { questionnaires } from "@/app/questionnairesData";
-import { Search } from "lucide-react";
+import { Interfaces } from "doodle-icons";
 import { useUser } from "@/app/context/UserContext";
 
 export default function EchellesPage() {
@@ -88,7 +88,7 @@ export default function EchellesPage() {
 
       <div className="mb-6">
         <div className="relative">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+          <Interfaces.Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
           <Input
             placeholder="Rechercher une échelle par nom, catégorie..."
             value={searchQuery}

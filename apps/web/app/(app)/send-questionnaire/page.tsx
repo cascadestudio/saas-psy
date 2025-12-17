@@ -27,7 +27,8 @@ import { useEffect, useState, Suspense } from "react";
 import { getAllPatients, addPatient, type MockPatient } from "@/data/mock-patients";
 import { addSession } from "@/data/mock-sessions";
 import { questionnaires } from "@/app/questionnairesData";
-import { ArrowLeft, UserPlus, Send, Check } from "lucide-react";
+import { Arrow, Interfaces } from "doodle-icons";
+import { Check } from "lucide-react";
 import { toast } from "sonner";
 import {
   Select,
@@ -155,7 +156,7 @@ function SendQuestionnaireContent() {
       <div className="flex items-center gap-4">
         <Button asChild variant="ghost" size="icon">
           <Link href="/dashboard">
-            <ArrowLeft className="h-4 w-4" />
+            <Arrow.ArrowLeft className="h-4 w-4" />
           </Link>
         </Button>
         <div className="flex-1">
@@ -275,7 +276,7 @@ function SendQuestionnaireContent() {
                         <div className="flex items-center gap-2">
                           <p className="font-medium">{questionnaire.title}</p>
                           {user?.profile?.favoriteQuestionnaires?.includes(questionnaire.id) && (
-                            <span className="text-yellow-500">⭐</span>
+                            <Interfaces.Star className="h-4 w-4 fill-primary text-primary" />
                           )}
                         </div>
                         <p className="text-sm text-muted-foreground mt-1">
@@ -286,7 +287,8 @@ function SendQuestionnaireContent() {
                             {questionnaire.category}
                           </span>
                           <span className="text-xs text-muted-foreground">
-                            ⏱️ {questionnaire.estimatedTime}
+                            <Interfaces.Clock className="inline h-3 w-3 mr-1" />
+                            {questionnaire.estimatedTime}
                           </span>
                         </div>
                       </div>
@@ -379,7 +381,7 @@ function SendQuestionnaireContent() {
                   Retour
                 </Button>
                 <Button onClick={handleSend}>
-                  <Send className="mr-2 h-4 w-4" />
+                  <Interfaces.Send className="mr-2 h-4 w-4" />
                   Envoyer maintenant
                 </Button>
               </div>

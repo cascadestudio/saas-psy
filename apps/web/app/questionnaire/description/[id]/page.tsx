@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowLeft, Clock, FileText } from "lucide-react";
+import { Arrow, Interfaces, Files } from "doodle-icons";
 import {
   Card,
   CardContent,
@@ -36,7 +36,7 @@ export default async function QuestionnairePage({
   return (
     <div className="container mx-auto py-8 px-4 sm:px-6 md:px-8">
       <Link href="/" className="flex items-center text-sm mb-6 hover:underline">
-        <ArrowLeft className="mr-2 h-4 w-4" />
+        <Arrow.ArrowLeft className="mr-2 h-4 w-4" />
         Retour aux questionnaires
       </Link>
 
@@ -54,11 +54,11 @@ export default async function QuestionnairePage({
         <CardContent className="space-y-6">
           <div className="flex items-center gap-6">
             <div className="flex items-center">
-              <FileText className="h-5 w-5 mr-2 text-muted-foreground" />
+              <Files.FileText className="h-5 w-5 mr-2 text-muted-foreground" />
               <span>{questionCount(questionnaire)} questions</span>
             </div>
             <div className="flex items-center">
-              <Clock className="h-5 w-5 mr-2 text-muted-foreground" />
+              <Interfaces.Clock className="h-5 w-5 mr-2 text-muted-foreground" />
               <span>{questionnaire.estimatedTime}</span>
             </div>
           </div>

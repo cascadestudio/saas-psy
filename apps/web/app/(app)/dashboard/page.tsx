@@ -16,7 +16,7 @@ import { useEffect, useState } from "react";
 import { getAllPatients, type MockPatient } from "@/data/mock-patients";
 import { getSessionsByPatientId } from "@/data/mock-sessions";
 import { questionnaires } from "@/app/questionnairesData";
-import { Search, Send, Star } from "lucide-react";
+import { Interfaces } from "doodle-icons";
 import { CreatePatientSheet } from "@/components/CreatePatientSheet";
 
 export default function DashboardPage() {
@@ -113,7 +113,7 @@ export default function DashboardPage() {
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+              <Interfaces.Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
               <Input
                 placeholder="Rechercher un patient..."
                 value={searchQuery}
@@ -169,7 +169,7 @@ export default function DashboardPage() {
                                 <Link
                                   href={`/send-questionnaire?patientId=${patient.id}`}
                                 >
-                                  <Send className="mr-2 h-4 w-4" />
+                                  <Interfaces.Send className="mr-2 h-4 w-4" />
                                   Envoyer une échelle
                                 </Link>
                               </Button>
@@ -216,7 +216,7 @@ export default function DashboardPage() {
                     <div className="flex items-start justify-between gap-3">
                       <div className="flex-1">
                         <div className="flex items-center gap-2 mb-1">
-                          <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                          <Interfaces.Star className="h-4 w-4 fill-primary text-primary" />
                           <h3 className="font-medium text-sm">{questionnaire.title}</h3>
                         </div>
                         <p className="text-xs text-muted-foreground line-clamp-2">
@@ -227,7 +227,8 @@ export default function DashboardPage() {
                             {questionnaire.category}
                           </span>
                           <span className="text-xs text-muted-foreground">
-                            ⏱️ {questionnaire.estimatedTime}
+                            <Interfaces.Clock className="inline h-3 w-3 mr-1" />
+                            {questionnaire.estimatedTime}
                           </span>
                         </div>
                       </div>

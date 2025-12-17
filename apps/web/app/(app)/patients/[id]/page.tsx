@@ -16,7 +16,7 @@ import { useEffect } from "react";
 import { getPatientById } from "@/data/mock-patients";
 import { getSessionsByPatientId } from "@/data/mock-sessions";
 import { questionnaires } from "@/app/questionnairesData";
-import { ArrowLeft, Send, Calendar, Mail, FileText } from "lucide-react";
+import { Arrow, Interfaces, Files } from "doodle-icons";
 
 const statusColors = {
   completed: "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200",
@@ -79,7 +79,7 @@ export default function PatientDetailPage() {
       <div className="flex items-center gap-4">
         <Button asChild variant="ghost" size="icon">
           <Link href="/patients">
-            <ArrowLeft className="h-4 w-4" />
+            <Arrow.ArrowLeft className="h-4 w-4" />
           </Link>
         </Button>
         <div className="flex-1">
@@ -88,7 +88,7 @@ export default function PatientDetailPage() {
         </div>
         <Button asChild size="lg">
           <Link href={`/send-questionnaire?patientId=${patient.id}`}>
-            <Send className="mr-2 h-4 w-4" />
+            <Interfaces.Send className="mr-2 h-4 w-4" />
             Envoyer une échelle
           </Link>
         </Button>
@@ -103,15 +103,15 @@ export default function PatientDetailPage() {
           </CardHeader>
           <CardContent className="space-y-2">
             <div className="flex items-center gap-2 text-sm">
-              <Calendar className="h-4 w-4 text-muted-foreground" />
+              <Interfaces.Calendar className="h-4 w-4 text-muted-foreground" />
               <span>{patient.age} ans</span>
             </div>
             <div className="flex items-center gap-2 text-sm">
-              <Mail className="h-4 w-4 text-muted-foreground" />
+              <Interfaces.Mail className="h-4 w-4 text-muted-foreground" />
               <span className="truncate">{patient.email}</span>
             </div>
             <div className="flex items-center gap-2 text-sm">
-              <FileText className="h-4 w-4 text-muted-foreground" />
+              <Files.FileText className="h-4 w-4 text-muted-foreground" />
               <span>
                 Créé le{" "}
                 {new Date(patient.createdAt).toLocaleDateString("fr-FR")}
@@ -184,7 +184,7 @@ export default function PatientDetailPage() {
               </p>
               <Button asChild>
                 <Link href={`/send-questionnaire?patientId=${patient.id}`}>
-                  <Send className="mr-2 h-4 w-4" />
+                  <Interfaces.Send className="mr-2 h-4 w-4" />
                   Envoyer la première échelle
                 </Link>
               </Button>

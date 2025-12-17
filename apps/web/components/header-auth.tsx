@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { Button } from "./ui/button";
-import { UserCircle, LogOut } from "lucide-react";
+import { Interfaces } from "doodle-icons";
 import { useUser } from "@/app/context/UserContext";
 
 export default function AuthButton() {
@@ -22,12 +22,12 @@ export default function AuthButton() {
     <div className="flex items-center gap-2">
       <Button asChild variant="outline" size="sm">
         <Link href="/dashboard">
-          <UserCircle className="mr-2 h-4 w-4" />
+          <Interfaces.User className="mr-2 h-4 w-4" />
           Tableau de bord
         </Link>
       </Button>
       <Button onClick={logout} variant="ghost" size="icon">
-        <LogOut className="h-4 w-4" />
+        <Interfaces.Logout className="h-4 w-4" />
       </Button>
     </div>
   ) : (

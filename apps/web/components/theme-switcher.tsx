@@ -8,7 +8,8 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Laptop, Moon, Sun } from "lucide-react";
+import { Interfaces, Weather } from "doodle-icons";
+import { Laptop } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 
@@ -25,29 +26,24 @@ const ThemeSwitcher = () => {
     return null;
   }
 
-  const ICON_SIZE = 16;
-
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" size={"sm"} className="hover:bg-secondary">
           {theme === "light" ? (
-            <Sun
+            <Interfaces.Sun
               key="light"
-              size={ICON_SIZE}
-              className={"text-primary"}
+              className={"text-primary h-4 w-4"}
             />
           ) : theme === "dark" ? (
-            <Moon
+            <Weather.Night
               key="dark"
-              size={ICON_SIZE}
-              className={"text-primary"}
+              className={"text-primary h-4 w-4"}
             />
           ) : (
             <Laptop
               key="system"
-              size={ICON_SIZE}
-              className={"text-muted-foreground"}
+              className={"text-muted-foreground h-4 w-4"}
             />
           )}
         </Button>
@@ -58,15 +54,15 @@ const ThemeSwitcher = () => {
           onValueChange={(e) => setTheme(e)}
         >
           <DropdownMenuRadioItem className="flex gap-2 cursor-pointer" value="light">
-            <Sun size={ICON_SIZE} className="text-primary" />{" "}
+            <Interfaces.Sun className="text-primary h-4 w-4" />{" "}
             <span>Clair</span>
           </DropdownMenuRadioItem>
           <DropdownMenuRadioItem className="flex gap-2 cursor-pointer" value="dark">
-            <Moon size={ICON_SIZE} className="text-accent" />{" "}
+            <Weather.Night className="text-accent h-4 w-4" />{" "}
             <span>Sombre</span>
           </DropdownMenuRadioItem>
           <DropdownMenuRadioItem className="flex gap-2 cursor-pointer" value="system">
-            <Laptop size={ICON_SIZE} className="text-muted-foreground" />{" "}
+            <Laptop className="text-muted-foreground h-4 w-4" />{" "}
             <span>Systeme</span>
           </DropdownMenuRadioItem>
         </DropdownMenuRadioGroup>

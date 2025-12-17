@@ -1,7 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Search, X } from "lucide-react";
+import { Interfaces } from "doodle-icons";
+import { X } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 
@@ -96,7 +97,7 @@ export default function Home() {
     <div className="container mx-auto py-8 px-4 sm:px-6 md:px-8">
       <div className="flex flex-col sm:flex-row gap-4 mb-8">
         <div className="relative flex-1">
-          <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+          <Interfaces.Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
           <Input
             type="search"
             placeholder="Rechercher des questionnaires..."

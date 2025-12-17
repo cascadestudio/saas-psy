@@ -15,7 +15,7 @@ import { useUser } from "@/app/context/UserContext";
 import { useEffect, useState } from "react";
 import { getAllPatients, type MockPatient } from "@/data/mock-patients";
 import { getSessionsByPatientId } from "@/data/mock-sessions";
-import { Search } from "lucide-react";
+import { Interfaces } from "doodle-icons";
 import { CreatePatientSheet } from "@/components/CreatePatientSheet";
 
 export default function PatientsPage() {
@@ -75,7 +75,7 @@ export default function PatientsPage() {
         <CardHeader>
           <div className="flex items-center gap-4">
             <div className="flex-1 relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+              <Interfaces.Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
               <Input
                 placeholder="Rechercher un patient (nom, email)..."
                 value={searchQuery}

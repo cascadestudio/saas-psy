@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Home, Users, LogOut, FileText } from "lucide-react";
+import { Interfaces, Files } from "doodle-icons";
 import { Button } from "@/components/ui/button";
 import { ThemeSwitcher } from "@/components/theme-switcher";
 import { useUser } from "@/app/context/UserContext";
@@ -10,9 +10,9 @@ import { redirect } from "next/navigation";
 import { useEffect } from "react";
 
 const navigation = [
-  { name: "Tableau de bord", href: "/dashboard", icon: Home },
-  { name: "Échelles", href: "/echelles", icon: FileText },
-  { name: "Patients", href: "/patients", icon: Users },
+  { name: "Tableau de bord", href: "/dashboard", icon: Interfaces.Home },
+  { name: "Échelles", href: "/echelles", icon: Files.FileText },
+  { name: "Patients", href: "/patients", icon: Interfaces.User },
 ];
 
 export default function AppLayout({
@@ -80,7 +80,7 @@ export default function AppLayout({
               onClick={logout}
               title="Déconnexion"
             >
-              <LogOut className="h-4 w-4" />
+              <Interfaces.Logout className="h-4 w-4" />
             </Button>
           </div>
         </div>

@@ -16,7 +16,8 @@ import { useEffect } from "react";
 import { getSessionById, getSessionsByPatientId } from "@/data/mock-sessions";
 import { getPatientById } from "@/data/mock-patients";
 import { questionnaires } from "@/app/questionnairesData";
-import { ArrowLeft, Download, TrendingDown, TrendingUp, Minus } from "lucide-react";
+import { Arrow, Interfaces, Finance } from "doodle-icons";
+import { Minus } from "lucide-react";
 
 export default function ResultsPage() {
   const { user, isLoading } = useUser();
@@ -162,7 +163,7 @@ export default function ResultsPage() {
       <div className="flex items-center gap-4">
         <Button asChild variant="ghost" size="icon">
           <Link href={`/patients/${patient?.id}`}>
-            <ArrowLeft className="h-4 w-4" />
+            <Arrow.ArrowLeft className="h-4 w-4" />
           </Link>
         </Button>
         <div className="flex-1">
@@ -172,7 +173,7 @@ export default function ResultsPage() {
           </p>
         </div>
         <Button variant="outline" disabled>
-          <Download className="mr-2 h-4 w-4" />
+          <Interfaces.Download className="mr-2 h-4 w-4" />
           Exporter PDF
         </Button>
       </div>
@@ -226,7 +227,7 @@ export default function ResultsPage() {
                   <div className="flex items-center gap-2">
                     {trend === "down" && (
                       <>
-                        <TrendingUp className="h-5 w-5 text-green-600" />
+                        <Finance.TrendUp className="h-5 w-5 text-green-600" />
                         <span className="text-sm text-green-600">
                           Amélioration de {trendPercentage}% depuis la dernière
                           passation
@@ -235,7 +236,7 @@ export default function ResultsPage() {
                     )}
                     {trend === "up" && (
                       <>
-                        <TrendingUp className="h-5 w-5 text-orange-600" />
+                        <Finance.TrendUp className="h-5 w-5 text-orange-600" />
                         <span className="text-sm text-orange-600">
                           Augmentation de {trendPercentage}% depuis la dernière
                           passation

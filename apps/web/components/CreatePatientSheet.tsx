@@ -15,7 +15,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { addPatient } from "@/data/mock-patients";
 import { toast } from "sonner";
-import { UserPlus } from "lucide-react";
+import { Interfaces } from "doodle-icons";
 
 interface CreatePatientSheetProps {
   onPatientCreated?: (patientId: string) => void;
@@ -91,7 +91,7 @@ export function CreatePatientSheet({
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button size={buttonSize}>
-          <UserPlus className="mr-2 h-4 w-4" />
+          <Interfaces.UserAdd className="mr-2 h-4 w-4" />
           {buttonText}
         </Button>
       </DialogTrigger>

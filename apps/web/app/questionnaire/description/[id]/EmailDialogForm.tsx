@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, forwardRef, ForwardedRef } from "react";
-import { Send } from "lucide-react";
+import { Interfaces } from "doodle-icons";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -80,7 +80,7 @@ export const EmailDialogForm = forwardRef(
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
           <Button ref={ref} className="w-full">
-            <Send className="mr-2 h-4 w-4" />
+            <Interfaces.Send className="mr-2 h-4 w-4" />
             Envoyer au Patient
           </Button>
         </DialogTrigger>

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Star } from "lucide-react";
+import { Interfaces } from "doodle-icons";
 import { toast } from "sonner";
 
 interface FavoriteButtonProps {
@@ -74,7 +74,7 @@ export function FavoriteButton({
       disabled={isLoading}
       aria-label={isFavorite ? "Retirer des favoris" : "Ajouter aux favoris"}
     >
-      <Star
+      <Interfaces.Star
         className={`${isFavorite ? "fill-primary text-primary" : "text-muted-foreground hover:text-primary"} transition-colors`}
       />
     </Button>

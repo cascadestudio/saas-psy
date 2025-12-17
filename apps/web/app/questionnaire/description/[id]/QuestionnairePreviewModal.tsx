@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef } from "react";
-import { Eye, Send } from "lucide-react";
+import { Interfaces } from "doodle-icons";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -78,7 +78,7 @@ export function QuestionnairePreviewModal({
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
           <Button variant="outline" className="mt-4">
-            <Eye className="mr-2 h-4 w-4" />
+            <Interfaces.Unhide className="mr-2 h-4 w-4" />
             Aperçu du questionnaire
           </Button>
         </DialogTrigger>
@@ -102,7 +102,7 @@ export function QuestionnairePreviewModal({
               <Button variant="outline">Fermer</Button>
             </DialogClose>
             <Button onClick={handleSendClick}>
-              <Send className="mr-2 h-4 w-4" />
+              <Interfaces.Send className="mr-2 h-4 w-4" />
               Envoyer au Patient
             </Button>
           </div>
