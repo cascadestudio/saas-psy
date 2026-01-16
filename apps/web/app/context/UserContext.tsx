@@ -7,16 +7,14 @@ import {
   useEffect,
   ReactNode,
 } from "react";
-import { getCurrentUser, mockLogin, mockLogout, type DemoUser } from "@/lib/mock-auth";
+import { authApi, ApiError } from "@/lib/api-client";
 import { useRouter } from "next/navigation";
 
-// Type compatible with both old User and new DemoUser
-type User = {
+export type User = {
   id: string;
   email: string;
   firstName?: string | null;
   lastName?: string | null;
-  fullName?: string;
   role?: string;
   profile?: {
     id?: string;
@@ -30,7 +28,6 @@ type UserContextType = {
   refreshUser: () => Promise<void>;
   login: (email: string, password: string) => Promise<{ success: boolean; error?: string }>;
   logout: () => void;
-  updateFavorites: (questionnaireIds: string[]) => void;
 };
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
@@ -43,20 +40,19 @@ export function UserProvider({ children }: { children: ReactNode }) {
   const refreshUser = async () => {
     setIsLoading(true);
     try {
-      const currentUser = getCurrentUser();
-      if (currentUser) {
-        // Transform DemoUser to User format
-        setUser({
-          id: currentUser.id,
-          email: currentUser.email,
-          fullName: currentUser.fullName,
-          profile: currentUser.profile,
-        });
-      } else {
+      // Check if we have a token
+      if (!authApi.isAuthenticated()) {
         setUser(null);
+        return;
       }
+
+      // Fetch current user from API
+      const { user: currentUser } = await authApi.getMe();
+      setUser(currentUser);
     } catch (error) {
       console.error("Error fetching user:", error);
+      // If token is invalid, clear it
+      authApi.logout();
       setUser(null);
     } finally {
       setIsLoading(false);
@@ -64,41 +60,23 @@ export function UserProvider({ children }: { children: ReactNode }) {
   };
 
   const login = async (email: string, password: string) => {
-    const result = mockLogin(email, password);
-    if (result.success && result.user) {
-      // Transform DemoUser to User format
-      setUser({
-        id: result.user.id,
-        email: result.user.email,
-        fullName: result.user.fullName,
-        profile: result.user.profile,
-      });
+    try {
+      const { user: loggedInUser } = await authApi.login(email, password);
+      setUser(loggedInUser);
+      return { success: true };
+    } catch (error) {
+      console.error("Login error:", error);
+      if (error instanceof ApiError) {
+        return { success: false, error: error.message };
+      }
+      return { success: false, error: "Une erreur est survenue" };
     }
-    return result;
   };
 
   const logout = () => {
-    mockLogout();
+    authApi.logout();
     setUser(null);
     router.push("/sign-in");
-  };
-
-  const updateFavorites = (questionnaireIds: string[]) => {
-    if (!user) return;
-
-    const updatedUser = {
-      ...user,
-      profile: {
-        ...user.profile,
-        favoriteQuestionnaires: questionnaireIds,
-      },
-    };
-    setUser(updatedUser);
-
-    // Also update in localStorage
-    if (typeof window !== "undefined") {
-      localStorage.setItem("melya-demo-user", JSON.stringify(updatedUser));
-    }
   };
 
   useEffect(() => {
@@ -106,7 +84,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
   }, []);
 
   return (
-    <UserContext.Provider value={{ user, isLoading, refreshUser, login, logout, updateFavorites }}>
+    <UserContext.Provider value={{ user, isLoading, refreshUser, login, logout }}>
       {children}
     </UserContext.Provider>
   );

@@ -13,8 +13,7 @@ import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import { useUser } from "@/app/context/UserContext";
 import { useEffect, useState } from "react";
-import { getAllPatients, type MockPatient } from "@/data/mock-patients";
-import { getSessionsByPatientId } from "@/data/mock-sessions";
+import { patientsApi, favoritesApi, type Patient } from "@/lib/api-client";
 import { questionnaires } from "@/app/questionnairesData";
 import { Interfaces } from "doodle-icons";
 import { CreatePatientSheet } from "@/components/CreatePatientSheet";
@@ -22,7 +21,8 @@ import { CreatePatientSheet } from "@/components/CreatePatientSheet";
 export default function DashboardPage() {
   const { user, isLoading } = useUser();
   const [searchQuery, setSearchQuery] = useState("");
-  const [patients, setPatients] = useState<MockPatient[]>([]);
+  const [patients, setPatients] = useState<Patient[]>([]);
+  const [patientsLoading, setPatientsLoading] = useState(true);
   const [favorites, setFavorites] = useState<string[]>([]);
 
   useEffect(() => {
@@ -31,35 +31,54 @@ export default function DashboardPage() {
     }
   }, [user, isLoading]);
 
+  // Load patients from API
   useEffect(() => {
-    setPatients(getAllPatients());
-  }, []);
-
-  const handlePatientCreated = (patientId: string) => {
-    // Refresh patient list
-    setPatients(getAllPatients());
-  };
-
-  useEffect(() => {
-    const loadFavorites = () => {
-      const loadedFavorites = localStorage.getItem("favorites");
-      if (loadedFavorites) {
-        setFavorites(JSON.parse(loadedFavorites));
-      } else {
-        const mockFavorites = [
-          "inventaire-de-depression-de-beck",
-          "echelle-d-anxiete-sociale-de-liebowitz",
-          "stai-anxiete-generalisee",
-        ];
-        setFavorites(mockFavorites);
-        localStorage.setItem("favorites", JSON.stringify(mockFavorites));
+    const loadPatients = async () => {
+      if (!user) return;
+      setPatientsLoading(true);
+      try {
+        const { patients: data } = await patientsApi.getAll();
+        setPatients(data);
+      } catch (error) {
+        console.error("Error loading patients:", error);
+        setPatients([]);
+      } finally {
+        setPatientsLoading(false);
       }
     };
 
-    loadFavorites();
-    window.addEventListener("storage", loadFavorites);
-    return () => window.removeEventListener("storage", loadFavorites);
-  }, []);
+    if (user) {
+      loadPatients();
+    }
+  }, [user]);
+
+  const handlePatientCreated = async () => {
+    // Refresh patient list from API
+    try {
+      const { patients: data } = await patientsApi.getAll();
+      setPatients(data);
+    } catch (error) {
+      console.error("Error refreshing patients:", error);
+    }
+  };
+
+  // Load favorites from API
+  useEffect(() => {
+    const loadFavorites = async () => {
+      if (!user) return;
+      try {
+        const { favorites: data } = await favoritesApi.getFavorites();
+        setFavorites(data);
+      } catch (error) {
+        console.error("Error loading favorites:", error);
+        setFavorites([]);
+      }
+    };
+
+    if (user) {
+      loadFavorites();
+    }
+  }, [user]);
 
   if (isLoading) {
     return (
@@ -75,8 +94,9 @@ export default function DashboardPage() {
 
   const filteredPatients = patients.filter((patient) => {
     const query = searchQuery.toLowerCase();
+    const fullName = `${patient.firstName} ${patient.lastName}`.toLowerCase();
     return (
-      patient.fullName?.toLowerCase().includes(query) ||
+      fullName.includes(query) ||
       patient.email.toLowerCase().includes(query)
     );
   });
@@ -87,14 +107,14 @@ export default function DashboardPage() {
 
   return (
     <div className="container mx-auto px-4 py-6">
-        <div className="mb-6">
-          <h1 className="font-bold text-3xl">Tableau de bord</h1>
-          <p className="text-muted-foreground mt-1">
-            Bienvenue, {user.fullName || user.email}
-          </p>
-        </div>
+      <div className="mb-6">
+        <h1 className="font-bold text-3xl">Tableau de bord</h1>
+        <p className="text-muted-foreground mt-1">
+          Bienvenue, {user.firstName || user.email}
+        </p>
+      </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <Card>
           <CardHeader>
             <div className="flex items-center justify-between">
@@ -122,7 +142,11 @@ export default function DashboardPage() {
               />
             </div>
             <div className="space-y-2">
-              {filteredPatients.length === 0 ? (
+              {patientsLoading ? (
+                <p className="text-sm text-muted-foreground text-center py-8">
+                  Chargement des patients...
+                </p>
+              ) : filteredPatients.length === 0 ? (
                 <p className="text-sm text-muted-foreground text-center py-8">
                   {searchQuery
                     ? "Aucun patient trouvé"
@@ -132,51 +156,36 @@ export default function DashboardPage() {
                 <div className="border rounded-lg overflow-hidden max-h-[600px] overflow-y-auto">
                   <table className="w-full">
                     <tbody>
-                      {filteredPatients.map((patient) => {
-                        // Afficher la notification uniquement pour Alice Martin (p1) en exemple
-                        const showNotification = patient.id === "p1";
-                        const sessions = getSessionsByPatientId(patient.id);
-                        const completedCount = sessions.filter(s => s.status === "completed").length;
-                        const inProgressCount = sessions.filter(s => s.status === "in_progress").length;
-                        const sentCount = sessions.filter(s => s.status === "sent").length;
-                        const expiredCount = sessions.filter(s => s.status === "expired").length;
-
-                        const notificationCount = completedCount + inProgressCount + sentCount + expiredCount;
-
-                        return (
-                          <tr
-                            key={patient.id}
-                            className="border-t first:border-t-0 hover:bg-muted/50 transition-colors cursor-pointer"
-                            onClick={() => window.location.href = `/patients/${patient.id}`}
-                          >
-                            <td className="p-3">
-                              <div className="flex items-center gap-2">
-                                <p className="font-medium">{patient.fullName}</p>
-                                {showNotification && notificationCount > 0 && (
-                                  <div className="flex items-center justify-center min-w-[20px] h-5 px-1.5 bg-red-500 text-white text-xs font-semibold rounded-full">
-                                    {notificationCount}
-                                  </div>
-                                )}
-                              </div>
-                            </td>
-                            <td className="p-3 text-right">
-                              <Button
-                                asChild
-                                variant="default"
-                                size="sm"
-                                onClick={(e) => e.stopPropagation()}
+                      {filteredPatients.map((patient) => (
+                        <tr
+                          key={patient.id}
+                          className="border-t first:border-t-0 hover:bg-muted/50 transition-colors cursor-pointer"
+                          onClick={() => window.location.href = `/patients/${patient.id}`}
+                        >
+                          <td className="p-3">
+                            <div className="flex items-center gap-2">
+                              <p className="font-medium">
+                                {patient.firstName} {patient.lastName}
+                              </p>
+                            </div>
+                          </td>
+                          <td className="p-3 text-right">
+                            <Button
+                              asChild
+                              variant="default"
+                              size="sm"
+                              onClick={(e) => e.stopPropagation()}
+                            >
+                              <Link
+                                href={`/send-questionnaire?patientId=${patient.id}`}
                               >
-                                <Link
-                                  href={`/send-questionnaire?patientId=${patient.id}`}
-                                >
-                                  <Interfaces.Send className="mr-2 h-4 w-4" />
-                                  Envoyer une échelle
-                                </Link>
-                              </Button>
-                            </td>
-                          </tr>
-                        );
-                      })}
+                                <Interfaces.Send className="mr-2 h-4 w-4" />
+                                Envoyer une échelle
+                              </Link>
+                            </Button>
+                          </td>
+                        </tr>
+                      ))}
                     </tbody>
                   </table>
                 </div>
@@ -244,7 +253,7 @@ export default function DashboardPage() {
             )}
           </CardContent>
         </Card>
-        </div>
+      </div>
     </div>
   );
 }

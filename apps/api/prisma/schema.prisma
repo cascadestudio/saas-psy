@@ -29,9 +29,10 @@ model User {
   
   // Relations
   profile       Profile?
+  patients      Patient[]
   sessions      Session[]
   auditLogs     AuditLog[]
-  
+
   @@map("users")
 }
 
@@ -53,6 +54,37 @@ model Profile {
   updatedAt               DateTime @updatedAt @map("updated_at")
   
   @@map("profiles")
+}
+
+// ============================================
+// PATIENTS
+// ============================================
+
+model Patient {
+  id          String   @id @default(cuid())
+
+  // Patient information
+  firstName   String   @map("first_name")
+  lastName    String   @map("last_name")
+  email       String
+  birthDate   DateTime? @map("birth_date")
+  notes       String?
+
+  // Practitioner who created the patient
+  practitionerId String @map("practitioner_id")
+  practitioner   User   @relation(fields: [practitionerId], references: [id])
+
+  // Timestamps
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  // Relations
+  sessions    Session[]
+
+  @@map("patients")
+  @@index([practitionerId])
+  @@index([email])
+  @@unique([practitionerId, email]) // Unique email per practitioner
 }
 
 // ============================================
@@ -92,17 +124,15 @@ model Questionnaire {
 
 model Session {
   id                String         @id @default(cuid())
-  
+
   // Questionnaire reference
   questionnaireId   String         @map("questionnaire_id")
   questionnaire     Questionnaire  @relation(fields: [questionnaireId], references: [id])
-  
-  // Patient information (pseudo-anonymized)
-  patientFirstName  String         @map("patient_first_name")
-  patientLastName   String         @map("patient_last_name")
-  patientEmail      String?        @map("patient_email")
-  patientPseudoId   String?        @map("patient_pseudo_id") // Future: anonymized ID
-  
+
+  // Patient reference
+  patientId         String         @map("patient_id")
+  patient           Patient        @relation(fields: [patientId], references: [id])
+
   // Practitioner who sent it
   practitionerId    String         @map("practitioner_id")
   practitioner      User           @relation(fields: [practitionerId], references: [id])
@@ -128,6 +158,7 @@ model Session {
   
   @@map("sessions")
   @@index([practitionerId])
+  @@index([patientId])
   @@index([questionnaireId])
   @@index([status])
 }

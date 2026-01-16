@@ -12,9 +12,8 @@ import {
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
 import { useUser } from "@/app/context/UserContext";
-import { useEffect } from "react";
-import { getSessionById, getSessionsByPatientId } from "@/data/mock-sessions";
-import { getPatientById } from "@/data/mock-patients";
+import { useEffect, useState } from "react";
+import { sessionsApi, patientsApi, type Session, type Patient } from "@/lib/api-client";
 import { questionnaires } from "@/app/questionnairesData";
 import { Arrow, Interfaces, Finance } from "doodle-icons";
 import { Minus } from "lucide-react";
@@ -24,13 +23,48 @@ export default function ResultsPage() {
   const params = useParams();
   const sessionId = params.sessionId as string;
 
+  const [session, setSession] = useState<Session | null>(null);
+  const [patient, setPatient] = useState<Patient | null>(null);
+  const [allSessions, setAllSessions] = useState<Session[]>([]);
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     if (!isLoading && !user) {
       redirect("/sign-in");
     }
   }, [user, isLoading]);
 
-  if (isLoading) {
+  // Load session data from API
+  useEffect(() => {
+    const loadData = async () => {
+      if (!user || !sessionId) return;
+      setLoading(true);
+      try {
+        const { session: sessionData } = await sessionsApi.getById(sessionId);
+        setSession(sessionData);
+
+        if (sessionData.patientId) {
+          const [patientRes, sessionsRes] = await Promise.all([
+            patientsApi.getById(sessionData.patientId),
+            sessionsApi.getByPatientId(sessionData.patientId),
+          ]);
+          setPatient(patientRes.patient);
+          setAllSessions(sessionsRes.sessions);
+        }
+      } catch (error) {
+        console.error("Error loading session:", error);
+        setSession(null);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (user) {
+      loadData();
+    }
+  }, [user, sessionId]);
+
+  if (isLoading || loading) {
     return (
       <div className="flex-1 w-full flex items-center justify-center">
         <p>Chargement...</p>
@@ -41,8 +75,6 @@ export default function ResultsPage() {
   if (!user) {
     return null;
   }
-
-  const session = getSessionById(sessionId);
 
   if (!session) {
     return (
@@ -55,14 +87,12 @@ export default function ResultsPage() {
     );
   }
 
-  const patient = getPatientById(session.patientId);
   const questionnaire = questionnaires.find(
     (q) => q.id === session.questionnaireId
   );
 
   // Get longitudinal data (previous sessions of same questionnaire for same patient)
-  const allPatientSessions = getSessionsByPatientId(session.patientId);
-  const sameQuestionnaireSessions = allPatientSessions
+  const sameQuestionnaireSessions = allSessions
     .filter(
       (s) =>
         s.questionnaireId === session.questionnaireId && s.status === "completed"
@@ -83,7 +113,7 @@ export default function ResultsPage() {
   let trend: "up" | "down" | "stable" | null = null;
   let trendPercentage = 0;
 
-  if (previousSession && previousSession.score !== null && session.score !== null) {
+  if (previousSession && previousSession.score !== undefined && session.score !== undefined) {
     const diff = session.score - previousSession.score;
     trendPercentage = Math.abs(
       Math.round((diff / previousSession.score) * 100)
@@ -100,8 +130,8 @@ export default function ResultsPage() {
 
   // Get score range info
   const scoreRange = questionnaire?.scoring?.ranges?.find(
-    (range) =>
-      session.score !== null &&
+    (range: { min: number; max: number }) =>
+      session.score !== undefined &&
       session.score >= range.min &&
       session.score <= range.max
   );
@@ -135,7 +165,7 @@ export default function ResultsPage() {
       "items" in questionnaire.questions[0]
     ) {
       const totalItems = questionnaire.questions.reduce(
-        (acc, q) => {
+        (acc: number, q: any) => {
           if (typeof q === "object" && "items" in q && Array.isArray(q.items)) {
             return acc + q.items.length;
           }
@@ -156,7 +186,7 @@ export default function ResultsPage() {
 
   const maxScore = getMaxScore();
   const scorePercentage =
-    session.score !== null ? Math.round((session.score / maxScore) * 100) : 0;
+    session.score !== undefined ? Math.round((session.score / maxScore) * 100) : 0;
 
   return (
     <div className="flex-1 w-full flex flex-col gap-6 p-6">
@@ -169,7 +199,7 @@ export default function ResultsPage() {
         <div className="flex-1">
           <h1 className="font-bold text-3xl">Résultats de passation</h1>
           <p className="text-muted-foreground mt-1">
-            {patient?.initials} - {questionnaire?.title}
+            {patient?.firstName} {patient?.lastName} - {questionnaire?.title}
           </p>
         </div>
         <Button variant="outline" disabled>

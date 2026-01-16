@@ -1,6 +1,6 @@
 "use client";
 
-import { redirect, useParams, useRouter } from "next/navigation";
+import { redirect, useParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -12,31 +12,37 @@ import {
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
 import { useUser } from "@/app/context/UserContext";
-import { useEffect } from "react";
-import { getPatientById } from "@/data/mock-patients";
-import { getSessionsByPatientId } from "@/data/mock-sessions";
+import { useEffect, useState } from "react";
+import { patientsApi, sessionsApi, type Patient, type Session } from "@/lib/api-client";
 import { questionnaires } from "@/app/questionnairesData";
 import { Arrow, Interfaces, Files } from "doodle-icons";
 
-const statusColors = {
+const statusColors: Record<string, string> = {
   completed: "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200",
-  in_progress: "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200",
+  started: "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200",
   sent: "bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200",
   expired: "bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200",
+  created: "bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200",
+  cancelled: "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200",
 };
 
-const statusLabels = {
+const statusLabels: Record<string, string> = {
   completed: "Complété",
-  in_progress: "Vu",
+  started: "Vu",
   sent: "Envoyé",
   expired: "Expiré",
+  created: "Créé",
+  cancelled: "Annulé",
 };
 
 export default function PatientDetailPage() {
   const { user, isLoading } = useUser();
   const params = useParams();
-  const router = useRouter();
   const patientId = params.id as string;
+
+  const [patient, setPatient] = useState<Patient | null>(null);
+  const [sessions, setSessions] = useState<Session[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (!isLoading && !user) {
@@ -44,7 +50,38 @@ export default function PatientDetailPage() {
     }
   }, [user, isLoading]);
 
-  if (isLoading) {
+  // Load patient and sessions from API
+  useEffect(() => {
+    const loadData = async () => {
+      if (!user || !patientId) return;
+      setLoading(true);
+      try {
+        const [patientRes, sessionsRes] = await Promise.all([
+          patientsApi.getById(patientId),
+          sessionsApi.getByPatientId(patientId),
+        ]);
+        setPatient(patientRes.patient);
+        // Sort sessions by date descending
+        setSessions(
+          sessionsRes.sessions.sort(
+            (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+          )
+        );
+      } catch (error) {
+        console.error("Error loading patient data:", error);
+        setPatient(null);
+        setSessions([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (user) {
+      loadData();
+    }
+  }, [user, patientId]);
+
+  if (isLoading || loading) {
     return (
       <div className="flex-1 w-full flex items-center justify-center">
         <p>Chargement...</p>
@@ -55,8 +92,6 @@ export default function PatientDetailPage() {
   if (!user) {
     return null;
   }
-
-  const patient = getPatientById(patientId);
 
   if (!patient) {
     return (
@@ -69,10 +104,22 @@ export default function PatientDetailPage() {
     );
   }
 
-  const sessions = getSessionsByPatientId(patientId).sort(
-    (a, b) => new Date(b.sentAt).getTime() - new Date(a.sentAt).getTime()
-  );
   const completedSessions = sessions.filter((s) => s.status === "completed");
+
+  // Calculate age from birthDate
+  const calculateAge = (birthDate?: string) => {
+    if (!birthDate) return null;
+    const today = new Date();
+    const birth = new Date(birthDate);
+    let age = today.getFullYear() - birth.getFullYear();
+    const monthDiff = today.getMonth() - birth.getMonth();
+    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birth.getDate())) {
+      age--;
+    }
+    return age;
+  };
+
+  const age = calculateAge(patient.birthDate);
 
   return (
     <div className="container mx-auto px-4 py-6 space-y-6">
@@ -83,7 +130,9 @@ export default function PatientDetailPage() {
           </Link>
         </Button>
         <div className="flex-1">
-          <h1 className="font-bold text-3xl">{patient.fullName}</h1>
+          <h1 className="font-bold text-3xl">
+            {patient.firstName} {patient.lastName}
+          </h1>
           <p className="text-muted-foreground mt-1">{patient.email}</p>
         </div>
         <Button asChild size="lg">
@@ -102,10 +151,12 @@ export default function PatientDetailPage() {
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-2">
-            <div className="flex items-center gap-2 text-sm">
-              <Interfaces.Calendar className="h-4 w-4 text-muted-foreground" />
-              <span>{patient.age} ans</span>
-            </div>
+            {age && (
+              <div className="flex items-center gap-2 text-sm">
+                <Interfaces.Calendar className="h-4 w-4 text-muted-foreground" />
+                <span>{age} ans</span>
+              </div>
+            )}
             <div className="flex items-center gap-2 text-sm">
               <Interfaces.Mail className="h-4 w-4 text-muted-foreground" />
               <span className="truncate">{patient.email}</span>
@@ -144,7 +195,7 @@ export default function PatientDetailPage() {
             {sessions.length > 0 ? (
               <>
                 <div className="text-lg font-semibold">
-                  {new Date(sessions[0].sentAt).toLocaleDateString("fr-FR")}
+                  {new Date(sessions[0].createdAt).toLocaleDateString("fr-FR")}
                 </div>
                 <p className="text-xs text-muted-foreground mt-1">
                   {questionnaires.find((q) => q.id === sessions[0].questionnaireId)
@@ -207,17 +258,17 @@ export default function PatientDetailPage() {
                           {questionnaire?.title || session.questionnaireId}
                         </p>
                         <Badge
-                          className={statusColors[session.status]}
+                          className={statusColors[session.status] || statusColors.created}
                           variant="secondary"
                         >
-                          {statusLabels[session.status]}
+                          {statusLabels[session.status] || session.status}
                         </Badge>
                       </div>
                       <p className="text-sm text-muted-foreground">
-                        Envoyé le{" "}
-                        {new Date(session.sentAt).toLocaleDateString("fr-FR")}
+                        Créé le{" "}
+                        {new Date(session.createdAt).toLocaleDateString("fr-FR")}
                       </p>
-                      {session.status === "completed" && session.score !== null && (
+                      {session.status === "completed" && session.score !== undefined && (
                         <p className="text-sm font-medium text-green-700 dark:text-green-400 mt-1">
                           Score: {session.score} - {session.interpretation}
                         </p>

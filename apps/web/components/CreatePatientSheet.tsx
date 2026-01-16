@@ -13,7 +13,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { addPatient } from "@/data/mock-patients";
+import { patientsApi } from "@/lib/api-client";
 import { toast } from "sonner";
 import { Interfaces } from "doodle-icons";
 
@@ -38,39 +38,22 @@ export function CreatePatientSheet({
     const formData = new FormData(e.currentTarget);
 
     const email = formData.get("email") as string;
-    const fullName = formData.get("fullName") as string;
+    const firstName = formData.get("firstName") as string;
+    const lastName = formData.get("lastName") as string;
     const birthDate = formData.get("birthDate") as string;
     const notes = formData.get("notes") as string;
 
-    // Calculate age from birth date
-    let age = 0;
-    if (birthDate) {
-      const today = new Date();
-      const birth = new Date(birthDate);
-      age = today.getFullYear() - birth.getFullYear();
-      const monthDiff = today.getMonth() - birth.getMonth();
-      if (
-        monthDiff < 0 ||
-        (monthDiff === 0 && today.getDate() < birth.getDate())
-      ) {
-        age--;
-      }
-    }
-
     try {
-      const newPatient = addPatient({
-        fullName: fullName || email.split("@")[0],
-        initials: fullName
-          ? fullName.split(" ").map(n => n[0]).join(".") + "."
-          : email.split("@")[0].substring(0, 2).toUpperCase() + ".",
+      const { patient } = await patientsApi.create({
+        firstName: firstName || email.split("@")[0],
+        lastName: lastName || "",
         email,
-        age,
         birthDate: birthDate || undefined,
         notes: notes || undefined,
       });
 
       toast.success("Patient créé avec succès", {
-        description: `${newPatient.fullName} a été ajouté à votre liste`,
+        description: `${patient.firstName} ${patient.lastName} a été ajouté à votre liste`,
       });
 
       setOpen(false);
@@ -78,9 +61,10 @@ export function CreatePatientSheet({
 
       // Callback with new patient ID
       if (onPatientCreated) {
-        onPatientCreated(newPatient.id);
+        onPatientCreated(patient.id);
       }
     } catch (error) {
+      console.error("Error creating patient:", error);
       toast.error("Erreur lors de la création du patient");
     } finally {
       setIsSubmitting(false);
@@ -120,18 +104,38 @@ export function CreatePatientSheet({
             </p>
           </div>
 
+          <div className="grid grid-cols-2 gap-4">
+            <div className="space-y-2">
+              <Label htmlFor="firstName">
+                Prénom
+              </Label>
+              <Input
+                id="firstName"
+                name="firstName"
+                placeholder="Martin"
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="lastName">
+                Nom
+              </Label>
+              <Input
+                id="lastName"
+                name="lastName"
+                placeholder="Dubois"
+              />
+            </div>
+          </div>
+
           <div className="space-y-2">
-            <Label htmlFor="fullName">
-              Nom complet
+            <Label htmlFor="birthDate">
+              Date de naissance
             </Label>
             <Input
-              id="fullName"
-              name="fullName"
-              placeholder="Martin Dubois"
+              id="birthDate"
+              name="birthDate"
+              type="date"
             />
-            <p className="text-xs text-muted-foreground">
-              Optionnel - peut être ajouté plus tard
-            </p>
           </div>
 
           <div className="space-y-2">

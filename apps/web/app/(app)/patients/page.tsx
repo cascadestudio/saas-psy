@@ -5,23 +5,21 @@ import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
-  CardDescription,
   CardHeader,
-  CardTitle,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import { useUser } from "@/app/context/UserContext";
 import { useEffect, useState } from "react";
-import { getAllPatients, type MockPatient } from "@/data/mock-patients";
-import { getSessionsByPatientId } from "@/data/mock-sessions";
+import { patientsApi, type Patient } from "@/lib/api-client";
 import { Interfaces } from "doodle-icons";
 import { CreatePatientSheet } from "@/components/CreatePatientSheet";
 
 export default function PatientsPage() {
   const { user, isLoading } = useUser();
   const [searchQuery, setSearchQuery] = useState("");
-  const [patients, setPatients] = useState<MockPatient[]>([]);
+  const [patients, setPatients] = useState<Patient[]>([]);
+  const [patientsLoading, setPatientsLoading] = useState(true);
 
   useEffect(() => {
     if (!isLoading && !user) {
@@ -29,13 +27,35 @@ export default function PatientsPage() {
     }
   }, [user, isLoading]);
 
+  // Load patients from API
   useEffect(() => {
-    setPatients(getAllPatients());
-  }, []);
+    const loadPatients = async () => {
+      if (!user) return;
+      setPatientsLoading(true);
+      try {
+        const { patients: data } = await patientsApi.getAll();
+        setPatients(data);
+      } catch (error) {
+        console.error("Error loading patients:", error);
+        setPatients([]);
+      } finally {
+        setPatientsLoading(false);
+      }
+    };
 
-  const handlePatientCreated = (patientId: string) => {
-    // Refresh patient list
-    setPatients(getAllPatients());
+    if (user) {
+      loadPatients();
+    }
+  }, [user]);
+
+  const handlePatientCreated = async () => {
+    // Refresh patient list from API
+    try {
+      const { patients: data } = await patientsApi.getAll();
+      setPatients(data);
+    } catch (error) {
+      console.error("Error refreshing patients:", error);
+    }
   };
 
   if (isLoading) {
@@ -52,11 +72,25 @@ export default function PatientsPage() {
 
   const filteredPatients = patients.filter((patient) => {
     const query = searchQuery.toLowerCase();
+    const fullName = `${patient.firstName} ${patient.lastName}`.toLowerCase();
     return (
-      patient.fullName?.toLowerCase().includes(query) ||
+      fullName.includes(query) ||
       patient.email.toLowerCase().includes(query)
     );
   });
+
+  // Calculate age from birthDate
+  const calculateAge = (birthDate?: string) => {
+    if (!birthDate) return null;
+    const today = new Date();
+    const birth = new Date(birthDate);
+    let age = today.getFullYear() - birth.getFullYear();
+    const monthDiff = today.getMonth() - birth.getMonth();
+    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birth.getDate())) {
+      age--;
+    }
+    return age;
+  };
 
   return (
     <div className="flex-1 w-full flex flex-col gap-6 p-6">
@@ -87,7 +121,11 @@ export default function PatientsPage() {
         </CardHeader>
         <CardContent>
           <div className="space-y-2">
-            {filteredPatients.length === 0 ? (
+            {patientsLoading ? (
+              <p className="text-sm text-muted-foreground text-center py-8">
+                Chargement des patients...
+              </p>
+            ) : filteredPatients.length === 0 ? (
               <p className="text-sm text-muted-foreground text-center py-8">
                 {searchQuery
                   ? "Aucun patient trouvé"
@@ -106,10 +144,7 @@ export default function PatientsPage() {
                         Email
                       </th>
                       <th className="text-left p-3 font-medium text-sm">
-                        Passations
-                      </th>
-                      <th className="text-left p-3 font-medium text-sm">
-                        Dernière passation
+                        Créé le
                       </th>
                       <th className="text-right p-3 font-medium text-sm">
                         Actions
@@ -118,12 +153,7 @@ export default function PatientsPage() {
                   </thead>
                   <tbody>
                     {filteredPatients.map((patient) => {
-                      const sessions = getSessionsByPatientId(patient.id);
-                      const lastSession = sessions.sort(
-                        (a, b) =>
-                          new Date(b.sentAt).getTime() -
-                          new Date(a.sentAt).getTime()
-                      )[0];
+                      const age = calculateAge(patient.birthDate);
 
                       return (
                         <tr
@@ -131,21 +161,18 @@ export default function PatientsPage() {
                           className="border-t hover:bg-muted/50 transition-colors"
                         >
                           <td className="p-3">
-                            <p className="font-medium">{patient.fullName}</p>
+                            <p className="font-medium">
+                              {patient.firstName} {patient.lastName}
+                            </p>
                           </td>
-                          <td className="p-3 text-sm">{patient.age} ans</td>
+                          <td className="p-3 text-sm">
+                            {age ? `${age} ans` : "-"}
+                          </td>
                           <td className="p-3 text-sm text-muted-foreground">
                             {patient.email}
                           </td>
-                          <td className="p-3 text-sm">
-                            {patient.sessionsCount}
-                          </td>
                           <td className="p-3 text-sm text-muted-foreground">
-                            {lastSession
-                              ? new Date(lastSession.sentAt).toLocaleDateString(
-                                  "fr-FR"
-                                )
-                              : "-"}
+                            {new Date(patient.createdAt).toLocaleDateString("fr-FR")}
                           </td>
                           <td className="p-3 text-right">
                             <Button asChild variant="ghost" size="sm">

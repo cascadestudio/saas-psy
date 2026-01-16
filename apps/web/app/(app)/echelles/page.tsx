@@ -7,11 +7,13 @@ import { QuestionnaireCard } from "@/components/QuestionnaireCard";
 import { questionnaires } from "@/app/questionnairesData";
 import { Interfaces } from "doodle-icons";
 import { useUser } from "@/app/context/UserContext";
+import { favoritesApi } from "@/lib/api-client";
 
 export default function EchellesPage() {
   const { user, isLoading } = useUser();
   const [searchQuery, setSearchQuery] = useState("");
   const [favorites, setFavorites] = useState<string[]>([]);
+  const [favoritesLoading, setFavoritesLoading] = useState(true);
 
   useEffect(() => {
     if (!isLoading && !user) {
@@ -19,31 +21,26 @@ export default function EchellesPage() {
     }
   }, [user, isLoading]);
 
-  // Simuler le chargement des favoris depuis une API
+  // Load favorites from API
   useEffect(() => {
-    const loadFavorites = () => {
-      // TODO: Remplacer par un vrai appel API
-      const loadedFavorites = localStorage.getItem("favorites");
-      if (loadedFavorites) {
-        setFavorites(JSON.parse(loadedFavorites));
-      } else {
-        // Mock favorites pour la démo
-        const mockFavorites = [
-          "inventaire-de-depression-de-beck",
-          "echelle-d-anxiete-sociale-de-liebowitz",
-          "stai-anxiete-generalisee",
-        ];
-        setFavorites(mockFavorites);
-        localStorage.setItem("favorites", JSON.stringify(mockFavorites));
+    const loadFavorites = async () => {
+      if (!user) return;
+      setFavoritesLoading(true);
+      try {
+        const { favorites: data } = await favoritesApi.getFavorites();
+        setFavorites(data);
+      } catch (error) {
+        console.error("Error loading favorites:", error);
+        setFavorites([]);
+      } finally {
+        setFavoritesLoading(false);
       }
     };
 
-    loadFavorites();
-
-    // Écouter les changements de favoris
-    window.addEventListener("storage", loadFavorites);
-    return () => window.removeEventListener("storage", loadFavorites);
-  }, []);
+    if (user) {
+      loadFavorites();
+    }
+  }, [user]);
 
   if (isLoading) {
     return (
@@ -110,7 +107,7 @@ export default function EchellesPage() {
             <QuestionnaireCard
               key={questionnaire.id}
               questionnaire={questionnaire}
-              isLoadingFavorites={false}
+              isLoadingFavorites={favoritesLoading}
               isFavorite={favorites.includes(questionnaire.id)}
             />
           ))}
