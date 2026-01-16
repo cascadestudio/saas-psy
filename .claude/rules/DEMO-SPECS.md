@@ -710,3 +710,19 @@ Once design validated with the 5 beta testers:
 ---
 
 **Build in public** 🚀 This prototype is a key step in our product validation process.
+
+---
+
+## 📝 Quick UI Fixes (FR)
+
+- inverser les passations récentes
+- les questionnaires favoris sont épingler afficher en premier dans la liste des quesitonnaire quand tu dois les selectionner pour un patient
+- actions rapide jarte
+- page questionnaires favoris jarte
+- tous "questionnaire" en "échelle"
+- enlèver les datas 3 points du dashboard
+- afficher la liste des patients dans le dashboard
+- page patient : historiques des passations dans l'autre sens, récent en premier
+- app.melya.fr => landing page melya.fr que pour le commerciale à discuter
+- enlever le bounjour dans le header
+- demo = app.melya.fr, il faut arriver direct sur sign in

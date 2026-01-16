@@ -8,6 +8,8 @@ Feature ideas and improvements for future development.
 
 - **Rajouter un bouton "feedback"**: Ajouter un système de feedback utilisateur pour collecter les retours et suggestions des psychologues utilisateurs
 
+- **Rajouter des catégorie d'échelles**: Ajouter des catégories pour organiser les échelles (ex: Anxiété, Dépression, Stress, etc.)
+
 ## Features to Consider
 
 (Add more ideas here as they come up)
