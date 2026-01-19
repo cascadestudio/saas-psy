@@ -16,13 +16,13 @@ import Link from "next/link";
 import { useUser } from "@/app/context/UserContext";
 import { useEffect, useState, Suspense } from "react";
 import { patientsApi, sessionsApi, type Patient } from "@/lib/api-client";
-import { questionnaires } from "@/app/questionnairesData";
+import { scales } from "@/app/scalesData";
 import { Arrow, Interfaces } from "doodle-icons";
 import { Check } from "lucide-react";
 import { toast } from "sonner";
 import { CreatePatientSheet } from "@/components/CreatePatientSheet";
 
-type Step = "questionnaires" | "message" | "confirm";
+type Step = "scales" | "message" | "confirm";
 
 function SendQuestionnaireContent() {
   const { user, isLoading } = useUser();
@@ -30,11 +30,11 @@ function SendQuestionnaireContent() {
   const searchParams = useSearchParams();
   const preselectedPatientId = searchParams.get("patientId");
 
-  const [step, setStep] = useState<Step>("questionnaires");
+  const [step, setStep] = useState<Step>("scales");
   const [selectedPatientId, setSelectedPatientId] = useState<string>(
     preselectedPatientId || ""
   );
-  const [selectedQuestionnaireIds, setSelectedQuestionnaireIds] = useState<
+  const [selectedScaleIds, setSelectedScaleIds] = useState<
     string[]
   >([]);
   const [personalMessage, setPersonalMessage] = useState("");
@@ -93,20 +93,20 @@ function SendQuestionnaireContent() {
   }
 
   const selectedPatient = patients.find((p) => p.id === selectedPatientId);
-  const selectedQuestionnaires = questionnaires.filter((q) =>
-    selectedQuestionnaireIds.includes(q.id)
+  const selectedScales = scales.filter((s) =>
+    selectedScaleIds.includes(s.id)
   );
 
-  const handleToggleQuestionnaire = (questionnaireId: string) => {
-    setSelectedQuestionnaireIds((prev) =>
-      prev.includes(questionnaireId)
-        ? prev.filter((id) => id !== questionnaireId)
-        : [...prev, questionnaireId]
+  const handleToggleScale = (scaleId: string) => {
+    setSelectedScaleIds((prev) =>
+      prev.includes(scaleId)
+        ? prev.filter((id) => id !== scaleId)
+        : [...prev, scaleId]
     );
   };
 
   const handleSend = async () => {
-    if (!selectedPatient || selectedQuestionnaireIds.length === 0) {
+    if (!selectedPatient || selectedScaleIds.length === 0) {
       toast.error("Veuillez sélectionner un patient et au moins une échelle");
       return;
     }
@@ -115,17 +115,17 @@ function SendQuestionnaireContent() {
     try {
       await sessionsApi.create({
         patientId: selectedPatient.id,
-        questionnaireIds: selectedQuestionnaireIds,
+        scaleIds: selectedScaleIds,
         message: personalMessage || undefined,
       });
 
       toast.success("Échelle(s) envoyée(s) avec succès", {
-        description: `${selectedQuestionnaireIds.length} échelle(s) envoyée(s) à ${selectedPatient.firstName} ${selectedPatient.lastName}`,
+        description: `${selectedScaleIds.length} échelle(s) envoyée(s) à ${selectedPatient.firstName} ${selectedPatient.lastName}`,
       });
 
       router.push(`/patients/${selectedPatient.id}`);
     } catch (error) {
-      console.error("Error sending questionnaires:", error);
+      console.error("Error sending scales:", error);
       toast.error("Erreur lors de l'envoi des échelles");
     } finally {
       setIsSending(false);
@@ -211,7 +211,7 @@ function SendQuestionnaireContent() {
         <>
           <div className="flex items-center gap-2">
             {[
-              { key: "questionnaires", label: "Questionnaires" },
+              { key: "scales", label: "Échelles" },
               { key: "message", label: "Message" },
               { key: "confirm", label: "Confirmation" },
             ].map((s, index) => (
@@ -221,13 +221,13 @@ function SendQuestionnaireContent() {
                     step === s.key
                       ? "bg-primary text-primary-foreground"
                       : index <
-                        ["questionnaires", "message", "confirm"].indexOf(step)
+                        ["scales", "message", "confirm"].indexOf(step)
                       ? "bg-green-500 text-white"
                       : "bg-muted text-muted-foreground"
                   }`}
                 >
                   {index <
-                  ["questionnaires", "message", "confirm"].indexOf(step) ? (
+                  ["scales", "message", "confirm"].indexOf(step) ? (
                     <Check className="h-4 w-4" />
                   ) : (
                     index + 1
@@ -246,13 +246,13 @@ function SendQuestionnaireContent() {
           <Card>
             <CardHeader>
               <CardTitle>
-                {step === "questionnaires" && "Choisir les questionnaires"}
+                {step === "scales" && "Choisir les échelles"}
                 {step === "message" && "Personnaliser le message"}
                 {step === "confirm" && "Confirmer l'envoi"}
               </CardTitle>
               <CardDescription>
-                {step === "questionnaires" &&
-                  "Vous pouvez sélectionner plusieurs questionnaires à envoyer en même temps"}
+                {step === "scales" &&
+                  "Vous pouvez sélectionner plusieurs échelles à envoyer en même temps"}
                 {step === "message" &&
                   "Ajoutez un message personnalisé (optionnel)"}
                 {step === "confirm" &&
@@ -260,8 +260,8 @@ function SendQuestionnaireContent() {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              {/* Step 1: Questionnaire Selection */}
-              {step === "questionnaires" && (
+              {/* Step 1: Scale Selection */}
+              {step === "scales" && (
                 <div className="space-y-4">
                   <div className="bg-blue-50 dark:bg-blue-950 border border-blue-200 dark:border-blue-800 rounded-lg p-4 mb-4">
                     <p className="text-sm text-blue-900 dark:text-blue-100">
@@ -273,48 +273,48 @@ function SendQuestionnaireContent() {
 
                   <div className="flex items-center justify-between mb-4">
                     <p className="text-sm font-medium">
-                      {selectedQuestionnaireIds.length} échelle(s)
+                      {selectedScaleIds.length} échelle(s)
                       sélectionnée(s)
                     </p>
                   </div>
 
                   <div className="grid grid-cols-1 gap-3">
-                    {questionnaires.map((questionnaire) => (
+                    {scales.map((scale) => (
                       <div
-                        key={questionnaire.id}
+                        key={scale.id}
                         className={`border rounded-lg p-4 cursor-pointer transition-all ${
-                          selectedQuestionnaireIds.includes(questionnaire.id)
+                          selectedScaleIds.includes(scale.id)
                             ? "border-primary bg-primary/5"
                             : "hover:border-muted-foreground/50"
                         }`}
                         onClick={() =>
-                          handleToggleQuestionnaire(questionnaire.id)
+                          handleToggleScale(scale.id)
                         }
                       >
                         <div className="flex items-start gap-3">
                           <Checkbox
-                            checked={selectedQuestionnaireIds.includes(
-                              questionnaire.id
+                            checked={selectedScaleIds.includes(
+                              scale.id
                             )}
                             onCheckedChange={() =>
-                              handleToggleQuestionnaire(questionnaire.id)
+                              handleToggleScale(scale.id)
                             }
                             onClick={(e) => e.stopPropagation()}
                           />
                           <div className="flex-1">
                             <div className="flex items-center gap-2">
-                              <p className="font-medium">{questionnaire.title}</p>
+                              <p className="font-medium">{scale.title}</p>
                             </div>
                             <p className="text-sm text-muted-foreground mt-1">
-                              {questionnaire.description}
+                              {scale.description}
                             </p>
                             <div className="flex items-center gap-4 mt-2">
                               <span className="text-xs text-muted-foreground">
-                                {questionnaire.category}
+                                {scale.category}
                               </span>
                               <span className="text-xs text-muted-foreground">
                                 <Interfaces.Clock className="inline h-3 w-3 mr-1" />
-                                {questionnaire.estimatedTime}
+                                {scale.estimatedTime}
                               </span>
                             </div>
                           </div>
@@ -329,7 +329,7 @@ function SendQuestionnaireContent() {
                     </Button>
                     <Button
                       onClick={() => setStep("message")}
-                      disabled={selectedQuestionnaireIds.length === 0}
+                      disabled={selectedScaleIds.length === 0}
                     >
                       Continuer
                     </Button>
@@ -346,7 +346,7 @@ function SendQuestionnaireContent() {
                     </Label>
                     <Textarea
                       id="message"
-                      placeholder="Bonjour,&#10;&#10;Merci de compléter ce(s) questionnaire(s) avant notre prochaine séance.&#10;&#10;Cordialement"
+                      placeholder="Bonjour,&#10;&#10;Merci de compléter cette/ces échelle(s) avant notre prochaine séance.&#10;&#10;Cordialement"
                       rows={6}
                       value={personalMessage}
                       onChange={(e) => setPersonalMessage(e.target.value)}
@@ -358,7 +358,7 @@ function SendQuestionnaireContent() {
 
                   <div className="flex justify-end gap-2 pt-4">
                     <Button
-                      onClick={() => setStep("questionnaires")}
+                      onClick={() => setStep("scales")}
                       variant="outline"
                     >
                       Retour
@@ -381,12 +381,12 @@ function SendQuestionnaireContent() {
                     </div>
                     <div>
                       <p className="text-sm text-muted-foreground">
-                        Questionnaire(s) sélectionné(s)
+                        Échelle(s) sélectionnée(s)
                       </p>
                       <ul className="list-disc list-inside mt-1">
-                        {selectedQuestionnaires.map((q) => (
-                          <li key={q.id} className="text-sm">
-                            {q.title}
+                        {selectedScales.map((s) => (
+                          <li key={s.id} className="text-sm">
+                            {s.title}
                           </li>
                         ))}
                       </ul>

@@ -9,6 +9,7 @@ import { UsersModule } from './users/users.module';
 import { PatientsModule } from './patients/patients.module';
 import { FavoritesModule } from './favorites/favorites.module';
 import { SessionsModule } from './sessions/sessions.module';
+import { ScalesModule } from './scales/scales.module';
 import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
 import { configValidationSchema } from './config/config.schema';
 
@@ -29,6 +30,7 @@ import { configValidationSchema } from './config/config.schema';
     PatientsModule,
     FavoritesModule,
     SessionsModule,
+    ScalesModule,
   ],
   controllers: [AppController],
   providers: [

@@ -1,18 +1,18 @@
 "use client";
 
-import { QuestionnaireProps, QuestionGroup } from "@/app/types";
+import { ScaleProps, QuestionGroup } from "@/app/types";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import BaseQuestionnaire from "../BaseQuestionnaire";
 
-export default function STAIQuestionnaire(props: QuestionnaireProps) {
-  const { questionnaire } = props;
+export default function STAIQuestionnaire(props: ScaleProps) {
+  const { scale } = props;
 
-  if (!questionnaire?.answerScales?.intensity) {
+  if (!scale?.answerScales?.intensity) {
     return <BaseQuestionnaire {...props} />;
   }
 
-  const { intensity } = questionnaire.answerScales;
+  const { intensity } = scale.answerScales;
 
   const getDevDefaultValue = (groupIndex: number, questionIndex: number) => {
     // Only apply default values in development
@@ -25,7 +25,7 @@ export default function STAIQuestionnaire(props: QuestionnaireProps) {
   return (
     <BaseQuestionnaire {...props}>
       <div className="space-y-12">
-        {(questionnaire.questions as QuestionGroup[]).map(
+        {(scale.questions as QuestionGroup[]).map(
           (questionGroup, groupIndex) => (
             <div key={groupIndex} className="space-y-8">
               <h2 className="text-xl font-medium">{questionGroup.title}</h2>

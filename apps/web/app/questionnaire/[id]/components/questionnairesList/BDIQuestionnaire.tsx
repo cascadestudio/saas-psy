@@ -1,12 +1,12 @@
 "use client";
 
 import BaseQuestionnaire from "../BaseQuestionnaire";
-import { QuestionnaireProps } from "@/app/types";
+import { ScaleProps } from "@/app/types";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 
-export default function BDIQuestionnaire(props: QuestionnaireProps) {
-  const { questionnaire } = props;
+export default function BDIQuestionnaire(props: ScaleProps) {
+  const { scale } = props;
 
   // Development helper function for random values
   const getDevDefaultValue = (questionIndex: number) => {
@@ -18,7 +18,7 @@ export default function BDIQuestionnaire(props: QuestionnaireProps) {
   return (
     <BaseQuestionnaire {...props}>
       <div className="space-y-8">
-        {questionnaire.questions.map((question: any, index: number) => (
+        {scale.questions.map((question: any, index: number) => (
           <div key={index} className="border p-4 rounded-md">
             <h3 className="font-medium mb-4">
               {index + 1}. {question.title}

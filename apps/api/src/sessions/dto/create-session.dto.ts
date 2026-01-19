@@ -5,9 +5,9 @@ export class CreateSessionDto {
   patientId: string;
 
   @IsArray()
-  @ArrayMinSize(1, { message: 'Au moins un questionnaire doit être sélectionné' })
+  @ArrayMinSize(1, { message: 'Au moins une échelle doit être sélectionnée' })
   @IsString({ each: true })
-  questionnaireIds: string[];
+  scaleIds: string[];
 
   @IsOptional()
   @IsString()

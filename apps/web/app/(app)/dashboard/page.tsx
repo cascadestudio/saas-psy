@@ -14,7 +14,7 @@ import Link from "next/link";
 import { useUser } from "@/app/context/UserContext";
 import { useEffect, useState } from "react";
 import { patientsApi, favoritesApi, type Patient } from "@/lib/api-client";
-import { questionnaires } from "@/app/questionnairesData";
+import { scales } from "@/app/scalesData";
 import { Interfaces } from "doodle-icons";
 import { CreatePatientSheet } from "@/components/CreatePatientSheet";
 
@@ -101,8 +101,8 @@ export default function DashboardPage() {
     );
   });
 
-  const favoriteQuestionnaires = questionnaires.filter((q) =>
-    favorites.includes(q.id)
+  const favoriteScales = scales.filter((s) =>
+    favorites.includes(s.id)
   );
 
   return (
@@ -200,7 +200,7 @@ export default function DashboardPage() {
               <div>
                 <CardTitle>Mes échelles</CardTitle>
                 <CardDescription>
-                  {favoriteQuestionnaires.length} échelle{favoriteQuestionnaires.length > 1 ? "s" : ""} favorite{favoriteQuestionnaires.length > 1 ? "s" : ""}
+                  {favoriteScales.length} échelle{favoriteScales.length > 1 ? "s" : ""} favorite{favoriteScales.length > 1 ? "s" : ""}
                 </CardDescription>
               </div>
               <Button asChild size="sm" variant="outline">
@@ -211,38 +211,38 @@ export default function DashboardPage() {
             </div>
           </CardHeader>
           <CardContent>
-            {favoriteQuestionnaires.length === 0 ? (
+            {favoriteScales.length === 0 ? (
               <p className="text-sm text-muted-foreground text-center py-8">
                 Aucune échelle favorite
               </p>
             ) : (
               <div className="space-y-3">
-                {favoriteQuestionnaires.map((questionnaire) => (
+                {favoriteScales.map((scale) => (
                   <div
-                    key={questionnaire.id}
+                    key={scale.id}
                     className="border rounded-lg p-4 hover:bg-muted/50 transition-colors"
                   >
                     <div className="flex items-start justify-between gap-3">
                       <div className="flex-1">
                         <div className="flex items-center gap-2 mb-1">
                           <Interfaces.Star className="h-4 w-4 fill-primary text-primary" />
-                          <h3 className="font-medium text-sm">{questionnaire.title}</h3>
+                          <h3 className="font-medium text-sm">{scale.title}</h3>
                         </div>
                         <p className="text-xs text-muted-foreground line-clamp-2">
-                          {questionnaire.description}
+                          {scale.description}
                         </p>
                         <div className="flex items-center gap-3 mt-2">
                           <span className="text-xs text-muted-foreground">
-                            {questionnaire.category}
+                            {scale.category}
                           </span>
                           <span className="text-xs text-muted-foreground">
                             <Interfaces.Clock className="inline h-3 w-3 mr-1" />
-                            {questionnaire.estimatedTime}
+                            {scale.estimatedTime}
                           </span>
                         </div>
                       </div>
                       <Button asChild size="sm" variant="ghost">
-                        <Link href={`/questionnaire/description/${questionnaire.id}`}>
+                        <Link href={`/questionnaire/description/${scale.id}`}>
                           Détails
                         </Link>
                       </Button>

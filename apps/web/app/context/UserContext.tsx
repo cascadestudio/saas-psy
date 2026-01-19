@@ -18,7 +18,7 @@ export type User = {
   role?: string;
   profile?: {
     id?: string;
-    favoriteQuestionnaires: string[];
+    favoriteScales: string[];
   };
 };
 

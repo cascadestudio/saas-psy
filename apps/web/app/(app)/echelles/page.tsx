@@ -3,8 +3,8 @@
 import { useState, useEffect } from "react";
 import { redirect } from "next/navigation";
 import { Input } from "@/components/ui/input";
-import { QuestionnaireCard } from "@/components/QuestionnaireCard";
-import { questionnaires } from "@/app/questionnairesData";
+import { ScaleCard } from "@/components/ScaleCard";
+import { scales } from "@/app/scalesData";
 import { Interfaces } from "doodle-icons";
 import { useUser } from "@/app/context/UserContext";
 import { favoritesApi } from "@/lib/api-client";
@@ -54,14 +54,14 @@ export default function EchellesPage() {
     return null;
   }
 
-  // Filtrer les questionnaires par titre, description ou catégorie
-  const filteredQuestionnaires = questionnaires
-    .filter((q) => {
+  // Filtrer les échelles par titre, description ou catégorie
+  const filteredScales = scales
+    .filter((s) => {
       const query = searchQuery.toLowerCase();
       return (
-        q.title.toLowerCase().includes(query) ||
-        q.description.toLowerCase().includes(query) ||
-        q.category.toLowerCase().includes(query)
+        s.title.toLowerCase().includes(query) ||
+        s.description.toLowerCase().includes(query) ||
+        s.category.toLowerCase().includes(query)
       );
     })
     // Trier pour afficher les favoris en premier
@@ -95,7 +95,7 @@ export default function EchellesPage() {
         </div>
       </div>
 
-      {filteredQuestionnaires.length === 0 ? (
+      {filteredScales.length === 0 ? (
         <div className="text-center py-12">
           <p className="text-muted-foreground">
             Aucune échelle trouvée pour "{searchQuery}"
@@ -103,20 +103,20 @@ export default function EchellesPage() {
         </div>
       ) : (
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {filteredQuestionnaires.map((questionnaire) => (
-            <QuestionnaireCard
-              key={questionnaire.id}
-              questionnaire={questionnaire}
+          {filteredScales.map((scale) => (
+            <ScaleCard
+              key={scale.id}
+              scale={scale}
               isLoadingFavorites={favoritesLoading}
-              isFavorite={favorites.includes(questionnaire.id)}
+              isFavorite={favorites.includes(scale.id)}
             />
           ))}
         </div>
       )}
 
-      {filteredQuestionnaires.length > 0 && (
+      {filteredScales.length > 0 && (
         <div className="mt-6 text-center text-sm text-muted-foreground">
-          {filteredQuestionnaires.length} échelle{filteredQuestionnaires.length > 1 ? "s" : ""} disponible{filteredQuestionnaires.length > 1 ? "s" : ""}
+          {filteredScales.length} échelle{filteredScales.length > 1 ? "s" : ""} disponible{filteredScales.length > 1 ? "s" : ""}
         </div>
       )}
     </div>

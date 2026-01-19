@@ -24,7 +24,7 @@ export async function POST(request: Request) {
       //   to: ["contact@cascadestudio.fr"],
       to: [patientEmail],
       //   to: ["delivered@resend.dev"], // Test address that always works
-      subject: "Votre questionnaire de santé",
+      subject: "Votre échelle d'évaluation",
       react: await SendQuestionnaireEmailTemplate({
         patientFirstname,
         patientLastname,

@@ -13,12 +13,12 @@ import {
   DialogClose,
 } from "@/components/ui/dialog";
 import { Card } from "@/components/ui/card";
-import { QuestionnaireProps } from "@/app/types";
+import { ScaleProps } from "@/app/types";
 import { EmailDialogForm } from "./EmailDialogForm";
-import QuestionnaireFactory from "@/app/questionnaire/[id]/components/QuestionnaireFactory";
+import ScaleFactory from "@/app/questionnaire/[id]/components/ScaleFactory";
 
-interface QuestionnairePreviewModalProps {
-  questionnaire: {
+interface ScalePreviewModalProps {
+  scale: {
     id: string;
     title: string;
     description: string;
@@ -38,15 +38,15 @@ interface QuestionnairePreviewModalProps {
   };
 }
 
-export function QuestionnairePreviewModal({
-  questionnaire,
-}: QuestionnairePreviewModalProps) {
+export function ScalePreviewModal({
+  scale,
+}: ScalePreviewModalProps) {
   const [open, setOpen] = useState(false);
   const emailButtonRef = useRef<HTMLButtonElement>(null);
 
   // Create dummy props for preview mode
-  const previewProps: QuestionnaireProps = {
-    questionnaire: questionnaire,
+  const previewProps: ScaleProps = {
+    scale: scale,
     psychologistEmail: "preview@example.com",
     patientFirstname: "[Prénom]",
     patientLastname: "[Nom]",
@@ -93,7 +93,7 @@ export function QuestionnairePreviewModal({
 
           <div className="py-4">
             <div className="preview-container">
-              <QuestionnaireFactory {...previewProps} />
+              <ScaleFactory {...previewProps} />
             </div>
           </div>
 

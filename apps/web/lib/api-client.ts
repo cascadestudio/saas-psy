@@ -142,12 +142,11 @@ export const favoritesApi = {
     return apiRequest<{ favorites: string[] }>("/favorites");
   },
 
-  toggleFavorite: async (questionnaireId: string) => {
-    return apiRequest<{ success: boolean; action: "add" | "remove" }>(
-      "/favorites",
+  toggleFavorite: async (scaleId: string) => {
+    return apiRequest<{ action: "add" | "remove"; favorites: string[] }>(
+      `/favorites/${scaleId}/toggle`,
       {
         method: "POST",
-        body: JSON.stringify({ questionnaireId }),
       }
     );
   },
@@ -240,19 +239,19 @@ export const sessionsApi = {
 };
 
 /**
- * Questionnaires API methods
+ * Scales API methods
  */
-export const questionnairesApi = {
+export const scalesApi = {
   getAll: async () => {
-    return apiRequest<{ questionnaires: Questionnaire[] }>("/questionnaires");
+    return apiRequest<{ scales: Scale[] }>("/scales");
   },
 
   getById: async (id: string) => {
-    return apiRequest<{ questionnaire: Questionnaire }>(`/questionnaires/${id}`);
+    return apiRequest<{ scale: Scale }>(`/scales/${id}`);
   },
 
   getByCategory: async (category: string) => {
-    return apiRequest<{ questionnaires: Questionnaire[] }>(`/questionnaires/category/${category}`);
+    return apiRequest<{ scales: Scale[] }>(`/scales/category/${category}`);
   },
 };
 
@@ -289,7 +288,7 @@ export interface UpdatePatientDto {
 export interface Session {
   id: string;
   patientId: string;
-  questionnaireId: string;
+  scaleId: string;
   status: "created" | "sent" | "started" | "completed" | "expired" | "cancelled";
   score?: number;
   interpretation?: string;
@@ -301,12 +300,12 @@ export interface Session {
   createdAt: string;
   updatedAt: string;
   patient?: Patient;
-  questionnaire?: Questionnaire;
+  scale?: Scale;
 }
 
 export interface CreateSessionDto {
   patientId: string;
-  questionnaireIds: string[];
+  scaleIds: string[];
   message?: string;
 }
 
@@ -318,14 +317,16 @@ export interface SessionStats {
   expired: number;
 }
 
-export interface Questionnaire {
+export interface Scale {
   id: string;
   title: string;
   description: string;
   longDescription?: string;
   category: string;
-  estimatedTime: number;
-  questionsCount: number;
+  estimatedTime: string;
+  questions: any;
+  answerScales?: any;
+  scoring?: any;
   isPublished: boolean;
 }
 
@@ -338,7 +339,7 @@ export const api = {
   favorites: favoritesApi,
   patients: patientsApi,
   sessions: sessionsApi,
-  questionnaires: questionnairesApi,
+  scales: scalesApi,
 };
 
 export default api;

@@ -11,11 +11,11 @@ export class FavoritesController {
     return this.favoritesService.getFavorites(userId);
   }
 
-  @Post(':questionnaireId/toggle')
+  @Post(':scaleId/toggle')
   toggleFavorite(
     @CurrentUser('id') userId: string,
-    @Param('questionnaireId') questionnaireId: string,
+    @Param('scaleId') scaleId: string,
   ) {
-    return this.favoritesService.toggleFavorite(userId, questionnaireId);
+    return this.favoritesService.toggleFavorite(userId, scaleId);
   }
 }

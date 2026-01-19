@@ -7,13 +7,13 @@ import { toast } from "sonner";
 import { favoritesApi } from "@/lib/api-client";
 
 interface FavoriteButtonProps {
-  questionnaireId: string;
+  scaleId: string;
   initialIsFavorite?: boolean;
   size?: "sm" | "md" | "lg";
 }
 
 export function FavoriteButton({
-  questionnaireId,
+  scaleId,
   initialIsFavorite = false,
   size = "md",
 }: FavoriteButtonProps) {
@@ -24,7 +24,7 @@ export function FavoriteButton({
     try {
       setIsLoading(true);
 
-      const { action } = await favoritesApi.toggleFavorite(questionnaireId);
+      const { action } = await favoritesApi.toggleFavorite(scaleId);
       const newIsFavorite = action === "add";
       setIsFavorite(newIsFavorite);
 

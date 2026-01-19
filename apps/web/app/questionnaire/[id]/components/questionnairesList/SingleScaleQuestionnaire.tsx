@@ -1,18 +1,18 @@
 "use client";
 
 import BaseQuestionnaire from "../BaseQuestionnaire";
-import { QuestionnaireProps } from "@/app/types";
+import { ScaleProps } from "@/app/types";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 
-export default function SingleScaleQuestionnaire(props: QuestionnaireProps) {
-  const { questionnaire } = props;
+export default function SingleScaleQuestionnaire(props: ScaleProps) {
+  const { scale } = props;
 
-  if (!questionnaire?.answerScales?.intensity) {
+  if (!scale?.answerScales?.intensity) {
     return <BaseQuestionnaire {...props} />;
   }
 
-  const { intensity } = questionnaire.answerScales;
+  const { intensity } = scale.answerScales;
 
   const getDevDefaultValue = (questionIndex: number) => {
     // Only apply default values in development
@@ -25,7 +25,7 @@ export default function SingleScaleQuestionnaire(props: QuestionnaireProps) {
   return (
     <BaseQuestionnaire {...props}>
       <div className="space-y-8">
-        {questionnaire.questions.map((question: any, index: any) => (
+        {scale.questions.map((question: any, index: any) => (
           <div key={index} className="border p-4 rounded-md">
             <h3 className="font-medium mb-4">
               {index + 1}. {question}

@@ -25,12 +25,12 @@ export class SessionsService {
       throw new ForbiddenException('Accès non autorisé à ce patient');
     }
 
-    // Create sessions for each questionnaire (one session per questionnaire)
+    // Create sessions for each scale (one session per scale)
     const sessions = await this.prisma.$transaction(
-      dto.questionnaireIds.map((questionnaireId) =>
+      dto.scaleIds.map((scaleId) =>
         this.prisma.session.create({
           data: {
-            questionnaireId,
+            scaleId,
             patientId: dto.patientId,
             practitionerId,
             status: 'SENT',
@@ -198,7 +198,7 @@ export class SessionsService {
     return {
       session: {
         id: session.id,
-        questionnaireId: session.questionnaireId,
+        scaleId: session.scaleId,
         patientFirstName: session.patient.firstName,
         status: session.status === 'SENT' ? 'STARTED' : session.status,
       },
@@ -229,7 +229,7 @@ export class SessionsService {
 
     // Calculate score based on responses (simplified - will be enhanced with ScoringModule)
     const { score, interpretation } = this.calculateScore(
-      session.questionnaireId,
+      session.scaleId,
       dto.responses,
     );
 
@@ -253,10 +253,10 @@ export class SessionsService {
 
   // Simplified scoring - will be moved to ScoringModule
   private calculateScore(
-    questionnaireId: string,
+    scaleId: string,
     responses: Record<string, any>,
   ): { score: number; interpretation: string } {
-    // Simple sum for most questionnaires
+    // Simple sum for most scales
     let totalScore = 0;
 
     if (typeof responses === 'object') {
@@ -265,7 +265,7 @@ export class SessionsService {
         if (typeof value === 'number') {
           totalScore += value;
         } else if (typeof value === 'object' && value !== null) {
-          // Handle dual-scale questionnaires (like Liebowitz with anxiety + avoidance)
+          // Handle dual-scale scales (like Liebowitz with anxiety + avoidance)
           if ('anxiety' in value) totalScore += value.anxiety || 0;
           if ('avoidance' in value) totalScore += value.avoidance || 0;
         }
@@ -276,7 +276,7 @@ export class SessionsService {
     let interpretation = 'Score calculé';
 
     // BDI-II ranges
-    if (questionnaireId.includes('bdi')) {
+    if (scaleId.includes('bdi')) {
       if (totalScore <= 13) interpretation = 'Dépression minimale';
       else if (totalScore <= 19) interpretation = 'Dépression légère';
       else if (totalScore <= 28) interpretation = 'Dépression modérée';
@@ -284,7 +284,7 @@ export class SessionsService {
     }
 
     // Liebowitz ranges
-    if (questionnaireId.includes('liebowitz')) {
+    if (scaleId.includes('liebowitz')) {
       if (totalScore <= 30) interpretation = 'Absence d\'anxiété sociale';
       else if (totalScore <= 60) interpretation = 'Anxiété sociale légère';
       else if (totalScore <= 90) interpretation = 'Anxiété sociale modérée';

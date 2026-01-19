@@ -1,9 +1,9 @@
-export const questionnaires = [
+export const scales = [
   {
     id: "echelle-d-anxiete-sociale-de-liebowitz",
     title: "Échelle d'anxiété sociale de Liebowitz",
     description:
-      "Un questionnaire clinique de 24 items qui mesure la peur et l'évitement dans des situations sociales et de performance",
+      "Une échelle clinique de 24 items qui mesure la peur et l'évitement dans des situations sociales et de performance",
     category: "Anxiété sociale",
     estimatedTime: "10-15 minutes",
     longDescription:
@@ -161,7 +161,7 @@ export const questionnaires = [
     id: "inventaire-de-depression-de-beck",
     title: "Inventaire de Dépression de Beck (BDI)",
     description:
-      "Un questionnaire d'auto-évaluation à choix multiples de 21 questions pour mesurer la sévérité de la dépression",
+      "Une échelle d'auto-évaluation à choix multiples de 21 questions pour mesurer la sévérité de la dépression",
     category: "Dépression",
     estimatedTime: "10-15 minutes",
     instructions:
@@ -476,13 +476,13 @@ export const questionnaires = [
     },
   },
   {
-    id: "test-questionnaire",
-    title: "Questionnaire Test",
-    description: "Un questionnaire court de 3 questions pour tester le système",
+    id: "test-scale",
+    title: "Échelle Test",
+    description: "Une échelle courte de 3 questions pour tester le système",
     category: "Test",
     estimatedTime: "2-3 minutes",
     longDescription:
-      "Ce questionnaire est conçu pour tester le fonctionnement du système avec un minimum de questions.",
+      "Cette échelle est conçue pour tester le fonctionnement du système avec un minimum de questions.",
     questions: [
       "Comment évaluez-vous votre niveau de stress aujourd'hui ?",
       "À quel point vous sentez-vous motivé(e) ?",
@@ -510,7 +510,7 @@ export const questionnaires = [
     id: "stai-anxiete-generalisee",
     title: "STAI - Inventaire d'Anxiété État-Trait",
     description:
-      "Un questionnaire de 40 items évaluant l'anxiété situationnelle (état) et l'anxiété générale (trait)",
+      "Une échelle de 40 items évaluant l'anxiété situationnelle (état) et l'anxiété générale (trait)",
     category: "Anxiété généralisée",
     estimatedTime: "15-20 minutes",
     longDescription:
@@ -591,7 +591,7 @@ export const questionnaires = [
     id: "traumatismes-pcl5",
     title: "PCL-5 - Liste de Vérification du TSPT",
     description:
-      "Un questionnaire de 20 items évaluant les symptômes du trouble de stress post-traumatique (TSPT)",
+      "Une échelle de 20 items évaluant les symptômes du trouble de stress post-traumatique (TSPT)",
     category: "Traumatismes",
     estimatedTime: "5-10 minutes",
     longDescription:

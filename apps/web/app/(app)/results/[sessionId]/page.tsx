@@ -14,7 +14,7 @@ import Link from "next/link";
 import { useUser } from "@/app/context/UserContext";
 import { useEffect, useState } from "react";
 import { sessionsApi, patientsApi, type Session, type Patient } from "@/lib/api-client";
-import { questionnaires } from "@/app/questionnairesData";
+import { scales } from "@/app/scalesData";
 import { Arrow, Interfaces, Finance } from "doodle-icons";
 import { Minus } from "lucide-react";
 
@@ -87,15 +87,15 @@ export default function ResultsPage() {
     );
   }
 
-  const questionnaire = questionnaires.find(
-    (q) => q.id === session.questionnaireId
+  const scale = scales.find(
+    (q) => q.id === session.scaleId
   );
 
-  // Get longitudinal data (previous sessions of same questionnaire for same patient)
+  // Get longitudinal data (previous sessions of same scale for same patient)
   const sameQuestionnaireSessions = allSessions
     .filter(
       (s) =>
-        s.questionnaireId === session.questionnaireId && s.status === "completed"
+        s.scaleId === session.scaleId && s.status === "completed"
     )
     .sort(
       (a, b) =>
@@ -129,7 +129,7 @@ export default function ResultsPage() {
   }
 
   // Get score range info
-  const scoreRange = questionnaire?.scoring?.ranges?.find(
+  const scoreRange = scale?.scoring?.ranges?.find(
     (range: { min: number; max: number }) =>
       session.score !== undefined &&
       session.score >= range.min &&
@@ -138,33 +138,33 @@ export default function ResultsPage() {
 
   // Calculate max possible score
   const getMaxScore = () => {
-    if (!questionnaire) return 0;
+    if (!scale) return 0;
 
-    // For dual-scale questionnaires (like Liebowitz)
-    if (questionnaire.answerScales) {
-      if ("anxiety" in questionnaire.answerScales) {
-        return questionnaire.questions.length * 3 * 2; // 2 scales, each 0-3
+    // For dual-scale scales (like Liebowitz)
+    if (scale.answerScales) {
+      if ("anxiety" in scale.answerScales) {
+        return scale.questions.length * 3 * 2; // 2 scales, each 0-3
       }
     }
 
-    // For BDI-style questionnaires
+    // For BDI-style scales
     if (
-      questionnaire.questions &&
-      Array.isArray(questionnaire.questions) &&
-      typeof questionnaire.questions[0] === "object" &&
-      "options" in questionnaire.questions[0]
+      scale.questions &&
+      Array.isArray(scale.questions) &&
+      typeof scale.questions[0] === "object" &&
+      "options" in scale.questions[0]
     ) {
-      return questionnaire.questions.length * 3; // Assuming 0-3 scale
+      return scale.questions.length * 3; // Assuming 0-3 scale
     }
 
-    // For STAI-style questionnaires
+    // For STAI-style scales
     if (
-      questionnaire.questions &&
-      Array.isArray(questionnaire.questions) &&
-      typeof questionnaire.questions[0] === "object" &&
-      "items" in questionnaire.questions[0]
+      scale.questions &&
+      Array.isArray(scale.questions) &&
+      typeof scale.questions[0] === "object" &&
+      "items" in scale.questions[0]
     ) {
-      const totalItems = questionnaire.questions.reduce(
+      const totalItems = scale.questions.reduce(
         (acc: number, q: any) => {
           if (typeof q === "object" && "items" in q && Array.isArray(q.items)) {
             return acc + q.items.length;
@@ -176,9 +176,9 @@ export default function ResultsPage() {
       return totalItems * 4; // 1-4 scale
     }
 
-    // For simple questionnaires
-    if (questionnaire.questions && Array.isArray(questionnaire.questions)) {
-      return questionnaire.questions.length * 4; // Assuming 0-4 scale
+    // For simple scales
+    if (scale.questions && Array.isArray(scale.questions)) {
+      return scale.questions.length * 4; // Assuming 0-4 scale
     }
 
     return 100; // Default
@@ -199,7 +199,7 @@ export default function ResultsPage() {
         <div className="flex-1">
           <h1 className="font-bold text-3xl">Résultats de passation</h1>
           <p className="text-muted-foreground mt-1">
-            {patient?.firstName} {patient?.lastName} - {questionnaire?.title}
+            {patient?.firstName} {patient?.lastName} - {scale?.title}
           </p>
         </div>
         <Button variant="outline" disabled>
@@ -349,34 +349,34 @@ export default function ResultsPage() {
       {/* Questionnaire Details */}
       <Card>
         <CardHeader>
-          <CardTitle>À propos de ce questionnaire</CardTitle>
+          <CardTitle>À propos de ce scale</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           <div>
             <h4 className="font-semibold mb-2">Description</h4>
             <p className="text-sm text-muted-foreground">
-              {questionnaire?.longDescription || questionnaire?.description}
+              {scale?.longDescription || scale?.description}
             </p>
           </div>
 
           <div className="grid grid-cols-2 gap-4 pt-4 border-t">
             <div>
               <p className="text-sm text-muted-foreground">Catégorie</p>
-              <p className="font-medium">{questionnaire?.category}</p>
+              <p className="font-medium">{scale?.category}</p>
             </div>
             <div>
               <p className="text-sm text-muted-foreground">
                 Durée estimée
               </p>
-              <p className="font-medium">{questionnaire?.estimatedTime}</p>
+              <p className="font-medium">{scale?.estimatedTime}</p>
             </div>
           </div>
 
-          {questionnaire?.scoring && (
+          {scale?.scoring && (
             <div className="pt-4 border-t">
               <h4 className="font-semibold mb-2">Méthode de cotation</h4>
               <p className="text-sm text-muted-foreground">
-                {questionnaire.scoring.method}
+                {scale.scoring.method}
               </p>
             </div>
           )}

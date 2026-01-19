@@ -14,18 +14,18 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Badge } from "@/components/ui/badge";
-import { questionnaires } from "@/app/questionnairesData";
-import { QuestionnaireCard } from "@/components/QuestionnaireCard";
+import { scales } from "@/app/scalesData";
+import { ScaleCard } from "@/components/ScaleCard";
 import { useUser } from "@/app/context/UserContext";
 
 // Get unique categories for filter
-const categories = Array.from(new Set(questionnaires.map((q) => q.category)));
+const categories = Array.from(new Set(scales.map((q) => q.category)));
 
 export default function Home() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
-  const [filteredQuestionnaires, setFilteredQuestionnaires] =
-    useState(questionnaires);
+  const [filteredScales, setFilteredScales] =
+    useState(scales);
   const [favorites, setFavorites] = useState<string[]>([]);
   const [isLoadingFavorites, setIsLoadingFavorites] = useState(true);
   const { user } = useUser();
@@ -57,25 +57,25 @@ export default function Home() {
     fetchFavorites();
   }, [user]);
 
-  // Filter questionnaires when search term or selected categories change
+  // Filter scales when search term or selected categories change
   useEffect(() => {
-    const filtered = questionnaires.filter((questionnaire) => {
+    const filtered = scales.filter((scale) => {
       const matchesSearch =
         searchTerm === "" ||
-        questionnaire.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        questionnaire.description
+        scale.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        scale.description
           .toLowerCase()
           .includes(searchTerm.toLowerCase()) ||
-        questionnaire.category.toLowerCase().includes(searchTerm.toLowerCase());
+        scale.category.toLowerCase().includes(searchTerm.toLowerCase());
 
       const matchesCategory =
         selectedCategories.length === 0 ||
-        selectedCategories.includes(questionnaire.category);
+        selectedCategories.includes(scale.category);
 
       return matchesSearch && matchesCategory;
     });
 
-    setFilteredQuestionnaires(filtered);
+    setFilteredScales(filtered);
   }, [searchTerm, selectedCategories]);
 
   // Toggle category selection
@@ -100,7 +100,7 @@ export default function Home() {
           <Interfaces.Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
           <Input
             type="search"
-            placeholder="Rechercher des questionnaires..."
+            placeholder="Rechercher des échelles..."
             className="pl-8"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
@@ -147,10 +147,10 @@ export default function Home() {
         </div>
       </div>
 
-      {filteredQuestionnaires.length === 0 ? (
+      {filteredScales.length === 0 ? (
         <div className="text-center py-12">
           <p className="text-lg text-muted-foreground">
-            Aucun questionnaire ne correspond à vos critères.
+            Aucune échelle ne correspond à vos critères.
           </p>
           <Button variant="link" onClick={clearFilters}>
             Effacer les filtres
@@ -158,12 +158,12 @@ export default function Home() {
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredQuestionnaires.map((questionnaire) => (
-            <QuestionnaireCard
-              key={questionnaire.id}
-              questionnaire={questionnaire}
+          {filteredScales.map((scale) => (
+            <ScaleCard
+              key={scale.id}
+              scale={scale}
               isLoadingFavorites={isLoadingFavorites}
-              isFavorite={favorites.includes(questionnaire.id)}
+              isFavorite={favorites.includes(scale.id)}
             />
           ))}
         </div>

@@ -47,7 +47,7 @@ model Profile {
   userId                  String   @unique @map("user_id")
   user                    User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   
-  favoriteQuestionnaires  String[] @map("favorite_questionnaires")
+  favoriteScales          String[] @map("favorite_scales")
   preferences             Json?    @default("{}")
   
   createdAt               DateTime @default(now()) @map("created_at")
@@ -88,34 +88,34 @@ model Patient {
 }
 
 // ============================================
-// QUESTIONNAIRES
+// SCALES (Échelles psychométriques)
 // ============================================
 
-model Questionnaire {
+model Scale {
   id                String   @id // e.g., "bdi", "stai-y-a"
   title             String
   description       String
   longDescription   String   @map("long_description")
   category          String
   estimatedTime     String   @map("estimated_time")
-  
-  // Questionnaire structure
-  questions         Json     // Stores the full questionnaire structure
+
+  // Scale structure
+  questions         Json     // Stores the full scale structure
   answerScales      Json?    @map("answer_scales")
   scoring           Json?    // Scoring configuration
-  
+
   // Metadata
   isPublished       Boolean  @default(true) @map("is_published")
   requiresAuth      Boolean  @default(false) @map("requires_auth")
   copyrightInfo     String?  @map("copyright_info")
-  
+
   createdAt         DateTime @default(now()) @map("created_at")
   updatedAt         DateTime @updatedAt @map("updated_at")
-  
+
   // Relations
   sessions          Session[]
-  
-  @@map("questionnaires")
+
+  @@map("scales")
 }
 
 // ============================================
@@ -125,9 +125,9 @@ model Questionnaire {
 model Session {
   id                String         @id @default(cuid())
 
-  // Questionnaire reference
-  questionnaireId   String         @map("questionnaire_id")
-  questionnaire     Questionnaire  @relation(fields: [questionnaireId], references: [id])
+  // Scale reference
+  scaleId           String         @map("scale_id")
+  scale             Scale          @relation(fields: [scaleId], references: [id])
 
   // Patient reference
   patientId         String         @map("patient_id")
@@ -159,7 +159,7 @@ model Session {
   @@map("sessions")
   @@index([practitionerId])
   @@index([patientId])
-  @@index([questionnaireId])
+  @@index([scaleId])
   @@index([status])
 }
 

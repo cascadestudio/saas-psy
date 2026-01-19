@@ -1,21 +1,21 @@
 "use client";
 
 import BaseQuestionnaire from "../BaseQuestionnaire";
-import { QuestionnaireProps } from "@/app/types";
+import { ScaleProps } from "@/app/types";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 
-export default function EchelleDanxieteDeLiebowitch(props: QuestionnaireProps) {
-  const { questionnaire } = props;
+export default function EchelleDanxieteDeLiebowitch(props: ScaleProps) {
+  const { scale } = props;
 
   if (
-    !questionnaire?.answerScales?.anxiety ||
-    !questionnaire?.answerScales?.avoidance
+    !scale?.answerScales?.anxiety ||
+    !scale?.answerScales?.avoidance
   ) {
     return <BaseQuestionnaire {...props} />;
   }
 
-  const { anxiety, avoidance } = questionnaire.answerScales;
+  const { anxiety, avoidance } = scale.answerScales;
 
   const getDevDefaultValue = (questionIndex: number, scaleType: string) => {
     // Only apply default values in development
@@ -28,7 +28,7 @@ export default function EchelleDanxieteDeLiebowitch(props: QuestionnaireProps) {
   return (
     <BaseQuestionnaire {...props}>
       <div className="space-y-8">
-        {questionnaire.questions.map((question: any, index: number) => (
+        {scale.questions.map((question: any, index: number) => (
           <div key={index} className="border p-4 rounded-md">
             <div className="flex justify-between items-center mb-4">
               <h3 className="font-medium">

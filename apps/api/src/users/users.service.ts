@@ -48,7 +48,7 @@ export class UsersService {
       await tx.profile.create({
         data: {
           userId: newUser.id,
-          favoriteQuestionnaires: [],
+          favoriteScales: [],
         },
       });
 

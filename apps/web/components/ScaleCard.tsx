@@ -13,8 +13,8 @@ import { Button } from "@/components/ui/button";
 import { FavoriteButton } from "@/components/FavoriteButton";
 import { questionCount } from "@/app/utils/utils";
 
-interface QuestionnaireCardProps {
-  questionnaire: {
+interface ScaleCardProps {
+  scale: {
     id: string;
     title: string;
     description: string;
@@ -26,40 +26,40 @@ interface QuestionnaireCardProps {
   isFavorite: boolean;
 }
 
-export function QuestionnaireCard({
-  questionnaire,
+export function ScaleCard({
+  scale,
   isLoadingFavorites,
   isFavorite,
-}: QuestionnaireCardProps) {
+}: ScaleCardProps) {
   return (
     <Card className="flex flex-col">
       <CardHeader>
         <div className="flex justify-between items-start">
           <div className="text-sm text-muted-foreground mb-1">
-            {questionnaire.category}
+            {scale.category}
           </div>
           {!isLoadingFavorites && (
             <FavoriteButton
-              questionnaireId={questionnaire.id}
+              scaleId={scale.id}
               initialIsFavorite={isFavorite}
               size="sm"
             />
           )}
         </div>
-        <CardTitle>{questionnaire.title}</CardTitle>
+        <CardTitle>{scale.title}</CardTitle>
         <CardDescription className="line-clamp-2">
-          {questionnaire.description}
+          {scale.description}
         </CardDescription>
       </CardHeader>
       <CardContent className="flex-grow">
         <div className="flex justify-between text-sm text-muted-foreground">
-          <span>{questionCount(questionnaire)} questions</span>
-          <span>{questionnaire.estimatedTime}</span>
+          <span>{questionCount(scale)} questions</span>
+          <span>{scale.estimatedTime}</span>
         </div>
       </CardContent>
       <CardFooter>
         <Link
-          href={`/questionnaire/description/${questionnaire.id}`}
+          href={`/questionnaire/description/${scale.id}`}
           className="w-full"
         >
           <Button className="w-full">Voir les détails</Button>

@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { calculateQuestionnaireScore } from "@/app/utils/questionnaire-scoring/questionnaire-scoring";
 import { sendQuestionnaireResults } from "@/app/services/email/sendQuestionnaireResults";
-import { questionnaires } from "@/app/questionnairesData";
+import { scales } from "@/app/scalesData";
 import { formatQuestionnaireAnswers } from "@/app/utils/formatQuestionnaireAnswers";
 export async function POST(request: Request) {
   try {
@@ -17,17 +17,17 @@ export async function POST(request: Request) {
       patientLastname,
     } = body;
 
-    const questionnaire = questionnaires.find((q) => q.id === questionnaireId);
+    const scale = scales.find((s) => s.id === questionnaireId);
 
     // Calculate scores using the utility function
     const scoreResult = calculateQuestionnaireScore(
-      questionnaire,
+      scale,
       questionnaireAnswers
     );
 
     // Format the answers to be readable
     const readableAnswers = formatQuestionnaireAnswers(
-      questionnaire,
+      scale,
       questionnaireAnswers
     );
 

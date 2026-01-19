@@ -1,8 +1,8 @@
 import { notFound } from "next/navigation";
-import { questionnaires } from "@/app/questionnairesData";
-import QuestionnaireFactory from "./components/QuestionnaireFactory";
+import { scales } from "@/app/scalesData";
+import ScaleFactory from "./components/ScaleFactory";
 
-export default async function QuestionnairePage({
+export default async function ScalePage({
   params,
   searchParams,
 }: {
@@ -33,15 +33,15 @@ export default async function QuestionnairePage({
     return notFound();
   }
 
-  const questionnaire = questionnaires.find((q) => q.id === id) || null;
+  const scale = scales.find((s) => s.id === id) || null;
 
-  if (!questionnaire) {
+  if (!scale) {
     return notFound();
   }
 
   return (
-    <QuestionnaireFactory
-      questionnaire={questionnaire}
+    <ScaleFactory
+      scale={scale}
       psychologistEmail={psychologistEmail}
       patientFirstname={patientFirstname}
       patientLastname={patientLastname}

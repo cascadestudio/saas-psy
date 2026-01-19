@@ -5,11 +5,11 @@ import { useEffect, useState } from "react";
 import { useUser } from "@/app/context/UserContext";
 
 interface FavoriteButtonWrapperProps {
-  questionnaireId: string;
+  scaleId: string;
 }
 
 export function FavoriteButtonWrapper({
-  questionnaireId,
+  scaleId,
 }: FavoriteButtonWrapperProps) {
   const [isFavorite, setIsFavorite] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -30,7 +30,7 @@ export function FavoriteButtonWrapper({
         const response = await fetch("/api/favorites");
         if (response.ok) {
           const data = await response.json();
-          setIsFavorite(data.favorites.includes(questionnaireId));
+          setIsFavorite(data.favorites.includes(scaleId));
         }
       } catch (error) {
         console.error("Error fetching favorites:", error);
@@ -40,7 +40,7 @@ export function FavoriteButtonWrapper({
     };
 
     fetchFavorites();
-  }, [questionnaireId, user]);
+  }, [scaleId, user]);
 
   if (isLoading) {
     return null;
@@ -52,7 +52,7 @@ export function FavoriteButtonWrapper({
 
   return (
     <FavoriteButton
-      questionnaireId={questionnaireId}
+      scaleId={scaleId}
       initialIsFavorite={isFavorite}
     />
   );

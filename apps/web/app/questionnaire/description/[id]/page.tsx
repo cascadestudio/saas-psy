@@ -9,63 +9,63 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { EmailDialogForm } from "./EmailDialogForm";
-import { questionnaires } from "@/app/questionnairesData";
+import { scales } from "@/app/scalesData";
 import DevTools from "./DevTools";
 import { questionCount, getExampleQuestions } from "@/app/utils/utils";
 import { FavoriteButtonWrapper } from "./FavoriteButtonWrapper";
-import { QuestionnairePreviewModal } from "./QuestionnairePreviewModal";
+import { ScalePreviewModal } from "./QuestionnairePreviewModal";
 
-export default async function QuestionnairePage({
+export default async function ScaleDescriptionPage({
   params,
 }: {
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const questionnaire = questionnaires.find((q) => q.id === id);
+  const scale = scales.find((s) => s.id === id);
 
-  if (!questionnaire) {
+  if (!scale) {
     return (
       <div className="container mx-auto py-8 px-4 sm:px-6 md:px-8">
-        Questionnaire non trouvé
+        Échelle non trouvée
       </div>
     );
   }
 
-  const exampleQuestions = getExampleQuestions(questionnaire);
+  const exampleQuestions = getExampleQuestions(scale);
 
   return (
     <div className="container mx-auto py-8 px-4 sm:px-6 md:px-8">
       <Link href="/" className="flex items-center text-sm mb-6 hover:underline">
         <Arrow.ArrowLeft className="mr-2 h-4 w-4" />
-        Retour aux questionnaires
+        Retour aux échelles
       </Link>
 
       <Card className="mb-8">
         <CardHeader>
           <div className="flex justify-between items-start">
             <div className="text-sm text-muted-foreground mb-1">
-              {questionnaire.category}
+              {scale.category}
             </div>
-            <FavoriteButtonWrapper questionnaireId={id} />
+            <FavoriteButtonWrapper scaleId={id} />
           </div>
-          <CardTitle className="text-2xl">{questionnaire.title}</CardTitle>
-          <CardDescription>{questionnaire.description}</CardDescription>
+          <CardTitle className="text-2xl">{scale.title}</CardTitle>
+          <CardDescription>{scale.description}</CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">
           <div className="flex items-center gap-6">
             <div className="flex items-center">
               <Files.FileText className="h-5 w-5 mr-2 text-muted-foreground" />
-              <span>{questionCount(questionnaire)} questions</span>
+              <span>{questionCount(scale)} questions</span>
             </div>
             <div className="flex items-center">
               <Interfaces.Clock className="h-5 w-5 mr-2 text-muted-foreground" />
-              <span>{questionnaire.estimatedTime}</span>
+              <span>{scale.estimatedTime}</span>
             </div>
           </div>
           <div>
             <h3 className="text-lg font-medium mb-2">Description</h3>
             <p className="text-muted-foreground">
-              {questionnaire.longDescription}
+              {scale.longDescription}
             </p>
           </div>
           {exampleQuestions.length > 0 && (
@@ -82,7 +82,7 @@ export default async function QuestionnairePage({
               </ul>
             </div>
           )}
-          <QuestionnairePreviewModal questionnaire={questionnaire} />
+          <ScalePreviewModal scale={scale} />
         </CardContent>
         <CardFooter>
           <EmailDialogForm />

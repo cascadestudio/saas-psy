@@ -10,16 +10,16 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { toast } from "sonner";
-import { QuestionnaireProps } from "@/app/types";
+import { ScaleProps } from "@/app/types";
 
 export default function BaseQuestionnaire({
-  questionnaire,
+  scale,
   psychologistEmail,
   patientFirstname,
   patientLastname,
   children,
   isPreview = false,
-}: QuestionnaireProps) {
+}: ScaleProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
@@ -35,20 +35,20 @@ export default function BaseQuestionnaire({
 
     // Extract patientComments and remove it from formEntries
     const patientComments = formEntries.patientComments as string;
-    const { patientComments: _, ...questionnaireAnswers } = formEntries;
+    const { patientComments: _, ...scaleAnswers } = formEntries;
 
     const submissionData = {
-      questionnaireId: questionnaire.id,
-      questionnaireTitle: questionnaire.title,
+      scaleId: scale.id,
+      scaleTitle: scale.title,
       patientFirstname,
       patientLastname,
       psychologistEmail,
-      questionnaireAnswers: questionnaireAnswers,
+      scaleAnswers: scaleAnswers,
       patientComments,
     };
 
     try {
-      const response = await fetch("/questionnaire/api/submit-questionnaire", {
+      const response = await fetch("/scale/api/submit-scale", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -57,14 +57,14 @@ export default function BaseQuestionnaire({
       });
 
       if (!response.ok) {
-        throw new Error("Failed to submit questionnaire");
+        throw new Error("Failed to submit scale");
       }
 
       setIsSubmitted(true);
-      toast.success("Questionnaire envoyé avec succès.");
+      toast.success("Échelle envoyée avec succès.");
     } catch (error) {
-      console.error("Error submitting questionnaire:", error);
-      toast.error("Une erreur est survenue lors de l'envoi du questionnaire.");
+      console.error("Error submitting scale:", error);
+      toast.error("Une erreur est survenue lors de l'envoi de l'échelle.");
     } finally {
       setIsSubmitting(false);
     }
@@ -75,9 +75,9 @@ export default function BaseQuestionnaire({
       <div className="container mx-auto py-8 px-4">
         <Card>
           <CardHeader>
-            <CardTitle>Questionnaire envoyé avec succès</CardTitle>
+            <CardTitle>Échelle envoyée avec succès</CardTitle>
             <p className="text-sm text-muted-foreground mt-2">
-              Merci d’avoir complété ce questionnaire. Vos réponses ont bien été
+              Merci d'avoir complété cette échelle. Vos réponses ont bien été
               transmises à votre praticien.
             </p>
           </CardHeader>
@@ -91,18 +91,18 @@ export default function BaseQuestionnaire({
       <Card>
         <CardHeader>
           <CardTitle>
-            Bonjour {patientFirstname} {patientLastname}, veuillez répondre à ce
-            questionnaire
+            Bonjour {patientFirstname} {patientLastname}, veuillez répondre à cette
+            échelle
           </CardTitle>
           <p className="text-sm text-muted-foreground mt-2">
-            Les réponses de ce questionnaire seront uniquement visibles par
+            Les réponses de cette échelle seront uniquement visibles par
             votre psychologue.
           </p>
         </CardHeader>
         <form ref={formRef} onSubmit={handleSubmit}>
           <CardContent>
             <p className=" mb-8">
-              {questionnaire.instructions ||
+              {scale.instructions ||
                 "Évaluez l'intensité de vos symptômes pour chaque situation"}
             </p>
             {children}

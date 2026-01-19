@@ -67,10 +67,10 @@ export const EmailDialogForm = forwardRef(
 
         setIsEmailSent(true);
         setOpen(false);
-        toast.success("Le questionnaire a été envoyé au patient avec succès.");
+        toast.success("L'échelle a été envoyée au patient avec succès.");
       } catch (error) {
         console.error("Error sending email:", error);
-        toast.error("Échec de l'envoi du questionnaire. Veuillez réessayer.");
+        toast.error("Échec de l'envoi de l'échelle. Veuillez réessayer.");
       } finally {
         setIsLoading(false);
       }
@@ -86,11 +86,11 @@ export const EmailDialogForm = forwardRef(
         </DialogTrigger>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Envoyer le Questionnaire au Patient</DialogTitle>
+            <DialogTitle>Envoyer l'Échelle au Patient</DialogTitle>
             <DialogDescription>
-              Le questionnaire sera envoyé à l'adresse e-mail du patient. Vous
-              recevrez un e-mail contenant les résultats du questionnaire
-              lorsque le patient validera le questionnaire.
+              L'échelle sera envoyée à l'adresse e-mail du patient. Vous
+              recevrez un e-mail contenant les résultats de l'échelle
+              lorsque le patient la validera.
             </DialogDescription>
           </DialogHeader>
           <form onSubmit={handleSendEmail}>
@@ -151,7 +151,7 @@ export const EmailDialogForm = forwardRef(
             </div>
             <DialogFooter>
               <Button type="submit" disabled={isLoading}>
-                {isLoading ? "Envoi en cours..." : "Envoyer le Questionnaire"}
+                {isLoading ? "Envoi en cours..." : "Envoyer l'Échelle"}
               </Button>
             </DialogFooter>
           </form>

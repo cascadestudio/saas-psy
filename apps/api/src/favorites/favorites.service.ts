@@ -14,10 +14,10 @@ export class FavoritesService {
       throw new NotFoundException('Profil non trouvé');
     }
 
-    return { favorites: profile.favoriteQuestionnaires };
+    return { favorites: profile.favoriteScales };
   }
 
-  async toggleFavorite(userId: string, questionnaireId: string) {
+  async toggleFavorite(userId: string, scaleId: string) {
     const profile = await this.prisma.profile.findUnique({
       where: { userId },
     });
@@ -26,23 +26,23 @@ export class FavoritesService {
       throw new NotFoundException('Profil non trouvé');
     }
 
-    const currentFavorites = profile.favoriteQuestionnaires;
-    const isFavorite = currentFavorites.includes(questionnaireId);
+    const currentFavorites = profile.favoriteScales;
+    const isFavorite = currentFavorites.includes(scaleId);
 
     let newFavorites: string[];
     let action: 'add' | 'remove';
 
     if (isFavorite) {
-      newFavorites = currentFavorites.filter((id) => id !== questionnaireId);
+      newFavorites = currentFavorites.filter((id) => id !== scaleId);
       action = 'remove';
     } else {
-      newFavorites = [...currentFavorites, questionnaireId];
+      newFavorites = [...currentFavorites, scaleId];
       action = 'add';
     }
 
     await this.prisma.profile.update({
       where: { userId },
-      data: { favoriteQuestionnaires: newFavorites },
+      data: { favoriteScales: newFavorites },
     });
 
     return {

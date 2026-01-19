@@ -14,7 +14,7 @@ import Link from "next/link";
 import { useUser } from "@/app/context/UserContext";
 import { useEffect, useState } from "react";
 import { patientsApi, sessionsApi, type Patient, type Session } from "@/lib/api-client";
-import { questionnaires } from "@/app/questionnairesData";
+import { scales } from "@/app/scalesData";
 import { Arrow, Interfaces, Files } from "doodle-icons";
 
 const statusColors: Record<string, string> = {
@@ -198,7 +198,7 @@ export default function PatientDetailPage() {
                   {new Date(sessions[0].createdAt).toLocaleDateString("fr-FR")}
                 </div>
                 <p className="text-xs text-muted-foreground mt-1">
-                  {questionnaires.find((q) => q.id === sessions[0].questionnaireId)
+                  {scales.find((s) => s.id === sessions[0].scaleId)
                     ?.title || "Échelle"}
                 </p>
               </>
@@ -243,8 +243,8 @@ export default function PatientDetailPage() {
           ) : (
             <div className="space-y-3">
               {sessions.map((session) => {
-                const questionnaire = questionnaires.find(
-                  (q) => q.id === session.questionnaireId
+                const scale = scales.find(
+                  (s) => s.id === session.scaleId
                 );
 
                 return (
@@ -255,7 +255,7 @@ export default function PatientDetailPage() {
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2 mb-1">
                         <p className="font-medium truncate">
-                          {questionnaire?.title || session.questionnaireId}
+                          {scale?.title || session.scaleId}
                         </p>
                         <Badge
                           className={statusColors[session.status] || statusColors.created}

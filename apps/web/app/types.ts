@@ -27,8 +27,8 @@ export type BaseQuestion = {
   type: string;
 };
 
-export type QuestionnaireProps = {
-  questionnaire: {
+export type ScaleProps = {
+  scale: {
     id: string;
     title: string;
     description: string;
