@@ -71,13 +71,18 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-gelica), Georgia, serif;
     @apply font-semibold tracking-tight;
   }
 }
 
-/* Utility class for brand font */
+/* Utility classes for brand fonts */
 @layer utilities {
   .font-rethink {
     font-family: 'Rethink Sans', Arial, sans-serif;
+  }
+
+  .font-gelica {
+    font-family: var(--font-gelica), Georgia, serif;
   }
 }

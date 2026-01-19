@@ -17,10 +17,11 @@ const config = {
       },
     },
     extend: {
-      /* Brand Font Family */
+      /* Brand Font Families */
       fontFamily: {
         sans: ["Rethink Sans", "Arial", "sans-serif"],
         rethink: ["Rethink Sans", "Arial", "sans-serif"],
+        gelica: ["var(--font-gelica)", "Georgia", "serif"],
       },
       colors: {
         border: "hsl(var(--border))",

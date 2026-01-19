@@ -1,4 +1,5 @@
 import "./globals.css";
+import { gelica } from "./fonts";
 import { Toaster } from "@/components/ui/sonner";
 import { UserProvider } from "@/app/context/UserContext";
 import { AuthGateProvider } from "@/app/context/AuthGateContext";
@@ -22,7 +23,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="fr">
+    <html lang="fr" className={gelica.variable}>
       <body className="bg-background text-foreground font-rethink">
         <UserProvider>
           <AuthGateProvider>
