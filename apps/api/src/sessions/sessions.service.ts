@@ -3,16 +3,23 @@ import {
   NotFoundException,
   ForbiddenException,
   BadRequestException,
+  Logger,
 } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
+import { EmailService } from '../email/email.service';
 import { CreateSessionDto, UpdateSessionDto, SubmitResponsesDto } from './dto';
 
 @Injectable()
 export class SessionsService {
-  constructor(private prisma: PrismaService) {}
+  private readonly logger = new Logger(SessionsService.name);
+
+  constructor(
+    private prisma: PrismaService,
+    private emailService: EmailService,
+  ) {}
 
   async create(practitionerId: string, dto: CreateSessionDto) {
-    // Verify patient belongs to practitioner
+    // Get patient data
     const patient = await this.prisma.patient.findUnique({
       where: { id: dto.patientId },
     });
@@ -24,6 +31,22 @@ export class SessionsService {
     if (patient.practitionerId !== practitionerId) {
       throw new ForbiddenException('Accès non autorisé à ce patient');
     }
+
+    // Get practitioner data
+    const practitioner = await this.prisma.user.findUnique({
+      where: { id: practitionerId },
+    });
+
+    if (!practitioner) {
+      throw new NotFoundException('Praticien non trouvé');
+    }
+
+    // Get scales data
+    const scales = await this.prisma.scale.findMany({
+      where: { id: { in: dto.scaleIds } },
+    });
+
+    const scalesMap = new Map(scales.map((s) => [s.id, s]));
 
     // Create sessions for each scale (one session per scale)
     const sessions = await this.prisma.$transaction(
@@ -42,9 +65,41 @@ export class SessionsService {
       ),
     );
 
+    // Send emails for each session
+    const practitionerName = [practitioner.firstName, practitioner.lastName]
+      .filter(Boolean)
+      .join(' ') || 'Votre praticien';
+
+    const emailResults = await Promise.all(
+      sessions.map(async (session) => {
+        const scale = scalesMap.get(session.scaleId);
+        const scaleName = scale?.title || 'Questionnaire';
+
+        return this.emailService.sendSessionEmail({
+          patientEmail: patient.email,
+          patientFirstName: patient.firstName,
+          patientLastName: patient.lastName,
+          sessionId: session.id,
+          scaleName,
+          practitionerName,
+          message: dto.message,
+        });
+      }),
+    );
+
+    // Log email results
+    const failedEmails = emailResults.filter((r) => !r.success);
+    if (failedEmails.length > 0) {
+      this.logger.warn(
+        `${failedEmails.length} email(s) failed to send for patient ${patient.id}`,
+      );
+    }
+
     return {
       sessions,
       message: `${sessions.length} échelle(s) envoyée(s) avec succès`,
+      emailsSent: emailResults.filter((r) => r.success).length,
+      emailsFailed: failedEmails.length,
     };
   }
 
@@ -158,8 +213,10 @@ export class SessionsService {
         patient: {
           select: {
             firstName: true,
+            lastName: true,
           },
         },
+        scale: true,
       },
     });
 
@@ -200,7 +257,20 @@ export class SessionsService {
         id: session.id,
         scaleId: session.scaleId,
         patientFirstName: session.patient.firstName,
+        patientLastName: session.patient.lastName,
         status: session.status === 'SENT' ? 'STARTED' : session.status,
+        scale: session.scale
+          ? {
+              id: session.scale.id,
+              title: session.scale.title,
+              description: session.scale.description,
+              instructions: session.scale.longDescription,
+              questions: session.scale.questions,
+              answerScales: session.scale.answerScales,
+              scoring: session.scale.scoring,
+              estimatedTime: session.scale.estimatedTime,
+            }
+          : null,
       },
     };
   }

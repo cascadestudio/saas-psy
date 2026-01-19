@@ -58,4 +58,6 @@ export type ScaleProps = {
   patientLastname: string;
   children?: ReactNode;
   isPreview?: boolean;
+  // Session mode: custom submit handler
+  onSubmit?: (responses: Record<string, any>, comments?: string) => Promise<void>;
 };

@@ -18,21 +18,21 @@ import { scales } from "@/app/scalesData";
 import { Arrow, Interfaces, Files } from "doodle-icons";
 
 const statusColors: Record<string, string> = {
-  completed: "bg-green-100 text-green-800",
-  started: "bg-blue-100 text-blue-800",
-  sent: "bg-orange-100 text-orange-800",
-  expired: "bg-gray-100 text-gray-800",
-  created: "bg-gray-100 text-gray-800",
-  cancelled: "bg-red-100 text-red-800",
+  COMPLETED: "bg-green-100 text-green-800",
+  STARTED: "bg-blue-100 text-blue-800",
+  SENT: "bg-orange-100 text-orange-800",
+  EXPIRED: "bg-gray-100 text-gray-800",
+  CREATED: "bg-gray-100 text-gray-800",
+  CANCELLED: "bg-red-100 text-red-800",
 };
 
 const statusLabels: Record<string, string> = {
-  completed: "Complété",
-  started: "Vu",
-  sent: "Envoyé",
-  expired: "Expiré",
-  created: "Créé",
-  cancelled: "Annulé",
+  COMPLETED: "Complété",
+  STARTED: "Vu",
+  SENT: "Envoyé",
+  EXPIRED: "Expiré",
+  CREATED: "Créé",
+  CANCELLED: "Annulé",
 };
 
 export default function PatientDetailPage() {
@@ -98,7 +98,7 @@ export default function PatientDetailPage() {
     );
   }
 
-  const completedSessions = sessions.filter((s) => s.status === "completed");
+  const completedSessions = sessions.filter((s) => s.status === "COMPLETED");
 
   // Calculate age from birthDate
   const calculateAge = (birthDate?: string) => {
@@ -262,13 +262,13 @@ export default function PatientDetailPage() {
                         Créé le{" "}
                         {new Date(session.createdAt).toLocaleDateString("fr-FR")}
                       </p>
-                      {session.status === "completed" && session.score !== undefined && (
+                      {session.status === "COMPLETED" && session.score !== undefined && (
                         <p className="text-sm font-medium text-green-700 mt-1">
                           Score: {session.score} - {session.interpretation}
                         </p>
                       )}
                     </div>
-                    {session.status === "completed" && (
+                    {session.status === "COMPLETED" && (
                       <Button asChild variant="outline" size="sm">
                         <Link href={`/results/${session.id}`}>
                           Voir résultats

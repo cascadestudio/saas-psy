@@ -19,6 +19,7 @@ export default function BaseQuestionnaire({
   patientLastname,
   children,
   isPreview = false,
+  onSubmit,
 }: ScaleProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -37,17 +38,31 @@ export default function BaseQuestionnaire({
     const patientComments = formEntries.patientComments as string;
     const { patientComments: _, ...scaleAnswers } = formEntries;
 
-    const submissionData = {
-      scaleId: scale.id,
-      scaleTitle: scale.title,
-      patientFirstname,
-      patientLastname,
-      psychologistEmail,
-      scaleAnswers: scaleAnswers,
-      patientComments,
-    };
+    // Convert string values to numbers where applicable
+    const responses: Record<string, any> = {};
+    for (const [key, value] of Object.entries(scaleAnswers)) {
+      const numValue = Number(value);
+      responses[key] = isNaN(numValue) ? value : numValue;
+    }
 
     try {
+      // If custom submit handler provided (session mode), use it
+      if (onSubmit) {
+        await onSubmit(responses, patientComments);
+        return;
+      }
+
+      // Default behavior: send via email API
+      const submissionData = {
+        scaleId: scale.id,
+        scaleTitle: scale.title,
+        patientFirstname,
+        patientLastname,
+        psychologistEmail,
+        scaleAnswers: scaleAnswers,
+        patientComments,
+      };
+
       const response = await fetch("/scale/api/submit-scale", {
         method: "POST",
         headers: {
