@@ -1,1 +1,2 @@
 - [x] remove dark theme (psy doesnt care)
+- [ ] review scales card and tunnel from scales
