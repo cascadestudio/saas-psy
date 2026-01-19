@@ -1,9 +1,10 @@
-import { ThemeProvider } from "next-themes";
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
 import { UserProvider } from "@/app/context/UserContext";
 import { AuthGateProvider } from "@/app/context/AuthGateContext";
 import { AuthGateModal } from "@/components/auth/AuthGateModal";
+import { PremiumGateProvider } from "@/app/context/PremiumGateContext";
+import { PremiumGateModal } from "@/components/PremiumGateModal";
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -21,19 +22,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="fr" suppressHydrationWarning>
+    <html lang="fr">
       <body className="bg-background text-foreground font-lora">
         <UserProvider>
           <AuthGateProvider>
-            <ThemeProvider
-              attribute="class"
-              defaultTheme="system"
-              enableSystem
-              disableTransitionOnChange
-            >
+            <PremiumGateProvider>
               {children}
               <AuthGateModal />
-            </ThemeProvider>
+              <PremiumGateModal />
+            </PremiumGateProvider>
           </AuthGateProvider>
         </UserProvider>
         <Toaster />

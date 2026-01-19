@@ -4,7 +4,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Interfaces, Files } from "doodle-icons";
 import { Button } from "@/components/ui/button";
-import { ThemeSwitcher } from "@/components/theme-switcher";
 import { useUser } from "@/app/context/UserContext";
 
 const navigation = [
@@ -61,7 +60,6 @@ export default function AppLayout({
             </Link>
           </button>
           <div className="flex flex-1 items-center justify-end space-x-2">
-            <ThemeSwitcher />
             {user ? (
               <Button
                 variant="ghost"

@@ -54,44 +54,6 @@
     --brand-mid-gray: 49 8% 67%;
     --brand-light-gray: 50 24% 89%;
   }
-
-  .dark {
-    /* Dark mode - inverted Anthropic palette */
-    --background: 60 3% 8%;             /* Dark #141413 */
-    --foreground: 48 38% 97%;           /* Light #faf9f5 */
-
-    --card: 60 4% 12%;                  /* Slightly lighter dark */
-    --card-foreground: 48 38% 97%;      /* Light #faf9f5 */
-
-    --popover: 60 4% 12%;
-    --popover-foreground: 48 38% 97%;
-
-    --primary: 15 62% 60%;              /* Orange stays same */
-    --primary-foreground: 60 3% 8%;     /* Dark text on orange */
-
-    --secondary: 60 4% 18%;             /* Dark secondary */
-    --secondary-foreground: 48 38% 97%;
-
-    --muted: 60 4% 18%;
-    --muted-foreground: 49 8% 67%;      /* Mid Gray */
-
-    --accent: 210 48% 61%;              /* Blue stays same */
-    --accent-foreground: 60 3% 8%;
-
-    --destructive: 0 62% 50%;
-    --destructive-foreground: 48 38% 97%;
-
-    --border: 60 4% 20%;
-    --input: 60 4% 20%;
-    --ring: 15 62% 60%;
-
-    /* Chart colors - slightly adjusted for dark mode */
-    --chart-1: 15 62% 55%;
-    --chart-2: 210 48% 56%;
-    --chart-3: 88 21% 50%;
-    --chart-4: 49 8% 60%;
-    --chart-5: 48 38% 90%;
-  }
 }
 
 @layer base {

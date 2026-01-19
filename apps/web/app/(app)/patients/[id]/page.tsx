@@ -18,12 +18,12 @@ import { scales } from "@/app/scalesData";
 import { Arrow, Interfaces, Files } from "doodle-icons";
 
 const statusColors: Record<string, string> = {
-  completed: "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200",
-  started: "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200",
-  sent: "bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200",
-  expired: "bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200",
-  created: "bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200",
-  cancelled: "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200",
+  completed: "bg-green-100 text-green-800",
+  started: "bg-blue-100 text-blue-800",
+  sent: "bg-orange-100 text-orange-800",
+  expired: "bg-gray-100 text-gray-800",
+  created: "bg-gray-100 text-gray-800",
+  cancelled: "bg-red-100 text-red-800",
 };
 
 const statusLabels: Record<string, string> = {
@@ -263,7 +263,7 @@ export default function PatientDetailPage() {
                         {new Date(session.createdAt).toLocaleDateString("fr-FR")}
                       </p>
                       {session.status === "completed" && session.score !== undefined && (
-                        <p className="text-sm font-medium text-green-700 dark:text-green-400 mt-1">
+                        <p className="text-sm font-medium text-green-700 mt-1">
                           Score: {session.score} - {session.interpretation}
                         </p>
                       )}

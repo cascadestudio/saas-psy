@@ -1,1 +1,1 @@
-- [ ] remove dark theme (psy doesnt care)
+- [x] remove dark theme (psy doesnt care)

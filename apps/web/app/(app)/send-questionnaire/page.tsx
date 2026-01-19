@@ -163,7 +163,7 @@ function SendQuestionnaireContent() {
                 <p className="text-sm text-muted-foreground mb-4">
                   Aucun patient dans votre liste
                 </p>
-                <CreatePatientSheet onPatientCreated={handlePatientCreated} />
+                <CreatePatientSheet onPatientCreated={handlePatientCreated} currentPatientCount={patients.length} />
               </div>
             ) : (
               <div className="space-y-4">
@@ -192,6 +192,7 @@ function SendQuestionnaireContent() {
                     onPatientCreated={handlePatientCreated}
                     buttonSize="sm"
                     buttonText="Nouveau patient"
+                    currentPatientCount={patients.length}
                   />
                 </div>
               </div>
@@ -257,8 +258,8 @@ function SendQuestionnaireContent() {
               {/* Step 1: Scale Selection */}
               {step === "scales" && (
                 <div className="space-y-4">
-                  <div className="bg-blue-50 dark:bg-blue-950 border border-blue-200 dark:border-blue-800 rounded-lg p-4 mb-4">
-                    <p className="text-sm text-blue-900 dark:text-blue-100">
+                  <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-4">
+                    <p className="text-sm text-blue-900">
                       <strong>Multi-sélection activée :</strong> Le patient
                       recevra toutes les échelles sélectionnées dans un seul
                       email et pourra les compléter dans l'ordre de son choix.
