@@ -7,6 +7,7 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { SubmitButton } from "@/components/submit-button";
 import { FormMessage, Message } from "@/components/form-message";
+import Link from "next/link";
 
 export function SignInForm() {
   const router = useRouter();
@@ -85,6 +86,13 @@ export function SignInForm() {
           </SubmitButton>
 
           {message && <FormMessage message={message} />}
+
+          <p className="text-sm text-center text-muted-foreground">
+            Pas encore de compte ?{" "}
+            <Link href="/sign-up" className="text-primary underline-offset-4 hover:underline">
+              S'inscrire
+            </Link>
+          </p>
         </div>
 
         <div className="border-t pt-4">
