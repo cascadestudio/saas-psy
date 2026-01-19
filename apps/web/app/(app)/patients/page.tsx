@@ -84,6 +84,7 @@ export default function PatientsPage() {
               <CreatePatientSheet
                 onPatientCreated={handlePatientCreated}
                 buttonText="Ajouter votre premier patient"
+                currentPatientCount={patients.length}
               />
             </div>
           </CardContent>
@@ -124,7 +125,7 @@ export default function PatientsPage() {
             liste
           </p>
         </div>
-        <CreatePatientSheet onPatientCreated={handlePatientCreated} />
+        <CreatePatientSheet onPatientCreated={handlePatientCreated} currentPatientCount={patients.length} />
       </div>
 
       <Card>

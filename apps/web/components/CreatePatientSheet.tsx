@@ -12,31 +12,41 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { patientsApi } from "@/lib/api-client";
+import { patientsApi, ApiError } from "@/lib/api-client";
 import { toast } from "sonner";
 import { Interfaces } from "doodle-icons";
 import { useRequireAuth } from "@/hooks/useRequireAuth";
+import { usePremiumGate, FREE_PATIENT_LIMIT } from "@/app/context/PremiumGateContext";
 
 interface CreatePatientSheetProps {
   onPatientCreated?: (patientId: string) => void;
   buttonSize?: "sm" | "lg";
   buttonText?: string;
+  currentPatientCount?: number;
 }
 
 export function CreatePatientSheet({
   onPatientCreated,
   buttonSize = "lg",
-  buttonText = "Ajouter un patient"
+  buttonText = "Ajouter un patient",
+  currentPatientCount = 0,
 }: CreatePatientSheetProps) {
   const [open, setOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { requireAuth } = useRequireAuth();
+  const { openPremiumGate } = usePremiumGate();
 
   const handleOpenChange = (newOpen: boolean) => {
     if (newOpen) {
       // Check auth before opening the dialog
-      if (!requireAuth(() => setOpen(true))) {
+      if (!requireAuth(() => handleOpenChange(true))) {
         return; // Auth gate modal opened, action stored for later
+      }
+
+      // Check patient limit (only for authenticated users)
+      if (currentPatientCount >= FREE_PATIENT_LIMIT) {
+        openPremiumGate(currentPatientCount);
+        return; // Premium gate modal opened
       }
     }
     setOpen(newOpen);
@@ -67,17 +77,19 @@ export function CreatePatientSheet({
         description: `${patient.firstName} ${patient.lastName} a été ajouté à votre liste`,
       });
 
+      setIsSubmitting(false);
       setOpen(false);
-      e.currentTarget.reset();
 
-      // Callback with new patient ID
-      if (onPatientCreated) {
-        onPatientCreated(patient.id);
-      }
+      // Refresh patient list
+      onPatientCreated?.(patient.id);
+      return;
     } catch (error) {
       console.error("Error creating patient:", error);
-      toast.error("Erreur lors de la création du patient");
-    } finally {
+      if (error instanceof ApiError) {
+        toast.error(error.message);
+      } else {
+        toast.error("Erreur lors de la création du patient");
+      }
       setIsSubmitting(false);
     }
   };

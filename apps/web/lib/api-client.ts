@@ -202,7 +202,7 @@ export const sessionsApi = {
   },
 
   getByPatientId: async (patientId: string) => {
-    return apiRequest<{ sessions: Session[] }>(`/sessions/patient/${patientId}`);
+    return apiRequest<{ sessions: Session[] }>(`/sessions?patientId=${patientId}`);
   },
 
   getRecent: async (limit: number = 10) => {

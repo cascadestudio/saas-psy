@@ -108,6 +108,7 @@ export default function DashboardPage() {
                 <CreatePatientSheet
                   onPatientCreated={handlePatientCreated}
                   buttonText="Ajouter un patient"
+                  currentPatientCount={patients.length}
                 />
               </div>
             </CardContent>
@@ -200,6 +201,7 @@ export default function DashboardPage() {
                 onPatientCreated={handlePatientCreated}
                 buttonSize="sm"
                 buttonText="Ajouter"
+                currentPatientCount={patients.length}
               />
             </div>
           </CardHeader>
