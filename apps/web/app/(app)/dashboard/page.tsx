@@ -1,6 +1,5 @@
 "use client";
 
-import { redirect } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -25,16 +24,13 @@ export default function DashboardPage() {
   const [patientsLoading, setPatientsLoading] = useState(true);
   const [favorites, setFavorites] = useState<string[]>([]);
 
-  useEffect(() => {
-    if (!isLoading && !user) {
-      redirect("/sign-in");
-    }
-  }, [user, isLoading]);
-
-  // Load patients from API
+  // Load patients from API (only for authenticated users)
   useEffect(() => {
     const loadPatients = async () => {
-      if (!user) return;
+      if (!user) {
+        setPatientsLoading(false);
+        return;
+      }
       setPatientsLoading(true);
       try {
         const { patients: data } = await patientsApi.getAll();
@@ -47,9 +43,7 @@ export default function DashboardPage() {
       }
     };
 
-    if (user) {
-      loadPatients();
-    }
+    loadPatients();
   }, [user]);
 
   const handlePatientCreated = async () => {
@@ -62,7 +56,7 @@ export default function DashboardPage() {
     }
   };
 
-  // Load favorites from API
+  // Load favorites from API (only for authenticated users)
   useEffect(() => {
     const loadFavorites = async () => {
       if (!user) return;
@@ -75,9 +69,7 @@ export default function DashboardPage() {
       }
     };
 
-    if (user) {
-      loadFavorites();
-    }
+    loadFavorites();
   }, [user]);
 
   if (isLoading) {
@@ -88,8 +80,88 @@ export default function DashboardPage() {
     );
   }
 
+  // Anonymous user view
   if (!user) {
-    return null;
+    return (
+      <div className="container mx-auto px-4 py-6">
+        <div className="mb-6">
+          <h1 className="font-bold text-3xl">Tableau de bord</h1>
+          <p className="text-muted-foreground mt-1">
+            Bienvenue sur Melya
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <Card>
+            <CardHeader>
+              <CardTitle>Mes patients</CardTitle>
+              <CardDescription>
+                Gérez vos patients et envoyez des échelles
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="text-center py-8">
+                <Interfaces.User className="h-12 w-12 mx-auto mb-4 text-muted-foreground" />
+                <p className="text-muted-foreground mb-4">
+                  Créez un compte pour ajouter vos premiers patients
+                </p>
+                <CreatePatientSheet
+                  onPatientCreated={handlePatientCreated}
+                  buttonText="Ajouter un patient"
+                />
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <div className="flex items-center justify-between">
+                <div>
+                  <CardTitle>Échelles disponibles</CardTitle>
+                  <CardDescription>
+                    {scales.length} échelles psychométriques validées
+                  </CardDescription>
+                </div>
+                <Button asChild size="sm" variant="outline">
+                  <Link href="/echelles">
+                    Voir tout
+                  </Link>
+                </Button>
+              </div>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-3">
+                {scales.slice(0, 3).map((scale) => (
+                  <div
+                    key={scale.id}
+                    className="border rounded-lg p-4 hover:bg-muted/50 transition-colors"
+                  >
+                    <div className="flex items-start justify-between gap-3">
+                      <div className="flex-1">
+                        <h3 className="font-medium text-sm">{scale.title}</h3>
+                        <p className="text-xs text-muted-foreground line-clamp-2">
+                          {scale.description}
+                        </p>
+                        <div className="flex items-center gap-3 mt-2">
+                          <span className="text-xs text-muted-foreground">
+                            {scale.category}
+                          </span>
+                        </div>
+                      </div>
+                      <Button asChild size="sm" variant="ghost">
+                        <Link href={`/questionnaire/description/${scale.id}`}>
+                          Détails
+                        </Link>
+                      </Button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+    );
   }
 
   const filteredPatients = patients.filter((patient) => {

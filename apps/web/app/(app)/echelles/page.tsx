@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { redirect } from "next/navigation";
 import { Input } from "@/components/ui/input";
 import { ScaleCard } from "@/components/ScaleCard";
 import { scales } from "@/app/scalesData";
@@ -15,16 +14,13 @@ export default function EchellesPage() {
   const [favorites, setFavorites] = useState<string[]>([]);
   const [favoritesLoading, setFavoritesLoading] = useState(true);
 
-  useEffect(() => {
-    if (!isLoading && !user) {
-      redirect("/sign-in");
-    }
-  }, [user, isLoading]);
-
-  // Load favorites from API
+  // Load favorites from API (only for authenticated users)
   useEffect(() => {
     const loadFavorites = async () => {
-      if (!user) return;
+      if (!user) {
+        setFavoritesLoading(false);
+        return;
+      }
       setFavoritesLoading(true);
       try {
         const { favorites: data } = await favoritesApi.getFavorites();
@@ -37,9 +33,7 @@ export default function EchellesPage() {
       }
     };
 
-    if (user) {
-      loadFavorites();
-    }
+    loadFavorites();
   }, [user]);
 
   if (isLoading) {
@@ -48,10 +42,6 @@ export default function EchellesPage() {
         <p>Chargement...</p>
       </div>
     );
-  }
-
-  if (!user) {
-    return null;
   }
 
   // Filtrer les échelles par titre, description ou catégorie

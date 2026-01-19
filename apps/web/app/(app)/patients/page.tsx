@@ -1,6 +1,5 @@
 "use client";
 
-import { redirect } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -21,16 +20,13 @@ export default function PatientsPage() {
   const [patients, setPatients] = useState<Patient[]>([]);
   const [patientsLoading, setPatientsLoading] = useState(true);
 
-  useEffect(() => {
-    if (!isLoading && !user) {
-      redirect("/sign-in");
-    }
-  }, [user, isLoading]);
-
-  // Load patients from API
+  // Load patients from API (only for authenticated users)
   useEffect(() => {
     const loadPatients = async () => {
-      if (!user) return;
+      if (!user) {
+        setPatientsLoading(false);
+        return;
+      }
       setPatientsLoading(true);
       try {
         const { patients: data } = await patientsApi.getAll();
@@ -43,9 +39,7 @@ export default function PatientsPage() {
       }
     };
 
-    if (user) {
-      loadPatients();
-    }
+    loadPatients();
   }, [user]);
 
   const handlePatientCreated = async () => {
@@ -66,8 +60,36 @@ export default function PatientsPage() {
     );
   }
 
+  // Anonymous user view
   if (!user) {
-    return null;
+    return (
+      <div className="flex-1 w-full flex flex-col gap-6 p-6">
+        <div className="flex items-center justify-between">
+          <div>
+            <h1 className="font-bold text-3xl">Gestion des patients</h1>
+            <p className="text-muted-foreground mt-1">
+              Gérez vos patients et leur suivi
+            </p>
+          </div>
+        </div>
+
+        <Card>
+          <CardContent className="py-12">
+            <div className="text-center">
+              <Interfaces.User className="h-16 w-16 mx-auto mb-4 text-muted-foreground" />
+              <h2 className="text-xl font-semibold mb-2">Commencez à suivre vos patients</h2>
+              <p className="text-muted-foreground mb-6 max-w-md mx-auto">
+                Créez un compte gratuit pour ajouter vos patients, leur envoyer des échelles et suivre leur évolution.
+              </p>
+              <CreatePatientSheet
+                onPatientCreated={handlePatientCreated}
+                buttonText="Ajouter votre premier patient"
+              />
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    );
   }
 
   const filteredPatients = patients.filter((patient) => {

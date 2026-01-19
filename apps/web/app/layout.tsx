@@ -1,10 +1,9 @@
-import HeaderAuth from "@/components/header-auth";
-import { ThemeSwitcher } from "@/components/theme-switcher";
 import { ThemeProvider } from "next-themes";
-import Link from "next/link";
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
 import { UserProvider } from "@/app/context/UserContext";
+import { AuthGateProvider } from "@/app/context/AuthGateContext";
+import { AuthGateModal } from "@/components/auth/AuthGateModal";
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -25,14 +24,17 @@ export default function RootLayout({
     <html lang="fr" suppressHydrationWarning>
       <body className="bg-background text-foreground font-lora">
         <UserProvider>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            {children}
-          </ThemeProvider>
+          <AuthGateProvider>
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="system"
+              enableSystem
+              disableTransitionOnChange
+            >
+              {children}
+              <AuthGateModal />
+            </ThemeProvider>
+          </AuthGateProvider>
         </UserProvider>
         <Toaster />
       </body>

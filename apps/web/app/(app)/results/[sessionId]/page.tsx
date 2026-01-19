@@ -1,6 +1,6 @@
 "use client";
 
-import { redirect, useParams } from "next/navigation";
+import { useParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -27,12 +27,6 @@ export default function ResultsPage() {
   const [patient, setPatient] = useState<Patient | null>(null);
   const [allSessions, setAllSessions] = useState<Session[]>([]);
   const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    if (!isLoading && !user) {
-      redirect("/sign-in");
-    }
-  }, [user, isLoading]);
 
   // Load session data from API
   useEffect(() => {

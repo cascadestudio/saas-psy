@@ -8,7 +8,6 @@ import {
   DialogDescription,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -16,6 +15,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { patientsApi } from "@/lib/api-client";
 import { toast } from "sonner";
 import { Interfaces } from "doodle-icons";
+import { useRequireAuth } from "@/hooks/useRequireAuth";
 
 interface CreatePatientSheetProps {
   onPatientCreated?: (patientId: string) => void;
@@ -30,6 +30,17 @@ export function CreatePatientSheet({
 }: CreatePatientSheetProps) {
   const [open, setOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const { requireAuth } = useRequireAuth();
+
+  const handleOpenChange = (newOpen: boolean) => {
+    if (newOpen) {
+      // Check auth before opening the dialog
+      if (!requireAuth(() => setOpen(true))) {
+        return; // Auth gate modal opened, action stored for later
+      }
+    }
+    setOpen(newOpen);
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -72,14 +83,13 @@ export function CreatePatientSheet({
   };
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
-        <Button size={buttonSize}>
-          <Interfaces.UserAdd className="mr-2 h-4 w-4" />
-          {buttonText}
-        </Button>
-      </DialogTrigger>
-      <DialogContent className="sm:max-w-[500px]">
+    <>
+      <Button size={buttonSize} onClick={() => handleOpenChange(true)}>
+        <Interfaces.UserAdd className="mr-2 h-4 w-4" />
+        {buttonText}
+      </Button>
+      <Dialog open={open} onOpenChange={handleOpenChange}>
+        <DialogContent className="sm:max-w-[500px]">
         <DialogHeader>
           <DialogTitle>Ajouter un nouveau patient</DialogTitle>
           <DialogDescription>
@@ -165,5 +175,6 @@ export function CreatePatientSheet({
         </form>
       </DialogContent>
     </Dialog>
+    </>
   );
 }

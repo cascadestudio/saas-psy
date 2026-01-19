@@ -1,6 +1,6 @@
 "use client";
 
-import { redirect, useRouter, useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -41,12 +41,6 @@ function SendQuestionnaireContent() {
   const [patients, setPatients] = useState<Patient[]>([]);
   const [patientsLoading, setPatientsLoading] = useState(true);
   const [isSending, setIsSending] = useState(false);
-
-  useEffect(() => {
-    if (!isLoading && !user) {
-      redirect("/sign-in");
-    }
-  }, [user, isLoading]);
 
   // Load patients from API
   useEffect(() => {

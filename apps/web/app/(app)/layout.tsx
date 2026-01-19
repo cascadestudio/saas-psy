@@ -6,8 +6,6 @@ import { Interfaces, Files } from "doodle-icons";
 import { Button } from "@/components/ui/button";
 import { ThemeSwitcher } from "@/components/theme-switcher";
 import { useUser } from "@/app/context/UserContext";
-import { redirect } from "next/navigation";
-import { useEffect } from "react";
 
 const navigation = [
   { name: "Tableau de bord", href: "/dashboard", icon: Interfaces.Home },
@@ -23,22 +21,12 @@ export default function AppLayout({
   const pathname = usePathname();
   const { user, isLoading, logout } = useUser();
 
-  useEffect(() => {
-    if (!isLoading && !user) {
-      redirect("/sign-in");
-    }
-  }, [user, isLoading]);
-
   if (isLoading) {
     return (
       <div className="flex min-h-screen items-center justify-center">
         <p>Chargement...</p>
       </div>
     );
-  }
-
-  if (!user) {
-    return null;
   }
 
   return (
@@ -74,14 +62,20 @@ export default function AppLayout({
           </button>
           <div className="flex flex-1 items-center justify-end space-x-2">
             <ThemeSwitcher />
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={logout}
-              title="Déconnexion"
-            >
-              <Interfaces.Logout className="h-4 w-4" />
-            </Button>
+            {user ? (
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={logout}
+                title="Déconnexion"
+              >
+                <Interfaces.Logout className="h-4 w-4" />
+              </Button>
+            ) : (
+              <Button asChild variant="default" size="sm">
+                <Link href="/sign-in">Connexion</Link>
+              </Button>
+            )}
           </div>
         </div>
       </header>
