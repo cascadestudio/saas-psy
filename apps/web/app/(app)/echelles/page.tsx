@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { Input } from "@/components/ui/input";
+import { Badge } from "@/components/ui/badge";
 import { ScaleCard } from "@/components/ScaleCard";
 import { scales } from "@/app/scalesData";
 import { Interfaces } from "doodle-icons";
@@ -11,8 +12,15 @@ import { favoritesApi } from "@/lib/api-client";
 export default function EchellesPage() {
   const { user, isLoading } = useUser();
   const [searchQuery, setSearchQuery] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [favorites, setFavorites] = useState<string[]>([]);
   const [favoritesLoading, setFavoritesLoading] = useState(true);
+
+  // Extract unique categories from scales (excluding "Test")
+  const categories = useMemo(() => {
+    const uniqueCategories = Array.from(new Set(scales.map((s) => s.category)));
+    return uniqueCategories.filter((c) => c !== "Test").sort();
+  }, []);
 
   // Load favorites from API (only for authenticated users)
   useEffect(() => {
@@ -44,10 +52,16 @@ export default function EchellesPage() {
     );
   }
 
-  // Filtrer les échelles par titre, description ou catégorie
+  // Filtrer les échelles par catégorie et par recherche
   const filteredScales = scales
     .filter((s) => {
+      // Category filter
+      if (selectedCategory && s.category !== selectedCategory) {
+        return false;
+      }
+      // Search filter
       const query = searchQuery.toLowerCase();
+      if (!query) return true;
       return (
         s.title.toLowerCase().includes(query) ||
         s.description.toLowerCase().includes(query) ||
@@ -73,11 +87,11 @@ export default function EchellesPage() {
         </p>
       </div>
 
-      <div className="mb-6">
+      <div className="mb-4">
         <div className="relative">
           <Interfaces.Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
           <Input
-            placeholder="Rechercher une échelle par nom, catégorie..."
+            placeholder="Rechercher une échelle par nom..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="pl-10"
@@ -85,10 +99,32 @@ export default function EchellesPage() {
         </div>
       </div>
 
+      <div className="mb-6 flex flex-wrap gap-2">
+        <Badge
+          variant={selectedCategory === null ? "default" : "outline"}
+          className="cursor-pointer hover:bg-primary/90 transition-colors"
+          onClick={() => setSelectedCategory(null)}
+        >
+          Toutes
+        </Badge>
+        {categories.map((category) => (
+          <Badge
+            key={category}
+            variant={selectedCategory === category ? "default" : "outline"}
+            className="cursor-pointer hover:bg-primary/90 transition-colors"
+            onClick={() => setSelectedCategory(category)}
+          >
+            {category}
+          </Badge>
+        ))}
+      </div>
+
       {filteredScales.length === 0 ? (
         <div className="text-center py-12">
           <p className="text-muted-foreground">
-            Aucune échelle trouvée pour "{searchQuery}"
+            Aucune échelle trouvée
+            {searchQuery && ` pour "${searchQuery}"`}
+            {selectedCategory && ` dans la catégorie "${selectedCategory}"`}
           </p>
         </div>
       ) : (
