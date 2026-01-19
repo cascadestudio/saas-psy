@@ -76,7 +76,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
   const logout = () => {
     authApi.logout();
     setUser(null);
-    router.push("/sign-in");
+    router.push("/");
   };
 
   useEffect(() => {

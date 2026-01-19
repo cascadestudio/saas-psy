@@ -31,13 +31,8 @@ export default function AuthButton() {
       </Button>
     </div>
   ) : (
-    <div className="flex gap-2">
-      <Button asChild size="sm" variant="outline">
-        <Link href="/sign-in">Connexion</Link>
-      </Button>
-      <Button asChild size="sm" variant="default">
-        <Link href="/sign-up">Inscription</Link>
-      </Button>
-    </div>
+    <Button asChild size="sm" variant="default">
+      <Link href="/dashboard">Accéder à l&apos;app</Link>
+    </Button>
   );
 }

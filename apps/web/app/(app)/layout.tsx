@@ -60,7 +60,7 @@ export default function AppLayout({
             </Link>
           </button>
           <div className="flex flex-1 items-center justify-end space-x-2">
-            {user ? (
+            {user && (
               <Button
                 variant="ghost"
                 size="icon"
@@ -68,10 +68,6 @@ export default function AppLayout({
                 title="Déconnexion"
               >
                 <Interfaces.Logout className="h-4 w-4" />
-              </Button>
-            ) : (
-              <Button asChild variant="default" size="sm">
-                <Link href="/sign-in">Connexion</Link>
               </Button>
             )}
           </div>
