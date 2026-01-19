@@ -23,7 +23,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr">
-      <body className="bg-background text-foreground font-lora">
+      <body className="bg-background text-foreground font-rethink">
         <UserProvider>
           <AuthGateProvider>
             <PremiumGateProvider>

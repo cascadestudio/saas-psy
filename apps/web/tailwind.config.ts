@@ -17,12 +17,10 @@ const config = {
       },
     },
     extend: {
-      /* Anthropic Brand Font Families */
+      /* Brand Font Family */
       fontFamily: {
-        sans: ["Lora", "Georgia", "serif"],
-        heading: ["Poppins", "Arial", "sans-serif"],
-        poppins: ["Poppins", "Arial", "sans-serif"],
-        lora: ["Lora", "Georgia", "serif"],
+        sans: ["Rethink Sans", "Arial", "sans-serif"],
+        rethink: ["Rethink Sans", "Arial", "sans-serif"],
       },
       colors: {
         border: "hsl(var(--border))",

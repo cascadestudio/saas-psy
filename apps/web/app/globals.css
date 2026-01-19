@@ -2,8 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Anthropic Brand Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Lora:wght@400;500;600;700&display=swap');
+/* Brand Font */
+@import url('https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;500;600;700&display=swap');
 
 @layer base {
   :root {
@@ -62,33 +62,22 @@
   }
 
   html {
-    font-family: 'Lora', Georgia, serif;
+    font-family: 'Rethink Sans', Arial, sans-serif;
   }
 
   body {
     @apply bg-background text-foreground;
-    font-family: 'Lora', Georgia, serif;
+    font-family: 'Rethink Sans', Arial, sans-serif;
   }
 
-  /* Headings use Poppins */
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Poppins', Arial, sans-serif;
     @apply font-semibold tracking-tight;
-  }
-
-  /* Buttons and labels use Poppins */
-  button, label, .font-heading {
-    font-family: 'Poppins', Arial, sans-serif;
   }
 }
 
-/* Utility classes for brand fonts */
+/* Utility class for brand font */
 @layer utilities {
-  .font-poppins {
-    font-family: 'Poppins', Arial, sans-serif;
-  }
-
-  .font-lora {
-    font-family: 'Lora', Georgia, serif;
+  .font-rethink {
+    font-family: 'Rethink Sans', Arial, sans-serif;
   }
 }
