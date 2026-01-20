@@ -1,44 +1,55 @@
 # Audit Melya - January 2026
 
-Comprehensive audit of the Melya platform identifying areas for improvement.
+Comprehensive audit of the Melya platform with MVP-focused prioritization.
 
 ---
 
-## High Priority - Security
+## Needed for Launch
 
-### Exposed Credentials in Git
-- **Location**: `.env` files committed to repository
-- **Risk**: Production secrets exposed if repo becomes public
-- **Fix**: Add to `.gitignore`, regenerate all keys immediately
+### Password Reset Flow
+- **Risk**: Users locked out = support burden, looks unprofessional
+- **Status**: Must implement before public launch
+- **Workaround for beta**: Manual reset via Prisma Studio
+- **Implementation**: Token-based reset via email
+
+---
+
+## Reviewed & OK for MVP
+
+### ~~Exposed Credentials in Git~~
+- **Status**: `.env` files are properly gitignored and not in history
+- **Verified**: `.gitignore` includes `.env`, `.env.local`, `.env*.local`
 
 ### JWT Storage in localStorage
 - **Location**: `apps/web/lib/api-client.ts:25-26`
-- **Risk**: Vulnerable to XSS attacks - any XSS allows token theft
-- **Fix**: Migrate to HttpOnly cookies with Secure flag
+- **Risk**: XSS could steal tokens - but React auto-escapes, making XSS rare
+- **Decision**: Keep for MVP - many production apps use this safely
+- **Later**: Consider HttpOnly cookies in Phase 3
 
-### No Rate Limiting
-- **Location**: Auth endpoints, public APIs
-- **Risk**: Brute force attacks on login, DoS on public endpoints
-- **Fix**: Implement `express-rate-limit` or NestJS throttler
+### ~~CSRF Protection~~
+- **Status**: Not needed - only applies to cookie-based auth
+- **Reason**: Using localStorage + Authorization header = no CSRF risk
 
-### No CSRF Protection
-- **Location**: `apps/api/src/sessions/sessions.controller.ts:67-79`
-- **Risk**: Public patient endpoints vulnerable to CSRF
-- **Fix**: Add CSRF tokens for state-changing operations
-
-### Weak Password Requirements
+### Password Requirements (8 chars min)
 - **Location**: `apps/api/src/auth/dto/register.dto.ts:8`
-- **Current**: Min 8 characters, no complexity
-- **Fix**: Min 12 chars + upper/lower/number/special OR use zxcvbn
+- **Decision**: Current setup is fine per NIST 2017+ guidelines
+- **Reason**: Complexity rules don't help, length matters more
+- **Later**: Add breached password check (HaveIBeenPwned) in Phase 3
 
-### Missing Email Verification
-- **Location**: Prisma schema has `emailVerified` field but unused
-- **Risk**: Accounts created with fake emails, undelivered questionnaires
-- **Fix**: Implement verification email on signup
+---
 
-### No Password Reset Flow
-- **Risk**: Users locked out of accounts, support burden
-- **Fix**: Implement secure token-based password reset
+## Defer to Post-MVP
+
+### Rate Limiting
+- **Location**: Auth endpoints, public APIs
+- **Risk**: Low for unknown MVP with few users
+- **When to add**: Before marketing push or if abuse detected
+- **Implementation**: `@nestjs/throttler` (30 min to add)
+
+### Email Verification
+- **Location**: Prisma schema has `emailVerified` field (unused)
+- **Decision**: Extra friction hurts conversion, add after launch
+- **When to add**: When polishing onboarding experience
 
 ---
 
@@ -71,7 +82,7 @@ Comprehensive audit of the Melya platform identifying areas for improvement.
 
 ### AuditLog Model Unused
 - **Location**: Prisma schema defines it, never used
-- **Risk**: HDS non-compliance
+- **Risk**: HDS non-compliance (needed later)
 - **Fix**: Implement AuditingService, log all data access
 
 ### Missing API Documentation
@@ -133,57 +144,26 @@ Comprehensive audit of the Melya platform identifying areas for improvement.
 
 ---
 
-## HDS Compliance Gaps
+## HDS Compliance (Phase 4)
 
 | Requirement | Status | Notes |
 |-------------|--------|-------|
 | Audit logging | Not implemented | Model exists in Prisma |
-| Email verification | Not implemented | Field exists in schema |
 | Session management | Not implemented | No logout-all-devices |
 | MFA | Not implemented | Consider for practitioners |
 | Soft deletes | Not implemented | Hard deletes only |
-| Encryption at rest | TBD | Verify Scaleway config |
+| Encryption at rest | TBD | Verify with Scaleway |
 
 ---
 
-## Quick Wins (1-2 days each)
+## Phase Summary
 
-1. [ ] Add `.env.example` files for documentation
-2. [ ] Enable strict TypeScript in API
-3. [ ] Add Swagger decorators for API docs
-4. [ ] Implement patient count check for premium gate (backend)
-5. [ ] Add pre-commit hooks (husky + prettier)
-6. [ ] Create password reset flow
-7. [ ] Add skeleton loaders to dashboard
-8. [ ] Standardize API response format
-
----
-
-## Priority Order for Implementation
-
-### Phase 1: Critical Security
-1. Remove `.env` from git, add to `.gitignore`
-2. Regenerate all exposed keys
-3. Add rate limiting to auth endpoints
-4. Implement email verification
-
-### Phase 2: Auth Improvements
-1. Password reset flow
-2. Migrate JWT to HttpOnly cookies
-3. Add CSRF protection
-4. Strengthen password requirements
-
-### Phase 3: Code Quality
-1. Enable strict TypeScript
-2. Replace `any` types with interfaces
-3. Standardize API responses
-4. Add pagination
-
-### Phase 4: UX Polish
-1. Skeleton loaders
-2. Form validation feedback
-3. Error boundaries
-4. Email failure notifications
+| Phase | Focus | Items |
+|-------|-------|-------|
+| **Launch** | Core functionality | Password reset |
+| **Post-MVP** | Security hardening | Rate limiting, email verification |
+| **Phase 3** | Polish | HttpOnly cookies, breach check, strict TS |
+| **Phase 4** | HDS Compliance | Audit logs, MFA, soft deletes |
 
 ---
 

@@ -157,6 +157,47 @@ Alternative approaches to consider?
 
 ---
 
+## MVP Minimum Infrastructure
+
+### Ce dont on a VRAIMENT besoin
+
+| Composant | Service Scaleway | Budget estimé |
+|-----------|------------------|---------------|
+| **Database** | Managed PostgreSQL (DEV-S) | ~15€/mois |
+| **API Backend** | Serverless Containers | ~5-10€/mois (pay-per-use) |
+| **Frontend** | Object Storage + CDN | ~1€/mois |
+| **Network** | Private Network | Gratuit |
+| **Total** | | **~20-30€/mois** |
+
+### Ce qu'ils pourraient proposer (mais dont on n'a PAS besoin)
+
+| Proposition | Réponse | Pourquoi |
+|-------------|---------|----------|
+| **Kubernetes (Kapsule)** | ❌ Non | Serverless Containers = zéro ops, parfait solo dev |
+| **Instances dédiées** | ❌ Non | Serverless scale automatiquement |
+| **Support Premium** | ❌ Non | Support standard suffit pour MVP |
+| **PostgreSQL HA** | ❌ Non | Overkill MVP, ajouter plus tard si besoin |
+| **Multiple environnements** | ❌ Non | Un seul env prod, dev reste local |
+| **Load Balancer dédié** | ❌ Non | Inclus dans Serverless Containers |
+| **Monitoring avancé (Cockpit payant)** | ❌ Non | Metrics de base suffisent |
+| **Backup cross-region** | ❌ Non | Un backup fr-par suffit |
+
+### Questions clés à poser
+
+1. "Quelle est la **plus petite** configuration PostgreSQL HDS-certifiée ?"
+2. "Les Serverless Containers sont-ils couverts par HDS ?" (crucial)
+3. "Le Private Network est-il gratuit et inclus dans HDS ?"
+4. "Y a-t-il un programme startup/crédits ?"
+
+### Red flags
+
+- Instance PostgreSQL > 50€/mois pour démarrer
+- Kubernetes proposé au lieu de Serverless Containers
+- Support Premium présenté comme obligatoire
+- Architecture multi-région
+
+---
+
 ## Why Scaleway?
 
 Considered other options:
@@ -183,6 +224,53 @@ Considered other options:
 - **Stage**: MVP development, preparing for first users
 - **Timeline**: Want to have production infrastructure ready in coming weeks
 - **Growth expectation**: Starting small, hoping to scale if product-market fit works
+
+---
+
+## Résumé - Points clés à retenir
+
+### Serverless Containers = Docker
+
+- Tu fournis une **image Docker** (ton `apps/api/Dockerfile`)
+- Scaleway la démarre/arrête selon le trafic
+- **Pay-per-use** : tu paies uniquement quand du code s'exécute
+- **Scale-to-zero** : pas de trafic = 0€ (nuits, weekends)
+- **Cold start** : ~1-2s de latence après inactivité (acceptable pour SaaS métier)
+
+### Frontend (Object Storage + CDN)
+
+```
+GitHub Actions                    Scaleway
+─────────────────────────────────────────────
+git push → build Next.js → upload → Object Storage → CDN → utilisateur
+           (npm run build)         (fichiers statiques)
+```
+
+- Next.js compilé en fichiers statiques (HTML/JS/CSS)
+- **Object Storage** = stockage fichiers (~centimes/mois)
+- **CDN** = cache mondial pour vitesse
+- **Pas de données santé** ici → pas besoin HDS pour cette partie
+- Build sur **GitHub Actions**, jamais en local
+
+### Environnements (staging/prod)
+
+| Option | Coût | Recommandation |
+|--------|------|----------------|
+| Prod only | ~20-30€ | Si tu montres pas l'app avant le launch |
+| 1 DB + 2 databases + 2 containers | ~25-30€ | **Recommandé si beta testeurs** |
+| 2 DBs séparées | ~45€ | Overkill pour MVP |
+
+**Reco MVP** : Une instance PostgreSQL avec 2 databases (staging + prod) + 2 Serverless Containers.
+
+### Estimation budget MVP
+
+| Composant | Coût |
+|-----------|------|
+| PostgreSQL (1 instance, 2 DBs) | ~15€/mois |
+| Container staging | ~3-5€/mois |
+| Container prod | ~5-10€/mois |
+| Object Storage + CDN | ~1€/mois |
+| **Total** | **~25-30€/mois** |
 
 ---
 
