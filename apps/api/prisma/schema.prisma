@@ -19,14 +19,15 @@ model User {
   email         String    @unique
   emailVerified DateTime? @map("email_verified")
   passwordHash  String    @map("password_hash")
-  
+
   firstName     String?   @map("first_name")
   lastName      String?   @map("last_name")
   role          UserRole  @default(PRACTITIONER)
-  
+  isPremium     Boolean   @default(false) @map("is_premium")
+
   createdAt     DateTime  @default(now()) @map("created_at")
   updatedAt     DateTime  @updatedAt @map("updated_at")
-  
+
   // Relations
   profile       Profile?
   patients      Patient[]
@@ -77,6 +78,7 @@ model Patient {
   // Timestamps
   createdAt   DateTime @default(now()) @map("created_at")
   updatedAt   DateTime @updatedAt @map("updated_at")
+  archivedAt  DateTime? @map("archived_at")
 
   // Relations
   sessions    Session[]

@@ -8,11 +8,16 @@ import {
   ReactNode,
 } from "react";
 
+type GateType = "patient_limit" | "premium_feature";
+
 type PremiumGateContextType = {
   isOpen: boolean;
+  gateType: GateType;
   currentCount: number;
   maxCount: number;
-  openPremiumGate: (currentCount: number) => void;
+  featureName: string;
+  openPatientLimitGate: (currentCount: number) => void;
+  openPremiumFeatureGate: (featureName: string) => void;
   closePremiumGate: () => void;
 };
 
@@ -24,10 +29,19 @@ const PremiumGateContext = createContext<PremiumGateContextType | undefined>(
 
 export function PremiumGateProvider({ children }: { children: ReactNode }) {
   const [isOpen, setIsOpen] = useState(false);
+  const [gateType, setGateType] = useState<GateType>("patient_limit");
   const [currentCount, setCurrentCount] = useState(0);
+  const [featureName, setFeatureName] = useState("");
 
-  const openPremiumGate = useCallback((count: number) => {
+  const openPatientLimitGate = useCallback((count: number) => {
+    setGateType("patient_limit");
     setCurrentCount(count);
+    setIsOpen(true);
+  }, []);
+
+  const openPremiumFeatureGate = useCallback((feature: string) => {
+    setGateType("premium_feature");
+    setFeatureName(feature);
     setIsOpen(true);
   }, []);
 
@@ -39,9 +53,12 @@ export function PremiumGateProvider({ children }: { children: ReactNode }) {
     <PremiumGateContext.Provider
       value={{
         isOpen,
+        gateType,
         currentCount,
         maxCount: FREE_TIER_PATIENT_LIMIT,
-        openPremiumGate,
+        featureName,
+        openPatientLimitGate,
+        openPremiumFeatureGate,
         closePremiumGate,
       }}
     >

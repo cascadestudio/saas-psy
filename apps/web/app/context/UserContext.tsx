@@ -16,6 +16,7 @@ export type User = {
   firstName?: string | null;
   lastName?: string | null;
   role?: string;
+  isPremium?: boolean;
   profile?: {
     id?: string;
     favoriteScales: string[];

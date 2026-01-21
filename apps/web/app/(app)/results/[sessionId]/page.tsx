@@ -89,7 +89,7 @@ export default function ResultsPage() {
   const sameQuestionnaireSessions = allSessions
     .filter(
       (s) =>
-        s.scaleId === session.scaleId && s.status === "completed"
+        s.scaleId === session.scaleId && s.status === "COMPLETED"
     )
     .sort(
       (a, b) =>

@@ -34,7 +34,7 @@ export function CreatePatientSheet({
   const [open, setOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { requireAuth } = useRequireAuth();
-  const { openPremiumGate } = usePremiumGate();
+  const { openPatientLimitGate } = usePremiumGate();
 
   const handleOpenChange = (newOpen: boolean) => {
     if (newOpen) {
@@ -45,7 +45,7 @@ export function CreatePatientSheet({
 
       // Check patient limit (only for authenticated users)
       if (currentPatientCount >= FREE_PATIENT_LIMIT) {
-        openPremiumGate(currentPatientCount);
+        openPatientLimitGate(currentPatientCount);
         return; // Premium gate modal opened
       }
     }

@@ -25,16 +25,25 @@ export class PatientsController {
   }
 
   @Get()
-  findAll(@CurrentUser('id') practitionerId: string) {
-    return this.patientsService.findAll(practitionerId);
+  findAll(
+    @CurrentUser('id') practitionerId: string,
+    @Query('status') status?: 'active' | 'archived',
+  ) {
+    return this.patientsService.findAll(practitionerId, status || 'active');
+  }
+
+  @Get('count/active')
+  countActive(@CurrentUser('id') practitionerId: string) {
+    return this.patientsService.countActive(practitionerId);
   }
 
   @Get('search')
   search(
     @CurrentUser('id') practitionerId: string,
     @Query('q') query: string,
+    @Query('status') status?: 'active' | 'archived',
   ) {
-    return this.patientsService.search(practitionerId, query || '');
+    return this.patientsService.search(practitionerId, query || '', status || 'active');
   }
 
   @Get(':id')
@@ -60,5 +69,21 @@ export class PatientsController {
     @CurrentUser('id') practitionerId: string,
   ) {
     return this.patientsService.delete(id, practitionerId);
+  }
+
+  @Patch(':id/archive')
+  archive(
+    @Param('id') id: string,
+    @CurrentUser('id') practitionerId: string,
+  ) {
+    return this.patientsService.archive(id, practitionerId);
+  }
+
+  @Patch(':id/restore')
+  restore(
+    @Param('id') id: string,
+    @CurrentUser('id') practitionerId: string,
+  ) {
+    return this.patientsService.restore(id, practitionerId);
   }
 }

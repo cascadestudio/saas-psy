@@ -156,8 +156,8 @@ export const favoritesApi = {
  * Patients API methods
  */
 export const patientsApi = {
-  getAll: async () => {
-    return apiRequest<{ patients: Patient[] }>("/patients");
+  getAll: async (status: 'active' | 'archived' = 'active') => {
+    return apiRequest<{ patients: Patient[] }>(`/patients?status=${status}`);
   },
 
   getById: async (id: string) => {
@@ -184,8 +184,24 @@ export const patientsApi = {
     });
   },
 
-  search: async (query: string) => {
-    return apiRequest<{ patients: Patient[] }>(`/patients/search?q=${encodeURIComponent(query)}`);
+  search: async (query: string, status: 'active' | 'archived' = 'active') => {
+    return apiRequest<{ patients: Patient[] }>(`/patients/search?q=${encodeURIComponent(query)}&status=${status}`);
+  },
+
+  countActive: async () => {
+    return apiRequest<{ count: number }>("/patients/count/active");
+  },
+
+  archive: async (id: string) => {
+    return apiRequest<{ patient: Patient }>(`/patients/${id}/archive`, {
+      method: "PATCH",
+    });
+  },
+
+  restore: async (id: string) => {
+    return apiRequest<{ patient: Patient }>(`/patients/${id}/restore`, {
+      method: "PATCH",
+    });
   },
 };
 
@@ -267,6 +283,7 @@ export interface Patient {
   notes?: string;
   createdAt: string;
   updatedAt: string;
+  archivedAt?: string | null;
 }
 
 export interface CreatePatientDto {
@@ -289,7 +306,7 @@ export interface Session {
   id: string;
   patientId: string;
   scaleId: string;
-  status: "created" | "sent" | "started" | "completed" | "expired" | "cancelled";
+  status: "CREATED" | "SENT" | "STARTED" | "COMPLETED" | "EXPIRED" | "CANCELLED";
   score?: number;
   interpretation?: string;
   responses?: Record<string, number>;

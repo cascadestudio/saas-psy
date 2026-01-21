@@ -1,6 +1,6 @@
 "use client";
 
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -12,10 +12,12 @@ import {
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
 import { useUser } from "@/app/context/UserContext";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { patientsApi, sessionsApi, type Patient, type Session } from "@/lib/api-client";
 import { scales } from "@/app/scalesData";
 import { Arrow, Interfaces, Files } from "doodle-icons";
+import { ArchivePatientDialog } from "@/components/ArchivePatientDialog";
+import { RestorePatientButton } from "@/components/RestorePatientButton";
 
 const statusColors: Record<string, string> = {
   COMPLETED: "bg-green-100 text-green-800",
@@ -38,42 +40,51 @@ const statusLabels: Record<string, string> = {
 export default function PatientDetailPage() {
   const { user, isLoading } = useUser();
   const params = useParams();
+  const router = useRouter();
   const patientId = params.id as string;
 
   const [patient, setPatient] = useState<Patient | null>(null);
   const [sessions, setSessions] = useState<Session[]>([]);
   const [loading, setLoading] = useState(true);
 
+  const loadData = useCallback(async () => {
+    if (!user || !patientId) return;
+    setLoading(true);
+    try {
+      const [patientRes, sessionsRes] = await Promise.all([
+        patientsApi.getById(patientId),
+        sessionsApi.getByPatientId(patientId),
+      ]);
+      setPatient(patientRes.patient);
+      // Sort sessions by date descending
+      setSessions(
+        sessionsRes.sessions.sort(
+          (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+        )
+      );
+    } catch (error) {
+      console.error("Error loading patient data:", error);
+      setPatient(null);
+      setSessions([]);
+    } finally {
+      setLoading(false);
+    }
+  }, [user, patientId]);
+
   // Load patient and sessions from API
   useEffect(() => {
-    const loadData = async () => {
-      if (!user || !patientId) return;
-      setLoading(true);
-      try {
-        const [patientRes, sessionsRes] = await Promise.all([
-          patientsApi.getById(patientId),
-          sessionsApi.getByPatientId(patientId),
-        ]);
-        setPatient(patientRes.patient);
-        // Sort sessions by date descending
-        setSessions(
-          sessionsRes.sessions.sort(
-            (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-          )
-        );
-      } catch (error) {
-        console.error("Error loading patient data:", error);
-        setPatient(null);
-        setSessions([]);
-      } finally {
-        setLoading(false);
-      }
-    };
-
     if (user) {
       loadData();
     }
-  }, [user, patientId]);
+  }, [user, loadData]);
+
+  const handleArchived = () => {
+    router.push("/patients");
+  };
+
+  const handleRestored = () => {
+    loadData();
+  };
 
   if (isLoading || loading) {
     return (
@@ -114,6 +125,7 @@ export default function PatientDetailPage() {
   };
 
   const age = calculateAge(patient.birthDate);
+  const isArchived = !!patient.archivedAt;
 
   return (
     <div className="container mx-auto px-4 py-6 space-y-6">
@@ -124,17 +136,40 @@ export default function PatientDetailPage() {
           </Link>
         </Button>
         <div className="flex-1">
-          <h1 className="font-bold text-3xl">
-            {patient.firstName} {patient.lastName}
-          </h1>
+          <div className="flex items-center gap-3">
+            <h1 className="font-bold text-3xl">
+              {patient.firstName} {patient.lastName}
+            </h1>
+            {isArchived && (
+              <Badge variant="secondary" className="bg-orange-100 text-orange-800">
+                Archivé le {new Date(patient.archivedAt!).toLocaleDateString("fr-FR")}
+              </Badge>
+            )}
+          </div>
           <p className="text-muted-foreground mt-1">{patient.email}</p>
         </div>
-        <Button asChild size="lg">
-          <Link href={`/send-questionnaire?patientId=${patient.id}`}>
-            <Interfaces.Send className="mr-2 h-4 w-4" />
-            Envoyer une échelle
-          </Link>
-        </Button>
+        <div className="flex items-center gap-2">
+          {isArchived ? (
+            <RestorePatientButton
+              patient={patient}
+              onRestored={handleRestored}
+              size="lg"
+            />
+          ) : (
+            <>
+              <ArchivePatientDialog
+                patient={patient}
+                onArchived={handleArchived}
+              />
+              <Button asChild size="lg">
+                <Link href={`/send-questionnaire?patientId=${patient.id}`}>
+                  <Interfaces.Send className="mr-2 h-4 w-4" />
+                  Envoyer une échelle
+                </Link>
+              </Button>
+            </>
+          )}
+        </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -227,12 +262,14 @@ export default function PatientDetailPage() {
               <p className="text-sm text-muted-foreground mb-4">
                 Aucune passation enregistrée pour ce patient
               </p>
-              <Button asChild>
-                <Link href={`/send-questionnaire?patientId=${patient.id}`}>
-                  <Interfaces.Send className="mr-2 h-4 w-4" />
-                  Envoyer la première échelle
-                </Link>
-              </Button>
+              {!isArchived && (
+                <Button asChild>
+                  <Link href={`/send-questionnaire?patientId=${patient.id}`}>
+                    <Interfaces.Send className="mr-2 h-4 w-4" />
+                    Envoyer la première échelle
+                  </Link>
+                </Button>
+              )}
             </div>
           ) : (
             <div className="space-y-3">

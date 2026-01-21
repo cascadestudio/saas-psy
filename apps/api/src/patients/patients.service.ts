@@ -37,9 +37,12 @@ export class PatientsService {
     return { patient };
   }
 
-  async findAll(practitionerId: string) {
+  async findAll(practitionerId: string, status: 'active' | 'archived' = 'active') {
     const patients = await this.prisma.patient.findMany({
-      where: { practitionerId },
+      where: {
+        practitionerId,
+        archivedAt: status === 'archived' ? { not: null } : null,
+      },
       orderBy: { createdAt: 'desc' },
     });
 
@@ -125,10 +128,11 @@ export class PatientsService {
     return { message: 'Patient supprimé avec succès' };
   }
 
-  async search(practitionerId: string, query: string) {
+  async search(practitionerId: string, query: string, status: 'active' | 'archived' = 'active') {
     const patients = await this.prisma.patient.findMany({
       where: {
         practitionerId,
+        archivedAt: status === 'archived' ? { not: null } : null,
         OR: [
           { firstName: { contains: query, mode: 'insensitive' } },
           { lastName: { contains: query, mode: 'insensitive' } },
@@ -139,5 +143,68 @@ export class PatientsService {
     });
 
     return { patients };
+  }
+
+  async countActive(practitionerId: string) {
+    const count = await this.prisma.patient.count({
+      where: {
+        practitionerId,
+        archivedAt: null,
+      },
+    });
+
+    return { count };
+  }
+
+  async archive(id: string, practitionerId: string) {
+    // First check if patient exists and belongs to practitioner
+    const existing = await this.prisma.patient.findUnique({
+      where: { id },
+    });
+
+    if (!existing) {
+      throw new NotFoundException('Patient non trouvé');
+    }
+
+    if (existing.practitionerId !== practitionerId) {
+      throw new ForbiddenException('Accès non autorisé à ce patient');
+    }
+
+    if (existing.archivedAt) {
+      throw new ConflictException('Ce patient est déjà archivé');
+    }
+
+    const patient = await this.prisma.patient.update({
+      where: { id },
+      data: { archivedAt: new Date() },
+    });
+
+    return { patient };
+  }
+
+  async restore(id: string, practitionerId: string) {
+    // First check if patient exists and belongs to practitioner
+    const existing = await this.prisma.patient.findUnique({
+      where: { id },
+    });
+
+    if (!existing) {
+      throw new NotFoundException('Patient non trouvé');
+    }
+
+    if (existing.practitionerId !== practitionerId) {
+      throw new ForbiddenException('Accès non autorisé à ce patient');
+    }
+
+    if (!existing.archivedAt) {
+      throw new ConflictException('Ce patient n\'est pas archivé');
+    }
+
+    const patient = await this.prisma.patient.update({
+      where: { id },
+      data: { archivedAt: null },
+    });
+
+    return { patient };
   }
 }
