@@ -5,10 +5,21 @@ import { useParams, useRouter } from "next/navigation";
 import { scales as localScales } from "@/app/scalesData";
 import ScaleFactory from "@/app/questionnaire/[id]/components/ScaleFactory";
 import { Loader2 } from "lucide-react";
+import { toast } from "sonner";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
 
 interface SessionData {
   id: string;
   scaleId: string;
+  batchId: string | null;
   patientFirstName: string;
   patientLastName: string;
   status: string;
@@ -142,6 +153,7 @@ export default function SessionPage() {
   return (
     <SessionQuestionnaireWrapper
       sessionId={session.id}
+      batchId={session.batchId}
       scale={scale}
       patientFirstName={session.patientFirstName}
       patientLastName={session.patientLastName}
@@ -151,6 +163,7 @@ export default function SessionPage() {
 
 interface WrapperProps {
   sessionId: string;
+  batchId: string | null;
   scale: any;
   patientFirstName: string;
   patientLastName: string;
@@ -158,16 +171,32 @@ interface WrapperProps {
 
 function SessionQuestionnaireWrapper({
   sessionId,
+  batchId,
   scale,
   patientFirstName,
   patientLastName,
 }: WrapperProps) {
   const router = useRouter();
   const [submitting, setSubmitting] = useState(false);
+  const [showConfirmDialog, setShowConfirmDialog] = useState(false);
+  const [pendingSubmission, setPendingSubmission] = useState<{
+    responses: Record<string, any>;
+    comments?: string;
+  } | null>(null);
 
-  // Override the submit handler to send to session API
-  const handleSubmit = async (responses: Record<string, any>, comments?: string) => {
+  // Called when user clicks "Valider" in the questionnaire
+  const handleSubmitRequest = async (responses: Record<string, any>, comments?: string) => {
+    setPendingSubmission({ responses, comments });
+    setShowConfirmDialog(true);
+  };
+
+  // Called when user confirms in the modal
+  const handleConfirmSubmit = async () => {
+    if (!pendingSubmission) return;
+
+    setShowConfirmDialog(false);
     setSubmitting(true);
+
     try {
       const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001/api";
       const res = await fetch(`${apiUrl}/sessions/patient/${sessionId}/submit`, {
@@ -176,8 +205,8 @@ function SessionQuestionnaireWrapper({
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          responses,
-          patientComments: comments,
+          responses: pendingSubmission.responses,
+          patientComments: pendingSubmission.comments,
         }),
       });
 
@@ -186,13 +215,29 @@ function SessionQuestionnaireWrapper({
         throw new Error(data.message || "Erreur lors de l'envoi");
       }
 
-      // Redirect to thank you page
-      router.push(`/session/${sessionId}/merci`);
+      // If there's a batchId, redirect to the portal
+      if (batchId) {
+        toast.success("Réponses enregistrées", {
+          description: "Vos réponses ont été enregistrées avec succès.",
+        });
+        router.push(`/p/${batchId}`);
+      } else {
+        // Fallback to thank you page for sessions without batchId
+        router.push(`/session/${sessionId}/merci`);
+      }
     } catch (err) {
-      alert(err instanceof Error ? err.message : "Une erreur est survenue");
+      toast.error("Erreur", {
+        description: err instanceof Error ? err.message : "Une erreur est survenue",
+      });
     } finally {
       setSubmitting(false);
+      setPendingSubmission(null);
     }
+  };
+
+  const handleCancelSubmit = () => {
+    setShowConfirmDialog(false);
+    setPendingSubmission(null);
   };
 
   return (
@@ -205,12 +250,32 @@ function SessionQuestionnaireWrapper({
           </div>
         </div>
       )}
+
+      <Dialog open={showConfirmDialog} onOpenChange={setShowConfirmDialog}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Confirmer vos réponses ?</DialogTitle>
+            <DialogDescription>
+              Une fois envoyées, vos réponses ne pourront plus être modifiées.
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter>
+            <Button variant="outline" onClick={handleCancelSubmit}>
+              Annuler
+            </Button>
+            <Button onClick={handleConfirmSubmit}>
+              Confirmer
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
       <ScaleFactory
         scale={scale}
         psychologistEmail="" // Not used in session mode
         patientFirstname={patientFirstName}
         patientLastname={patientLastName}
-        onSubmit={handleSubmit}
+        onSubmit={handleSubmitRequest}
       />
     </div>
   );

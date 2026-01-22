@@ -64,6 +64,12 @@ export class SessionsController {
   // Patient endpoints (public - no auth)
 
   @Public()
+  @Get('portal/:batchId')
+  getPatientPortal(@Param('batchId') batchId: string) {
+    return this.sessionsService.getPatientPortalSessions(batchId);
+  }
+
+  @Public()
   @Get('patient/:id')
   getSessionForPatient(@Param('id') id: string) {
     return this.sessionsService.getSessionForPatient(id);

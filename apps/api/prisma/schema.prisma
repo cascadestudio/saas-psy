@@ -138,31 +138,35 @@ model Session {
   // Practitioner who sent it
   practitionerId    String         @map("practitioner_id")
   practitioner      User           @relation(fields: [practitionerId], references: [id])
-  
+
+  // Batch ID for grouping sessions sent together
+  batchId           String?        @map("batch_id")
+
   // Session status
   status            SessionStatus  @default(CREATED)
-  
+
   // Responses
   responses         Json?          // Stores all answers
   score             Json?          // Calculated score
   interpretation    String?        // Auto-generated interpretation
   patientComments   String?        @map("patient_comments")
-  
+
   // Timestamps
   sentAt            DateTime?      @map("sent_at")
   startedAt         DateTime?      @map("started_at")
   completedAt       DateTime?      @map("completed_at")
   createdAt         DateTime       @default(now()) @map("created_at")
   updatedAt         DateTime       @updatedAt @map("updated_at")
-  
+
   // Expiration
   expiresAt         DateTime?      @map("expires_at")
-  
+
   @@map("sessions")
   @@index([practitionerId])
   @@index([patientId])
   @@index([scaleId])
   @@index([status])
+  @@index([batchId])
 }
 
 enum SessionStatus {

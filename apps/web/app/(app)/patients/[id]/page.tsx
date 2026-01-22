@@ -162,7 +162,7 @@ export default function PatientDetailPage() {
                 onArchived={handleArchived}
               />
               <Button asChild size="lg">
-                <Link href={`/send-questionnaire?patientId=${patient.id}`}>
+                <Link href={`/send-scale?patientId=${patient.id}`}>
                   <Interfaces.Send className="mr-2 h-4 w-4" />
                   Envoyer une échelle
                 </Link>
@@ -264,7 +264,7 @@ export default function PatientDetailPage() {
               </p>
               {!isArchived && (
                 <Button asChild>
-                  <Link href={`/send-questionnaire?patientId=${patient.id}`}>
+                  <Link href={`/send-scale?patientId=${patient.id}`}>
                     <Interfaces.Send className="mr-2 h-4 w-4" />
                     Envoyer la première échelle
                   </Link>

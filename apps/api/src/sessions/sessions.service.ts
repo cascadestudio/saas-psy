@@ -8,6 +8,7 @@ import {
 import { PrismaService } from '../prisma/prisma.service';
 import { EmailService } from '../email/email.service';
 import { CreateSessionDto, UpdateSessionDto, SubmitResponsesDto } from './dto';
+import { createId } from '@paralleldrive/cuid2';
 
 @Injectable()
 export class SessionsService {
@@ -48,6 +49,9 @@ export class SessionsService {
 
     const scalesMap = new Map(scales.map((s) => [s.id, s]));
 
+    // Generate a unique batchId for this group of sessions
+    const batchId = createId();
+
     // Create sessions for each scale (one session per scale)
     const sessions = await this.prisma.$transaction(
       dto.scaleIds.map((scaleId) =>
@@ -56,6 +60,7 @@ export class SessionsService {
             scaleId,
             patientId: dto.patientId,
             practitionerId,
+            batchId,
             status: 'SENT',
             sentAt: new Date(),
             // Set expiration to 7 days from now
@@ -65,41 +70,40 @@ export class SessionsService {
       ),
     );
 
-    // Send emails for each session
+    // Build scale names list for the email
+    const scaleNames = dto.scaleIds.map((scaleId) => {
+      const scale = scalesMap.get(scaleId);
+      return scale?.title || 'Questionnaire';
+    });
+
+    // Send ONE email with link to portal
     const practitionerName = [practitioner.firstName, practitioner.lastName]
       .filter(Boolean)
       .join(' ') || 'Votre praticien';
 
-    const emailResults = await Promise.all(
-      sessions.map(async (session) => {
-        const scale = scalesMap.get(session.scaleId);
-        const scaleName = scale?.title || 'Questionnaire';
+    const emailResult = await this.emailService.sendBatchSessionEmail({
+      patientEmail: patient.email,
+      patientFirstName: patient.firstName,
+      patientLastName: patient.lastName,
+      batchId,
+      scaleNames,
+      practitionerName,
+      message: dto.message,
+    });
 
-        return this.emailService.sendSessionEmail({
-          patientEmail: patient.email,
-          patientFirstName: patient.firstName,
-          patientLastName: patient.lastName,
-          sessionId: session.id,
-          scaleName,
-          practitionerName,
-          message: dto.message,
-        });
-      }),
-    );
-
-    // Log email results
-    const failedEmails = emailResults.filter((r) => !r.success);
-    if (failedEmails.length > 0) {
+    // Log email result
+    if (!emailResult.success) {
       this.logger.warn(
-        `${failedEmails.length} email(s) failed to send for patient ${patient.id}`,
+        `Email failed to send for patient ${patient.id}: ${emailResult.error}`,
       );
     }
 
     return {
       sessions,
+      batchId,
       message: `${sessions.length} échelle(s) envoyée(s) avec succès`,
-      emailsSent: emailResults.filter((r) => r.success).length,
-      emailsFailed: failedEmails.length,
+      emailsSent: emailResult.success ? 1 : 0,
+      emailsFailed: emailResult.success ? 0 : 1,
     };
   }
 
@@ -205,6 +209,65 @@ export class SessionsService {
     return { session: updatedSession };
   }
 
+  // Public endpoint for patient portal (no auth required)
+  async getPatientPortalSessions(batchId: string) {
+    const sessions = await this.prisma.session.findMany({
+      where: { batchId },
+      include: {
+        patient: {
+          select: {
+            firstName: true,
+            lastName: true,
+          },
+        },
+        scale: {
+          select: {
+            id: true,
+            title: true,
+            description: true,
+            estimatedTime: true,
+          },
+        },
+      },
+      orderBy: { createdAt: 'asc' },
+    });
+
+    if (sessions.length === 0) {
+      throw new NotFoundException('Portail non trouvé');
+    }
+
+    // Get patient info from first session
+    const patient = sessions[0].patient;
+
+    // Separate pending and completed sessions
+    const pendingSessions = sessions.filter(
+      (s) => s.status === 'SENT' || s.status === 'STARTED',
+    );
+    const completedSessions = sessions.filter((s) => s.status === 'COMPLETED');
+
+    return {
+      portal: {
+        batchId,
+        patientFirstName: patient.firstName,
+        patientLastName: patient.lastName,
+        totalCount: sessions.length,
+        pendingCount: pendingSessions.length,
+        completedCount: completedSessions.length,
+        allCompleted: pendingSessions.length === 0,
+        sessions: sessions.map((s) => ({
+          id: s.id,
+          scaleId: s.scale?.id,
+          scaleTitle: s.scale?.title,
+          scaleDescription: s.scale?.description,
+          estimatedTime: s.scale?.estimatedTime,
+          status: s.status,
+          isCompleted: s.status === 'COMPLETED',
+          completedAt: s.completedAt,
+        })),
+      },
+    };
+  }
+
   // Public endpoint for patients (no auth required)
   async getSessionForPatient(id: string) {
     const session = await this.prisma.session.findUnique({
@@ -256,6 +319,7 @@ export class SessionsService {
       session: {
         id: session.id,
         scaleId: session.scaleId,
+        batchId: session.batchId,
         patientFirstName: session.patient.firstName,
         patientLastName: session.patient.lastName,
         status: session.status === 'SENT' ? 'STARTED' : session.status,
