@@ -1,5 +1,25 @@
 # Melya - HDS Hosting Research
 
+**Last updated**: February 2026
+
+---
+
+## TL;DR - Final Recommendation
+
+```
+Vercel (gratuit)              Scaleway Dedibox HDS (~75€/mois)
+────────────────              ──────────────────────────────────
+Frontend Next.js              API NestJS + PostgreSQL
+(pas de données santé)        (toutes les données santé)
+
+                              Backups chiffrés → Object Storage
+                              (n'importe quel provider, ~2€/mois)
+```
+
+**Alternative à investiguer** : Clever Cloud (HDS 6 activités, zero ops, pricing à demander)
+
+---
+
 **Scaleway Call** - January 2026
 
 ---
@@ -43,16 +63,18 @@ What we hoped to get with HDS:
 
 ## TL;DR - Call Outcome
 
-Scaleway's modern serverless stack is **NOT HDS certified**. Only dedicated servers (Dedibox) and Object Storage are HDS compliant.
+Scaleway's modern serverless stack is **NOT HDS certified**. Only dedicated servers (Dedibox) are HDS compliant à prix raisonnable.
 
-| Service | HDS Certified? |
-|---------|---------------|
-| Managed PostgreSQL | ❌ No |
-| Serverless Containers | ❌ No |
-| Object Storage | ✅ Yes |
-| Dedibox (Gen 9 Start-9-M+) | ✅ Yes |
+| Service | HDS Certified? | HDS Support Cost |
+|---------|---------------|------------------|
+| Managed PostgreSQL | ❌ No | - |
+| Serverless Containers | ❌ No | - |
+| Object Storage | ✅ Yes | **250€/mois** (comme OVH) |
+| Dedibox (Gen 9 Start-9-M+) | ✅ Yes | **35€/mois** |
 
 **Result**: Must use dedicated server instead of serverless architecture.
+
+> ⚠️ **Object Storage HDS = 250€/mois de support obligatoire**, ce qui le rend non viable pour un MVP. Heureusement, le frontend n'a pas besoin d'HDS.
 
 ---
 
@@ -60,12 +82,17 @@ Scaleway's modern serverless stack is **NOT HDS certified**. Only dedicated serv
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│                    Scaleway HDS (fr-par)                        │
-│                                                                 │
+│   Vercel (gratuit)                                              │
 │   ┌───────────────────┐                                         │
-│   │   Object Storage  │◄─── Frontend (Next.js static)           │
-│   │   + CDN (HDS)     │     HTML, JS, CSS                       │
-│   └───────────────────┘     No health data                      │
+│   │   Next.js Static  │◄─── Frontend (HTML, JS, CSS)            │
+│   │   CDN Global      │     Aucune donnée de santé              │
+│   └───────────────────┘     Pas besoin HDS                      │
+└─────────────────────────────────────────────────────────────────┘
+              │
+              │ API calls (HTTPS)
+              ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                    Scaleway HDS (fr-par)                        │
 │                                                                 │
 │   ┌───────────────────────────────────────────────────────────┐ │
 │   │              Dedibox Gen 9 Start-9-M (HDS)                │ │
@@ -81,6 +108,31 @@ Scaleway's modern serverless stack is **NOT HDS certified**. Only dedicated serv
 │   │                                                           │ │
 │   └───────────────────────────────────────────────────────────┘ │
 └─────────────────────────────────────────────────────────────────┘
+              │
+              │ Backups chiffrés (daily)
+              ▼
+┌─────────────────────────────────────────────────────────────────┐
+│   Object Storage (Scaleway, Backblaze, AWS S3...)               │
+│   ┌───────────────────┐                                         │
+│   │  Backups chiffrés │◄─── pg_dump + age/gpg encryption        │
+│   │  (pas besoin HDS) │     Clé reste sur Dedibox               │
+│   └───────────────────┘     ~2€/mois                            │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+### Pourquoi le frontend n'a pas besoin d'HDS ?
+
+Le frontend Next.js en mode static ne contient que du HTML/JS/CSS. Les données de santé transitent **directement** du navigateur de l'utilisateur vers l'API sur le Dedibox HDS. Vercel ne voit jamais les données patients.
+
+```
+Flux des données de santé :
+
+Navigateur ────────────────────────► API Dedibox (HDS) ────► PostgreSQL (HDS)
+    │                                       ▲
+    │         Données de santé              │
+    └───────────────────────────────────────┘
+
+Vercel ne sert que la "coquille" de l'app (HTML/JS/CSS)
 ```
 
 ---
@@ -104,13 +156,25 @@ Scaleway's modern serverless stack is **NOT HDS certified**. Only dedicated serv
 |-----------|--------------|
 | Dedibox Start-9-M | 39,99€ |
 | HDS Support (mandatory) | 35,00€ |
-| Object Storage + CDN | ~1-2€ |
+| Vercel (frontend) | 0€ (free tier) |
+| Object Storage (backups chiffrés) | ~2€ |
 | **Total** | **~77€/month** |
 
 ### Business Perspective
 
 - 77€/month = ~2-3 paying customers to cover infrastructure
-- If pricing is 30-50€/month per psychologist → break-even at 2-3 users
+- If pricing is 30€/month per psychologist → break-even at 3 users
+
+### Pourquoi pas 2 VPS séparés (API + DB) ?
+
+| Aspect | 1 VPS (API + DB) | 2 VPS séparés |
+|--------|------------------|---------------|
+| Coût | ~77€/mois | ~154€/mois |
+| Latence API↔DB | ~0ms (localhost) | ~1-5ms (réseau) |
+| Complexité | Simple | Plus de config |
+| Ressources | 32GB RAM suffisant | Gaspillage pour MVP |
+
+Le Dedibox Start-9-M a largement assez de ressources pour les deux. Séparer quand tu auras des centaines d'utilisateurs simultanés.
 
 ---
 
@@ -165,11 +229,48 @@ PostgreSQL (disk 1)
       │
       │ pg_dump (daily)
       ▼
+Chiffrement (age/gpg)
+      │
+      ▼
 Local backup (disk 2)
       │
       │ rclone sync (daily)
       ▼
-Object Storage HDS (off-site)
+Object Storage (off-site, pas besoin HDS)
+```
+
+### Pourquoi les backups n'ont pas besoin d'HDS ?
+
+Si les backups sont **chiffrés avant** de quitter le Dedibox HDS, le provider Object Storage ne voit que des blobs illisibles. La clé de déchiffrement reste exclusivement sur le Dedibox.
+
+**Interprétation juridique courante** : des données chiffrées dont la clé reste sur infrastructure HDS ne sont plus des "données de santé lisibles" pour l'hébergeur non-HDS.
+
+### Options Object Storage pour backups
+
+| Provider | Prix ~100GB | Localisation |
+|----------|-------------|--------------|
+| Scaleway (sans HDS) | ~2€/mois | France |
+| Backblaze B2 | ~1€/mois | EU (Amsterdam) |
+| AWS S3 | ~2-3€/mois | EU (Paris) |
+| OVH Object Storage | ~1-2€/mois | France |
+
+### Script backup type
+
+```bash
+#!/bin/bash
+# Sur le Dedibox
+
+# 1. Dump
+pg_dump melya_prod > /tmp/backup.sql
+
+# 2. Chiffre
+age -r "ta_clé_publique" /tmp/backup.sql > /tmp/backup.sql.enc
+
+# 3. Upload
+rclone copy /tmp/backup.sql.enc scaleway:melya-backups/
+
+# 4. Nettoyage
+rm /tmp/backup.sql /tmp/backup.sql.enc
 ```
 
 ---
@@ -189,27 +290,37 @@ Both run on the same Dedibox:
 
 ## Frontend Deployment
 
-Frontend has no health data → can use Object Storage + CDN (HDS certified anyway).
+Frontend has no health data → can use Vercel (gratuit, pas besoin HDS).
 
 ```
-GitHub Actions                         Scaleway
+GitHub                                 Vercel
 ──────────────────────────────────────────────────────
-git push → npm run build → upload → Object Storage → CDN
-                                    (melya.fr)
+git push → auto build → deploy → CDN Global
+                                 (melya.fr)
 ```
+
+### Avantages Vercel vs Object Storage Scaleway
+
+| Aspect | Vercel | Scaleway Object Storage |
+|--------|--------|------------------------|
+| Coût | Gratuit (free tier) | ~1-2€/mois |
+| Déploiement | Auto (git push) | CI/CD à configurer |
+| Preview deployments | ✅ Inclus | ❌ À configurer |
+| Analytics | ✅ Inclus | ❌ Non |
+| CDN | ✅ Global | ✅ France |
 
 ---
 
-## Comparison: Expected vs Reality
+## Comparison: All Options
 
-| Aspect | Expected (Serverless) | Reality (Dedibox) |
-|--------|----------------------|-------------------|
-| Monthly cost | ~25-30€ | ~77€ |
-| Operations | Zero ops | Full server management |
-| Scaling | Automatic | Manual |
-| Pay model | Per-use | Fixed monthly |
-| Cold start | 1-2s after inactivity | Always warm |
-| HDS certified | ❌ (surprise) | ✅ |
+| Aspect | Initial Hope | Scaleway Dedibox | Clever Cloud (TBC) |
+|--------|--------------|------------------|-------------------|
+| Monthly cost | ~25-30€ | ~77€ | À confirmer |
+| Operations | Zero ops | Self-managed | Zero ops |
+| Scaling | Automatic | Manual | Automatic |
+| Pay model | Per-use | Fixed monthly | Per-second |
+| HDS activities | - | 1-4 only | 1-6 (all) |
+| Frontend | Scaleway | Vercel (free) | Vercel (free) |
 
 ---
 
@@ -218,7 +329,11 @@ git push → npm run build → upload → Object Storage → CDN
 1. **"HDS certified" ≠ all services** - Only specific products are covered
 2. **Serverless + HDS don't mix** (at Scaleway) - Modern stack isn't certified yet
 3. **Budget 3x higher** than initial estimate for HDS compliance
-4. **More ops work** required - no managed database available with HDS
+4. **More ops work** required - no managed database available with HDS (chez Scaleway)
+5. **Frontend n'a pas besoin HDS** - Les données de santé transitent directement du navigateur vers l'API HDS
+6. **Backups chiffrés = pas besoin HDS** - Si la clé reste sur l'infra HDS, les blobs chiffrés ne sont plus des "données de santé"
+7. **Clever Cloud = alternative viable** - HDS 6 activités + zero ops (pricing à confirmer)
+8. **Object Storage HDS Scaleway = 250€/mois** - Trop cher, mais non nécessaire pour frontend/backups
 
 ---
 
@@ -269,11 +384,61 @@ For a solo dev MVP, paying 77€ + doing some ops work beats paying 295€ for m
 
 ---
 
+## Clever Cloud (Investigated - February 2026)
+
+### Ce qu'ils offrent
+
+Clever Cloud a obtenu la certification HDS en **janvier 2025** pour **les 6 activités** (contrairement à Scaleway qui ne couvre que 1-4).
+
+| Aspect | Clever Cloud | Scaleway Dedibox |
+|--------|--------------|------------------|
+| **Certification HDS** | ✅ 6 activités (1-6) | ⚠️ 4 activités (1-4) |
+| **Services HDS** | PostgreSQL, Docker, Node.js managés | Dedibox uniquement |
+| **Modèle** | PaaS managé (zero ops) | Serveur dédié (self-managed) |
+| **Facturation** | À la seconde | Mensuel fixe |
+| **Scaling** | Automatique | Manuel |
+
+### Services HDS certifiés
+
+- PostgreSQL, MySQL, Elasticsearch, Redis, MongoDB (managed)
+- Applications Docker, Node.js, etc.
+- Backups inclus
+
+### Pricing
+
+**Non publié pour HDS** - nécessite de contacter leur équipe commerciale.
+
+Pricing standard (hors HDS) :
+- App Node.js XS (1GB RAM) : ~16€/mois
+- PostgreSQL : ~20-30€/mois (estimé)
+
+### Avantage majeur
+
+C'est le setup "serverless + HDS" que tu voulais initialement :
+- Zero ops (managed PostgreSQL, managed containers)
+- HDS 6 activités = pas besoin de te certifier toi-même
+- Scaling automatique
+
+### Action recommandée
+
+Contacter Clever Cloud pour un devis HDS :
+1. Surcoût HDS vs standard ?
+2. Engagement minimum ?
+3. Confirmation que Node.js/Docker est couvert par HDS ?
+
+**Si pricing < 150€/mois**, ça pourrait valoir le coup vs gérer un Dedibox.
+
+### Références
+
+- [Clever Cloud HDS](https://clever.cloud/health-data-hosting/)
+- [Annonce certification HDS](https://www.clever.cloud/blog/press/2025/01/15/clever-cloud-obtains-hds-certification/)
+
+---
+
 ## Other Providers (Not Investigated)
 
 | Provider | HDS Option | Notes |
 |----------|-----------|-------|
-| **Clever Cloud** | Claims HDS | Worth investigating serverless options |
 | **Outscale** | Full HDS | Dassault subsidiary, enterprise-focused |
 | **Azure France** | HDS available | More complex, likely expensive |
 
@@ -326,17 +491,37 @@ Cost estimate for HDS activities 5-6:
 
 ## Next Steps
 
-- [ ] Confirm Dedibox order with HDS support
-- [ ] Plan server setup (OS, PostgreSQL, Docker, Nginx)
-- [ ] Design backup automation (pg_dump → Object Storage)
-- [ ] Set up CI/CD for Dedibox deployment
-- [ ] Document server maintenance procedures
+### Option A : Scaleway Dedibox (~77€/mois)
+
+- [ ] Confirmer commande Dedibox avec support HDS
+- [ ] Clarifier avec Scaleway : "Avec le support HDS 35€, suis-je couvert pour les 6 activités ou dois-je me certifier pour 5-6 ?"
+- [ ] Setup serveur (OS, PostgreSQL, Docker, Nginx)
+- [ ] Configurer backups chiffrés → Object Storage
+- [ ] Connecter Vercel pour le frontend
+- [ ] CI/CD pour déploiement API sur Dedibox
+
+### Option B : Clever Cloud (pricing à confirmer)
+
+- [ ] Contacter Clever Cloud pour devis HDS
+- [ ] Comparer coût total vs Scaleway
+- [ ] Si < 150€/mois → potentiellement plus intéressant (zero ops)
 
 ---
 
 ## Useful References
 
+### Scaleway
 - [Scaleway Security & Compliance](https://www.scaleway.com/fr/securite-conformite/)
 - [Scaleway Dedibox](https://www.scaleway.com/fr/dedibox/)
+
+### Clever Cloud
+- [Clever Cloud HDS](https://clever.cloud/health-data-hosting/)
+- [Clever Cloud Pricing](https://clever.cloud/pricing/)
+
+### Réglementation
 - [Article L.1111-8 CSP](https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000021941353)
 - [ANS - Référentiel HDS](https://esante.gouv.fr/produits-services/hds)
+- [PGSSI-S](https://esante.gouv.fr/produits-services/pgssi-s/corpus-documentaire)
+
+### Frontend
+- [Vercel](https://vercel.com/)
