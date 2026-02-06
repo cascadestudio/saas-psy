@@ -16,7 +16,7 @@ Frontend Next.js              API NestJS + PostgreSQL
                               (n'importe quel provider, ~2€/mois)
 ```
 
-**Alternative à investiguer** : Clever Cloud (HDS 6 activités, zero ops, pricing à demander)
+**Alternative** : Clever Cloud (HDS 6 activités, zero ops, ~300€/mois estimé - devis en attente)
 
 ---
 
@@ -313,14 +313,17 @@ git push → auto build → deploy → CDN Global
 
 ## Comparison: All Options
 
-| Aspect | Initial Hope | Scaleway Dedibox | Clever Cloud (TBC) |
-|--------|--------------|------------------|-------------------|
-| Monthly cost | ~25-30€ | ~77€ | À confirmer |
-| Operations | Zero ops | Self-managed | Zero ops |
-| Scaling | Automatic | Manual | Automatic |
-| Pay model | Per-use | Fixed monthly | Per-second |
-| HDS activities | - | 1-4 only | 1-6 (all) |
-| Frontend | Scaleway | Vercel (free) | Vercel (free) |
+| Aspect | Initial Hope | Scaleway Dedibox | Clever Cloud HDS | OVH Managed + HDS |
+|--------|--------------|------------------|------------------|-------------------|
+| Monthly cost | ~25-30€ | ~77€ | ~300€ (estimé) | ~295€ |
+| Operations | Zero ops | Self-managed | Zero ops | Zero ops |
+| Scaling | Automatic | Manual | Automatic | Automatic |
+| Pay model | Per-use | Fixed monthly | Per-second + 200€ fixe | Fixed monthly |
+| HDS activities | - | 1-4 only | 1-6 (all) | 1-6 (all) |
+| Engagement | - | Aucun | 12 mois | Aucun |
+| Backups | - | Self-managed | Inclus (7j) | Inclus |
+| DB replication | - | Self-managed | Incluse | Incluse |
+| Frontend | Scaleway | Vercel (free) | Vercel (free) | Vercel (free) |
 
 ---
 
@@ -332,8 +335,9 @@ git push → auto build → deploy → CDN Global
 4. **More ops work** required - no managed database available with HDS (chez Scaleway)
 5. **Frontend n'a pas besoin HDS** - Les données de santé transitent directement du navigateur vers l'API HDS
 6. **Backups chiffrés = pas besoin HDS** - Si la clé reste sur l'infra HDS, les blobs chiffrés ne sont plus des "données de santé"
-7. **Clever Cloud = alternative viable** - HDS 6 activités + zero ops (pricing à confirmer)
+7. **Clever Cloud = zero ops HDS** - 6 activités + managed, mais ~300€/mois (200€ fixe + coeff ×1.4)
 8. **Object Storage HDS Scaleway = 250€/mois** - Trop cher, mais non nécessaire pour frontend/backups
+9. **Le vrai arbitrage** : ~77€ self-managed (Scaleway) vs ~300€ zero ops (Clever Cloud/OVH) - le zero ops HDS coûte ~4x plus cher
 
 ---
 
@@ -386,9 +390,11 @@ For a solo dev MVP, paying 77€ + doing some ops work beats paying 295€ for m
 
 ## Clever Cloud (Investigated - February 2026)
 
+**Clever Cloud Call** - February 2026
+
 ### Ce qu'ils offrent
 
-Clever Cloud a obtenu la certification HDS en **janvier 2025** pour **les 6 activités** (contrairement à Scaleway qui ne couvre que 1-4).
+Clever Cloud a obtenu la certification HDS en **janvier 2025** pour **les 6 activités** (contrairement à Scaleway qui ne couvre que 1-4). Certification valide jusqu'en **2027**.
 
 | Aspect | Clever Cloud | Scaleway Dedibox |
 |--------|--------------|------------------|
@@ -396,37 +402,61 @@ Clever Cloud a obtenu la certification HDS en **janvier 2025** pour **les 6 acti
 | **Services HDS** | PostgreSQL, Docker, Node.js managés | Dedibox uniquement |
 | **Modèle** | PaaS managé (zero ops) | Serveur dédié (self-managed) |
 | **Facturation** | À la seconde | Mensuel fixe |
-| **Scaling** | Automatique | Manuel |
+| **Scaling** | Automatique (vertical + horizontal) | Manuel |
+| **Backups** | Inclus (rétention 7 jours) | À gérer soi-même |
+| **Réplication DB** | Incluse (doublée) | À gérer soi-même |
 
 ### Services HDS certifiés
 
 - PostgreSQL, MySQL, Elasticsearch, Redis, MongoDB (managed)
 - Applications Docker, Node.js, etc.
-- Backups inclus
+- Backups inclus (7 jours de rétention)
+- Réplication de base de données incluse
 
-### Pricing
+### Pricing HDS (Call Outcome)
 
-**Non publié pour HDS** - nécessite de contacter leur équipe commerciale.
+| Élément | Détail |
+|---------|--------|
+| **Abonnement HDS fixe** | 200€/mois |
+| **Engagement** | 12 mois |
+| **Coefficient HDS** | ×1.4 sur toute la consommation |
+| **Paiement progressif** | 10 premiers mois (mois 1 = 10%, mois 2 = 20%, ...) |
 
-Pricing standard (hors HDS) :
-- App Node.js XS (1GB RAM) : ~16€/mois
-- PostgreSQL : ~20-30€/mois (estimé)
+### Estimation coût mensuel (à confirmer avec devis)
 
-### Avantage majeur
+| Composant | Coût standard | Avec coeff HDS (×1.4) |
+|-----------|--------------|----------------------|
+| Abonnement HDS fixe | - | 200€ |
+| PostgreSQL (nano) | ~20-30€ | ~28-42€ |
+| Docker container(s) | ~54€ (à confirmer) | ~76€ |
+| **Total estimé** | - | **~300-320€/mois** |
 
-C'est le setup "serverless + HDS" que tu voulais initialement :
-- Zero ops (managed PostgreSQL, managed containers)
-- HDS 6 activités = pas besoin de te certifier toi-même
-- Scaling automatique
+> ⚠️ Le paiement progressif les 10 premiers mois réduit la charge initiale :
+> Mois 1 ≈ 30€, Mois 2 ≈ 60€, ... Mois 10 ≈ 300€, puis plein tarif.
 
-### Action recommandée
+### Avantages confirmés
 
-Contacter Clever Cloud pour un devis HDS :
-1. Surcoût HDS vs standard ?
-2. Engagement minimum ?
-3. Confirmation que Node.js/Docker est couvert par HDS ?
+- **Zero ops** : managed PostgreSQL, managed containers, backups automatiques
+- **HDS 6 activités** = pas besoin de se certifier soi-même (activités 5-6 incluses)
+- **Scaling automatique** (vertical + horizontal)
+- **Support réactif** : escalade aux bonnes équipes, retours rapides
+- **Couverture géographique** : AZ à Paris et autres zones disponibles
+- **Frontend séparable** : confirmé que le frontend peut rester sur Vercel
 
-**Si pricing < 150€/mois**, ça pourrait valoir le coup vs gérer un Dedibox.
+### Inconvénients
+
+- **Coût élevé** : ~300€/mois vs 77€ pour Scaleway Dedibox (~4x plus cher)
+- **Engagement 12 mois** : pas de flexibilité
+- **Obligations documentaires** : audits et demandes de documents liés à la certification HDS
+- **Convention HDS** : nécessite signature (SIREN, coordonnées, périmètre)
+- **Risque de surconsommation** : arrêt automatique des services si surconso RAM/CPU
+
+### Prochaines étapes Clever Cloud
+
+- [ ] Recevoir le devis officiel de Clever Cloud
+- [ ] Signer la convention HDS (format Word, infos SIREN/téléphone)
+- [ ] Créer un compte organisation + crédits gratuits offerts
+- [ ] Comparer devis final vs Scaleway Dedibox
 
 ### Références
 
@@ -455,13 +485,22 @@ Contacter Clever Cloud pour un devis HDS :
 
 ### For Melya (SaaS)
 
+**Réponse confirmée par le contrat Scaleway (février 2026)** : Scaleway ne couvre que les activités 1-4. Les activités 5-6 sont explicitement à la charge du client.
+
 ```
-Scaleway (Dedibox HDS)              You (SaaS Editor)
+Scaleway (Dedibox HDS)              CASCADE (Client)
 ──────────────────────────────────────────────────────────
-Activities 1-4 ✅                    Activities 5-6 ❓
+Activities 1-4 ✅                    Activities 5-6 ⚠️
 Physical infrastructure              Application management
-Certified by Scaleway                Potentially required
+Certified by Scaleway                À la charge du client
 ```
+
+Le contrat liste comme responsabilités client :
+- Maintenance OS, correctifs de sécurité → **Activité 5**
+- Sauvegardes régulières, déportées et testées → **Activité 6**
+- Gestion des accès (IAM) → **Activité 5**
+- Journalisation des accès → **Activité 5**
+- Plan de continuité (PCA/PRA) → **Activités 5-6**
 
 ### Key Rules
 
@@ -471,11 +510,16 @@ Certified by Scaleway                Potentially required
 | SaaS hosting health data yourself | ⚠️ Potentially yes (activities 5-6) |
 | Using fully certified HDS host (1-6) | ✅ Covered by host |
 
-### Question to Ask Scaleway
+### Deux interprétations possibles
 
-> "With the 35€ HDS support, am I covered for all 6 activities, or do I need to certify myself for activities 5-6?"
+| Interprétation | Conséquence |
+|----------------|------------|
+| **Stricte** : éditeur SaaS = hébergeur pour activités 5-6 | Certification HDS 5-6 requise (~10 000€+ one-time + audits annuels) |
+| **Courante** : éditeur SaaS ≠ hébergeur pour compte de tiers | Pas de certification HDS requise, bonnes pratiques suffisent |
 
-### If Self-Certification Required
+> ⚠️ **Avec Clever Cloud (activités 1-6)**, ce flou juridique disparaît : tout est couvert par l'hébergeur.
+
+### If Self-Certification Required (Scaleway)
 
 Cost estimate for HDS activities 5-6:
 - ISO 27001 certification prerequisite
@@ -494,17 +538,19 @@ Cost estimate for HDS activities 5-6:
 ### Option A : Scaleway Dedibox (~77€/mois)
 
 - [ ] Confirmer commande Dedibox avec support HDS
-- [ ] Clarifier avec Scaleway : "Avec le support HDS 35€, suis-je couvert pour les 6 activités ou dois-je me certifier pour 5-6 ?"
+- [x] Clarifier activités 5-6 → **Contrat confirme : Scaleway = activités 1-4 seulement, 5-6 à la charge du client**
 - [ ] Setup serveur (OS, PostgreSQL, Docker, Nginx)
 - [ ] Configurer backups chiffrés → Object Storage
 - [ ] Connecter Vercel pour le frontend
 - [ ] CI/CD pour déploiement API sur Dedibox
 
-### Option B : Clever Cloud (pricing à confirmer)
+### Option B : Clever Cloud (~300€/mois estimé, devis en attente)
 
-- [ ] Contacter Clever Cloud pour devis HDS
-- [ ] Comparer coût total vs Scaleway
-- [ ] Si < 150€/mois → potentiellement plus intéressant (zero ops)
+- [x] Contacter Clever Cloud pour pricing HDS → **appel fait février 2026**
+- [ ] Recevoir et analyser le devis officiel
+- [ ] Signer la convention HDS si retenu (SIREN, périmètre)
+- [ ] Créer compte organisation
+- [ ] Comparer devis final vs Scaleway (arbitrage coût vs temps ops)
 
 ---
 
