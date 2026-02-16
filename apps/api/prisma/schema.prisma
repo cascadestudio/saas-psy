@@ -145,10 +145,10 @@ model Session {
   // Session status
   status            SessionStatus  @default(CREATED)
 
-  // Responses
-  responses         Json?          // Stores all answers
-  score             Json?          // Calculated score
-  interpretation    String?        // Auto-generated interpretation
+  // Responses (encrypted at rest - HDS compliance)
+  responses         String?        // Encrypted JSON answers
+  score             String?        // Encrypted calculated score
+  interpretation    String?        // Encrypted auto-generated interpretation
   patientComments   String?        @map("patient_comments")
 
   // Timestamps

@@ -7,6 +7,7 @@ import {
 } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { EmailService } from '../email/email.service';
+import { EncryptionService } from '../encryption/encryption.service';
 import { CreateSessionDto, UpdateSessionDto, SubmitResponsesDto } from './dto';
 import { createId } from '@paralleldrive/cuid2';
 
@@ -17,6 +18,7 @@ export class SessionsService {
   constructor(
     private prisma: PrismaService,
     private emailService: EmailService,
+    private encryption: EncryptionService,
   ) {}
 
   async create(practitionerId: string, dto: CreateSessionDto) {
@@ -76,15 +78,22 @@ export class SessionsService {
       return scale?.title || 'Questionnaire';
     });
 
+    // Decrypt patient/practitioner names for email
+    const decryptedPatientFirstName = this.encryption.decryptField(patient.firstName);
+    const decryptedPatientLastName = this.encryption.decryptField(patient.lastName);
+
     // Send ONE email with link to portal
-    const practitionerName = [practitioner.firstName, practitioner.lastName]
+    const practitionerName = [
+      this.encryption.decryptField(practitioner.firstName),
+      this.encryption.decryptField(practitioner.lastName),
+    ]
       .filter(Boolean)
       .join(' ') || 'Votre praticien';
 
     const emailResult = await this.emailService.sendBatchSessionEmail({
       patientEmail: patient.email,
-      patientFirstName: patient.firstName,
-      patientLastName: patient.lastName,
+      patientFirstName: decryptedPatientFirstName || '',
+      patientLastName: decryptedPatientLastName || '',
       batchId,
       scaleNames,
       practitionerName,
@@ -129,7 +138,7 @@ export class SessionsService {
       },
     });
 
-    return { sessions };
+    return { sessions: sessions.map((s) => this.decryptSession(s)) };
   }
 
   async findById(id: string, practitionerId: string) {
@@ -148,7 +157,7 @@ export class SessionsService {
       throw new ForbiddenException('Accès non autorisé à cette session');
     }
 
-    return { session };
+    return { session: this.decryptSession(session) };
   }
 
   async findAll(practitionerId: string) {
@@ -160,7 +169,7 @@ export class SessionsService {
       },
     });
 
-    return { sessions };
+    return { sessions: sessions.map((s) => this.decryptSession(s)) };
   }
 
   async update(id: string, practitionerId: string, dto: UpdateSessionDto) {
@@ -181,7 +190,7 @@ export class SessionsService {
       data: dto,
     });
 
-    return { session: updatedSession };
+    return { session: this.decryptSession(updatedSession) };
   }
 
   async cancel(id: string, practitionerId: string) {
@@ -201,12 +210,12 @@ export class SessionsService {
       throw new BadRequestException('Impossible d\'annuler une session complétée');
     }
 
-    const updatedSession = await this.prisma.session.update({
+    const cancelledSession = await this.prisma.session.update({
       where: { id },
       data: { status: 'CANCELLED' },
     });
 
-    return { session: updatedSession };
+    return { session: this.decryptSession(cancelledSession) };
   }
 
   // Public endpoint for patient portal (no auth required)
@@ -236,8 +245,10 @@ export class SessionsService {
       throw new NotFoundException('Portail non trouvé');
     }
 
-    // Get patient info from first session
+    // Get patient info from first session (decrypt encrypted names)
     const patient = sessions[0].patient;
+    const patientFirstName = this.encryption.decryptField(patient.firstName) || '';
+    const patientLastName = this.encryption.decryptField(patient.lastName) || '';
 
     // Separate pending and completed sessions
     const pendingSessions = sessions.filter(
@@ -248,8 +259,8 @@ export class SessionsService {
     return {
       portal: {
         batchId,
-        patientFirstName: patient.firstName,
-        patientLastName: patient.lastName,
+        patientFirstName,
+        patientLastName,
         totalCount: sessions.length,
         pendingCount: pendingSessions.length,
         completedCount: completedSessions.length,
@@ -320,8 +331,8 @@ export class SessionsService {
         id: session.id,
         scaleId: session.scaleId,
         batchId: session.batchId,
-        patientFirstName: session.patient.firstName,
-        patientLastName: session.patient.lastName,
+        patientFirstName: this.encryption.decryptField(session.patient.firstName),
+        patientLastName: this.encryption.decryptField(session.patient.lastName),
         status: session.status === 'SENT' ? 'STARTED' : session.status,
         scale: session.scale
           ? {
@@ -372,15 +383,15 @@ export class SessionsService {
       data: {
         status: 'COMPLETED',
         completedAt: new Date(),
-        responses: dto.responses,
-        patientComments: dto.patientComments,
-        score: score,
-        interpretation,
+        responses: this.encryption.encryptJson(dto.responses),
+        patientComments: this.encryption.encryptField(dto.patientComments),
+        score: this.encryption.encryptJson(score),
+        interpretation: this.encryption.encryptField(interpretation),
       },
     });
 
     return {
-      session: updatedSession,
+      session: this.decryptSession(updatedSession),
       message: 'Réponses enregistrées avec succès',
     };
   }
@@ -426,5 +437,26 @@ export class SessionsService {
     }
 
     return { score: totalScore, interpretation };
+  }
+
+  private decryptSession(session: any) {
+    if (!session) return session;
+    const decrypted = {
+      ...session,
+      responses: this.encryption.decryptJson(session.responses),
+      score: this.encryption.decryptJson(session.score),
+      interpretation: this.encryption.decryptField(session.interpretation),
+      patientComments: this.encryption.decryptField(session.patientComments),
+    };
+    // Decrypt included patient relation
+    if (decrypted.patient) {
+      decrypted.patient = {
+        ...decrypted.patient,
+        firstName: this.encryption.decryptField(decrypted.patient.firstName),
+        lastName: this.encryption.decryptField(decrypted.patient.lastName),
+        notes: this.encryption.decryptField(decrypted.patient.notes),
+      };
+    }
+    return decrypted;
   }
 }

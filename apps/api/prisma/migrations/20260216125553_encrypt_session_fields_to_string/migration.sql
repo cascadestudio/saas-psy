@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "sessions" ALTER COLUMN "responses" SET DATA TYPE TEXT,
+ALTER COLUMN "score" SET DATA TYPE TEXT;

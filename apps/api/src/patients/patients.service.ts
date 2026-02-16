@@ -5,11 +5,15 @@ import {
   ForbiddenException,
 } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
+import { EncryptionService } from '../encryption/encryption.service';
 import { CreatePatientDto, UpdatePatientDto } from './dto';
 
 @Injectable()
 export class PatientsService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private prisma: PrismaService,
+    private encryption: EncryptionService,
+  ) {}
 
   async create(practitionerId: string, dto: CreatePatientDto) {
     // Check if patient with same email already exists for this practitioner
@@ -28,13 +32,16 @@ export class PatientsService {
 
     const patient = await this.prisma.patient.create({
       data: {
-        ...dto,
+        firstName: this.encryption.encryptField(dto.firstName)!,
+        lastName: this.encryption.encryptField(dto.lastName)!,
+        email: dto.email,
         birthDate: dto.birthDate ? new Date(dto.birthDate) : null,
+        notes: this.encryption.encryptField(dto.notes),
         practitionerId,
       },
     });
 
-    return { patient };
+    return { patient: this.decryptPatient(patient) };
   }
 
   async findAll(practitionerId: string, status: 'active' | 'archived' = 'active') {
@@ -46,7 +53,7 @@ export class PatientsService {
       orderBy: { createdAt: 'desc' },
     });
 
-    return { patients };
+    return { patients: patients.map((p) => this.decryptPatient(p)) };
   }
 
   async findById(id: string, practitionerId: string) {
@@ -63,7 +70,7 @@ export class PatientsService {
       throw new ForbiddenException('Accès non autorisé à ce patient');
     }
 
-    return { patient };
+    return { patient: this.decryptPatient(patient) };
   }
 
   async update(id: string, practitionerId: string, dto: UpdatePatientDto) {
@@ -96,15 +103,25 @@ export class PatientsService {
       }
     }
 
+    const encryptedData: Record<string, any> = {};
+    if (dto.firstName !== undefined)
+      encryptedData.firstName = this.encryption.encryptField(dto.firstName);
+    if (dto.lastName !== undefined)
+      encryptedData.lastName = this.encryption.encryptField(dto.lastName);
+    if (dto.email !== undefined) encryptedData.email = dto.email;
+    if (dto.birthDate !== undefined)
+      encryptedData.birthDate = dto.birthDate
+        ? new Date(dto.birthDate)
+        : null;
+    if (dto.notes !== undefined)
+      encryptedData.notes = this.encryption.encryptField(dto.notes);
+
     const patient = await this.prisma.patient.update({
       where: { id },
-      data: {
-        ...dto,
-        birthDate: dto.birthDate ? new Date(dto.birthDate) : undefined,
-      },
+      data: encryptedData,
     });
 
-    return { patient };
+    return { patient: this.decryptPatient(patient) };
   }
 
   async delete(id: string, practitionerId: string) {
@@ -129,20 +146,29 @@ export class PatientsService {
   }
 
   async search(practitionerId: string, query: string, status: 'active' | 'archived' = 'active') {
+    // firstName/lastName are encrypted → can't use DB-level LIKE/contains
+    // Load all patients, decrypt, then filter in memory
+    // Email stays unencrypted and can be filtered at DB level
     const patients = await this.prisma.patient.findMany({
       where: {
         practitionerId,
         archivedAt: status === 'archived' ? { not: null } : null,
-        OR: [
-          { firstName: { contains: query, mode: 'insensitive' } },
-          { lastName: { contains: query, mode: 'insensitive' } },
-          { email: { contains: query, mode: 'insensitive' } },
-        ],
       },
-      orderBy: { lastName: 'asc' },
     });
 
-    return { patients };
+    const decrypted = patients.map((p) => this.decryptPatient(p));
+    const lowerQuery = query.toLowerCase();
+
+    const filtered = decrypted
+      .filter(
+        (p) =>
+          p.firstName?.toLowerCase().includes(lowerQuery) ||
+          p.lastName?.toLowerCase().includes(lowerQuery) ||
+          p.email?.toLowerCase().includes(lowerQuery),
+      )
+      .sort((a, b) => (a.lastName || '').localeCompare(b.lastName || ''));
+
+    return { patients: filtered };
   }
 
   async countActive(practitionerId: string) {
@@ -179,7 +205,7 @@ export class PatientsService {
       data: { archivedAt: new Date() },
     });
 
-    return { patient };
+    return { patient: this.decryptPatient(patient) };
   }
 
   async restore(id: string, practitionerId: string) {
@@ -205,6 +231,16 @@ export class PatientsService {
       data: { archivedAt: null },
     });
 
-    return { patient };
+    return { patient: this.decryptPatient(patient) };
+  }
+
+  private decryptPatient(patient: any) {
+    if (!patient) return patient;
+    return {
+      ...patient,
+      firstName: this.encryption.decryptField(patient.firstName),
+      lastName: this.encryption.decryptField(patient.lastName),
+      notes: this.encryption.decryptField(patient.notes),
+    };
   }
 }
