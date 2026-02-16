@@ -519,6 +519,35 @@ Le contrat liste comme responsabilités client :
 
 > ⚠️ **Avec Clever Cloud (activités 1-6)**, ce flou juridique disparaît : tout est couvert par l'hébergeur.
 
+### Risques concrets sans certification 5-6 (Scaleway)
+
+#### Sanctions théoriques
+
+| Type | Sanction | Base légale |
+|------|----------|-------------|
+| **Pénale** | 3 ans d'emprisonnement + 45 000€ d'amende | Art. L.1115-1 CSP |
+| **CNIL** | Jusqu'à 20M€ ou 4% du CA annuel | RGPD |
+| **Administrative** | Mise en demeure, injonction | ARS / CNIL |
+
+#### Risque réel pour un MVP
+
+- **Probabilité d'un contrôle** sur un petit SaaS : très faible
+- **Aucun cas connu** d'un éditeur SaaS sanctionné pour absence de certification 5-6
+- La plupart des startups santé françaises lancent sans certification HDS complète
+- L'interprétation juridique est débattue
+
+#### Quand ça devient un vrai problème
+
+| Situation | Risque |
+|-----------|--------|
+| Tout va bien, pas de plainte | Quasi nul |
+| **Fuite de données** | Non-conformité HDS = **facteur aggravant** |
+| Client psy demande des garanties | Impossible de prouver la conformité |
+| Prospection **hôpitaux / institutions** | Ils exigeront la certification |
+| Dénonciation par concurrent | Possible mais rare |
+
+> **En résumé** : pas de certification 5-6 + pas d'incident = probablement rien. Pas de certification 5-6 + fuite de données = gros problème. C'est un risque calculé que beaucoup de startups prennent au début.
+
 ### If Self-Certification Required (Scaleway)
 
 Cost estimate for HDS activities 5-6:
@@ -530,6 +559,7 @@ Cost estimate for HDS activities 5-6:
 
 - [ANS - Certification HDS](https://esante.gouv.fr/produits-services/hds)
 - [Éditeur de logiciels de santé et HDS](https://www.dpo-partage.fr/editeur-de-logiciels-de-sante/)
+- [Article L.1115-1 CSP - Sanctions pénales](https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000021941353)
 
 ---
 
