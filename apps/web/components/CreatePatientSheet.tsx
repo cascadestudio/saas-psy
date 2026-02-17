@@ -37,6 +37,9 @@ export function CreatePatientSheet({
   const { openPatientLimitGate } = usePremiumGate();
 
   const handleOpenChange = (newOpen: boolean) => {
+    // Prevent closing dialog while submitting
+    if (!newOpen && isSubmitting) return;
+
     if (newOpen) {
       // Check auth before opening the dialog
       if (!requireAuth(() => handleOpenChange(true))) {

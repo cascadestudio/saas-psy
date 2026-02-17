@@ -30,18 +30,25 @@ export class PatientsService {
       throw new ConflictException('Un patient avec cet email existe déjà');
     }
 
-    const patient = await this.prisma.patient.create({
-      data: {
-        firstName: this.encryption.encryptField(dto.firstName)!,
-        lastName: this.encryption.encryptField(dto.lastName)!,
-        email: dto.email,
-        birthDate: dto.birthDate ? new Date(dto.birthDate) : null,
-        notes: this.encryption.encryptField(dto.notes),
-        practitionerId,
-      },
-    });
+    try {
+      const patient = await this.prisma.patient.create({
+        data: {
+          firstName: this.encryption.encryptField(dto.firstName)!,
+          lastName: this.encryption.encryptField(dto.lastName)!,
+          email: dto.email,
+          birthDate: dto.birthDate ? new Date(dto.birthDate) : null,
+          notes: this.encryption.encryptField(dto.notes),
+          practitionerId,
+        },
+      });
 
-    return { patient: this.decryptPatient(patient) };
+      return { patient: this.decryptPatient(patient) };
+    } catch (error: any) {
+      if (error?.code === 'P2002') {
+        throw new ConflictException('Un patient avec cet email existe déjà');
+      }
+      throw error;
+    }
   }
 
   async findAll(practitionerId: string, status: 'active' | 'archived' = 'active') {
@@ -116,12 +123,19 @@ export class PatientsService {
     if (dto.notes !== undefined)
       encryptedData.notes = this.encryption.encryptField(dto.notes);
 
-    const patient = await this.prisma.patient.update({
-      where: { id },
-      data: encryptedData,
-    });
+    try {
+      const patient = await this.prisma.patient.update({
+        where: { id },
+        data: encryptedData,
+      });
 
-    return { patient: this.decryptPatient(patient) };
+      return { patient: this.decryptPatient(patient) };
+    } catch (error: any) {
+      if (error?.code === 'P2002') {
+        throw new ConflictException('Un patient avec cet email existe déjà');
+      }
+      throw error;
+    }
   }
 
   async delete(id: string, practitionerId: string) {
