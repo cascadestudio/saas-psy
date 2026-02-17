@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { scales as localScales } from "@/app/scalesData";
-import ScaleFactory from "@/app/questionnaire/[id]/components/ScaleFactory";
+import ScaleFactory from "@/app/scale/[id]/components/ScaleFactory";
 import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import {
@@ -28,6 +28,7 @@ interface SessionData {
     title: string;
     description: string;
     instructions: string;
+    formType?: string;
     questions: any[];
     answerScales?: any;
     scoring?: any;
@@ -111,6 +112,7 @@ export default function SessionPage() {
         title: localScale.title,
         description: localScale.description,
         instructions: localScale.longDescription,
+        formType: localScale.formType,
         questions: localScale.questions,
         answerScales: localScale.answerScales,
         scoring: localScale.scoring,
@@ -143,6 +145,7 @@ export default function SessionPage() {
     description: scaleData.description,
     instructions: scaleData.instructions,
     category: "",
+    formType: scaleData.formType,
     questions: scaleData.questions,
     estimatedTime: scaleData.estimatedTime,
     longDescription: scaleData.instructions,
@@ -151,7 +154,7 @@ export default function SessionPage() {
   };
 
   return (
-    <SessionQuestionnaireWrapper
+    <SessionScaleWrapper
       sessionId={session.id}
       batchId={session.batchId}
       scale={scale}
@@ -169,7 +172,7 @@ interface WrapperProps {
   patientLastName: string;
 }
 
-function SessionQuestionnaireWrapper({
+function SessionScaleWrapper({
   sessionId,
   batchId,
   scale,

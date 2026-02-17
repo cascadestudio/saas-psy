@@ -17,6 +17,7 @@ import { sessionsApi, patientsApi, type Session, type Patient } from "@/lib/api-
 import { scales } from "@/app/scalesData";
 import { Arrow, Interfaces, Finance } from "doodle-icons";
 import { Minus } from "lucide-react";
+import { getMainScore, getMaxScore, getScorePercentage, getSubscores, getInterpretation as getStoredInterpretation } from "@/lib/score-utils";
 
 export default function ResultsPage() {
   const { user, isLoading } = useUser();
@@ -86,7 +87,7 @@ export default function ResultsPage() {
   );
 
   // Get longitudinal data (previous sessions of same scale for same patient)
-  const sameQuestionnaireSessions = allSessions
+  const sameScaleSessions = allSessions
     .filter(
       (s) =>
         s.scaleId === session.scaleId && s.status === "COMPLETED"
@@ -96,21 +97,24 @@ export default function ResultsPage() {
         new Date(b.completedAt!).getTime() - new Date(a.completedAt!).getTime()
     );
 
-  const currentSessionIndex = sameQuestionnaireSessions.findIndex(
+  const currentSessionIndex = sameScaleSessions.findIndex(
     (s) => s.id === session.id
   );
   const previousSession =
-    currentSessionIndex < sameQuestionnaireSessions.length - 1
-      ? sameQuestionnaireSessions[currentSessionIndex + 1]
+    currentSessionIndex < sameScaleSessions.length - 1
+      ? sameScaleSessions[currentSessionIndex + 1]
       : null;
 
   let trend: "up" | "down" | "stable" | null = null;
   let trendPercentage = 0;
 
-  if (previousSession && previousSession.score !== undefined && session.score !== undefined) {
-    const diff = session.score - previousSession.score;
+  const currentMain = getMainScore(session.score);
+  const previousMain = getMainScore(previousSession?.score);
+
+  if (previousMain !== undefined && currentMain !== undefined) {
+    const diff = currentMain - previousMain;
     trendPercentage = Math.abs(
-      Math.round((diff / previousSession.score) * 100)
+      Math.round((diff / previousMain) * 100)
     );
 
     if (diff > 0) {
@@ -122,65 +126,28 @@ export default function ResultsPage() {
     }
   }
 
-  // Get score range info
-  const scoreRange = scale?.scoring?.ranges?.find(
-    (range: { min: number; max: number }) =>
-      session.score !== undefined &&
-      session.score >= range.min &&
-      session.score <= range.max
-  );
+  // Score display values
+  const maxScore = getMaxScore(session.score);
+  const scorePercentage = getScorePercentage(session.score);
+  const subscores = getSubscores(session.score);
 
-  // Calculate max possible score
-  const getMaxScore = () => {
-    if (!scale) return 0;
+  // Get interpretation from stored score or from session.interpretation or from scale ranges
+  const storedInterpretation = getStoredInterpretation(session.score);
+  const displayInterpretation = storedInterpretation || session.interpretation;
 
-    // For dual-scale scales (like Liebowitz)
-    if (scale.answerScales) {
-      if ("anxiety" in scale.answerScales) {
-        return scale.questions.length * 3 * 2; // 2 scales, each 0-3
-      }
-    }
+  // Fallback: find interpretation from scale ranges if not stored
+  const scoreRange = !storedInterpretation && scale?.scoring?.ranges
+    ? scale.scoring.ranges.find(
+        (range: { min: number; max: number }) =>
+          currentMain !== undefined &&
+          currentMain >= range.min &&
+          currentMain <= range.max
+      )
+    : null;
 
-    // For BDI-style scales
-    if (
-      scale.questions &&
-      Array.isArray(scale.questions) &&
-      typeof scale.questions[0] === "object" &&
-      "options" in scale.questions[0]
-    ) {
-      return scale.questions.length * 3; // Assuming 0-3 scale
-    }
-
-    // For STAI-style scales
-    if (
-      scale.questions &&
-      Array.isArray(scale.questions) &&
-      typeof scale.questions[0] === "object" &&
-      "items" in scale.questions[0]
-    ) {
-      const totalItems = scale.questions.reduce(
-        (acc: number, q: any) => {
-          if (typeof q === "object" && "items" in q && Array.isArray(q.items)) {
-            return acc + q.items.length;
-          }
-          return acc;
-        },
-        0
-      );
-      return totalItems * 4; // 1-4 scale
-    }
-
-    // For simple scales
-    if (scale.questions && Array.isArray(scale.questions)) {
-      return scale.questions.length * 4; // Assuming 0-4 scale
-    }
-
-    return 100; // Default
-  };
-
-  const maxScore = getMaxScore();
-  const scorePercentage =
-    session.score !== undefined ? Math.round((session.score / maxScore) * 100) : 0;
+  const badgeInterpretation = storedInterpretation
+    || scoreRange?.interpretation
+    || (typeof session.interpretation === "string" ? session.interpretation : null);
 
   return (
     <div className="flex-1 w-full flex flex-col gap-6 p-6">
@@ -223,14 +190,19 @@ export default function ResultsPage() {
             {/* Score Gauge */}
             <div className="flex flex-col items-center justify-center p-6 bg-muted rounded-lg">
               <div className="text-6xl font-bold text-primary mb-2">
-                {session.score}
+                {currentMain}
               </div>
+              {subscores.length > 0 && (
+                <div className="text-sm text-muted-foreground mb-1">
+                  {subscores.map((s) => `${s.label}: ${s.value}${s.max ? `/${s.max}` : ""}`).join(" · ")}
+                </div>
+              )}
               <div className="text-sm text-muted-foreground mb-4">
-                sur {maxScore} ({scorePercentage}%)
+                sur {maxScore || "?"} ({scorePercentage}%)
               </div>
-              {scoreRange && (
+              {badgeInterpretation && (
                 <Badge className="text-base px-4 py-2">
-                  {scoreRange.interpretation}
+                  {badgeInterpretation}
                 </Badge>
               )}
             </div>
@@ -240,7 +212,7 @@ export default function ResultsPage() {
               <div>
                 <h4 className="font-semibold mb-2">Interprétation clinique</h4>
                 <p className="text-sm text-muted-foreground">
-                  {session.interpretation}
+                  {displayInterpretation}
                 </p>
               </div>
 
@@ -281,7 +253,7 @@ export default function ResultsPage() {
                     {new Date(previousSession.completedAt!).toLocaleDateString(
                       "fr-FR"
                     )}{" "}
-                    : {previousSession.score}
+                    : {previousMain}
                   </p>
                 </div>
               )}
@@ -291,20 +263,20 @@ export default function ResultsPage() {
       </Card>
 
       {/* Longitudinal History */}
-      {sameQuestionnaireSessions.length > 1 && (
+      {sameScaleSessions.length > 1 && (
         <Card>
           <CardHeader>
             <CardTitle>Historique longitudinal</CardTitle>
             <CardDescription>
               Évolution des scores au fil du temps ({
-                sameQuestionnaireSessions.length
+                sameScaleSessions.length
               }{" "}
               passation(s))
             </CardDescription>
           </CardHeader>
           <CardContent>
             <div className="space-y-3">
-              {sameQuestionnaireSessions.map((s, index) => {
+              {sameScaleSessions.map((s, index) => {
                 const isCurrent = s.id === session.id;
                 return (
                   <div
@@ -322,12 +294,12 @@ export default function ResultsPage() {
                           {new Date(s.completedAt!).toLocaleDateString("fr-FR")}
                         </p>
                         <p className="text-xs text-muted-foreground">
-                          {s.interpretation}
+                          {getStoredInterpretation(s.score) || s.interpretation}
                         </p>
                       </div>
                     </div>
                     <div className="flex items-center gap-4">
-                      <div className="text-2xl font-bold">{s.score}</div>
+                      <div className="text-2xl font-bold">{getMainScore(s.score)}</div>
                       {isCurrent && (
                         <Badge variant="outline">Actuel</Badge>
                       )}

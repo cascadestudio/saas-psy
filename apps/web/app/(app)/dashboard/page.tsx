@@ -171,7 +171,7 @@ export default function DashboardPage() {
                         </div>
                       </div>
                       <Button asChild size="sm" variant="ghost">
-                        <Link href={`/questionnaire/description/${scale.id}`}>
+                        <Link href={`/scale/description/${scale.id}`}>
                           Détails
                         </Link>
                       </Button>
@@ -345,7 +345,7 @@ export default function DashboardPage() {
                         </div>
                       </div>
                       <Button asChild size="sm" variant="ghost">
-                        <Link href={`/questionnaire/description/${scale.id}`}>
+                        <Link href={`/scale/description/${scale.id}`}>
                           Détails
                         </Link>
                       </Button>
