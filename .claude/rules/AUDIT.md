@@ -2,6 +2,8 @@
 
 Comprehensive audit of the Melya platform with MVP-focused prioritization.
 
+> **Note**: All actionable items from this audit have been migrated to Linear (issues MEL-32 to MEL-54). This document serves as historical reference.
+
 ---
 
 ## Needed for Launch

@@ -1,5 +1,0 @@
-- [ ] review scales card and tunnel from scales
-- [ ] Corriger bug création de patient en double / problème de persistence
-- [ ] Ajouter modal "Modifier patient" avec option d'archivage (repositionner le bouton)
-- [ ] Refondre interface questionnaire mobile-first (1 question par écran)
-- [ ] l'export PDF
