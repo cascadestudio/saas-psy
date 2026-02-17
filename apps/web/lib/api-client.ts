@@ -112,6 +112,20 @@ export const authApi = {
   isAuthenticated: () => {
     return !!authApi.getToken();
   },
+
+  forgotPassword: async (email: string) => {
+    return apiRequest<{ message: string }>("/auth/forgot-password", {
+      method: "POST",
+      body: JSON.stringify({ email }),
+    });
+  },
+
+  resetPassword: async (token: string, newPassword: string) => {
+    return apiRequest<{ message: string }>("/auth/reset-password", {
+      method: "POST",
+      body: JSON.stringify({ token, newPassword }),
+    });
+  },
 };
 
 /**

@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useState, useEffect } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useUser } from "@/app/context/UserContext";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
@@ -11,9 +11,17 @@ import Link from "next/link";
 
 export function SignInForm() {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const { login } = useUser();
   const [message, setMessage] = useState<Message | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+
+  // Check for reset success message
+  useEffect(() => {
+    if (searchParams.get("reset") === "success") {
+      setMessage({ success: "Mot de passe réinitialisé avec succès ! Vous pouvez maintenant vous connecter." });
+    }
+  }, [searchParams]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -71,7 +79,15 @@ export function SignInForm() {
           </div>
 
           <div className="flex flex-col gap-2">
-            <Label htmlFor="password">Mot de passe</Label>
+            <div className="flex items-center justify-between">
+              <Label htmlFor="password">Mot de passe</Label>
+              <Link
+                href="/forgot-password"
+                className="text-xs text-muted-foreground hover:underline"
+              >
+                Mot de passe oublié ?
+              </Link>
+            </div>
             <Input
               type="password"
               name="password"

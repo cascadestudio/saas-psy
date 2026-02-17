@@ -25,6 +25,10 @@ model User {
   role          UserRole  @default(PRACTITIONER)
   isPremium     Boolean   @default(false) @map("is_premium")
 
+  // Password reset
+  passwordResetToken     String?   @unique @map("password_reset_token")
+  passwordResetExpiresAt DateTime? @map("password_reset_expires_at")
+
   createdAt     DateTime  @default(now()) @map("created_at")
   updatedAt     DateTime  @updatedAt @map("updated_at")
 
