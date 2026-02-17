@@ -97,11 +97,19 @@ export default function DashboardPage() {
   if (!user) {
     return (
       <div className="container mx-auto px-4 py-6">
-        <div className="mb-6">
-          <h1 className="font-bold text-3xl">Tableau de bord</h1>
-          <p className="text-muted-foreground mt-1">
-            Bienvenue sur Melya
-          </p>
+        <div className="mb-6 flex items-center justify-between">
+          <div>
+            <h1 className="font-bold text-3xl">Tableau de bord</h1>
+            <p className="text-muted-foreground mt-1">
+              Bienvenue sur Melya
+            </p>
+          </div>
+          <Button asChild>
+            <Link href="/send-scale">
+              <Interfaces.Send className="mr-2 h-4 w-4" />
+              Envoyer une échelle
+            </Link>
+          </Button>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">

@@ -54,8 +54,11 @@ function SendScaleContent() {
 
   // Load patients from API
   useEffect(() => {
+    if (!user) {
+      setPatientsLoading(false);
+      return;
+    }
     const loadPatients = async () => {
-      if (!user) return;
       setPatientsLoading(true);
       try {
         const { patients: data } = await patientsApi.getAll();
@@ -68,9 +71,7 @@ function SendScaleContent() {
       }
     };
 
-    if (user) {
-      loadPatients();
-    }
+    loadPatients();
   }, [user]);
 
   const handlePatientCreated = async (patientId: string) => {
@@ -90,10 +91,6 @@ function SendScaleContent() {
         <p>Chargement...</p>
       </div>
     );
-  }
-
-  if (!user) {
-    return null;
   }
 
   const selectedPatient = patients.find((p) => p.id === selectedPatientId);

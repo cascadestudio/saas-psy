@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -15,7 +15,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { patientsApi, ApiError } from "@/lib/api-client";
 import { toast } from "sonner";
 import { Interfaces } from "doodle-icons";
-import { useRequireAuth } from "@/hooks/useRequireAuth";
+import { useUser } from "@/app/context/UserContext";
+import { useAuthGate } from "@/app/context/AuthGateContext";
 import { usePremiumGate, FREE_PATIENT_LIMIT } from "@/app/context/PremiumGateContext";
 
 interface CreatePatientSheetProps {
@@ -23,6 +24,14 @@ interface CreatePatientSheetProps {
   buttonSize?: "sm" | "lg";
   buttonText?: string;
   currentPatientCount?: number;
+}
+
+interface PatientFormData {
+  email: string;
+  firstName: string;
+  lastName: string;
+  birthDate: string;
+  notes: string;
 }
 
 export function CreatePatientSheet({
@@ -33,47 +42,35 @@ export function CreatePatientSheet({
 }: CreatePatientSheetProps) {
   const [open, setOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const { requireAuth } = useRequireAuth();
+  const { user } = useUser();
+  const { openAuthGate } = useAuthGate();
   const { openPatientLimitGate } = usePremiumGate();
+  const pendingFormDataRef = useRef<PatientFormData | null>(null);
 
   const handleOpenChange = (newOpen: boolean) => {
-    // Prevent closing dialog while submitting
     if (!newOpen && isSubmitting) return;
-
-    if (newOpen) {
-      // Check auth before opening the dialog
-      if (!requireAuth(() => handleOpenChange(true))) {
-        return; // Auth gate modal opened, action stored for later
-      }
-
-      // Check patient limit (only for authenticated users)
-      if (currentPatientCount >= FREE_PATIENT_LIMIT) {
-        openPatientLimitGate(currentPatientCount);
-        return; // Premium gate modal opened
-      }
-    }
     setOpen(newOpen);
   };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const handleOpen = () => {
+    // Check patient limit only for authenticated users
+    if (user && currentPatientCount >= FREE_PATIENT_LIMIT) {
+      openPatientLimitGate(currentPatientCount);
+      return;
+    }
+    setOpen(true);
+  };
+
+  const createPatient = async (data: PatientFormData) => {
     setIsSubmitting(true);
-
-    const formData = new FormData(e.currentTarget);
-
-    const email = formData.get("email") as string;
-    const firstName = formData.get("firstName") as string;
-    const lastName = formData.get("lastName") as string;
-    const birthDate = formData.get("birthDate") as string;
-    const notes = formData.get("notes") as string;
-
+    setOpen(true);
     try {
       const { patient } = await patientsApi.create({
-        firstName: firstName || email.split("@")[0],
-        lastName: lastName || "",
-        email,
-        birthDate: birthDate || undefined,
-        notes: notes || undefined,
+        firstName: data.firstName || data.email.split("@")[0],
+        lastName: data.lastName || "",
+        email: data.email,
+        birthDate: data.birthDate || undefined,
+        notes: data.notes || undefined,
       });
 
       toast.success("Patient créé avec succès", {
@@ -82,10 +79,8 @@ export function CreatePatientSheet({
 
       setIsSubmitting(false);
       setOpen(false);
-
-      // Refresh patient list
+      pendingFormDataRef.current = null;
       onPatientCreated?.(patient.id);
-      return;
     } catch (error) {
       console.error("Error creating patient:", error);
       if (error instanceof ApiError) {
@@ -97,9 +92,43 @@ export function CreatePatientSheet({
     }
   };
 
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.currentTarget);
+    const data: PatientFormData = {
+      email: formData.get("email") as string,
+      firstName: formData.get("firstName") as string,
+      lastName: formData.get("lastName") as string,
+      birthDate: formData.get("birthDate") as string,
+      notes: formData.get("notes") as string,
+    };
+
+    if (!user) {
+      // Store form data and trigger auth gate
+      pendingFormDataRef.current = data;
+      setOpen(false);
+      openAuthGate(() => {
+        // After successful auth, create the patient automatically
+        if (pendingFormDataRef.current) {
+          createPatient(pendingFormDataRef.current);
+        }
+      });
+      return;
+    }
+
+    // Check patient limit
+    if (currentPatientCount >= FREE_PATIENT_LIMIT) {
+      openPatientLimitGate(currentPatientCount);
+      return;
+    }
+
+    await createPatient(data);
+  };
+
   return (
     <>
-      <Button size={buttonSize} onClick={() => handleOpenChange(true)}>
+      <Button size={buttonSize} onClick={handleOpen}>
         <Interfaces.UserAdd className="mr-2 h-4 w-4" />
         {buttonText}
       </Button>
@@ -123,6 +152,7 @@ export function CreatePatientSheet({
               placeholder="patient@example.com"
               required
               autoFocus
+              defaultValue={pendingFormDataRef.current?.email}
             />
             <p className="text-xs text-muted-foreground">
               Nécessaire pour l'envoi des questionnaires
@@ -138,6 +168,7 @@ export function CreatePatientSheet({
                 id="firstName"
                 name="firstName"
                 placeholder="Martin"
+                defaultValue={pendingFormDataRef.current?.firstName}
               />
             </div>
             <div className="space-y-2">
@@ -148,6 +179,7 @@ export function CreatePatientSheet({
                 id="lastName"
                 name="lastName"
                 placeholder="Dubois"
+                defaultValue={pendingFormDataRef.current?.lastName}
               />
             </div>
           </div>
@@ -160,6 +192,7 @@ export function CreatePatientSheet({
               id="birthDate"
               name="birthDate"
               type="date"
+              defaultValue={pendingFormDataRef.current?.birthDate}
             />
           </div>
 
@@ -172,6 +205,7 @@ export function CreatePatientSheet({
               name="notes"
               placeholder="Notes confidentielles sur le patient..."
               rows={3}
+              defaultValue={pendingFormDataRef.current?.notes}
             />
           </div>
 
