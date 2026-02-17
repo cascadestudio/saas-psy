@@ -123,15 +123,22 @@ function SendScaleContent() {
 
     setIsSending(true);
     try {
-      await sessionsApi.create({
+      const result = await sessionsApi.create({
         patientId: selectedPatient.id,
         scaleIds: selectedScaleIds,
         message: personalMessage || undefined,
       });
 
-      toast.success("Échelle(s) envoyée(s) avec succès", {
-        description: `${selectedScaleIds.length} échelle(s) envoyée(s) à ${selectedPatient.firstName} ${selectedPatient.lastName}`,
-      });
+      if (result.emailsFailed > 0) {
+        toast.warning("Échelle(s) créée(s) mais l'email n'a pas pu être envoyé", {
+          description: `Vérifiez l'adresse email de ${selectedPatient.firstName} ${selectedPatient.lastName}`,
+          duration: 8000,
+        });
+      } else {
+        toast.success("Échelle(s) envoyée(s) avec succès", {
+          description: `${selectedScaleIds.length} échelle(s) envoyée(s) à ${selectedPatient.firstName} ${selectedPatient.lastName}`,
+        });
+      }
 
       router.push(`/patients/${selectedPatient.id}`);
     } catch (error) {

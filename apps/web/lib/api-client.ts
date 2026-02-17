@@ -240,7 +240,13 @@ export const sessionsApi = {
   },
 
   create: async (data: CreateSessionDto) => {
-    return apiRequest<{ session: Session }>("/sessions", {
+    return apiRequest<{
+      sessions: Session[];
+      batchId: string;
+      message: string;
+      emailsSent: number;
+      emailsFailed: number;
+    }>("/sessions", {
       method: "POST",
       body: JSON.stringify(data),
     });
