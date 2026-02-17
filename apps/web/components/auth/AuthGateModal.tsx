@@ -130,16 +130,7 @@ function SignInForm({
       </div>
 
       <div className="space-y-2">
-        <div className="flex items-center justify-between">
-          <Label htmlFor="signin-password">Mot de passe</Label>
-          <Link
-            href="/forgot-password"
-            className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-            onClick={closeAuthGate}
-          >
-            Mot de passe oublié ?
-          </Link>
-        </div>
+        <Label htmlFor="signin-password">Mot de passe</Label>
         <Input
           id="signin-password"
           type="password"
@@ -147,6 +138,13 @@ function SignInForm({
           placeholder="Votre mot de passe"
           required
         />
+        <Link
+          href="/forgot-password"
+          className="text-[11px] text-muted-foreground/60 hover:text-primary transition-colors w-fit"
+          onClick={closeAuthGate}
+        >
+          Mot de passe oublié ?
+        </Link>
       </div>
 
       <SubmitButton

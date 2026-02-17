@@ -50,10 +50,10 @@ export function ForgotPasswordForm() {
 
         <div className="text-center">
           <Link
-            href="/sign-in"
+            href="/dashboard"
             className="text-sm text-primary hover:underline"
           >
-            Retour à la connexion
+            Retour à l'application
           </Link>
         </div>
       </div>
@@ -96,10 +96,10 @@ export function ForgotPasswordForm() {
 
         <div className="text-center">
           <Link
-            href="/sign-in"
+            href="/dashboard"
             className="text-sm text-muted-foreground hover:underline"
           >
-            Retour à la connexion
+            Retour à l'application
           </Link>
         </div>
       </div>

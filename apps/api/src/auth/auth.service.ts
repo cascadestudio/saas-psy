@@ -7,6 +7,7 @@ import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 import * as crypto from 'crypto';
 import { UsersService } from '../users/users.service';
+import { EmailService } from '../email/email.service';
 import { RegisterDto, LoginDto } from './dto';
 import { ForgotPasswordDto } from './dto/forgot-password.dto';
 import { ResetPasswordDto } from './dto/reset-password.dto';
@@ -18,6 +19,7 @@ export class AuthService {
     private usersService: UsersService,
     private jwtService: JwtService,
     private configService: ConfigService,
+    private emailService: EmailService,
   ) {}
 
   async register(registerDto: RegisterDto) {
@@ -119,11 +121,8 @@ export class AuthService {
       expiresAt,
     );
 
-    // TODO: Send email with reset link containing raw token
-    // await this.emailService.sendPasswordResetEmail(user.email, resetToken);
-
-    console.log(`Password reset token for ${user.email}: ${resetToken}`);
-    console.log(`Reset link: ${this.configService.get('APP_URL')}/reset-password/${resetToken}`);
+    // Send email with reset link containing raw token
+    await this.emailService.sendPasswordResetEmail(user.email, resetToken);
   }
 
   async resetPassword(token: string, newPassword: string): Promise<void> {

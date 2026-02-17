@@ -10,7 +10,9 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
+import { useSearchParams, useRouter } from "next/navigation";
 import { useUser } from "@/app/context/UserContext";
+import { useAuthGate } from "@/app/context/AuthGateContext";
 import { useEffect, useState } from "react";
 import { patientsApi, favoritesApi, type Patient } from "@/lib/api-client";
 import { scales } from "@/app/scalesData";
@@ -19,10 +21,21 @@ import { CreatePatientSheet } from "@/components/CreatePatientSheet";
 
 export default function DashboardPage() {
   const { user, isLoading } = useUser();
+  const { openAuthGate } = useAuthGate();
+  const searchParams = useSearchParams();
+  const router = useRouter();
   const [searchQuery, setSearchQuery] = useState("");
   const [patients, setPatients] = useState<Patient[]>([]);
   const [patientsLoading, setPatientsLoading] = useState(true);
   const [favorites, setFavorites] = useState<string[]>([]);
+
+  // Open auth modal if redirected from password reset
+  useEffect(() => {
+    if (searchParams.get("login") === "true") {
+      openAuthGate();
+      router.replace("/dashboard");
+    }
+  }, [searchParams, openAuthGate, router]);
 
   // Load patients from API (only for authenticated users)
   useEffect(() => {

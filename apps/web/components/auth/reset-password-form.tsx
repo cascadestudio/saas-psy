@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { authApi } from "@/lib/api-client";
 import { Button } from "@/components/ui/button";
@@ -13,17 +12,16 @@ interface ResetPasswordFormProps {
 }
 
 export function ResetPasswordForm({ token }: ResetPasswordFormProps) {
-  const router = useRouter();
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState(false);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError(null);
 
-    // Validation
     if (newPassword.length < 8) {
       setError("Le mot de passe doit contenir au moins 8 caractères");
       return;
@@ -38,13 +36,36 @@ export function ResetPasswordForm({ token }: ResetPasswordFormProps) {
 
     try {
       await authApi.resetPassword(token, newPassword);
-
-      // Redirect to sign-in with success message
-      router.push("/sign-in?reset=success");
+      setSuccess(true);
     } catch (err: any) {
       setError(err.message || "Une erreur est survenue");
       setIsLoading(false);
     }
+  }
+
+  if (success) {
+    return (
+      <div className="space-y-6">
+        <div className="space-y-2 text-center">
+          <h1 className="text-3xl font-bold">Mot de passe mis à jour</h1>
+          <p className="text-gray-500">
+            Votre mot de passe a été réinitialisé avec succès.
+          </p>
+        </div>
+
+        <div className="rounded-lg border bg-muted/50 p-4">
+          <p className="text-sm text-muted-foreground">
+            Vous pouvez maintenant vous reconnecter avec votre nouveau mot de passe.
+          </p>
+        </div>
+
+        <Link href="/dashboard?login=true" className="block mt-2">
+          <Button className="w-full">
+            Se reconnecter
+          </Button>
+        </Link>
+      </div>
+    );
   }
 
   return (
@@ -100,10 +121,10 @@ export function ResetPasswordForm({ token }: ResetPasswordFormProps) {
 
         <div className="text-center">
           <Link
-            href="/sign-in"
+            href="/dashboard"
             className="text-sm text-muted-foreground hover:underline"
           >
-            Retour à la connexion
+            Retour à l'application
           </Link>
         </div>
       </div>

@@ -231,6 +231,110 @@ export class EmailService {
     }
   }
 
+  async sendPasswordResetEmail(email: string, resetToken: string): Promise<{ success: boolean; error?: string }> {
+    const resetUrl = `${this.appUrl}/reset-password/${resetToken}`;
+    const subject = 'Réinitialisation de votre mot de passe - Melya';
+
+    const html = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body style="margin: 0; padding: 0; background-color: #f6f9fc; font-family: Arial, sans-serif;">
+  <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background-color: #f6f9fc;">
+    <tr>
+      <td align="center" style="padding: 40px 20px;">
+        <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="max-width: 600px; background-color: #ffffff; border-radius: 8px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);">
+          <tr>
+            <td style="padding: 40px 40px 20px 40px; text-align: center;">
+              <h1 style="margin: 0; color: #1a1a1a; font-size: 24px; font-weight: 600;">
+                R&eacute;initialisation du mot de passe
+              </h1>
+            </td>
+          </tr>
+          <tr>
+            <td style="padding: 0 40px;">
+              <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 0;">
+            </td>
+          </tr>
+          <tr>
+            <td style="padding: 30px 40px;">
+              <p style="margin: 0 0 16px 0; color: #374151; font-size: 16px; line-height: 24px;">
+                Vous avez demand&eacute; la r&eacute;initialisation de votre mot de passe.
+              </p>
+              <p style="margin: 0 0 24px 0; color: #374151; font-size: 16px; line-height: 24px;">
+                Cliquez sur le bouton ci-dessous pour cr&eacute;er un nouveau mot de passe. Ce lien est valable <strong>1 heure</strong>.
+              </p>
+              <table role="presentation" width="100%" cellspacing="0" cellpadding="0">
+                <tr>
+                  <td align="center">
+                    <a href="${resetUrl}" style="display: inline-block; padding: 14px 32px; background-color: #6366f1; color: #ffffff; text-decoration: none; font-size: 16px; font-weight: 600; border-radius: 6px;">
+                      R&eacute;initialiser mon mot de passe
+                    </a>
+                  </td>
+                </tr>
+              </table>
+              <p style="margin: 24px 0 0 0; color: #6b7280; font-size: 14px; line-height: 20px;">
+                Si vous n'avez pas demand&eacute; cette r&eacute;initialisation, ignorez simplement cet email.
+              </p>
+              <p style="margin: 16px 0 0 0; color: #6b7280; font-size: 14px; line-height: 20px;">
+                Ou copiez ce lien dans votre navigateur :<br>
+                <a href="${resetUrl}" style="color: #6366f1; word-break: break-all;">${resetUrl}</a>
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td style="padding: 0 40px;">
+              <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 0;">
+            </td>
+          </tr>
+          <tr>
+            <td style="padding: 20px 40px 40px 40px; text-align: center;">
+              <p style="margin: 0; color: #9ca3af; font-size: 12px;">
+                Melya - Plateforme de questionnaires psychom&eacute;triques
+              </p>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
+    `.trim();
+
+    this.logger.log(`Sending password reset email to ${email}`);
+
+    if (!this.resend) {
+      this.logger.warn(`[DEV MODE] Password reset email would be sent to: ${email}`);
+      this.logger.warn(`[DEV MODE] Reset URL: ${resetUrl}`);
+      return { success: true };
+    }
+
+    try {
+      const { data, error } = await this.resend.emails.send({
+        from: `Melya <${this.fromEmail}>`,
+        to: [email],
+        subject,
+        html,
+      });
+
+      if (error) {
+        this.logger.error(`Failed to send password reset email: ${error.message}`);
+        return { success: false, error: error.message };
+      }
+
+      this.logger.log(`Password reset email sent successfully: ${data?.id}`);
+      return { success: true };
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : 'Unknown error';
+      this.logger.error(`Exception sending password reset email: ${errorMessage}`);
+      return { success: false, error: errorMessage };
+    }
+  }
+
   private async logEmail(data: {
     to: string;
     subject: string;
