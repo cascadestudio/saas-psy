@@ -104,6 +104,7 @@ model Scale {
   longDescription   String   @map("long_description")
   category          String
   estimatedTime     String   @map("estimated_time")
+  formType          String   @map("form_type") @default("single-scale")
 
   // Scale structure
   questions         Json     // Stores the full scale structure

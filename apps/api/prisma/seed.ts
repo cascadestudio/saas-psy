@@ -11,6 +11,7 @@ const scales: {
   category: string;
   estimatedTime: string;
   longDescription: string;
+  formType: string;
   questions: Prisma.InputJsonValue;
   answerScales: Prisma.InputJsonValue;
   scoring: Prisma.InputJsonValue;
@@ -21,6 +22,7 @@ const scales: {
     description: "Une échelle clinique de 24 items qui mesure la peur et l'évitement dans des situations sociales et de performance",
     category: "Anxiété sociale",
     estimatedTime: "10-15 minutes",
+    formType: "dual-scale",
     longDescription: "L'Échelle d'anxiété sociale de Liebowitz (LSAS) est un questionnaire développé par le psychiatre Michael Liebowitz pour évaluer la gravité de l'anxiété sociale. Il mesure à la fois la peur et l'évitement dans 24 situations sociales différentes.",
     questions: [
       { id: 1, text: "Téléphoner en public", type: "performance" },
@@ -78,6 +80,7 @@ const scales: {
     description: "Une échelle d'auto-évaluation à choix multiples de 21 questions pour mesurer la sévérité de la dépression",
     category: "Dépression",
     estimatedTime: "10-15 minutes",
+    formType: "options",
     longDescription: "L'Inventaire de Dépression de Beck (BDI) est un questionnaire d'auto-évaluation à choix multiples de 21 questions, l'un des tests psychométriques les plus largement utilisés pour mesurer la sévérité de la dépression.",
     questions: [
       { title: "Tristesse", options: [{ value: 0, text: "Je ne me sens pas triste." }, { value: 1, text: "Je me sens morose ou triste." }, { value: 2, text: "Je suis morose ou triste tout le temps et je ne peux pas me remettre d'aplomb." }, { value: 3, text: "Je suis tellement triste ou malheureux(se) que je ne peux plus le supporter." }] },
@@ -119,6 +122,7 @@ const scales: {
     description: "Une échelle courte de 3 questions pour tester le système",
     category: "Test",
     estimatedTime: "2-3 minutes",
+    formType: "single-scale",
     longDescription: "Cette échelle est conçue pour tester le fonctionnement du système avec un minimum de questions.",
     questions: [
       "Comment évaluez-vous votre niveau de stress aujourd'hui ?",
@@ -148,6 +152,7 @@ const scales: {
     description: "Une échelle de 40 items évaluant l'anxiété situationnelle (état) et l'anxiété générale (trait)",
     category: "Anxiété généralisée",
     estimatedTime: "15-20 minutes",
+    formType: "grouped-items",
     longDescription: "L'Inventaire d'Anxiété État-Trait (STAI) est un outil d'évaluation psychologique qui mesure deux types d'anxiété : l'anxiété-état (anxiété situationnelle) et l'anxiété-trait (anxiété générale).",
     questions: [
       {
@@ -202,6 +207,7 @@ const scales: {
     description: "Une échelle de 20 items évaluant les symptômes du trouble de stress post-traumatique (TSPT)",
     category: "Traumatismes",
     estimatedTime: "5-10 minutes",
+    formType: "single-scale",
     longDescription: "La PCL-5 (Post-traumatic Stress Disorder Checklist) est un questionnaire d'auto-évaluation de 20 items qui évalue la présence et la sévérité des symptômes du TSPT selon les critères du DSM-5.",
     questions: [
       "Des souvenirs répétés, pénibles et involontaires de l'expérience stressante ?",
@@ -248,6 +254,7 @@ const scales: {
     description: "Une échelle d'évaluation des symptômes obsessionnels-compulsifs mesurant la sévérité du TOC",
     category: "Troubles Obsessionnels Compulsifs",
     estimatedTime: "15-20 minutes",
+    formType: "options",
     longDescription: "L'échelle Y-BOCS (Yale-Brown Obsessive Compulsive Scale) est l'outil de référence pour évaluer la sévérité des symptômes du trouble obsessionnel-compulsif (TOC).",
     questions: [
       { title: "Temps accaparé par les pensées obsédantes:", options: [{ value: 0, text: "Aucune" }, { value: 1, text: "Moins d'une heure par jour" }, { value: 2, text: "Entre une et trois heures par jour" }, { value: 3, text: "Entre trois et huit heures par jour" }, { value: 4, text: "Plus de huit heures par jour" }] },
@@ -304,6 +311,7 @@ async function main() {
         longDescription: s.longDescription,
         category: s.category,
         estimatedTime: s.estimatedTime,
+        formType: s.formType,
         questions: s.questions,
         answerScales: s.answerScales,
         scoring: s.scoring,
@@ -315,6 +323,7 @@ async function main() {
         longDescription: s.longDescription,
         category: s.category,
         estimatedTime: s.estimatedTime,
+        formType: s.formType,
         questions: s.questions,
         answerScales: s.answerScales,
         scoring: s.scoring,
@@ -406,8 +415,8 @@ async function main() {
       startedAt: daysAgo(89),
       completedAt: daysAgo(89),
       responses: JSON.stringify({ answers: Array.from({ length: 24 }, (_, i) => ({ questionId: i + 1, anxiety: 2, avoidance: 2 })) }),
-      score: JSON.stringify({ total: 96, anxiety: 48, avoidance: 48 }),
-      interpretation: 'Anxiété sociale marquée',
+      score: JSON.stringify({ totalScore: 96, maxTotal: 144, anxietyScore: 48, avoidanceScore: 48, maxAnxiety: 72, maxAvoidance: 72, interpretation: 'Anxiété sociale sévère' }),
+      interpretation: 'Anxiété sociale sévère',
     },
     {
       scaleId: 'echelle-d-anxiete-sociale-de-liebowitz',
@@ -417,8 +426,8 @@ async function main() {
       startedAt: daysAgo(29),
       completedAt: daysAgo(29),
       responses: JSON.stringify({ answers: Array.from({ length: 24 }, (_, i) => ({ questionId: i + 1, anxiety: 1, avoidance: 1 })) }),
-      score: JSON.stringify({ total: 48, anxiety: 24, avoidance: 24 }),
-      interpretation: 'Anxiété sociale modérée',
+      score: JSON.stringify({ totalScore: 48, maxTotal: 144, anxietyScore: 24, avoidanceScore: 24, maxAnxiety: 72, maxAvoidance: 72, interpretation: 'Anxiété sociale légère' }),
+      interpretation: 'Anxiété sociale légère',
     },
     // Lucas - BDI completed
     {
@@ -430,8 +439,8 @@ async function main() {
       completedAt: daysAgo(29),
       batchId: 'batch-lucas-1',
       responses: JSON.stringify({ answers: Array.from({ length: 21 }, (_, i) => ({ questionId: i + 1, value: 0 })) }),
-      score: JSON.stringify({ total: 5 }),
-      interpretation: 'Absence de dépression',
+      score: JSON.stringify({ totalScore: 5, maxTotal: 63, interpretation: 'Dépression minimale' }),
+      interpretation: 'Dépression minimale',
     },
 
     // Emma - BDI: multiple completed showing depression trajectory
@@ -443,8 +452,8 @@ async function main() {
       startedAt: daysAgo(59),
       completedAt: daysAgo(59),
       responses: JSON.stringify({ answers: Array.from({ length: 21 }, (_, i) => ({ questionId: i + 1, value: 2 })) }),
-      score: JSON.stringify({ total: 28 }),
-      interpretation: 'Dépression modérée à sévère',
+      score: JSON.stringify({ totalScore: 28, maxTotal: 63, interpretation: 'Dépression modérée' }),
+      interpretation: 'Dépression modérée',
     },
     {
       scaleId: 'inventaire-de-depression-de-beck',
@@ -454,7 +463,7 @@ async function main() {
       startedAt: daysAgo(13),
       completedAt: daysAgo(13),
       responses: JSON.stringify({ answers: Array.from({ length: 21 }, (_, i) => ({ questionId: i + 1, value: 1 })) }),
-      score: JSON.stringify({ total: 16 }),
+      score: JSON.stringify({ totalScore: 16, maxTotal: 63, interpretation: 'Dépression légère' }),
       interpretation: 'Dépression légère',
     },
     // Emma - STAI completed
@@ -467,8 +476,8 @@ async function main() {
       completedAt: daysAgo(13),
       batchId: 'batch-emma-1',
       responses: JSON.stringify({ answers: Array.from({ length: 40 }, (_, i) => ({ questionId: i + 1, value: 2 })) }),
-      score: JSON.stringify({ stateAnxiety: 50, traitAnxiety: 50 }),
-      interpretation: 'Anxiété état et trait modérées',
+      score: JSON.stringify({ totalScore: 100, maxTotal: 160, stateScore: 50, traitScore: 50, maxState: 80, maxTrait: 80, interpretation: { state: 'Anxiété modérée', trait: 'Anxiété modérée' } }),
+      interpretation: JSON.stringify({ state: 'Anxiété modérée', trait: 'Anxiété modérée' }),
     },
 
     // Hugo - PCL-5 completed
@@ -480,8 +489,8 @@ async function main() {
       startedAt: daysAgo(6),
       completedAt: daysAgo(6),
       responses: JSON.stringify({ answers: Array.from({ length: 20 }, (_, i) => ({ questionId: i + 1, value: 3 })) }),
-      score: JSON.stringify({ total: 60 }),
-      interpretation: 'Score très élevé - TSPT probable',
+      score: JSON.stringify({ totalScore: 60, maxTotal: 80, interpretation: 'Présence éventuelle d\'un trouble de stress post-traumatique' }),
+      interpretation: 'Présence éventuelle d\'un trouble de stress post-traumatique',
       patientComments: 'J\'ai eu du mal à répondre aux questions sur les cauchemars.',
     },
 
@@ -494,7 +503,7 @@ async function main() {
       startedAt: daysAgo(20),
       completedAt: daysAgo(20),
       responses: JSON.stringify({ answers: Array.from({ length: 10 }, (_, i) => ({ questionId: i + 1, value: 3 })) }),
-      score: JSON.stringify({ total: 30, obsessions: 15, compulsions: 15 }),
+      score: JSON.stringify({ totalScore: 30, maxTotal: 40, interpretation: 'TOC sévère' }),
       interpretation: 'TOC sévère',
     },
 

@@ -327,7 +327,7 @@ export interface Session {
   patientId: string;
   scaleId: string;
   status: "CREATED" | "SENT" | "STARTED" | "COMPLETED" | "EXPIRED" | "CANCELLED";
-  score?: number;
+  score?: number | Record<string, any>;
   interpretation?: string;
   responses?: Record<string, number>;
   sentAt?: string;
@@ -361,6 +361,7 @@ export interface Scale {
   longDescription?: string;
   category: string;
   estimatedTime: string;
+  formType?: string;
   questions: any;
   answerScales?: any;
   scoring?: any;

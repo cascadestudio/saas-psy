@@ -1,6 +1,7 @@
 export const scales = [
   {
     id: "echelle-d-anxiete-sociale-de-liebowitz",
+    formType: "dual-scale",
     title: "Échelle d'anxiété sociale de Liebowitz",
     description:
       "Une échelle clinique de 24 items qui mesure la peur et l'évitement dans des situations sociales et de performance",
@@ -159,6 +160,7 @@ export const scales = [
   },
   {
     id: "inventaire-de-depression-de-beck",
+    formType: "options",
     title: "Inventaire de Dépression de Beck (BDI)",
     description:
       "Une échelle d'auto-évaluation à choix multiples de 21 questions pour mesurer la sévérité de la dépression",
@@ -477,6 +479,7 @@ export const scales = [
   },
   {
     id: "test-scale",
+    formType: "single-scale",
     title: "Échelle Test",
     description: "Une échelle courte de 3 questions pour tester le système",
     category: "Test",
@@ -508,6 +511,7 @@ export const scales = [
   },
   {
     id: "stai-anxiete-generalisee",
+    formType: "grouped-items",
     title: "STAI - Inventaire d'Anxiété État-Trait",
     description:
       "Une échelle de 40 items évaluant l'anxiété situationnelle (état) et l'anxiété générale (trait)",
@@ -589,6 +593,7 @@ export const scales = [
   },
   {
     id: "traumatismes-pcl5",
+    formType: "single-scale",
     title: "PCL-5 - Liste de Vérification du TSPT",
     description:
       "Une échelle de 20 items évaluant les symptômes du trouble de stress post-traumatique (TSPT)",
@@ -649,6 +654,7 @@ export const scales = [
   },
   {
     id: "index-symptomes-ybocs",
+    formType: "options",
     title: "Y-BOCS - Index des Symptômes Obsessionnels-Compulsifs",
     description:
       "Une échelle d'évaluation des symptômes obsessionnels-compulsifs mesurant la sévérité du TOC",

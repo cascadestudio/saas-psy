@@ -8,6 +8,7 @@ import {
 import { PrismaService } from '../prisma/prisma.service';
 import { EmailService } from '../email/email.service';
 import { EncryptionService } from '../encryption/encryption.service';
+import { ScoringService } from '../scoring/scoring.service';
 import { CreateSessionDto, UpdateSessionDto, SubmitResponsesDto } from './dto';
 import { createId } from '@paralleldrive/cuid2';
 
@@ -19,6 +20,7 @@ export class SessionsService {
     private prisma: PrismaService,
     private emailService: EmailService,
     private encryption: EncryptionService,
+    private scoringService: ScoringService,
   ) {}
 
   async create(practitionerId: string, dto: CreateSessionDto) {
@@ -372,11 +374,17 @@ export class SessionsService {
       throw new BadRequestException('Cette session a expiré');
     }
 
-    // Calculate score based on responses (simplified - will be enhanced with ScoringModule)
-    const { score, interpretation } = this.calculateScore(
+    // Calculate score using the scoring service
+    const scoreResult = await this.scoringService.calculateScore(
       session.scaleId,
       dto.responses,
     );
+
+    // Store the full ScoreResult (without scoreDetails to save space)
+    const interpretation =
+      typeof scoreResult.interpretation === 'string'
+        ? scoreResult.interpretation
+        : JSON.stringify(scoreResult.interpretation);
 
     const updatedSession = await this.prisma.session.update({
       where: { id },
@@ -385,7 +393,7 @@ export class SessionsService {
         completedAt: new Date(),
         responses: this.encryption.encryptJson(dto.responses),
         patientComments: this.encryption.encryptField(dto.patientComments),
-        score: this.encryption.encryptJson(score),
+        score: this.encryption.encryptJson(scoreResult),
         interpretation: this.encryption.encryptField(interpretation),
       },
     });
@@ -394,49 +402,6 @@ export class SessionsService {
       session: this.decryptSession(updatedSession),
       message: 'Réponses enregistrées avec succès',
     };
-  }
-
-  // Simplified scoring - will be moved to ScoringModule
-  private calculateScore(
-    scaleId: string,
-    responses: Record<string, any>,
-  ): { score: number; interpretation: string } {
-    // Simple sum for most scales
-    let totalScore = 0;
-
-    if (typeof responses === 'object') {
-      for (const key in responses) {
-        const value = responses[key];
-        if (typeof value === 'number') {
-          totalScore += value;
-        } else if (typeof value === 'object' && value !== null) {
-          // Handle dual-scale scales (like Liebowitz with anxiety + avoidance)
-          if ('anxiety' in value) totalScore += value.anxiety || 0;
-          if ('avoidance' in value) totalScore += value.avoidance || 0;
-        }
-      }
-    }
-
-    // Basic interpretation based on score ranges (will be enhanced)
-    let interpretation = 'Score calculé';
-
-    // BDI-II ranges
-    if (scaleId.includes('bdi')) {
-      if (totalScore <= 13) interpretation = 'Dépression minimale';
-      else if (totalScore <= 19) interpretation = 'Dépression légère';
-      else if (totalScore <= 28) interpretation = 'Dépression modérée';
-      else interpretation = 'Dépression sévère';
-    }
-
-    // Liebowitz ranges
-    if (scaleId.includes('liebowitz')) {
-      if (totalScore <= 30) interpretation = 'Absence d\'anxiété sociale';
-      else if (totalScore <= 60) interpretation = 'Anxiété sociale légère';
-      else if (totalScore <= 90) interpretation = 'Anxiété sociale modérée';
-      else interpretation = 'Anxiété sociale sévère';
-    }
-
-    return { score: totalScore, interpretation };
   }
 
   private decryptSession(session: any) {

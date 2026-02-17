@@ -34,6 +34,7 @@ export type ScaleProps = {
     description: string;
     instructions?: string;
     category: string;
+    formType?: string;
     questions: (
       | string
       | QuestionGroup

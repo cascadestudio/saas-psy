@@ -18,6 +18,7 @@ import { scales } from "@/app/scalesData";
 import { Arrow, Interfaces, Files } from "doodle-icons";
 import { ArchivePatientDialog } from "@/components/ArchivePatientDialog";
 import { RestorePatientButton } from "@/components/RestorePatientButton";
+import { formatScore } from "@/lib/score-utils";
 
 const statusColors: Record<string, string> = {
   COMPLETED: "bg-green-100 text-green-800",
@@ -299,9 +300,10 @@ export default function PatientDetailPage() {
                         Créé le{" "}
                         {new Date(session.createdAt).toLocaleDateString("fr-FR")}
                       </p>
-                      {session.status === "COMPLETED" && session.score !== undefined && (
+                      {session.status === "COMPLETED" && session.score != null && (
                         <p className="text-sm font-medium text-green-700 mt-1">
-                          Score: {session.score} - {session.interpretation}
+                          Score: {formatScore(session.score)}
+                          {session.interpretation && ` - ${session.interpretation}`}
                         </p>
                       )}
                     </div>
