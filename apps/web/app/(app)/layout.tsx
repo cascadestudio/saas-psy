@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { Interfaces, Files } from "doodle-icons";
 import { Button } from "@/components/ui/button";
 import { useUser } from "@/app/context/UserContext";
+import { useAuthGate } from "@/app/context/AuthGateContext";
 
 const navigation = [
   { name: "Tableau de bord", href: "/dashboard", icon: Interfaces.Home },
@@ -19,6 +20,7 @@ export default function AppLayout({
 }) {
   const pathname = usePathname();
   const { user, isLoading, logout } = useUser();
+  const { openAuthGate } = useAuthGate();
 
   if (isLoading) {
     return (
@@ -60,7 +62,7 @@ export default function AppLayout({
             </Link>
           </button>
           <div className="flex flex-1 items-center justify-end space-x-2">
-            {user && (
+            {user ? (
               <Button
                 variant="ghost"
                 size="icon"
@@ -68,6 +70,14 @@ export default function AppLayout({
                 title="Déconnexion"
               >
                 <Interfaces.Logout className="h-4 w-4" />
+              </Button>
+            ) : (
+              <Button
+                onClick={() => openAuthGate()}
+                size="sm"
+                variant="default"
+              >
+                Se connecter / S&apos;inscrire
               </Button>
             )}
           </div>

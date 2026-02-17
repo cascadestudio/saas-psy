@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { useAuthGate } from "@/app/context/AuthGateContext";
 import { useUser } from "@/app/context/UserContext";
 import { api, ApiError } from "@/lib/api-client";
@@ -82,6 +83,7 @@ function SignInForm({
     password: string
   ) => Promise<{ success: boolean; error?: string }>;
 }) {
+  const { closeAuthGate } = useAuthGate();
   const [message, setMessage] = useState<Message | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -128,7 +130,16 @@ function SignInForm({
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="signin-password">Mot de passe</Label>
+        <div className="flex items-center justify-between">
+          <Label htmlFor="signin-password">Mot de passe</Label>
+          <Link
+            href="/forgot-password"
+            className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+            onClick={closeAuthGate}
+          >
+            Mot de passe oublié ?
+          </Link>
+        </div>
         <Input
           id="signin-password"
           type="password"
