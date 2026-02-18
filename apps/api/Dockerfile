@@ -1,69 +1,57 @@
-# Production Dockerfile for Scaleway Serverless Containers
-# Optimized multi-stage build for NestJS API
+# Production Dockerfile for Dedibox HDS
+# Multi-stage build for NestJS API
 
-# Stage 1: Dependencies
-FROM node:20-alpine AS deps
-WORKDIR /app
-
-# Copy package files
-COPY package*.json ./
-COPY apps/api/package*.json ./apps/api/
-
-# Install dependencies
-RUN npm ci --only=production && \
-    cd apps/api && npm ci --only=production
-
-# Stage 2: Build
+# Stage 1: Build
 FROM node:20-alpine AS builder
 WORKDIR /app
 
-# Copy package files
+# Copy workspace package files
 COPY package*.json ./
 COPY apps/api/package*.json ./apps/api/
+COPY packages/core/package*.json ./packages/core/
 
-# Install all dependencies (including dev)
-RUN npm ci && cd apps/api && npm ci
+# Install all dependencies
+RUN npm ci
 
 # Copy source code
+COPY packages/core ./packages/core
 COPY apps/api ./apps/api
 
-# Generate Prisma Client
+# Build core package first
+RUN npm run build --workspace=packages/core
+
+# Generate Prisma Client & build API
 WORKDIR /app/apps/api
 RUN npx prisma generate
-
-# Build application
 RUN npm run build
 
-# Stage 3: Production runtime
+# Stage 2: Production runtime
 FROM node:20-alpine AS runner
 WORKDIR /app
 
-# Create non-root user for security (HDS compliance)
+# Create non-root user (HDS compliance)
 RUN addgroup -g 1001 -S nodejs && \
     adduser -S nestjs -u 1001 -G nodejs
 
-# Copy production dependencies
-COPY --from=deps --chown=nestjs:nodejs /app/apps/api/node_modules ./node_modules
-COPY --from=deps --chown=nestjs:nodejs /app/node_modules ./root_node_modules
+# Copy workspace node_modules and built files
+COPY --from=builder --chown=nestjs:nodejs /app/node_modules ./node_modules
+COPY --from=builder --chown=nestjs:nodejs /app/apps/api/node_modules ./apps/api/node_modules
+COPY --from=builder --chown=nestjs:nodejs /app/apps/api/dist ./apps/api/dist
+COPY --from=builder --chown=nestjs:nodejs /app/apps/api/prisma ./apps/api/prisma
+COPY --from=builder --chown=nestjs:nodejs /app/apps/api/package*.json ./apps/api/
+COPY --from=builder --chown=nestjs:nodejs /app/packages/core/dist ./packages/core/dist
+COPY --from=builder --chown=nestjs:nodejs /app/packages/core/package*.json ./packages/core/
+COPY --from=builder --chown=nestjs:nodejs /app/package*.json ./
 
-# Copy built application
-COPY --from=builder --chown=nestjs:nodejs /app/apps/api/dist ./dist
-COPY --from=builder --chown=nestjs:nodejs /app/apps/api/prisma ./prisma
-COPY --from=builder --chown=nestjs:nodejs /app/apps/api/package*.json ./
-
-# Set NODE_ENV
 ENV NODE_ENV=production
-ENV PORT=3001
+ENV PORT=3002
 
-# Switch to non-root user
 USER nestjs
 
-# Expose port
-EXPOSE 3001
+EXPOSE 3002
 
-# Health check for Scaleway monitoring
 HEALTHCHECK --interval=30s --timeout=5s --start-period=40s --retries=3 \
-  CMD node -e "require('http').get('http://localhost:3001/api/health', (r) => {process.exit(r.statusCode === 200 ? 0 : 1)})"
+  CMD node -e "require('http').get('http://localhost:3002/api/health', (r) => {process.exit(r.statusCode === 200 ? 0 : 1)})"
 
-# Start application
+WORKDIR /app/apps/api
 CMD ["node", "dist/main"]
