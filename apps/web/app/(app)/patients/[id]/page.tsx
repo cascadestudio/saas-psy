@@ -1,6 +1,6 @@
 "use client";
 
-import { redirect, useParams, useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -12,24 +12,30 @@ import {
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
 import { useUser } from "@/app/context/UserContext";
-import { useEffect } from "react";
-import { getPatientById } from "@/data/mock-patients";
-import { getSessionsByPatientId } from "@/data/mock-sessions";
-import { questionnaires } from "@/app/questionnairesData";
-import { ArrowLeft, Send, Calendar, Mail, FileText } from "lucide-react";
+import { useEffect, useState, useCallback } from "react";
+import { patientsApi, sessionsApi, type Patient, type Session } from "@/lib/api-client";
+import { scales } from "@/app/scalesData";
+import { Arrow, Interfaces, Files } from "doodle-icons";
+import { ArchivePatientDialog } from "@/components/ArchivePatientDialog";
+import { RestorePatientButton } from "@/components/RestorePatientButton";
+import { formatScore } from "@/lib/score-utils";
 
-const statusColors = {
-  completed: "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200",
-  in_progress: "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200",
-  sent: "bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200",
-  expired: "bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200",
+const statusColors: Record<string, string> = {
+  COMPLETED: "bg-green-100 text-green-800",
+  STARTED: "bg-blue-100 text-blue-800",
+  SENT: "bg-orange-100 text-orange-800",
+  EXPIRED: "bg-gray-100 text-gray-800",
+  CREATED: "bg-gray-100 text-gray-800",
+  CANCELLED: "bg-red-100 text-red-800",
 };
 
-const statusLabels = {
-  completed: "Complété",
-  in_progress: "Vu",
-  sent: "Envoyé",
-  expired: "Expiré",
+const statusLabels: Record<string, string> = {
+  COMPLETED: "Complété",
+  STARTED: "Vu",
+  SENT: "Envoyé",
+  EXPIRED: "Expiré",
+  CREATED: "Créé",
+  CANCELLED: "Annulé",
 };
 
 export default function PatientDetailPage() {
@@ -38,13 +44,50 @@ export default function PatientDetailPage() {
   const router = useRouter();
   const patientId = params.id as string;
 
-  useEffect(() => {
-    if (!isLoading && !user) {
-      redirect("/sign-in");
-    }
-  }, [user, isLoading]);
+  const [patient, setPatient] = useState<Patient | null>(null);
+  const [sessions, setSessions] = useState<Session[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  if (isLoading) {
+  const loadData = useCallback(async () => {
+    if (!user || !patientId) return;
+    setLoading(true);
+    try {
+      const [patientRes, sessionsRes] = await Promise.all([
+        patientsApi.getById(patientId),
+        sessionsApi.getByPatientId(patientId),
+      ]);
+      setPatient(patientRes.patient);
+      // Sort sessions by date descending
+      setSessions(
+        sessionsRes.sessions.sort(
+          (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+        )
+      );
+    } catch (error) {
+      console.error("Error loading patient data:", error);
+      setPatient(null);
+      setSessions([]);
+    } finally {
+      setLoading(false);
+    }
+  }, [user, patientId]);
+
+  // Load patient and sessions from API
+  useEffect(() => {
+    if (user) {
+      loadData();
+    }
+  }, [user, loadData]);
+
+  const handleArchived = () => {
+    router.push("/patients");
+  };
+
+  const handleRestored = () => {
+    loadData();
+  };
+
+  if (isLoading || loading) {
     return (
       <div className="flex-1 w-full flex items-center justify-center">
         <p>Chargement...</p>
@@ -55,8 +98,6 @@ export default function PatientDetailPage() {
   if (!user) {
     return null;
   }
-
-  const patient = getPatientById(patientId);
 
   if (!patient) {
     return (
@@ -69,29 +110,67 @@ export default function PatientDetailPage() {
     );
   }
 
-  const sessions = getSessionsByPatientId(patientId).sort(
-    (a, b) => new Date(b.sentAt).getTime() - new Date(a.sentAt).getTime()
-  );
-  const completedSessions = sessions.filter((s) => s.status === "completed");
+  const completedSessions = sessions.filter((s) => s.status === "COMPLETED");
+
+  // Calculate age from birthDate
+  const calculateAge = (birthDate?: string) => {
+    if (!birthDate) return null;
+    const today = new Date();
+    const birth = new Date(birthDate);
+    let age = today.getFullYear() - birth.getFullYear();
+    const monthDiff = today.getMonth() - birth.getMonth();
+    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birth.getDate())) {
+      age--;
+    }
+    return age;
+  };
+
+  const age = calculateAge(patient.birthDate);
+  const isArchived = !!patient.archivedAt;
 
   return (
     <div className="container mx-auto px-4 py-6 space-y-6">
       <div className="flex items-center gap-4">
         <Button asChild variant="ghost" size="icon">
           <Link href="/patients">
-            <ArrowLeft className="h-4 w-4" />
+            <Arrow.ArrowLeft className="h-4 w-4" />
           </Link>
         </Button>
         <div className="flex-1">
-          <h1 className="font-bold text-3xl">{patient.fullName}</h1>
+          <div className="flex items-center gap-3">
+            <h1 className="font-bold text-3xl">
+              {patient.firstName} {patient.lastName}
+            </h1>
+            {isArchived && (
+              <Badge variant="secondary" className="bg-orange-100 text-orange-800">
+                Archivé le {new Date(patient.archivedAt!).toLocaleDateString("fr-FR")}
+              </Badge>
+            )}
+          </div>
           <p className="text-muted-foreground mt-1">{patient.email}</p>
         </div>
-        <Button asChild size="lg">
-          <Link href={`/send-questionnaire?patientId=${patient.id}`}>
-            <Send className="mr-2 h-4 w-4" />
-            Envoyer une échelle
-          </Link>
-        </Button>
+        <div className="flex items-center gap-2">
+          {isArchived ? (
+            <RestorePatientButton
+              patient={patient}
+              onRestored={handleRestored}
+              size="lg"
+            />
+          ) : (
+            <>
+              <ArchivePatientDialog
+                patient={patient}
+                onArchived={handleArchived}
+              />
+              <Button asChild size="lg">
+                <Link href={`/send-scale?patientId=${patient.id}`}>
+                  <Interfaces.Send className="mr-2 h-4 w-4" />
+                  Envoyer une échelle
+                </Link>
+              </Button>
+            </>
+          )}
+        </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -102,16 +181,18 @@ export default function PatientDetailPage() {
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-2">
+            {age && (
+              <div className="flex items-center gap-2 text-sm">
+                <Interfaces.Calendar className="h-4 w-4 text-muted-foreground" />
+                <span>{age} ans</span>
+              </div>
+            )}
             <div className="flex items-center gap-2 text-sm">
-              <Calendar className="h-4 w-4 text-muted-foreground" />
-              <span>{patient.age} ans</span>
-            </div>
-            <div className="flex items-center gap-2 text-sm">
-              <Mail className="h-4 w-4 text-muted-foreground" />
+              <Interfaces.Mail className="h-4 w-4 text-muted-foreground" />
               <span className="truncate">{patient.email}</span>
             </div>
             <div className="flex items-center gap-2 text-sm">
-              <FileText className="h-4 w-4 text-muted-foreground" />
+              <Files.FileText className="h-4 w-4 text-muted-foreground" />
               <span>
                 Créé le{" "}
                 {new Date(patient.createdAt).toLocaleDateString("fr-FR")}
@@ -144,10 +225,10 @@ export default function PatientDetailPage() {
             {sessions.length > 0 ? (
               <>
                 <div className="text-lg font-semibold">
-                  {new Date(sessions[0].sentAt).toLocaleDateString("fr-FR")}
+                  {new Date(sessions[0].createdAt).toLocaleDateString("fr-FR")}
                 </div>
                 <p className="text-xs text-muted-foreground mt-1">
-                  {questionnaires.find((q) => q.id === sessions[0].questionnaireId)
+                  {scales.find((s) => s.id === sessions[0].scaleId)
                     ?.title || "Échelle"}
                 </p>
               </>
@@ -182,18 +263,20 @@ export default function PatientDetailPage() {
               <p className="text-sm text-muted-foreground mb-4">
                 Aucune passation enregistrée pour ce patient
               </p>
-              <Button asChild>
-                <Link href={`/send-questionnaire?patientId=${patient.id}`}>
-                  <Send className="mr-2 h-4 w-4" />
-                  Envoyer la première échelle
-                </Link>
-              </Button>
+              {!isArchived && (
+                <Button asChild>
+                  <Link href={`/send-scale?patientId=${patient.id}`}>
+                    <Interfaces.Send className="mr-2 h-4 w-4" />
+                    Envoyer la première échelle
+                  </Link>
+                </Button>
+              )}
             </div>
           ) : (
             <div className="space-y-3">
               {sessions.map((session) => {
-                const questionnaire = questionnaires.find(
-                  (q) => q.id === session.questionnaireId
+                const scale = scales.find(
+                  (s) => s.id === session.scaleId
                 );
 
                 return (
@@ -204,26 +287,27 @@ export default function PatientDetailPage() {
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2 mb-1">
                         <p className="font-medium truncate">
-                          {questionnaire?.title || session.questionnaireId}
+                          {scale?.title || session.scaleId}
                         </p>
                         <Badge
-                          className={statusColors[session.status]}
+                          className={statusColors[session.status] || statusColors.created}
                           variant="secondary"
                         >
-                          {statusLabels[session.status]}
+                          {statusLabels[session.status] || session.status}
                         </Badge>
                       </div>
                       <p className="text-sm text-muted-foreground">
-                        Envoyé le{" "}
-                        {new Date(session.sentAt).toLocaleDateString("fr-FR")}
+                        Créé le{" "}
+                        {new Date(session.createdAt).toLocaleDateString("fr-FR")}
                       </p>
-                      {session.status === "completed" && session.score !== null && (
-                        <p className="text-sm font-medium text-green-700 dark:text-green-400 mt-1">
-                          Score: {session.score} - {session.interpretation}
+                      {session.status === "COMPLETED" && session.score != null && (
+                        <p className="text-sm font-medium text-green-700 mt-1">
+                          Score: {formatScore(session.score)}
+                          {session.interpretation && ` - ${session.interpretation}`}
                         </p>
                       )}
                     </div>
-                    {session.status === "completed" && (
+                    {session.status === "COMPLETED" && (
                       <Button asChild variant="outline" size="sm">
                         <Link href={`/results/${session.id}`}>
                           Voir résultats

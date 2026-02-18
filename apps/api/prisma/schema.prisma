@@ -19,19 +19,25 @@ model User {
   email         String    @unique
   emailVerified DateTime? @map("email_verified")
   passwordHash  String    @map("password_hash")
-  
+
   firstName     String?   @map("first_name")
   lastName      String?   @map("last_name")
   role          UserRole  @default(PRACTITIONER)
-  
+  isPremium     Boolean   @default(false) @map("is_premium")
+
+  // Password reset
+  passwordResetToken     String?   @unique @map("password_reset_token")
+  passwordResetExpiresAt DateTime? @map("password_reset_expires_at")
+
   createdAt     DateTime  @default(now()) @map("created_at")
   updatedAt     DateTime  @updatedAt @map("updated_at")
-  
+
   // Relations
   profile       Profile?
+  patients      Patient[]
   sessions      Session[]
   auditLogs     AuditLog[]
-  
+
   @@map("users")
 }
 
@@ -46,7 +52,7 @@ model Profile {
   userId                  String   @unique @map("user_id")
   user                    User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   
-  favoriteQuestionnaires  String[] @map("favorite_questionnaires")
+  favoriteScales          String[] @map("favorite_scales")
   preferences             Json?    @default("{}")
   
   createdAt               DateTime @default(now()) @map("created_at")
@@ -56,34 +62,67 @@ model Profile {
 }
 
 // ============================================
-// QUESTIONNAIRES
+// PATIENTS
 // ============================================
 
-model Questionnaire {
+model Patient {
+  id          String   @id @default(cuid())
+
+  // Patient information
+  firstName   String   @map("first_name")
+  lastName    String   @map("last_name")
+  email       String
+  birthDate   DateTime? @map("birth_date")
+  notes       String?
+
+  // Practitioner who created the patient
+  practitionerId String @map("practitioner_id")
+  practitioner   User   @relation(fields: [practitionerId], references: [id])
+
+  // Timestamps
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+  archivedAt  DateTime? @map("archived_at")
+
+  // Relations
+  sessions    Session[]
+
+  @@map("patients")
+  @@index([practitionerId])
+  @@index([email])
+  @@unique([practitionerId, email]) // Unique email per practitioner
+}
+
+// ============================================
+// SCALES (Échelles psychométriques)
+// ============================================
+
+model Scale {
   id                String   @id // e.g., "bdi", "stai-y-a"
   title             String
   description       String
   longDescription   String   @map("long_description")
   category          String
   estimatedTime     String   @map("estimated_time")
-  
-  // Questionnaire structure
-  questions         Json     // Stores the full questionnaire structure
+  formType          String   @map("form_type") @default("single-scale")
+
+  // Scale structure
+  questions         Json     // Stores the full scale structure
   answerScales      Json?    @map("answer_scales")
   scoring           Json?    // Scoring configuration
-  
+
   // Metadata
   isPublished       Boolean  @default(true) @map("is_published")
   requiresAuth      Boolean  @default(false) @map("requires_auth")
   copyrightInfo     String?  @map("copyright_info")
-  
+
   createdAt         DateTime @default(now()) @map("created_at")
   updatedAt         DateTime @updatedAt @map("updated_at")
-  
+
   // Relations
   sessions          Session[]
-  
-  @@map("questionnaires")
+
+  @@map("scales")
 }
 
 // ============================================
@@ -92,44 +131,47 @@ model Questionnaire {
 
 model Session {
   id                String         @id @default(cuid())
-  
-  // Questionnaire reference
-  questionnaireId   String         @map("questionnaire_id")
-  questionnaire     Questionnaire  @relation(fields: [questionnaireId], references: [id])
-  
-  // Patient information (pseudo-anonymized)
-  patientFirstName  String         @map("patient_first_name")
-  patientLastName   String         @map("patient_last_name")
-  patientEmail      String?        @map("patient_email")
-  patientPseudoId   String?        @map("patient_pseudo_id") // Future: anonymized ID
-  
+
+  // Scale reference
+  scaleId           String         @map("scale_id")
+  scale             Scale          @relation(fields: [scaleId], references: [id])
+
+  // Patient reference
+  patientId         String         @map("patient_id")
+  patient           Patient        @relation(fields: [patientId], references: [id])
+
   // Practitioner who sent it
   practitionerId    String         @map("practitioner_id")
   practitioner      User           @relation(fields: [practitionerId], references: [id])
-  
+
+  // Batch ID for grouping sessions sent together
+  batchId           String?        @map("batch_id")
+
   // Session status
   status            SessionStatus  @default(CREATED)
-  
-  // Responses
-  responses         Json?          // Stores all answers
-  score             Json?          // Calculated score
-  interpretation    String?        // Auto-generated interpretation
+
+  // Responses (encrypted at rest - HDS compliance)
+  responses         String?        // Encrypted JSON answers
+  score             String?        // Encrypted calculated score
+  interpretation    String?        // Encrypted auto-generated interpretation
   patientComments   String?        @map("patient_comments")
-  
+
   // Timestamps
   sentAt            DateTime?      @map("sent_at")
   startedAt         DateTime?      @map("started_at")
   completedAt       DateTime?      @map("completed_at")
   createdAt         DateTime       @default(now()) @map("created_at")
   updatedAt         DateTime       @updatedAt @map("updated_at")
-  
+
   // Expiration
   expiresAt         DateTime?      @map("expires_at")
-  
+
   @@map("sessions")
   @@index([practitionerId])
-  @@index([questionnaireId])
+  @@index([patientId])
+  @@index([scaleId])
   @@index([status])
+  @@index([batchId])
 }
 
 enum SessionStatus {

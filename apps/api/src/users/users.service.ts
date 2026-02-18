@@ -48,7 +48,7 @@ export class UsersService {
       await tx.profile.create({
         data: {
           userId: newUser.id,
-          favoriteQuestionnaires: [],
+          favoriteScales: [],
         },
       });
 
@@ -93,6 +93,41 @@ export class UsersService {
 
   async validatePassword(password: string, passwordHash: string): Promise<boolean> {
     return bcrypt.compare(password, passwordHash);
+  }
+
+  async updatePasswordResetToken(
+    userId: string,
+    token: string,
+    expiresAt: Date,
+  ): Promise<void> {
+    await this.prisma.user.update({
+      where: { id: userId },
+      data: {
+        passwordResetToken: token,
+        passwordResetExpiresAt: expiresAt,
+      },
+    });
+  }
+
+  async findByPasswordResetToken(token: string) {
+    return this.prisma.user.findUnique({
+      where: { passwordResetToken: token },
+    });
+  }
+
+  async resetPassword(userId: string, newPassword: string): Promise<void> {
+    // Hash new password
+    const passwordHash = await bcrypt.hash(newPassword, 10);
+
+    // Update password and clear reset fields
+    await this.prisma.user.update({
+      where: { id: userId },
+      data: {
+        passwordHash,
+        passwordResetToken: null,
+        passwordResetExpiresAt: null,
+      },
+    });
   }
 
   // Remove sensitive data

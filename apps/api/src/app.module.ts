@@ -6,8 +6,13 @@ import { AppService } from './app.service';
 import { PrismaModule } from './prisma/prisma.module';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
+import { PatientsModule } from './patients/patients.module';
+import { FavoritesModule } from './favorites/favorites.module';
+import { SessionsModule } from './sessions/sessions.module';
+import { ScalesModule } from './scales/scales.module';
 import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
 import { configValidationSchema } from './config/config.schema';
+import { EncryptionModule } from './encryption/encryption.module';
 
 @Module({
   imports: [
@@ -21,8 +26,13 @@ import { configValidationSchema } from './config/config.schema';
       },
     }),
     PrismaModule,
+    EncryptionModule,
     AuthModule,
     UsersModule,
+    PatientsModule,
+    FavoritesModule,
+    SessionsModule,
+    ScalesModule,
   ],
   controllers: [AppController],
   providers: [

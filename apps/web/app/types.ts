@@ -27,13 +27,14 @@ export type BaseQuestion = {
   type: string;
 };
 
-export type QuestionnaireProps = {
-  questionnaire: {
+export type ScaleProps = {
+  scale: {
     id: string;
     title: string;
     description: string;
     instructions?: string;
     category: string;
+    formType?: string;
     questions: (
       | string
       | QuestionGroup
@@ -58,4 +59,6 @@ export type QuestionnaireProps = {
   patientLastname: string;
   children?: ReactNode;
   isPreview?: boolean;
+  // Session mode: custom submit handler
+  onSubmit?: (responses: Record<string, any>, comments?: string) => Promise<void>;
 };

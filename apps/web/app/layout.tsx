@@ -1,11 +1,12 @@
-import HeaderAuth from "@/components/header-auth";
-import { ThemeSwitcher } from "@/components/theme-switcher";
-import { Geist } from "next/font/google";
-import { ThemeProvider } from "next-themes";
-import Link from "next/link";
 import "./globals.css";
+import { gelica } from "./fonts";
 import { Toaster } from "@/components/ui/sonner";
 import { UserProvider } from "@/app/context/UserContext";
+import { AuthGateProvider } from "@/app/context/AuthGateContext";
+import { AuthGateModal } from "@/components/auth/AuthGateModal";
+import { PremiumGateProvider } from "@/app/context/PremiumGateContext";
+import { PremiumGateModal } from "@/components/PremiumGateModal";
+
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
   : "http://localhost:3000";
@@ -16,28 +17,22 @@ export const metadata = {
   description: "Melya",
 };
 
-const geistSans = Geist({
-  display: "swap",
-  subsets: ["latin"],
-});
-
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="fr" className={geistSans.className} suppressHydrationWarning>
-      <body className="bg-background text-foreground">
+    <html lang="fr" className={gelica.variable}>
+      <body className="bg-background text-foreground font-rethink">
         <UserProvider>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            {children}
-          </ThemeProvider>
+          <AuthGateProvider>
+            <PremiumGateProvider>
+              {children}
+              <AuthGateModal />
+              <PremiumGateModal />
+            </PremiumGateProvider>
+          </AuthGateProvider>
         </UserProvider>
         <Toaster />
       </body>

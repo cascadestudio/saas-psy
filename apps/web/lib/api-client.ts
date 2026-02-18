@@ -112,6 +112,20 @@ export const authApi = {
   isAuthenticated: () => {
     return !!authApi.getToken();
   },
+
+  forgotPassword: async (email: string) => {
+    return apiRequest<{ message: string }>("/auth/forgot-password", {
+      method: "POST",
+      body: JSON.stringify({ email }),
+    });
+  },
+
+  resetPassword: async (token: string, newPassword: string) => {
+    return apiRequest<{ message: string }>("/auth/reset-password", {
+      method: "POST",
+      body: JSON.stringify({ token, newPassword }),
+    });
+  },
 };
 
 /**
@@ -142,16 +156,217 @@ export const favoritesApi = {
     return apiRequest<{ favorites: string[] }>("/favorites");
   },
 
-  toggleFavorite: async (questionnaireId: string) => {
-    return apiRequest<{ success: boolean; action: "add" | "remove" }>(
-      "/favorites",
+  toggleFavorite: async (scaleId: string) => {
+    return apiRequest<{ action: "add" | "remove"; favorites: string[] }>(
+      `/favorites/${scaleId}/toggle`,
       {
         method: "POST",
-        body: JSON.stringify({ questionnaireId }),
       }
     );
   },
 };
+
+/**
+ * Patients API methods
+ */
+export const patientsApi = {
+  getAll: async (status: 'active' | 'archived' = 'active') => {
+    return apiRequest<{ patients: Patient[] }>(`/patients?status=${status}`);
+  },
+
+  getById: async (id: string) => {
+    return apiRequest<{ patient: Patient }>(`/patients/${id}`);
+  },
+
+  create: async (data: CreatePatientDto) => {
+    return apiRequest<{ patient: Patient }>("/patients", {
+      method: "POST",
+      body: JSON.stringify(data),
+    });
+  },
+
+  update: async (id: string, data: UpdatePatientDto) => {
+    return apiRequest<{ patient: Patient }>(`/patients/${id}`, {
+      method: "PATCH",
+      body: JSON.stringify(data),
+    });
+  },
+
+  delete: async (id: string) => {
+    return apiRequest<{ success: boolean }>(`/patients/${id}`, {
+      method: "DELETE",
+    });
+  },
+
+  search: async (query: string, status: 'active' | 'archived' = 'active') => {
+    return apiRequest<{ patients: Patient[] }>(`/patients/search?q=${encodeURIComponent(query)}&status=${status}`);
+  },
+
+  countActive: async () => {
+    return apiRequest<{ count: number }>("/patients/count/active");
+  },
+
+  archive: async (id: string) => {
+    return apiRequest<{ patient: Patient }>(`/patients/${id}/archive`, {
+      method: "PATCH",
+    });
+  },
+
+  restore: async (id: string) => {
+    return apiRequest<{ patient: Patient }>(`/patients/${id}/restore`, {
+      method: "PATCH",
+    });
+  },
+};
+
+/**
+ * Sessions API methods
+ */
+export const sessionsApi = {
+  getAll: async () => {
+    return apiRequest<{ sessions: Session[] }>("/sessions");
+  },
+
+  getById: async (id: string) => {
+    return apiRequest<{ session: Session }>(`/sessions/${id}`);
+  },
+
+  getByPatientId: async (patientId: string) => {
+    return apiRequest<{ sessions: Session[] }>(`/sessions?patientId=${patientId}`);
+  },
+
+  getRecent: async (limit: number = 10) => {
+    return apiRequest<{ sessions: Session[] }>(`/sessions/recent?limit=${limit}`);
+  },
+
+  create: async (data: CreateSessionDto) => {
+    return apiRequest<{
+      sessions: Session[];
+      batchId: string;
+      message: string;
+      emailsSent: number;
+      emailsFailed: number;
+    }>("/sessions", {
+      method: "POST",
+      body: JSON.stringify(data),
+    });
+  },
+
+  updateStatus: async (id: string, status: string) => {
+    return apiRequest<{ session: Session }>(`/sessions/${id}/status`, {
+      method: "PATCH",
+      body: JSON.stringify({ status }),
+    });
+  },
+
+  submit: async (id: string, responses: Record<string, number>) => {
+    return apiRequest<{ session: Session; score: number; interpretation: string }>(
+      `/sessions/${id}/submit`,
+      {
+        method: "POST",
+        body: JSON.stringify({ responses }),
+      }
+    );
+  },
+
+  getStats: async () => {
+    return apiRequest<SessionStats>("/sessions/stats");
+  },
+};
+
+/**
+ * Scales API methods
+ */
+export const scalesApi = {
+  getAll: async () => {
+    return apiRequest<{ scales: Scale[] }>("/scales");
+  },
+
+  getById: async (id: string) => {
+    return apiRequest<{ scale: Scale }>(`/scales/${id}`);
+  },
+
+  getByCategory: async (category: string) => {
+    return apiRequest<{ scales: Scale[] }>(`/scales/category/${category}`);
+  },
+};
+
+/**
+ * Types
+ */
+export interface Patient {
+  id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  birthDate?: string;
+  notes?: string;
+  createdAt: string;
+  updatedAt: string;
+  archivedAt?: string | null;
+}
+
+export interface CreatePatientDto {
+  firstName: string;
+  lastName: string;
+  email: string;
+  birthDate?: string;
+  notes?: string;
+}
+
+export interface UpdatePatientDto {
+  firstName?: string;
+  lastName?: string;
+  email?: string;
+  birthDate?: string;
+  notes?: string;
+}
+
+export interface Session {
+  id: string;
+  patientId: string;
+  scaleId: string;
+  status: "CREATED" | "SENT" | "STARTED" | "COMPLETED" | "EXPIRED" | "CANCELLED";
+  score?: number | Record<string, any>;
+  interpretation?: string;
+  responses?: Record<string, number>;
+  sentAt?: string;
+  startedAt?: string;
+  completedAt?: string;
+  expiresAt?: string;
+  createdAt: string;
+  updatedAt: string;
+  patient?: Patient;
+  scale?: Scale;
+}
+
+export interface CreateSessionDto {
+  patientId: string;
+  scaleIds: string[];
+  message?: string;
+}
+
+export interface SessionStats {
+  total: number;
+  completed: number;
+  inProgress: number;
+  sent: number;
+  expired: number;
+}
+
+export interface Scale {
+  id: string;
+  title: string;
+  description: string;
+  longDescription?: string;
+  category: string;
+  estimatedTime: string;
+  formType?: string;
+  questions: any;
+  answerScales?: any;
+  scoring?: any;
+  isPublished: boolean;
+}
 
 /**
  * Generic export
@@ -160,6 +375,9 @@ export const api = {
   auth: authApi,
   profiles: profilesApi,
   favorites: favoritesApi,
+  patients: patientsApi,
+  sessions: sessionsApi,
+  scales: scalesApi,
 };
 
 export default api;

@@ -37,7 +37,7 @@ export class PrismaService extends PrismaClient implements OnModuleInit, OnModul
       this.auditLog.deleteMany(),
       this.session.deleteMany(),
       this.profile.deleteMany(),
-      this.questionnaire.deleteMany(),
+      this.scale.deleteMany(),
       this.user.deleteMany(),
     ]);
   }

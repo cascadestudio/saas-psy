@@ -2,17 +2,15 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Home, Users, LogOut, FileText } from "lucide-react";
+import { Interfaces, Files } from "doodle-icons";
 import { Button } from "@/components/ui/button";
-import { ThemeSwitcher } from "@/components/theme-switcher";
 import { useUser } from "@/app/context/UserContext";
-import { redirect } from "next/navigation";
-import { useEffect } from "react";
+import { useAuthGate } from "@/app/context/AuthGateContext";
 
 const navigation = [
-  { name: "Tableau de bord", href: "/dashboard", icon: Home },
-  { name: "Échelles", href: "/echelles", icon: FileText },
-  { name: "Patients", href: "/patients", icon: Users },
+  { name: "Tableau de bord", href: "/dashboard", icon: Interfaces.Home },
+  { name: "Échelles", href: "/echelles", icon: Files.FileText },
+  { name: "Patients", href: "/patients", icon: Interfaces.User },
 ];
 
 export default function AppLayout({
@@ -22,12 +20,7 @@ export default function AppLayout({
 }) {
   const pathname = usePathname();
   const { user, isLoading, logout } = useUser();
-
-  useEffect(() => {
-    if (!isLoading && !user) {
-      redirect("/sign-in");
-    }
-  }, [user, isLoading]);
+  const { openAuthGate } = useAuthGate();
 
   if (isLoading) {
     return (
@@ -35,10 +28,6 @@ export default function AppLayout({
         <p>Chargement...</p>
       </div>
     );
-  }
-
-  if (!user) {
-    return null;
   }
 
   return (
@@ -73,15 +62,24 @@ export default function AppLayout({
             </Link>
           </button>
           <div className="flex flex-1 items-center justify-end space-x-2">
-            <ThemeSwitcher />
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={logout}
-              title="Déconnexion"
-            >
-              <LogOut className="h-4 w-4" />
-            </Button>
+            {user ? (
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={logout}
+                title="Déconnexion"
+              >
+                <Interfaces.Logout className="h-4 w-4" />
+              </Button>
+            ) : (
+              <Button
+                onClick={() => openAuthGate()}
+                size="sm"
+                variant="default"
+              >
+                Se connecter / S&apos;inscrire
+              </Button>
+            )}
           </div>
         </div>
       </header>

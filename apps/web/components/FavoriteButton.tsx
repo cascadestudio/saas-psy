@@ -2,17 +2,18 @@
 
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Star } from "lucide-react";
+import { Interfaces } from "doodle-icons";
 import { toast } from "sonner";
+import { favoritesApi } from "@/lib/api-client";
 
 interface FavoriteButtonProps {
-  questionnaireId: string;
+  scaleId: string;
   initialIsFavorite?: boolean;
   size?: "sm" | "md" | "lg";
 }
 
 export function FavoriteButton({
-  questionnaireId,
+  scaleId,
   initialIsFavorite = false,
   size = "md",
 }: FavoriteButtonProps) {
@@ -23,33 +24,13 @@ export function FavoriteButton({
     try {
       setIsLoading(true);
 
-      // TODO: Remplacer par un vrai appel API
-      // Pour le moment, on utilise le localStorage
-      const storedFavorites = localStorage.getItem("favorites");
-      const favorites: string[] = storedFavorites
-        ? JSON.parse(storedFavorites)
-        : [];
-
-      const newIsFavorite = !isFavorite;
-      let updatedFavorites: string[];
-
-      if (newIsFavorite) {
-        // Ajouter aux favoris
-        updatedFavorites = [...favorites, questionnaireId];
-      } else {
-        // Retirer des favoris
-        updatedFavorites = favorites.filter((id) => id !== questionnaireId);
-      }
-
-      localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+      const { action } = await favoritesApi.toggleFavorite(scaleId);
+      const newIsFavorite = action === "add";
       setIsFavorite(newIsFavorite);
 
       toast.success(
         newIsFavorite ? "Ajouté aux favoris" : "Retiré des favoris"
       );
-
-      // Recharger la page pour mettre à jour l'affichage
-      window.dispatchEvent(new Event("storage"));
     } catch (error) {
       console.error("Error toggling favorite:", error);
       toast.error("Erreur lors de la mise à jour des favoris");
@@ -69,13 +50,13 @@ export function FavoriteButton({
     <Button
       variant="ghost"
       size="icon"
-      className={`${sizeClasses[size]} rounded-full`}
+      className={`${sizeClasses[size]} rounded-full hover:bg-primary/10`}
       onClick={toggleFavorite}
       disabled={isLoading}
       aria-label={isFavorite ? "Retirer des favoris" : "Ajouter aux favoris"}
     >
-      <Star
-        className={`${isFavorite ? "fill-yellow-400 text-yellow-400" : "text-muted-foreground"}`}
+      <Interfaces.Star
+        className={`${isFavorite ? "fill-primary text-primary" : "text-muted-foreground hover:text-primary"} transition-colors`}
       />
     </Button>
   );

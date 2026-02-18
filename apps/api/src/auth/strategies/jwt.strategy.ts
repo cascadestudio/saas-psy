@@ -41,7 +41,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
         profile: {
           select: {
             id: true,
-            favoriteQuestionnaires: true,
+            favoriteScales: true,
           },
         },
       },

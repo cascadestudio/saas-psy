@@ -10,7 +10,7 @@ export default function ProtectedPage() {
 
   useEffect(() => {
     if (!isLoading && !user) {
-      redirect("/sign-in");
+      redirect("/");
     }
   }, [user, isLoading]);
 
