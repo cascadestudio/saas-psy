@@ -54,7 +54,7 @@ jobs:
               -e ENCRYPTION_KEY="${{ secrets.ENCRYPTION_KEY_PROD }}" \
               -e NODE_ENV=production \
               -e PORT=3002 \
-              -e CORS_ORIGIN="https://melya.app" \
+              -e CORS_ORIGIN="https://melya.app,https://www.melya.app" \
               melya-api
 
             # Run migrations
