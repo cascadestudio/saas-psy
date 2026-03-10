@@ -18,7 +18,7 @@ const badgeVariants = cva(
         accent:
           "border-transparent bg-accent text-accent-foreground hover:bg-accent/80",
         success:
-          "border-transparent bg-brand-green text-brand-light hover:opacity-80",
+          "border-transparent bg-brand-soft-green text-brand-off-white hover:opacity-80",
       },
     },
     defaultVariants: {

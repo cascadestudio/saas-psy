@@ -1,11 +1,10 @@
+import HeaderAuth from "@/components/header-auth";
+import { ThemeSwitcher } from "@/components/theme-switcher";
+import { ThemeProvider } from "next-themes";
+import Link from "next/link";
 import "./globals.css";
-import { gelica } from "./fonts";
 import { Toaster } from "@/components/ui/sonner";
 import { UserProvider } from "@/app/context/UserContext";
-import { AuthGateProvider } from "@/app/context/AuthGateContext";
-import { AuthGateModal } from "@/components/auth/AuthGateModal";
-import { PremiumGateProvider } from "@/app/context/PremiumGateContext";
-import { PremiumGateModal } from "@/components/PremiumGateModal";
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -23,16 +22,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="fr" className={gelica.variable}>
-      <body className="bg-background text-foreground font-rethink">
+    <html lang="fr" suppressHydrationWarning>
+      <body className="text-foreground font-sans">
         <UserProvider>
-          <AuthGateProvider>
-            <PremiumGateProvider>
-              {children}
-              <AuthGateModal />
-              <PremiumGateModal />
-            </PremiumGateProvider>
-          </AuthGateProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="light"
+            enableSystem={false}
+            disableTransitionOnChange
+          >
+            {children}
+          </ThemeProvider>
         </UserProvider>
         <Toaster />
       </body>

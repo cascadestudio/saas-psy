@@ -2,57 +2,109 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Brand Font */
+/* Melya Brand Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;500;600;700&display=swap');
+
+@font-face {
+  font-family: 'Gelica';
+  src: url('/fonts/Gelica-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gelica';
+  src: url('/fonts/Gelica-Semi-Bold.otf') format('opentype');
+  font-weight: 600;
+  font-display: swap;
+}
 
 @layer base {
   :root {
-    /* Anthropic Brand Colors */
-    --background: 48 38% 97%;           /* Light #faf9f5 */
-    --foreground: 60 3% 8%;             /* Dark #141413 */
+    /* Melya Brand Colors */
+    --background: 39 28% 90%;           /* cream-light #EDE8DF */
+    --foreground: 0 0% 10%;             /* warm-black #1A1A1A */
 
-    --card: 48 38% 97%;                 /* Light #faf9f5 */
-    --card-foreground: 60 3% 8%;        /* Dark #141413 */
+    --card: 40 33% 97%;                 /* off-white #FAF8F5 */
+    --card-foreground: 0 0% 10%;        /* warm-black #1A1A1A */
 
-    --popover: 48 38% 97%;              /* Light #faf9f5 */
-    --popover-foreground: 60 3% 8%;     /* Dark #141413 */
+    --popover: 40 33% 97%;              /* off-white #FAF8F5 */
+    --popover-foreground: 0 0% 10%;     /* warm-black #1A1A1A */
 
-    --primary: 15 62% 60%;              /* Orange #d97757 */
-    --primary-foreground: 48 38% 97%;   /* Light #faf9f5 */
+    --primary: 24 70% 46%;              /* terracotta #C65D24 */
+    --primary-foreground: 40 33% 97%;   /* off-white #FAF8F5 */
 
-    --secondary: 50 24% 89%;            /* Light Gray #e8e6dc */
-    --secondary-foreground: 60 3% 8%;   /* Dark #141413 */
+    --secondary: 37 22% 90%;            /* cream-light #EDE8DF */
+    --secondary-foreground: 30 6% 27%;  /* warm-gray #4A4540 */
 
-    --muted: 50 24% 89%;                /* Light Gray #e8e6dc */
-    --muted-foreground: 49 8% 47%;      /* Mid Gray darker */
+    --muted: 37 22% 90%;               /* cream-light #EDE8DF */
+    --muted-foreground: 30 6% 27%;     /* warm-gray #4A4540 */
 
-    --accent: 210 48% 61%;              /* Blue #6a9bcc */
-    --accent-foreground: 48 38% 97%;    /* Light #faf9f5 */
+    --accent: 140 22% 45%;              /* soft-green #5B8C6A */
+    --accent-foreground: 40 33% 97%;    /* off-white #FAF8F5 */
 
     --destructive: 0 84% 60%;           /* Red for errors */
-    --destructive-foreground: 48 38% 97%;
+    --destructive-foreground: 40 33% 97%;
 
-    --border: 50 20% 85%;               /* Subtle border */
-    --input: 50 20% 85%;                /* Input border */
-    --ring: 15 62% 60%;                 /* Orange focus ring */
+    --border: 37 18% 74%;               /* slightly darker beige */
+    --input: 37 18% 74%;                /* input border */
+    --ring: 24 70% 46%;                 /* terracotta focus ring */
 
     --radius: 0.5rem;
 
-    /* Chart colors using brand accents */
-    --chart-1: 15 62% 60%;              /* Orange */
-    --chart-2: 210 48% 61%;             /* Blue */
-    --chart-3: 88 21% 46%;              /* Green */
-    --chart-4: 49 8% 67%;               /* Mid Gray */
-    --chart-5: 60 3% 8%;                /* Dark */
+    /* Chart colors */
+    --chart-1: 24 70% 46%;              /* terracotta */
+    --chart-2: 140 22% 45%;             /* soft-green */
+    --chart-3: 37 22% 90%;              /* cream-light */
+    --chart-4: 30 6% 27%;               /* warm-gray */
+    --chart-5: 0 0% 10%;                /* warm-black */
 
-    /* Additional brand colors for direct use */
-    --brand-orange: 15 62% 60%;
-    --brand-blue: 210 48% 61%;
-    --brand-green: 88 21% 46%;
-    --brand-dark: 60 3% 8%;
-    --brand-light: 48 38% 97%;
-    --brand-mid-gray: 49 8% 67%;
-    --brand-light-gray: 50 24% 89%;
+    /* Brand colors for direct use */
+    --brand-terracotta: 24 70% 46%;
+    --brand-beige: 41 26% 78%;
+    --brand-cream: 37 22% 90%;
+    --brand-off-white: 40 33% 97%;
+    --brand-warm-black: 0 0% 10%;
+    --brand-warm-gray: 30 6% 27%;
+    --brand-soft-green: 140 22% 45%;
+  }
+
+  .dark {
+    /* Dark mode - inverted Melya palette */
+    --background: 0 0% 10%;             /* warm-black #1A1A1A */
+    --foreground: 40 33% 97%;           /* off-white #FAF8F5 */
+
+    --card: 0 0% 14%;                   /* slightly lighter dark */
+    --card-foreground: 40 33% 97%;
+
+    --popover: 0 0% 14%;
+    --popover-foreground: 40 33% 97%;
+
+    --primary: 24 70% 46%;              /* terracotta stays same */
+    --primary-foreground: 0 0% 10%;
+
+    --secondary: 0 0% 18%;
+    --secondary-foreground: 40 33% 97%;
+
+    --muted: 0 0% 18%;
+    --muted-foreground: 30 6% 60%;
+
+    --accent: 140 22% 45%;              /* soft-green stays same */
+    --accent-foreground: 0 0% 10%;
+
+    --destructive: 0 62% 50%;
+    --destructive-foreground: 40 33% 97%;
+
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+    --ring: 24 70% 46%;
+
+    /* Chart colors - adjusted for dark mode */
+    --chart-1: 24 70% 50%;
+    --chart-2: 140 22% 50%;
+    --chart-3: 37 22% 60%;
+    --chart-4: 30 6% 60%;
+    --chart-5: 40 33% 90%;
   }
 }
 
@@ -62,27 +114,59 @@
   }
 
   html {
-    font-family: 'Rethink Sans', Arial, sans-serif;
+    scroll-behavior: smooth;
+    font-family: 'Rethink Sans', sans-serif;
   }
 
   body {
-    @apply bg-background text-foreground;
-    font-family: 'Rethink Sans', Arial, sans-serif;
+    @apply text-foreground;
+    background-color: #EDE8DF;
+    font-family: 'Rethink Sans', sans-serif;
   }
 
+  /* Headings use Gelica */
   h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-gelica), Georgia, serif;
+    font-family: 'Gelica', Georgia, serif;
     @apply font-semibold tracking-tight;
+  }
+
+  /* Buttons and labels use Gelica */
+  button, label, .font-heading {
+    font-family: 'Gelica', Georgia, serif;
   }
 }
 
 /* Utility classes for brand fonts */
 @layer utilities {
-  .font-rethink {
-    font-family: 'Rethink Sans', Arial, sans-serif;
+  .font-gelica {
+    font-family: 'Gelica', Georgia, serif;
   }
 
-  .font-gelica {
-    font-family: var(--font-gelica), Georgia, serif;
+  .font-body {
+    font-family: 'Rethink Sans', sans-serif;
   }
 }
+
+/* Scroll animations */
+.scroll-animate {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+.scroll-animate.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Hero toast animations */
+@keyframes slide-in-right {
+  from { opacity: 0; transform: translateX(30px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+.toast-animate {
+  animation: slide-in-right 0.5s ease-out forwards;
+  opacity: 0;
+}
+.toast-animate-delay-1 { animation-delay: 0.8s; }
+.toast-animate-delay-2 { animation-delay: 1.6s; }
+.toast-animate-delay-3 { animation-delay: 2.4s; }
