@@ -7,7 +7,7 @@ export function FormMessage({ message }: { message: Message }) {
   return (
     <div className="flex flex-col gap-2 w-full max-w-md text-sm">
       {"success" in message && (
-        <div className="text-brand-green border-l-2 border-brand-green px-4 bg-brand-green/5 py-2 rounded-r">
+        <div className="text-brand-soft-green border-l-2 border-brand-soft-green px-4 bg-brand-soft-green/5 py-2 rounded-r">
           {message.success}
         </div>
       )}
