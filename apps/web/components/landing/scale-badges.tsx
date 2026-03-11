@@ -1,51 +1,111 @@
 "use client";
 
+import Image from "next/image";
 import { useScrollAnimation } from "./use-scroll-animation";
 
 const scales = [
-  { acronym: "BDI", label: "Dépression", icon: "icon-bdi.svg" },
-  { acronym: "STAI", label: "Anxiété", icon: "icon-stai.svg" },
-  { acronym: "LSAS", label: "Anxiété sociale", icon: "icon-lsas.svg" },
-  { acronym: "PCL-5", label: "Trauma", icon: "icon-pcl5.svg" },
-  { acronym: "YBOCS", label: "TOC", icon: "icon-ybocs.svg" },
+  {
+    acronym: "BDI",
+    label: "Inventaire de Dépression de Beck",
+    icon: "/images/scales/bdi.svg",
+    color: "#CBCADB",
+  },
+  {
+    acronym: "LSAS",
+    label: "Échelle d'anxiété sociale de Liebowitz",
+    icon: "/images/scales/lsas.svg",
+    color: "#6A9BCC",
+  },
+  {
+    acronym: "PCL-5",
+    label: "Liste de Vérification du TSPT",
+    icon: "/images/scales/pcl-5.svg",
+    color: "#C46686",
+  },
+  {
+    acronym: "STAI",
+    label: "Inventaire d'Anxiété État-Trait",
+    icon: "/images/scales/stai.svg",
+    color: "#6A9BCC",
+  },
+  {
+    acronym: "Y-BOCS",
+    label: "Index des Symptômes Obsessionnels-Compulsifs",
+    icon: "/images/scales/y-bocs.svg",
+    color: "#BCD1CA",
+  },
 ];
+
+function ScaleBadge({ scale }: { scale: (typeof scales)[number] }) {
+  return (
+    <div
+      className="flex-shrink-0 flex overflow-hidden"
+      style={{
+        borderRadius: 20,
+        aspectRatio: "340 / 120",
+        width: "clamp(280px, 22vw, 340px)",
+      }}
+    >
+      <div
+        className="flex items-center justify-center flex-shrink-0 p-5"
+        style={{
+          backgroundColor: scale.color,
+          aspectRatio: "1 / 1",
+          height: "100%",
+        }}
+      >
+        <Image
+          src={scale.icon}
+          alt={scale.acronym}
+          width={56}
+          height={56}
+          className="w-3/5 h-3/5 object-contain"
+        />
+      </div>
+      <div
+        className="flex flex-col justify-center px-4 flex-1 min-w-0"
+        style={{ backgroundColor: `${scale.color}80` }}
+      >
+        <p className="font-heading font-bold text-black leading-tight text-[clamp(1.25rem,1.8vw,1.75rem)]">
+          {scale.acronym}
+        </p>
+        <p className="font-body text-black/80 leading-snug mt-0.5 text-[clamp(0.65rem,0.85vw,0.8rem)]">
+          {scale.label}
+        </p>
+      </div>
+    </div>
+  );
+}
 
 export function ScaleBadges() {
   const { ref, isVisible } = useScrollAnimation();
 
   return (
     <section className="py-12 md:py-16">
-      <div
-        ref={ref}
-        className={`mx-auto max-w-6xl px-4 sm:px-6 scroll-animate ${isVisible ? "visible" : ""}`}
-      >
-        <div className="flex gap-4 overflow-x-auto pb-4 md:pb-0 md:flex-wrap md:justify-center md:overflow-visible scrollbar-hide">
-          {scales.map((scale) => (
-            <div
-              key={scale.acronym}
-              className="flex-shrink-0 flex items-center gap-3 bg-card border border-border rounded-xl px-5 py-3 shadow-sm"
-            >
-              <div className="h-8 w-8 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                <span className="text-xs font-heading font-bold text-primary">
-                  {scale.acronym.charAt(0)}
-                </span>
-              </div>
-              <div>
-                <p className="font-heading font-semibold text-sm text-foreground whitespace-nowrap">
-                  {scale.acronym}
-                </p>
-                <p className="text-xs text-muted-foreground font-body whitespace-nowrap">
-                  {scale.label}
-                </p>
-              </div>
-            </div>
-          ))}
+      <div ref={ref} className={`scroll-animate ${isVisible ? "visible" : ""}`}>
+        {/* Marquee - full viewport width, no max-width constraint */}
+        <div className="overflow-hidden w-full">
+          <div className="animate-marquee flex gap-6 w-max">
+            {/* Render scales twice for seamless loop */}
+            {[...scales, ...scales].map((scale, i) => (
+              <ScaleBadge key={`${scale.acronym}-${i}`} scale={scale} />
+            ))}
+          </div>
         </div>
 
-        <p className="text-center text-muted-foreground font-body mt-6 text-sm md:text-base">
+        <p className="text-center text-muted-foreground font-body mt-6 text-sm md:text-base px-4">
           Accédez aux échelles psychométriques les plus utilisées, validées
           scientifiquement
         </p>
+
+        <div className="text-center mt-4">
+          <a
+            href="#fonctionnalites"
+            className="inline-flex items-center gap-2 text-sm font-medium font-body text-brand-orange border border-brand-orange/30 rounded-full px-5 py-2 hover:bg-brand-orange/5 transition-colors"
+          >
+            Voir toutes les échelles
+          </a>
+        </div>
       </div>
     </section>
   );

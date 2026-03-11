@@ -1,17 +1,7 @@
 "use client";
 
-import { ArrowRight } from "lucide-react";
 import { WaitlistButton } from "./waitlist-button";
 import Image from "next/image";
-
-const toasts = [
-  { text: "Test BDI envoyé à M. Dupont", delay: "toast-animate-delay-1" },
-  { text: "Vous avez reçu un test", delay: "toast-animate-delay-2" },
-  {
-    text: "Vous avez reçu les résultats de M. Dupont",
-    delay: "toast-animate-delay-3",
-  },
-];
 
 export function Hero() {
   return (
@@ -20,79 +10,118 @@ export function Hero() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Left — Copy */}
           <div className="space-y-6">
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight text-foreground">
-              Envoyez vos échelles en 2 minutes, recevez les résultats cotés
-              automatiquement
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-normal leading-tight text-foreground">
+              Vos échelles cotées automatiquement, en{" "}
+              <span className="relative inline-block">
+                2 minutes
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/images/landing/drawn-underline.svg"
+                  alt=""
+                  className="absolute -bottom-4 left-0 w-full h-[15px]"
+                />
+              </span>
             </h1>
             <p className="text-lg text-muted-foreground font-body leading-relaxed max-w-xl">
               Melya automatise la cotation de vos échelles et questionnaires
               psychologiques. Moins de paperasse, plus de rigueur clinique, plus
               de temps avec vos patients.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 pt-2">
-              <WaitlistButton size="lg" className="text-base">
-                Rejoindre la liste d&apos;attente
-              </WaitlistButton>
-              <a
-                href="#comment-ca-marche"
-                className="inline-flex items-center gap-2 text-primary font-medium font-body hover:gap-3 transition-all self-center"
+
+            {/* CTA — button centered, arrow fills left space */}
+            <div className="relative flex justify-center pt-10">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/images/landing/arrow-right.svg"
+                alt=""
+                className="hidden sm:block absolute left-0 bottom-0 max-h-[88px]"
+                style={{ width: "calc(50% - 130px)" }}
+              />
+              <WaitlistButton
+                size="lg"
+                className="font-body font-medium text-sm rounded-full px-8 bg-brand-orange text-white hover:bg-brand-orange/90"
               >
-                Voir comment ça marche
-                <ArrowRight className="h-4 w-4" />
-              </a>
+                Rejoindre la liste d'attente
+              </WaitlistButton>
             </div>
           </div>
 
-          {/* Right — Hero image + floating toasts */}
+          {/* Right — Hero illustration */}
           <div className="relative">
-            <div className="relative rounded-2xl overflow-hidden aspect-[4/3] bg-secondary">
-              {/* Placeholder — replace with hero-photo.jpg when available */}
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-secondary to-brand-cream flex items-center justify-center">
-                <Image
-                  src="/images/landing/hero-photo.jpg"
-                  alt="Consultation psychologique"
-                  fill
-                  className="object-cover"
-                  priority
-                  onError={(e) => {
-                    (e.target as HTMLImageElement).style.display = "none";
-                  }}
-                />
-              </div>
+            <div className="relative rounded-2xl overflow-hidden aspect-[4/3]">
+              <Image
+                src="/images/landing/hero-image.png"
+                alt="Consultation psychologique"
+                fill
+                className="object-contain"
+                priority
+              />
             </div>
 
-            {/* Floating toasts */}
-            {toasts.map((toast, i) => (
-              <div
-                key={i}
-                className={`toast-animate ${toast.delay} absolute bg-card shadow-lg rounded-xl px-4 py-3 text-sm font-body flex items-center gap-2 ${
-                  i === 0
-                    ? "top-4 -right-2 sm:-right-4"
-                    : i === 1
-                      ? "top-1/2 -left-2 sm:-left-4 -translate-y-1/2"
-                      : "bottom-4 -right-2 sm:-right-4"
-                }`}
+            {/* Notification toasts — right, left, right */}
+            <div
+              className="toast-animate absolute -right-1 top-4 hidden lg:flex items-center gap-2.5 bg-card rounded-full px-4 py-2.5 shadow-md border border-border/50"
+              style={{ animationDelay: "0.8s" }}
+            >
+              <svg
+                className="w-4 h-4 text-brand-orange flex-shrink-0"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={2.5}
               >
-                <span className="flex-shrink-0 h-5 w-5 rounded-full bg-brand-soft-green/20 flex items-center justify-center">
-                  <svg
-                    className="h-3 w-3 text-brand-soft-green"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth={3}
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M5 13l4 4L19 7"
-                    />
-                  </svg>
-                </span>
-                <span className="text-foreground whitespace-nowrap">
-                  {toast.text}
-                </span>
-              </div>
-            ))}
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M5 13l4 4L19 7"
+                />
+              </svg>
+              <span className="text-sm font-body text-foreground whitespace-nowrap">
+                Échelle LSAS envoyée à Mme. Martin
+              </span>
+            </div>
+            <div
+              className="toast-animate absolute -left-4 top-1/2 -translate-y-1/2 hidden lg:flex items-center gap-2.5 bg-card rounded-full px-4 py-2.5 shadow-md border border-border/50"
+              style={{ animationDelay: "1.6s" }}
+            >
+              <svg
+                className="w-4 h-4 text-brand-orange flex-shrink-0"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={2.5}
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M5 13l4 4L19 7"
+                />
+              </svg>
+              <span className="text-sm font-body text-foreground whitespace-nowrap">
+                Vous avez reçu un questionnaire
+              </span>
+            </div>
+            <div
+              className="toast-animate absolute -right-1 bottom-8 hidden lg:flex items-center gap-2.5 bg-card rounded-full px-4 py-2.5 shadow-md border border-border/50"
+              style={{ animationDelay: "2.4s" }}
+            >
+              <svg
+                className="w-4 h-4 text-brand-orange flex-shrink-0"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={2.5}
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M5 13l4 4L19 7"
+                />
+              </svg>
+              <span className="text-sm font-body text-foreground whitespace-nowrap">
+                Résultats de Mme. Martin reçus
+              </span>
+            </div>
           </div>
         </div>
       </div>

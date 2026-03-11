@@ -1,4 +1,5 @@
 import { Linkedin, Instagram } from "lucide-react";
+import Image from "next/image";
 
 export function Footer() {
   return (
@@ -7,9 +8,12 @@ export function Footer() {
         <div className="flex flex-col md:flex-row items-center justify-between gap-8">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <span className="text-xl font-heading font-bold text-foreground">
-              Melya
-            </span>
+            <Image
+              src="/images/landing/logo.svg"
+              alt="Melya"
+              width={100}
+              height={31}
+            />
           </div>
 
           {/* Links */}

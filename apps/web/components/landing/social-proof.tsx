@@ -20,9 +20,9 @@ export function SocialProof() {
         </blockquote>
 
         <div className="mt-8 flex items-center justify-center gap-4">
-          <div className="relative h-12 w-12 rounded-full overflow-hidden bg-primary/10 flex-shrink-0">
+          <div className="relative h-12 w-12 rounded-full overflow-hidden bg-brand-orange/10 flex-shrink-0">
             <Image
-              src="/images/landing/renata-photo.jpg"
+              src="/images/landing/renata-illustration.png"
               alt="Renata Dujmusic"
               fill
               className="object-cover"
@@ -30,10 +30,6 @@ export function SocialProof() {
                 (e.target as HTMLImageElement).style.display = "none";
               }}
             />
-            {/* Placeholder initials */}
-            <span className="absolute inset-0 flex items-center justify-center text-sm font-heading font-bold text-primary">
-              RD
-            </span>
           </div>
           <div className="text-left">
             <p className="font-heading font-semibold text-foreground">

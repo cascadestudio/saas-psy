@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { WaitlistButton } from "./waitlist-button";
+import Image from "next/image";
 
 const navLinks = [
   { href: "#fonctionnalites", label: "Fonctionnalités" },
@@ -33,9 +34,13 @@ export function Navbar() {
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <a href="#" className="flex items-center gap-2">
-            <span className="text-xl font-heading font-bold text-foreground">
-              Melya
-            </span>
+            <Image
+              src="/images/landing/logo.svg"
+              alt="Melya"
+              width={112}
+              height={35}
+              priority
+            />
           </a>
 
           {/* Center links — desktop */}
@@ -52,15 +57,18 @@ export function Navbar() {
           </div>
 
           {/* CTA — desktop */}
-          <div className="hidden md:flex items-center gap-4">
+          <div className="hidden md:flex items-center gap-3">
             <a
               href="/sign-in"
-              className="text-sm font-medium font-body text-muted-foreground hover:text-foreground transition-colors"
+              className="text-sm !text-brand-orange font-medium font-body transition-colors rounded-full px-4 py-2 bg-brand-orange-light hover:bg-brand-orange-light/80"
             >
               Se connecter
             </a>
-            <WaitlistButton size="sm">
-              Rejoindre la liste d&apos;attente
+            <WaitlistButton
+              size="sm"
+              className="font-body font-medium text-sm rounded-full px-5 bg-brand-orange text-white hover:bg-brand-orange/90"
+            >
+              Rejoindre la liste d'attente
             </WaitlistButton>
           </div>
 
@@ -70,7 +78,11 @@ export function Navbar() {
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label="Menu"
           >
-            {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            {mobileOpen ? (
+              <X className="h-5 w-5" />
+            ) : (
+              <Menu className="h-5 w-5" />
+            )}
           </button>
         </div>
       </div>
@@ -91,14 +103,17 @@ export function Navbar() {
             ))}
             <a
               href="/sign-in"
-              className="block text-sm font-medium font-body text-muted-foreground hover:text-foreground transition-colors py-2"
+              className="block text-sm !text-brand-orange font-medium font-body rounded-full px-4 py-2 bg-brand-orange-light hover:bg-brand-orange-light/80 text-center"
               onClick={() => setMobileOpen(false)}
             >
               Se connecter
             </a>
             <div className="pt-2">
-              <WaitlistButton className="w-full" size="sm">
-                Rejoindre la liste d&apos;attente
+              <WaitlistButton
+                className="w-full font-body font-medium text-sm rounded-full bg-brand-orange text-white hover:bg-brand-orange/90"
+                size="sm"
+              >
+                Rejoindre la liste d'attente
               </WaitlistButton>
             </div>
           </div>
