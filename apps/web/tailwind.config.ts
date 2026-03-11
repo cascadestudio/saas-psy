@@ -20,7 +20,7 @@ const config = {
   	extend: {
   		fontFamily: {
   			sans: [
-  				'Rethink Sans',
+  				'var(--font-rethink)',
   				'sans-serif'
   			],
   			heading: [
@@ -34,7 +34,7 @@ const config = {
   				'serif'
   			],
   			body: [
-  				'Rethink Sans',
+  				'var(--font-rethink)',
   				'sans-serif'
   			]
   		},
@@ -86,7 +86,9 @@ const config = {
   				'off-white': 'hsl(var(--brand-off-white))',
   				'warm-black': 'hsl(var(--brand-warm-black))',
   				'warm-gray': 'hsl(var(--brand-warm-gray))',
-  				'soft-green': 'hsl(var(--brand-soft-green))'
+  				'soft-green': 'hsl(var(--brand-soft-green))',
+  				orange: '#D6591F',
+  				'orange-light': '#E6DAD4'
   			}
   		},
   		borderRadius: {
