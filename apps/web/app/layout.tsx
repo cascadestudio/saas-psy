@@ -2,6 +2,7 @@ import { ThemeProvider } from "next-themes";
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
 import { UserProvider } from "@/app/context/UserContext";
+import { AuthGateProvider } from "@/app/context/AuthGateContext";
 import { Rethink_Sans } from "next/font/google";
 
 const rethinkSans = Rethink_Sans({
@@ -30,14 +31,16 @@ export default function RootLayout({
     <html lang="fr" suppressHydrationWarning className={rethinkSans.variable}>
       <body className="text-foreground font-sans">
         <UserProvider>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="light"
-            enableSystem={false}
-            disableTransitionOnChange
-          >
-            {children}
-          </ThemeProvider>
+          <AuthGateProvider>
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="light"
+              enableSystem={false}
+              disableTransitionOnChange
+            >
+              {children}
+            </ThemeProvider>
+          </AuthGateProvider>
         </UserProvider>
         <Toaster />
       </body>
