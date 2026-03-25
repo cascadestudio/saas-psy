@@ -21,20 +21,25 @@ function WaitlistModal({
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
+    setError("");
     try {
-      await fetch("/api/waitlist", {
+      const res = await fetch("/api/waitlist", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),
       });
+      if (!res.ok) {
+        setError("Une erreur est survenue. Veuillez réessayer.");
+        return;
+      }
       setSubmitted(true);
     } catch {
-      // Silently handle — placeholder endpoint
-      setSubmitted(true);
+      setError("Une erreur est survenue. Veuillez réessayer.");
     } finally {
       setLoading(false);
     }
@@ -46,6 +51,7 @@ function WaitlistModal({
       setTimeout(() => {
         setEmail("");
         setSubmitted(false);
+        setError("");
       }, 300);
     }
   };
@@ -93,6 +99,9 @@ function WaitlistModal({
               required
               className="h-12 bg-background font-body"
             />
+            {error && (
+              <p className="text-sm text-red-500 font-body">{error}</p>
+            )}
             <Button
               type="submit"
               className="w-full h-12 text-base"

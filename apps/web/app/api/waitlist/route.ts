@@ -1,4 +1,7 @@
 import { NextResponse } from "next/server";
+import { Resend } from "resend";
+
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(request: Request) {
   try {
@@ -11,13 +14,20 @@ export async function POST(request: Request) {
       );
     }
 
-    // TODO: Wire up Resend to collect waitlist emails
-    // import { Resend } from 'resend';
-    // const resend = new Resend(process.env.RESEND_API_KEY);
-    // await resend.contacts.create({ email, audienceId: '...' });
+    const { error } = await resend.contacts.create({
+      email,
+      unsubscribed: false,
+    });
+
+    if (error) {
+      console.error(`[Waitlist] Resend error:`, error.message);
+      return NextResponse.json(
+        { error: "Erreur lors de l'inscription" },
+        { status: 500 }
+      );
+    }
 
     console.log(`[Waitlist] New signup: ${email}`);
-
     return NextResponse.json({ success: true });
   } catch {
     return NextResponse.json(
