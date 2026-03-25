@@ -79,7 +79,7 @@ export const EmailDialogForm = forwardRef(
     return (
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
-          <Button ref={ref} className="w-full">
+          <Button ref={ref} className="w-fit">
             <Interfaces.Send className="mr-2 h-4 w-4" />
             Envoyer au Patient
           </Button>

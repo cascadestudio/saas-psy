@@ -35,7 +35,7 @@ export default async function ScaleDescriptionPage({
 
   return (
     <div className="container mx-auto py-8 px-4 sm:px-6 md:px-8">
-      <Link href="/" className="flex items-center text-sm mb-6 hover:underline">
+      <Link href="/echelles" className="flex items-center text-sm mb-6 hover:underline">
         <Arrow.ArrowLeft className="mr-2 h-4 w-4" />
         Retour aux échelles
       </Link>
@@ -82,9 +82,9 @@ export default async function ScaleDescriptionPage({
               </ul>
             </div>
           )}
-          <ScalePreviewModal scale={scale} />
         </CardContent>
-        <CardFooter>
+        <CardFooter className="justify-center gap-3">
+          <ScalePreviewModal scale={scale} />
           <EmailDialogForm />
         </CardFooter>
       </Card>

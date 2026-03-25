@@ -1,34 +1,40 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useScrollAnimation } from "./use-scroll-animation";
 
 const scales = [
   {
+    id: "inventaire-de-depression-de-beck",
     acronym: "BDI",
     label: "Inventaire de Dépression de Beck",
     icon: "/images/scales/bdi.svg",
     color: "#CBCADB",
   },
   {
+    id: "echelle-d-anxiete-sociale-de-liebowitz",
     acronym: "LSAS",
     label: "Échelle d'anxiété sociale de Liebowitz",
     icon: "/images/scales/lsas.svg",
     color: "#6A9BCC",
   },
   {
+    id: "traumatismes-pcl5",
     acronym: "PCL-5",
     label: "Liste de Vérification du TSPT",
     icon: "/images/scales/pcl-5.svg",
     color: "#C46686",
   },
   {
+    id: "stai-anxiete-generalisee",
     acronym: "STAI",
     label: "Inventaire d'Anxiété État-Trait",
     icon: "/images/scales/stai.svg",
     color: "#6A9BCC",
   },
   {
+    id: "index-symptomes-ybocs",
     acronym: "Y-BOCS",
     label: "Index des Symptômes Obsessionnels-Compulsifs",
     icon: "/images/scales/y-bocs.svg",
@@ -88,7 +94,9 @@ export function ScaleBadges() {
           <div className="animate-marquee flex gap-6 w-max">
             {/* Render scales twice for seamless loop */}
             {[...scales, ...scales].map((scale, i) => (
-              <ScaleBadge key={`${scale.acronym}-${i}`} scale={scale} />
+              <Link key={`${scale.acronym}-${i}`} href={`/scale/description/${scale.id}`}>
+                <ScaleBadge scale={scale} />
+              </Link>
             ))}
           </div>
         </div>
@@ -99,12 +107,12 @@ export function ScaleBadges() {
         </p>
 
         <div className="text-center mt-4">
-          <a
-            href="#fonctionnalites"
+          <Link
+            href="/echelles"
             className="inline-flex items-center gap-2 text-sm font-medium font-body text-brand-orange border border-brand-orange/30 rounded-full px-5 py-2 hover:bg-brand-orange/5 transition-colors"
           >
             Voir toutes les échelles
-          </a>
+          </Link>
         </div>
       </div>
     </section>

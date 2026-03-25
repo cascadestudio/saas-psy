@@ -6,7 +6,7 @@ import { ScaleBadges } from "@/components/landing/scale-badges";
 import { Benefits } from "@/components/landing/benefits";
 import { HowItWorks } from "@/components/landing/how-it-works";
 import { Comparison } from "@/components/landing/comparison";
-import { Pricing } from "@/components/landing/pricing";
+// import { Pricing } from "@/components/landing/pricing";
 import { FAQ } from "@/components/landing/faq";
 import { FinalCTA } from "@/components/landing/final-cta";
 import { Footer } from "@/components/landing/footer";
@@ -38,7 +38,7 @@ export default function LandingPage() {
         <Benefits />
         <HowItWorks />
         <Comparison />
-        <Pricing />
+        {/* <Pricing /> */}
         <FAQ />
         <FinalCTA />
       </main>
