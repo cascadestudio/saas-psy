@@ -192,33 +192,47 @@ function SendScaleContent() {
         </div>
       </div>
 
-      {/* Progress Steps - Always visible */}
+      {/* Progress Steps - Always visible, completed steps are clickable */}
       <div className="flex items-center gap-2">
-        {STEPS.map((s, index) => (
-          <div key={s.key} className="flex items-center gap-2 flex-1">
-            <div
-              className={`flex items-center justify-center w-8 h-8 rounded-full text-sm font-medium ${
-                step === s.key
-                  ? "bg-primary text-primary-foreground"
-                  : index < currentStepIndex
-                  ? "bg-green-500 text-white"
-                  : "bg-muted text-muted-foreground"
-              }`}
-            >
-              {index < currentStepIndex ? (
-                <Check className="h-4 w-4" />
-              ) : (
-                index + 1
+        {STEPS.map((s, index) => {
+          const isCompleted = index < currentStepIndex;
+          const isCurrent = step === s.key;
+          const isClickable = isCompleted;
+
+          return (
+            <div key={s.key} className="flex items-center gap-2 flex-1">
+              <button
+                type="button"
+                disabled={!isClickable}
+                onClick={() => isClickable && setStep(s.key)}
+                className={`flex items-center justify-center w-8 h-8 rounded-full text-sm font-medium transition-colors ${
+                  isCurrent
+                    ? "bg-primary text-primary-foreground"
+                    : isCompleted
+                    ? "bg-green-500 text-white hover:bg-green-600 cursor-pointer"
+                    : "bg-muted text-muted-foreground"
+                } ${!isClickable ? "cursor-default" : ""}`}
+              >
+                {isCompleted ? (
+                  <Check className="h-4 w-4" />
+                ) : (
+                  index + 1
+                )}
+              </button>
+              <span
+                className={`text-sm font-medium hidden md:inline ${
+                  isClickable ? "cursor-pointer hover:text-primary" : ""
+                }`}
+                onClick={() => isClickable && setStep(s.key)}
+              >
+                {s.label}
+              </span>
+              {index < STEPS.length - 1 && (
+                <div className="flex-1 h-0.5 bg-muted hidden md:block" />
               )}
             </div>
-            <span className="text-sm font-medium hidden md:inline">
-              {s.label}
-            </span>
-            {index < STEPS.length - 1 && (
-              <div className="flex-1 h-0.5 bg-muted hidden md:block" />
-            )}
-          </div>
-        ))}
+          );
+        })}
       </div>
 
       <Card>
