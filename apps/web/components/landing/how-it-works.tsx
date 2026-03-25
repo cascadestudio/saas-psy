@@ -1,49 +1,222 @@
+"use client";
+
+import { useScrollAnimation } from "./use-scroll-animation";
+import { Search, Send, Star, Clock, LogOut, UserPlus } from "lucide-react";
+
 const steps = [
   {
     number: "1",
-    title: "Sélectionnez une échelle",
+    title: "Choisissez votre patient et vos échelles",
     description:
-      "Choisissez parmi notre bibliothèque de questionnaires validés (BDI, STAI, Liebowitz...).",
+      "Sélectionnez un patient existant ou créez-en un en quelques secondes, puis choisissez une ou plusieurs échelles à lui envoyer.",
   },
   {
     number: "2",
-    title: "Envoyez au patient",
+    title: "Le patient répond en ligne",
     description:
-      "Le patient reçoit un lien par email et répond au questionnaire à son rythme.",
+      "Votre patient·e reçoit un lien par email, remplit le questionnaire depuis son téléphone ou ordinateur, sans créer de compte.",
   },
   {
     number: "3",
-    title: "Recevez les résultats",
+    title: "Recevez les résultats cotés automatiquement",
     description:
-      "Score calculé automatiquement, interprétation claire, historique accessible.",
+      "Scores calculés selon les barèmes officiels, disponibles instantanément dans votre espace sécurisé.",
   },
 ];
 
-export function HowItWorks() {
+function DashboardMockup() {
   return (
-    <section className="py-20">
-      <div className="container mx-auto px-4">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">
-          Comment ça marche
-        </h2>
-        <p className="text-muted-foreground text-center max-w-2xl mx-auto mb-12">
-          Un processus simple en trois étapes pour vous faire gagner du temps.
-        </p>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-          {steps.map((step, index) => (
-            <div key={step.number} className="text-center">
-              <div className="w-12 h-12 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-xl font-bold mx-auto mb-4">
-                {step.number}
-              </div>
-              <h3 className="text-lg font-semibold mb-2">{step.title}</h3>
-              <p className="text-muted-foreground text-sm">
-                {step.description}
-              </p>
-              {index < steps.length - 1 && (
-                <div className="hidden md:block absolute top-6 left-full w-full h-0.5 bg-border -translate-x-1/2" />
-              )}
+    <div className="max-w-4xl mx-auto">
+      <div className="rounded-2xl overflow-hidden shadow-xl border border-border">
+        {/* Browser chrome */}
+        <div className="bg-card px-4 py-3 flex items-center gap-2 border-b border-border">
+          <div className="flex gap-1.5">
+            <div className="h-3 w-3 rounded-full bg-destructive/40" />
+            <div className="h-3 w-3 rounded-full bg-primary/30" />
+            <div className="h-3 w-3 rounded-full bg-brand-soft-green/40" />
+          </div>
+          <div className="flex-1 mx-4">
+            <div className="bg-secondary rounded-md px-3 py-1 text-xs text-muted-foreground font-body max-w-xs mx-auto text-center">
+              melya.app/dashboard
             </div>
-          ))}
+          </div>
+        </div>
+
+        {/* App content */}
+        <div className="bg-background">
+          {/* App nav bar */}
+          <div className="px-4 sm:px-6 py-2.5 flex items-center justify-between border-b border-border/60">
+            <div className="flex items-center gap-5">
+              <span className="font-heading font-bold text-sm text-foreground">Melya</span>
+              <nav className="hidden sm:flex items-center gap-4">
+                <span className="text-[11px] font-body font-medium text-foreground">Tableau de bord</span>
+                <span className="text-[11px] font-body text-muted-foreground">Échelles</span>
+                <span className="text-[11px] font-body text-muted-foreground">Patients</span>
+              </nav>
+            </div>
+            <LogOut className="h-3.5 w-3.5 text-muted-foreground" />
+          </div>
+
+          {/* Dashboard header */}
+          <div className="px-4 sm:px-6 pt-4 pb-3">
+            <div className="flex items-start justify-between">
+              <div>
+                <h3 className="font-heading font-bold text-base sm:text-lg text-foreground leading-tight">
+                  Tableau de bord
+                </h3>
+                <p className="text-[10px] font-body text-muted-foreground mt-0.5">
+                  Bienvenue, clement@cascadestudio.fr
+                </p>
+              </div>
+              <button className="flex items-center gap-1.5 bg-primary text-primary-foreground text-[10px] font-body font-medium px-3 py-1.5 rounded-lg">
+                <Send className="h-3 w-3" />
+                <span className="hidden sm:inline">Envoyer une échelle</span>
+              </button>
+            </div>
+          </div>
+
+          {/* Two-panel layout */}
+          <div className="px-4 sm:px-6 pb-5 flex flex-col sm:flex-row gap-3">
+            {/* Left: Mes patients */}
+            <div className="flex-1 bg-card rounded-xl border border-border p-3">
+              <div className="flex items-center justify-between mb-3">
+                <div>
+                  <p className="font-heading font-bold text-xs text-foreground">Mes patients</p>
+                  <p className="text-[9px] font-body text-muted-foreground">3 patients dans votre liste</p>
+                </div>
+                <button className="flex items-center gap-1 bg-primary/10 text-primary text-[9px] font-body font-medium px-2 py-1 rounded-lg">
+                  <UserPlus className="h-3 w-3" />
+                  Ajouter
+                </button>
+              </div>
+
+              {/* Search bar */}
+              <div className="flex items-center gap-2 bg-background border border-border rounded-lg px-2.5 py-1.5 mb-3">
+                <Search className="h-3 w-3 text-muted-foreground" />
+                <span className="text-[9px] font-body text-muted-foreground/60">Rechercher un patient...</span>
+              </div>
+
+              {/* Patient rows */}
+              <div className="space-y-0 divide-y divide-border">
+                {["Sarah Elraim", "Jeanne Dupont", "Martin Dubois"].map((name) => (
+                  <div key={name} className="flex items-center justify-between py-2.5">
+                    <span className="text-[10px] font-body font-medium text-foreground">{name}</span>
+                    <button className="flex items-center gap-1 bg-primary/90 text-primary-foreground text-[8px] font-body font-medium px-2 py-1 rounded-md">
+                      <Send className="h-2.5 w-2.5" />
+                      Envoyer une échelle
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Right: Mes échelles */}
+            <div className="flex-1 bg-card rounded-xl border border-border p-3">
+              <div className="flex items-center justify-between mb-3">
+                <div>
+                  <p className="font-heading font-bold text-xs text-foreground">Mes échelles</p>
+                  <p className="text-[9px] font-body text-muted-foreground">3 échelles favorites</p>
+                </div>
+                <button className="text-[9px] font-body font-medium text-primary border border-primary/30 px-2 py-1 rounded-lg">
+                  Voir tout
+                </button>
+              </div>
+
+              {/* Scale cards */}
+              <div className="space-y-2">
+                {[
+                  {
+                    name: "Échelle d'anxiété sociale de Liebowitz",
+                    desc: "Une échelle clinique de 24 items qui mesure la peur et l'évitement dans des situations sociales et de performance",
+                    category: "Anxiété sociale",
+                    time: "10-15 minutes",
+                  },
+                  {
+                    name: "Inventaire de Dépression de Beck (BDI)",
+                    desc: "Une échelle d'auto-évaluation à choix multiples de 21 questions pour mesurer la sévérité de la dépression",
+                    category: "Dépression",
+                    time: "10-15 minutes",
+                  },
+                  {
+                    name: "STAI - Inventaire d'Anxiété État-Trait",
+                    desc: "Une échelle de 40 items évaluant l'anxiété situationnelle (état) et l'anxiété générale (trait)",
+                    category: "Anxiété généralisée",
+                    time: "15-20 minutes",
+                  },
+                ].map((scale) => (
+                  <div
+                    key={scale.name}
+                    className="bg-background border border-border rounded-lg p-2.5"
+                  >
+                    <div className="flex items-start justify-between gap-2">
+                      <div className="flex items-start gap-1.5 min-w-0">
+                        <Star className="h-3 w-3 text-primary/40 flex-shrink-0 mt-0.5" />
+                        <div className="min-w-0">
+                          <p className="text-[10px] font-heading font-bold text-foreground leading-tight">
+                            {scale.name}
+                          </p>
+                          <p className="text-[8px] font-body text-muted-foreground leading-snug mt-0.5 line-clamp-2">
+                            {scale.desc}
+                          </p>
+                          <div className="flex items-center gap-2 mt-1.5">
+                            <span className="text-[8px] font-body text-muted-foreground">
+                              {scale.category}
+                            </span>
+                            <span className="flex items-center gap-0.5 text-[8px] font-body text-muted-foreground">
+                              <Clock className="h-2.5 w-2.5" />
+                              {scale.time}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                      <span className="text-[8px] font-body text-muted-foreground flex-shrink-0">
+                        Détails
+                      </span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export function HowItWorks() {
+  const { ref, isVisible } = useScrollAnimation();
+
+  return (
+    <section id="comment-ca-marche" className="py-16 md:py-24">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6">
+        <div
+          ref={ref}
+          className={`scroll-animate ${isVisible ? "visible" : ""}`}
+        >
+          <h2 className="text-2xl sm:text-3xl font-bold text-center text-foreground mb-12">
+            Comment ça marche ?
+          </h2>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+            {steps.map((step) => (
+              <div key={step.number} className="text-center">
+                <div className="mx-auto mb-4 h-12 w-12 rounded-full bg-brand-orange flex items-center justify-center">
+                  <span className="text-lg font-heading font-bold text-white">
+                    {step.number}
+                  </span>
+                </div>
+                <h3 className="text-lg font-bold text-foreground mb-2">
+                  {step.title}
+                </h3>
+                <p className="text-muted-foreground font-body leading-relaxed">
+                  {step.description}
+                </p>
+              </div>
+            ))}
+          </div>
+
+          <DashboardMockup />
         </div>
       </div>
     </section>

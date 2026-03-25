@@ -22,7 +22,7 @@ const buttonVariants = cva(
         accent:
           "bg-accent text-accent-foreground shadow-sm hover:bg-accent/90 hover:shadow-md",
         success:
-          "bg-brand-green text-brand-light shadow-sm hover:opacity-90 hover:shadow-md",
+          "bg-brand-soft-green text-brand-off-white shadow-sm hover:opacity-90 hover:shadow-md",
       },
       size: {
         default: "h-10 px-4 py-2",

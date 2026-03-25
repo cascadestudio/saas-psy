@@ -1,7 +1,9 @@
 import { Resend } from "resend";
 import { ResultScaleEmailTemplate } from "@/app/scale/api/submit-scale/ResultScaleEmailTemplate";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+function getResendClient() {
+  return new Resend(process.env.RESEND_API_KEY);
+}
 
 interface SendScaleResultsParams {
   psychologistEmail: string;
@@ -34,6 +36,7 @@ export async function sendScaleResults({
   patientComments,
   scaleId,
 }: SendScaleResultsParams) {
+  const resend = getResendClient();
   return await resend.emails.send({
     from: "Melya <contact@cascadestudio.fr>",
     to: [psychologistEmail],
