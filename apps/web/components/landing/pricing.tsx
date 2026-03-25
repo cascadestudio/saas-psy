@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Check } from "lucide-react";
+import { Interfaces } from "doodle-icons";
 import { Badge } from "@/components/ui/badge";
 import { WaitlistButton } from "./waitlist-button";
 import { useScrollAnimation } from "./use-scroll-animation";
@@ -128,7 +128,7 @@ export function Pricing() {
                 <ul className="mt-6 space-y-3 flex-1">
                   {plan.features.map((feature, i) => (
                     <li key={i} className="flex items-start gap-3">
-                      <Check className="h-5 w-5 text-brand-soft-green flex-shrink-0 mt-0.5" />
+                      <Interfaces.Tick className="h-5 w-5 text-brand-soft-green flex-shrink-0 mt-0.5" fill="currentColor" />
                       <span className="text-foreground font-body text-sm">
                         {feature}
                       </span>

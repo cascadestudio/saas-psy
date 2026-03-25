@@ -1,6 +1,6 @@
 "use client";
 
-import { X, Check } from "lucide-react";
+import { Interfaces } from "doodle-icons";
 import { useScrollAnimation } from "./use-scroll-animation";
 
 const without = [
@@ -33,7 +33,7 @@ export function Comparison() {
             <ul className="space-y-4">
               {without.map((item, i) => (
                 <li key={i} className="flex items-start gap-3">
-                  <X className="h-5 w-5 text-muted-foreground flex-shrink-0 mt-0.5" />
+                  <Interfaces.Cross className="h-5 w-5 text-red-400 flex-shrink-0 mt-0.5" fill="currentColor" />
                   <span className="text-muted-foreground font-body">
                     {item}
                   </span>
@@ -50,7 +50,7 @@ export function Comparison() {
             <ul className="space-y-4">
               {withMelya.map((item, i) => (
                 <li key={i} className="flex items-start gap-3">
-                  <Check className="h-5 w-5 text-brand-orange flex-shrink-0 mt-0.5" />
+                  <Interfaces.Tick className="h-5 w-5 text-brand-soft-green flex-shrink-0 mt-0.5" fill="currentColor" />
                   <span className="text-foreground font-body">{item}</span>
                 </li>
               ))}
