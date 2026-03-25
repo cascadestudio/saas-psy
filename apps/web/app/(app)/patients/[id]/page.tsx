@@ -10,14 +10,22 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import Link from "next/link";
 import { useUser } from "@/app/context/UserContext";
 import { useEffect, useState, useCallback } from "react";
 import { patientsApi, sessionsApi, type Patient, type Session } from "@/lib/api-client";
 import { scales } from "@/app/scalesData";
 import { Arrow, Interfaces, Files } from "doodle-icons";
+import { MoreVertical, Pencil, Archive } from "lucide-react";
 import { ArchivePatientDialog } from "@/components/ArchivePatientDialog";
 import { RestorePatientButton } from "@/components/RestorePatientButton";
+import { EditPatientSheet } from "@/components/EditPatientSheet";
 import { formatScore } from "@/lib/score-utils";
 
 const statusColors: Record<string, string> = {
@@ -47,6 +55,7 @@ export default function PatientDetailPage() {
   const [patient, setPatient] = useState<Patient | null>(null);
   const [sessions, setSessions] = useState<Session[]>([]);
   const [loading, setLoading] = useState(true);
+  const [editOpen, setEditOpen] = useState(false);
 
   const loadData = useCallback(async () => {
     if (!user || !patientId) return;
@@ -85,6 +94,10 @@ export default function PatientDetailPage() {
 
   const handleRestored = () => {
     loadData();
+  };
+
+  const handlePatientUpdated = (updated: Patient) => {
+    setPatient(updated);
   };
 
   if (isLoading || loading) {
@@ -158,16 +171,41 @@ export default function PatientDetailPage() {
             />
           ) : (
             <>
-              <ArchivePatientDialog
-                patient={patient}
-                onArchived={handleArchived}
-              />
               <Button asChild size="lg">
                 <Link href={`/send-scale?patientId=${patient.id}`}>
                   <Interfaces.Send className="mr-2 h-4 w-4" />
                   Envoyer une échelle
                 </Link>
               </Button>
+              <EditPatientSheet
+                patient={patient}
+                onPatientUpdated={handlePatientUpdated}
+                open={editOpen}
+                onOpenChange={setEditOpen}
+              />
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="outline" size="icon">
+                    <MoreVertical className="h-4 w-4" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuItem onClick={() => setEditOpen(true)}>
+                    <Pencil className="mr-2 h-4 w-4" />
+                    Modifier
+                  </DropdownMenuItem>
+                  <ArchivePatientDialog
+                    patient={patient}
+                    onArchived={handleArchived}
+                    trigger={
+                      <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
+                        <Archive className="mr-2 h-4 w-4" />
+                        Archiver
+                      </DropdownMenuItem>
+                    }
+                  />
+                </DropdownMenuContent>
+              </DropdownMenu>
             </>
           )}
         </div>

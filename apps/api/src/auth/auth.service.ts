@@ -39,6 +39,14 @@ export class AuthService {
         user.role as string,
       );
 
+      // Send welcome email (non-blocking)
+      this.emailService
+        .sendWelcomeEmail(user.email, user.firstName ?? undefined)
+        .catch((err) => {
+          // Don't fail registration if email fails
+          console.error('Failed to send welcome email:', err);
+        });
+
       return {
         user,
         ...tokens,
