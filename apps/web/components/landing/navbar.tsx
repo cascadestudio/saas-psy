@@ -58,12 +58,6 @@ export function Navbar() {
 
           {/* CTA — desktop */}
           <div className="hidden md:flex items-center gap-3">
-            <a
-              href="/sign-in"
-              className="text-sm !text-brand-orange font-medium font-body transition-colors rounded-full px-4 py-2 bg-brand-orange-light hover:bg-brand-orange-light/80"
-            >
-              Se connecter
-            </a>
             <WaitlistButton
               size="sm"
               className="font-body font-medium text-sm rounded-full px-5 bg-brand-orange text-white hover:bg-brand-orange/90"
@@ -101,13 +95,6 @@ export function Navbar() {
                 {link.label}
               </a>
             ))}
-            <a
-              href="/sign-in"
-              className="block text-sm !text-brand-orange font-medium font-body rounded-full px-4 py-2 bg-brand-orange-light hover:bg-brand-orange-light/80 text-center"
-              onClick={() => setMobileOpen(false)}
-            >
-              Se connecter
-            </a>
             <div className="pt-2">
               <WaitlistButton
                 className="w-full font-body font-medium text-sm rounded-full bg-brand-orange text-white hover:bg-brand-orange/90"
