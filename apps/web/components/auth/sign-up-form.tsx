@@ -105,8 +105,8 @@ export function SignUpForm() {
             id="password"
             name="password"
             type="password"
-            placeholder="Minimum 6 caractères"
-            minLength={6}
+            placeholder="Minimum 8 caractères"
+            minLength={8}
             required
             disabled={isLoading}
           />
