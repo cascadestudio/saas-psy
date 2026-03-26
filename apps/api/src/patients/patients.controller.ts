@@ -22,8 +22,14 @@ export class PatientsController {
   create(
     @CurrentUser('id') practitionerId: string,
     @Body() dto: CreatePatientDto,
+    @Req() req: Request,
   ) {
-    return this.patientsService.create(practitionerId, dto);
+    return this.patientsService.create(
+      practitionerId,
+      dto,
+      req.ip,
+      req.headers['user-agent'],
+    );
   }
 
   @Get()
@@ -52,8 +58,14 @@ export class PatientsController {
   findById(
     @Param('id') id: string,
     @CurrentUser('id') practitionerId: string,
+    @Req() req: Request,
   ) {
-    return this.patientsService.findById(id, practitionerId);
+    return this.patientsService.findById(
+      id,
+      practitionerId,
+      req.ip,
+      req.headers['user-agent'],
+    );
   }
 
   @Patch(':id')
@@ -61,8 +73,15 @@ export class PatientsController {
     @Param('id') id: string,
     @CurrentUser('id') practitionerId: string,
     @Body() dto: UpdatePatientDto,
+    @Req() req: Request,
   ) {
-    return this.patientsService.update(id, practitionerId, dto);
+    return this.patientsService.update(
+      id,
+      practitionerId,
+      dto,
+      req.ip,
+      req.headers['user-agent'],
+    );
   }
 
   @Delete(':id')
@@ -83,15 +102,27 @@ export class PatientsController {
   archive(
     @Param('id') id: string,
     @CurrentUser('id') practitionerId: string,
+    @Req() req: Request,
   ) {
-    return this.patientsService.archive(id, practitionerId);
+    return this.patientsService.archive(
+      id,
+      practitionerId,
+      req.ip,
+      req.headers['user-agent'],
+    );
   }
 
   @Patch(':id/restore')
   restore(
     @Param('id') id: string,
     @CurrentUser('id') practitionerId: string,
+    @Req() req: Request,
   ) {
-    return this.patientsService.restore(id, practitionerId);
+    return this.patientsService.restore(
+      id,
+      practitionerId,
+      req.ip,
+      req.headers['user-agent'],
+    );
   }
 }

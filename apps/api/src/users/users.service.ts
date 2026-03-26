@@ -1,6 +1,7 @@
 import { Injectable, ConflictException, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { AuditLogService } from '../audit-log/audit-log.service';
+import { AuditAction } from '../audit-log/audit-actions';
 import * as bcrypt from 'bcrypt';
 
 @Injectable()
@@ -86,11 +87,28 @@ export class UsersService {
     return this.sanitizeUser(user);
   }
 
-  async updateUser(id: string, data: { firstName?: string; lastName?: string; email?: string }) {
+  async updateUser(
+    id: string,
+    data: { firstName?: string; lastName?: string; email?: string },
+    ipAddress?: string,
+    userAgent?: string,
+  ) {
     const user = await this.prisma.user.update({
       where: { id },
       data,
     });
+
+    this.auditLog
+      .log({
+        userId: id,
+        action: AuditAction.PROFILE_UPDATED,
+        resource: 'User',
+        resourceId: id,
+        metadata: { fieldsUpdated: Object.keys(data) },
+        ipAddress,
+        userAgent,
+      })
+      .catch(() => {});
 
     return this.sanitizeUser(user);
   }
@@ -173,7 +191,7 @@ export class UsersService {
         // 4. Audit log before deleting user (userId still valid)
         await this.auditLog.logInTransaction(tx, {
           userId,
-          action: 'USER_ACCOUNT_DELETED',
+          action: AuditAction.USER_ACCOUNT_DELETED,
           resource: 'User',
           resourceId: userId,
           metadata: {

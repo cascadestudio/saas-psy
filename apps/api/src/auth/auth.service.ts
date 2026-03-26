@@ -8,6 +8,8 @@ import { ConfigService } from '@nestjs/config';
 import * as crypto from 'crypto';
 import { UsersService } from '../users/users.service';
 import { EmailService } from '../email/email.service';
+import { AuditLogService } from '../audit-log/audit-log.service';
+import { AuditAction } from '../audit-log/audit-actions';
 import { RegisterDto, LoginDto } from './dto';
 import { ForgotPasswordDto } from './dto/forgot-password.dto';
 import { ResetPasswordDto } from './dto/reset-password.dto';
@@ -20,9 +22,14 @@ export class AuthService {
     private jwtService: JwtService,
     private configService: ConfigService,
     private emailService: EmailService,
+    private auditLog: AuditLogService,
   ) {}
 
-  async register(registerDto: RegisterDto) {
+  async register(
+    registerDto: RegisterDto,
+    ipAddress?: string,
+    userAgent?: string,
+  ) {
     try {
       // Create user
       const user = await this.usersService.createUser({
@@ -47,6 +54,19 @@ export class AuthService {
           console.error('Failed to send welcome email:', err);
         });
 
+      // Audit log (non-blocking)
+      this.auditLog
+        .log({
+          userId: user.id,
+          action: AuditAction.USER_REGISTERED,
+          resource: 'User',
+          resourceId: user.id,
+          metadata: { email: registerDto.email },
+          ipAddress,
+          userAgent,
+        })
+        .catch(() => {});
+
       return {
         user,
         ...tokens,
@@ -61,11 +81,21 @@ export class AuthService {
     }
   }
 
-  async login(loginDto: LoginDto) {
+  async login(loginDto: LoginDto, ipAddress?: string, userAgent?: string) {
     // Find user
     const user = await this.usersService.findByEmail(loginDto.email);
 
     if (!user) {
+      this.auditLog
+        .log({
+          userId: null,
+          action: AuditAction.USER_LOGIN_FAILED,
+          resource: 'User',
+          metadata: { email: loginDto.email, reason: 'user_not_found' },
+          ipAddress,
+          userAgent,
+        })
+        .catch(() => {});
       throw new UnauthorizedException('Email ou mot de passe incorrect');
     }
 
@@ -76,6 +106,17 @@ export class AuthService {
     );
 
     if (!isPasswordValid) {
+      this.auditLog
+        .log({
+          userId: user.id,
+          action: AuditAction.USER_LOGIN_FAILED,
+          resource: 'User',
+          resourceId: user.id,
+          metadata: { email: loginDto.email, reason: 'invalid_password' },
+          ipAddress,
+          userAgent,
+        })
+        .catch(() => {});
       throw new UnauthorizedException('Email ou mot de passe incorrect');
     }
 
@@ -85,6 +126,18 @@ export class AuthService {
       user.email,
       user.role as string,
     );
+
+    // Audit log (non-blocking)
+    this.auditLog
+      .log({
+        userId: user.id,
+        action: AuditAction.USER_LOGIN,
+        resource: 'User',
+        resourceId: user.id,
+        ipAddress,
+        userAgent,
+      })
+      .catch(() => {});
 
     // Return user without password hash
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -100,7 +153,11 @@ export class AuthService {
     return this.usersService.findById(userId);
   }
 
-  async forgotPassword(email: string): Promise<void> {
+  async forgotPassword(
+    email: string,
+    ipAddress?: string,
+    userAgent?: string,
+  ): Promise<void> {
     // Find user by email
     const user = await this.usersService.findByEmail(email);
 
@@ -131,9 +188,26 @@ export class AuthService {
 
     // Send email with reset link containing raw token
     await this.emailService.sendPasswordResetEmail(user.email, resetToken);
+
+    // Audit log (non-blocking)
+    this.auditLog
+      .log({
+        userId: user.id,
+        action: AuditAction.PASSWORD_RESET_REQUESTED,
+        resource: 'User',
+        resourceId: user.id,
+        ipAddress,
+        userAgent,
+      })
+      .catch(() => {});
   }
 
-  async resetPassword(token: string, newPassword: string): Promise<void> {
+  async resetPassword(
+    token: string,
+    newPassword: string,
+    ipAddress?: string,
+    userAgent?: string,
+  ): Promise<void> {
     // Hash the provided token to compare with database
     const hashedToken = crypto.createHash('sha256').update(token).digest('hex');
 
@@ -151,6 +225,18 @@ export class AuthService {
 
     // Update password and clear reset fields
     await this.usersService.resetPassword(user.id, newPassword);
+
+    // Audit log (non-blocking)
+    this.auditLog
+      .log({
+        userId: user.id,
+        action: AuditAction.PASSWORD_RESET_COMPLETED,
+        resource: 'User',
+        resourceId: user.id,
+        ipAddress,
+        userAgent,
+      })
+      .catch(() => {});
   }
 
   private async generateTokens(userId: string, email: string, role: string) {

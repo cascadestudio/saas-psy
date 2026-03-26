@@ -9,6 +9,8 @@ import { PrismaService } from '../prisma/prisma.service';
 import { EmailService } from '../email/email.service';
 import { EncryptionService } from '../encryption/encryption.service';
 import { ScoringService } from '../scoring/scoring.service';
+import { AuditLogService } from '../audit-log/audit-log.service';
+import { AuditAction } from '../audit-log/audit-actions';
 import { CreateSessionDto, UpdateSessionDto, SubmitResponsesDto } from './dto';
 import { createId } from '@paralleldrive/cuid2';
 
@@ -21,9 +23,15 @@ export class SessionsService {
     private emailService: EmailService,
     private encryption: EncryptionService,
     private scoringService: ScoringService,
+    private auditLog: AuditLogService,
   ) {}
 
-  async create(practitionerId: string, dto: CreateSessionDto) {
+  async create(
+    practitionerId: string,
+    dto: CreateSessionDto,
+    ipAddress?: string,
+    userAgent?: string,
+  ) {
     // Get patient data
     const patient = await this.prisma.patient.findUnique({
       where: { id: dto.patientId },
@@ -109,6 +117,23 @@ export class SessionsService {
       );
     }
 
+    // Audit log (non-blocking)
+    this.auditLog
+      .log({
+        userId: practitionerId,
+        action: AuditAction.SESSION_CREATED,
+        resource: 'Session',
+        resourceId: batchId,
+        metadata: {
+          patientId: dto.patientId,
+          scaleIds: dto.scaleIds,
+          sessionCount: sessions.length,
+        },
+        ipAddress,
+        userAgent,
+      })
+      .catch(() => {});
+
     return {
       sessions,
       batchId,
@@ -143,7 +168,12 @@ export class SessionsService {
     return { sessions: sessions.map((s) => this.decryptSession(s)) };
   }
 
-  async findById(id: string, practitionerId: string) {
+  async findById(
+    id: string,
+    practitionerId: string,
+    ipAddress?: string,
+    userAgent?: string,
+  ) {
     const session = await this.prisma.session.findUnique({
       where: { id },
       include: {
@@ -158,6 +188,18 @@ export class SessionsService {
     if (session.practitionerId !== practitionerId) {
       throw new ForbiddenException('Accès non autorisé à cette session');
     }
+
+    this.auditLog
+      .log({
+        userId: practitionerId,
+        action: AuditAction.SESSION_VIEWED,
+        resource: 'Session',
+        resourceId: id,
+        metadata: { patientId: session.patientId, status: session.status },
+        ipAddress,
+        userAgent,
+      })
+      .catch(() => {});
 
     return { session: this.decryptSession(session) };
   }
@@ -195,7 +237,12 @@ export class SessionsService {
     return { session: this.decryptSession(updatedSession) };
   }
 
-  async cancel(id: string, practitionerId: string) {
+  async cancel(
+    id: string,
+    practitionerId: string,
+    ipAddress?: string,
+    userAgent?: string,
+  ) {
     const session = await this.prisma.session.findUnique({
       where: { id },
     });
@@ -216,6 +263,18 @@ export class SessionsService {
       where: { id },
       data: { status: 'CANCELLED' },
     });
+
+    this.auditLog
+      .log({
+        userId: practitionerId,
+        action: AuditAction.SESSION_CANCELLED,
+        resource: 'Session',
+        resourceId: id,
+        metadata: { patientId: session.patientId },
+        ipAddress,
+        userAgent,
+      })
+      .catch(() => {});
 
     return { session: this.decryptSession(cancelledSession) };
   }

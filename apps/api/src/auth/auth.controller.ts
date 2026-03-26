@@ -1,4 +1,5 @@
-import { Controller, Post, Body, Get, UseGuards, HttpCode, HttpStatus } from '@nestjs/common';
+import { Controller, Post, Body, Get, UseGuards, HttpCode, HttpStatus, Req } from '@nestjs/common';
+import { Request } from 'express';
 import { AuthService } from './auth.service';
 import { RegisterDto, LoginDto } from './dto';
 import { ForgotPasswordDto } from './dto/forgot-password.dto';
@@ -12,22 +13,37 @@ export class AuthController {
 
   @Public()
   @Post('register')
-  async register(@Body() registerDto: RegisterDto) {
-    return this.authService.register(registerDto);
+  async register(@Body() registerDto: RegisterDto, @Req() req: Request) {
+    return this.authService.register(
+      registerDto,
+      req.ip,
+      req.headers['user-agent'],
+    );
   }
 
   @Public()
   @Post('login')
   @HttpCode(HttpStatus.OK)
-  async login(@Body() loginDto: LoginDto) {
-    return this.authService.login(loginDto);
+  async login(@Body() loginDto: LoginDto, @Req() req: Request) {
+    return this.authService.login(
+      loginDto,
+      req.ip,
+      req.headers['user-agent'],
+    );
   }
 
   @Public()
   @Post('forgot-password')
   @HttpCode(HttpStatus.OK)
-  async forgotPassword(@Body() forgotPasswordDto: ForgotPasswordDto) {
-    await this.authService.forgotPassword(forgotPasswordDto.email);
+  async forgotPassword(
+    @Body() forgotPasswordDto: ForgotPasswordDto,
+    @Req() req: Request,
+  ) {
+    await this.authService.forgotPassword(
+      forgotPasswordDto.email,
+      req.ip,
+      req.headers['user-agent'],
+    );
     return {
       message: 'Si cet email existe, un lien de réinitialisation a été envoyé.',
     };
@@ -36,10 +52,15 @@ export class AuthController {
   @Public()
   @Post('reset-password')
   @HttpCode(HttpStatus.OK)
-  async resetPassword(@Body() resetPasswordDto: ResetPasswordDto) {
+  async resetPassword(
+    @Body() resetPasswordDto: ResetPasswordDto,
+    @Req() req: Request,
+  ) {
     await this.authService.resetPassword(
       resetPasswordDto.token,
       resetPasswordDto.newPassword,
+      req.ip,
+      req.headers['user-agent'],
     );
     return {
       message: 'Mot de passe mis à jour avec succès.',
@@ -63,4 +84,3 @@ export class AuthController {
     };
   }
 }
-
