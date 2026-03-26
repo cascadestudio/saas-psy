@@ -202,7 +202,7 @@ export function HowItWorks() {
             {steps.map((step) => (
               <div key={step.number} className="text-center">
                 <div className="mx-auto mb-4 h-12 w-12 rounded-full bg-brand-orange flex items-center justify-center">
-                  <span className="text-lg font-heading font-bold text-white">
+                  <span className="text-lg font-heading font-bold text-brand-white">
                     {step.number}
                   </span>
                 </div>

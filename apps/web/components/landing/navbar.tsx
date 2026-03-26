@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 import { Interfaces } from "doodle-icons";
 import { WaitlistButton } from "./waitlist-button";
 import Image from "next/image";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 const navLinks = [
   { href: "#fonctionnalites", label: "Fonctionnalités" },
@@ -57,12 +59,20 @@ export function Navbar() {
           </div>
 
           {/* CTA — desktop */}
-          <div className="hidden md:flex items-center gap-3">
+          <div className="hidden md:flex items-center gap-4">
+            <Button
+              asChild
+              variant="outline"
+              size="sm"
+              className="font-body font-medium text-sm rounded-full px-5 border-brand-orange text-brand-orange hover:bg-brand-orange hover:text-brand-white"
+            >
+              <Link href="/dashboard">Explorer l&apos;app</Link>
+            </Button>
             <WaitlistButton
               size="sm"
-              className="font-body font-medium text-sm rounded-full px-5 bg-brand-orange text-white hover:bg-brand-orange/90"
+              className="font-body font-medium text-sm rounded-full px-5 bg-brand-orange text-brand-white hover:bg-brand-orange/90"
             >
-              Rejoindre la liste d'attente
+              Rejoindre la liste d&apos;attente
             </WaitlistButton>
           </div>
 
@@ -95,12 +105,19 @@ export function Navbar() {
                 {link.label}
               </a>
             ))}
+            <Link
+              href="/dashboard"
+              className="block text-sm font-medium font-body text-muted-foreground hover:text-foreground transition-colors py-2"
+              onClick={() => setMobileOpen(false)}
+            >
+              Explorer l&apos;app
+            </Link>
             <div className="pt-2">
               <WaitlistButton
-                className="w-full font-body font-medium text-sm rounded-full bg-brand-orange text-white hover:bg-brand-orange/90"
+                className="w-full font-body font-medium text-sm rounded-full bg-brand-orange text-brand-white hover:bg-brand-orange/90"
                 size="sm"
               >
-                Rejoindre la liste d'attente
+                Rejoindre la liste d&apos;attente
               </WaitlistButton>
             </div>
           </div>

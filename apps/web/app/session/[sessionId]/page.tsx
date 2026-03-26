@@ -85,7 +85,7 @@ export default function SessionPage() {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
         <div className="text-center max-w-md mx-auto px-4">
-          <div className="bg-white rounded-lg shadow-sm p-8">
+          <div className="bg-brand-white rounded-lg shadow-sm p-8">
             <h1 className="text-xl font-semibold text-gray-900 mb-2">
               Questionnaire non disponible
             </h1>
@@ -125,7 +125,7 @@ export default function SessionPage() {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
         <div className="text-center max-w-md mx-auto px-4">
-          <div className="bg-white rounded-lg shadow-sm p-8">
+          <div className="bg-brand-white rounded-lg shadow-sm p-8">
             <h1 className="text-xl font-semibold text-gray-900 mb-2">
               Échelle non trouvée
             </h1>
@@ -246,7 +246,7 @@ function SessionScaleWrapper({
   return (
     <div className="relative">
       {submitting && (
-        <div className="fixed inset-0 bg-white/80 flex items-center justify-center z-50">
+        <div className="fixed inset-0 bg-brand-white/80 flex items-center justify-center z-50">
           <div className="text-center">
             <Loader2 className="h-8 w-8 animate-spin text-indigo-600 mx-auto" />
             <p className="mt-4 text-gray-600">Envoi en cours...</p>
