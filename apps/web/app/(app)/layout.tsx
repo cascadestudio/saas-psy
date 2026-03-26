@@ -2,7 +2,9 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Interfaces, Files } from "doodle-icons";
+import Image from "next/image";
+import { Arrow, Interfaces, Files } from "doodle-icons";
+import { WaitlistButton } from "@/components/landing/waitlist-button";
 import { Button } from "@/components/ui/button";
 import { useUser } from "@/app/context/UserContext";
 import { useAuthGate } from "@/app/context/AuthGateContext";
@@ -32,12 +34,43 @@ export default function AppLayout({
 
   return (
     <div className="flex min-h-screen flex-col">
+      {/* Demo banner for unauthenticated visitors */}
+      {!user && !isLoading && (
+        <div className="w-full border-b bg-primary/5">
+          <div className="container flex h-10 items-center justify-between text-sm">
+            <Link
+              href="/"
+              className="flex items-center gap-1 text-muted-foreground hover:text-foreground transition-colors"
+            >
+              <Arrow.ArrowLeft className="h-3.5 w-3.5" />
+              <span className="font-body hidden sm:inline">Retour au site</span>
+            </Link>
+            <div className="flex items-center gap-3">
+              <span className="font-body text-muted-foreground hidden sm:inline">
+                Vous explorez Melya en mode d&eacute;couverte
+              </span>
+              <WaitlistButton
+                size="sm"
+                className="h-7 font-body font-medium text-xs rounded-full px-4 bg-brand-orange text-brand-white hover:bg-brand-orange/90"
+              >
+                Rejoindre la b&ecirc;ta
+              </WaitlistButton>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Header */}
       <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="container flex h-14 items-center">
           <div className="mr-4 hidden md:flex">
-            <Link href="/dashboard" className="mr-6 flex items-center space-x-2">
-              <span className="font-bold">Melya</span>
+            <Link href="/dashboard" className="mr-6 flex items-center">
+              <Image
+                src="/images/landing/logo.svg"
+                alt="Melya"
+                width={90}
+                height={28}
+              />
             </Link>
             <nav className="flex items-center space-x-6 text-sm font-medium">
               {navigation.map((item) => (

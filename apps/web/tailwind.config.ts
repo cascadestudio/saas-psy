@@ -88,7 +88,8 @@ const config = {
   				'warm-gray': 'hsl(var(--brand-warm-gray))',
   				'soft-green': 'hsl(var(--brand-soft-green))',
   				orange: '#D6591F',
-  				'orange-light': '#E6DAD4'
+  				'orange-light': '#E6DAD4',
+  				white: '#F4F0E4'
   			}
   		},
   		borderRadius: {
