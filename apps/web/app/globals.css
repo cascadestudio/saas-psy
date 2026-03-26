@@ -28,17 +28,17 @@
 @layer base {
   :root {
     /* Melya Brand Colors */
-    --background: 39 28% 90%;           /* cream-light #EDE8DF */
+    --background: 45 42% 92.5%;           /* brand-white #F4F0E4 */
     --foreground: 0 0% 10%;             /* warm-black #1A1A1A */
 
-    --card: 43 38% 93%;                 /* off-white #FAF8F5 */
+    --card: 45 44% 96.5%;                 /* surface-white #FAF8F2 */
     --card-foreground: 0 0% 10%;        /* warm-black #1A1A1A */
 
-    --popover: 43 38% 93%;              /* off-white #FAF8F5 */
+    --popover: 45 44% 96.5%;              /* surface-white #FAF8F2 */
     --popover-foreground: 0 0% 10%;     /* warm-black #1A1A1A */
 
     --primary: 21 75% 48%;              /* brand-orange #D6591F */
-    --primary-foreground: 43 38% 93%;   /* off-white #FAF8F5 */
+    --primary-foreground: 45 42% 92.5%;   /* brand-white #F4F0E4 */
 
     --secondary: 37 22% 90%;            /* cream-light #EDE8DF */
     --secondary-foreground: 30 6% 27%;  /* warm-gray #4A4540 */
@@ -47,10 +47,10 @@
     --muted-foreground: 30 6% 27%;     /* warm-gray #4A4540 */
 
     --accent: 140 22% 45%;              /* soft-green #5B8C6A */
-    --accent-foreground: 43 38% 93%;    /* off-white #FAF8F5 */
+    --accent-foreground: 45 42% 92.5%;    /* brand-white #F4F0E4 */
 
     --destructive: 0 84% 60%;           /* Red for errors */
-    --destructive-foreground: 43 38% 93%;
+    --destructive-foreground: 45 42% 92.5%;
 
     --border: 37 18% 74%;               /* slightly darker beige */
     --input: 37 18% 74%;                /* input border */
@@ -69,7 +69,7 @@
     --brand-terracotta: 24 70% 46%;
     --brand-beige: 41 26% 78%;
     --brand-cream: 37 22% 90%;
-    --brand-off-white: 43 38% 93%;
+    --brand-off-white: 45 42% 92.5%;
     --brand-warm-black: 0 0% 10%;
     --brand-warm-gray: 30 6% 27%;
     --brand-soft-green: 140 22% 45%;
@@ -78,19 +78,19 @@
   .dark {
     /* Dark mode - inverted Melya palette */
     --background: 0 0% 10%;             /* warm-black #1A1A1A */
-    --foreground: 43 38% 93%;           /* off-white #FAF8F5 */
+    --foreground: 45 42% 92.5%;           /* brand-white #F4F0E4 */
 
     --card: 0 0% 14%;                   /* slightly lighter dark */
-    --card-foreground: 43 38% 93%;
+    --card-foreground: 45 42% 92.5%;
 
     --popover: 0 0% 14%;
-    --popover-foreground: 43 38% 93%;
+    --popover-foreground: 45 42% 92.5%;
 
     --primary: 21 75% 48%;              /* brand-orange #D6591F */
     --primary-foreground: 0 0% 10%;
 
     --secondary: 0 0% 18%;
-    --secondary-foreground: 43 38% 93%;
+    --secondary-foreground: 45 42% 92.5%;
 
     --muted: 0 0% 18%;
     --muted-foreground: 30 6% 60%;
@@ -99,7 +99,7 @@
     --accent-foreground: 0 0% 10%;
 
     --destructive: 0 62% 50%;
-    --destructive-foreground: 43 38% 93%;
+    --destructive-foreground: 45 42% 92.5%;
 
     --border: 0 0% 20%;
     --input: 0 0% 20%;

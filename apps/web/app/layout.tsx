@@ -31,7 +31,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr" suppressHydrationWarning className={rethinkSans.variable}>
-      <body className="text-foreground font-sans">
+      <body className="bg-background text-foreground font-sans">
         <UserProvider>
           <AuthGateProvider>
             <PremiumGateProvider>

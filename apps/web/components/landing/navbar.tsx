@@ -64,13 +64,13 @@ export function Navbar() {
               asChild
               variant="outline"
               size="sm"
-              className="font-body font-medium text-sm rounded-full px-5 border-brand-orange text-brand-orange hover:bg-brand-orange hover:text-brand-white"
+              className="font-body font-medium text-sm rounded-full px-5 border-0 bg-brand-orange-light text-brand-orange hover:bg-brand-orange hover:text-brand-white-bright"
             >
               <Link href="/dashboard">Explorer l&apos;app</Link>
             </Button>
             <WaitlistButton
               size="sm"
-              className="font-body font-medium text-sm rounded-full px-5 bg-brand-orange text-brand-white hover:bg-brand-orange/90"
+              className="font-body font-medium text-sm rounded-full px-5 bg-brand-orange text-brand-white-bright hover:bg-brand-orange/90"
             >
               Rejoindre la liste d&apos;attente
             </WaitlistButton>
@@ -114,7 +114,7 @@ export function Navbar() {
             </Link>
             <div className="pt-2">
               <WaitlistButton
-                className="w-full font-body font-medium text-sm rounded-full bg-brand-orange text-brand-white hover:bg-brand-orange/90"
+                className="w-full font-body font-medium text-sm rounded-full bg-brand-orange text-brand-white-bright hover:bg-brand-orange/90"
                 size="sm"
               >
                 Rejoindre la liste d&apos;attente

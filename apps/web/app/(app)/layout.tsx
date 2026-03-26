@@ -51,7 +51,7 @@ export default function AppLayout({
               </span>
               <WaitlistButton
                 size="sm"
-                className="h-7 font-body font-medium text-xs rounded-full px-4 bg-brand-orange text-brand-white hover:bg-brand-orange/90"
+                className="h-7 font-body font-medium text-xs rounded-full px-4 bg-brand-orange text-brand-white-bright hover:bg-brand-orange/90"
               >
                 Rejoindre la b&ecirc;ta
               </WaitlistButton>
