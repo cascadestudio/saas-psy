@@ -13,6 +13,7 @@ import { ScalesModule } from './scales/scales.module';
 import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
 import { configValidationSchema } from './config/config.schema';
 import { EncryptionModule } from './encryption/encryption.module';
+import { AuditLogModule } from './audit-log/audit-log.module';
 
 @Module({
   imports: [
@@ -33,6 +34,7 @@ import { EncryptionModule } from './encryption/encryption.module';
     FavoritesModule,
     SessionsModule,
     ScalesModule,
+    AuditLogModule,
   ],
   controllers: [AppController],
   providers: [

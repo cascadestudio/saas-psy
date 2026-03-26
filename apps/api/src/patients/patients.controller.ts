@@ -7,7 +7,9 @@ import {
   Body,
   Param,
   Query,
+  Req,
 } from '@nestjs/common';
+import { Request } from 'express';
 import { PatientsService } from './patients.service';
 import { CreatePatientDto, UpdatePatientDto } from './dto';
 import { CurrentUser } from '../auth/decorators';
@@ -67,8 +69,14 @@ export class PatientsController {
   delete(
     @Param('id') id: string,
     @CurrentUser('id') practitionerId: string,
+    @Req() req: Request,
   ) {
-    return this.patientsService.delete(id, practitionerId);
+    return this.patientsService.delete(
+      id,
+      practitionerId,
+      req.ip,
+      req.headers['user-agent'],
+    );
   }
 
   @Patch(':id/archive')
