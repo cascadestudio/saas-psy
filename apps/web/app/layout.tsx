@@ -3,6 +3,8 @@ import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
 import { UserProvider } from "@/app/context/UserContext";
 import { AuthGateProvider } from "@/app/context/AuthGateContext";
+import { PremiumGateProvider } from "@/app/context/PremiumGateContext";
+import { PremiumGateModal } from "@/components/PremiumGateModal";
 import { Rethink_Sans } from "next/font/google";
 
 const rethinkSans = Rethink_Sans({
@@ -32,14 +34,17 @@ export default function RootLayout({
       <body className="text-foreground font-sans">
         <UserProvider>
           <AuthGateProvider>
-            <ThemeProvider
-              attribute="class"
-              defaultTheme="light"
-              enableSystem={false}
-              disableTransitionOnChange
-            >
-              {children}
-            </ThemeProvider>
+            <PremiumGateProvider>
+              <ThemeProvider
+                attribute="class"
+                defaultTheme="light"
+                enableSystem={false}
+                disableTransitionOnChange
+              >
+                {children}
+              </ThemeProvider>
+              <PremiumGateModal />
+            </PremiumGateProvider>
           </AuthGateProvider>
         </UserProvider>
         <Toaster />
