@@ -44,7 +44,13 @@ jobs:
             docker stop melya-api-prod 2>/dev/null || true
             docker rm melya-api-prod 2>/dev/null || true
 
-            # Run new container
+            # Run migrations with admin user (DDL privileges)
+            docker run --rm \
+              --network host \
+              -e DATABASE_URL="${{ secrets.DATABASE_URL_MIGRATE }}" \
+              melya-api npx prisma migrate deploy
+
+            # Run new container with app user (DML only)
             docker run -d \
               --name melya-api-prod \
               --restart unless-stopped \
@@ -56,9 +62,6 @@ jobs:
               -e PORT=3002 \
               -e CORS_ORIGIN="https://melya.app,https://www.melya.app" \
               melya-api
-
-            # Run migrations
-            docker exec melya-api-prod npx prisma migrate deploy
 
             # Cleanup
             rm /home/cascade/melya-api.tar.gz
