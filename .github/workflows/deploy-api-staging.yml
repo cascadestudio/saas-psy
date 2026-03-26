@@ -2,7 +2,7 @@ name: Deploy API to Dedibox (Staging)
 
 on:
   push:
-    branches: [dev]
+    branches: [staging]
     paths:
       - 'apps/api/**'
       - 'packages/core/**'
