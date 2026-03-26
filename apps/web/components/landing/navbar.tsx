@@ -1,13 +1,14 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
+import { Interfaces } from "doodle-icons";
 import { WaitlistButton } from "./waitlist-button";
 import Image from "next/image";
 
 const navLinks = [
   { href: "#fonctionnalites", label: "Fonctionnalités" },
   { href: "#comment-ca-marche", label: "Comment ça marche" },
+  // { href: "#tarifs", label: "Tarifs" },
   { href: "#faq", label: "FAQ" },
 ];
 
@@ -72,9 +73,9 @@ export function Navbar() {
             aria-label="Menu"
           >
             {mobileOpen ? (
-              <X className="h-5 w-5" />
+              <Interfaces.Cross className="h-5 w-5" fill="currentColor" />
             ) : (
-              <Menu className="h-5 w-5" />
+              <Interfaces.Menu className="h-5 w-5" fill="currentColor" />
             )}
           </button>
         </div>

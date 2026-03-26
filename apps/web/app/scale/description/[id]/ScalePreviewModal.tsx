@@ -77,7 +77,7 @@ export function ScalePreviewModal({
 
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
-          <Button variant="outline" className="mt-4">
+          <Button variant="outline">
             <Interfaces.Unhide className="mr-2 h-4 w-4" />
             Aperçu du questionnaire
           </Button>

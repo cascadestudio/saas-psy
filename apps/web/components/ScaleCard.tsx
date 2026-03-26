@@ -59,7 +59,7 @@ export function ScaleCard({
       </CardContent>
       <CardFooter>
         <Link
-          href={`/questionnaire/description/${scale.id}`}
+          href={`/scale/description/${scale.id}`}
           className="w-full"
         >
           <Button className="w-full">Voir les détails</Button>

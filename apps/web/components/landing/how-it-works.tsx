@@ -1,7 +1,7 @@
 "use client";
 
 import { useScrollAnimation } from "./use-scroll-animation";
-import { Search, Send, Star, Clock, LogOut, UserPlus } from "lucide-react";
+import { Interfaces } from "doodle-icons";
 
 const steps = [
   {
@@ -54,7 +54,7 @@ function DashboardMockup() {
                 <span className="text-[11px] font-body text-muted-foreground">Patients</span>
               </nav>
             </div>
-            <LogOut className="h-3.5 w-3.5 text-muted-foreground" />
+            <Interfaces.Logout className="h-3.5 w-3.5 text-muted-foreground" fill="currentColor" />
           </div>
 
           {/* Dashboard header */}
@@ -69,7 +69,7 @@ function DashboardMockup() {
                 </p>
               </div>
               <button className="flex items-center gap-1.5 bg-primary text-primary-foreground text-[10px] font-body font-medium px-3 py-1.5 rounded-lg">
-                <Send className="h-3 w-3" />
+                <Interfaces.Send className="h-3 w-3" fill="currentColor" />
                 <span className="hidden sm:inline">Envoyer une échelle</span>
               </button>
             </div>
@@ -85,14 +85,14 @@ function DashboardMockup() {
                   <p className="text-[9px] font-body text-muted-foreground">3 patients dans votre liste</p>
                 </div>
                 <button className="flex items-center gap-1 bg-primary/10 text-primary text-[9px] font-body font-medium px-2 py-1 rounded-lg">
-                  <UserPlus className="h-3 w-3" />
+                  <Interfaces.UserAdd className="h-3 w-3" fill="currentColor" />
                   Ajouter
                 </button>
               </div>
 
               {/* Search bar */}
               <div className="flex items-center gap-2 bg-background border border-border rounded-lg px-2.5 py-1.5 mb-3">
-                <Search className="h-3 w-3 text-muted-foreground" />
+                <Interfaces.Search className="h-3 w-3 text-muted-foreground" fill="currentColor" />
                 <span className="text-[9px] font-body text-muted-foreground/60">Rechercher un patient...</span>
               </div>
 
@@ -102,7 +102,7 @@ function DashboardMockup() {
                   <div key={name} className="flex items-center justify-between py-2.5">
                     <span className="text-[10px] font-body font-medium text-foreground">{name}</span>
                     <button className="flex items-center gap-1 bg-primary/90 text-primary-foreground text-[8px] font-body font-medium px-2 py-1 rounded-md">
-                      <Send className="h-2.5 w-2.5" />
+                      <Interfaces.Send className="h-2.5 w-2.5" fill="currentColor" />
                       Envoyer une échelle
                     </button>
                   </div>
@@ -150,7 +150,7 @@ function DashboardMockup() {
                   >
                     <div className="flex items-start justify-between gap-2">
                       <div className="flex items-start gap-1.5 min-w-0">
-                        <Star className="h-3 w-3 text-primary/40 flex-shrink-0 mt-0.5" />
+                        <Interfaces.Star className="h-3 w-3 text-primary/40 flex-shrink-0 mt-0.5" fill="currentColor" />
                         <div className="min-w-0">
                           <p className="text-[10px] font-heading font-bold text-foreground leading-tight">
                             {scale.name}
@@ -163,7 +163,7 @@ function DashboardMockup() {
                               {scale.category}
                             </span>
                             <span className="flex items-center gap-0.5 text-[8px] font-body text-muted-foreground">
-                              <Clock className="h-2.5 w-2.5" />
+                              <Interfaces.Clock className="h-2.5 w-2.5" fill="currentColor" />
                               {scale.time}
                             </span>
                           </div>

@@ -1,4 +1,4 @@
-import { Linkedin, Instagram } from "lucide-react";
+import { Logos } from "doodle-icons";
 import Image from "next/image";
 
 export function Footer() {
@@ -46,14 +46,14 @@ export function Footer() {
               className="text-muted-foreground hover:text-foreground transition-colors"
               aria-label="LinkedIn"
             >
-              <Linkedin className="h-5 w-5" />
+              <Logos.Linkedin className="h-5 w-5" fill="currentColor" />
             </a>
             <a
               href="#"
               className="text-muted-foreground hover:text-foreground transition-colors"
               aria-label="Instagram"
             >
-              <Instagram className="h-5 w-5" />
+              <Logos.Instagram className="h-5 w-5" fill="currentColor" />
             </a>
           </div>
         </div>
