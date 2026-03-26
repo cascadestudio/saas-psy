@@ -89,7 +89,8 @@ const config = {
   				'soft-green': 'hsl(var(--brand-soft-green))',
   				orange: '#D6591F',
   				'orange-light': '#E6DAD4',
-  				white: '#F4F0E4'
+  				white: '#F4F0E4',
+  				'white-bright': '#FAF8F2'
   			}
   		},
   		borderRadius: {

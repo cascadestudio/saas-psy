@@ -43,7 +43,7 @@ export function Hero() {
               />
               <WaitlistButton
                 size="lg"
-                className="font-body font-medium text-sm rounded-full ml-4 px-8 bg-brand-orange text-brand-white hover:bg-brand-orange/90"
+                className="font-body font-medium text-sm rounded-full ml-4 px-8 bg-brand-orange text-brand-white-bright hover:bg-brand-orange/90"
               >
                 Rejoindre la liste d&apos;attente
               </WaitlistButton>
@@ -51,7 +51,7 @@ export function Hero() {
                 asChild
                 variant="outline"
                 size="lg"
-                className="font-body font-medium text-sm rounded-full px-8 border-brand-orange text-brand-orange hover:bg-brand-orange hover:text-brand-white"
+                className="font-body font-medium text-sm rounded-full px-8 border-0 bg-brand-orange-light text-brand-orange hover:bg-brand-orange hover:text-brand-white-bright"
               >
                 <Link href="/dashboard">Explorer l&apos;app</Link>
               </Button>
