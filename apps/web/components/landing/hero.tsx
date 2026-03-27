@@ -9,9 +9,11 @@ export function Hero() {
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Left — Copy */}
-          <div className="space-y-6">
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-normal leading-tight text-foreground">
-              Vos échelles cotées automatiquement, en{" "}
+          <div className="space-y-12">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-normal text-foreground !leading-[1.2]">
+              Vos échelles cotées automatiquement,
+              <br />
+              en{" "}
               <span className="relative inline-block">
                 2 minutes
                 {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -22,7 +24,7 @@ export function Hero() {
                 />
               </span>
             </h1>
-            <p className="text-lg text-muted-foreground font-body leading-relaxed max-w-xl">
+            <p className="text-lg font-body leading-relaxed max-w-xl">
               Melya automatise la cotation de vos échelles et questionnaires
               psychologiques. Moins de paperasse, plus de rigueur clinique, plus
               de temps avec vos patients.
