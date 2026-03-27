@@ -61,7 +61,7 @@ jobs:
               -e ENCRYPTION_KEY="${{ secrets.ENCRYPTION_KEY_STAGING }}" \
               -e NODE_ENV=staging \
               -e PORT=3002 \
-              -e CORS_ORIGIN="https://staging.melya.app" \
+              -e CORS_ORIGIN="https://staging-melya.vercel.app" \
               melya-api-staging
 
             # Cleanup
