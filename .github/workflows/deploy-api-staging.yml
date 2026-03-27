@@ -60,14 +60,14 @@ jobs:
               -e JWT_SECRET="${{ secrets.JWT_SECRET_STAGING }}" \
               -e ENCRYPTION_KEY="${{ secrets.ENCRYPTION_KEY_STAGING }}" \
               -e NODE_ENV=staging \
-              -e PORT=3001 \
+              -e PORT=3002 \
               -e CORS_ORIGIN="https://staging.melya.app" \
               melya-api-staging
 
             # Cleanup
-            rm /home/cascade/melya-api-staging.tar.gz
+            rm /home/cascade/melya-api-staging.tar.gz || true
             docker image prune -f
 
             # Verify
             sleep 5
-            curl -f http://localhost:3001/api/health || exit 1
+            curl -f http://localhost:3002/api/health || exit 1
