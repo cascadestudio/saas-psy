@@ -2,6 +2,7 @@
 
 import { WaitlistButton } from "./waitlist-button";
 import Image from "next/image";
+import { Interfaces } from "doodle-icons";
 
 export function Hero() {
   return (
@@ -62,65 +63,44 @@ export function Hero() {
 
             {/* Notification toasts — right, left, right */}
             <div
-              className="toast-animate absolute -right-1 top-4 hidden lg:flex items-center gap-2.5 bg-card rounded-full px-4 py-2.5 shadow-md border border-border/50"
+              className="toast-animate absolute right-2 lg:-right-1 top-4 flex items-center gap-2 sm:gap-2.5 bg-card rounded-full px-3 py-2 sm:px-4 sm:py-2.5 shadow-md border border-border/50"
               style={{ animationDelay: "0.8s" }}
             >
-              <svg
-                className="w-4 h-4 text-brand-orange flex-shrink-0"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth={2.5}
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M5 13l4 4L19 7"
-                />
-              </svg>
-              <span className="text-sm font-body text-foreground whitespace-nowrap">
+              <Interfaces.Send
+                width={16}
+                height={16}
+                fill="#D6591F"
+                className="flex-shrink-0"
+              />
+              <span className="text-xs sm:text-sm font-body text-foreground whitespace-nowrap">
                 Échelle LSAS envoyée à Mme. Martin
               </span>
             </div>
             <div
-              className="toast-animate absolute -left-4 top-1/2 -translate-y-1/2 hidden lg:flex items-center gap-2.5 bg-card rounded-full px-4 py-2.5 shadow-md border border-border/50"
+              className="toast-animate absolute left-2 lg:-left-4 top-1/2 -translate-y-1/2 flex items-center gap-2 sm:gap-2.5 bg-card rounded-full px-3 py-2 sm:px-4 sm:py-2.5 shadow-md border border-border/50"
               style={{ animationDelay: "1.6s" }}
             >
-              <svg
-                className="w-4 h-4 text-brand-orange flex-shrink-0"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth={2.5}
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M5 13l4 4L19 7"
-                />
-              </svg>
-              <span className="text-sm font-body text-foreground whitespace-nowrap">
+              <Interfaces.Mail
+                width={16}
+                height={16}
+                fill="#D6591F"
+                className="flex-shrink-0"
+              />
+              <span className="text-xs sm:text-sm font-body text-foreground whitespace-nowrap">
                 Vous avez reçu un questionnaire
               </span>
             </div>
             <div
-              className="toast-animate absolute -right-1 bottom-8 hidden lg:flex items-center gap-2.5 bg-card rounded-full px-4 py-2.5 shadow-md border border-border/50"
+              className="toast-animate absolute right-2 lg:-right-1 bottom-8 flex items-center gap-2 sm:gap-2.5 bg-card rounded-full px-3 py-2 sm:px-4 sm:py-2.5 shadow-md border border-border/50"
               style={{ animationDelay: "2.4s" }}
             >
-              <svg
-                className="w-4 h-4 text-brand-orange flex-shrink-0"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth={2.5}
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M5 13l4 4L19 7"
-                />
-              </svg>
-              <span className="text-sm font-body text-foreground whitespace-nowrap">
+              <Interfaces.Analytics
+                width={16}
+                height={16}
+                fill="#D6591F"
+                className="flex-shrink-0"
+              />
+              <span className="text-xs sm:text-sm font-body text-foreground whitespace-nowrap">
                 Résultats de Mme. Martin reçus
               </span>
             </div>
