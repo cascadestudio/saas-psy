@@ -53,7 +53,7 @@ export function Hero() {
           <div className="relative">
             <div className="relative rounded-2xl overflow-hidden aspect-[4/3]">
               <Image
-                src="/images/landing/hero-image.png"
+                src="/images/landing/hero-image.svg"
                 alt="Consultation psychologique"
                 fill
                 className="object-contain"
