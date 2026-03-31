@@ -77,6 +77,7 @@ export class EncryptionService {
    */
   encryptField(value: string | null | undefined): string | null {
     if (value == null) return null;
+    if (value === '') return '';
     return this.encrypt(value);
   }
 

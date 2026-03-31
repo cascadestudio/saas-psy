@@ -7,7 +7,9 @@ import {
   Body,
   Param,
   Query,
+  Req,
 } from '@nestjs/common';
+import { Request } from 'express';
 import { PatientsService } from './patients.service';
 import { CreatePatientDto, UpdatePatientDto } from './dto';
 import { CurrentUser } from '../auth/decorators';
@@ -20,8 +22,14 @@ export class PatientsController {
   create(
     @CurrentUser('id') practitionerId: string,
     @Body() dto: CreatePatientDto,
+    @Req() req: Request,
   ) {
-    return this.patientsService.create(practitionerId, dto);
+    return this.patientsService.create(
+      practitionerId,
+      dto,
+      req.ip,
+      req.headers['user-agent'],
+    );
   }
 
   @Get()
@@ -50,8 +58,14 @@ export class PatientsController {
   findById(
     @Param('id') id: string,
     @CurrentUser('id') practitionerId: string,
+    @Req() req: Request,
   ) {
-    return this.patientsService.findById(id, practitionerId);
+    return this.patientsService.findById(
+      id,
+      practitionerId,
+      req.ip,
+      req.headers['user-agent'],
+    );
   }
 
   @Patch(':id')
@@ -59,31 +73,56 @@ export class PatientsController {
     @Param('id') id: string,
     @CurrentUser('id') practitionerId: string,
     @Body() dto: UpdatePatientDto,
+    @Req() req: Request,
   ) {
-    return this.patientsService.update(id, practitionerId, dto);
+    return this.patientsService.update(
+      id,
+      practitionerId,
+      dto,
+      req.ip,
+      req.headers['user-agent'],
+    );
   }
 
   @Delete(':id')
   delete(
     @Param('id') id: string,
     @CurrentUser('id') practitionerId: string,
+    @Req() req: Request,
   ) {
-    return this.patientsService.delete(id, practitionerId);
+    return this.patientsService.delete(
+      id,
+      practitionerId,
+      req.ip,
+      req.headers['user-agent'],
+    );
   }
 
   @Patch(':id/archive')
   archive(
     @Param('id') id: string,
     @CurrentUser('id') practitionerId: string,
+    @Req() req: Request,
   ) {
-    return this.patientsService.archive(id, practitionerId);
+    return this.patientsService.archive(
+      id,
+      practitionerId,
+      req.ip,
+      req.headers['user-agent'],
+    );
   }
 
   @Patch(':id/restore')
   restore(
     @Param('id') id: string,
     @CurrentUser('id') practitionerId: string,
+    @Req() req: Request,
   ) {
-    return this.patientsService.restore(id, practitionerId);
+    return this.patientsService.restore(
+      id,
+      practitionerId,
+      req.ip,
+      req.headers['user-agent'],
+    );
   }
 }

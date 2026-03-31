@@ -248,8 +248,8 @@ function SignUpForm({
           id="signup-password"
           type="password"
           name="password"
-          placeholder="Minimum 6 caractères"
-          minLength={6}
+          placeholder="Minimum 8 caractères"
+          minLength={8}
           required
         />
       </div>

@@ -1,13 +1,13 @@
-name: Deploy API to Dedibox
+name: Deploy API to Dedibox (Staging)
 
 on:
   push:
-    branches: [main]
+    branches: [staging]
     paths:
       - 'apps/api/**'
       - 'packages/core/**'
       - 'package-lock.json'
-      - '.github/workflows/deploy-api.yml'
+      - '.github/workflows/deploy-api-staging.yml'
 
 jobs:
   deploy:
@@ -16,10 +16,10 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Build Docker image
-        run: docker build -t melya-api -f apps/api/Dockerfile .
+        run: docker build -t melya-api-staging -f apps/api/Dockerfile .
 
       - name: Save Docker image
-        run: docker save melya-api | gzip > melya-api.tar.gz
+        run: docker save melya-api-staging | gzip > melya-api-staging.tar.gz
 
       - name: Copy image to server
         uses: appleboy/scp-action@v0.1.7
@@ -27,7 +27,7 @@ jobs:
           host: ${{ secrets.DEPLOY_HOST }}
           username: ${{ secrets.DEPLOY_USER }}
           key: ${{ secrets.DEPLOY_SSH_KEY }}
-          source: melya-api.tar.gz
+          source: melya-api-staging.tar.gz
           target: /home/cascade
 
       - name: Deploy on server
@@ -38,35 +38,35 @@ jobs:
           key: ${{ secrets.DEPLOY_SSH_KEY }}
           script: |
             # Load image
-            docker load < /home/cascade/melya-api.tar.gz
+            docker load < /home/cascade/melya-api-staging.tar.gz
 
             # Stop old container
-            docker stop melya-api-prod 2>/dev/null || true
-            docker rm melya-api-prod 2>/dev/null || true
+            docker stop melya-api-staging 2>/dev/null || true
+            docker rm melya-api-staging 2>/dev/null || true
 
             # Run migrations with admin user (DDL privileges)
             docker run --rm \
               --network host \
-              -e DATABASE_URL="${{ secrets.DATABASE_URL_MIGRATE }}" \
-              melya-api npx prisma migrate deploy
+              -e DATABASE_URL="${{ secrets.DATABASE_URL_STAGING_MIGRATE }}" \
+              melya-api-staging npx prisma migrate deploy
 
             # Run new container with app user (DML only)
             docker run -d \
-              --name melya-api-prod \
+              --name melya-api-staging \
               --restart unless-stopped \
               --network host \
-              -e DATABASE_URL="${{ secrets.DATABASE_URL_PROD }}" \
-              -e JWT_SECRET="${{ secrets.JWT_SECRET_PROD }}" \
-              -e ENCRYPTION_KEY="${{ secrets.ENCRYPTION_KEY_PROD }}" \
-              -e NODE_ENV=production \
-              -e PORT=3002 \
-              -e CORS_ORIGIN="https://melya.app,https://www.melya.app" \
-              melya-api
+              -e DATABASE_URL="${{ secrets.DATABASE_URL_STAGING }}" \
+              -e JWT_SECRET="${{ secrets.JWT_SECRET_STAGING }}" \
+              -e ENCRYPTION_KEY="${{ secrets.ENCRYPTION_KEY_STAGING }}" \
+              -e NODE_ENV=staging \
+              -e PORT=3001 \
+              -e CORS_ORIGIN="https://staging.melya.app" \
+              melya-api-staging
 
             # Cleanup
-            rm /home/cascade/melya-api.tar.gz
+            rm /home/cascade/melya-api-staging.tar.gz
             docker image prune -f
 
             # Verify
             sleep 5
-            curl -f http://localhost:3002/api/health || exit 1
+            curl -f http://localhost:3001/api/health || exit 1

@@ -6,7 +6,9 @@ import {
   Body,
   Param,
   Query,
+  Req,
 } from '@nestjs/common';
+import { Request } from 'express';
 import { SessionsService } from './sessions.service';
 import { CreateSessionDto, UpdateSessionDto, SubmitResponsesDto } from './dto';
 import { CurrentUser, Public } from '../auth/decorators';
@@ -21,8 +23,14 @@ export class SessionsController {
   create(
     @CurrentUser('id') practitionerId: string,
     @Body() dto: CreateSessionDto,
+    @Req() req: Request,
   ) {
-    return this.sessionsService.create(practitionerId, dto);
+    return this.sessionsService.create(
+      practitionerId,
+      dto,
+      req.ip,
+      req.headers['user-agent'],
+    );
   }
 
   @Get()
@@ -40,8 +48,14 @@ export class SessionsController {
   findById(
     @Param('id') id: string,
     @CurrentUser('id') practitionerId: string,
+    @Req() req: Request,
   ) {
-    return this.sessionsService.findById(id, practitionerId);
+    return this.sessionsService.findById(
+      id,
+      practitionerId,
+      req.ip,
+      req.headers['user-agent'],
+    );
   }
 
   @Patch(':id')
@@ -57,8 +71,14 @@ export class SessionsController {
   cancel(
     @Param('id') id: string,
     @CurrentUser('id') practitionerId: string,
+    @Req() req: Request,
   ) {
-    return this.sessionsService.cancel(id, practitionerId);
+    return this.sessionsService.cancel(
+      id,
+      practitionerId,
+      req.ip,
+      req.headers['user-agent'],
+    );
   }
 
   // Patient endpoints (public - no auth)

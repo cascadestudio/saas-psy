@@ -6,6 +6,8 @@ import {
 } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { EncryptionService } from '../encryption/encryption.service';
+import { AuditLogService } from '../audit-log/audit-log.service';
+import { AuditAction } from '../audit-log/audit-actions';
 import { CreatePatientDto, UpdatePatientDto } from './dto';
 
 @Injectable()
@@ -13,9 +15,15 @@ export class PatientsService {
   constructor(
     private prisma: PrismaService,
     private encryption: EncryptionService,
+    private auditLog: AuditLogService,
   ) {}
 
-  async create(practitionerId: string, dto: CreatePatientDto) {
+  async create(
+    practitionerId: string,
+    dto: CreatePatientDto,
+    ipAddress?: string,
+    userAgent?: string,
+  ) {
     // Check if patient with same email already exists for this practitioner
     const existing = await this.prisma.patient.findUnique({
       where: {
@@ -42,6 +50,18 @@ export class PatientsService {
         },
       });
 
+      this.auditLog
+        .log({
+          userId: practitionerId,
+          action: AuditAction.PATIENT_CREATED,
+          resource: 'Patient',
+          resourceId: patient.id,
+          metadata: { email: dto.email },
+          ipAddress,
+          userAgent,
+        })
+        .catch(() => {});
+
       return { patient: this.decryptPatient(patient) };
     } catch (error: any) {
       if (error?.code === 'P2002') {
@@ -63,7 +83,12 @@ export class PatientsService {
     return { patients: patients.map((p) => this.decryptPatient(p)) };
   }
 
-  async findById(id: string, practitionerId: string) {
+  async findById(
+    id: string,
+    practitionerId: string,
+    ipAddress?: string,
+    userAgent?: string,
+  ) {
     const patient = await this.prisma.patient.findUnique({
       where: { id },
     });
@@ -77,10 +102,27 @@ export class PatientsService {
       throw new ForbiddenException('Accès non autorisé à ce patient');
     }
 
+    this.auditLog
+      .log({
+        userId: practitionerId,
+        action: AuditAction.PATIENT_VIEWED,
+        resource: 'Patient',
+        resourceId: id,
+        ipAddress,
+        userAgent,
+      })
+      .catch(() => {});
+
     return { patient: this.decryptPatient(patient) };
   }
 
-  async update(id: string, practitionerId: string, dto: UpdatePatientDto) {
+  async update(
+    id: string,
+    practitionerId: string,
+    dto: UpdatePatientDto,
+    ipAddress?: string,
+    userAgent?: string,
+  ) {
     // First check if patient exists and belongs to practitioner
     const existing = await this.prisma.patient.findUnique({
       where: { id },
@@ -129,6 +171,18 @@ export class PatientsService {
         data: encryptedData,
       });
 
+      this.auditLog
+        .log({
+          userId: practitionerId,
+          action: AuditAction.PATIENT_UPDATED,
+          resource: 'Patient',
+          resourceId: id,
+          metadata: { fieldsUpdated: Object.keys(dto) },
+          ipAddress,
+          userAgent,
+        })
+        .catch(() => {});
+
       return { patient: this.decryptPatient(patient) };
     } catch (error: any) {
       if (error?.code === 'P2002') {
@@ -138,8 +192,12 @@ export class PatientsService {
     }
   }
 
-  async delete(id: string, practitionerId: string) {
-    // First check if patient exists and belongs to practitioner
+  async delete(
+    id: string,
+    practitionerId: string,
+    ipAddress?: string,
+    userAgent?: string,
+  ) {
     const existing = await this.prisma.patient.findUnique({
       where: { id },
     });
@@ -152,11 +210,45 @@ export class PatientsService {
       throw new ForbiddenException('Accès non autorisé à ce patient');
     }
 
-    await this.prisma.patient.delete({
-      where: { id },
+    const sessionCount = await this.prisma.session.count({
+      where: { patientId: id },
     });
 
-    return { message: 'Patient supprimé avec succès' };
+    await this.prisma.$transaction(async (tx) => {
+      // Nullify sessionId references in EmailLog (data hygiene)
+      const sessions = await tx.session.findMany({
+        where: { patientId: id },
+        select: { id: true },
+      });
+      if (sessions.length > 0) {
+        await tx.emailLog.updateMany({
+          where: { sessionId: { in: sessions.map((s) => s.id) } },
+          data: { sessionId: null },
+        });
+      }
+
+      // Delete all sessions for this patient
+      await tx.session.deleteMany({ where: { patientId: id } });
+
+      // Delete the patient
+      await tx.patient.delete({ where: { id } });
+
+      // Audit log
+      await this.auditLog.logInTransaction(tx, {
+        userId: practitionerId,
+        action: AuditAction.PATIENT_DELETED,
+        resource: 'Patient',
+        resourceId: id,
+        metadata: {
+          patientEmail: existing.email,
+          sessionsDeleted: sessionCount,
+        },
+        ipAddress,
+        userAgent,
+      });
+    });
+
+    return { message: 'Patient et données associées supprimés avec succès' };
   }
 
   async search(practitionerId: string, query: string, status: 'active' | 'archived' = 'active') {
@@ -196,7 +288,12 @@ export class PatientsService {
     return { count };
   }
 
-  async archive(id: string, practitionerId: string) {
+  async archive(
+    id: string,
+    practitionerId: string,
+    ipAddress?: string,
+    userAgent?: string,
+  ) {
     // First check if patient exists and belongs to practitioner
     const existing = await this.prisma.patient.findUnique({
       where: { id },
@@ -219,10 +316,27 @@ export class PatientsService {
       data: { archivedAt: new Date() },
     });
 
+    this.auditLog
+      .log({
+        userId: practitionerId,
+        action: AuditAction.PATIENT_ARCHIVED,
+        resource: 'Patient',
+        resourceId: id,
+        metadata: { email: existing.email },
+        ipAddress,
+        userAgent,
+      })
+      .catch(() => {});
+
     return { patient: this.decryptPatient(patient) };
   }
 
-  async restore(id: string, practitionerId: string) {
+  async restore(
+    id: string,
+    practitionerId: string,
+    ipAddress?: string,
+    userAgent?: string,
+  ) {
     // First check if patient exists and belongs to practitioner
     const existing = await this.prisma.patient.findUnique({
       where: { id },
@@ -244,6 +358,18 @@ export class PatientsService {
       where: { id },
       data: { archivedAt: null },
     });
+
+    this.auditLog
+      .log({
+        userId: practitionerId,
+        action: AuditAction.PATIENT_RESTORED,
+        resource: 'Patient',
+        resourceId: id,
+        metadata: { email: existing.email },
+        ipAddress,
+        userAgent,
+      })
+      .catch(() => {});
 
     return { patient: this.decryptPatient(patient) };
   }

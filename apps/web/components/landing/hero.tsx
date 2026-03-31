@@ -2,6 +2,8 @@
 
 import { WaitlistButton } from "./waitlist-button";
 import Image from "next/image";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 export function Hero() {
   return (
@@ -9,9 +11,11 @@ export function Hero() {
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Left — Copy */}
-          <div className="space-y-6">
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-normal leading-tight text-foreground">
-              Vos échelles cotées automatiquement, en{" "}
+          <div className="space-y-12">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-normal text-foreground !leading-[1.2]">
+              Vos échelles cotées automatiquement,
+              <br />
+              en{" "}
               <span className="relative inline-block">
                 2 minutes
                 {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -22,27 +26,35 @@ export function Hero() {
                 />
               </span>
             </h1>
-            <p className="text-lg text-muted-foreground font-body leading-relaxed max-w-xl">
+            <p className="text-lg font-body leading-relaxed max-w-xl">
               Melya automatise la cotation de vos échelles et questionnaires
               psychologiques. Moins de paperasse, plus de rigueur clinique, plus
               de temps avec vos patients.
             </p>
 
-            {/* CTA — button centered, arrow fills left space */}
-            <div className="relative flex justify-center pt-10">
+            {/* CTA — buttons centered, arrow fills left space */}
+            <div className="relative flex flex-col sm:flex-row items-center justify-center gap-4 pt-10">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/images/landing/arrow-right.svg"
                 alt=""
-                className="hidden sm:block absolute left-0 bottom-0 max-h-[88px]"
-                style={{ width: "calc(50% - 130px)" }}
+                className="hidden sm:block absolute left-0 bottom-3 max-h-[88px]"
+                style={{ width: "calc(50% - 200px)" }}
               />
               <WaitlistButton
                 size="lg"
-                className="font-body font-medium text-sm rounded-full px-8 bg-brand-orange text-white hover:bg-brand-orange/90"
+                className="font-body font-medium text-sm rounded-full ml-4 px-8 bg-brand-orange text-brand-white-bright hover:bg-brand-orange/90"
               >
-                Rejoindre la liste d'attente
+                Rejoindre la liste d&apos;attente
               </WaitlistButton>
+              <Button
+                asChild
+                variant="outline"
+                size="lg"
+                className="font-body font-medium text-sm rounded-full px-8 border-0 bg-brand-orange-light text-brand-orange hover:bg-brand-orange hover:text-brand-white-bright"
+              >
+                <Link href="/dashboard">Explorer l&apos;app</Link>
+              </Button>
             </div>
           </div>
 

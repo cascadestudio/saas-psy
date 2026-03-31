@@ -1,10 +1,15 @@
 import { Injectable, ConflictException, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
+import { AuditLogService } from '../audit-log/audit-log.service';
+import { AuditAction } from '../audit-log/audit-actions';
 import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UsersService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private prisma: PrismaService,
+    private auditLog: AuditLogService,
+  ) {}
 
   async createUser(data: {
     email: string;
@@ -82,11 +87,28 @@ export class UsersService {
     return this.sanitizeUser(user);
   }
 
-  async updateUser(id: string, data: { firstName?: string; lastName?: string; email?: string }) {
+  async updateUser(
+    id: string,
+    data: { firstName?: string; lastName?: string; email?: string },
+    ipAddress?: string,
+    userAgent?: string,
+  ) {
     const user = await this.prisma.user.update({
       where: { id },
       data,
     });
+
+    this.auditLog
+      .log({
+        userId: id,
+        action: AuditAction.PROFILE_UPDATED,
+        resource: 'User',
+        resourceId: id,
+        metadata: { fieldsUpdated: Object.keys(data) },
+        ipAddress,
+        userAgent,
+      })
+      .catch(() => {});
 
     return this.sanitizeUser(user);
   }
@@ -128,6 +150,81 @@ export class UsersService {
         passwordResetExpiresAt: null,
       },
     });
+  }
+
+  async deleteAccount(
+    userId: string,
+    userEmail: string,
+    ipAddress?: string,
+    userAgent?: string,
+  ) {
+    const user = await this.prisma.user.findUnique({ where: { id: userId } });
+    if (!user) {
+      throw new NotFoundException('Utilisateur non trouvé');
+    }
+
+    const [patientCount, sessionCount] = await Promise.all([
+      this.prisma.patient.count({ where: { practitionerId: userId } }),
+      this.prisma.session.count({ where: { practitionerId: userId } }),
+    ]);
+
+    await this.prisma.$transaction(
+      async (tx) => {
+        // 1. Nullify EmailLog sessionId references
+        const sessions = await tx.session.findMany({
+          where: { practitionerId: userId },
+          select: { id: true },
+        });
+        if (sessions.length > 0) {
+          await tx.emailLog.updateMany({
+            where: { sessionId: { in: sessions.map((s) => s.id) } },
+            data: { sessionId: null },
+          });
+        }
+
+        // 2. Delete all sessions
+        await tx.session.deleteMany({ where: { practitionerId: userId } });
+
+        // 3. Delete all patients
+        await tx.patient.deleteMany({ where: { practitionerId: userId } });
+
+        // 4. Audit log before deleting user (userId still valid)
+        await this.auditLog.logInTransaction(tx, {
+          userId,
+          action: AuditAction.USER_ACCOUNT_DELETED,
+          resource: 'User',
+          resourceId: userId,
+          metadata: {
+            email: userEmail,
+            patientsDeleted: patientCount,
+            sessionsDeleted: sessionCount,
+          },
+          ipAddress,
+          userAgent,
+        });
+
+        // 5. Nullify userId on audit logs (FK constraint)
+        await tx.auditLog.updateMany({
+          where: { userId },
+          data: { userId: null },
+        });
+
+        // 6. Delete profile (CASCADE would handle it, but explicit for clarity)
+        await tx.profile.deleteMany({ where: { userId } });
+
+        // 7. Delete user
+        await tx.user.delete({ where: { id: userId } });
+      },
+      { timeout: 30000 },
+    );
+
+    return {
+      message: 'Compte et toutes les données associées supprimés avec succès',
+      deletedData: {
+        patients: patientCount,
+        sessions: sessionCount,
+      },
+    };
   }
 
   // Remove sensitive data

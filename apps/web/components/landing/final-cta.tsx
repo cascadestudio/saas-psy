@@ -19,7 +19,7 @@ export function FinalCTA() {
           Rejoignez les psychologues qui utilisent Melya pour automatiser leurs
           cotations.
         </p>
-        <WaitlistButton size="lg" className="font-body font-medium text-sm rounded-full px-8 bg-brand-orange text-white hover:bg-brand-orange/90">
+        <WaitlistButton size="lg" className="font-body font-medium text-sm rounded-full px-8 bg-brand-orange text-brand-white-bright hover:bg-brand-orange/90">
           Rejoindre la liste d&apos;attente
         </WaitlistButton>
       </div>

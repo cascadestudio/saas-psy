@@ -99,7 +99,7 @@ export function Pricing() {
                 }`}
               >
                 {plan.highlighted && (
-                  <Badge className="absolute -top-3 left-6 bg-brand-orange text-white border-transparent">
+                  <Badge className="absolute -top-3 left-6 bg-brand-orange text-brand-white-bright border-transparent">
                     Recommandé
                   </Badge>
                 )}
@@ -141,8 +141,8 @@ export function Pricing() {
                     variant={plan.highlighted ? "default" : "outline"}
                     className={
                       plan.highlighted
-                        ? "w-full bg-brand-orange text-white hover:bg-brand-orange/90"
-                        : "w-full border-brand-orange text-brand-orange hover:bg-brand-orange hover:text-white"
+                        ? "w-full bg-brand-orange text-brand-white-bright hover:bg-brand-orange/90"
+                        : "w-full bg-brand-orange-light border-brand-orange text-brand-orange hover:bg-brand-orange hover:text-brand-white-bright"
                     }
                     size="lg"
                   >

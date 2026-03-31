@@ -4,6 +4,7 @@ import { Toaster } from "@/components/ui/sonner";
 import { UserProvider } from "@/app/context/UserContext";
 import { AuthGateProvider } from "@/app/context/AuthGateContext";
 import { PremiumGateProvider } from "@/app/context/PremiumGateContext";
+import { AuthGateModal } from "@/components/auth/AuthGateModal";
 import { PremiumGateModal } from "@/components/PremiumGateModal";
 import { Rethink_Sans } from "next/font/google";
 
@@ -31,7 +32,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr" suppressHydrationWarning className={rethinkSans.variable}>
-      <body className="text-foreground font-sans">
+      <body className="bg-background text-foreground font-sans">
         <UserProvider>
           <AuthGateProvider>
             <PremiumGateProvider>
@@ -42,8 +43,9 @@ export default function RootLayout({
                 disableTransitionOnChange
               >
                 {children}
+                <AuthGateModal />
+                <PremiumGateModal />
               </ThemeProvider>
-              <PremiumGateModal />
             </PremiumGateProvider>
           </AuthGateProvider>
         </UserProvider>
