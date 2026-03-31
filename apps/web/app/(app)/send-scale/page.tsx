@@ -435,7 +435,7 @@ function SendScaleContent() {
 
                 {/* Email content preview - matches the new batch template */}
                 <div className="bg-[#f6f9fc] p-6">
-                  <div className="max-w-[500px] mx-auto bg-white rounded-lg shadow-sm">
+                  <div className="max-w-[500px] mx-auto bg-brand-white rounded-lg shadow-sm">
                     {/* Header */}
                     <div className="px-8 pt-8 pb-4 text-center">
                       <h2 className="text-xl font-semibold text-gray-900">

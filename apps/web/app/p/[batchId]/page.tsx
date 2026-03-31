@@ -80,7 +80,7 @@ export default function PatientPortalPage() {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
         <div className="text-center max-w-md mx-auto px-4">
-          <div className="bg-white rounded-lg shadow-sm p-8">
+          <div className="bg-brand-white rounded-lg shadow-sm p-8">
             <h1 className="text-xl font-semibold text-gray-900 mb-2">
               Portail non disponible
             </h1>

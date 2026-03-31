@@ -2,6 +2,8 @@
 
 import { WaitlistButton } from "./waitlist-button";
 import Image from "next/image";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 export function Hero() {
   return (
@@ -30,21 +32,29 @@ export function Hero() {
               de temps avec vos patients.
             </p>
 
-            {/* CTA — button centered, arrow fills left space */}
-            <div className="relative flex justify-center pt-10">
+            {/* CTA — buttons centered, arrow fills left space */}
+            <div className="relative flex flex-col sm:flex-row items-center justify-center gap-4 pt-10">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/images/landing/arrow-right.svg"
                 alt=""
-                className="hidden sm:block absolute left-0 bottom-0 max-h-[88px]"
-                style={{ width: "calc(50% - 130px)" }}
+                className="hidden sm:block absolute left-0 bottom-3 max-h-[88px]"
+                style={{ width: "calc(50% - 200px)" }}
               />
               <WaitlistButton
                 size="lg"
-                className="font-body font-medium text-sm rounded-full px-8 bg-brand-orange text-white hover:bg-brand-orange/90"
+                className="font-body font-medium text-sm rounded-full ml-4 px-8 bg-brand-orange text-brand-white-bright hover:bg-brand-orange/90"
               >
-                Rejoindre la liste d'attente
+                Rejoindre la liste d&apos;attente
               </WaitlistButton>
+              <Button
+                asChild
+                variant="outline"
+                size="lg"
+                className="font-body font-medium text-sm rounded-full px-8 border-0 bg-brand-orange-light text-brand-orange hover:bg-brand-orange hover:text-brand-white-bright"
+              >
+                <Link href="/dashboard">Explorer l&apos;app</Link>
+              </Button>
             </div>
           </div>
 
