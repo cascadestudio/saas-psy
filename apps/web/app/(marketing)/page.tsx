@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     description:
       "Envoyez vos échelles en 2 minutes, recevez les résultats cotés automatiquement.",
     url: "https://melya.app",
-    images: ["/images/landing/og-image.png"],
+    images: ["/opengraph-image.png"],
   },
   alternates: {
     canonical: "https://melya.app",
