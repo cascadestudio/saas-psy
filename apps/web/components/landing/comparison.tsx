@@ -43,15 +43,15 @@ export function Comparison() {
           </div>
 
           {/* Avec Melya */}
-          <div className="rounded-2xl p-6 md:p-8 bg-card border-2 border-brand-orange/30 shadow-sm">
-            <h3 className="text-lg font-bold text-foreground mb-6">
+          <div className="rounded-2xl p-6 md:p-8 bg-brand-orange">
+            <h3 className="text-lg font-bold text-white mb-6">
               Avec Melya
             </h3>
             <ul className="space-y-4">
               {withMelya.map((item, i) => (
                 <li key={i} className="flex items-start gap-3">
-                  <Interfaces.Tick className="h-5 w-5 text-brand-soft-green flex-shrink-0 mt-0.5" fill="currentColor" />
-                  <span className="text-foreground font-body">{item}</span>
+                  <Interfaces.Tick className="h-5 w-5 text-white flex-shrink-0 mt-0.5" fill="currentColor" />
+                  <span className="text-white font-body">{item}</span>
                 </li>
               ))}
             </ul>

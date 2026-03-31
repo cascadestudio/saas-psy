@@ -1,14 +1,16 @@
 import { type NextRequest, NextResponse } from "next/server";
 
+// App routes that should not be accessible in pre-launch mode
+const APP_ROUTES = ["/dashboard", "/patients", "/echelles", "/send-scale", "/results", "/sign-up", "/forgot-password", "/reset-password"];
+
 export async function middleware(request: NextRequest) {
-  // For now, we're using localStorage for tokens (client-side)
-  // So middleware can't validate JWT on server-side
-  // Protected routes will be handled by UserContext on the client
-  
-  // You could enhance this later by:
-  // 1. Using cookies instead of localStorage
-  // 2. Validating JWT in middleware
-  
+  const { pathname } = request.nextUrl;
+
+  // Redirect app routes to landing page (app not yet launched)
+  if (APP_ROUTES.some((route) => pathname.startsWith(route))) {
+    return NextResponse.redirect(new URL("/", request.url));
+  }
+
   return NextResponse.next();
 }
 

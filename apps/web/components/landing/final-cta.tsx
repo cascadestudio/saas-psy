@@ -12,7 +12,7 @@ export function FinalCTA() {
         ref={ref}
         className={`mx-auto max-w-3xl px-4 sm:px-6 text-center scroll-animate ${isVisible ? "visible" : ""}`}
       >
-        <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-4">
+        <h2 className="text-3xl sm:text-4xl font-normal text-foreground mb-4">
           Prêt·e à simplifier votre pratique clinique ?
         </h2>
         <p className="text-lg text-muted-foreground font-body mb-8 max-w-xl mx-auto">

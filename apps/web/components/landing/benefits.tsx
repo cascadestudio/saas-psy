@@ -36,12 +36,12 @@ export function Benefits() {
 
   return (
     <section id="fonctionnalites" className="py-16 md:py-24">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6">
+      <div className="mx-auto max-w-4xl px-4 sm:px-6">
         <div
           ref={ref}
           className={`scroll-animate ${isVisible ? "visible" : ""}`}
         >
-          <h2 className="text-2xl sm:text-3xl font-bold text-center text-foreground mb-12">
+          <h2 className="text-3xl sm:text-4xl font-normal text-center text-foreground mb-12">
             Melya allège votre charge administrative
           </h2>
 

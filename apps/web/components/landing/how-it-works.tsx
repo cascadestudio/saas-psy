@@ -194,7 +194,7 @@ export function HowItWorks() {
           ref={ref}
           className={`scroll-animate ${isVisible ? "visible" : ""}`}
         >
-          <h2 className="text-2xl sm:text-3xl font-bold text-center text-foreground mb-12">
+          <h2 className="text-3xl sm:text-4xl font-normal text-center text-foreground mb-12">
             Comment ça marche ?
           </h2>
 
