@@ -35,7 +35,7 @@ export function Navbar() {
           {/* Logo */}
           <a href="#" className="flex items-center gap-2">
             <Image
-              src="/images/landing/logo.svg"
+              src="/images/logos/logo-melya.svg"
               alt="Melya"
               width={112}
               height={35}

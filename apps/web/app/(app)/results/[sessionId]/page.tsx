@@ -153,7 +153,7 @@ export default function ResultsPage() {
     <div className="flex-1 w-full flex flex-col gap-6 p-6">
       <div className="flex items-center gap-4">
         <Button asChild variant="ghost" size="icon">
-          <Link href={`/patients/${patient?.id}`}>
+          <Link href="/dashboard">
             <Arrow.ArrowLeft className="h-4 w-4" />
           </Link>
         </Button>

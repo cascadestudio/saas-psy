@@ -9,7 +9,7 @@ export function Footer() {
           {/* Logo */}
           <div className="flex-shrink-0">
             <Image
-              src="/images/landing/logo.svg"
+              src="/images/logos/logo-melya.svg"
               alt="Melya"
               width={100}
               height={31}
@@ -18,7 +18,10 @@ export function Footer() {
 
           {/* Links */}
           <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm font-body text-muted-foreground">
-            <a href="mailto:contact@cascadestudio.fr" className="hover:text-foreground transition-colors">
+            <a
+              href="mailto:contact@cascadestudio.fr"
+              className="hover:text-foreground transition-colors"
+            >
               Contact
             </a>
             <span className="hidden sm:inline text-border">·</span>
@@ -34,7 +37,10 @@ export function Footer() {
               Mentions légales
             </a>
             <span className="hidden sm:inline text-border">·</span>
-            <a href="#fonctionnalites" className="hover:text-foreground transition-colors">
+            <a
+              href="#fonctionnalites"
+              className="hover:text-foreground transition-colors"
+            >
               Échelles disponibles
             </a>
           </div>

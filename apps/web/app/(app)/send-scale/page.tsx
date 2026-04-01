@@ -137,7 +137,7 @@ function SendScaleContent() {
         });
       }
 
-      router.push(`/patients/${selectedPatient.id}`);
+      router.push("/dashboard");
     } catch (error) {
       console.error("Error sending scales:", error);
       toast.error("Erreur lors de l'envoi des échelles");

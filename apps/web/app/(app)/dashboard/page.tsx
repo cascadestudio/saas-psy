@@ -262,8 +262,7 @@ export default function DashboardPage() {
                       {filteredPatients.map((patient) => (
                         <tr
                           key={patient.id}
-                          className="border-t first:border-t-0 hover:bg-muted/50 transition-colors cursor-pointer"
-                          onClick={() => window.location.href = `/patients/${patient.id}`}
+                          className="border-t first:border-t-0 hover:bg-muted/50 transition-colors"
                         >
                           <td className="p-3">
                             <div className="flex items-center gap-2">
@@ -277,7 +276,6 @@ export default function DashboardPage() {
                               asChild
                               variant="default"
                               size="sm"
-                              onClick={(e) => e.stopPropagation()}
                             >
                               <Link
                                 href={`/send-scale?patientId=${patient.id}`}

@@ -3,7 +3,7 @@ import { type NextRequest, NextResponse } from "next/server";
 const isPrelaunch = process.env.NEXT_PUBLIC_APP_MODE === "prelaunch";
 
 // App routes that should not be accessible in pre-launch mode
-const APP_ROUTES = ["/dashboard", "/patients", "/echelles", "/send-scale", "/results", "/sign-up", "/forgot-password", "/reset-password"];
+const APP_ROUTES = ["/dashboard", "/echelles", "/send-scale", "/results", "/sign-up", "/forgot-password", "/reset-password"];
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;

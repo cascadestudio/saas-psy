@@ -9,6 +9,7 @@ SaaS pour psychologues : envoi d'échelles, passation en ligne, scoring automati
 - **Infra**: Frontend on Vercel, API + PostgreSQL on Scaleway Dedibox (HDS), CI/CD GitHub Actions
 - **Backups**: Chiffrés, stockés sur Hetzner Storage Box, via SFTP
 - **Shared**: `@melya/core` package (types, scoring algorithms, utils)
+- **UI**: doodle icons
 
 ## Monorepo Structure
 

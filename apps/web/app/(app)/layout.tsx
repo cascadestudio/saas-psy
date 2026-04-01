@@ -1,23 +1,20 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Interfaces, Files } from "doodle-icons";
 import { Button } from "@/components/ui/button";
 import { useUser } from "@/app/context/UserContext";
 import { useAuthGate } from "@/app/context/AuthGateContext";
+import { cn } from "@/lib/utils";
 
 const navigation = [
   { name: "Tableau de bord", href: "/dashboard", icon: Interfaces.Home },
   { name: "Échelles", href: "/echelles", icon: Files.FileText },
-  { name: "Patients", href: "/patients", icon: Interfaces.User },
 ];
 
-export default function AppLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function AppLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const { user, isLoading, logout } = useUser();
   const { openAuthGate } = useAuthGate();
@@ -31,61 +28,70 @@ export default function AppLayout({
   }
 
   return (
-    <div className="flex min-h-screen flex-col">
-      {/* Header */}
-      <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="container flex h-14 items-center">
-          <div className="mr-4 hidden md:flex">
-            <Link href="/dashboard" className="mr-6 flex items-center space-x-2">
-              <span className="font-bold">Melya</span>
-            </Link>
-            <nav className="flex items-center space-x-6 text-sm font-medium">
-              {navigation.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className={`transition-colors hover:text-foreground/80 ${
-                    pathname === item.href
-                      ? "text-foreground"
-                      : "text-foreground/60"
-                  }`}
-                >
-                  {item.name}
-                </Link>
-              ))}
-            </nav>
-          </div>
-          {/* Mobile menu button */}
-          <button className="mr-2 px-0 text-base hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 md:hidden">
-            <Link href="/dashboard" className="flex items-center space-x-2">
-              <span className="font-bold">Melya</span>
-            </Link>
-          </button>
-          <div className="flex flex-1 items-center justify-end space-x-2">
-            {user ? (
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={logout}
-                title="Déconnexion"
-              >
-                <Interfaces.Logout className="h-4 w-4" />
-              </Button>
-            ) : (
-              <Button
-                onClick={() => openAuthGate()}
-                size="sm"
-                variant="default"
-              >
-                Se connecter / S&apos;inscrire
-              </Button>
-            )}
-          </div>
+    <div className="flex min-h-screen">
+      {/* Sidebar */}
+      <aside className="sticky top-0 m-2 flex h-[calc(100vh-1rem)] w-52 flex-col rounded-2xl bg-brand-orange/10 text-brand-orange">
+        {/* Logo */}
+        <div className="flex h-20 items-center justify-center px-4">
+          <Link href="/dashboard" className="flex items-center">
+            <Image
+              src="/images/logos/logo-melya.svg"
+              alt="Melya"
+              width={96}
+              height={30}
+              priority
+            />
+          </Link>
         </div>
-      </header>
+
+        {/* Navigation */}
+        <nav className="flex-1 space-y-1 px-4 py-4">
+          {navigation.map((item) => {
+            const Icon = item.icon;
+            const isActive =
+              pathname === item.href || pathname.startsWith(item.href + "/");
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={cn(
+                  "relative flex items-center gap-3 px-2 py-2 text-sm font-medium transition-all duration-200",
+                  isActive
+                    ? "text-brand-orange translate-x-1"
+                    : "text-foreground hover:text-brand-orange hover:translate-x-1",
+                )}
+              >
+                {isActive && (
+                  <span className="absolute left-0 top-1/2 -translate-y-1/2 h-5 w-px rounded-full bg-brand-orange" />
+                )}
+                <Icon className="h-4 w-4" fill="currentColor" />
+                {item.name}
+              </Link>
+            );
+          })}
+        </nav>
+
+        {/* Bottom section */}
+        <div className="border-t border-brand-orange/30 p-3">
+          {user ? (
+            <Button
+              variant="ghost"
+              className="w-full justify-start gap-3 text-foreground hover:text-brand-orange hover:bg-brand-orange/10"
+              onClick={logout}
+            >
+              <Interfaces.Logout className="h-4 w-4" fill="currentColor" />
+              Déconnexion
+            </Button>
+          ) : (
+            <Button onClick={() => openAuthGate()} size="sm" className="w-full">
+              Se connecter / S&apos;inscrire
+            </Button>
+          )}
+        </div>
+      </aside>
 
       {/* Main content */}
-      <main className="flex-1">{children}</main>
+      <main className="flex-1 overflow-auto">{children}</main>
     </div>
   );
 }
