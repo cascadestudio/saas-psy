@@ -23,6 +23,9 @@ docs/              # Reference docs (pricing, HDS, audit, encryption, etc.)
 ## Dev Commands
 
 ```bash
+# SSH tunnel to staging DB (required before running API locally)
+ssh -L 5432:localhost:5432 cascade@195.154.205.18 -N
+
 npm run dev          # Next.js (port 3000)
 npm run dev:api      # NestJS (port 3001)
 npm run dev:all      # Both
