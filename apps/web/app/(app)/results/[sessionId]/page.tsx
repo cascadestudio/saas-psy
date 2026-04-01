@@ -68,7 +68,138 @@ export default function ResultsPage() {
   }
 
   if (!user) {
-    return null;
+    const mockScale = scales.find((s) => s.id === "inventaire-de-depression-de-beck");
+    return (
+      <div className="flex-1 w-full flex flex-col gap-6 p-6">
+        <div className="flex items-center gap-4">
+          <Button asChild variant="ghost" size="icon">
+            <Link href="/dashboard">
+              <Arrow.ArrowLeft className="h-4 w-4" />
+            </Link>
+          </Button>
+          <div className="flex-1">
+            <h1 className="font-bold text-3xl">Résultats de passation</h1>
+            <p className="text-muted-foreground mt-1">
+              Marie Dupont - {mockScale?.title}
+            </p>
+          </div>
+          <Button variant="outline" disabled>
+            <Interfaces.Download className="mr-2 h-4 w-4" />
+            Exporter PDF
+          </Button>
+        </div>
+
+        {/* Main Score Card */}
+        <Card>
+          <CardHeader>
+            <CardTitle>Score et interprétation</CardTitle>
+            <CardDescription>
+              Complété le 1 avril 2026 à 14:30
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="flex flex-col items-center justify-center p-6 bg-muted rounded-lg">
+                <div className="text-6xl font-bold text-primary mb-2">18</div>
+                <div className="text-sm text-muted-foreground mb-4">
+                  sur 63 (29%)
+                </div>
+                <Badge className="text-base px-4 py-2">
+                  Dépression légère
+                </Badge>
+              </div>
+              <div className="space-y-4">
+                <div>
+                  <h4 className="font-semibold mb-2">Interprétation clinique</h4>
+                  <p className="text-sm text-muted-foreground">
+                    Le score obtenu indique une symptomatologie dépressive légère. Un suivi régulier est recommandé pour évaluer l&apos;évolution.
+                  </p>
+                </div>
+                <div className="border-t pt-4">
+                  <h4 className="font-semibold mb-2">Évolution</h4>
+                  <div className="flex items-center gap-2">
+                    <Finance.TrendUp className="h-5 w-5 text-green-600" />
+                    <span className="text-sm text-green-600">
+                      Amélioration de 25% depuis la dernière passation
+                    </span>
+                  </div>
+                  <p className="text-xs text-muted-foreground mt-1">
+                    Passation précédente le 01/03/2026 : 24
+                  </p>
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Longitudinal History */}
+        <Card>
+          <CardHeader>
+            <CardTitle>Historique longitudinal</CardTitle>
+            <CardDescription>
+              Évolution des scores au fil du temps (3 passations)
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-3">
+              {[
+                { id: "t0", date: "01/01/2026", score: 28, interpretation: "Dépression modérée", current: false },
+                { id: "t1", date: "01/03/2026", score: 24, interpretation: "Dépression modérée", current: false },
+                { id: "t2", date: "01/04/2026", score: 18, interpretation: "Dépression légère", current: true },
+              ].map((s, index) => (
+                <div
+                  key={s.id}
+                  className={`flex items-center justify-between p-4 border rounded-lg ${
+                    s.current ? "bg-primary/5 border-primary" : ""
+                  }`}
+                >
+                  <div className="flex items-center gap-4">
+                    <div className="text-sm font-medium text-muted-foreground w-8">
+                      T{index}
+                    </div>
+                    <div>
+                      <p className="text-sm font-medium">{s.date}</p>
+                      <p className="text-xs text-muted-foreground">
+                        {s.interpretation}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-4">
+                    <div className="text-2xl font-bold">{s.score}</div>
+                    {s.current && <Badge variant="outline">Actuel</Badge>}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Scale Details */}
+        <Card>
+          <CardHeader>
+            <CardTitle>À propos de cette échelle</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div>
+              <h4 className="font-semibold mb-2">Description</h4>
+              <p className="text-sm text-muted-foreground">
+                {mockScale?.longDescription || mockScale?.description}
+              </p>
+            </div>
+            <div className="grid grid-cols-2 gap-4 pt-4 border-t">
+              <div>
+                <p className="text-sm text-muted-foreground">Catégorie</p>
+                <p className="font-medium">{mockScale?.category}</p>
+              </div>
+              <div>
+                <p className="text-sm text-muted-foreground">Durée estimée</p>
+                <p className="font-medium">{mockScale?.estimatedTime}</p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    );
   }
 
   if (!session) {

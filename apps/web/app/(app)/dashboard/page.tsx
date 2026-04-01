@@ -105,7 +105,32 @@ export default function DashboardPage() {
     );
   }
 
-  // Anonymous user view
+  // Mock data for anonymous users
+  const mockSessions: {
+    id: string;
+    patientName: string;
+    scaleId: string;
+    status: Session["status"];
+    date: string;
+  }[] = [
+    { id: "1", patientName: "Marie Dupont", scaleId: "inventaire-de-depression-de-beck", status: "SENT", date: "28/03" },
+    { id: "2", patientName: "Marie Dupont", scaleId: "stai-anxiete-generalisee", status: "STARTED", date: "30/03" },
+    { id: "3", patientName: "Jean Martin", scaleId: "echelle-d-anxiete-sociale-de-liebowitz", status: "COMPLETED", date: "01/04" },
+    { id: "4", patientName: "Sophie Bernard", scaleId: "traumatismes-pcl5", status: "SENT", date: "31/03" },
+  ];
+
+  const mockPatients = [
+    { id: "1", name: "Marie Dupont", hasActive: true },
+    { id: "2", name: "Jean Martin", hasActive: false },
+    { id: "3", name: "Sophie Bernard", hasActive: true },
+    { id: "4", name: "Lucas Moreau", hasActive: false },
+  ];
+
+  const getScaleTitle = (scaleId: string) => {
+    return scales.find((s) => s.id === scaleId)?.title ?? scaleId;
+  };
+
+  // Anonymous user view with mock data
   if (!user) {
     return (
       <div className="container mx-auto px-4 py-6">
@@ -123,27 +148,95 @@ export default function DashboardPage() {
           </Button>
         </div>
 
-        <Card>
-          <CardHeader>
-            <CardTitle>Mes patients</CardTitle>
-            <CardDescription>
-              Gérez vos patients et envoyez des échelles
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="text-center py-8">
-              <Interfaces.User className="h-12 w-12 mx-auto mb-4 text-muted-foreground" />
-              <p className="text-muted-foreground mb-4">
-                Créez un compte pour ajouter vos premiers patients
-              </p>
+        <div className="space-y-6">
+          {/* Suivi des passations - mock */}
+          <div>
+            <div className="mb-3">
+              <h2 className="text-lg font-sans font-semibold">Suivi des passations</h2>
+            </div>
+            <Card className="border-0 bg-muted-foreground/5 shadow-none hover:shadow-none">
+              <CardContent className="p-4">
+              <div className="flex gap-3 overflow-x-auto pb-2">
+                {mockSessions.map((session) => {
+                  const config = STATUS_CONFIG[session.status];
+                  return (
+                    <Link
+                      key={session.id}
+                      href={`/results/${session.id}`}
+                      className="bg-background rounded-lg p-4 min-w-[200px] hover:bg-background/80 transition-colors flex-shrink-0"
+                    >
+                      <p className="font-medium text-sm">
+                        {session.patientName}
+                      </p>
+                      <p className="text-sm text-muted-foreground mt-1">
+                        {getScaleTitle(session.scaleId)}
+                      </p>
+                      <div className="flex items-center justify-between mt-3">
+                        <Badge variant={config.variant}>{config.label}</Badge>
+                        <span className="text-xs text-muted-foreground">
+                          {session.date}
+                        </span>
+                      </div>
+                    </Link>
+                  );
+                })}
+              </div>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Mes patients - mock */}
+          <div>
+            <div className="mb-3 flex items-center justify-between">
+              <div>
+                <h2 className="text-lg font-sans font-semibold">Mes patients</h2>
+              </div>
               <CreatePatientSheet
                 onPatientCreated={handlePatientCreated}
-                buttonText="Ajouter un patient"
-                currentPatientCount={patients.length}
+                buttonSize="sm"
+                buttonText="Ajouter"
+                currentPatientCount={0}
               />
             </div>
-          </CardContent>
-        </Card>
+            <Card className="border-0 bg-muted-foreground/5 shadow-none hover:shadow-none">
+              <CardContent className="p-4">
+              <div className="rounded-lg overflow-hidden">
+                <table className="w-full">
+                  <tbody>
+                    {mockPatients.map((patient) => (
+                      <tr
+                        key={patient.id}
+                        className="border-t border-border/50 first:border-t-0 hover:bg-background/50 transition-colors"
+                      >
+                        <td className="p-3">
+                          <div className="flex items-center gap-2">
+                            <p className="font-medium">{patient.name}</p>
+                            {patient.hasActive && (
+                              <Badge variant="secondary" className="text-xs">
+                                Passation en cours
+                              </Badge>
+                            )}
+                          </div>
+                        </td>
+                        <td className="p-3 text-right">
+                          <Button
+                            variant="default"
+                            size="sm"
+                            onClick={() => openAuthGate()}
+                          >
+                            <Interfaces.Send className="mr-2 h-4 w-4" />
+                            Envoyer une échelle
+                          </Button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
       </div>
     );
   }
@@ -172,10 +265,6 @@ export default function DashboardPage() {
     return 0;
   });
 
-  const getScaleTitle = (scaleId: string) => {
-    return scales.find((s) => s.id === scaleId)?.title ?? scaleId;
-  };
-
   return (
     <div className="container mx-auto px-4 py-6">
       <div className="mb-6 flex items-center justify-between">
@@ -194,16 +283,12 @@ export default function DashboardPage() {
 
       <div className="space-y-6">
         {/* Suivi des passations */}
-        <Card>
-          <CardHeader>
-            <CardTitle>Suivi des passations</CardTitle>
-            <CardDescription>
-              {activeSessions.length} passation
-              {activeSessions.length > 1 ? "s" : ""} en cours ou récente
-              {activeSessions.length > 1 ? "s" : ""}
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
+        <div>
+          <div className="mb-3">
+            <h2 className="text-lg font-sans font-semibold">Suivi des passations</h2>
+          </div>
+          <Card className="border-0 bg-muted-foreground/5 shadow-none hover:shadow-none">
+            <CardContent className="p-4">
             {activeSessions.length === 0 ? (
               <p className="text-sm text-muted-foreground text-center py-8">
                 Aucune passation en cours
@@ -215,12 +300,8 @@ export default function DashboardPage() {
                   return (
                     <Link
                       key={session.id}
-                      href={
-                        session.status === "COMPLETED"
-                          ? `/sessions/${session.id}`
-                          : `/sessions/${session.id}`
-                      }
-                      className="border rounded-lg p-4 min-w-[200px] hover:bg-muted/50 transition-colors flex-shrink-0"
+                      href={`/results/${session.id}`}
+                      className="bg-background rounded-lg p-4 min-w-[200px] hover:bg-background/80 transition-colors flex-shrink-0"
                     >
                       <p className="font-medium text-sm">
                         {session.patient
@@ -241,28 +322,25 @@ export default function DashboardPage() {
                 })}
               </div>
             )}
-          </CardContent>
-        </Card>
+            </CardContent>
+          </Card>
+        </div>
 
         {/* Mes patients */}
-        <Card>
-          <CardHeader>
-            <div className="flex items-center justify-between">
-              <div>
-                <CardTitle>Mes patients</CardTitle>
-                <CardDescription>
-                  {patients.length} patient{patients.length > 1 ? "s" : ""}
-                </CardDescription>
-              </div>
-              <CreatePatientSheet
-                onPatientCreated={handlePatientCreated}
-                buttonSize="sm"
-                buttonText="Ajouter"
-                currentPatientCount={patients.length}
-              />
+        <div>
+          <div className="mb-3 flex items-center justify-between">
+            <div>
+              <h2 className="text-lg font-sans font-semibold">Mes patients</h2>
             </div>
-          </CardHeader>
-          <CardContent>
+            <CreatePatientSheet
+              onPatientCreated={handlePatientCreated}
+              buttonSize="sm"
+              buttonText="Ajouter"
+              currentPatientCount={patients.length}
+            />
+          </div>
+          <Card className="border-0 bg-muted-foreground/5 shadow-none hover:shadow-none">
+            <CardContent className="p-4">
             {patientsLoading ? (
               <p className="text-sm text-muted-foreground text-center py-8">
                 Chargement des patients...
@@ -272,13 +350,13 @@ export default function DashboardPage() {
                 Aucun patient dans votre liste
               </p>
             ) : (
-              <div className="border rounded-lg overflow-hidden">
+              <div className="rounded-lg overflow-hidden">
                 <table className="w-full">
                   <tbody>
                     {sortedPatients.map((patient) => (
                       <tr
                         key={patient.id}
-                        className="border-t first:border-t-0 hover:bg-muted/50 transition-colors"
+                        className="border-t border-border/50 first:border-t-0 hover:bg-background/50 transition-colors"
                       >
                         <td className="p-3">
                           <div className="flex items-center gap-2">
@@ -308,8 +386,9 @@ export default function DashboardPage() {
                 </table>
               </div>
             )}
-          </CardContent>
-        </Card>
+            </CardContent>
+          </Card>
+        </div>
       </div>
     </div>
   );
