@@ -1,13 +1,15 @@
 import { type NextRequest, NextResponse } from "next/server";
 
+const isPrelaunch = process.env.NEXT_PUBLIC_APP_MODE === "prelaunch";
+
 // App routes that should not be accessible in pre-launch mode
 const APP_ROUTES = ["/dashboard", "/patients", "/echelles", "/send-scale", "/results", "/sign-up", "/forgot-password", "/reset-password"];
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // Redirect app routes to landing page (app not yet launched)
-  if (APP_ROUTES.some((route) => pathname.startsWith(route))) {
+  // In pre-launch mode, redirect app routes to landing page
+  if (isPrelaunch && APP_ROUTES.some((route) => pathname.startsWith(route))) {
     return NextResponse.redirect(new URL("/", request.url));
   }
 
