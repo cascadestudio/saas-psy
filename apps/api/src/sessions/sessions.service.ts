@@ -216,6 +216,29 @@ export class SessionsService {
     return { sessions: sessions.map((s) => this.decryptSession(s)) };
   }
 
+  async findRecent(practitionerId: string, limit: number = 10) {
+    const thirtyDaysAgo = new Date();
+    thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+
+    const sessions = await this.prisma.session.findMany({
+      where: {
+        practitionerId,
+        OR: [
+          { status: { in: ['CREATED', 'SENT', 'STARTED'] } },
+          {
+            status: 'COMPLETED',
+            completedAt: { gte: thirtyDaysAgo },
+          },
+        ],
+      },
+      orderBy: { createdAt: 'desc' },
+      include: { patient: true },
+      take: limit,
+    });
+
+    return { sessions: sessions.map((s) => this.decryptSession(s)) };
+  }
+
   async update(id: string, practitionerId: string, dto: UpdateSessionDto) {
     const session = await this.prisma.session.findUnique({
       where: { id },

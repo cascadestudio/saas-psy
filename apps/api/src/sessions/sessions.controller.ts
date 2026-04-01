@@ -44,6 +44,17 @@ export class SessionsController {
     return this.sessionsService.findAll(practitionerId);
   }
 
+  @Get('recent')
+  findRecent(
+    @CurrentUser('id') practitionerId: string,
+    @Query('limit') limit?: string,
+  ) {
+    return this.sessionsService.findRecent(
+      practitionerId,
+      limit ? parseInt(limit, 10) : 10,
+    );
+  }
+
   @Get(':id')
   findById(
     @Param('id') id: string,

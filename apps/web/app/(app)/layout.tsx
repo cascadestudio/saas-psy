@@ -69,11 +69,20 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
               </Link>
             );
           })}
+          {!user && (
+            <button
+              onClick={() => openAuthGate()}
+              className="relative flex items-center gap-3 px-2 py-2 text-sm font-medium transition-all duration-200 text-foreground hover:text-brand-orange hover:translate-x-1"
+            >
+              <Interfaces.Login className="h-4 w-4" fill="currentColor" />
+              Se connecter
+            </button>
+          )}
         </nav>
 
         {/* Bottom section */}
-        <div className="border-t border-brand-orange/30 p-3">
-          {user ? (
+        {user && (
+          <div className="border-t border-brand-orange/30 p-3">
             <Button
               variant="ghost"
               className="w-full justify-start gap-3 text-foreground hover:text-brand-orange hover:bg-brand-orange/10"
@@ -82,12 +91,8 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
               <Interfaces.Logout className="h-4 w-4" fill="currentColor" />
               Déconnexion
             </Button>
-          ) : (
-            <Button onClick={() => openAuthGate()} size="sm" className="w-full">
-              Se connecter / S&apos;inscrire
-            </Button>
-          )}
-        </div>
+          </div>
+        )}
       </aside>
 
       {/* Main content */}
