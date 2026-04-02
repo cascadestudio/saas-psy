@@ -68,7 +68,7 @@ export function Hero() {
 
             {/* Notification toasts — right, left, right */}
             <div
-              className="toast-animate absolute right-2 lg:-right-0 top-24 flex items-center gap-2 sm:gap-2.5 bg-card rounded-full px-3 py-2 sm:px-4 sm:py-2.5 shadow-md border border-border/50"
+              className="toast-animate absolute right-2 lg:-right-0 top-12 lg:top-24 flex items-center gap-2 sm:gap-2.5 bg-card rounded-full px-3 py-2 sm:px-4 sm:py-2.5 shadow-md border border-border/50"
               style={{ animationDelay: "0.8s" }}
             >
               <Interfaces.Send
