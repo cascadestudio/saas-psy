@@ -113,7 +113,6 @@ export function ScaleBadges() {
     hasDragged.current = false;
     startX.current = e.clientX;
     scrollLeft.current = el.scrollLeft;
-    el.setPointerCapture(e.pointerId);
   }, []);
 
   const onPointerMove = useCallback((e: React.PointerEvent) => {

@@ -60,11 +60,11 @@ function WaitlistModal({
     <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogContent className="sm:max-w-md bg-card">
         <DialogHeader className="text-center sm:text-center">
-          <DialogTitle className="text-2xl">
+          <DialogTitle className="text-3xl not-italic font-normal">
             Rejoindre la liste d&apos;attente
           </DialogTitle>
           <DialogDescription className="text-base">
-            Recevez un accès prioritaire dès le lancement.
+            Recevez un accès prioritaire et gratuit dès le lancement.
           </DialogDescription>
         </DialogHeader>
 
@@ -99,12 +99,10 @@ function WaitlistModal({
               required
               className="h-12 bg-background font-body"
             />
-            {error && (
-              <p className="text-sm text-red-500 font-body">{error}</p>
-            )}
+            {error && <p className="text-sm text-red-500 font-body">{error}</p>}
             <Button
               type="submit"
-              className="w-full h-12 text-base"
+              className="w-full h-12 text-base rounded-full"
               disabled={loading}
             >
               {loading ? "..." : "S'inscrire"}
