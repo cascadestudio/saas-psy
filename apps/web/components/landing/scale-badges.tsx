@@ -1,11 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useCallback } from "react";
 import Image from "next/image";
 import { useScrollAnimation } from "./use-scroll-animation";
 import { scales as scalesData } from "@/app/scalesData";
 import { questionCount } from "@/app/utils/utils";
-import { Interfaces, Files } from "doodle-icons";
+import { Arrow, Interfaces, Files } from "doodle-icons";
 import {
   Sheet,
   SheetContent,
@@ -98,22 +98,84 @@ function ScaleBadge({ scale, onClick }: { scale: BadgeScale; onClick: () => void
 export function ScaleBadges() {
   const { ref, isVisible } = useScrollAnimation();
   const [selected, setSelected] = useState<BadgeScale | null>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const isDragging = useRef(false);
+  const startX = useRef(0);
+  const scrollLeft = useRef(0);
+  const hasDragged = useRef(false);
 
   const fullScale = selected ? scalesData.find((s) => s.id === selected.id) : null;
+
+  const onPointerDown = useCallback((e: React.PointerEvent) => {
+    const el = scrollRef.current;
+    if (!el) return;
+    isDragging.current = true;
+    hasDragged.current = false;
+    startX.current = e.clientX;
+    scrollLeft.current = el.scrollLeft;
+    el.setPointerCapture(e.pointerId);
+  }, []);
+
+  const onPointerMove = useCallback((e: React.PointerEvent) => {
+    if (!isDragging.current || !scrollRef.current) return;
+    const dx = e.clientX - startX.current;
+    if (Math.abs(dx) > 5) hasDragged.current = true;
+    scrollRef.current.scrollLeft = scrollLeft.current - dx;
+  }, []);
+
+  const onPointerUp = useCallback(() => {
+    isDragging.current = false;
+  }, []);
+
+  const scroll = useCallback((direction: "left" | "right") => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const amount = 320;
+    el.scrollBy({ left: direction === "left" ? -amount : amount, behavior: "smooth" });
+  }, []);
 
   return (
     <section className="py-12 md:py-16">
       <div ref={ref} className={`scroll-animate ${isVisible ? "visible" : ""}`}>
-        <div className="overflow-hidden w-full">
-          <div className="animate-marquee flex gap-6 w-max">
-            {[...scales, ...scales].map((scale, i) => (
+        <div className="relative group">
+          {/* Left arrow */}
+          <button
+            onClick={() => scroll("left")}
+            className="absolute left-2 top-1/2 -translate-y-1/2 z-10 h-10 w-10 rounded-full bg-card/90 border border-border shadow-md flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+            aria-label="Défiler à gauche"
+          >
+            <Arrow.ArrowLeft className="h-5 w-5 text-foreground" fill="currentColor" />
+          </button>
+
+          {/* Scrollable container */}
+          <div
+            ref={scrollRef}
+            className="overflow-x-auto flex gap-6 px-4 sm:px-6 cursor-grab active:cursor-grabbing scrollbar-hide"
+            onPointerDown={onPointerDown}
+            onPointerMove={onPointerMove}
+            onPointerUp={onPointerUp}
+            onPointerCancel={onPointerUp}
+            style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+          >
+            {scales.map((scale) => (
               <ScaleBadge
-                key={`${scale.acronym}-${i}`}
+                key={scale.acronym}
                 scale={scale}
-                onClick={() => setSelected(scale)}
+                onClick={() => {
+                  if (!hasDragged.current) setSelected(scale);
+                }}
               />
             ))}
           </div>
+
+          {/* Right arrow */}
+          <button
+            onClick={() => scroll("right")}
+            className="absolute right-2 top-1/2 -translate-y-1/2 z-10 h-10 w-10 rounded-full bg-card/90 border border-border shadow-md flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+            aria-label="Défiler à droite"
+          >
+            <Arrow.ArrowRight className="h-5 w-5 text-foreground" fill="currentColor" />
+          </button>
         </div>
 
         <p className="text-center text-muted-foreground font-body mt-6 text-sm md:text-base px-4">

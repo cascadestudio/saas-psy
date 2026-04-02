@@ -20,7 +20,7 @@ export function FinalCTA() {
           cotations.
         </p>
         <WaitlistButton size="lg" className="font-body font-medium text-sm rounded-full px-8 bg-brand-orange text-white hover:bg-brand-orange/90">
-          Rejoindre la liste d&apos;attente
+          Je souhaite essayer Melya (gratuit)
         </WaitlistButton>
       </div>
     </section>

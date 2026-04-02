@@ -13,10 +13,10 @@ export function SocialProof() {
         className={`mx-auto max-w-3xl px-4 sm:px-6 text-center scroll-animate ${isVisible ? "visible" : ""}`}
       >
         <blockquote className="text-lg sm:text-xl md:text-2xl leading-relaxed text-foreground font-body italic">
-          &ldquo;La cotation manuelle est tellement chronophage qu&apos;on finit
-          par renoncer à utiliser les échelles, alors qu&apos;on sait
-          qu&apos;elles peuvent être essentielles à la rigueur clinique du
-          suivi.&rdquo;
+          &ldquo;Avec Melya, j&apos;envoie mes échelles en quelques clics et
+          je reçois les résultats cotés avant même la séance. Ça m&apos;a
+          permis de réintégrer les questionnaires dans mon suivi sans y
+          passer des heures.&rdquo;
         </blockquote>
 
         <div className="mt-8 flex items-center justify-center gap-4">

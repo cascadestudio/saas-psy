@@ -5,6 +5,7 @@ import { SocialProof } from "@/components/landing/social-proof";
 import { ScaleBadges } from "@/components/landing/scale-badges";
 import { Benefits } from "@/components/landing/benefits";
 import { HowItWorks } from "@/components/landing/how-it-works";
+import { DashboardScreenshot } from "@/components/landing/dashboard-screenshot";
 import { Comparison } from "@/components/landing/comparison";
 // import { Pricing } from "@/components/landing/pricing";
 import { FAQ } from "@/components/landing/faq";
@@ -33,10 +34,11 @@ export default function LandingPage() {
       <Navbar />
       <main>
         <Hero />
-        <SocialProof />
-        <ScaleBadges />
-        <Benefits />
         <HowItWorks />
+        <ScaleBadges />
+        <SocialProof />
+        <Benefits />
+        <DashboardScreenshot />
         <Comparison />
         {/* <Pricing /> */}
         <FAQ />

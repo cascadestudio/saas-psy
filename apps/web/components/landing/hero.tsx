@@ -11,7 +11,7 @@ export function Hero() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Left — Copy */}
           <div className="space-y-12">
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-normal text-foreground !leading-[1.2]">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-normal not-italic text-foreground !leading-[1.2]">
               Vos échelles cotées automatiquement,
               <br />
               en{" "}
@@ -31,21 +31,26 @@ export function Hero() {
               de temps avec vos patients.
             </p>
 
-            {/* CTA — button centered, arrow fills left space */}
-            <div className="relative flex justify-center pt-10">
+            {/* CTA — arrow left, gap, button */}
+            <div className="relative flex justify-center pt-4">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/images/landing/arrow-right.svg"
                 alt=""
                 className="hidden sm:block absolute left-0 bottom-0 max-h-[88px]"
-                style={{ width: "calc(50% - 130px)" }}
+                style={{ width: "calc(50% - 160px)" }}
               />
-              <WaitlistButton
-                size="lg"
-                className="font-body font-medium text-sm rounded-full px-8 bg-brand-orange text-white hover:bg-brand-orange/90"
-              >
-                Rejoindre la liste d'attente
-              </WaitlistButton>
+              <div className="relative flex flex-col items-center">
+                <WaitlistButton
+                  size="lg"
+                  className="font-body font-medium text-sm rounded-full px-8 bg-brand-orange text-white hover:bg-brand-orange/90"
+                >
+                  Je souhaite essayer Melya
+                </WaitlistButton>
+                <span className="absolute -bottom-6 text-xs text-foreground/50 font-body">
+                  100% gratuit
+                </span>
+              </div>
             </div>
           </div>
 
