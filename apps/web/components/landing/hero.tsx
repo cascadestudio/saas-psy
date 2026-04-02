@@ -6,9 +6,9 @@ import { Interfaces } from "doodle-icons";
 
 export function Hero() {
   return (
-    <section className="pt-28 pb-16 md:pt-36 md:pb-24">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+    <section className="pt-28 pb-16 md:pt-36 md:pb-24 overflow-x-clip">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 overflow-visible">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 lg:gap-16 items-center overflow-visible">
           {/* Left — Copy */}
           <div className="space-y-12">
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-normal text-foreground !leading-[1.2]">
@@ -55,7 +55,7 @@ export function Hero() {
           </div>
 
           {/* Right — Hero illustration */}
-          <div className="relative">
+          <div className="relative overflow-visible">
             <div className="relative rounded-2xl overflow-hidden aspect-[4/3]">
               <Image
                 src="/images/landing/hero-image.svg"
@@ -68,7 +68,7 @@ export function Hero() {
 
             {/* Notification toasts — right, left, right */}
             <div
-              className="toast-animate absolute right-2 lg:-right-1 top-4 flex items-center gap-2 sm:gap-2.5 bg-card rounded-full px-3 py-2 sm:px-4 sm:py-2.5 shadow-md border border-border/50"
+              className="toast-animate absolute right-2 lg:-right-0 top-24 flex items-center gap-2 sm:gap-2.5 bg-card rounded-full px-3 py-2 sm:px-4 sm:py-2.5 shadow-md border border-border/50"
               style={{ animationDelay: "0.8s" }}
             >
               <Interfaces.Send
@@ -82,22 +82,8 @@ export function Hero() {
               </span>
             </div>
             <div
-              className="toast-animate absolute left-2 lg:-left-4 top-1/2 -translate-y-1/2 flex items-center gap-2 sm:gap-2.5 bg-card rounded-full px-3 py-2 sm:px-4 sm:py-2.5 shadow-md border border-border/50"
+              className="toast-animate absolute left-14 bottom-20 flex items-center gap-2 sm:gap-2.5 bg-card rounded-full px-3 py-2 sm:px-4 sm:py-2.5 shadow-md border border-border/50"
               style={{ animationDelay: "1.6s" }}
-            >
-              <Interfaces.Mail
-                width={16}
-                height={16}
-                fill="#D6591F"
-                className="flex-shrink-0"
-              />
-              <span className="text-xs sm:text-sm font-body text-foreground whitespace-nowrap">
-                Vous avez reçu un questionnaire
-              </span>
-            </div>
-            <div
-              className="toast-animate absolute right-2 lg:-right-1 bottom-8 flex items-center gap-2 sm:gap-2.5 bg-card rounded-full px-3 py-2 sm:px-4 sm:py-2.5 shadow-md border border-border/50"
-              style={{ animationDelay: "2.4s" }}
             >
               <Interfaces.Analytics
                 width={16}

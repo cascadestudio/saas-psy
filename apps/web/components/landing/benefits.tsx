@@ -36,7 +36,7 @@ export function Benefits() {
 
   return (
     <section id="fonctionnalites" className="py-16 md:py-24">
-      <div className="mx-auto max-w-4xl px-4 sm:px-6">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <div
           ref={ref}
           className={`scroll-animate ${isVisible ? "visible" : ""}`}
