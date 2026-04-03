@@ -68,3 +68,9 @@ User, Profile, Patient, Echelle, Session, AuditLog, EmailLog
 - L'app est actuelement en phase de pré-lancement
 - Landing page sert uniquement à récolter les mails de beta testeurs
 - La landing page ne doit pas avoir de lien vers l'app (en construction)
+
+## Style
+
+- Brand color : #D97757 (orange)
+- Title font : Gelica Regular
+- Body font : Rethink Sans Regular

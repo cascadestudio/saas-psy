@@ -22,7 +22,12 @@ import {
 } from "@/lib/api-client";
 import { scales } from "@/app/scalesData";
 import { Interfaces } from "doodle-icons";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { CreatePatientSheet } from "@/components/CreatePatientSheet";
 import { SESSION_STATUS_CONFIG } from "@/lib/session-status";
 
@@ -104,10 +109,34 @@ export default function DashboardPage() {
     status: Session["status"];
     date: string;
   }[] = [
-    { id: "1", patientName: "Marie Dupont", scaleId: "inventaire-de-depression-de-beck", status: "SENT", date: "28/03" },
-    { id: "2", patientName: "Marie Dupont", scaleId: "stai-anxiete-generalisee", status: "STARTED", date: "30/03" },
-    { id: "3", patientName: "Jean Martin", scaleId: "echelle-d-anxiete-sociale-de-liebowitz", status: "COMPLETED", date: "01/04" },
-    { id: "4", patientName: "Sophie Bernard", scaleId: "traumatismes-pcl5", status: "SENT", date: "31/03" },
+    {
+      id: "1",
+      patientName: "Marie Dupont",
+      scaleId: "inventaire-de-depression-de-beck",
+      status: "SENT",
+      date: "28/03",
+    },
+    {
+      id: "2",
+      patientName: "Marie Dupont",
+      scaleId: "stai-anxiete-generalisee",
+      status: "STARTED",
+      date: "30/03",
+    },
+    {
+      id: "3",
+      patientName: "Jean Martin",
+      scaleId: "echelle-d-anxiete-sociale-de-liebowitz",
+      status: "COMPLETED",
+      date: "01/04",
+    },
+    {
+      id: "4",
+      patientName: "Sophie Bernard",
+      scaleId: "traumatismes-pcl5",
+      status: "SENT",
+      date: "31/03",
+    },
   ];
 
   const mockPatients = [
@@ -135,40 +164,44 @@ export default function DashboardPage() {
           {/* Suivi des passations - mock */}
           <div>
             <div className="mb-3">
-              <h2 className="text-lg font-sans font-semibold">Suivi des passations</h2>
+              <h2 className="text-lg font-sans font-semibold">
+                Suivi des passations
+              </h2>
             </div>
-              <div className="flex gap-3 overflow-x-auto pb-2">
-                {mockSessions.map((session) => {
-                  const config = SESSION_STATUS_CONFIG[session.status];
-                  return (
-                    <Link
-                      key={session.id}
-                      href={`/results/${session.id}`}
-                      className="bg-muted-foreground/5 rounded-lg p-4 min-w-[200px] hover:bg-muted-foreground/10 transition-colors flex-shrink-0"
-                    >
-                      <p className="font-medium text-sm">
-                        {session.patientName}
-                      </p>
-                      <p className="text-sm text-muted-foreground mt-1">
-                        {getScaleTitle(session.scaleId)}
-                      </p>
-                      <div className="flex items-center justify-between mt-3">
-                        <Badge className={config.className} variant="secondary">{config.label}</Badge>
-                        <span className="text-xs text-muted-foreground">
-                          {session.date}
-                        </span>
-                      </div>
-                    </Link>
-                  );
-                })}
-              </div>
+            <div className="flex gap-3 overflow-x-auto pb-2">
+              {mockSessions.map((session) => {
+                const config = SESSION_STATUS_CONFIG[session.status];
+                return (
+                  <Link
+                    key={session.id}
+                    href={`/results/${session.id}`}
+                    className="bg-muted-foreground/5 rounded-lg p-4 min-w-[200px] hover:bg-muted-foreground/10 transition-colors flex-shrink-0"
+                  >
+                    <p className="font-medium text-sm">{session.patientName}</p>
+                    <p className="text-sm text-muted-foreground mt-1">
+                      {getScaleTitle(session.scaleId)}
+                    </p>
+                    <div className="flex items-center justify-between mt-3">
+                      <Badge className={config.className} variant="secondary">
+                        {config.label}
+                      </Badge>
+                      <span className="text-xs text-muted-foreground">
+                        {session.date}
+                      </span>
+                    </div>
+                  </Link>
+                );
+              })}
+            </div>
           </div>
 
           {/* Mes patients - mock */}
           <div>
             <div className="mb-3 flex items-center justify-between">
               <div>
-                <h2 className="text-lg font-sans font-semibold">Mes patients</h2>
+                <h2 className="text-lg font-sans font-semibold">
+                  Mes patients
+                </h2>
               </div>
               <CreatePatientSheet
                 onPatientCreated={handlePatientCreated}
@@ -179,39 +212,39 @@ export default function DashboardPage() {
             </div>
             <Card className="border-0 bg-muted-foreground/5 shadow-none hover:shadow-none">
               <CardContent className="p-4">
-              <div className="rounded-lg overflow-hidden">
-                <table className="w-full">
-                  <tbody>
-                    {mockPatients.map((patient) => (
-                      <tr
-                        key={patient.id}
-                        className="border-t border-border/50 first:border-t-0 hover:bg-background/50 transition-colors"
-                      >
-                        <td className="p-3">
-                          <div className="flex items-center gap-2">
-                            <p className="font-medium">{patient.name}</p>
-                            {patient.hasActive && (
-                              <Badge variant="secondary" className="text-xs">
-                                Passation en cours
-                              </Badge>
-                            )}
-                          </div>
-                        </td>
-                        <td className="p-3 text-right">
-                          <Button
-                            variant="default"
-                            size="sm"
-                            onClick={() => openAuthGate()}
-                          >
-                            <Interfaces.Send className="mr-2 h-4 w-4" />
-                            Envoyer une échelle
-                          </Button>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+                <div className="rounded-lg overflow-hidden">
+                  <table className="w-full">
+                    <tbody>
+                      {mockPatients.map((patient) => (
+                        <tr
+                          key={patient.id}
+                          className="border-t border-border/50 first:border-t-0 hover:bg-background/50 transition-colors"
+                        >
+                          <td className="p-3">
+                            <div className="flex items-center gap-2">
+                              <p className="font-medium">{patient.name}</p>
+                              {patient.hasActive && (
+                                <Badge variant="secondary" className="text-xs">
+                                  Passation en cours
+                                </Badge>
+                              )}
+                            </div>
+                          </td>
+                          <td className="p-3 text-right">
+                            <Button
+                              variant="default"
+                              size="sm"
+                              onClick={() => openAuthGate()}
+                            >
+                              <Interfaces.Send className="mr-2 h-4 w-4" />
+                              Envoyer une échelle
+                            </Button>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
               </CardContent>
             </Card>
           </div>
@@ -233,7 +266,7 @@ export default function DashboardPage() {
   const patientIdsWithActiveSessions = new Set(
     sessions
       .filter((s) => ["CREATED", "SENT", "STARTED"].includes(s.status))
-      .map((s) => s.patientId)
+      .map((s) => s.patientId),
   );
 
   const sortedPatients = [...patients].sort((a, b) => {
@@ -244,15 +277,16 @@ export default function DashboardPage() {
     return 0;
   });
 
-  const filteredPatients = patientFilter === "active"
-    ? sortedPatients.filter((p) => patientIdsWithActiveSessions.has(p.id))
-    : sortedPatients;
+  const filteredPatients =
+    patientFilter === "active"
+      ? sortedPatients.filter((p) => patientIdsWithActiveSessions.has(p.id))
+      : sortedPatients;
 
   return (
     <div className="container mx-auto px-4 py-6">
       <div className="mb-6">
-        <h1 className="font-bold text-3xl">
-          Bonjour{user.firstName ? `, ${user.firstName}` : ""}
+        <h1 className="font-normal text-3xl">
+          Bonjour{user.firstName ? `, ${user.firstName}...` : "..."}
         </h1>
       </div>
 
@@ -260,41 +294,45 @@ export default function DashboardPage() {
         {/* Suivi des passations */}
         <div>
           <div className="mb-3">
-            <h2 className="text-lg font-sans font-semibold">Suivi des passations</h2>
+            <h2 className="text-lg font-sans font-semibold">
+              Suivi des passations
+            </h2>
           </div>
           {activeSessions.length === 0 ? (
-              <p className="text-sm text-muted-foreground text-center py-8">
-                Aucune passation en cours
-              </p>
-            ) : (
-              <div className="flex gap-3 overflow-x-auto pb-2">
-                {activeSessions.map((session) => {
-                  const config = SESSION_STATUS_CONFIG[session.status];
-                  return (
-                    <Link
-                      key={session.id}
-                      href={`/results/${session.id}`}
-                      className="bg-muted-foreground/5 rounded-lg p-4 min-w-[200px] hover:bg-muted-foreground/10 transition-colors flex-shrink-0"
-                    >
-                      <p className="font-medium text-sm">
-                        {session.patient
-                          ? `${session.patient.firstName} ${session.patient.lastName}`
-                          : "Patient"}
-                      </p>
-                      <p className="text-sm text-muted-foreground mt-1">
-                        {getScaleTitle(session.scaleId)}
-                      </p>
-                      <div className="flex items-center justify-between mt-3">
-                        <Badge className={config.className} variant="secondary">{config.label}</Badge>
-                        <span className="text-xs text-muted-foreground">
-                          {formatDate(session.sentAt || session.createdAt)}
-                        </span>
-                      </div>
-                    </Link>
-                  );
-                })}
-              </div>
-            )}
+            <p className="text-sm text-muted-foreground text-center py-8">
+              Aucune passation en cours
+            </p>
+          ) : (
+            <div className="flex gap-3 overflow-x-auto pb-2">
+              {activeSessions.map((session) => {
+                const config = SESSION_STATUS_CONFIG[session.status];
+                return (
+                  <Link
+                    key={session.id}
+                    href={`/results/${session.id}`}
+                    className="bg-muted-foreground/5 rounded-lg p-4 min-w-[200px] hover:bg-muted-foreground/10 transition-colors flex-shrink-0"
+                  >
+                    <p className="font-medium text-sm">
+                      {session.patient
+                        ? `${session.patient.firstName} ${session.patient.lastName}`
+                        : "Patient"}
+                    </p>
+                    <p className="text-sm text-muted-foreground mt-1">
+                      {getScaleTitle(session.scaleId)}
+                    </p>
+                    <div className="flex items-center justify-between mt-3">
+                      <Badge className={config.className} variant="secondary">
+                        {config.label}
+                      </Badge>
+                      <span className="text-xs text-muted-foreground">
+                        {formatDate(session.sentAt || session.createdAt)}
+                      </span>
+                    </div>
+                  </Link>
+                );
+              })}
+            </div>
+          )}
         </div>
 
         {/* Mes patients */}
@@ -335,53 +373,55 @@ export default function DashboardPage() {
           </div>
           <Card className="border-0 bg-muted-foreground/5 shadow-none hover:shadow-none">
             <CardContent className="p-4">
-            {patientsLoading ? (
-              <p className="text-sm text-muted-foreground text-center py-8">
-                Chargement des patients...
-              </p>
-            ) : filteredPatients.length === 0 ? (
-              <p className="text-sm text-muted-foreground text-center py-8">
-                {patientFilter === "active" ? "Aucune passation en cours" : "Aucun patient dans votre liste"}
-              </p>
-            ) : (
-              <div className="rounded-lg overflow-hidden">
-                {filteredPatients.map((patient) => (
-                  <Link
-                    key={patient.id}
-                    href={`/patients/${patient.id}`}
-                    className="flex items-center justify-between p-3 border-t border-border/50 first:border-t-0 hover:bg-background/50 transition-colors"
-                  >
-                    <div className="flex items-center gap-2">
-                      <p className="font-medium">
-                        {patient.firstName} {patient.lastName}
-                      </p>
-                      {patientIdsWithActiveSessions.has(patient.id) && (
-                        <Badge variant="secondary" className="text-xs">
-                          Passation en cours
-                        </Badge>
-                      )}
-                    </div>
-                    <TooltipProvider>
-                      <Tooltip>
-                        <TooltipTrigger asChild>
-                          <Interfaces.Send
-                            className="h-4 w-4 flex-shrink-0"
-                            fill="#f97316"
-                            onClick={(e: React.MouseEvent) => {
-                              e.preventDefault();
-                              window.location.href = `/send-scale?patientId=${patient.id}`;
-                            }}
-                          />
-                        </TooltipTrigger>
-                        <TooltipContent>
-                          <p>Envoyer une échelle</p>
-                        </TooltipContent>
-                      </Tooltip>
-                    </TooltipProvider>
-                  </Link>
-                ))}
-              </div>
-            )}
+              {patientsLoading ? (
+                <p className="text-sm text-muted-foreground text-center py-8">
+                  Chargement des patients...
+                </p>
+              ) : filteredPatients.length === 0 ? (
+                <p className="text-sm text-muted-foreground text-center py-8">
+                  {patientFilter === "active"
+                    ? "Aucune passation en cours"
+                    : "Aucun patient dans votre liste"}
+                </p>
+              ) : (
+                <div className="rounded-lg overflow-hidden">
+                  {filteredPatients.map((patient) => (
+                    <Link
+                      key={patient.id}
+                      href={`/patients/${patient.id}`}
+                      className="flex items-center justify-between p-3 border-t border-border/50 first:border-t-0 hover:bg-background/50 transition-colors"
+                    >
+                      <div className="flex items-center gap-2">
+                        <p className="font-medium">
+                          {patient.firstName} {patient.lastName}
+                        </p>
+                        {patientIdsWithActiveSessions.has(patient.id) && (
+                          <Badge variant="secondary" className="text-xs">
+                            Passation en cours
+                          </Badge>
+                        )}
+                      </div>
+                      <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <Interfaces.Send
+                              className="h-4 w-4 flex-shrink-0"
+                              fill="#f97316"
+                              onClick={(e: React.MouseEvent) => {
+                                e.preventDefault();
+                                window.location.href = `/send-scale?patientId=${patient.id}`;
+                              }}
+                            />
+                          </TooltipTrigger>
+                          <TooltipContent>
+                            <p>Envoyer une échelle</p>
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
+                    </Link>
+                  ))}
+                </div>
+              )}
             </CardContent>
           </Card>
         </div>
