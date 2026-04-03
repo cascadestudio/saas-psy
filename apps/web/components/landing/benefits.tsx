@@ -10,24 +10,28 @@ const benefits = [
     description:
       "Le calcul est automatique, basé sur les barèmes officiels. Fini les doutes sur un score fait à la main.",
     icon: Interfaces.Tick,
+    color: "#CBCADB",
   },
   {
     title: "Vos patients remplissent depuis leur téléphone",
     description:
       "Pas d'impression, pas de papier à récupérer. Le patient répond où et quand il veut avant la séance.",
     icon: Interfaces.Tablet,
+    color: "#6A9BCC",
   },
   {
     title: "Toutes vos passations au même endroit",
     description:
       "Plus de fichiers Excel éparpillés, de PDFs perdus ou de classeurs papier. Un patient, un historique.",
     icon: Interfaces.Folder,
+    color: "#C46686",
   },
   {
     title: "Visualisez l'évolution séance après séance",
     description: "Suivez la progression de vos patients en un coup d'œil.",
     icon: Finance.TrendUp,
     comingSoon: true,
+    color: "#BCD1CA",
   },
 ];
 
@@ -58,7 +62,10 @@ export function Benefits() {
                       Bientôt disponible
                     </Badge>
                   )}
-                  <div className="h-12 w-12 rounded-xl bg-brand-orange/10 flex items-center justify-center mb-4 text-brand-orange">
+                  <div
+                    className="h-12 w-12 rounded-xl flex items-center justify-center mb-4 text-white"
+                    style={{ backgroundColor: benefit.color }}
+                  >
                     <Icon className="h-6 w-6" fill="currentColor" />
                   </div>
                   <h3 className="text-lg font-bold text-foreground mb-2">
