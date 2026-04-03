@@ -23,18 +23,7 @@ import {
 import { scales } from "@/app/scalesData";
 import { Interfaces } from "doodle-icons";
 import { CreatePatientSheet } from "@/components/CreatePatientSheet";
-
-const STATUS_CONFIG: Record<
-  Session["status"],
-  { label: string; variant: "default" | "secondary" | "destructive" | "outline" }
-> = {
-  CREATED: { label: "Créée", variant: "secondary" },
-  SENT: { label: "Envoyée", variant: "default" },
-  STARTED: { label: "En cours", variant: "default" },
-  COMPLETED: { label: "Complétée", variant: "outline" },
-  EXPIRED: { label: "Expirée", variant: "destructive" },
-  CANCELLED: { label: "Annulée", variant: "secondary" },
-};
+import { SESSION_STATUS_CONFIG } from "@/lib/session-status";
 
 function formatDate(dateStr: string) {
   return new Date(dateStr).toLocaleDateString("fr-FR", {
@@ -158,7 +147,7 @@ export default function DashboardPage() {
               <CardContent className="p-4">
               <div className="flex gap-3 overflow-x-auto pb-2">
                 {mockSessions.map((session) => {
-                  const config = STATUS_CONFIG[session.status];
+                  const config = SESSION_STATUS_CONFIG[session.status];
                   return (
                     <Link
                       key={session.id}
@@ -172,7 +161,7 @@ export default function DashboardPage() {
                         {getScaleTitle(session.scaleId)}
                       </p>
                       <div className="flex items-center justify-between mt-3">
-                        <Badge variant={config.variant}>{config.label}</Badge>
+                        <Badge className={config.className} variant="secondary">{config.label}</Badge>
                         <span className="text-xs text-muted-foreground">
                           {session.date}
                         </span>
@@ -296,7 +285,7 @@ export default function DashboardPage() {
             ) : (
               <div className="flex gap-3 overflow-x-auto pb-2">
                 {activeSessions.map((session) => {
-                  const config = STATUS_CONFIG[session.status];
+                  const config = SESSION_STATUS_CONFIG[session.status];
                   return (
                     <Link
                       key={session.id}
@@ -312,7 +301,7 @@ export default function DashboardPage() {
                         {getScaleTitle(session.scaleId)}
                       </p>
                       <div className="flex items-center justify-between mt-3">
-                        <Badge variant={config.variant}>{config.label}</Badge>
+                        <Badge className={config.className} variant="secondary">{config.label}</Badge>
                         <span className="text-xs text-muted-foreground">
                           {formatDate(session.sentAt || session.createdAt)}
                         </span>
@@ -360,9 +349,9 @@ export default function DashboardPage() {
                       >
                         <td className="p-3">
                           <div className="flex items-center gap-2">
-                            <p className="font-medium">
+                            <Link href={`/patients/${patient.id}`} className="font-medium hover:underline">
                               {patient.firstName} {patient.lastName}
-                            </p>
+                            </Link>
                             {patientIdsWithActiveSessions.has(patient.id) && (
                               <Badge variant="secondary" className="text-xs">
                                 Passation en cours
