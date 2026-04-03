@@ -4,7 +4,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Interfaces, Files } from "doodle-icons";
-import { Button } from "@/components/ui/button";
 import { useUser } from "@/app/context/UserContext";
 import { useAuthGate } from "@/app/context/AuthGateContext";
 import { cn } from "@/lib/utils";
@@ -69,7 +68,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
               </Link>
             );
           })}
-          {!user && (
+          {!user ? (
             <button
               onClick={() => openAuthGate()}
               className="relative flex items-center gap-3 px-2 py-2 text-sm font-medium transition-all duration-200 text-foreground hover:text-brand-orange hover:translate-x-1"
@@ -77,22 +76,16 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
               <Interfaces.Login className="h-4 w-4" fill="currentColor" />
               Se connecter
             </button>
-          )}
-        </nav>
-
-        {/* Bottom section */}
-        {user && (
-          <div className="border-t border-brand-orange/30 p-3">
-            <Button
-              variant="ghost"
-              className="w-full justify-start gap-3 text-foreground hover:text-brand-orange hover:bg-brand-orange/10"
+          ) : (
+            <button
               onClick={logout}
+              className="relative flex items-center gap-3 px-2 py-2 text-sm font-medium transition-all duration-200 text-foreground hover:text-brand-orange hover:translate-x-1"
             >
               <Interfaces.Logout className="h-4 w-4" fill="currentColor" />
               Déconnexion
-            </Button>
-          </div>
-        )}
+            </button>
+          )}
+        </nav>
       </aside>
 
       {/* Main content */}
