@@ -22,6 +22,7 @@ import {
 } from "@/lib/api-client";
 import { scales } from "@/app/scalesData";
 import { Interfaces } from "doodle-icons";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { CreatePatientSheet } from "@/components/CreatePatientSheet";
 import { SESSION_STATUS_CONFIG } from "@/lib/session-status";
 
@@ -40,6 +41,7 @@ export default function DashboardPage() {
   const [patients, setPatients] = useState<Patient[]>([]);
   const [patientsLoading, setPatientsLoading] = useState(true);
   const [sessions, setSessions] = useState<Session[]>([]);
+  const [patientFilter, setPatientFilter] = useState<"all" | "active">("all");
 
   // Open auth modal if redirected from password reset
   useEffect(() => {
@@ -242,6 +244,10 @@ export default function DashboardPage() {
     return 0;
   });
 
+  const filteredPatients = patientFilter === "active"
+    ? sortedPatients.filter((p) => patientIdsWithActiveSessions.has(p.id))
+    : sortedPatients;
+
   return (
     <div className="container mx-auto px-4 py-6">
       <div className="mb-6">
@@ -295,12 +301,37 @@ export default function DashboardPage() {
         <div>
           <div className="mb-3 flex items-center gap-2">
             <h2 className="text-lg font-sans font-semibold">Mes patients</h2>
-            <CreatePatientSheet
-              onPatientCreated={handlePatientCreated}
-              iconOnly
-              buttonVariant="ghost"
-              currentPatientCount={patients.length}
-            />
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <span>
+                    <CreatePatientSheet
+                      onPatientCreated={handlePatientCreated}
+                      iconOnly
+                      buttonVariant="ghost"
+                      currentPatientCount={patients.length}
+                    />
+                  </span>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>Ajouter un patient</p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+          </div>
+          <div className="flex gap-2 mb-3">
+            <button
+              className={`px-3 py-1 text-sm rounded-full transition-colors ${patientFilter === "all" ? "bg-foreground text-background" : "bg-muted text-muted-foreground"}`}
+              onClick={() => setPatientFilter("all")}
+            >
+              Tous
+            </button>
+            <button
+              className={`px-3 py-1 text-sm rounded-full transition-colors ${patientFilter === "active" ? "bg-foreground text-background" : "bg-muted text-muted-foreground"}`}
+              onClick={() => setPatientFilter("active")}
+            >
+              Passation en cours
+            </button>
           </div>
           <Card className="border-0 bg-muted-foreground/5 shadow-none hover:shadow-none">
             <CardContent className="p-4">
@@ -308,13 +339,13 @@ export default function DashboardPage() {
               <p className="text-sm text-muted-foreground text-center py-8">
                 Chargement des patients...
               </p>
-            ) : sortedPatients.length === 0 ? (
+            ) : filteredPatients.length === 0 ? (
               <p className="text-sm text-muted-foreground text-center py-8">
-                Aucun patient dans votre liste
+                {patientFilter === "active" ? "Aucune passation en cours" : "Aucun patient dans votre liste"}
               </p>
             ) : (
               <div className="rounded-lg overflow-hidden">
-                {sortedPatients.map((patient) => (
+                {filteredPatients.map((patient) => (
                   <Link
                     key={patient.id}
                     href={`/patients/${patient.id}`}
@@ -330,14 +361,23 @@ export default function DashboardPage() {
                         </Badge>
                       )}
                     </div>
-                    <Interfaces.Send
-                      className="h-4 w-4 flex-shrink-0"
-                      fill="#f97316"
-                      onClick={(e: React.MouseEvent) => {
-                        e.preventDefault();
-                        window.location.href = `/send-scale?patientId=${patient.id}`;
-                      }}
-                    />
+                    <TooltipProvider>
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <Interfaces.Send
+                            className="h-4 w-4 flex-shrink-0"
+                            fill="#f97316"
+                            onClick={(e: React.MouseEvent) => {
+                              e.preventDefault();
+                              window.location.href = `/send-scale?patientId=${patient.id}`;
+                            }}
+                          />
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          <p>Envoyer une échelle</p>
+                        </TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
                   </Link>
                 ))}
               </div>
