@@ -29,6 +29,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { CreatePatientSheet } from "@/components/CreatePatientSheet";
+import { GlobalSearchBar } from "@/components/GlobalSearchBar";
 import { SESSION_STATUS_CONFIG } from "@/lib/session-status";
 
 function formatDate(dateStr: string) {
@@ -284,9 +285,10 @@ export default function DashboardPage() {
 
   return (
     <div className="container mx-auto px-4 py-6">
+      <GlobalSearchBar patients={patients} sessions={sessions} />
       <div className="mb-6">
         <h1 className="font-normal text-3xl">
-          Bonjour{user.firstName ? `, ${user.firstName}...` : "..."}
+          Bonjour{user.firstName ? `, ${user.firstName}` : ""}
         </h1>
       </div>
 
