@@ -123,18 +123,10 @@ export default function DashboardPage() {
   if (!user) {
     return (
       <div className="container mx-auto px-4 py-6">
-        <div className="mb-6 flex items-center justify-between">
-          <div>
-            <h1 className="text-4xl font-normal not-italic">
-              Bienvenue sur Melya
-            </h1>
-          </div>
-          <Button asChild>
-            <Link href="/send-scale">
-              <Interfaces.Send className="mr-2 h-4 w-4" />
-              Envoyer une échelle
-            </Link>
-          </Button>
+        <div className="mb-6">
+          <h1 className="text-4xl font-normal not-italic">
+            Bienvenue sur Melya
+          </h1>
         </div>
 
         <div className="space-y-6">
@@ -143,8 +135,6 @@ export default function DashboardPage() {
             <div className="mb-3">
               <h2 className="text-lg font-sans font-semibold">Suivi des passations</h2>
             </div>
-            <Card className="border-0 bg-muted-foreground/5 shadow-none hover:shadow-none">
-              <CardContent className="p-4">
               <div className="flex gap-3 overflow-x-auto pb-2">
                 {mockSessions.map((session) => {
                   const config = SESSION_STATUS_CONFIG[session.status];
@@ -152,7 +142,7 @@ export default function DashboardPage() {
                     <Link
                       key={session.id}
                       href={`/results/${session.id}`}
-                      className="bg-background rounded-lg p-4 min-w-[200px] hover:bg-background/80 transition-colors flex-shrink-0"
+                      className="bg-muted-foreground/5 rounded-lg p-4 min-w-[200px] hover:bg-muted-foreground/10 transition-colors flex-shrink-0"
                     >
                       <p className="font-medium text-sm">
                         {session.patientName}
@@ -170,8 +160,6 @@ export default function DashboardPage() {
                   );
                 })}
               </div>
-              </CardContent>
-            </Card>
           </div>
 
           {/* Mes patients - mock */}
@@ -256,18 +244,10 @@ export default function DashboardPage() {
 
   return (
     <div className="container mx-auto px-4 py-6">
-      <div className="mb-6 flex items-center justify-between">
-        <div>
-          <h1 className="font-bold text-3xl">
-            Bonjour{user.firstName ? `, ${user.firstName}` : ""}
-          </h1>
-        </div>
-        <Button asChild>
-          <Link href="/send-scale">
-            <Interfaces.Send className="mr-2 h-4 w-4" />
-            Envoyer une échelle
-          </Link>
-        </Button>
+      <div className="mb-6">
+        <h1 className="font-bold text-3xl">
+          Bonjour{user.firstName ? `, ${user.firstName}` : ""}
+        </h1>
       </div>
 
       <div className="space-y-6">
@@ -276,9 +256,7 @@ export default function DashboardPage() {
           <div className="mb-3">
             <h2 className="text-lg font-sans font-semibold">Suivi des passations</h2>
           </div>
-          <Card className="border-0 bg-muted-foreground/5 shadow-none hover:shadow-none">
-            <CardContent className="p-4">
-            {activeSessions.length === 0 ? (
+          {activeSessions.length === 0 ? (
               <p className="text-sm text-muted-foreground text-center py-8">
                 Aucune passation en cours
               </p>
@@ -290,7 +268,7 @@ export default function DashboardPage() {
                     <Link
                       key={session.id}
                       href={`/results/${session.id}`}
-                      className="bg-background rounded-lg p-4 min-w-[200px] hover:bg-background/80 transition-colors flex-shrink-0"
+                      className="bg-muted-foreground/5 rounded-lg p-4 min-w-[200px] hover:bg-muted-foreground/10 transition-colors flex-shrink-0"
                     >
                       <p className="font-medium text-sm">
                         {session.patient
@@ -311,20 +289,16 @@ export default function DashboardPage() {
                 })}
               </div>
             )}
-            </CardContent>
-          </Card>
         </div>
 
         {/* Mes patients */}
         <div>
-          <div className="mb-3 flex items-center justify-between">
-            <div>
-              <h2 className="text-lg font-sans font-semibold">Mes patients</h2>
-            </div>
+          <div className="mb-3 flex items-center gap-2">
+            <h2 className="text-lg font-sans font-semibold">Mes patients</h2>
             <CreatePatientSheet
               onPatientCreated={handlePatientCreated}
-              buttonSize="sm"
-              buttonText="Ajouter"
+              iconOnly
+              buttonVariant="ghost"
               currentPatientCount={patients.length}
             />
           </div>
@@ -340,39 +314,32 @@ export default function DashboardPage() {
               </p>
             ) : (
               <div className="rounded-lg overflow-hidden">
-                <table className="w-full">
-                  <tbody>
-                    {sortedPatients.map((patient) => (
-                      <tr
-                        key={patient.id}
-                        className="border-t border-border/50 first:border-t-0 hover:bg-background/50 transition-colors"
-                      >
-                        <td className="p-3">
-                          <div className="flex items-center gap-2">
-                            <Link href={`/patients/${patient.id}`} className="font-medium hover:underline">
-                              {patient.firstName} {patient.lastName}
-                            </Link>
-                            {patientIdsWithActiveSessions.has(patient.id) && (
-                              <Badge variant="secondary" className="text-xs">
-                                Passation en cours
-                              </Badge>
-                            )}
-                          </div>
-                        </td>
-                        <td className="p-3 text-right">
-                          <Button asChild variant="default" size="sm">
-                            <Link
-                              href={`/send-scale?patientId=${patient.id}`}
-                            >
-                              <Interfaces.Send className="mr-2 h-4 w-4" />
-                              Envoyer une échelle
-                            </Link>
-                          </Button>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
+                {sortedPatients.map((patient) => (
+                  <Link
+                    key={patient.id}
+                    href={`/patients/${patient.id}`}
+                    className="flex items-center justify-between p-3 border-t border-border/50 first:border-t-0 hover:bg-background/50 transition-colors"
+                  >
+                    <div className="flex items-center gap-2">
+                      <p className="font-medium">
+                        {patient.firstName} {patient.lastName}
+                      </p>
+                      {patientIdsWithActiveSessions.has(patient.id) && (
+                        <Badge variant="secondary" className="text-xs">
+                          Passation en cours
+                        </Badge>
+                      )}
+                    </div>
+                    <Interfaces.Send
+                      className="h-4 w-4 flex-shrink-0"
+                      fill="#f97316"
+                      onClick={(e: React.MouseEvent) => {
+                        e.preventDefault();
+                        window.location.href = `/send-scale?patientId=${patient.id}`;
+                      }}
+                    />
+                  </Link>
+                ))}
               </div>
             )}
             </CardContent>

@@ -23,6 +23,8 @@ interface CreatePatientSheetProps {
   onPatientCreated?: (patientId: string) => void;
   buttonSize?: "sm" | "lg";
   buttonText?: string;
+  buttonVariant?: "default" | "ghost" | "outline" | "secondary" | "destructive" | "link";
+  iconOnly?: boolean;
   currentPatientCount?: number;
 }
 
@@ -38,6 +40,8 @@ export function CreatePatientSheet({
   onPatientCreated,
   buttonSize = "lg",
   buttonText = "Ajouter un patient",
+  buttonVariant = "default",
+  iconOnly = false,
   currentPatientCount = 0,
 }: CreatePatientSheetProps) {
   const [open, setOpen] = useState(false);
@@ -128,9 +132,9 @@ export function CreatePatientSheet({
 
   return (
     <>
-      <Button size={buttonSize} onClick={handleOpen}>
-        <Interfaces.UserAdd className="mr-2 h-4 w-4" />
-        {buttonText}
+      <Button size={iconOnly ? "icon" : buttonSize} variant={buttonVariant} onClick={handleOpen}>
+        <Interfaces.UserAdd className={iconOnly ? "h-4 w-4" : "mr-2 h-4 w-4"} {...(iconOnly ? { fill: "#f97316" } : {})} />
+        {!iconOnly && buttonText}
       </Button>
       <Dialog open={open} onOpenChange={handleOpenChange}>
         <DialogContent className="sm:max-w-[500px]">
