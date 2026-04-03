@@ -21,6 +21,8 @@ npm run dev:staging
 
 Le front tourne sur http://localhost:3000 et pointe automatiquement sur l'API staging.
 
+> **Note** : ce mode ne nécessite ni PostgreSQL local, ni tunnel SSH. Idéal pour travailler uniquement sur le front.
+
 ## Workflow
 
 1. Se mettre sur la branche `staging` : `git checkout staging`
@@ -45,3 +47,7 @@ apps/web/
 | `npm run dev:staging` | Lance le front en mode staging |
 | `npm run build:web` | Build de production |
 | `npm run lint --workspace=apps/web` | Lint du code |
+
+## Passer en mode full-stack
+
+Pour travailler aussi sur l'API avec une DB locale, voir [setup-fullstack.md](setup-fullstack.md).

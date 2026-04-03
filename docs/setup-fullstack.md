@@ -3,7 +3,7 @@
 ## Prérequis
 
 - [Node.js](https://nodejs.org/) v20+
-- Accès SSH au serveur Dedibox (clé SSH configurée)
+- PostgreSQL installé localement (`brew install postgresql@14` ou supérieur)
 - Accès au repo GitHub
 
 ## Installation
@@ -14,21 +14,39 @@ cd saas-psy
 npm install
 ```
 
-## Lancer le projet
-
-### 1. Ouvrir le tunnel SSH vers la DB staging
-
-Dans un premier terminal (à laisser ouvert) :
+## Setup de la DB locale
 
 ```bash
-ssh -L 5432:localhost:5432 cascade@195.154.205.18 -N
+# Démarrer PostgreSQL si ce n'est pas déjà fait
+brew services start postgresql@14
+
+# Créer la base de données
+createdb melya_dev
+
+# Appliquer les migrations
+cd apps/api
+npx prisma migrate dev
 ```
 
-Cela redirige le port local 5432 vers la DB PostgreSQL du serveur.
+## Configuration
 
-### 2. Lancer le front + l'API
+### API (`apps/api/.env`)
 
-Dans un second terminal :
+```env
+DATABASE_URL="postgresql://<ton-user>@localhost:5432/melya_dev"
+NODE_ENV="development"
+```
+
+Les autres variables (JWT_SECRET, ENCRYPTION_KEY, etc.) sont déjà configurées dans le `.env`.
+
+### Front (`apps/web/.env.local`)
+
+```env
+NEXT_PUBLIC_API_URL=http://localhost:3001/api
+NEXT_PUBLIC_APP_MODE=full
+```
+
+## Lancer le projet
 
 ```bash
 npm run dev:all
@@ -37,10 +55,20 @@ npm run dev:all
 - Front : http://localhost:3000
 - API : http://localhost:3001/api
 
-## Configuration
+## Accéder à la DB staging (optionnel)
 
-- **Front** : `apps/web/.env.local` (généré automatiquement par `dev:staging`, ou copier `.env.staging`)
-- **API** : `apps/api/.env` (déjà configuré pour pointer vers la DB staging via le tunnel)
+Si tu as besoin d'accéder aux données staging (debug, Prisma Studio sur staging, etc.), ouvre un tunnel SSH dans un terminal séparé :
+
+```bash
+# Utiliser un port local différent (5433) car 5432 est pris par le PostgreSQL local
+ssh -L 5433:localhost:5432 cascade@195.154.205.18 -N
+```
+
+Puis modifier temporairement `DATABASE_URL` dans `apps/api/.env` :
+
+```env
+DATABASE_URL="postgresql://melya_app_staging:<password>@localhost:5433/melya_staging"
+```
 
 ## Commandes utiles
 
