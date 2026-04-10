@@ -326,7 +326,7 @@ export interface Session {
   id: string;
   patientId: string;
   scaleId: string;
-  status: "CREATED" | "SENT" | "STARTED" | "COMPLETED" | "EXPIRED" | "CANCELLED";
+  status: "SENT" | "STARTED" | "COMPLETED" | "EXPIRED" | "CANCELLED";
   score?: number | Record<string, any>;
   interpretation?: string;
   responses?: Record<string, number>;

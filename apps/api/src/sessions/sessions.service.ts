@@ -224,7 +224,7 @@ export class SessionsService {
       where: {
         practitionerId,
         OR: [
-          { status: { in: ['CREATED', 'SENT', 'STARTED'] } },
+          { status: { in: ['SENT', 'STARTED'] } },
           {
             status: 'COMPLETED',
             completedAt: { gte: thirtyDaysAgo },

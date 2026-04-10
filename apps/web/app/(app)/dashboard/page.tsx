@@ -32,11 +32,13 @@ import { CreatePatientSheet } from "@/components/CreatePatientSheet";
 import { GlobalSearchBar } from "@/components/GlobalSearchBar";
 import { SESSION_STATUS_CONFIG } from "@/lib/session-status";
 
-function formatDate(dateStr: string) {
-  return new Date(dateStr).toLocaleDateString("fr-FR", {
-    day: "2-digit",
-    month: "2-digit",
-  });
+function daysSinceSent(dateStr: string) {
+  const days = Math.floor(
+    (Date.now() - new Date(dateStr).getTime()) / (1000 * 60 * 60 * 24),
+  );
+  if (days === 0) return "Aujourd'hui";
+  if (days === 1) return "Il y a 1 jour";
+  return `Il y a ${days} jours`;
 }
 
 export default function DashboardPage() {
@@ -48,6 +50,7 @@ export default function DashboardPage() {
   const [patientsLoading, setPatientsLoading] = useState(true);
   const [sessions, setSessions] = useState<Session[]>([]);
   const [patientFilter, setPatientFilter] = useState<"all" | "active">("all");
+  const [sessionFilter, setSessionFilter] = useState<"all" | "SENT" | "STARTED" | "COMPLETED">("all");
 
   // Open auth modal if redirected from password reset
   useEffect(() => {
@@ -255,18 +258,23 @@ export default function DashboardPage() {
   }
 
   // Sort sessions: pending first, then completed
-  const activeSessions = [...sessions].sort((a, b) => {
-    const aIsPending = ["CREATED", "SENT", "STARTED"].includes(a.status);
-    const bIsPending = ["CREATED", "SENT", "STARTED"].includes(b.status);
+  const sortedSessions = [...sessions].sort((a, b) => {
+    const aIsPending = ["SENT", "STARTED"].includes(a.status);
+    const bIsPending = ["SENT", "STARTED"].includes(b.status);
     if (aIsPending && !bIsPending) return -1;
     if (!aIsPending && bIsPending) return 1;
     return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
   });
 
+  const activeSessions =
+    sessionFilter === "all"
+      ? sortedSessions
+      : sortedSessions.filter((s) => s.status === sessionFilter);
+
   // Sort patients: those with active sessions first
   const patientIdsWithActiveSessions = new Set(
     sessions
-      .filter((s) => ["CREATED", "SENT", "STARTED"].includes(s.status))
+      .filter((s) => ["SENT", "STARTED"].includes(s.status))
       .map((s) => s.patientId),
   );
 
@@ -300,6 +308,23 @@ export default function DashboardPage() {
               Suivi des passations
             </h2>
           </div>
+          <div className="flex gap-2 mb-3">
+            {(["all", "SENT", "STARTED", "COMPLETED"] as const).map((filter) => {
+              const label =
+                filter === "all"
+                  ? "Toutes"
+                  : SESSION_STATUS_CONFIG[filter].label;
+              return (
+                <button
+                  key={filter}
+                  className={`px-3 py-1 text-sm rounded-full transition-colors ${sessionFilter === filter ? "bg-foreground text-background" : "bg-muted text-muted-foreground"}`}
+                  onClick={() => setSessionFilter(filter)}
+                >
+                  {label}
+                </button>
+              );
+            })}
+          </div>
           {activeSessions.length === 0 ? (
             <p className="text-sm text-muted-foreground text-center py-8">
               Aucune passation en cours
@@ -327,7 +352,7 @@ export default function DashboardPage() {
                         {config.label}
                       </Badge>
                       <span className="text-xs text-muted-foreground">
-                        {formatDate(session.sentAt || session.createdAt)}
+                        {daysSinceSent(session.sentAt || session.createdAt)}
                       </span>
                     </div>
                   </Link>

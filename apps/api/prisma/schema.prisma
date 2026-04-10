@@ -148,7 +148,7 @@ model Session {
   batchId           String?        @map("batch_id")
 
   // Session status
-  status            SessionStatus  @default(CREATED)
+  status            SessionStatus  @default(SENT)
 
   // Responses (encrypted at rest - HDS compliance)
   responses         String?        // Encrypted JSON answers
@@ -175,7 +175,6 @@ model Session {
 }
 
 enum SessionStatus {
-  CREATED      // Session created, not sent yet
   SENT         // Email sent to patient
   STARTED      // Patient started filling
   COMPLETED    // Patient completed
