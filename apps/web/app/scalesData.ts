@@ -478,38 +478,6 @@ export const scales = [
     },
   },
   {
-    id: "test-scale",
-    formType: "single-scale",
-    title: "Échelle Test",
-    description: "Une échelle courte de 3 questions pour tester le système",
-    category: "Test",
-    estimatedTime: "2-3 minutes",
-    longDescription:
-      "Cette échelle est conçue pour tester le fonctionnement du système avec un minimum de questions.",
-    questions: [
-      "Comment évaluez-vous votre niveau de stress aujourd'hui ?",
-      "À quel point vous sentez-vous motivé(e) ?",
-      "Comment qualifieriez-vous votre qualité de sommeil ?",
-    ],
-    answerScales: {
-      intensity: [
-        { value: 0, label: "Pas du tout" },
-        { value: 1, label: "Un peu" },
-        { value: 2, label: "Modérément" },
-        { value: 3, label: "Beaucoup" },
-      ],
-    },
-    scoring: {
-      ranges: [
-        { min: 0, max: 3, interpretation: "Score faible" },
-        { min: 4, max: 6, interpretation: "Score moyen" },
-        { min: 7, max: 9, interpretation: "Score élevé" },
-      ],
-      method:
-        "Additionnez les scores de chaque question (0-3). Le score total varie de 0 à 9.",
-    },
-  },
-  {
     id: "stai-anxiete-generalisee",
     formType: "grouped-items",
     title: "STAI - Inventaire d'Anxiété État-Trait",

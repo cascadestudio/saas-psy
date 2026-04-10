@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useMemo } from "react";
 import { Input } from "@/components/ui/input";
-import { Badge } from "@/components/ui/badge";
 import { ScaleCard } from "@/components/ScaleCard";
 import { scales } from "@/app/scalesData";
 import { Interfaces } from "doodle-icons";
@@ -19,7 +18,7 @@ export default function EchellesPage() {
   // Extract unique categories from scales (excluding "Test")
   const categories = useMemo(() => {
     const uniqueCategories = Array.from(new Set(scales.map((s) => s.category)));
-    return uniqueCategories.filter((c) => c !== "Test").sort();
+    return uniqueCategories.sort();
   }, []);
 
   // Load favorites from API (only for authenticated users)
@@ -81,17 +80,14 @@ export default function EchellesPage() {
   return (
     <div className="container mx-auto px-4 py-6">
       <div className="mb-6">
-        <h1 className="font-bold text-3xl mb-2">Échelles psychométriques</h1>
-        <p className="text-muted-foreground">
-          Parcourez notre catalogue d'échelles et questionnaires validés scientifiquement
-        </p>
+        <h1 className="font-normal text-3xl">Échelles psychométriques</h1>
       </div>
 
       <div className="mb-4">
         <div className="relative">
           <Interfaces.Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
           <Input
-            placeholder="Rechercher une échelle par nom..."
+            placeholder="Rechercher une échelle..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="pl-10"
@@ -100,35 +96,33 @@ export default function EchellesPage() {
       </div>
 
       <div className="mb-6 flex flex-wrap gap-2">
-        <Badge
-          variant={selectedCategory === null ? "default" : "outline"}
-          className="cursor-pointer hover:bg-primary/90 transition-colors"
+        <button
+          className={`px-3 py-1 text-sm rounded-full transition-colors ${selectedCategory === null ? "bg-foreground text-background" : "bg-muted text-muted-foreground"}`}
           onClick={() => setSelectedCategory(null)}
         >
           Toutes
-        </Badge>
+        </button>
         {categories.map((category) => (
-          <Badge
+          <button
             key={category}
-            variant={selectedCategory === category ? "default" : "outline"}
-            className="cursor-pointer hover:bg-primary/90 transition-colors"
+            className={`px-3 py-1 text-sm rounded-full transition-colors ${selectedCategory === category ? "bg-foreground text-background" : "bg-muted text-muted-foreground"}`}
             onClick={() => setSelectedCategory(category)}
           >
             {category}
-          </Badge>
+          </button>
         ))}
       </div>
 
       {filteredScales.length === 0 ? (
         <div className="text-center py-12">
-          <p className="text-muted-foreground">
+          <p className="text-sm text-muted-foreground">
             Aucune échelle trouvée
             {searchQuery && ` pour "${searchQuery}"`}
             {selectedCategory && ` dans la catégorie "${selectedCategory}"`}
           </p>
         </div>
       ) : (
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
           {filteredScales.map((scale) => (
             <ScaleCard
               key={scale.id}

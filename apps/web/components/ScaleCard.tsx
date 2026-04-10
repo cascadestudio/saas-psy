@@ -1,15 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { FavoriteButton } from "@/components/FavoriteButton";
 import { questionCount } from "@/app/utils/utils";
 
@@ -32,39 +23,30 @@ export function ScaleCard({
   isFavorite,
 }: ScaleCardProps) {
   return (
-    <Card className="flex flex-col">
-      <CardHeader>
-        <div className="flex justify-between items-start">
-          <div className="text-sm text-muted-foreground mb-1">
-            {scale.category}
-          </div>
-          {!isLoadingFavorites && (
-            <FavoriteButton
-              scaleId={scale.id}
-              initialIsFavorite={isFavorite}
-              size="sm"
-            />
-          )}
-        </div>
-        <CardTitle>{scale.title}</CardTitle>
-        <CardDescription className="line-clamp-2">
+    <Link
+      href={`/scale/description/${scale.id}`}
+      className="bg-muted-foreground/5 rounded-lg p-4 flex flex-col gap-3 hover:bg-muted-foreground/10 transition-colors"
+    >
+      <div className="flex items-start justify-between gap-2">
+        <span className="text-xs text-muted-foreground">{scale.category}</span>
+        {!isLoadingFavorites && (
+          <FavoriteButton
+            scaleId={scale.id}
+            initialIsFavorite={isFavorite}
+            size="sm"
+          />
+        )}
+      </div>
+      <div className="flex-1">
+        <p className="font-medium text-sm leading-snug mb-1">{scale.title}</p>
+        <p className="text-sm text-muted-foreground line-clamp-2">
           {scale.description}
-        </CardDescription>
-      </CardHeader>
-      <CardContent className="flex-grow">
-        <div className="flex justify-between text-sm text-muted-foreground">
-          <span>{questionCount(scale)} questions</span>
-          <span>{scale.estimatedTime}</span>
-        </div>
-      </CardContent>
-      <CardFooter>
-        <Link
-          href={`/scale/description/${scale.id}`}
-          className="w-full"
-        >
-          <Button className="w-full">Voir les détails</Button>
-        </Link>
-      </CardFooter>
-    </Card>
+        </p>
+      </div>
+      <div className="flex justify-between text-xs text-muted-foreground">
+        <span>{questionCount(scale)} questions</span>
+        <span>{scale.estimatedTime}</span>
+      </div>
+    </Link>
   );
 }
