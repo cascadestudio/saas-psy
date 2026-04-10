@@ -2,13 +2,6 @@
 
 import { useParams, useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import {
   DropdownMenu,
@@ -49,7 +42,6 @@ export default function PatientDetailPage() {
         sessionsApi.getByPatientId(patientId),
       ]);
       setPatient(patientRes.patient);
-      // Sort sessions by date descending
       setSessions(
         sessionsRes.sessions.sort(
           (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
@@ -64,7 +56,6 @@ export default function PatientDetailPage() {
     }
   }, [user, patientId]);
 
-  // Load patient and sessions from API
   useEffect(() => {
     if (user) {
       loadData();
@@ -106,9 +97,6 @@ export default function PatientDetailPage() {
     );
   }
 
-  const completedSessions = sessions.filter((s) => s.status === "COMPLETED");
-
-  // Calculate age from birthDate
   const calculateAge = (birthDate?: string) => {
     if (!birthDate) return null;
     const today = new Date();
@@ -125,167 +113,110 @@ export default function PatientDetailPage() {
   const isArchived = !!patient.archivedAt;
 
   return (
-    <div className="container mx-auto px-4 py-6 space-y-6">
-      <div className="flex items-center gap-4">
-        <Button asChild variant="ghost" size="icon">
+    <div className="container mx-auto px-4 py-6">
+      {/* Header */}
+      <div className="flex items-center gap-3 mb-1">
+        <Button asChild variant="ghost" size="icon" className="-ml-2">
           <Link href="/dashboard">
             <Arrow.ArrowLeft className="h-4 w-4" />
           </Link>
         </Button>
-        <div className="flex-1">
-          <div className="flex items-center gap-3">
-            <h1 className="font-bold text-3xl">
-              {patient.firstName} {patient.lastName}
-            </h1>
-            {isArchived && (
-              <Badge variant="secondary" className="bg-orange-100 text-orange-800">
-                Archivé le {new Date(patient.archivedAt!).toLocaleDateString("fr-FR")}
-              </Badge>
-            )}
-          </div>
-          <p className="text-muted-foreground mt-1">{patient.email}</p>
-        </div>
-        <div className="flex items-center gap-2">
-          {isArchived ? (
-            <RestorePatientButton
+        <h1 className="font-normal text-3xl">
+          {patient.firstName} {patient.lastName}
+        </h1>
+        {isArchived && (
+          <Badge variant="secondary" className="bg-orange-100 text-orange-800">
+            Archivé le {new Date(patient.archivedAt!).toLocaleDateString("fr-FR")}
+          </Badge>
+        )}
+        {isArchived ? (
+          <RestorePatientButton
+            patient={patient}
+            onRestored={handleRestored}
+            size="lg"
+          />
+        ) : (
+          <>
+            <EditPatientSheet
               patient={patient}
-              onRestored={handleRestored}
-              size="lg"
+              onPatientUpdated={handlePatientUpdated}
+              open={editOpen}
+              onOpenChange={setEditOpen}
             />
-          ) : (
-            <>
-              <Button asChild size="lg">
-                <Link href={`/send-scale?patientId=${patient.id}`}>
-                  <Interfaces.Send className="mr-2 h-4 w-4" />
-                  Envoyer une échelle
-                </Link>
-              </Button>
-              <EditPatientSheet
-                patient={patient}
-                onPatientUpdated={handlePatientUpdated}
-                open={editOpen}
-                onOpenChange={setEditOpen}
-              />
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button variant="outline" size="icon">
-                    <MoreVertical className="h-4 w-4" />
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end">
-                  <DropdownMenuItem onClick={() => setEditOpen(true)}>
-                    <Pencil className="mr-2 h-4 w-4" />
-                    Modifier
-                  </DropdownMenuItem>
-                  <ArchivePatientDialog
-                    patient={patient}
-                    onArchived={handleArchived}
-                    trigger={
-                      <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
-                        <Archive className="mr-2 h-4 w-4" />
-                        Archiver
-                      </DropdownMenuItem>
-                    }
-                  />
-                </DropdownMenuContent>
-              </DropdownMenu>
-            </>
-          )}
-        </div>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" size="icon">
+                  <MoreVertical className="h-4 w-4" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuItem asChild>
+                  <Link href={`/send-scale?patientId=${patient.id}`}>
+                    <Interfaces.Send className="mr-2 h-4 w-4" />
+                    Envoyer une échelle
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => setEditOpen(true)}>
+                  <Pencil className="mr-2 h-4 w-4" />
+                  Modifier
+                </DropdownMenuItem>
+                <ArchivePatientDialog
+                  patient={patient}
+                  onArchived={handleArchived}
+                  trigger={
+                    <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
+                      <Archive className="mr-2 h-4 w-4" />
+                      Archiver
+                    </DropdownMenuItem>
+                  }
+                />
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </>
+        )}
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium text-muted-foreground">
-              Informations
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-2">
-            {age && (
-              <div className="flex items-center gap-2 text-sm">
-                <Interfaces.Calendar className="h-4 w-4 text-muted-foreground" />
-                <span>{age} ans</span>
-              </div>
-            )}
-            <div className="flex items-center gap-2 text-sm">
-              <Interfaces.Mail className="h-4 w-4 text-muted-foreground" />
-              <span className="truncate">{patient.email}</span>
-            </div>
-            <div className="flex items-center gap-2 text-sm">
-              <Files.FileText className="h-4 w-4 text-muted-foreground" />
-              <span>
-                Créé le{" "}
-                {new Date(patient.createdAt).toLocaleDateString("fr-FR")}
-              </span>
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium text-muted-foreground">
-              Passations totales
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="text-3xl font-bold">{sessions.length}</div>
-            <p className="text-xs text-muted-foreground mt-1">
-              {completedSessions.length} complétée(s)
-            </p>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium text-muted-foreground">
-              Dernière passation
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            {sessions.length > 0 ? (
-              <>
-                <div className="text-lg font-semibold">
-                  {new Date(sessions[0].createdAt).toLocaleDateString("fr-FR")}
-                </div>
-                <p className="text-xs text-muted-foreground mt-1">
-                  {scales.find((s) => s.id === sessions[0].scaleId)
-                    ?.title || "Échelle"}
-                </p>
-              </>
-            ) : (
-              <p className="text-sm text-muted-foreground">Aucune passation</p>
-            )}
-          </CardContent>
-        </Card>
+      {/* Subline */}
+      <div className="flex items-center gap-4 text-sm text-muted-foreground mb-6 pl-10">
+        {age && (
+          <span className="flex items-center gap-1.5">
+            <Interfaces.Calendar className="h-3.5 w-3.5" />
+            {age} ans
+          </span>
+        )}
+        <span className="flex items-center gap-1.5">
+          <Interfaces.Mail className="h-3.5 w-3.5" />
+          {patient.email}
+        </span>
+        <span className="flex items-center gap-1.5">
+          <Files.FileText className="h-3.5 w-3.5" />
+          Depuis le {new Date(patient.createdAt).toLocaleDateString("fr-FR")}
+        </span>
       </div>
 
-      {patient.notes && (
-        <Card>
-          <CardHeader>
-            <CardTitle>Notes</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p className="text-sm whitespace-pre-wrap">{patient.notes}</p>
-          </CardContent>
-        </Card>
-      )}
+      <div className="space-y-6">
+        {/* Notes */}
+        {patient.notes && (
+          <div>
+            <h2 className="text-lg font-sans font-semibold mb-3">Notes</h2>
+            <div className="bg-muted-foreground/5 rounded-lg p-4">
+              <p className="text-sm whitespace-pre-wrap">{patient.notes}</p>
+            </div>
+          </div>
+        )}
 
-      <Card>
-        <CardHeader>
-          <CardTitle>Historique des passations</CardTitle>
-          <CardDescription>
-            Toutes les passations d'échelles pour ce patient
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
+        {/* Historique des passations */}
+        <div>
+          <h2 className="text-lg font-sans font-semibold mb-3">
+            Historique des passations
+          </h2>
           {sessions.length === 0 ? (
-            <div className="text-center py-8">
+            <div className="bg-muted-foreground/5 rounded-lg p-8 text-center">
               <p className="text-sm text-muted-foreground mb-4">
                 Aucune passation enregistrée pour ce patient
               </p>
               {!isArchived && (
-                <Button asChild>
+                <Button asChild size="sm">
                   <Link href={`/send-scale?patientId=${patient.id}`}>
                     <Interfaces.Send className="mr-2 h-4 w-4" />
                     Envoyer la première échelle
@@ -294,39 +225,36 @@ export default function PatientDetailPage() {
               )}
             </div>
           ) : (
-            <div className="space-y-3">
+            <div className="bg-muted-foreground/5 rounded-lg overflow-hidden">
               {sessions.map((session) => {
-                const scale = scales.find(
-                  (s) => s.id === session.scaleId
-                );
+                const scale = scales.find((s) => s.id === session.scaleId);
+                const config = SESSION_STATUS_CONFIG[session.status as keyof typeof SESSION_STATUS_CONFIG];
 
                 return (
                   <div
                     key={session.id}
-                    className="flex items-center justify-between border rounded-lg p-4 hover:bg-muted/50 transition-colors"
+                    className="flex items-center justify-between p-4 border-t border-border/50 first:border-t-0 hover:bg-background/50 transition-colors"
                   >
                     <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2 mb-1">
-                        <p className="font-medium truncate">
+                      <div className="flex items-center gap-2 mb-0.5">
+                        <p className="font-medium text-sm truncate">
                           {scale?.title || session.scaleId}
                         </p>
-                        <Badge
-                          className={SESSION_STATUS_CONFIG[session.status as keyof typeof SESSION_STATUS_CONFIG]?.className}
-                          variant="secondary"
-                        >
-                          {SESSION_STATUS_CONFIG[session.status as keyof typeof SESSION_STATUS_CONFIG]?.label ?? session.status}
+                        <Badge className={config?.className} variant="secondary">
+                          {config?.label ?? session.status}
                         </Badge>
                       </div>
-                      <p className="text-sm text-muted-foreground">
-                        Créé le{" "}
-                        {new Date(session.createdAt).toLocaleDateString("fr-FR")}
-                      </p>
-                      {session.status === "COMPLETED" && session.score != null && (
-                        <p className="text-sm font-medium text-green-700 mt-1">
-                          Score: {formatScore(session.score)}
-                          {session.interpretation && ` - ${session.interpretation}`}
+                      <div className="flex items-center gap-3">
+                        <p className="text-xs text-muted-foreground">
+                          {new Date(session.createdAt).toLocaleDateString("fr-FR")}
                         </p>
-                      )}
+                        {session.status === "COMPLETED" && session.score != null && (
+                          <p className="text-xs font-medium text-green-700">
+                            Score : {formatScore(session.score)}
+                            {session.interpretation && ` — ${session.interpretation}`}
+                          </p>
+                        )}
+                      </div>
                     </div>
                     {session.status === "COMPLETED" && (
                       <Button asChild variant="outline" size="sm">
@@ -340,8 +268,8 @@ export default function PatientDetailPage() {
               })}
             </div>
           )}
-        </CardContent>
-      </Card>
+        </div>
+      </div>
     </div>
   );
 }
