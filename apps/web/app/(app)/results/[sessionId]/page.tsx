@@ -2,22 +2,21 @@
 
 import { useParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
 import { useUser } from "@/app/context/UserContext";
 import { useEffect, useState } from "react";
 import { sessionsApi, patientsApi, type Session, type Patient } from "@/lib/api-client";
 import { scales } from "@/app/scalesData";
-import { Arrow, Interfaces, Finance } from "doodle-icons";
-import { Minus } from "lucide-react";
-import { getMainScore, getMaxScore, getScorePercentage, getSubscores, getInterpretation as getStoredInterpretation } from "@/lib/score-utils";
+import { Arrow, Interfaces, Finance, Files } from "doodle-icons";
+import {
+  getMainScore,
+  getMaxScore,
+  getScorePercentage,
+  getSubscores,
+  getInterpretation as getStoredInterpretation,
+} from "@/lib/score-utils";
+import { SESSION_STATUS_CONFIG } from "@/lib/session-status";
 
 export default function ResultsPage() {
   const { user, isLoading } = useUser();
@@ -28,8 +27,8 @@ export default function ResultsPage() {
   const [patient, setPatient] = useState<Patient | null>(null);
   const [allSessions, setAllSessions] = useState<Session[]>([]);
   const [loading, setLoading] = useState(true);
+  const [copied, setCopied] = useState(false);
 
-  // Load session data from API
   useEffect(() => {
     const loadData = async () => {
       if (!user || !sessionId) return;
@@ -59,6 +58,14 @@ export default function ResultsPage() {
     }
   }, [user, sessionId]);
 
+  const handleCopyLink = () => {
+    const link = `${window.location.origin}/session/${sessionId}`;
+    navigator.clipboard.writeText(link).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    });
+  };
+
   if (isLoading || loading) {
     return (
       <div className="flex-1 w-full flex items-center justify-center">
@@ -67,140 +74,7 @@ export default function ResultsPage() {
     );
   }
 
-  if (!user) {
-    const mockScale = scales.find((s) => s.id === "inventaire-de-depression-de-beck");
-    return (
-      <div className="flex-1 w-full flex flex-col gap-6 p-6">
-        <div className="flex items-center gap-4">
-          <Button asChild variant="ghost" size="icon">
-            <Link href="/dashboard">
-              <Arrow.ArrowLeft className="h-4 w-4" />
-            </Link>
-          </Button>
-          <div className="flex-1">
-            <h1 className="font-bold text-3xl">Résultats de passation</h1>
-            <p className="text-muted-foreground mt-1">
-              Marie Dupont - {mockScale?.title}
-            </p>
-          </div>
-          <Button variant="outline" disabled>
-            <Interfaces.Download className="mr-2 h-4 w-4" />
-            Exporter PDF
-          </Button>
-        </div>
-
-        {/* Main Score Card */}
-        <Card>
-          <CardHeader>
-            <CardTitle>Score et interprétation</CardTitle>
-            <CardDescription>
-              Complété le 1 avril 2026 à 14:30
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="flex flex-col items-center justify-center p-6 bg-muted rounded-lg">
-                <div className="text-6xl font-bold text-primary mb-2">18</div>
-                <div className="text-sm text-muted-foreground mb-4">
-                  sur 63 (29%)
-                </div>
-                <Badge className="text-base px-4 py-2">
-                  Dépression légère
-                </Badge>
-              </div>
-              <div className="space-y-4">
-                <div>
-                  <h4 className="font-semibold mb-2">Interprétation clinique</h4>
-                  <p className="text-sm text-muted-foreground">
-                    Le score obtenu indique une symptomatologie dépressive légère. Un suivi régulier est recommandé pour évaluer l&apos;évolution.
-                  </p>
-                </div>
-                <div className="border-t pt-4">
-                  <h4 className="font-semibold mb-2">Évolution</h4>
-                  <div className="flex items-center gap-2">
-                    <Finance.TrendUp className="h-5 w-5 text-green-600" />
-                    <span className="text-sm text-green-600">
-                      Amélioration de 25% depuis la dernière passation
-                    </span>
-                  </div>
-                  <p className="text-xs text-muted-foreground mt-1">
-                    Passation précédente le 01/03/2026 : 24
-                  </p>
-                </div>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Longitudinal History */}
-        <Card>
-          <CardHeader>
-            <CardTitle>Historique longitudinal</CardTitle>
-            <CardDescription>
-              Évolution des scores au fil du temps (3 passations)
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-3">
-              {[
-                { id: "t0", date: "01/01/2026", score: 28, interpretation: "Dépression modérée", current: false },
-                { id: "t1", date: "01/03/2026", score: 24, interpretation: "Dépression modérée", current: false },
-                { id: "t2", date: "01/04/2026", score: 18, interpretation: "Dépression légère", current: true },
-              ].map((s, index) => (
-                <div
-                  key={s.id}
-                  className={`flex items-center justify-between p-4 border rounded-lg ${
-                    s.current ? "bg-primary/5 border-primary" : ""
-                  }`}
-                >
-                  <div className="flex items-center gap-4">
-                    <div className="text-sm font-medium text-muted-foreground w-8">
-                      T{index}
-                    </div>
-                    <div>
-                      <p className="text-sm font-medium">{s.date}</p>
-                      <p className="text-xs text-muted-foreground">
-                        {s.interpretation}
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-4">
-                    <div className="text-2xl font-bold">{s.score}</div>
-                    {s.current && <Badge variant="outline">Actuel</Badge>}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Scale Details */}
-        <Card>
-          <CardHeader>
-            <CardTitle>À propos de cette échelle</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div>
-              <h4 className="font-semibold mb-2">Description</h4>
-              <p className="text-sm text-muted-foreground">
-                {mockScale?.longDescription || mockScale?.description}
-              </p>
-            </div>
-            <div className="grid grid-cols-2 gap-4 pt-4 border-t">
-              <div>
-                <p className="text-sm text-muted-foreground">Catégorie</p>
-                <p className="font-medium">{mockScale?.category}</p>
-              </div>
-              <div>
-                <p className="text-sm text-muted-foreground">Durée estimée</p>
-                <p className="font-medium">{mockScale?.estimatedTime}</p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-    );
-  }
+  if (!user) return null;
 
   if (!session) {
     return (
@@ -213,16 +87,76 @@ export default function ResultsPage() {
     );
   }
 
-  const scale = scales.find(
-    (q) => q.id === session.scaleId
-  );
+  const scale = scales.find((q) => q.id === session.scaleId);
+  const statusConfig = SESSION_STATUS_CONFIG[session.status];
+  const backHref = patient ? `/patients/${patient.id}` : "/dashboard";
 
-  // Get longitudinal data (previous sessions of same scale for same patient)
+  // --- Pending / non-completed states ---
+  if (session.status !== "COMPLETED") {
+    return (
+      <div className="container mx-auto px-4 py-6">
+        {/* Header */}
+        <div className="flex items-center gap-3 mb-1">
+          <Button asChild variant="ghost" size="icon" className="-ml-2">
+            <Link href={backHref}>
+              <Arrow.ArrowLeft className="h-4 w-4" />
+            </Link>
+          </Button>
+          <h1 className="font-normal text-3xl">Résultats de passation</h1>
+        </div>
+
+        {/* Subline */}
+        <div className="flex items-center gap-4 text-sm text-muted-foreground mb-6 pl-10">
+          {patient && (
+            <span className="flex items-center gap-1.5">
+              <Interfaces.User className="h-3.5 w-3.5" />
+              {patient.firstName} {patient.lastName}
+            </span>
+          )}
+          {scale && (
+            <span className="flex items-center gap-1.5">
+              <Files.FileText className="h-3.5 w-3.5" />
+              {scale.title}
+            </span>
+          )}
+          <Badge className={statusConfig?.className} variant="secondary">
+            {statusConfig?.label ?? session.status}
+          </Badge>
+        </div>
+
+        {/* Pending state */}
+        <div className="bg-muted-foreground/5 rounded-lg p-8 text-center space-y-4">
+          <p className="text-muted-foreground">
+            {session.status === "EXPIRED"
+              ? "Cette passation a expiré. Le patient ne peut plus y répondre."
+              : session.status === "CANCELLED"
+              ? "Cette passation a été annulée."
+              : "Les résultats seront disponibles une fois la passation complétée par le patient."}
+          </p>
+          {session.sentAt && (
+            <p className="text-xs text-muted-foreground">
+              Envoyée le{" "}
+              {new Date(session.sentAt).toLocaleDateString("fr-FR", {
+                day: "numeric",
+                month: "long",
+                year: "numeric",
+              })}
+            </p>
+          )}
+          {(session.status === "SENT" || session.status === "STARTED") && (
+            <Button variant="outline" size="sm" onClick={handleCopyLink}>
+              <Interfaces.Copy className="mr-2 h-4 w-4" />
+              {copied ? "Lien copié !" : "Copier le lien de passation"}
+            </Button>
+          )}
+        </div>
+      </div>
+    );
+  }
+
+  // --- Completed state ---
   const sameScaleSessions = allSessions
-    .filter(
-      (s) =>
-        s.scaleId === session.scaleId && s.status === "COMPLETED"
-    )
+    .filter((s) => s.scaleId === session.scaleId && s.status === "COMPLETED")
     .sort(
       (a, b) =>
         new Date(b.completedAt!).getTime() - new Date(a.completedAt!).getTime()
@@ -236,190 +170,191 @@ export default function ResultsPage() {
       ? sameScaleSessions[currentSessionIndex + 1]
       : null;
 
-  let trend: "up" | "down" | "stable" | null = null;
-  let trendPercentage = 0;
-
   const currentMain = getMainScore(session.score);
   const previousMain = getMainScore(previousSession?.score);
-
-  if (previousMain !== undefined && currentMain !== undefined) {
-    const diff = currentMain - previousMain;
-    trendPercentage = Math.abs(
-      Math.round((diff / previousMain) * 100)
-    );
-
-    if (diff > 0) {
-      trend = "up";
-    } else if (diff < 0) {
-      trend = "down";
-    } else {
-      trend = "stable";
-    }
-  }
-
-  // Score display values
   const maxScore = getMaxScore(session.score);
   const scorePercentage = getScorePercentage(session.score);
   const subscores = getSubscores(session.score);
 
-  // Get interpretation from stored score or from session.interpretation or from scale ranges
+  let trend: "up" | "down" | "stable" | null = null;
+  let trendPercentage = 0;
+
+  if (previousMain !== undefined && currentMain !== undefined) {
+    const diff = currentMain - previousMain;
+    trendPercentage = Math.abs(Math.round((diff / previousMain) * 100));
+    if (diff > 0) trend = "up";
+    else if (diff < 0) trend = "down";
+    else trend = "stable";
+  }
+
   const storedInterpretation = getStoredInterpretation(session.score);
   const displayInterpretation = storedInterpretation || session.interpretation;
 
-  // Fallback: find interpretation from scale ranges if not stored
-  const scoreRange = !storedInterpretation && scale?.scoring?.ranges
-    ? scale.scoring.ranges.find(
-        (range: { min: number; max: number }) =>
-          currentMain !== undefined &&
-          currentMain >= range.min &&
-          currentMain <= range.max
-      )
-    : null;
+  const scoreRange =
+    !storedInterpretation && scale?.scoring?.ranges
+      ? scale.scoring.ranges.find(
+          (range: { min: number; max: number }) =>
+            currentMain !== undefined &&
+            currentMain >= range.min &&
+            currentMain <= range.max
+        )
+      : null;
 
-  const badgeInterpretation = storedInterpretation
-    || scoreRange?.interpretation
-    || (typeof session.interpretation === "string" ? session.interpretation : null);
+  const badgeInterpretation =
+    storedInterpretation ||
+    scoreRange?.interpretation ||
+    (typeof session.interpretation === "string" ? session.interpretation : null);
 
   return (
-    <div className="flex-1 w-full flex flex-col gap-6 p-6">
-      <div className="flex items-center gap-4">
-        <Button asChild variant="ghost" size="icon">
-          <Link href="/dashboard">
+    <div className="container mx-auto px-4 py-6">
+      {/* Header */}
+      <div className="flex items-center gap-3 mb-1">
+        <Button asChild variant="ghost" size="icon" className="-ml-2">
+          <Link href={backHref}>
             <Arrow.ArrowLeft className="h-4 w-4" />
           </Link>
         </Button>
-        <div className="flex-1">
-          <h1 className="font-bold text-3xl">Résultats de passation</h1>
-          <p className="text-muted-foreground mt-1">
-            {patient?.firstName} {patient?.lastName} - {scale?.title}
-          </p>
-        </div>
-        <Button variant="outline" disabled>
-          <Interfaces.Download className="mr-2 h-4 w-4" />
-          Exporter PDF
-        </Button>
+        <h1 className="font-normal text-3xl">Résultats de passation</h1>
       </div>
 
-      {/* Main Score Card */}
-      <Card>
-        <CardHeader>
-          <CardTitle>Score et interprétation</CardTitle>
-          <CardDescription>
-            Complété le{" "}
-            {session.completedAt &&
-              new Date(session.completedAt).toLocaleDateString("fr-FR", {
-                day: "numeric",
-                month: "long",
-                year: "numeric",
-                hour: "2-digit",
-                minute: "2-digit",
-              })}
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* Score Gauge */}
-            <div className="flex flex-col items-center justify-center p-6 bg-muted rounded-lg">
-              <div className="text-6xl font-bold text-primary mb-2">
-                {currentMain}
-              </div>
-              {subscores.length > 0 && (
-                <div className="text-sm text-muted-foreground mb-1">
-                  {subscores.map((s) => `${s.label}: ${s.value}${s.max ? `/${s.max}` : ""}`).join(" · ")}
+      {/* Subline */}
+      <div className="flex items-center gap-4 text-sm text-muted-foreground mb-6 pl-10">
+        {patient && (
+          <span className="flex items-center gap-1.5">
+            <Interfaces.User className="h-3.5 w-3.5" />
+            {patient.firstName} {patient.lastName}
+          </span>
+        )}
+        {scale && (
+          <span className="flex items-center gap-1.5">
+            <Files.FileText className="h-3.5 w-3.5" />
+            {scale.title}
+          </span>
+        )}
+        {session.completedAt && (
+          <span className="flex items-center gap-1.5">
+            <Interfaces.Calendar className="h-3.5 w-3.5" />
+            {new Date(session.completedAt).toLocaleDateString("fr-FR", {
+              day: "numeric",
+              month: "long",
+              year: "numeric",
+            })}
+          </span>
+        )}
+      </div>
+
+      <div className="space-y-6">
+        {/* Score et interprétation */}
+        <div>
+          <h2 className="text-lg font-sans font-semibold mb-3">
+            Score et interprétation
+          </h2>
+          <div className="bg-muted-foreground/5 rounded-lg p-6">
+            <div className="flex flex-col sm:flex-row gap-6">
+              {/* Score */}
+              <div className="flex flex-col items-center justify-center sm:w-48 shrink-0">
+                <div className="text-7xl font-bold text-primary leading-none mb-1">
+                  {currentMain}
                 </div>
-              )}
-              <div className="text-sm text-muted-foreground mb-4">
-                sur {maxScore || "?"} ({scorePercentage}%)
-              </div>
-              {badgeInterpretation && (
-                <Badge className="text-base px-4 py-2">
-                  {badgeInterpretation}
-                </Badge>
-              )}
-            </div>
-
-            {/* Interpretation */}
-            <div className="space-y-4">
-              <div>
-                <h4 className="font-semibold mb-2">Interprétation clinique</h4>
-                <p className="text-sm text-muted-foreground">
-                  {displayInterpretation}
-                </p>
-              </div>
-
-              {/* Trend indicator */}
-              {trend && previousSession && (
-                <div className="border-t pt-4">
-                  <h4 className="font-semibold mb-2">Évolution</h4>
-                  <div className="flex items-center gap-2">
-                    {trend === "down" && (
-                      <>
-                        <Finance.TrendUp className="h-5 w-5 text-green-600" />
-                        <span className="text-sm text-green-600">
-                          Amélioration de {trendPercentage}% depuis la dernière
-                          passation
-                        </span>
-                      </>
-                    )}
-                    {trend === "up" && (
-                      <>
-                        <Finance.TrendUp className="h-5 w-5 text-orange-600" />
-                        <span className="text-sm text-orange-600">
-                          Augmentation de {trendPercentage}% depuis la dernière
-                          passation
-                        </span>
-                      </>
-                    )}
-                    {trend === "stable" && (
-                      <>
-                        <Minus className="h-5 w-5 text-gray-600" />
-                        <span className="text-sm text-gray-600">
-                          Score stable depuis la dernière passation
-                        </span>
-                      </>
-                    )}
+                <div className="text-sm text-muted-foreground mt-2">
+                  sur {maxScore || "?"} ({scorePercentage}%)
+                </div>
+                {subscores.length > 0 && (
+                  <div className="text-xs text-muted-foreground mt-1 text-center">
+                    {subscores
+                      .map(
+                        (s) =>
+                          `${s.label}: ${s.value}${s.max ? `/${s.max}` : ""}`
+                      )
+                      .join(" · ")}
                   </div>
-                  <p className="text-xs text-muted-foreground mt-1">
-                    Passation précédente le{" "}
-                    {new Date(previousSession.completedAt!).toLocaleDateString(
-                      "fr-FR"
-                    )}{" "}
-                    : {previousMain}
-                  </p>
-                </div>
-              )}
+                )}
+                {badgeInterpretation && (
+                  <Badge className="mt-3 text-sm px-3 py-1">
+                    {badgeInterpretation}
+                  </Badge>
+                )}
+              </div>
+
+              {/* Interpretation + trend */}
+              <div className="flex-1 space-y-4 sm:border-l sm:pl-6">
+                {displayInterpretation && (
+                  <div>
+                    <p className="text-sm font-medium mb-1">Interprétation clinique</p>
+                    <p className="text-sm text-muted-foreground">
+                      {displayInterpretation}
+                    </p>
+                  </div>
+                )}
+
+                {trend && previousSession && (
+                  <div className="border-t pt-4">
+                    <p className="text-sm font-medium mb-2">Évolution</p>
+                    <div className="flex items-center gap-2">
+                      {trend === "down" && (
+                        <>
+                          <Finance.TrendUp className="h-4 w-4 text-green-600" />
+                          <span className="text-sm text-green-600">
+                            Amélioration de {trendPercentage}% depuis la dernière
+                            passation
+                          </span>
+                        </>
+                      )}
+                      {trend === "up" && (
+                        <>
+                          <Finance.TrendUp className="h-4 w-4 text-orange-600" />
+                          <span className="text-sm text-orange-600">
+                            Augmentation de {trendPercentage}% depuis la dernière
+                            passation
+                          </span>
+                        </>
+                      )}
+                      {trend === "stable" && (
+                        <>
+                          <span className="inline-block w-4 h-0.5 bg-gray-500 rounded" />
+                          <span className="text-sm text-gray-600">
+                            Score stable depuis la dernière passation
+                          </span>
+                        </>
+                      )}
+                    </div>
+                    <p className="text-xs text-muted-foreground mt-1">
+                      Passation précédente le{" "}
+                      {new Date(previousSession.completedAt!).toLocaleDateString(
+                        "fr-FR"
+                      )}{" "}
+                      : {previousMain}
+                    </p>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
-        </CardContent>
-      </Card>
+        </div>
 
-      {/* Longitudinal History */}
-      {sameScaleSessions.length > 1 && (
-        <Card>
-          <CardHeader>
-            <CardTitle>Historique longitudinal</CardTitle>
-            <CardDescription>
-              Évolution des scores au fil du temps ({
-                sameScaleSessions.length
-              }{" "}
-              passation(s))
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-3">
+        {/* Historique longitudinal */}
+        {sameScaleSessions.length > 1 && (
+          <div>
+            <h2 className="text-lg font-sans font-semibold mb-3">
+              Historique longitudinal
+            </h2>
+            <div className="bg-muted-foreground/5 rounded-lg overflow-hidden">
               {sameScaleSessions.map((s, index) => {
                 const isCurrent = s.id === session.id;
                 return (
-                  <div
+                  <Link
                     key={s.id}
-                    className={`flex items-center justify-between p-4 border rounded-lg ${
-                      isCurrent ? "bg-primary/5 border-primary" : ""
+                    href={`/results/${s.id}`}
+                    className={`flex items-center justify-between p-4 border-t border-border/50 first:border-t-0 transition-colors ${
+                      isCurrent
+                        ? "bg-primary/5 pointer-events-none"
+                        : "hover:bg-background/50 cursor-pointer"
                     }`}
                   >
                     <div className="flex items-center gap-4">
-                      <div className="text-sm font-medium text-muted-foreground w-8">
-                        T{index}
-                      </div>
+                      <span className="text-sm text-muted-foreground w-6">
+                        T{sameScaleSessions.length - 1 - index}
+                      </span>
                       <div>
                         <p className="text-sm font-medium">
                           {new Date(s.completedAt!).toLocaleDateString("fr-FR")}
@@ -429,56 +364,23 @@ export default function ResultsPage() {
                         </p>
                       </div>
                     </div>
-                    <div className="flex items-center gap-4">
-                      <div className="text-2xl font-bold">{getMainScore(s.score)}</div>
+                    <div className="flex items-center gap-3">
+                      <span className="text-2xl font-bold">
+                        {getMainScore(s.score)}
+                      </span>
                       {isCurrent && (
-                        <Badge variant="outline">Actuel</Badge>
+                        <Badge variant="outline" className="text-xs">
+                          Actuel
+                        </Badge>
                       )}
                     </div>
-                  </div>
+                  </Link>
                 );
               })}
             </div>
-          </CardContent>
-        </Card>
-      )}
-
-      {/* Questionnaire Details */}
-      <Card>
-        <CardHeader>
-          <CardTitle>À propos de ce scale</CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <div>
-            <h4 className="font-semibold mb-2">Description</h4>
-            <p className="text-sm text-muted-foreground">
-              {scale?.longDescription || scale?.description}
-            </p>
           </div>
-
-          <div className="grid grid-cols-2 gap-4 pt-4 border-t">
-            <div>
-              <p className="text-sm text-muted-foreground">Catégorie</p>
-              <p className="font-medium">{scale?.category}</p>
-            </div>
-            <div>
-              <p className="text-sm text-muted-foreground">
-                Durée estimée
-              </p>
-              <p className="font-medium">{scale?.estimatedTime}</p>
-            </div>
-          </div>
-
-          {scale?.scoring && (
-            <div className="pt-4 border-t">
-              <h4 className="font-semibold mb-2">Méthode de cotation</h4>
-              <p className="text-sm text-muted-foreground">
-                {scale.scoring.method}
-              </p>
-            </div>
-          )}
-        </CardContent>
-      </Card>
+        )}
+      </div>
     </div>
   );
 }
