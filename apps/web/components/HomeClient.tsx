@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 import { Interfaces } from "doodle-icons";
-import { X } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 
@@ -110,7 +109,7 @@ export default function Home() {
               className="absolute right-2.5 top-2.5 h-4 w-4 text-muted-foreground hover:text-foreground"
               onClick={() => setSearchTerm("")}
             >
-              <X className="h-4 w-4" />
+              <Interfaces.Cross className="h-4 w-4" />
             </button>
           )}
         </div>

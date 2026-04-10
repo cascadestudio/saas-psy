@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Loader2, CheckCircle2, Clock, ChevronRight } from "lucide-react";
+import { Arrow, Interfaces } from "doodle-icons";
 import Link from "next/link";
 
 interface PortalSession {
@@ -69,7 +69,7 @@ export default function PatientPortalPage() {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
         <div className="text-center">
-          <Loader2 className="h-8 w-8 animate-spin text-indigo-600 mx-auto" />
+          <Interfaces.Sync className="h-8 w-8 animate-spin text-indigo-600 mx-auto" />
           <p className="mt-4 text-gray-600">Chargement...</p>
         </div>
       </div>
@@ -124,7 +124,7 @@ export default function PatientPortalPage() {
           <Card className="mb-6 border-green-200 bg-green-50">
             <CardContent className="py-6">
               <div className="flex items-center justify-center gap-3">
-                <CheckCircle2 className="h-8 w-8 text-green-600" />
+                <Interfaces.Tick2 className="h-8 w-8 text-green-600" />
                 <div className="text-center">
                   <p className="font-medium text-green-900">
                     Merci pour vos réponses !
@@ -150,7 +150,7 @@ export default function PatientPortalPage() {
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2">
                       {session.isCompleted ? (
-                        <CheckCircle2 className="h-5 w-5 text-green-600 flex-shrink-0" />
+                        <Interfaces.Tick2 className="h-5 w-5 text-green-600 flex-shrink-0" />
                       ) : (
                         <div className="h-5 w-5 rounded-full border-2 border-indigo-300 flex-shrink-0" />
                       )}
@@ -171,7 +171,7 @@ export default function PatientPortalPage() {
                     )}
                     {session.estimatedTime && !session.isCompleted && (
                       <div className="flex items-center gap-1 text-xs text-gray-400 mt-1 ml-7">
-                        <Clock className="h-3 w-3" />
+                        <Interfaces.Clock className="h-3 w-3" />
                         <span>{session.estimatedTime}</span>
                       </div>
                     )}
@@ -185,7 +185,7 @@ export default function PatientPortalPage() {
                       <Button asChild size="sm">
                         <Link href={`/session/${session.id}`}>
                           Commencer
-                          <ChevronRight className="h-4 w-4 ml-1" />
+                          <Arrow.ArrowSingleRight className="h-4 w-4 ml-1" />
                         </Link>
                       </Button>
                     )}

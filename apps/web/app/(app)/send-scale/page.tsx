@@ -19,7 +19,6 @@ import { patientsApi, sessionsApi, type Patient } from "@/lib/api-client";
 import { scales } from "@/app/scalesData";
 import { Input } from "@/components/ui/input";
 import { Arrow, Interfaces } from "doodle-icons";
-import { Check } from "lucide-react";
 import { toast } from "sonner";
 import { CreatePatientSheet } from "@/components/CreatePatientSheet";
 
@@ -214,7 +213,7 @@ function SendScaleContent() {
                 } ${!isClickable ? "cursor-default" : ""}`}
               >
                 {isCompleted ? (
-                  <Check className="h-4 w-4" />
+                  <Interfaces.Tick className="h-4 w-4" />
                 ) : (
                   index + 1
                 )}
