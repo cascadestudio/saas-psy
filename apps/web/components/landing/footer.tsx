@@ -48,14 +48,18 @@ export function Footer() {
           {/* Social */}
           <div className="flex items-center gap-4">
             <a
-              href="#"
+              href="https://www.linkedin.com/company/melya-app"
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-muted-foreground hover:text-foreground transition-colors"
               aria-label="LinkedIn"
             >
               <Logos.Linkedin className="h-5 w-5" fill="currentColor" />
             </a>
             <a
-              href="#"
+              href="https://www.instagram.com/melya_app/"
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-muted-foreground hover:text-foreground transition-colors"
               aria-label="Instagram"
             >
