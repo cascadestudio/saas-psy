@@ -10,7 +10,6 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Interfaces } from "doodle-icons";
-import { Check } from "lucide-react";
 
 export function PremiumGateModal() {
   const { isOpen, closePremiumGate, gateType, currentCount, maxCount, featureName } = usePremiumGate();
@@ -49,19 +48,19 @@ export function PremiumGateModal() {
             </p>
             <ul className="space-y-2">
               <li className="flex items-center gap-2 text-sm">
-                <Check className="h-4 w-4 text-primary" />
+                <Interfaces.Tick className="h-4 w-4 text-primary" />
                 Patients illimités
               </li>
               <li className="flex items-center gap-2 text-sm">
-                <Check className="h-4 w-4 text-primary" />
+                <Interfaces.Tick className="h-4 w-4 text-primary" />
                 Archivage des patients
               </li>
               <li className="flex items-center gap-2 text-sm">
-                <Check className="h-4 w-4 text-primary" />
+                <Interfaces.Tick className="h-4 w-4 text-primary" />
                 Export PDF des résultats
               </li>
               <li className="flex items-center gap-2 text-sm">
-                <Check className="h-4 w-4 text-primary" />
+                <Interfaces.Tick className="h-4 w-4 text-primary" />
                 Support prioritaire
               </li>
             </ul>

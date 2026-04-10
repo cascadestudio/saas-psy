@@ -15,7 +15,6 @@ import { useEffect, useState, useCallback } from "react";
 import { patientsApi, sessionsApi, type Patient, type Session } from "@/lib/api-client";
 import { scales } from "@/app/scalesData";
 import { Arrow, Interfaces, Files } from "doodle-icons";
-import { MoreVertical } from "lucide-react";
 import { ArchivePatientDialog } from "@/components/ArchivePatientDialog";
 import { RestorePatientButton } from "@/components/RestorePatientButton";
 import { EditPatientSheet } from "@/components/EditPatientSheet";
@@ -146,7 +145,7 @@ export default function PatientDetailPage() {
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" size="icon">
-                  <MoreVertical className="h-4 w-4" />
+                  <Interfaces.Setting className="h-4 w-4" />
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="bg-muted">
