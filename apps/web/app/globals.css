@@ -66,6 +66,7 @@
     --chart-5: 0 0% 10%;                /* warm-black */
 
     /* Brand colors for direct use */
+    --brand-orange: 19 75% 48%;           /* #D6591F */
     --brand-terracotta: 24 70% 46%;
     --brand-beige: 41 26% 78%;
     --brand-cream: 37 22% 90%;
@@ -128,9 +129,15 @@
     background-color: #EDE8DF;
   }
 
-  /* Headings use Gelica */
-  h1, h2, h3, h4, h5, h6 {
+  /* h1, h2 use Gelica */
+  h1, h2 {
     font-family: 'Gelica', Georgia, serif;
+    @apply font-semibold tracking-tight;
+  }
+
+  /* h3+ use Rethink Sans */
+  h3, h4, h5, h6 {
+    font-family: var(--font-rethink), sans-serif;
     @apply font-semibold tracking-tight;
   }
 

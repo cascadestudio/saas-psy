@@ -7,21 +7,18 @@ const steps = [
     title: "Choisissez votre patient et vos échelles",
     description:
       "Sélectionnez un patient existant ou créez-en un en quelques secondes, puis choisissez une ou plusieurs échelles à lui envoyer.",
-    color: "#CBCADB",
   },
   {
     number: "2",
     title: "Le patient répond en ligne",
     description:
       "Votre patient·e reçoit un lien par email, remplit le questionnaire depuis son téléphone ou ordinateur, sans créer de compte.",
-    color: "#6A9BCC",
   },
   {
     number: "3",
     title: "Recevez les résultats cotés automatiquement",
     description:
       "Scores calculés selon les barèmes officiels, disponibles instantanément dans votre espace sécurisé.",
-    color: "#C46686",
   },
 ];
 
@@ -43,8 +40,7 @@ export function HowItWorks() {
             {steps.map((step) => (
               <div key={step.number} className="text-center">
                 <div
-                  className="mx-auto mb-4 h-12 w-12 rounded-full flex items-center justify-center"
-                  style={{ backgroundColor: step.color }}
+                  className="mx-auto mb-4 h-12 w-12 rounded-full flex items-center justify-center bg-brand-orange"
                 >
                   <span className="text-lg font-heading font-bold text-white">
                     {step.number}

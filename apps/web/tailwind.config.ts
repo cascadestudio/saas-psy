@@ -66,6 +66,7 @@ const config = {
           "5": "hsl(var(--chart-5))",
         },
         brand: {
+          orange: "hsl(var(--brand-orange))",
           terracotta: "hsl(var(--brand-terracotta))",
           beige: "hsl(var(--brand-beige))",
           cream: "hsl(var(--brand-cream))",
@@ -73,9 +74,6 @@ const config = {
           "warm-black": "hsl(var(--brand-warm-black))",
           "warm-gray": "hsl(var(--brand-warm-gray))",
           "soft-green": "hsl(var(--brand-soft-green))",
-          "white": "#F4F0E4",
-          orange: "#D97757",
-          "orange-light": "#E6DAD4",
         },
       },
       borderRadius: {
