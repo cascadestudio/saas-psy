@@ -24,7 +24,7 @@ export function ScaleCard({
 }: ScaleCardProps) {
   return (
     <Link
-      href={`/scale/description/${scale.id}`}
+      href={`/echelles/${scale.id}`}
       className="bg-muted-foreground/5 rounded-lg p-4 flex flex-col gap-3 hover:bg-muted-foreground/10 transition-colors"
     >
       <div className="flex items-start justify-between gap-2">

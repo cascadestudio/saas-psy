@@ -36,6 +36,7 @@ function SendScaleContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const preselectedPatientId = searchParams.get("patientId");
+  const preselectedScaleId = searchParams.get("scaleId");
 
   // If patient is preselected, start at scales step
   const [step, setStep] = useState<Step>(
@@ -44,7 +45,9 @@ function SendScaleContent() {
   const [selectedPatientId, setSelectedPatientId] = useState<string>(
     preselectedPatientId || ""
   );
-  const [selectedScaleIds, setSelectedScaleIds] = useState<string[]>([]);
+  const [selectedScaleIds, setSelectedScaleIds] = useState<string[]>(
+    preselectedScaleId ? [preselectedScaleId] : []
+  );
   const [personalMessage, setPersonalMessage] = useState("");
   const [patients, setPatients] = useState<Patient[]>([]);
   const [patientsLoading, setPatientsLoading] = useState(true);
