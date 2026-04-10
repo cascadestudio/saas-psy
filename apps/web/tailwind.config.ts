@@ -67,6 +67,7 @@ const config = {
         },
         brand: {
           orange: "hsl(var(--brand-orange))",
+          "orange-light": "hsl(var(--brand-orange-light))",
           terracotta: "hsl(var(--brand-terracotta))",
           beige: "hsl(var(--brand-beige))",
           cream: "hsl(var(--brand-cream))",

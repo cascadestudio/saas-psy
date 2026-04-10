@@ -15,7 +15,7 @@ import { useEffect, useState, useCallback } from "react";
 import { patientsApi, sessionsApi, type Patient, type Session } from "@/lib/api-client";
 import { scales } from "@/app/scalesData";
 import { Arrow, Interfaces, Files } from "doodle-icons";
-import { MoreVertical, Pencil, Archive } from "lucide-react";
+import { MoreVertical } from "lucide-react";
 import { ArchivePatientDialog } from "@/components/ArchivePatientDialog";
 import { RestorePatientButton } from "@/components/RestorePatientButton";
 import { EditPatientSheet } from "@/components/EditPatientSheet";
@@ -149,23 +149,23 @@ export default function PatientDetailPage() {
                   <MoreVertical className="h-4 w-4" />
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
-                <DropdownMenuItem asChild>
+              <DropdownMenuContent align="end" className="bg-muted">
+                <DropdownMenuItem asChild className="cursor-pointer">
                   <Link href={`/send-scale?patientId=${patient.id}`}>
                     <Interfaces.Send className="mr-2 h-4 w-4" />
                     Envoyer une échelle
                   </Link>
                 </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => setEditOpen(true)}>
-                  <Pencil className="mr-2 h-4 w-4" />
+                <DropdownMenuItem onClick={() => setEditOpen(true)} className="cursor-pointer">
+                  <Interfaces.Pencil className="mr-2 h-4 w-4" />
                   Modifier
                 </DropdownMenuItem>
                 <ArchivePatientDialog
                   patient={patient}
                   onArchived={handleArchived}
                   trigger={
-                    <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
-                      <Archive className="mr-2 h-4 w-4" />
+                    <DropdownMenuItem onSelect={(e) => e.preventDefault()} className="cursor-pointer">
+                      <Interfaces.Delete className="mr-2 h-4 w-4" />
                       Archiver
                     </DropdownMenuItem>
                   }
@@ -231,9 +231,10 @@ export default function PatientDetailPage() {
                 const config = SESSION_STATUS_CONFIG[session.status as keyof typeof SESSION_STATUS_CONFIG];
 
                 return (
-                  <div
+                  <Link
                     key={session.id}
-                    className="flex items-center justify-between p-4 border-t border-border/50 first:border-t-0 hover:bg-background/50 transition-colors"
+                    href={`/results/${session.id}`}
+                    className="flex items-center justify-between p-4 border-t border-border/50 first:border-t-0 hover:bg-background/50 transition-colors cursor-pointer"
                   >
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2 mb-0.5">
@@ -256,14 +257,7 @@ export default function PatientDetailPage() {
                         )}
                       </div>
                     </div>
-                    {session.status === "COMPLETED" && (
-                      <Button asChild variant="outline" size="sm">
-                        <Link href={`/results/${session.id}`}>
-                          Voir résultats
-                        </Link>
-                      </Button>
-                    )}
-                  </div>
+                  </Link>
                 );
               })}
             </div>

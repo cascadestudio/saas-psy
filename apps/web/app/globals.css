@@ -67,6 +67,7 @@
 
     /* Brand colors for direct use */
     --brand-orange: 19 75% 48%;           /* #D6591F */
+    --brand-orange-light: 19 75% 93%;     /* solid light orange */
     --brand-terracotta: 24 70% 46%;
     --brand-beige: 41 26% 78%;
     --brand-cream: 37 22% 90%;
