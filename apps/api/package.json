@@ -22,6 +22,7 @@
     "prisma:migrate:dev": "prisma migrate dev",
     "prisma:migrate:deploy": "prisma migrate deploy",
     "prisma:studio": "prisma studio",
+    "prisma:studio:staging": "DATABASE_URL='postgresql://melya_app_staging:4374611d57b92c38d2f8f12f0927a2abc0b0bf19cad08ea0@localhost:5433/melya_staging' prisma studio --port 5556",
     "prisma:seed": "ts-node prisma/seed.ts"
   },
   "dependencies": {
