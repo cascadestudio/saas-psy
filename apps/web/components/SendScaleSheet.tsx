@@ -1,23 +1,22 @@
 "use client";
 
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
-import Link from "next/link";
+import { Input } from "@/components/ui/input";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetDescription,
+} from "@/components/ui/sheet";
 import { useUser } from "@/app/context/UserContext";
-import { useEffect, useState, Suspense } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { patientsApi, sessionsApi, type Patient } from "@/lib/api-client";
 import { scales } from "@/app/scalesData";
-import { Input } from "@/components/ui/input";
 import { Arrow, Interfaces } from "doodle-icons";
 import { toast } from "sonner";
 import { CreatePatientSheet } from "@/components/CreatePatientSheet";
@@ -31,22 +30,32 @@ const STEPS: { key: Step; label: string }[] = [
   { key: "confirm", label: "Confirmation" },
 ];
 
-function SendScaleContent() {
-  const { user, isLoading } = useUser();
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const preselectedPatientId = searchParams.get("patientId");
-  const preselectedScaleId = searchParams.get("scaleId");
+interface SendScaleSheetProps {
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+  defaultPatientId?: string;
+  defaultScaleIds?: string[];
+  /** Called after successful send (e.g. to refresh data) */
+  onSent?: () => void;
+}
 
-  // If patient is preselected, start at scales step
-  const [step, setStep] = useState<Step>(
-    preselectedPatientId ? "scales" : "patient"
-  );
+export function SendScaleSheet({
+  open,
+  onOpenChange,
+  defaultPatientId,
+  defaultScaleIds,
+  onSent,
+}: SendScaleSheetProps) {
+  const { user } = useUser();
+  const router = useRouter();
+
+  const initialStep: Step = defaultPatientId ? "scales" : "patient";
+  const [step, setStep] = useState<Step>(initialStep);
   const [selectedPatientId, setSelectedPatientId] = useState<string>(
-    preselectedPatientId || ""
+    defaultPatientId || ""
   );
   const [selectedScaleIds, setSelectedScaleIds] = useState<string[]>(
-    preselectedScaleId ? [preselectedScaleId] : []
+    defaultScaleIds || []
   );
   const [personalMessage, setPersonalMessage] = useState("");
   const [patients, setPatients] = useState<Patient[]>([]);
@@ -54,9 +63,20 @@ function SendScaleContent() {
   const [isSending, setIsSending] = useState(false);
   const [patientSearch, setPatientSearch] = useState("");
 
-  // Load patients from API
+  // Reset state when sheet opens with new defaults
   useEffect(() => {
-    if (!user) {
+    if (open) {
+      setSelectedPatientId(defaultPatientId || "");
+      setSelectedScaleIds(defaultScaleIds || []);
+      setStep(defaultPatientId ? "scales" : "patient");
+      setPersonalMessage("");
+      setPatientSearch("");
+    }
+  }, [open, defaultPatientId, defaultScaleIds]);
+
+  // Load patients
+  useEffect(() => {
+    if (!user || !open) {
       setPatientsLoading(false);
       return;
     }
@@ -72,12 +92,10 @@ function SendScaleContent() {
         setPatientsLoading(false);
       }
     };
-
     loadPatients();
-  }, [user]);
+  }, [user, open]);
 
   const handlePatientCreated = async (patientId: string) => {
-    // Refresh patient list and select the new patient
     try {
       const { patients: data } = await patientsApi.getAll();
       setPatients(data);
@@ -86,14 +104,6 @@ function SendScaleContent() {
       console.error("Error refreshing patients:", error);
     }
   };
-
-  if (isLoading) {
-    return (
-      <div className="flex-1 w-full flex items-center justify-center">
-        <p>Chargement...</p>
-      </div>
-    );
-  }
 
   const selectedPatient = patients.find((p) => p.id === selectedPatientId);
   const selectedScales = scales.filter((s) =>
@@ -139,7 +149,9 @@ function SendScaleContent() {
         });
       }
 
-      router.push("/dashboard");
+      onOpenChange(false);
+      onSent?.();
+      router.refresh();
     } catch (error) {
       console.error("Error sending scales:", error);
       toast.error("Erreur lors de l'envoi des échelles");
@@ -163,86 +175,69 @@ function SendScaleContent() {
     }
   };
 
-  const getStepDescription = () => {
-    switch (step) {
-      case "patient":
-        return "Sélectionnez le patient à qui envoyer les échelles";
-      case "scales":
-        return "Vous pouvez sélectionner plusieurs échelles à envoyer en même temps";
-      case "message":
-        return "Ajoutez un message personnalisé (optionnel)";
-      case "confirm":
-        return "Vérifiez les informations avant d'envoyer";
-    }
-  };
-
   return (
-    <div className="container mx-auto px-4 py-6 space-y-6 max-w-4xl">
-      <div className="flex items-center gap-4">
-        <Button asChild variant="ghost" size="icon">
-          <Link href="/dashboard">
-            <Arrow.ArrowLeft className="h-4 w-4" />
-          </Link>
-        </Button>
-        <div className="flex-1">
-          <h1 className="font-bold text-3xl">Envoyer une échelle</h1>
-          <p className="text-muted-foreground mt-1">
-            {selectedPatient
-              ? `Pour ${selectedPatient.firstName} ${selectedPatient.lastName}`
-              : "Sélectionnez un patient"}
-          </p>
-        </div>
-      </div>
+    <Sheet open={open} onOpenChange={onOpenChange}>
+      <SheetContent
+        side="right"
+        className="sm:max-w-[520px] w-full flex flex-col p-0"
+      >
+        {/* Header */}
+        <SheetHeader className="px-6 pt-6 pb-4 border-b space-y-4">
+          <div>
+            <SheetTitle className="text-xl">Envoyer une échelle</SheetTitle>
+            <SheetDescription>
+              {selectedPatient
+                ? `Pour ${selectedPatient.firstName} ${selectedPatient.lastName}`
+                : "Sélectionnez un patient"}
+            </SheetDescription>
+          </div>
 
-      {/* Progress Steps - Always visible, completed steps are clickable */}
-      <div className="flex items-center gap-2">
-        {STEPS.map((s, index) => {
-          const isCompleted = index < currentStepIndex;
-          const isCurrent = step === s.key;
-          const isClickable = isCompleted;
+          {/* Progress Steps */}
+          <div className="flex items-center gap-2">
+            {STEPS.map((s, index) => {
+              const isCompleted = index < currentStepIndex;
+              const isCurrent = step === s.key;
+              const isClickable = isCompleted;
 
-          return (
-            <div key={s.key} className="flex items-center gap-2 flex-1">
-              <button
-                type="button"
-                disabled={!isClickable}
-                onClick={() => isClickable && setStep(s.key)}
-                className={`flex items-center justify-center w-8 h-8 rounded-full text-sm font-medium transition-colors ${
-                  isCurrent
-                    ? "bg-primary text-primary-foreground"
-                    : isCompleted
-                    ? "bg-green-500 text-white hover:bg-green-600 cursor-pointer"
-                    : "bg-muted text-muted-foreground"
-                } ${!isClickable ? "cursor-default" : ""}`}
-              >
-                {isCompleted ? (
-                  <Interfaces.Tick className="h-4 w-4" />
-                ) : (
-                  index + 1
-                )}
-              </button>
-              <span
-                className={`text-sm font-medium hidden md:inline ${
-                  isClickable ? "cursor-pointer hover:text-primary" : ""
-                }`}
-                onClick={() => isClickable && setStep(s.key)}
-              >
-                {s.label}
-              </span>
-              {index < STEPS.length - 1 && (
-                <div className="flex-1 h-0.5 bg-muted hidden md:block" />
-              )}
-            </div>
-          );
-        })}
-      </div>
+              return (
+                <div key={s.key} className="flex items-center gap-1.5 flex-1">
+                  <button
+                    type="button"
+                    disabled={!isClickable}
+                    onClick={() => isClickable && setStep(s.key)}
+                    className={`flex items-center justify-center w-7 h-7 rounded-full text-xs font-medium transition-colors ${
+                      isCurrent
+                        ? "bg-primary text-primary-foreground"
+                        : isCompleted
+                        ? "bg-green-500 text-white hover:bg-green-600 cursor-pointer"
+                        : "bg-muted text-muted-foreground"
+                    } ${!isClickable ? "cursor-default" : ""}`}
+                  >
+                    {isCompleted ? (
+                      <Interfaces.Tick className="h-3.5 w-3.5" />
+                    ) : (
+                      index + 1
+                    )}
+                  </button>
+                  <span
+                    className={`text-xs font-medium hidden sm:inline ${
+                      isClickable ? "cursor-pointer hover:text-primary" : ""
+                    }`}
+                    onClick={() => isClickable && setStep(s.key)}
+                  >
+                    {s.label}
+                  </span>
+                  {index < STEPS.length - 1 && (
+                    <div className="flex-1 h-0.5 bg-muted" />
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </SheetHeader>
 
-      <Card>
-        <CardHeader>
-          <CardTitle>{getStepTitle()}</CardTitle>
-          <CardDescription>{getStepDescription()}</CardDescription>
-        </CardHeader>
-        <CardContent>
+        {/* Scrollable content */}
+        <div className="flex-1 overflow-y-auto px-6 py-4">
           {/* Step 1: Patient Selection */}
           {step === "patient" && (
             <div className="space-y-4">
@@ -263,7 +258,7 @@ function SendScaleContent() {
                 </div>
               ) : (
                 <>
-                  <div className="relative mb-4">
+                  <div className="relative">
                     <Interfaces.Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                     <Input
                       placeholder="Rechercher un patient..."
@@ -298,24 +293,14 @@ function SendScaleContent() {
                       ))
                     )}
                   </div>
-                  <div className="flex items-center justify-between pt-4 border-t">
+                  <div className="pt-2">
                     <CreatePatientSheet
                       onPatientCreated={handlePatientCreated}
                       buttonSize="sm"
+                      buttonVariant="outline"
                       buttonText="Nouveau patient"
                       currentPatientCount={patients.length}
                     />
-                    <div className="flex gap-2">
-                      <Button asChild variant="outline">
-                        <Link href="/dashboard">Annuler</Link>
-                      </Button>
-                      <Button
-                        onClick={() => setStep("scales")}
-                        disabled={!selectedPatientId}
-                      >
-                        Continuer
-                      </Button>
-                    </div>
                   </div>
                 </>
               )}
@@ -325,12 +310,9 @@ function SendScaleContent() {
           {/* Step 2: Scale Selection */}
           {step === "scales" && (
             <div className="space-y-4">
-              <div className="flex items-center justify-between mb-4">
-                <p className="text-sm font-medium">
-                  {selectedScaleIds.length} échelle(s) sélectionnée(s)
-                </p>
-              </div>
-
+              <p className="text-sm font-medium">
+                {selectedScaleIds.length} échelle(s) sélectionnée(s)
+              </p>
               <div className="grid grid-cols-1 gap-3">
                 {scales.map((scale) => (
                   <div
@@ -349,9 +331,7 @@ function SendScaleContent() {
                         onClick={(e) => e.stopPropagation()}
                       />
                       <div className="flex-1">
-                        <div className="flex items-center gap-2">
-                          <p className="font-medium">{scale.title}</p>
-                        </div>
+                        <p className="font-medium">{scale.title}</p>
                         <p className="text-sm text-muted-foreground mt-1">
                           {scale.description}
                         </p>
@@ -368,21 +348,6 @@ function SendScaleContent() {
                     </div>
                   </div>
                 ))}
-              </div>
-
-              <div className="flex justify-end gap-2 pt-4">
-                <Button
-                  onClick={() => setStep("patient")}
-                  variant="outline"
-                >
-                  Retour
-                </Button>
-                <Button
-                  onClick={() => setStep("message")}
-                  disabled={selectedScaleIds.length === 0}
-                >
-                  Continuer
-                </Button>
               </div>
             </div>
           )}
@@ -405,23 +370,21 @@ function SendScaleContent() {
                   Ce message sera inclus dans l'email envoyé au patient
                 </p>
               </div>
-
-              <div className="flex justify-end gap-2 pt-4">
-                <Button onClick={() => setStep("scales")} variant="outline">
-                  Retour
-                </Button>
-                <Button onClick={() => setStep("confirm")}>Continuer</Button>
-              </div>
             </div>
           )}
 
           {/* Step 4: Confirmation */}
           {step === "confirm" && (
             <div className="space-y-6">
-              {/* Info about single email with portal */}
               <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
                 <p className="text-sm text-blue-900">
-                  <strong>1 email</strong> sera envoyé à {selectedPatient?.firstName} avec un lien vers un portail contenant {selectedScales.length === 1 ? "le questionnaire" : `les ${selectedScales.length} questionnaires`}.
+                  <strong>1 email</strong> sera envoyé à{" "}
+                  {selectedPatient?.firstName} avec un lien vers un portail
+                  contenant{" "}
+                  {selectedScales.length === 1
+                    ? "le questionnaire"
+                    : `les ${selectedScales.length} questionnaires`}
+                  .
                 </p>
               </div>
 
@@ -435,28 +398,26 @@ function SendScaleContent() {
                   </span>
                 </div>
 
-                {/* Email content preview - matches the new batch template */}
-                <div className="bg-[#f6f9fc] p-6">
-                  <div className="max-w-[500px] mx-auto bg-white rounded-lg shadow-sm">
-                    {/* Header */}
-                    <div className="px-8 pt-8 pb-4 text-center">
-                      <h2 className="text-xl font-semibold text-gray-900">
+                <div className="bg-[#f6f9fc] p-4">
+                  <div className="bg-white rounded-lg shadow-sm">
+                    <div className="px-6 pt-6 pb-3 text-center">
+                      <h2 className="text-lg font-semibold text-gray-900">
                         {selectedScales.length === 1
                           ? "Questionnaire de suivi"
                           : `${selectedScales.length} questionnaires à compléter`}
                       </h2>
                     </div>
 
-                    <div className="px-8">
+                    <div className="px-6">
                       <hr className="border-gray-200" />
                     </div>
 
-                    {/* Body */}
-                    <div className="px-8 py-6 space-y-4">
-                      <p className="text-gray-700">
-                        Bonjour {selectedPatient?.firstName} {selectedPatient?.lastName},
+                    <div className="px-6 py-4 space-y-3">
+                      <p className="text-sm text-gray-700">
+                        Bonjour {selectedPatient?.firstName}{" "}
+                        {selectedPatient?.lastName},
                       </p>
-                      <p className="text-gray-700">
+                      <p className="text-sm text-gray-700">
                         {user?.firstName} {user?.lastName} vous a envoyé{" "}
                         {selectedScales.length === 1
                           ? "un questionnaire"
@@ -464,85 +425,100 @@ function SendScaleContent() {
                         à compléter :
                       </p>
 
-                      {/* Scale list */}
-                      <div className="bg-gray-50 rounded-lg p-4">
-                        <ul className="space-y-2">
+                      <div className="bg-gray-50 rounded-lg p-3">
+                        <ul className="space-y-1.5">
                           {selectedScales.map((scale) => (
-                            <li key={scale.id} className="flex items-center gap-3">
-                              <span className="w-2 h-2 bg-indigo-500 rounded-full flex-shrink-0" />
-                              <span className="text-gray-700 text-sm">{scale.title}</span>
+                            <li
+                              key={scale.id}
+                              className="flex items-center gap-2"
+                            >
+                              <span className="w-1.5 h-1.5 bg-indigo-500 rounded-full flex-shrink-0" />
+                              <span className="text-gray-700 text-xs">
+                                {scale.title}
+                              </span>
                             </li>
                           ))}
                         </ul>
                       </div>
 
                       {personalMessage && (
-                        <div className="my-4 p-4 bg-gray-50 border-l-4 border-indigo-500 rounded">
-                          <p className="text-gray-600 text-sm italic">
+                        <div className="p-3 bg-gray-50 border-l-4 border-indigo-500 rounded">
+                          <p className="text-gray-600 text-xs italic">
                             "{personalMessage}"
                           </p>
                         </div>
                       )}
 
-                      <p className="text-gray-700">
-                        Cliquez sur le bouton ci-dessous pour accéder à vos questionnaires :
-                      </p>
-
-                      <div className="text-center py-2">
-                        <span className="inline-block px-6 py-3 bg-indigo-500 text-white font-semibold rounded-md text-sm">
+                      <div className="text-center py-1">
+                        <span className="inline-block px-5 py-2 bg-indigo-500 text-white font-semibold rounded-md text-xs">
                           Accéder aux questionnaires
                         </span>
                       </div>
-
-                      <p className="text-gray-500 text-xs">
-                        Ou copiez ce lien dans votre navigateur :<br />
-                        <span className="text-indigo-500 break-all">
-                          https://melya.fr/p/xxx-xxx-xxx
-                        </span>
-                      </p>
                     </div>
 
-                    <div className="px-8">
+                    <div className="px-6">
                       <hr className="border-gray-200" />
                     </div>
 
-                    {/* Footer */}
-                    <div className="px-8 py-4 text-center">
-                      <p className="text-gray-400 text-xs">
+                    <div className="px-6 py-3 text-center">
+                      <p className="text-gray-400 text-[10px]">
                         Melya - Plateforme de questionnaires psychométriques
                       </p>
                     </div>
                   </div>
                 </div>
               </div>
-
-              <div className="flex justify-end gap-2">
-                <Button onClick={() => setStep("message")} variant="outline">
-                  Retour
-                </Button>
-                <Button onClick={handleSend} disabled={isSending}>
-                  <Interfaces.Send className="mr-2 h-4 w-4" />
-                  {isSending ? "Envoi en cours..." : "Envoyer maintenant"}
-                </Button>
-              </div>
             </div>
           )}
-        </CardContent>
-      </Card>
-    </div>
-  );
-}
-
-export default function SendScalePage() {
-  return (
-    <Suspense
-      fallback={
-        <div className="flex-1 w-full flex items-center justify-center">
-          <p>Chargement...</p>
         </div>
-      }
-    >
-      <SendScaleContent />
-    </Suspense>
+
+        {/* Footer - fixed at bottom */}
+        <div className="border-t px-6 py-4 flex justify-between items-center">
+          {step === "patient" ? (
+            <>
+              <div />
+              <Button
+                onClick={() => setStep("scales")}
+                disabled={!selectedPatientId}
+              >
+                Continuer
+              </Button>
+            </>
+          ) : step === "scales" ? (
+            <>
+              <Button onClick={() => setStep("patient")} variant="outline" size="sm">
+                <Arrow.ArrowLeft className="mr-1 h-3.5 w-3.5" />
+                Retour
+              </Button>
+              <Button
+                onClick={() => setStep("message")}
+                disabled={selectedScaleIds.length === 0}
+              >
+                Continuer
+              </Button>
+            </>
+          ) : step === "message" ? (
+            <>
+              <Button onClick={() => setStep("scales")} variant="outline" size="sm">
+                <Arrow.ArrowLeft className="mr-1 h-3.5 w-3.5" />
+                Retour
+              </Button>
+              <Button onClick={() => setStep("confirm")}>Continuer</Button>
+            </>
+          ) : (
+            <>
+              <Button onClick={() => setStep("message")} variant="outline" size="sm">
+                <Arrow.ArrowLeft className="mr-1 h-3.5 w-3.5" />
+                Retour
+              </Button>
+              <Button onClick={handleSend} disabled={isSending}>
+                <Interfaces.Send className="mr-2 h-4 w-4" />
+                {isSending ? "Envoi en cours..." : "Envoyer"}
+              </Button>
+            </>
+          )}
+        </div>
+      </SheetContent>
+    </Sheet>
   );
 }

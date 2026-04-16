@@ -7,6 +7,7 @@ import { PremiumGateProvider } from "@/app/context/PremiumGateContext";
 import { AuthGateModal } from "@/components/auth/AuthGateModal";
 import { PremiumGateModal } from "@/components/PremiumGateModal";
 import { Rethink_Sans } from "next/font/google";
+import { gelica } from "./fonts";
 
 const rethinkSans = Rethink_Sans({
   subsets: ["latin"],
@@ -47,7 +48,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="fr" suppressHydrationWarning className={rethinkSans.variable}>
+    <html lang="fr" suppressHydrationWarning className={`${rethinkSans.variable} ${gelica.variable}`}>
       <body className="text-foreground font-sans">
         <UserProvider>
           <AuthGateProvider>

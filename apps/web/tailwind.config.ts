@@ -20,8 +20,8 @@ const config = {
     extend: {
       fontFamily: {
         sans: ["var(--font-rethink)", "sans-serif"],
-        heading: ["Gelica", "Georgia", "serif"],
-        gelica: ["Gelica", "Georgia", "serif"],
+        heading: ["var(--font-gelica)", "Georgia", "serif"],
+        gelica: ["var(--font-gelica)", "Georgia", "serif"],
         body: ["var(--font-rethink)", "sans-serif"],
       },
       colors: {

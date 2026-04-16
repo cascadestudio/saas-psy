@@ -18,6 +18,7 @@ import { Arrow, Interfaces, Files } from "doodle-icons";
 import { ArchivePatientDialog } from "@/components/ArchivePatientDialog";
 import { RestorePatientButton } from "@/components/RestorePatientButton";
 import { EditPatientSheet } from "@/components/EditPatientSheet";
+import { SendScaleSheet } from "@/components/SendScaleSheet";
 import { formatScore } from "@/lib/score-utils";
 import { SESSION_STATUS_CONFIG } from "@/lib/session-status";
 
@@ -31,6 +32,7 @@ export default function PatientDetailPage() {
   const [sessions, setSessions] = useState<Session[]>([]);
   const [loading, setLoading] = useState(true);
   const [editOpen, setEditOpen] = useState(false);
+  const [sendScaleOpen, setSendScaleOpen] = useState(false);
 
   const loadData = useCallback(async () => {
     if (!user || !patientId) return;
@@ -149,11 +151,12 @@ export default function PatientDetailPage() {
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="bg-muted">
-                <DropdownMenuItem asChild className="cursor-pointer">
-                  <Link href={`/send-scale?patientId=${patient.id}`}>
-                    <Interfaces.Send className="mr-2 h-4 w-4" />
-                    Envoyer une échelle
-                  </Link>
+                <DropdownMenuItem
+                  className="cursor-pointer"
+                  onSelect={() => setSendScaleOpen(true)}
+                >
+                  <Interfaces.Send className="mr-2 h-4 w-4" />
+                  Envoyer une échelle
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => setEditOpen(true)} className="cursor-pointer">
                   <Interfaces.Pencil className="mr-2 h-4 w-4" />
@@ -215,11 +218,9 @@ export default function PatientDetailPage() {
                 Aucune passation enregistrée pour ce patient
               </p>
               {!isArchived && (
-                <Button asChild size="sm">
-                  <Link href={`/send-scale?patientId=${patient.id}`}>
-                    <Interfaces.Send className="mr-2 h-4 w-4" />
-                    Envoyer la première échelle
-                  </Link>
+                <Button size="sm" onClick={() => setSendScaleOpen(true)}>
+                  <Interfaces.Send className="mr-2 h-4 w-4" />
+                  Envoyer la première échelle
                 </Button>
               )}
             </div>
@@ -263,6 +264,12 @@ export default function PatientDetailPage() {
           )}
         </div>
       </div>
+      <SendScaleSheet
+        open={sendScaleOpen}
+        onOpenChange={setSendScaleOpen}
+        defaultPatientId={patient.id}
+        onSent={loadData}
+      />
     </div>
   );
 }

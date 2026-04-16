@@ -1,10 +1,9 @@
-import Link from "next/link";
 import Image from "next/image";
 import { Interfaces, Files } from "doodle-icons";
-import { Button } from "@/components/ui/button";
 import { scales } from "@/app/scalesData";
 import { questionCount } from "@/app/utils/utils";
 import ScalePreview from "./ScalePreview";
+import { ScaleSendButton } from "./ScaleSendButton";
 
 export default async function ScaleDescriptionPage({
   params,
@@ -49,13 +48,7 @@ export default async function ScaleDescriptionPage({
                 {scale.label}
               </p>
             </div>
-            <Button
-              asChild
-              size="lg"
-              className="flex-shrink-0 ml-4 rounded-full text-base px-8"
-            >
-              <Link href={`/send-scale?scaleId=${id}`}>Envoyer au patient</Link>
-            </Button>
+            <ScaleSendButton scaleId={id} />
           </div>
         </div>
       </div>

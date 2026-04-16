@@ -2,28 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Melya Brand Fonts — Rethink Sans loaded via next/font in layout.tsx */
-
-@font-face {
-  font-family: 'Gelica';
-  src: url('/fonts/Gelica-Regular.otf') format('opentype');
-  font-weight: 400;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Gelica';
-  src: url('/fonts/Gelica-Semi-Bold.otf') format('opentype');
-  font-weight: 600;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Gelica';
-  src: url('/fonts/Gelica-Bold.otf') format('opentype');
-  font-weight: 700;
-  font-display: swap;
-}
+/* Melya Brand Fonts — loaded via next/font in layout.tsx */
 
 @layer base {
   :root {
@@ -132,7 +111,8 @@
 
   /* h1, h2 use Gelica */
   h1, h2 {
-    font-family: 'Gelica', Georgia, serif;
+    font-family: var(--font-gelica), Georgia, serif;
+    font-style: normal;
     @apply font-semibold tracking-tight;
   }
 
@@ -144,14 +124,16 @@
 
   /* Labels and heading utility use Gelica */
   label, .font-heading {
-    font-family: 'Gelica', Georgia, serif;
+    font-family: var(--font-gelica), Georgia, serif;
+    font-style: normal;
   }
 }
 
 /* Utility classes for brand fonts */
 @layer utilities {
   .font-gelica {
-    font-family: 'Gelica', Georgia, serif;
+    font-family: var(--font-gelica), Georgia, serif;
+    font-style: normal;
   }
 
   .font-body {

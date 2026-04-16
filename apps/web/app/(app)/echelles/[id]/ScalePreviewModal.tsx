@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import { Interfaces } from "doodle-icons";
 import { Button } from "@/components/ui/button";
 import {
@@ -14,6 +13,7 @@ import {
   DialogClose,
 } from "@/components/ui/dialog";
 import ScalePreview from "./ScalePreview";
+import { SendScaleSheet } from "@/components/SendScaleSheet";
 
 interface ScalePreviewModalProps {
   scale: {
@@ -38,14 +38,15 @@ interface ScalePreviewModalProps {
 
 export function ScalePreviewModal({ scale }: ScalePreviewModalProps) {
   const [open, setOpen] = useState(false);
-  const router = useRouter();
+  const [sendOpen, setSendOpen] = useState(false);
 
   const handleSendClick = () => {
     setOpen(false);
-    router.push(`/send-scale?scaleId=${scale.id}`);
+    setSendOpen(true);
   };
 
   return (
+    <>
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button variant="outline">
@@ -76,5 +77,11 @@ export function ScalePreviewModal({ scale }: ScalePreviewModalProps) {
         </div>
       </DialogContent>
     </Dialog>
+    <SendScaleSheet
+      open={sendOpen}
+      onOpenChange={setSendOpen}
+      defaultScaleIds={[scale.id]}
+    />
+    </>
   );
 }
