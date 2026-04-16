@@ -52,6 +52,7 @@ What we hoped to get with HDS:
 ```
 
 **Expected benefits:**
+
 - Zero ops (Scaleway manages everything)
 - Pay-per-use (~25-30€/month)
 - Auto-scaling
@@ -65,12 +66,12 @@ What we hoped to get with HDS:
 
 Scaleway's modern serverless stack is **NOT HDS certified**. Only dedicated servers (Dedibox) are HDS compliant à prix raisonnable.
 
-| Service | HDS Certified? | HDS Support Cost |
-|---------|---------------|------------------|
-| Managed PostgreSQL | ❌ No | - |
-| Serverless Containers | ❌ No | - |
-| Object Storage | ✅ Yes | **250€/mois** (comme OVH) |
-| Dedibox (Gen 9 Start-9-M+) | ✅ Yes | **35€/mois** |
+| Service                    | HDS Certified? | HDS Support Cost          |
+| -------------------------- | -------------- | ------------------------- |
+| Managed PostgreSQL         | ❌ No          | -                         |
+| Serverless Containers      | ❌ No          | -                         |
+| Object Storage             | ✅ Yes         | **250€/mois** (comme OVH) |
+| Dedibox (Gen 9 Start-9-M+) | ✅ Yes         | **35€/mois**              |
 
 **Result**: Must use dedicated server instead of serverless architecture.
 
@@ -112,7 +113,7 @@ Scaleway's modern serverless stack is **NOT HDS certified**. Only dedicated serv
               │ Backups chiffrés (daily)
               ▼
 ┌─────────────────────────────────────────────────────────────────┐
-│   Object Storage (Scaleway, Backblaze, AWS S3...)               │
+│   Object Storage (Hetzner)               │
 │   ┌───────────────────┐                                         │
 │   │  Backups chiffrés │◄─── pg_dump + age/gpg encryption        │
 │   │  (pas besoin HDS) │     Clé reste sur Dedibox               │
@@ -139,26 +140,26 @@ Vercel ne sert que la "coquille" de l'app (HTML/JS/CSS)
 
 ## Dedibox Start-9-M Specs
 
-| Spec | Value |
-|------|-------|
-| CPU | AMD Ryzen 5 PRO 3600 (6C/12T, 3.6 GHz) |
-| RAM | 32 GB DDR4 ECC |
-| Storage | 2 × 1 TB NVMe |
-| Public bandwidth | 500 Mbps |
-| Private bandwidth | 1 Gbps (RPNv2) |
-| CPU Benchmark | 18037 |
+| Spec              | Value                                  |
+| ----------------- | -------------------------------------- |
+| CPU               | AMD Ryzen 5 PRO 3600 (6C/12T, 3.6 GHz) |
+| RAM               | 32 GB DDR4 ECC                         |
+| Storage           | 2 × 1 TB NVMe                          |
+| Public bandwidth  | 500 Mbps                               |
+| Private bandwidth | 1 Gbps (RPNv2)                         |
+| CPU Benchmark     | 18037                                  |
 
 ---
 
 ## Real MVP Budget
 
-| Component | Monthly Cost |
-|-----------|--------------|
-| Dedibox Start-9-M | 39,99€ |
-| HDS Support (mandatory) | 35,00€ |
-| Vercel (frontend) | 0€ (free tier) |
-| Object Storage (backups chiffrés) | ~2€ |
-| **Total** | **~77€/month** |
+| Component                         | Monthly Cost   |
+| --------------------------------- | -------------- |
+| Dedibox Start-9-M                 | 39,99€         |
+| HDS Support (mandatory)           | 35,00€         |
+| Vercel (frontend)                 | 0€ (free tier) |
+| Object Storage (backups chiffrés) | ~2€            |
+| **Total**                         | **~77€/month** |
 
 ### Business Perspective
 
@@ -167,12 +168,12 @@ Vercel ne sert que la "coquille" de l'app (HTML/JS/CSS)
 
 ### Pourquoi pas 2 VPS séparés (API + DB) ?
 
-| Aspect | 1 VPS (API + DB) | 2 VPS séparés |
-|--------|------------------|---------------|
-| Coût | ~77€/mois | ~154€/mois |
-| Latence API↔DB | ~0ms (localhost) | ~1-5ms (réseau) |
-| Complexité | Simple | Plus de config |
-| Ressources | 32GB RAM suffisant | Gaspillage pour MVP |
+| Aspect          | 1 VPS (API + DB)   | 2 VPS séparés       |
+| --------------- | ------------------ | ------------------- |
+| Coût            | ~77€/mois          | ~154€/mois          |
+| Latence API↔DB | ~0ms (localhost)   | ~1-5ms (réseau)     |
+| Complexité      | Simple             | Plus de config      |
+| Ressources      | 32GB RAM suffisant | Gaspillage pour MVP |
 
 Le Dedibox Start-9-M a largement assez de ressources pour les deux. Séparer quand tu auras des centaines d'utilisateurs simultanés.
 
@@ -180,17 +181,17 @@ Le Dedibox Start-9-M a largement assez de ressources pour les deux. Séparer qua
 
 ## What You Manage (Self-Hosted)
 
-| Task | Responsibility |
-|------|----------------|
-| OS installation & updates | You |
-| PostgreSQL installation | You |
-| PostgreSQL backups | You |
-| PostgreSQL updates | You |
-| Docker setup | You |
-| Nginx + SSL certificates | You |
-| Firewall configuration | You |
-| Monitoring & alerting | You |
-| Security patches | You |
+| Task                      | Responsibility |
+| ------------------------- | -------------- |
+| OS installation & updates | You            |
+| PostgreSQL installation   | You            |
+| PostgreSQL backups        | You            |
+| PostgreSQL updates        | You            |
+| Docker setup              | You            |
+| Nginx + SSL certificates  | You            |
+| Firewall configuration    | You            |
+| Monitoring & alerting     | You            |
+| Security patches          | You            |
 
 ### Suggested Server Setup
 
@@ -217,10 +218,10 @@ Dedibox Start-9-M
 
 With 2 × 1 TB NVMe drives:
 
-| Option | Setup |
-|--------|-------|
+| Option       | Setup                                              |
+| ------------ | -------------------------------------------------- |
 | **Option A** | RAID 1 (mirror) - 1 TB usable, hardware redundancy |
-| **Option B** | Separate drives - DB on disk 1, backups on disk 2 |
+| **Option B** | Separate drives - DB on disk 1, backups on disk 2  |
 
 ### Recommended Backup Flow
 
@@ -247,12 +248,12 @@ Si les backups sont **chiffrés avant** de quitter le Dedibox HDS, le provider O
 
 ### Options Object Storage pour backups
 
-| Provider | Prix ~100GB | Localisation |
-|----------|-------------|--------------|
-| Scaleway (sans HDS) | ~2€/mois | France |
-| Backblaze B2 | ~1€/mois | EU (Amsterdam) |
-| AWS S3 | ~2-3€/mois | EU (Paris) |
-| OVH Object Storage | ~1-2€/mois | France |
+| Provider            | Prix ~100GB | Localisation   |
+| ------------------- | ----------- | -------------- |
+| Scaleway (sans HDS) | ~2€/mois    | France         |
+| Backblaze B2        | ~1€/mois    | EU (Amsterdam) |
+| AWS S3              | ~2-3€/mois  | EU (Paris)     |
+| OVH Object Storage  | ~1-2€/mois  | France         |
 
 ### Script backup type
 
@@ -279,10 +280,10 @@ rm /tmp/backup.sql /tmp/backup.sql.enc
 
 Both run on the same Dedibox:
 
-| Environment | Database | API Container | URL |
-|-------------|----------|---------------|-----|
-| Staging | melya_staging | api-staging:3001 | api-staging.melya.fr |
-| Production | melya_prod | api-prod:3002 | api.melya.fr |
+| Environment | Database      | API Container    | URL                  |
+| ----------- | ------------- | ---------------- | -------------------- |
+| Staging     | melya_staging | api-staging:3001 | api-staging.melya.fr |
+| Production  | melya_prod    | api-prod:3002    | api.melya.fr         |
 
 **Cost**: 0€ extra (same server)
 
@@ -301,29 +302,29 @@ git push → auto build → deploy → CDN Global
 
 ### Avantages Vercel vs Object Storage Scaleway
 
-| Aspect | Vercel | Scaleway Object Storage |
-|--------|--------|------------------------|
-| Coût | Gratuit (free tier) | ~1-2€/mois |
-| Déploiement | Auto (git push) | CI/CD à configurer |
-| Preview deployments | ✅ Inclus | ❌ À configurer |
-| Analytics | ✅ Inclus | ❌ Non |
-| CDN | ✅ Global | ✅ France |
+| Aspect              | Vercel              | Scaleway Object Storage |
+| ------------------- | ------------------- | ----------------------- |
+| Coût                | Gratuit (free tier) | ~1-2€/mois              |
+| Déploiement         | Auto (git push)     | CI/CD à configurer      |
+| Preview deployments | ✅ Inclus           | ❌ À configurer         |
+| Analytics           | ✅ Inclus           | ❌ Non                  |
+| CDN                 | ✅ Global           | ✅ France               |
 
 ---
 
 ## Comparison: All Options
 
-| Aspect | Initial Hope | Scaleway Dedibox | Clever Cloud HDS | OVH Managed + HDS |
-|--------|--------------|------------------|------------------|-------------------|
-| Monthly cost | ~25-30€ | ~77€ | ~300€ (estimé) | ~295€ |
-| Operations | Zero ops | Self-managed | Zero ops | Zero ops |
-| Scaling | Automatic | Manual | Automatic | Automatic |
-| Pay model | Per-use | Fixed monthly | Per-second + 200€ fixe | Fixed monthly |
-| HDS activities | - | 1-4 only | 1-6 (all) | 1-6 (all) |
-| Engagement | - | Aucun | 12 mois | Aucun |
-| Backups | - | Self-managed | Inclus (7j) | Inclus |
-| DB replication | - | Self-managed | Incluse | Incluse |
-| Frontend | Scaleway | Vercel (free) | Vercel (free) | Vercel (free) |
+| Aspect         | Initial Hope | Scaleway Dedibox | Clever Cloud HDS       | OVH Managed + HDS |
+| -------------- | ------------ | ---------------- | ---------------------- | ----------------- |
+| Monthly cost   | ~25-30€      | ~77€             | ~300€ (estimé)         | ~295€             |
+| Operations     | Zero ops     | Self-managed     | Zero ops               | Zero ops          |
+| Scaling        | Automatic    | Manual           | Automatic              | Automatic         |
+| Pay model      | Per-use      | Fixed monthly    | Per-second + 200€ fixe | Fixed monthly     |
+| HDS activities | -            | 1-4 only         | 1-6 (all)              | 1-6 (all)         |
+| Engagement     | -            | Aucun            | 12 mois                | Aucun             |
+| Backups        | -            | Self-managed     | Inclus (7j)            | Inclus            |
+| DB replication | -            | Self-managed     | Incluse                | Incluse           |
+| Frontend       | Scaleway     | Vercel (free)    | Vercel (free)          | Vercel (free)     |
 
 ---
 
@@ -347,22 +348,22 @@ git push → auto build → deploy → CDN Global
 
 OVH has more HDS-certified services than Scaleway:
 
-| Service | HDS Certified |
-|---------|---------------|
-| Managed PostgreSQL | ✅ Yes |
-| Managed Kubernetes | ✅ Yes |
-| Public Cloud Compute | ✅ Yes |
-| Object Storage | ✅ Yes |
-| Dedicated Servers | ✅ Yes |
+| Service              | HDS Certified |
+| -------------------- | ------------- |
+| Managed PostgreSQL   | ✅ Yes        |
+| Managed Kubernetes   | ✅ Yes        |
+| Public Cloud Compute | ✅ Yes        |
+| Object Storage       | ✅ Yes        |
+| Dedicated Servers    | ✅ Yes        |
 
 ### The Catch: Mandatory Support Tier
 
 To activate HDS on any OVH service, you **must** subscribe to Business or Enterprise support:
 
-| Support Tier | Monthly Cost |
-|--------------|--------------|
-| Business | **250€ HT/mois** |
-| Enterprise | **5000€ HT/mois** |
+| Support Tier | Monthly Cost      |
+| ------------ | ----------------- |
+| Business     | **250€ HT/mois**  |
+| Enterprise   | **5000€ HT/mois** |
 
 ### OVH Total Cost Estimate
 
@@ -377,10 +378,10 @@ Total                            ~295€/mois
 
 ### Verdict: OVH vs Scaleway
 
-| Solution | Monthly Cost | Ops Work |
-|----------|--------------|----------|
-| **Scaleway Dedibox** | ~77€ | Self-managed |
-| **OVH Managed + HDS** | ~295€ | Zero ops |
+| Solution              | Monthly Cost | Ops Work     |
+| --------------------- | ------------ | ------------ |
+| **Scaleway Dedibox**  | ~77€         | Self-managed |
+| **OVH Managed + HDS** | ~295€        | Zero ops     |
 
 **OVH costs ~4x more** than Scaleway for managed services with HDS.
 
@@ -396,15 +397,15 @@ For a solo dev MVP, paying 77€ + doing some ops work beats paying 295€ for m
 
 Clever Cloud a obtenu la certification HDS en **janvier 2025** pour **les 6 activités** (contrairement à Scaleway qui ne couvre que 1-4). Certification valide jusqu'en **2027**.
 
-| Aspect | Clever Cloud | Scaleway Dedibox |
-|--------|--------------|------------------|
-| **Certification HDS** | ✅ 6 activités (1-6) | ⚠️ 4 activités (1-4) |
-| **Services HDS** | PostgreSQL, Docker, Node.js managés | Dedibox uniquement |
-| **Modèle** | PaaS managé (zero ops) | Serveur dédié (self-managed) |
-| **Facturation** | À la seconde | Mensuel fixe |
-| **Scaling** | Automatique (vertical + horizontal) | Manuel |
-| **Backups** | Inclus (rétention 7 jours) | À gérer soi-même |
-| **Réplication DB** | Incluse (doublée) | À gérer soi-même |
+| Aspect                | Clever Cloud                        | Scaleway Dedibox             |
+| --------------------- | ----------------------------------- | ---------------------------- |
+| **Certification HDS** | ✅ 6 activités (1-6)                | ⚠️ 4 activités (1-4)         |
+| **Services HDS**      | PostgreSQL, Docker, Node.js managés | Dedibox uniquement           |
+| **Modèle**            | PaaS managé (zero ops)              | Serveur dédié (self-managed) |
+| **Facturation**       | À la seconde                        | Mensuel fixe                 |
+| **Scaling**           | Automatique (vertical + horizontal) | Manuel                       |
+| **Backups**           | Inclus (rétention 7 jours)          | À gérer soi-même             |
+| **Réplication DB**    | Incluse (doublée)                   | À gérer soi-même             |
 
 ### Services HDS certifiés
 
@@ -415,21 +416,21 @@ Clever Cloud a obtenu la certification HDS en **janvier 2025** pour **les 6 acti
 
 ### Pricing HDS (Call Outcome)
 
-| Élément | Détail |
-|---------|--------|
-| **Abonnement HDS fixe** | 200€/mois |
-| **Engagement** | 12 mois |
-| **Coefficient HDS** | ×1.4 sur toute la consommation |
+| Élément                 | Détail                                             |
+| ----------------------- | -------------------------------------------------- |
+| **Abonnement HDS fixe** | 200€/mois                                          |
+| **Engagement**          | 12 mois                                            |
+| **Coefficient HDS**     | ×1.4 sur toute la consommation                     |
 | **Paiement progressif** | 10 premiers mois (mois 1 = 10%, mois 2 = 20%, ...) |
 
 ### Estimation coût mensuel (à confirmer avec devis)
 
-| Composant | Coût standard | Avec coeff HDS (×1.4) |
-|-----------|--------------|----------------------|
-| Abonnement HDS fixe | - | 200€ |
-| PostgreSQL (nano) | ~20-30€ | ~28-42€ |
-| Docker container(s) | ~54€ (à confirmer) | ~76€ |
-| **Total estimé** | - | **~300-320€/mois** |
+| Composant           | Coût standard      | Avec coeff HDS (×1.4) |
+| ------------------- | ------------------ | --------------------- |
+| Abonnement HDS fixe | -                  | 200€                  |
+| PostgreSQL (nano)   | ~20-30€            | ~28-42€               |
+| Docker container(s) | ~54€ (à confirmer) | ~76€                  |
+| **Total estimé**    | -                  | **~300-320€/mois**    |
 
 > ⚠️ Le paiement progressif les 10 premiers mois réduit la charge initiale :
 > Mois 1 ≈ 30€, Mois 2 ≈ 60€, ... Mois 10 ≈ 300€, puis plein tarif.
@@ -467,10 +468,10 @@ Clever Cloud a obtenu la certification HDS en **janvier 2025** pour **les 6 acti
 
 ## Other Providers (Not Investigated)
 
-| Provider | HDS Option | Notes |
-|----------|-----------|-------|
-| **Outscale** | Full HDS | Dassault subsidiary, enterprise-focused |
-| **Azure France** | HDS available | More complex, likely expensive |
+| Provider         | HDS Option    | Notes                                   |
+| ---------------- | ------------- | --------------------------------------- |
+| **Outscale**     | Full HDS      | Dassault subsidiary, enterprise-focused |
+| **Azure France** | HDS available | More complex, likely expensive          |
 
 ---
 
@@ -478,10 +479,10 @@ Clever Cloud a obtenu la certification HDS en **janvier 2025** pour **les 6 acti
 
 ### The 6 HDS Activity Levels
 
-| Activities | Who | Description |
-|------------|-----|-------------|
-| 1-4 | **Infrastructure host** | Datacenter, hardware, physical security |
-| 5-6 | **Managed services (Infogéreur)** | Application management, administration, backups |
+| Activities | Who                               | Description                                     |
+| ---------- | --------------------------------- | ----------------------------------------------- |
+| 1-4        | **Infrastructure host**           | Datacenter, hardware, physical security         |
+| 5-6        | **Managed services (Infogéreur)** | Application management, administration, backups |
 
 ### For Melya (SaaS)
 
@@ -496,6 +497,7 @@ Certified by Scaleway                À la charge du client
 ```
 
 Le contrat liste comme responsabilités client :
+
 - Maintenance OS, correctifs de sécurité → **Activité 5**
 - Sauvegardes régulières, déportées et testées → **Activité 6**
 - Gestion des accès (IAM) → **Activité 5**
@@ -504,18 +506,18 @@ Le contrat liste comme responsabilités client :
 
 ### Key Rules
 
-| Situation | Certification Required |
-|-----------|----------------------|
-| Software installed at client's location | ❌ No |
-| SaaS hosting health data yourself | ⚠️ Potentially yes (activities 5-6) |
-| Using fully certified HDS host (1-6) | ✅ Covered by host |
+| Situation                               | Certification Required              |
+| --------------------------------------- | ----------------------------------- |
+| Software installed at client's location | ❌ No                               |
+| SaaS hosting health data yourself       | ⚠️ Potentially yes (activities 5-6) |
+| Using fully certified HDS host (1-6)    | ✅ Covered by host                  |
 
 ### Deux interprétations possibles
 
-| Interprétation | Conséquence |
-|----------------|------------|
-| **Stricte** : éditeur SaaS = hébergeur pour activités 5-6 | Certification HDS 5-6 requise (~10 000€+ one-time + audits annuels) |
-| **Courante** : éditeur SaaS ≠ hébergeur pour compte de tiers | Pas de certification HDS requise, bonnes pratiques suffisent |
+| Interprétation                                               | Conséquence                                                         |
+| ------------------------------------------------------------ | ------------------------------------------------------------------- |
+| **Stricte** : éditeur SaaS = hébergeur pour activités 5-6    | Certification HDS 5-6 requise (~10 000€+ one-time + audits annuels) |
+| **Courante** : éditeur SaaS ≠ hébergeur pour compte de tiers | Pas de certification HDS requise, bonnes pratiques suffisent        |
 
 > ⚠️ **Avec Clever Cloud (activités 1-6)**, ce flou juridique disparaît : tout est couvert par l'hébergeur.
 
@@ -523,11 +525,11 @@ Le contrat liste comme responsabilités client :
 
 #### Sanctions théoriques
 
-| Type | Sanction | Base légale |
-|------|----------|-------------|
-| **Pénale** | 3 ans d'emprisonnement + 45 000€ d'amende | Art. L.1115-1 CSP |
-| **CNIL** | Jusqu'à 20M€ ou 4% du CA annuel | RGPD |
-| **Administrative** | Mise en demeure, injonction | ARS / CNIL |
+| Type               | Sanction                                  | Base légale       |
+| ------------------ | ----------------------------------------- | ----------------- |
+| **Pénale**         | 3 ans d'emprisonnement + 45 000€ d'amende | Art. L.1115-1 CSP |
+| **CNIL**           | Jusqu'à 20M€ ou 4% du CA annuel           | RGPD              |
+| **Administrative** | Mise en demeure, injonction               | ARS / CNIL        |
 
 #### Risque réel pour un MVP
 
@@ -538,19 +540,20 @@ Le contrat liste comme responsabilités client :
 
 #### Quand ça devient un vrai problème
 
-| Situation | Risque |
-|-----------|--------|
-| Tout va bien, pas de plainte | Quasi nul |
-| **Fuite de données** | Non-conformité HDS = **facteur aggravant** |
-| Client psy demande des garanties | Impossible de prouver la conformité |
-| Prospection **hôpitaux / institutions** | Ils exigeront la certification |
-| Dénonciation par concurrent | Possible mais rare |
+| Situation                               | Risque                                     |
+| --------------------------------------- | ------------------------------------------ |
+| Tout va bien, pas de plainte            | Quasi nul                                  |
+| **Fuite de données**                    | Non-conformité HDS = **facteur aggravant** |
+| Client psy demande des garanties        | Impossible de prouver la conformité        |
+| Prospection **hôpitaux / institutions** | Ils exigeront la certification             |
+| Dénonciation par concurrent             | Possible mais rare                         |
 
 > **En résumé** : pas de certification 5-6 + pas d'incident = probablement rien. Pas de certification 5-6 + fuite de données = gros problème. C'est un risque calculé que beaucoup de startups prennent au début.
 
 ### If Self-Certification Required (Scaleway)
 
 Cost estimate for HDS activities 5-6:
+
 - ISO 27001 certification prerequisite
 - HDS audit by accredited body
 - Total: likely **10,000€+ one-time** + annual audits
@@ -587,17 +590,21 @@ Cost estimate for HDS activities 5-6:
 ## Useful References
 
 ### Scaleway
+
 - [Scaleway Security & Compliance](https://www.scaleway.com/fr/securite-conformite/)
 - [Scaleway Dedibox](https://www.scaleway.com/fr/dedibox/)
 
 ### Clever Cloud
+
 - [Clever Cloud HDS](https://clever.cloud/health-data-hosting/)
 - [Clever Cloud Pricing](https://clever.cloud/pricing/)
 
 ### Réglementation
+
 - [Article L.1111-8 CSP](https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000021941353)
 - [ANS - Référentiel HDS](https://esante.gouv.fr/produits-services/hds)
 - [PGSSI-S](https://esante.gouv.fr/produits-services/pgssi-s/corpus-documentaire)
 
 ### Frontend
+
 - [Vercel](https://vercel.com/)
