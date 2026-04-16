@@ -29,6 +29,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { CreatePatientSheet } from "@/components/CreatePatientSheet";
+import { SendScaleSheet } from "@/components/SendScaleSheet";
 import { GlobalSearchBar } from "@/components/GlobalSearchBar";
 import { SESSION_STATUS_CONFIG } from "@/lib/session-status";
 
@@ -51,6 +52,8 @@ export default function DashboardPage() {
   const [sessions, setSessions] = useState<Session[]>([]);
   const [patientFilter, setPatientFilter] = useState<"all" | "active">("all");
   const [sessionFilter, setSessionFilter] = useState<"all" | "SENT" | "STARTED" | "COMPLETED">("all");
+  const [sendScaleOpen, setSendScaleOpen] = useState(false);
+  const [sendScalePatientId, setSendScalePatientId] = useState<string | undefined>();
 
   // Open auth modal if redirected from password reset
   useEffect(() => {
@@ -436,7 +439,8 @@ export default function DashboardPage() {
                               fill="#f97316"
                               onClick={(e: React.MouseEvent) => {
                                 e.preventDefault();
-                                window.location.href = `/send-scale?patientId=${patient.id}`;
+                                setSendScalePatientId(patient.id);
+                                setSendScaleOpen(true);
                               }}
                             />
                           </TooltipTrigger>
@@ -453,6 +457,23 @@ export default function DashboardPage() {
           </Card>
         </div>
       </div>
+      <SendScaleSheet
+        open={sendScaleOpen}
+        onOpenChange={setSendScaleOpen}
+        defaultPatientId={sendScalePatientId}
+        onSent={async () => {
+          try {
+            const [pRes, sRes] = await Promise.all([
+              patientsApi.getAll(),
+              sessionsApi.getRecent(20),
+            ]);
+            setPatients(pRes.patients);
+            setSessions(sRes.sessions);
+          } catch (error) {
+            console.error("Error refreshing data:", error);
+          }
+        }}
+      />
     </div>
   );
 }

@@ -141,7 +141,7 @@ export function GlobalSearchBar({ patients, sessions }: GlobalSearchBarProps) {
             title: s.title,
             subtitle: s.category,
             category: "echelles",
-            href: `/send-scale?scaleId=${s.id}`,
+            href: `/echelles/${s.id}`,
           }),
         );
     }
