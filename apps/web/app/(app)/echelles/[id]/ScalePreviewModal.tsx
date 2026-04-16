@@ -13,8 +13,7 @@ import {
   DialogTrigger,
   DialogClose,
 } from "@/components/ui/dialog";
-import { ScaleProps } from "@/app/types";
-import ScaleFactory from "@/app/scale/[id]/components/ScaleFactory";
+import ScalePreview from "./ScalePreview";
 
 interface ScalePreviewModalProps {
   scale: {
@@ -41,15 +40,6 @@ export function ScalePreviewModal({ scale }: ScalePreviewModalProps) {
   const [open, setOpen] = useState(false);
   const router = useRouter();
 
-  const previewProps: ScaleProps = {
-    scale: scale,
-    psychologistEmail: "preview@example.com",
-    patientFirstname: "[Prénom]",
-    patientLastname: "[Nom]",
-    children: undefined,
-    isPreview: true,
-  };
-
   const handleSendClick = () => {
     setOpen(false);
     router.push(`/send-scale?scaleId=${scale.id}`);
@@ -60,19 +50,19 @@ export function ScalePreviewModal({ scale }: ScalePreviewModalProps) {
       <DialogTrigger asChild>
         <Button variant="outline">
           <Interfaces.Unhide className="mr-2 h-4 w-4" />
-          Aperçu du questionnaire
+          Aperçu de l'échelle
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[700px] max-h-[90vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle>Aperçu du questionnaire</DialogTitle>
+          <DialogTitle>Aperçu de l'échelle</DialogTitle>
           <DialogDescription>
-            Voici un aperçu du questionnaire tel qu'il sera présenté au patient.
+            Voici un aperçu de l'échelle telle qu'elle sera présentée au patient.
           </DialogDescription>
         </DialogHeader>
 
         <div className="py-4">
-          <ScaleFactory {...previewProps} />
+          <ScalePreview scale={scale} />
         </div>
 
         <div className="flex justify-between">
