@@ -29,7 +29,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex min-h-screen">
       {/* Sidebar */}
-      <aside className="sticky top-0 flex h-screen w-52 flex-col bg-brand-orange/10 text-brand-orange">
+      <aside className="sticky top-0 flex h-screen w-52 flex-col bg-brand-orange/10 text-brand-orange rounded-r-2xl">
         {/* Logo */}
         <div className="flex h-20 items-center justify-center px-4">
           <Link href="/dashboard" className="flex items-center">

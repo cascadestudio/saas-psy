@@ -105,14 +105,7 @@ export default function BaseScale({
     <div className="container mx-auto py-8 px-4">
       <Card>
         <CardHeader>
-          <CardTitle>
-            Bonjour {patientFirstname} {patientLastname}, veuillez répondre à cette
-            échelle
-          </CardTitle>
-          <p className="text-sm text-muted-foreground mt-2">
-            Les réponses de cette échelle seront uniquement visibles par
-            votre psychologue.
-          </p>
+          <CardTitle>{scale.title}</CardTitle>
         </CardHeader>
         <form ref={formRef} onSubmit={handleSubmit}>
           <CardContent>
