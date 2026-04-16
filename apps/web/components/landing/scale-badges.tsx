@@ -13,45 +13,15 @@ import {
   SheetTitle,
 } from "@/components/ui/sheet";
 
-const scales = [
-  {
-    id: "inventaire-de-depression-de-beck",
-    acronym: "BDI",
-    label: "Inventaire de Dépression de Beck",
-    icon: "/images/scales/bdi.svg",
-    color: "#CBCADB",
-  },
-  {
-    id: "echelle-d-anxiete-sociale-de-liebowitz",
-    acronym: "LSAS",
-    label: "Échelle d'anxiété sociale de Liebowitz",
-    icon: "/images/scales/lsas.svg",
-    color: "#6A9BCC",
-  },
-  {
-    id: "traumatismes-pcl5",
-    acronym: "PCL-5",
-    label: "Liste de Vérification du TSPT",
-    icon: "/images/scales/pcl-5.svg",
-    color: "#C46686",
-  },
-  {
-    id: "stai-anxiete-generalisee",
-    acronym: "STAI",
-    label: "Inventaire d'Anxiété État-Trait",
-    icon: "/images/scales/stai.svg",
-    color: "#6A9BCC",
-  },
-  {
-    id: "index-symptomes-ybocs",
-    acronym: "Y-BOCS",
-    label: "Index des Symptômes Obsessionnels-Compulsifs",
-    icon: "/images/scales/y-bocs.svg",
-    color: "#BCD1CA",
-  },
-];
+const badgeScales = scalesData.map((s) => ({
+  id: s.id,
+  acronym: s.acronym,
+  label: s.label,
+  icon: s.icon,
+  color: s.color,
+}));
 
-type BadgeScale = (typeof scales)[number];
+type BadgeScale = (typeof badgeScales)[number];
 
 function ScaleBadge({ scale, onClick }: { scale: BadgeScale; onClick: () => void }) {
   return (
@@ -74,7 +44,7 @@ function ScaleBadge({ scale, onClick }: { scale: BadgeScale; onClick: () => void
       >
         <Image
           src={scale.icon}
-          alt={scale.acronym}
+          alt={scale.label}
           width={56}
           height={56}
           className="w-3/5 h-3/5 object-contain"
@@ -156,9 +126,9 @@ export function ScaleBadges() {
             onPointerCancel={onPointerUp}
             style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
           >
-            {scales.map((scale) => (
+            {badgeScales.map((scale) => (
               <ScaleBadge
-                key={scale.acronym}
+                key={scale.id}
                 scale={scale}
                 onClick={() => {
                   if (!hasDragged.current) setSelected(scale);
@@ -198,7 +168,7 @@ export function ScaleBadges() {
                 >
                   <Image
                     src={selected.icon}
-                    alt={selected.acronym}
+                    alt={selected.label}
                     width={48}
                     height={48}
                     className="w-12 h-12 object-contain"

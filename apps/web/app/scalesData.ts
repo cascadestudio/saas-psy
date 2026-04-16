@@ -1,6 +1,10 @@
 export const scales = [
   {
     id: "echelle-d-anxiete-sociale-de-liebowitz",
+    acronym: "LSAS",
+    label: "Échelle d'anxiété sociale de Liebowitz",
+    icon: "/images/scales/lsas.svg",
+    color: "#6A9BCC",
     formType: "dual-scale",
     title: "Échelle d'anxiété sociale de Liebowitz",
     description:
@@ -160,6 +164,10 @@ export const scales = [
   },
   {
     id: "inventaire-de-depression-de-beck",
+    acronym: "BDI",
+    label: "Inventaire de Dépression de Beck",
+    icon: "/images/scales/bdi.svg",
+    color: "#CBCADB",
     formType: "options",
     title: "Inventaire de Dépression de Beck (BDI)",
     description:
@@ -479,6 +487,10 @@ export const scales = [
   },
   {
     id: "stai-anxiete-generalisee",
+    acronym: "STAI",
+    label: "Inventaire d'Anxiété État-Trait",
+    icon: "/images/scales/stai.svg",
+    color: "#6A9BCC",
     formType: "grouped-items",
     title: "STAI - Inventaire d'Anxiété État-Trait",
     description:
@@ -561,6 +573,10 @@ export const scales = [
   },
   {
     id: "traumatismes-pcl5",
+    acronym: "PCL-5",
+    label: "Liste de Vérification du TSPT",
+    icon: "/images/scales/pcl-5.svg",
+    color: "#C46686",
     formType: "single-scale",
     title: "PCL-5 - Liste de Vérification du TSPT",
     description:
@@ -622,6 +638,10 @@ export const scales = [
   },
   {
     id: "index-symptomes-ybocs",
+    acronym: "Y-BOCS",
+    label: "Index des Symptômes Obsessionnels-Compulsifs",
+    icon: "/images/scales/y-bocs.svg",
+    color: "#BCD1CA",
     formType: "options",
     title: "Y-BOCS - Index des Symptômes Obsessionnels-Compulsifs",
     description:
