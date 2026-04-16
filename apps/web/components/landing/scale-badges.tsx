@@ -19,6 +19,7 @@ const badgeScales = scalesData.map((s) => ({
   label: s.label,
   icon: s.icon,
   color: s.color,
+  colorLight: s.colorLight,
 }));
 
 type BadgeScale = (typeof badgeScales)[number];
@@ -52,7 +53,7 @@ function ScaleBadge({ scale, onClick }: { scale: BadgeScale; onClick: () => void
       </div>
       <div
         className="flex flex-col justify-center px-4 flex-1 min-w-0"
-        style={{ backgroundColor: `${scale.color}80` }}
+        style={{ backgroundColor: scale.colorLight }}
       >
         <p className="font-heading font-bold text-black leading-tight text-[clamp(1.25rem,1.8vw,1.75rem)]">
           {scale.acronym}

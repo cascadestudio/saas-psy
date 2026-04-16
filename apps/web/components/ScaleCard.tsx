@@ -10,6 +10,7 @@ interface ScaleCardProps {
     label: string;
     icon: string;
     color: string;
+    colorLight: string;
   };
 }
 
@@ -38,7 +39,7 @@ export function ScaleCard({ scale }: ScaleCardProps) {
       </div>
       <div
         className="flex flex-col justify-center px-4 flex-1 min-w-0"
-        style={{ backgroundColor: `${scale.color}80` }}
+        style={{ backgroundColor: scale.colorLight }}
       >
         <p className="font-heading font-bold text-black leading-tight text-2xl">
           {scale.acronym}
