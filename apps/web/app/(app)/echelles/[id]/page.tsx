@@ -1,10 +1,10 @@
 import Link from "next/link";
-import { Arrow, Interfaces, Files } from "doodle-icons";
+import Image from "next/image";
+import { Interfaces, Files } from "doodle-icons";
 import { Button } from "@/components/ui/button";
 import { scales } from "@/app/scalesData";
-import { questionCount, getExampleQuestions } from "@/app/utils/utils";
-import { FavoriteButtonWrapper } from "./FavoriteButtonWrapper";
-import { ScalePreviewModal } from "./ScalePreviewModal";
+import { questionCount } from "@/app/utils/utils";
+import ScaleFactory from "@/app/scale/[id]/components/ScaleFactory";
 
 export default async function ScaleDescriptionPage({
   params,
@@ -22,73 +22,85 @@ export default async function ScaleDescriptionPage({
     );
   }
 
-  const exampleQuestions = getExampleQuestions(scale);
-
   return (
-    <div className="container mx-auto px-4 py-6">
-      {/* Header */}
-      <div className="flex items-center gap-3 mb-1">
-        <Button asChild variant="ghost" size="icon" className="-ml-2">
-          <Link href="/echelles">
-            <Arrow.ArrowLeft className="h-4 w-4" />
-          </Link>
-        </Button>
-        <h1 className="font-normal text-3xl flex-1">{scale.title}</h1>
-        <FavoriteButtonWrapper scaleId={id} />
+    <div className="container mx-auto px-4 py-6 space-y-6">
+      {/* Header sticky 2 couleurs + CTA */}
+      <div className="sticky top-0 z-10 rounded-2xl overflow-hidden">
+        <div className="flex h-[80px]">
+          <div
+            className="flex items-center justify-center flex-shrink-0 aspect-square h-full"
+            style={{ backgroundColor: scale.color }}
+          >
+            <Image
+              src={scale.icon}
+              alt={scale.acronym}
+              width={48}
+              height={48}
+              className="w-10 h-10 object-contain"
+            />
+          </div>
+          <div
+            className="flex items-center justify-between px-6 flex-1 min-w-0"
+            style={{ backgroundColor: `${scale.color}80` }}
+          >
+            <div className="min-w-0">
+              <h1 className="font-heading font-bold text-black leading-tight text-2xl">
+                {scale.acronym}
+              </h1>
+              <p className="font-body text-black/80 leading-snug mt-0.5 text-sm truncate">
+                {scale.label}
+              </p>
+            </div>
+            <Button asChild size="sm" className="flex-shrink-0 ml-4">
+              <Link href={`/send-scale?scaleId=${id}`}>
+                <Interfaces.Send className="mr-2 h-4 w-4" />
+                Envoyer au patient
+              </Link>
+            </Button>
+          </div>
+        </div>
       </div>
 
-      {/* Subline */}
-      <div className="flex items-center gap-4 text-sm text-muted-foreground mb-6 pl-10">
-        <span>{scale.category}</span>
-        <span className="flex items-center gap-1.5">
-          <Files.FileText className="h-3.5 w-3.5" />
-          {questionCount(scale)} questions
-        </span>
-        <span className="flex items-center gap-1.5">
-          <Interfaces.Clock className="h-3.5 w-3.5" />
-          {scale.estimatedTime}
-        </span>
-      </div>
+      {/* Carte description */}
+      <div className="bg-muted-foreground/5 rounded-2xl p-6 space-y-6">
+        {/* Meta */}
+        <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
+          <span className="inline-flex items-center gap-2">
+            <Interfaces.Bookmark className="h-4 w-4 flex-shrink-0" fill="currentColor" />
+            {scale.category}
+          </span>
+          <span className="inline-flex items-center gap-2">
+            <Files.FileText className="h-4 w-4 flex-shrink-0" fill="currentColor" />
+            {questionCount(scale)} questions
+          </span>
+          <span className="inline-flex items-center gap-2">
+            <Interfaces.Clock className="h-4 w-4 flex-shrink-0" fill="currentColor" />
+            {scale.estimatedTime}
+          </span>
+        </div>
 
-      <div className="space-y-4">
         {/* Description */}
         <div>
           <h2 className="text-lg font-sans font-semibold mb-3">Description</h2>
-          <div className="bg-muted-foreground/5 rounded-lg p-4">
-            <p className="text-sm text-muted-foreground leading-relaxed">
-              {scale.longDescription}
-            </p>
-          </div>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            {scale.longDescription}
+          </p>
         </div>
+      </div>
 
-        {/* Exemples de questions */}
-        {exampleQuestions.length > 0 && (
-          <div>
-            <h2 className="text-lg font-sans font-semibold mb-3">
-              Exemples de questions
-            </h2>
-            <div className="bg-muted-foreground/5 rounded-lg overflow-hidden">
-              {exampleQuestions.map((question: string, index: number) => (
-                <p
-                  key={index}
-                  className="text-sm text-muted-foreground p-4 border-t border-border/50 first:border-t-0"
-                >
-                  {question}
-                </p>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* Actions */}
-        <div className="flex gap-3 pt-2">
-          <ScalePreviewModal scale={scale} />
-          <Button asChild>
-            <Link href={`/send-scale?scaleId=${id}`}>
-              <Interfaces.Send className="mr-2 h-4 w-4" />
-              Envoyer au patient
-            </Link>
-          </Button>
+      {/* Carte aperçu */}
+      <div className="bg-muted-foreground/5 rounded-2xl p-6">
+        <h2 className="text-lg font-sans font-semibold mb-4">
+          Aperçu du questionnaire
+        </h2>
+        <div className="bg-background rounded-lg p-4">
+          <ScaleFactory
+            scale={scale}
+            psychologistEmail="preview@example.com"
+            patientFirstname="[Prénom]"
+            patientLastname="[Nom]"
+            isPreview
+          />
         </div>
       </div>
     </div>

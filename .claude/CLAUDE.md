@@ -2,6 +2,10 @@
 
 SaaS pour psychologues : envoi d'échelles, passation en ligne, scoring automatique, interprétation et historique longitudinal.
 
+## Current app state
+
+- L'app est actuelement en phase de pré-lancement
+
 ## Stack
 
 - **Frontend**: Next.js 15 (App Router), TailwindCSS, shadcn/ui, TypeScript
@@ -62,12 +66,6 @@ User, Profile, Patient, Echelle, Session, AuditLog, EmailLog
 - RGPD + audit logging
 - Copyright on psychometric scales
 - Data encrypted at rest (AES-256-GCM via Prisma middleware)
-
-## Current app state
-
-- L'app est actuelement en phase de pré-lancement
-- Landing page sert uniquement à récolter les mails de beta testeurs
-- La landing page ne doit pas avoir de lien vers l'app (en construction)
 
 ## Style
 
