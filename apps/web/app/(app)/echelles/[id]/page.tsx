@@ -51,9 +51,8 @@ export default async function ScaleDescriptionPage({
                 {scale.label}
               </p>
             </div>
-            <Button asChild size="sm" className="flex-shrink-0 ml-4">
+            <Button asChild size="lg" className="flex-shrink-0 ml-4 rounded-full text-base px-8">
               <Link href={`/send-scale?scaleId=${id}`}>
-                <Interfaces.Send className="mr-2 h-4 w-4" />
                 Envoyer au patient
               </Link>
             </Button>
@@ -80,13 +79,9 @@ export default async function ScaleDescriptionPage({
           </span>
         </div>
 
-        {/* Description */}
-        <div>
-          <h2 className="text-lg font-sans font-semibold mb-3">Description</h2>
-          <p className="text-sm text-muted-foreground leading-relaxed">
-            {scale.longDescription}
-          </p>
-        </div>
+        <p className="text-sm text-muted-foreground leading-relaxed">
+          {scale.longDescription}
+        </p>
       </div>
 
       {/* Carte aperçu */}
