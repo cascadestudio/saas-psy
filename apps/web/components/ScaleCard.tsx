@@ -1,51 +1,51 @@
 "use client";
 
 import Link from "next/link";
-import { FavoriteButton } from "@/components/FavoriteButton";
-import { questionCount } from "@/app/utils/utils";
+import Image from "next/image";
 
 interface ScaleCardProps {
   scale: {
     id: string;
-    title: string;
-    description: string;
-    category: string;
-    questions: any[];
-    estimatedTime: string;
+    acronym: string;
+    label: string;
+    icon: string;
+    color: string;
   };
-  isLoadingFavorites: boolean;
-  isFavorite: boolean;
 }
 
-export function ScaleCard({
-  scale,
-  isLoadingFavorites,
-  isFavorite,
-}: ScaleCardProps) {
+export function ScaleCard({ scale }: ScaleCardProps) {
   return (
     <Link
       href={`/echelles/${scale.id}`}
-      className="bg-muted-foreground/5 rounded-lg p-4 flex flex-col gap-3 hover:bg-muted-foreground/10 transition-colors"
+      className="flex overflow-hidden hover:opacity-90 transition-opacity"
+      style={{ borderRadius: 20, aspectRatio: "340 / 120" }}
     >
-      <div className="flex items-start justify-between gap-2">
-        <span className="text-xs text-muted-foreground">{scale.category}</span>
-        {!isLoadingFavorites && (
-          <FavoriteButton
-            scaleId={scale.id}
-            initialIsFavorite={isFavorite}
-            size="sm"
-          />
-        )}
+      <div
+        className="flex items-center justify-center flex-shrink-0 p-5"
+        style={{
+          backgroundColor: scale.color,
+          aspectRatio: "1 / 1",
+          height: "100%",
+        }}
+      >
+        <Image
+          src={scale.icon}
+          alt={scale.acronym}
+          width={56}
+          height={56}
+          className="w-3/5 h-3/5 object-contain"
+        />
       </div>
-      <div className="flex-1">
-        <p className="font-medium text-sm leading-snug mb-1">{scale.title}</p>
-        <p className="text-sm text-muted-foreground line-clamp-2">
-          {scale.description}
+      <div
+        className="flex flex-col justify-center px-4 flex-1 min-w-0"
+        style={{ backgroundColor: `${scale.color}80` }}
+      >
+        <p className="font-heading font-bold text-black leading-tight text-2xl">
+          {scale.acronym}
         </p>
-      </div>
-      <div className="flex justify-between text-xs text-muted-foreground">
-        <span>{questionCount(scale)} questions</span>
-        <span>{scale.estimatedTime}</span>
+        <p className="font-body text-black/80 leading-snug mt-0.5 text-sm">
+          {scale.label}
+        </p>
       </div>
     </Link>
   );

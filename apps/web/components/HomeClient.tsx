@@ -161,8 +161,6 @@ export default function Home() {
             <ScaleCard
               key={scale.id}
               scale={scale}
-              isLoadingFavorites={isLoadingFavorites}
-              isFavorite={favorites.includes(scale.id)}
             />
           ))}
         </div>

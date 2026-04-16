@@ -1,81 +1,32 @@
 "use client";
 
-import { useState, useEffect, useMemo } from "react";
+import { useState, useMemo } from "react";
 import { Input } from "@/components/ui/input";
 import { ScaleCard } from "@/components/ScaleCard";
 import { scales } from "@/app/scalesData";
 import { Interfaces } from "doodle-icons";
-import { useUser } from "@/app/context/UserContext";
-import { favoritesApi } from "@/lib/api-client";
 
 export default function EchellesPage() {
-  const { user, isLoading } = useUser();
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-  const [favorites, setFavorites] = useState<string[]>([]);
-  const [favoritesLoading, setFavoritesLoading] = useState(true);
 
-  // Extract unique categories from scales (excluding "Test")
   const categories = useMemo(() => {
     const uniqueCategories = Array.from(new Set(scales.map((s) => s.category)));
     return uniqueCategories.sort();
   }, []);
 
-  // Load favorites from API (only for authenticated users)
-  useEffect(() => {
-    const loadFavorites = async () => {
-      if (!user) {
-        setFavoritesLoading(false);
-        return;
-      }
-      setFavoritesLoading(true);
-      try {
-        const { favorites: data } = await favoritesApi.getFavorites();
-        setFavorites(data);
-      } catch (error) {
-        console.error("Error loading favorites:", error);
-        setFavorites([]);
-      } finally {
-        setFavoritesLoading(false);
-      }
-    };
-
-    loadFavorites();
-  }, [user]);
-
-  if (isLoading) {
+  const filteredScales = scales.filter((s) => {
+    if (selectedCategory && s.category !== selectedCategory) {
+      return false;
+    }
+    const query = searchQuery.toLowerCase();
+    if (!query) return true;
     return (
-      <div className="flex-1 w-full flex items-center justify-center">
-        <p>Chargement...</p>
-      </div>
+      s.title.toLowerCase().includes(query) ||
+      s.description.toLowerCase().includes(query) ||
+      s.category.toLowerCase().includes(query)
     );
-  }
-
-  // Filtrer les échelles par catégorie et par recherche
-  const filteredScales = scales
-    .filter((s) => {
-      // Category filter
-      if (selectedCategory && s.category !== selectedCategory) {
-        return false;
-      }
-      // Search filter
-      const query = searchQuery.toLowerCase();
-      if (!query) return true;
-      return (
-        s.title.toLowerCase().includes(query) ||
-        s.description.toLowerCase().includes(query) ||
-        s.category.toLowerCase().includes(query)
-      );
-    })
-    // Trier pour afficher les favoris en premier
-    .sort((a, b) => {
-      const aIsFavorite = favorites.includes(a.id);
-      const bIsFavorite = favorites.includes(b.id);
-
-      if (aIsFavorite && !bIsFavorite) return -1;
-      if (!aIsFavorite && bIsFavorite) return 1;
-      return 0;
-    });
+  });
 
   return (
     <div className="container mx-auto px-4 py-6">
@@ -124,12 +75,7 @@ export default function EchellesPage() {
       ) : (
         <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
           {filteredScales.map((scale) => (
-            <ScaleCard
-              key={scale.id}
-              scale={scale}
-              isLoadingFavorites={favoritesLoading}
-              isFavorite={favorites.includes(scale.id)}
-            />
+            <ScaleCard key={scale.id} scale={scale} />
           ))}
         </div>
       )}
