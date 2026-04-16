@@ -23,7 +23,7 @@ export default async function ScaleDescriptionPage({
   return (
     <div>
       {/* Header fullwidth 2 couleurs + CTA */}
-      <div className="sticky top-0 z-10 p-1">
+      <div className="sticky top-0 z-10 px-4 pt-2">
         <div className="flex h-[80px]">
           <div
             className="flex items-center justify-center flex-shrink-0 aspect-square h-full rounded-l-2xl"
@@ -94,14 +94,47 @@ export default async function ScaleDescriptionPage({
         </div>
 
         {/* Carte aperçu */}
+        <h2 className="text-lg font-sans font-semibold mb-4">
+          Aperçu de l'échelle
+        </h2>
         <div className="bg-muted-foreground/5 rounded-2xl p-6 mb-6">
-          <h2 className="text-lg font-sans font-semibold mb-4">
-            Aperçu de l'échelle
-          </h2>
-          <div className="bg-background rounded-lg p-4">
-            <ScalePreview scale={scale} />
-          </div>
+          <ScalePreview scale={scale} />
         </div>
+
+        {/* Cotations & interprétations */}
+        {scale.scoring && (
+          <>
+            <h2 className="text-lg font-sans font-semibold mb-4">
+              Cotations & interprétations
+            </h2>
+            <div className="bg-muted-foreground/5 rounded-2xl p-6 mb-6 space-y-6">
+              <div>
+                <h3 className="text-sm font-semibold mb-2">Méthode de cotation</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  {scale.scoring.method}
+                </p>
+              </div>
+              <div>
+                <h3 className="text-sm font-semibold mb-3">Interprétation des scores</h3>
+                <div className="space-y-2">
+                  {scale.scoring.ranges.map((range, index) => (
+                    <div
+                      key={index}
+                      className="flex items-center justify-between bg-muted-foreground/5 rounded-lg px-4 py-2.5"
+                    >
+                      <span className="text-sm font-medium">
+                        {range.interpretation}
+                      </span>
+                      <span className="text-xs text-muted-foreground bg-muted-foreground/10 px-3 py-1 rounded-full">
+                        {range.min} – {range.max}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );
