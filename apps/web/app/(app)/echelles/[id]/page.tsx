@@ -23,9 +23,9 @@ export default async function ScaleDescriptionPage({
   }
 
   return (
-    <div className="container mx-auto px-4 py-6 space-y-6">
-      {/* Header sticky 2 couleurs + CTA */}
-      <div className="sticky top-0 z-10 rounded-2xl overflow-hidden">
+    <div>
+      {/* Header fullwidth 2 couleurs + CTA */}
+      <div className="sticky top-0 z-10">
         <div className="flex h-[80px]">
           <div
             className="flex items-center justify-center flex-shrink-0 aspect-square h-full"
@@ -41,7 +41,7 @@ export default async function ScaleDescriptionPage({
           </div>
           <div
             className="flex items-center justify-between px-6 flex-1 min-w-0"
-            style={{ backgroundColor: `${scale.color}80` }}
+            style={{ backgroundColor: scale.colorLight }}
           >
             <div className="min-w-0">
               <h1 className="font-heading font-bold text-black leading-tight text-2xl">
@@ -62,7 +62,8 @@ export default async function ScaleDescriptionPage({
       </div>
 
       {/* Carte description */}
-      <div className="bg-muted-foreground/5 rounded-2xl p-6 space-y-6">
+      <div className="container mx-auto px-4 pt-6">
+      <div className="bg-muted-foreground/5 rounded-2xl p-6 space-y-6 mb-6">
         {/* Meta */}
         <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
           <span className="inline-flex items-center gap-2">
@@ -89,7 +90,7 @@ export default async function ScaleDescriptionPage({
       </div>
 
       {/* Carte aperçu */}
-      <div className="bg-muted-foreground/5 rounded-2xl p-6">
+      <div className="bg-muted-foreground/5 rounded-2xl p-6 mb-6">
         <h2 className="text-lg font-sans font-semibold mb-4">
           Aperçu du questionnaire
         </h2>
@@ -102,6 +103,7 @@ export default async function ScaleDescriptionPage({
             isPreview
           />
         </div>
+      </div>
       </div>
     </div>
   );
