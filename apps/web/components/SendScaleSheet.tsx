@@ -1,10 +1,10 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import {
   Sheet,
@@ -17,7 +17,7 @@ import { useUser } from "@/app/context/UserContext";
 import { useEffect, useState } from "react";
 import { patientsApi, sessionsApi, type Patient } from "@/lib/api-client";
 import { scales } from "@/app/scalesData";
-import { Arrow, Interfaces } from "doodle-icons";
+import { Interfaces } from "doodle-icons";
 import { toast } from "sonner";
 import { CreatePatientSheet } from "@/components/CreatePatientSheet";
 
@@ -172,7 +172,7 @@ export function SendScaleSheet({
         className="sm:max-w-[520px] w-full flex flex-col p-0 rounded-l-2xl"
       >
         {/* Header */}
-        <SheetHeader className="px-6 pt-6 pb-4 space-y-4 bg-brand-orange/10 border-b border-brand-orange/20">
+        <SheetHeader className="px-6 pt-6 pb-4 space-y-4 bg-brand-orange/10">
           <div>
             <SheetTitle className="text-xl">Envoyer une échelle</SheetTitle>
             <SheetDescription>
@@ -287,7 +287,7 @@ export function SendScaleSheet({
                     <CreatePatientSheet
                       onPatientCreated={handlePatientCreated}
                       buttonVariant="default"
-                      buttonClassName="rounded-full bg-primary text-primary-foreground w-full text-base"
+                      buttonClassName="bg-primary text-primary-foreground w-full text-base"
                       buttonText="Nouveau patient"
                       hideIcon
                       currentPatientCount={patients.length}
@@ -305,40 +305,44 @@ export function SendScaleSheet({
                 {selectedScaleIds.length} échelle(s) sélectionnée(s)
               </p>
               <div className="grid grid-cols-1 gap-3">
-                {scales.map((scale) => (
-                  <div
-                    key={scale.id}
-                    className={`border rounded-lg p-4 cursor-pointer transition-all ${
-                      selectedScaleIds.includes(scale.id)
-                        ? "border-primary bg-primary/5"
-                        : "hover:border-muted-foreground/50"
-                    }`}
-                    onClick={() => handleToggleScale(scale.id)}
-                  >
-                    <div className="flex items-start gap-3">
-                      <Checkbox
-                        checked={selectedScaleIds.includes(scale.id)}
-                        onCheckedChange={() => handleToggleScale(scale.id)}
-                        onClick={(e) => e.stopPropagation()}
-                      />
-                      <div className="flex-1">
-                        <p className="font-medium">{scale.title}</p>
-                        <p className="text-sm text-muted-foreground mt-1">
-                          {scale.description}
-                        </p>
-                        <div className="flex items-center gap-4 mt-2">
-                          <span className="text-xs text-muted-foreground">
-                            {scale.category}
-                          </span>
-                          <span className="text-xs text-muted-foreground">
-                            <Interfaces.Clock className="inline h-3 w-3 mr-1" />
-                            {scale.estimatedTime}
-                          </span>
-                        </div>
+                {scales.map((scale) => {
+                  const isSelected = selectedScaleIds.includes(scale.id);
+                  return (
+                    <div
+                      key={scale.id}
+                      className={`relative flex overflow-hidden cursor-pointer transition-all ${
+                        isSelected ? "ring-2 ring-primary" : "hover:opacity-90"
+                      }`}
+                      style={{ borderRadius: 16, height: 88 }}
+                      onClick={() => handleToggleScale(scale.id)}
+                    >
+                      <div
+                        className="flex items-center justify-center flex-shrink-0"
+                        style={{ backgroundColor: scale.color, aspectRatio: "1 / 1", height: "100%" }}
+                      >
+                        <Image
+                          src={scale.icon}
+                          alt={scale.acronym}
+                          width={40}
+                          height={40}
+                          className="w-3/5 h-3/5 object-contain"
+                        />
                       </div>
+                      <div
+                        className="flex flex-col justify-center px-4 flex-1 min-w-0"
+                        style={{ backgroundColor: scale.colorLight }}
+                      >
+                        <p className="font-heading font-bold text-black leading-tight text-lg">{scale.acronym}</p>
+                        <p className="font-body text-black/70 text-xs leading-snug mt-0.5 truncate">{scale.label}</p>
+                      </div>
+                      {isSelected && (
+                        <div className="absolute top-2 right-2 w-5 h-5 rounded-full bg-primary flex items-center justify-center">
+                          <Interfaces.Tick className="h-3 w-3 text-white" fill="white" />
+                        </div>
+                      )}
                     </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
           )}
@@ -347,12 +351,12 @@ export function SendScaleSheet({
           {step === "message" && (
             <div className="space-y-4">
               <div className="space-y-2">
-                <Label htmlFor="message">
+                <Label htmlFor="message" className="font-body">
                   Message personnalisé (optionnel)
                 </Label>
                 <Textarea
                   id="message"
-                  placeholder="Bonjour,&#10;&#10;Merci de compléter cette/ces échelle(s) avant notre prochaine séance.&#10;&#10;Cordialement"
+                  placeholder={`Ex : ${selectedPatient?.firstName ?? "Prénom"}, on avait parlé de faire un point sur ton anxiété sociale — ce questionnaire prend 10 minutes, ça nous donnera une bonne base pour notre prochaine séance.`}
                   rows={6}
                   value={personalMessage}
                   onChange={(e) => setPersonalMessage(e.target.value)}
@@ -467,12 +471,7 @@ export function SendScaleSheet({
         <div className="px-6 py-4 flex justify-between items-center">
           {step === "patient" ? null : step === "scales" ? (
             <>
-              <Button
-                onClick={() => setStep("patient")}
-                variant="outline"
-                size="sm"
-              >
-                <Arrow.ArrowLeft className="mr-1 h-3.5 w-3.5" />
+              <Button onClick={() => setStep("patient")} variant="outline">
                 Retour
               </Button>
               <Button
@@ -489,7 +488,6 @@ export function SendScaleSheet({
                 variant="outline"
                 size="sm"
               >
-                <Arrow.ArrowLeft className="mr-1 h-3.5 w-3.5" />
                 Retour
               </Button>
               <Button onClick={() => setStep("confirm")}>Continuer</Button>
@@ -501,7 +499,6 @@ export function SendScaleSheet({
                 variant="outline"
                 size="sm"
               >
-                <Arrow.ArrowLeft className="mr-1 h-3.5 w-3.5" />
                 Retour
               </Button>
               <Button onClick={handleSend} disabled={isSending}>
