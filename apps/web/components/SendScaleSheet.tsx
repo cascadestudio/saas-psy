@@ -371,14 +371,14 @@ export function SendScaleSheet({
           {/* Step 4: Confirmation */}
           {step === "confirm" && (
             <div className="space-y-6">
-              <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-                <p className="text-sm text-blue-900">
+              <div className="bg-foreground/5 border border-foreground/10 rounded-xl p-4">
+                <p className="text-sm text-foreground">
                   <strong>1 email</strong> sera envoyé à{" "}
-                  {selectedPatient?.firstName} avec un lien vers un portail
+                  <strong>{selectedPatient?.firstName}</strong> avec un lien vers un portail
                   contenant{" "}
                   {selectedScales.length === 1
                     ? "le questionnaire"
-                    : `les ${selectedScales.length} questionnaires`}
+                    : <strong>les {selectedScales.length} questionnaires</strong>}
                   .
                 </p>
               </div>
@@ -483,26 +483,13 @@ export function SendScaleSheet({
             </>
           ) : step === "message" ? (
             <>
-              <Button
-                onClick={() => setStep("scales")}
-                variant="outline"
-                size="sm"
-              >
-                Retour
-              </Button>
+              <Button onClick={() => setStep("scales")} variant="outline">Retour</Button>
               <Button onClick={() => setStep("confirm")}>Continuer</Button>
             </>
           ) : (
             <>
-              <Button
-                onClick={() => setStep("message")}
-                variant="outline"
-                size="sm"
-              >
-                Retour
-              </Button>
+              <Button onClick={() => setStep("message")} variant="outline">Retour</Button>
               <Button onClick={handleSend} disabled={isSending}>
-                <Interfaces.Send className="mr-2 h-4 w-4" />
                 {isSending ? "Envoi en cours..." : "Envoyer"}
               </Button>
             </>
