@@ -19,7 +19,7 @@ export function ScaleCard({ scale }: ScaleCardProps) {
     <Link
       href={`/echelles/${scale.id}`}
       className="flex overflow-hidden hover:opacity-90 transition-opacity"
-      style={{ borderRadius: 20, aspectRatio: "340 / 120" }}
+      style={{ borderRadius: 20, height: 120 }}
     >
       <div
         className="flex items-center justify-center flex-shrink-0 p-5"
