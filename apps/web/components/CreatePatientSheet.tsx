@@ -62,7 +62,7 @@ export function CreatePatientSheet({
 
   const handleOpen = () => {
     // Check patient limit only for authenticated users
-    if (user && currentPatientCount >= FREE_PATIENT_LIMIT) {
+    if (user && !user.isPremium && currentPatientCount >= FREE_PATIENT_LIMIT) {
       openPatientLimitGate(currentPatientCount);
       return;
     }
@@ -126,7 +126,7 @@ export function CreatePatientSheet({
     }
 
     // Check patient limit
-    if (currentPatientCount >= FREE_PATIENT_LIMIT) {
+    if (!user?.isPremium && currentPatientCount >= FREE_PATIENT_LIMIT) {
       openPatientLimitGate(currentPatientCount);
       return;
     }
