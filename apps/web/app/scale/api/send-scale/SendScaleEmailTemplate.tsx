@@ -113,7 +113,7 @@ const textStyle = {
 };
 
 const buttonStyle = {
-  backgroundColor: "#4f46e5",
+  backgroundColor: "#D6591F",
   borderRadius: "5px",
   color: "#fff",
   fontSize: "16px",
@@ -133,7 +133,7 @@ const linkTextStyle = {
 };
 
 const linkStyle = {
-  color: "#4f46e5",
+  color: "#D6591F",
   textDecoration: "underline",
   wordBreak: "break-all" as const,
 };

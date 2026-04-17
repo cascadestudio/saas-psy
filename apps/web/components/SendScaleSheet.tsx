@@ -20,6 +20,7 @@ import { scales } from "@/app/scalesData";
 import { Interfaces } from "doodle-icons";
 import { toast } from "sonner";
 import { CreatePatientSheet } from "@/components/CreatePatientSheet";
+import { buildBatchEmailHtml } from "@melya/core";
 
 type Step = "patient" | "scales" | "message" | "confirm";
 
@@ -384,7 +385,7 @@ export function SendScaleSheet({
               </div>
 
               {/* Email Preview */}
-              <div className="border rounded-lg overflow-hidden">
+              <div className="border rounded-xl overflow-hidden">
                 <div className="bg-muted px-4 py-2 border-b flex items-center gap-2">
                   <Interfaces.Mail className="h-4 w-4 text-muted-foreground" />
                   <span className="text-sm font-medium">Aperçu de l'email</span>
@@ -392,76 +393,21 @@ export function SendScaleSheet({
                     À : {selectedPatient?.email}
                   </span>
                 </div>
-
-                <div className="bg-[#f6f9fc] p-4">
-                  <div className="bg-white rounded-lg shadow-sm">
-                    <div className="px-6 pt-6 pb-3 text-center">
-                      <h2 className="text-lg font-semibold text-gray-900">
-                        {selectedScales.length === 1
-                          ? "Questionnaire de suivi"
-                          : `${selectedScales.length} questionnaires à compléter`}
-                      </h2>
-                    </div>
-
-                    <div className="px-6">
-                      <hr className="border-gray-200" />
-                    </div>
-
-                    <div className="px-6 py-4 space-y-3">
-                      <p className="text-sm text-gray-700">
-                        Bonjour {selectedPatient?.firstName}{" "}
-                        {selectedPatient?.lastName},
-                      </p>
-                      <p className="text-sm text-gray-700">
-                        {user?.firstName} {user?.lastName} vous a envoyé{" "}
-                        {selectedScales.length === 1
-                          ? "un questionnaire"
-                          : `${selectedScales.length} questionnaires`}{" "}
-                        à compléter :
-                      </p>
-
-                      <div className="bg-gray-50 rounded-lg p-3">
-                        <ul className="space-y-1.5">
-                          {selectedScales.map((scale) => (
-                            <li
-                              key={scale.id}
-                              className="flex items-center gap-2"
-                            >
-                              <span className="w-1.5 h-1.5 bg-indigo-500 rounded-full flex-shrink-0" />
-                              <span className="text-gray-700 text-xs">
-                                {scale.title}
-                              </span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-
-                      {personalMessage && (
-                        <div className="p-3 bg-gray-50 border-l-4 border-indigo-500 rounded">
-                          <p className="text-gray-600 text-xs italic">
-                            "{personalMessage}"
-                          </p>
-                        </div>
-                      )}
-
-                      <div className="text-center py-1">
-                        <span className="inline-block px-5 py-2 bg-indigo-500 text-white font-semibold rounded-md text-xs">
-                          Accéder aux questionnaires
-                        </span>
-                      </div>
-                    </div>
-
-                    <div className="px-6">
-                      <hr className="border-gray-200" />
-                    </div>
-
-                    <div className="px-6 py-3 text-center">
-                      <p className="text-gray-400 text-[10px]">
-                        Melya - Plateforme de questionnaires psychométriques
-                      </p>
-                    </div>
-                  </div>
-                </div>
+                <iframe
+                  srcDoc={buildBatchEmailHtml({
+                    patientFirstName: selectedPatient?.firstName ?? "",
+                    patientLastName: selectedPatient?.lastName ?? "",
+                    scaleNames: selectedScales.map((s) => s.title),
+                    practitionerName: `${user?.firstName ?? ""} ${user?.lastName ?? ""}`.trim(),
+                    message: personalMessage || undefined,
+                    portalUrl: "#",
+                    logoUrl: "/images/logos/logo-melya.svg",
+                  })}
+                  className="w-full border-0"
+                  style={{ height: "480px" }}
+                  sandbox="allow-same-origin"
+                  title="Aperçu de l'email"
+                />
               </div>
             </div>
           )}

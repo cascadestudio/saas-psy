@@ -247,14 +247,14 @@ const scoreStyle = {
 };
 
 const interpretationStyle = {
-  color: "#2563eb",
+  color: "#D6591F",
   fontSize: "16px",
   lineHeight: "24px",
   marginTop: "15px",
   padding: "10px",
-  backgroundColor: "#eff6ff",
+  backgroundColor: "#fdf5f2",
   borderRadius: "5px",
-  borderLeft: "4px solid #2563eb",
+  borderLeft: "3px solid #D6591F",
 };
 
 const responsesStyle = {
