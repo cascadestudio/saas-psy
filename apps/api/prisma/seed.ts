@@ -337,8 +337,8 @@ async function main() {
   // ============================================
   console.log('\n📦 Seeding test account...');
 
-  const TEST_EMAIL = 'test@melya.app';
-  const TEST_PASSWORD = 'password123';
+  const TEST_EMAIL = 'test@test.test';
+  const TEST_PASSWORD = 'testtest';
   const passwordHash = await bcrypt.hash(TEST_PASSWORD, 10);
 
   // Create or update test user
