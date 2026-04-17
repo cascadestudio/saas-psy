@@ -396,10 +396,10 @@ Ce volet concerne le déploiement sur le Dedibox HDS :
 ```nginx
 server {
     listen 443 ssl http2;
-    server_name api.melya.fr;
+    server_name api.melya.app;
 
-    ssl_certificate /etc/letsencrypt/live/api.melya.fr/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/api.melya.fr/privkey.pem;
+    ssl_certificate /etc/letsencrypt/live/api.melya.app/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/api.melya.app/privkey.pem;
     ssl_protocols TLSv1.2 TLSv1.3;
 
     add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;

@@ -48,7 +48,7 @@ What we hoped to get with HDS:
               │
               ▼
         [ Internet ]
-         api.melya.fr
+         api.melya.app
 ```
 
 **Expected benefits:**
@@ -205,8 +205,8 @@ Dedibox Start-9-M
 │   ├── container: api-staging (port 3001)
 │   └── container: api-prod (port 3002)
 ├── Nginx (reverse proxy)
-│   ├── api-staging.melya.fr → localhost:3001
-│   └── api.melya.fr → localhost:3002
+│   ├── api-staging.melya.app → localhost:3001
+│   └── api.melya.app → localhost:3002
 ├── Let's Encrypt (SSL)
 ├── UFW firewall
 └── Automated backups (pg_dump → Object Storage)
@@ -282,8 +282,8 @@ Both run on the same Dedibox:
 
 | Environment | Database      | API Container    | URL                  |
 | ----------- | ------------- | ---------------- | -------------------- |
-| Staging     | melya_staging | api-staging:3001 | api-staging.melya.fr |
-| Production  | melya_prod    | api-prod:3002    | api.melya.fr         |
+| Staging     | melya_staging | api-staging:3001 | api-staging.melya.app |
+| Production  | melya_prod    | api-prod:3002    | api.melya.app         |
 
 **Cost**: 0€ extra (same server)
 
@@ -297,7 +297,7 @@ Frontend has no health data → can use Vercel (gratuit, pas besoin HDS).
 GitHub                                 Vercel
 ──────────────────────────────────────────────────────
 git push → auto build → deploy → CDN Global
-                                 (melya.fr)
+                                 (melya.app)
 ```
 
 ### Avantages Vercel vs Object Storage Scaleway

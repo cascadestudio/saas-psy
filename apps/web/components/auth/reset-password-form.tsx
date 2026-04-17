@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { Eye, EyeOff } from "lucide-react";
 import { authApi } from "@/lib/api-client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -17,6 +18,7 @@ export function ResetPasswordForm({ token }: ResetPasswordFormProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -86,16 +88,29 @@ export function ResetPasswordForm({ token }: ResetPasswordFormProps) {
 
         <div className="space-y-2">
           <Label htmlFor="newPassword">Nouveau mot de passe</Label>
-          <Input
-            id="newPassword"
-            type="password"
-            placeholder="Au moins 8 caractères"
-            value={newPassword}
-            onChange={(e) => setNewPassword(e.target.value)}
-            required
-            disabled={isLoading}
-            minLength={8}
-          />
+          <div className="relative">
+            <Input
+              id="newPassword"
+              type={showPassword ? "text" : "password"}
+              placeholder="Au moins 8 caractères"
+              value={newPassword}
+              onChange={(e) => setNewPassword(e.target.value)}
+              required
+              disabled={isLoading}
+              minLength={8}
+              className="pr-10"
+            />
+            <Button
+              type="button"
+              variant="ghost"
+              size="icon"
+              className="absolute right-0 top-0 h-full px-3 text-muted-foreground hover:text-foreground"
+              onClick={() => setShowPassword((v) => !v)}
+              tabIndex={-1}
+            >
+              {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+            </Button>
+          </div>
           <p className="text-xs text-muted-foreground">
             Minimum 8 caractères
           </p>
@@ -103,16 +118,19 @@ export function ResetPasswordForm({ token }: ResetPasswordFormProps) {
 
         <div className="space-y-2">
           <Label htmlFor="confirmPassword">Confirmer le mot de passe</Label>
-          <Input
-            id="confirmPassword"
-            type="password"
-            placeholder="Retapez votre mot de passe"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            required
-            disabled={isLoading}
-            minLength={8}
-          />
+          <div className="relative">
+            <Input
+              id="confirmPassword"
+              type={showPassword ? "text" : "password"}
+              placeholder="Retapez votre mot de passe"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              required
+              disabled={isLoading}
+              minLength={8}
+              className="pr-10"
+            />
+          </div>
         </div>
 
         <Button type="submit" className="w-full" disabled={isLoading}>
