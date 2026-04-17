@@ -14,7 +14,7 @@ import {
   SheetDescription,
 } from "@/components/ui/sheet";
 import { useUser } from "@/app/context/UserContext";
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState } from "react";
 import { patientsApi, sessionsApi, type Patient } from "@/lib/api-client";
 import { scales } from "@/app/scalesData";
 import { Arrow, Interfaces } from "doodle-icons";
@@ -52,10 +52,10 @@ export function SendScaleSheet({
   const initialStep: Step = defaultPatientId ? "scales" : "patient";
   const [step, setStep] = useState<Step>(initialStep);
   const [selectedPatientId, setSelectedPatientId] = useState<string>(
-    defaultPatientId || ""
+    defaultPatientId || "",
   );
   const [selectedScaleIds, setSelectedScaleIds] = useState<string[]>(
-    defaultScaleIds || []
+    defaultScaleIds || [],
   );
   const [personalMessage, setPersonalMessage] = useState("");
   const [patients, setPatients] = useState<Patient[]>([]);
@@ -106,21 +106,21 @@ export function SendScaleSheet({
   };
 
   const selectedPatient = patients.find((p) => p.id === selectedPatientId);
-  const selectedScales = scales.filter((s) =>
-    selectedScaleIds.includes(s.id)
-  );
+  const selectedScales = scales.filter((s) => selectedScaleIds.includes(s.id));
 
   const filteredPatients = patients.filter((patient) => {
     const query = patientSearch.toLowerCase();
     const fullName = `${patient.firstName} ${patient.lastName}`.toLowerCase();
-    return fullName.includes(query) || patient.email.toLowerCase().includes(query);
+    return (
+      fullName.includes(query) || patient.email.toLowerCase().includes(query)
+    );
   });
 
   const handleToggleScale = (scaleId: string) => {
     setSelectedScaleIds((prev) =>
       prev.includes(scaleId)
         ? prev.filter((id) => id !== scaleId)
-        : [...prev, scaleId]
+        : [...prev, scaleId],
     );
   };
 
@@ -139,10 +139,13 @@ export function SendScaleSheet({
       });
 
       if (result.emailsFailed > 0) {
-        toast.warning("Échelle(s) créée(s) mais l'email n'a pas pu être envoyé", {
-          description: `Vérifiez l'adresse email de ${selectedPatient.firstName} ${selectedPatient.lastName}`,
-          duration: 8000,
-        });
+        toast.warning(
+          "Échelle(s) créée(s) mais l'email n'a pas pu être envoyé",
+          {
+            description: `Vérifiez l'adresse email de ${selectedPatient.firstName} ${selectedPatient.lastName}`,
+            duration: 8000,
+          },
+        );
       } else {
         toast.success("Échelle(s) envoyée(s) avec succès", {
           description: `${selectedScaleIds.length} échelle(s) envoyée(s) à ${selectedPatient.firstName} ${selectedPatient.lastName}`,
@@ -162,27 +165,14 @@ export function SendScaleSheet({
 
   const currentStepIndex = STEPS.findIndex((s) => s.key === step);
 
-  const getStepTitle = () => {
-    switch (step) {
-      case "patient":
-        return "Choisir un patient";
-      case "scales":
-        return "Choisir les échelles";
-      case "message":
-        return "Personnaliser le message";
-      case "confirm":
-        return "Confirmer l'envoi";
-    }
-  };
-
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
       <SheetContent
         side="right"
-        className="sm:max-w-[520px] w-full flex flex-col p-0"
+        className="sm:max-w-[520px] w-full flex flex-col p-0 rounded-l-2xl"
       >
         {/* Header */}
-        <SheetHeader className="px-6 pt-6 pb-4 border-b space-y-4">
+        <SheetHeader className="px-6 pt-6 pb-4 space-y-4 bg-brand-orange/10 border-b border-brand-orange/20">
           <div>
             <SheetTitle className="text-xl">Envoyer une échelle</SheetTitle>
             <SheetDescription>
@@ -209,8 +199,8 @@ export function SendScaleSheet({
                       isCurrent
                         ? "bg-primary text-primary-foreground"
                         : isCompleted
-                        ? "bg-green-500 text-white hover:bg-green-600 cursor-pointer"
-                        : "bg-muted text-muted-foreground"
+                          ? "bg-green-500 text-white hover:bg-green-600 cursor-pointer"
+                          : "bg-background border border-muted-foreground/30 text-muted-foreground"
                     } ${!isClickable ? "cursor-default" : ""}`}
                   >
                     {isCompleted ? (
@@ -228,7 +218,7 @@ export function SendScaleSheet({
                     {s.label}
                   </span>
                   {index < STEPS.length - 1 && (
-                    <div className="flex-1 h-0.5 bg-muted" />
+                    <div className="flex-1 h-px bg-border" />
                   )}
                 </div>
               );
@@ -264,7 +254,7 @@ export function SendScaleSheet({
                       placeholder="Rechercher un patient..."
                       value={patientSearch}
                       onChange={(e) => setPatientSearch(e.target.value)}
-                      className="pl-10"
+                      className="pl-10 rounded-full"
                     />
                   </div>
                   <div className="grid grid-cols-1 gap-2 max-h-[400px] overflow-y-auto">
@@ -279,15 +269,15 @@ export function SendScaleSheet({
                           className={`border rounded-lg p-3 cursor-pointer transition-all ${
                             selectedPatientId === patient.id
                               ? "border-primary bg-primary/5"
-                              : "hover:border-muted-foreground/50"
+                              : "hover:border-primary hover:bg-primary/5"
                           }`}
-                          onClick={() => setSelectedPatientId(patient.id)}
+                          onClick={() => {
+                            setSelectedPatientId(patient.id);
+                            setStep("scales");
+                          }}
                         >
                           <p className="font-medium">
                             {patient.firstName} {patient.lastName}
-                          </p>
-                          <p className="text-sm text-muted-foreground">
-                            {patient.email}
                           </p>
                         </div>
                       ))
@@ -296,9 +286,10 @@ export function SendScaleSheet({
                   <div className="pt-2">
                     <CreatePatientSheet
                       onPatientCreated={handlePatientCreated}
-                      buttonSize="sm"
-                      buttonVariant="outline"
+                      buttonVariant="default"
+                      buttonClassName="rounded-full bg-primary text-primary-foreground w-full text-base"
                       buttonText="Nouveau patient"
+                      hideIcon
                       currentPatientCount={patients.length}
                     />
                   </div>
@@ -473,20 +464,14 @@ export function SendScaleSheet({
         </div>
 
         {/* Footer - fixed at bottom */}
-        <div className="border-t px-6 py-4 flex justify-between items-center">
-          {step === "patient" ? (
+        <div className="px-6 py-4 flex justify-between items-center">
+          {step === "patient" ? null : step === "scales" ? (
             <>
-              <div />
               <Button
-                onClick={() => setStep("scales")}
-                disabled={!selectedPatientId}
+                onClick={() => setStep("patient")}
+                variant="outline"
+                size="sm"
               >
-                Continuer
-              </Button>
-            </>
-          ) : step === "scales" ? (
-            <>
-              <Button onClick={() => setStep("patient")} variant="outline" size="sm">
                 <Arrow.ArrowLeft className="mr-1 h-3.5 w-3.5" />
                 Retour
               </Button>
@@ -499,7 +484,11 @@ export function SendScaleSheet({
             </>
           ) : step === "message" ? (
             <>
-              <Button onClick={() => setStep("scales")} variant="outline" size="sm">
+              <Button
+                onClick={() => setStep("scales")}
+                variant="outline"
+                size="sm"
+              >
                 <Arrow.ArrowLeft className="mr-1 h-3.5 w-3.5" />
                 Retour
               </Button>
@@ -507,7 +496,11 @@ export function SendScaleSheet({
             </>
           ) : (
             <>
-              <Button onClick={() => setStep("message")} variant="outline" size="sm">
+              <Button
+                onClick={() => setStep("message")}
+                variant="outline"
+                size="sm"
+              >
                 <Arrow.ArrowLeft className="mr-1 h-3.5 w-3.5" />
                 Retour
               </Button>
