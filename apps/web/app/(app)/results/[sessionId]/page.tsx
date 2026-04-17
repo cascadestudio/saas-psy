@@ -302,8 +302,8 @@ export default function ResultsPage() {
                       )}
                       {trend === "up" && (
                         <>
-                          <Finance.TrendUp className="h-4 w-4 text-orange-600" />
-                          <span className="text-sm text-orange-600">
+                          <Finance.TrendUp className="h-4 w-4 text-brand-orange" />
+                          <span className="text-sm text-brand-orange">
                             Augmentation de {trendPercentage}% depuis la dernière
                             passation
                           </span>

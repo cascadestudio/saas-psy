@@ -137,7 +137,7 @@ export function CreatePatientSheet({
   return (
     <>
       <Button size={iconOnly ? "icon" : buttonSize} variant={buttonVariant} className={buttonClassName} onClick={handleOpen}>
-        {!hideIcon && <Interfaces.UserAdd className={iconOnly ? "h-4 w-4" : "mr-2 h-4 w-4"} {...(iconOnly ? { fill: "#f97316" } : {})} />}
+        {!hideIcon && <Interfaces.UserAdd className={iconOnly ? "h-4 w-4" : "mr-2 h-4 w-4"} {...(iconOnly ? { fill: "#D6591F" } : {})} />}
         {!iconOnly && buttonText}
       </Button>
       <Dialog open={open} onOpenChange={handleOpenChange}>

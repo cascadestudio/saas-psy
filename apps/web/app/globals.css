@@ -16,7 +16,7 @@
     --popover: 40 33% 97%;              /* off-white #FAF8F5 */
     --popover-foreground: 0 0% 10%;     /* warm-black #1A1A1A */
 
-    --primary: 24 70% 46%;              /* terracotta #C65D24 */
+    --primary: 19 75% 48%;              /* brand-orange #D6591F */
     --primary-foreground: 40 33% 97%;   /* off-white #FAF8F5 */
 
     --secondary: 37 22% 90%;            /* cream-light #EDE8DF */
@@ -33,12 +33,12 @@
 
     --border: 37 18% 74%;               /* slightly darker beige */
     --input: 37 18% 74%;                /* input border */
-    --ring: 24 70% 46%;                 /* terracotta focus ring */
+    --ring: 19 75% 48%;                 /* brand-orange focus ring */
 
     --radius: 0.5rem;
 
     /* Chart colors */
-    --chart-1: 24 70% 46%;              /* terracotta */
+    --chart-1: 19 75% 48%;              /* brand-orange */
     --chart-2: 140 22% 45%;             /* soft-green */
     --chart-3: 37 22% 90%;              /* cream-light */
     --chart-4: 30 6% 27%;               /* warm-gray */
@@ -67,7 +67,7 @@
     --popover: 0 0% 14%;
     --popover-foreground: 40 33% 97%;
 
-    --primary: 24 70% 46%;              /* terracotta stays same */
+    --primary: 19 75% 48%;              /* brand-orange */
     --primary-foreground: 0 0% 10%;
 
     --secondary: 0 0% 18%;
@@ -87,7 +87,7 @@
     --ring: 24 70% 46%;
 
     /* Chart colors - adjusted for dark mode */
-    --chart-1: 24 70% 50%;
+    --chart-1: 19 75% 50%;
     --chart-2: 140 22% 50%;
     --chart-3: 37 22% 60%;
     --chart-4: 30 6% 60%;

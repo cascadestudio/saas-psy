@@ -69,6 +69,6 @@ User, Profile, Patient, Echelle, Session, AuditLog, EmailLog
 
 ## Style
 
-- Brand color : #D97757 (orange)
+- Brand color : #D6591F (orange)
 - Title font : Gelica Regular
 - Body font : Rethink Sans Regular

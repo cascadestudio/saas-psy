@@ -1,6 +1,7 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { Resend } from 'resend';
+import { buildBatchEmailHtml, buildSessionEmailHtml } from '@melya/core';
 import { PrismaService } from '../prisma/prisma.service';
 
 interface SendSessionEmailParams {
@@ -58,14 +59,14 @@ export class EmailService {
     const questionnaireUrl = `${this.appUrl}/session/${sessionId}`;
     const subject = 'Votre questionnaire est disponible';
 
-    // Build email HTML
-    const html = this.buildEmailHtml({
+    const html = buildSessionEmailHtml({
       patientFirstName,
       patientLastName,
       scaleName,
       practitionerName,
       message,
       questionnaireUrl,
+      logoUrl: `${this.appUrl}/images/logos/logo-melya.svg`,
     });
 
     // Log the attempt
@@ -153,14 +154,14 @@ export class EmailService {
       ? 'Votre questionnaire est disponible'
       : `${scaleCount} questionnaires à compléter`;
 
-    // Build email HTML
-    const html = this.buildBatchEmailHtml({
+    const html = buildBatchEmailHtml({
       patientFirstName,
       patientLastName,
       scaleNames,
       practitionerName,
       message,
       portalUrl,
+      logoUrl: `${this.appUrl}/images/logos/logo-melya.svg`,
     });
 
     // Log the attempt
@@ -243,75 +244,81 @@ export class EmailService {
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-<body style="margin: 0; padding: 0; background-color: #f6f9fc; font-family: Arial, sans-serif;">
-  <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background-color: #f6f9fc;">
+<body style="margin: 0; padding: 0; background-color: #faf8f6; font-family: 'Helvetica Neue', Arial, sans-serif;">
+  <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background-color: #faf8f6;">
     <tr>
       <td align="center" style="padding: 40px 20px;">
-        <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="max-width: 600px; background-color: #ffffff; border-radius: 8px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);">
+        <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="max-width: 580px;">
+          <!-- Logo header -->
           <tr>
-            <td style="padding: 40px 40px 20px 40px; text-align: center;">
-              <h1 style="margin: 0; color: #1a1a1a; font-size: 24px; font-weight: 600;">
-                Bienvenue sur Melya !
-              </h1>
+            <td style="padding: 0 0 24px 0; text-align: center;">
+              <img src="${this.appUrl}/images/logos/logo-melya.svg" alt="Melya" width="120" height="34" style="display: inline-block; border: 0;" />
             </td>
           </tr>
+          <!-- Card -->
           <tr>
-            <td style="padding: 0 40px;">
-              <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 0;">
-            </td>
-          </tr>
-          <tr>
-            <td style="padding: 30px 40px;">
-              <p style="margin: 0 0 16px 0; color: #374151; font-size: 16px; line-height: 24px;">
-                ${greeting}
-              </p>
-              <p style="margin: 0 0 16px 0; color: #374151; font-size: 16px; line-height: 24px;">
-                Votre compte a &eacute;t&eacute; cr&eacute;&eacute; avec succ&egrave;s. Vous pouvez d&egrave;s maintenant commencer &agrave; utiliser Melya pour g&eacute;rer vos questionnaires psychom&eacute;triques.
-              </p>
-              <p style="margin: 0 0 16px 0; color: #374151; font-size: 16px; line-height: 24px;">
-                Avec Melya, vous pouvez :
-              </p>
-              <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="margin: 0 0 24px 0;">
-                <tr>
-                  <td style="padding: 8px 0;">
-                    <span style="display: inline-block; width: 8px; height: 8px; background-color: #6366f1; border-radius: 50%; margin-right: 12px;"></span>
-                    <span style="color: #374151; font-size: 15px;">Envoyer des questionnaires &agrave; vos patients en quelques clics</span>
-                  </td>
-                </tr>
-                <tr>
-                  <td style="padding: 8px 0;">
-                    <span style="display: inline-block; width: 8px; height: 8px; background-color: #6366f1; border-radius: 50%; margin-right: 12px;"></span>
-                    <span style="color: #374151; font-size: 15px;">Obtenir un scoring et une interpr&eacute;tation automatiques</span>
-                  </td>
-                </tr>
-                <tr>
-                  <td style="padding: 8px 0;">
-                    <span style="display: inline-block; width: 8px; height: 8px; background-color: #6366f1; border-radius: 50%; margin-right: 12px;"></span>
-                    <span style="color: #374151; font-size: 15px;">Suivre l'&eacute;volution de vos patients dans le temps</span>
-                  </td>
-                </tr>
-              </table>
+            <td style="background-color: #ffffff; border-radius: 20px; box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06); overflow: hidden;">
+              <!-- Orange top bar -->
               <table role="presentation" width="100%" cellspacing="0" cellpadding="0">
                 <tr>
-                  <td align="center">
-                    <a href="${dashboardUrl}" style="display: inline-block; padding: 14px 32px; background-color: #6366f1; color: #ffffff; text-decoration: none; font-size: 16px; font-weight: 600; border-radius: 6px;">
-                      Acc&eacute;der &agrave; mon tableau de bord
-                    </a>
+                  <td style="background-color: #D6591F; padding: 32px 40px; text-align: center;">
+                    <h1 style="margin: 0; color: #ffffff; font-size: 22px; font-weight: 700; letter-spacing: -0.3px;">
+                      Bienvenue sur Melya !
+                    </h1>
+                  </td>
+                </tr>
+                <!-- Body -->
+                <tr>
+                  <td style="padding: 36px 40px;">
+                    <p style="margin: 0 0 16px 0; color: #374151; font-size: 16px; line-height: 26px;">
+                      ${greeting}
+                    </p>
+                    <p style="margin: 0 0 16px 0; color: #374151; font-size: 16px; line-height: 26px;">
+                      Votre compte a &eacute;t&eacute; cr&eacute;&eacute; avec succ&egrave;s. Vous pouvez d&egrave;s maintenant commencer &agrave; utiliser Melya pour g&eacute;rer vos questionnaires psychom&eacute;triques.
+                    </p>
+                    <p style="margin: 0 0 20px 0; color: #374151; font-size: 16px; line-height: 26px;">
+                      Avec Melya, vous pouvez :
+                    </p>
+                    <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="margin: 0 0 32px 0;">
+                      <tr>
+                        <td style="padding: 7px 0;">
+                          <span style="display: inline-block; width: 7px; height: 7px; background-color: #D6591F; border-radius: 50%; margin-right: 12px; vertical-align: middle;"></span>
+                          <span style="color: #374151; font-size: 15px; line-height: 22px;">Envoyer des questionnaires &agrave; vos patients en quelques clics</span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style="padding: 7px 0;">
+                          <span style="display: inline-block; width: 7px; height: 7px; background-color: #D6591F; border-radius: 50%; margin-right: 12px; vertical-align: middle;"></span>
+                          <span style="color: #374151; font-size: 15px; line-height: 22px;">Obtenir un scoring et une interpr&eacute;tation automatiques</span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style="padding: 7px 0;">
+                          <span style="display: inline-block; width: 7px; height: 7px; background-color: #D6591F; border-radius: 50%; margin-right: 12px; vertical-align: middle;"></span>
+                          <span style="color: #374151; font-size: 15px; line-height: 22px;">Suivre l'&eacute;volution de vos patients dans le temps</span>
+                        </td>
+                      </tr>
+                    </table>
+                    <table role="presentation" width="100%" cellspacing="0" cellpadding="0">
+                      <tr>
+                        <td align="center">
+                          <a href="${dashboardUrl}" style="display: inline-block; padding: 14px 36px; background-color: #D6591F; color: #ffffff; text-decoration: none; font-size: 15px; font-weight: 600; border-radius: 100px;">
+                            Acc&eacute;der &agrave; mon tableau de bord
+                          </a>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+                <!-- Footer -->
+                <tr>
+                  <td style="padding: 20px 40px 28px 40px; text-align: center; border-top: 1px solid #f3f4f6;">
+                    <p style="margin: 0; color: #9ca3af; font-size: 12px; line-height: 18px;">
+                      Melya &mdash; Plateforme de questionnaires psychom&eacute;triques
+                    </p>
                   </td>
                 </tr>
               </table>
-            </td>
-          </tr>
-          <tr>
-            <td style="padding: 0 40px;">
-              <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 0;">
-            </td>
-          </tr>
-          <tr>
-            <td style="padding: 20px 40px 40px 40px; text-align: center;">
-              <p style="margin: 0; color: #9ca3af; font-size: 12px;">
-                Melya - Plateforme de questionnaires psychom&eacute;triques
-              </p>
             </td>
           </tr>
         </table>
@@ -362,59 +369,65 @@ export class EmailService {
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-<body style="margin: 0; padding: 0; background-color: #f6f9fc; font-family: Arial, sans-serif;">
-  <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background-color: #f6f9fc;">
+<body style="margin: 0; padding: 0; background-color: #faf8f6; font-family: 'Helvetica Neue', Arial, sans-serif;">
+  <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background-color: #faf8f6;">
     <tr>
       <td align="center" style="padding: 40px 20px;">
-        <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="max-width: 600px; background-color: #ffffff; border-radius: 8px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);">
+        <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="max-width: 580px;">
+          <!-- Logo header -->
           <tr>
-            <td style="padding: 40px 40px 20px 40px; text-align: center;">
-              <h1 style="margin: 0; color: #1a1a1a; font-size: 24px; font-weight: 600;">
-                R&eacute;initialisation du mot de passe
-              </h1>
+            <td style="padding: 0 0 24px 0; text-align: center;">
+              <img src="${this.appUrl}/images/logos/logo-melya.svg" alt="Melya" width="120" height="34" style="display: inline-block; border: 0;" />
             </td>
           </tr>
+          <!-- Card -->
           <tr>
-            <td style="padding: 0 40px;">
-              <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 0;">
-            </td>
-          </tr>
-          <tr>
-            <td style="padding: 30px 40px;">
-              <p style="margin: 0 0 16px 0; color: #374151; font-size: 16px; line-height: 24px;">
-                Vous avez demand&eacute; la r&eacute;initialisation de votre mot de passe.
-              </p>
-              <p style="margin: 0 0 24px 0; color: #374151; font-size: 16px; line-height: 24px;">
-                Cliquez sur le bouton ci-dessous pour cr&eacute;er un nouveau mot de passe. Ce lien est valable <strong>1 heure</strong>.
-              </p>
+            <td style="background-color: #ffffff; border-radius: 20px; box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06); overflow: hidden;">
               <table role="presentation" width="100%" cellspacing="0" cellpadding="0">
+                <!-- Orange top bar -->
                 <tr>
-                  <td align="center">
-                    <a href="${resetUrl}" style="display: inline-block; padding: 14px 32px; background-color: #6366f1; color: #ffffff; text-decoration: none; font-size: 16px; font-weight: 600; border-radius: 6px;">
-                      R&eacute;initialiser mon mot de passe
-                    </a>
+                  <td style="background-color: #D6591F; padding: 32px 40px; text-align: center;">
+                    <h1 style="margin: 0; color: #ffffff; font-size: 22px; font-weight: 700; letter-spacing: -0.3px;">
+                      R&eacute;initialisation du mot de passe
+                    </h1>
+                  </td>
+                </tr>
+                <!-- Body -->
+                <tr>
+                  <td style="padding: 36px 40px;">
+                    <p style="margin: 0 0 16px 0; color: #374151; font-size: 16px; line-height: 26px;">
+                      Vous avez demand&eacute; la r&eacute;initialisation de votre mot de passe.
+                    </p>
+                    <p style="margin: 0 0 32px 0; color: #374151; font-size: 16px; line-height: 26px;">
+                      Cliquez sur le bouton ci-dessous pour cr&eacute;er un nouveau mot de passe. Ce lien est valable <strong>1 heure</strong>.
+                    </p>
+                    <table role="presentation" width="100%" cellspacing="0" cellpadding="0">
+                      <tr>
+                        <td align="center">
+                          <a href="${resetUrl}" style="display: inline-block; padding: 14px 36px; background-color: #D6591F; color: #ffffff; text-decoration: none; font-size: 15px; font-weight: 600; border-radius: 100px;">
+                            R&eacute;initialiser mon mot de passe
+                          </a>
+                        </td>
+                      </tr>
+                    </table>
+                    <p style="margin: 28px 0 0 0; color: #6b7280; font-size: 14px; line-height: 22px;">
+                      Si vous n'avez pas demand&eacute; cette r&eacute;initialisation, ignorez simplement cet email.
+                    </p>
+                    <p style="margin: 14px 0 0 0; color: #6b7280; font-size: 13px; line-height: 20px;">
+                      Ou copiez ce lien dans votre navigateur :<br>
+                      <a href="${resetUrl}" style="color: #D6591F; word-break: break-all;">${resetUrl}</a>
+                    </p>
+                  </td>
+                </tr>
+                <!-- Footer -->
+                <tr>
+                  <td style="padding: 20px 40px 28px 40px; text-align: center; border-top: 1px solid #f3f4f6;">
+                    <p style="margin: 0; color: #9ca3af; font-size: 12px; line-height: 18px;">
+                      Melya &mdash; Plateforme de questionnaires psychom&eacute;triques
+                    </p>
                   </td>
                 </tr>
               </table>
-              <p style="margin: 24px 0 0 0; color: #6b7280; font-size: 14px; line-height: 20px;">
-                Si vous n'avez pas demand&eacute; cette r&eacute;initialisation, ignorez simplement cet email.
-              </p>
-              <p style="margin: 16px 0 0 0; color: #6b7280; font-size: 14px; line-height: 20px;">
-                Ou copiez ce lien dans votre navigateur :<br>
-                <a href="${resetUrl}" style="color: #6366f1; word-break: break-all;">${resetUrl}</a>
-              </p>
-            </td>
-          </tr>
-          <tr>
-            <td style="padding: 0 40px;">
-              <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 0;">
-            </td>
-          </tr>
-          <tr>
-            <td style="padding: 20px 40px 40px 40px; text-align: center;">
-              <p style="margin: 0; color: #9ca3af; font-size: 12px;">
-                Melya - Plateforme de questionnaires psychom&eacute;triques
-              </p>
             </td>
           </tr>
         </table>
@@ -479,206 +492,5 @@ export class EmailService {
     } catch (err) {
       this.logger.error(`Failed to log email: ${err}`);
     }
-  }
-
-  private buildEmailHtml(params: {
-    patientFirstName: string;
-    patientLastName: string;
-    scaleName: string;
-    practitionerName: string;
-    message?: string;
-    questionnaireUrl: string;
-  }): string {
-    const { patientFirstName, patientLastName, scaleName, practitionerName, message, questionnaireUrl } = params;
-
-    return `
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body style="margin: 0; padding: 0; background-color: #f6f9fc; font-family: Arial, sans-serif;">
-  <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background-color: #f6f9fc;">
-    <tr>
-      <td align="center" style="padding: 40px 20px;">
-        <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="max-width: 600px; background-color: #ffffff; border-radius: 8px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);">
-          <tr>
-            <td style="padding: 40px 40px 20px 40px; text-align: center;">
-              <h1 style="margin: 0; color: #1a1a1a; font-size: 24px; font-weight: 600;">
-                Questionnaire de suivi
-              </h1>
-            </td>
-          </tr>
-          <tr>
-            <td style="padding: 0 40px;">
-              <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 0;">
-            </td>
-          </tr>
-          <tr>
-            <td style="padding: 30px 40px;">
-              <p style="margin: 0 0 16px 0; color: #374151; font-size: 16px; line-height: 24px;">
-                Bonjour ${patientFirstName} ${patientLastName},
-              </p>
-              <p style="margin: 0 0 16px 0; color: #374151; font-size: 16px; line-height: 24px;">
-                ${practitionerName} vous a envoyé le questionnaire <strong>${scaleName}</strong> à compléter.
-              </p>
-              ${message ? `
-              <div style="margin: 24px 0; padding: 16px; background-color: #f9fafb; border-left: 4px solid #6366f1; border-radius: 4px;">
-                <p style="margin: 0; color: #4b5563; font-size: 14px; font-style: italic;">
-                  "${message}"
-                </p>
-              </div>
-              ` : ''}
-              <p style="margin: 0 0 24px 0; color: #374151; font-size: 16px; line-height: 24px;">
-                Cliquez sur le bouton ci-dessous pour accéder au questionnaire :
-              </p>
-              <table role="presentation" width="100%" cellspacing="0" cellpadding="0">
-                <tr>
-                  <td align="center">
-                    <a href="${questionnaireUrl}" style="display: inline-block; padding: 14px 32px; background-color: #6366f1; color: #ffffff; text-decoration: none; font-size: 16px; font-weight: 600; border-radius: 6px;">
-                      Accéder au questionnaire
-                    </a>
-                  </td>
-                </tr>
-              </table>
-              <p style="margin: 24px 0 0 0; color: #6b7280; font-size: 14px; line-height: 20px;">
-                Ou copiez ce lien dans votre navigateur :<br>
-                <a href="${questionnaireUrl}" style="color: #6366f1; word-break: break-all;">${questionnaireUrl}</a>
-              </p>
-            </td>
-          </tr>
-          <tr>
-            <td style="padding: 0 40px;">
-              <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 0;">
-            </td>
-          </tr>
-          <tr>
-            <td style="padding: 20px 40px 40px 40px; text-align: center;">
-              <p style="margin: 0; color: #9ca3af; font-size: 12px;">
-                Melya - Plateforme de questionnaires psychom&eacute;triques
-              </p>
-            </td>
-          </tr>
-        </table>
-      </td>
-    </tr>
-  </table>
-</body>
-</html>
-    `.trim();
-  }
-
-  private buildBatchEmailHtml(params: {
-    patientFirstName: string;
-    patientLastName: string;
-    scaleNames: string[];
-    practitionerName: string;
-    message?: string;
-    portalUrl: string;
-  }): string {
-    const { patientFirstName, patientLastName, scaleNames, practitionerName, message, portalUrl } = params;
-    const scaleCount = scaleNames.length;
-
-    const scaleListHtml = scaleNames
-      .map(
-        (name) => `
-          <tr>
-            <td style="padding: 8px 0; border-bottom: 1px solid #f3f4f6;">
-              <span style="display: inline-block; width: 8px; height: 8px; background-color: #6366f1; border-radius: 50%; margin-right: 12px;"></span>
-              <span style="color: #374151; font-size: 15px;">${name}</span>
-            </td>
-          </tr>
-        `,
-      )
-      .join('');
-
-    return `
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body style="margin: 0; padding: 0; background-color: #f6f9fc; font-family: Arial, sans-serif;">
-  <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background-color: #f6f9fc;">
-    <tr>
-      <td align="center" style="padding: 40px 20px;">
-        <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="max-width: 600px; background-color: #ffffff; border-radius: 8px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);">
-          <tr>
-            <td style="padding: 40px 40px 20px 40px; text-align: center;">
-              <h1 style="margin: 0; color: #1a1a1a; font-size: 24px; font-weight: 600;">
-                ${scaleCount === 1 ? 'Questionnaire de suivi' : `${scaleCount} questionnaires à compléter`}
-              </h1>
-            </td>
-          </tr>
-          <tr>
-            <td style="padding: 0 40px;">
-              <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 0;">
-            </td>
-          </tr>
-          <tr>
-            <td style="padding: 30px 40px;">
-              <p style="margin: 0 0 16px 0; color: #374151; font-size: 16px; line-height: 24px;">
-                Bonjour ${patientFirstName} ${patientLastName},
-              </p>
-              <p style="margin: 0 0 16px 0; color: #374151; font-size: 16px; line-height: 24px;">
-                ${practitionerName} vous a envoyé ${scaleCount === 1 ? 'un questionnaire' : `${scaleCount} questionnaires`} à compléter :
-              </p>
-
-              <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="margin: 20px 0; background-color: #f9fafb; border-radius: 8px; padding: 16px;">
-                <tr>
-                  <td style="padding: 16px;">
-                    <table role="presentation" width="100%" cellspacing="0" cellpadding="0">
-                      ${scaleListHtml}
-                    </table>
-                  </td>
-                </tr>
-              </table>
-
-              ${message ? `
-              <div style="margin: 24px 0; padding: 16px; background-color: #f9fafb; border-left: 4px solid #6366f1; border-radius: 4px;">
-                <p style="margin: 0; color: #4b5563; font-size: 14px; font-style: italic;">
-                  "${message}"
-                </p>
-              </div>
-              ` : ''}
-              <p style="margin: 0 0 24px 0; color: #374151; font-size: 16px; line-height: 24px;">
-                Cliquez sur le bouton ci-dessous pour accéder à vos questionnaires :
-              </p>
-              <table role="presentation" width="100%" cellspacing="0" cellpadding="0">
-                <tr>
-                  <td align="center">
-                    <a href="${portalUrl}" style="display: inline-block; padding: 14px 32px; background-color: #6366f1; color: #ffffff; text-decoration: none; font-size: 16px; font-weight: 600; border-radius: 6px;">
-                      Accéder aux questionnaires
-                    </a>
-                  </td>
-                </tr>
-              </table>
-              <p style="margin: 24px 0 0 0; color: #6b7280; font-size: 14px; line-height: 20px;">
-                Ou copiez ce lien dans votre navigateur :<br>
-                <a href="${portalUrl}" style="color: #6366f1; word-break: break-all;">${portalUrl}</a>
-              </p>
-            </td>
-          </tr>
-          <tr>
-            <td style="padding: 0 40px;">
-              <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 0;">
-            </td>
-          </tr>
-          <tr>
-            <td style="padding: 20px 40px 40px 40px; text-align: center;">
-              <p style="margin: 0; color: #9ca3af; font-size: 12px;">
-                Melya - Plateforme de questionnaires psychom&eacute;triques
-              </p>
-            </td>
-          </tr>
-        </table>
-      </td>
-    </tr>
-  </table>
-</body>
-</html>
-    `.trim();
   }
 }

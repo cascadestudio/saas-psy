@@ -57,7 +57,7 @@ export function FavoriteButton({
     >
       <Interfaces.Star
         className="transition-colors"
-        fill={isFavorite ? "#D97757" : "currentColor"}
+        fill={isFavorite ? "#D6591F" : "currentColor"}
       />
     </Button>
   );

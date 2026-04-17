@@ -7,3 +7,6 @@ export * from './scoring';
 // Export utilities
 export * from './utils';
 
+// Export email builders
+export * from './email';
+

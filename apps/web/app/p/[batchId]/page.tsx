@@ -69,7 +69,7 @@ export default function PatientPortalPage() {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
         <div className="text-center">
-          <Interfaces.Sync className="h-8 w-8 animate-spin text-indigo-600 mx-auto" />
+          <Interfaces.Sync className="h-8 w-8 animate-spin text-brand-orange mx-auto" />
           <p className="mt-4 text-gray-600">Chargement...</p>
         </div>
       </div>
@@ -100,8 +100,8 @@ export default function PatientPortalPage() {
       <div className="max-w-2xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-indigo-100 rounded-full mb-4">
-            <span className="text-2xl font-bold text-indigo-600">M</span>
+          <div className="inline-flex items-center justify-center w-16 h-16 bg-brand-orange/10 rounded-full mb-4">
+            <span className="text-2xl font-bold text-brand-orange">M</span>
           </div>
           <h1 className="text-2xl font-semibold text-gray-900">
             Bonjour {portal.patientFirstName},
@@ -152,7 +152,7 @@ export default function PatientPortalPage() {
                       {session.isCompleted ? (
                         <Interfaces.Tick2 className="h-5 w-5 text-green-600 flex-shrink-0" />
                       ) : (
-                        <div className="h-5 w-5 rounded-full border-2 border-indigo-300 flex-shrink-0" />
+                        <div className="h-5 w-5 rounded-full border-2 border-brand-orange/40 flex-shrink-0" />
                       )}
                       <h3
                         className={`font-medium truncate ${

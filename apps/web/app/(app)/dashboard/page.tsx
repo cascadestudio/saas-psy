@@ -436,7 +436,7 @@ export default function DashboardPage() {
                           <TooltipTrigger asChild>
                             <Interfaces.Send
                               className="h-4 w-4 flex-shrink-0"
-                              fill="#f97316"
+                              fill="#D6591F"
                               onClick={(e: React.MouseEvent) => {
                                 e.preventDefault();
                                 setSendScalePatientId(patient.id);

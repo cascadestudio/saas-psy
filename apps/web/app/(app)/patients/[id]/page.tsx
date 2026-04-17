@@ -126,7 +126,7 @@ export default function PatientDetailPage() {
           {patient.firstName} {patient.lastName}
         </h1>
         {isArchived && (
-          <Badge variant="secondary" className="bg-orange-100 text-orange-800">
+          <Badge variant="secondary" className="bg-brand-orange/10 text-brand-orange">
             Archivé le {new Date(patient.archivedAt!).toLocaleDateString("fr-FR")}
           </Badge>
         )}

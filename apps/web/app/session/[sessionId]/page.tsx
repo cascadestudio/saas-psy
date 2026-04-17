@@ -74,7 +74,7 @@ export default function SessionPage() {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
         <div className="text-center">
-          <Interfaces.Sync className="h-8 w-8 animate-spin text-indigo-600 mx-auto" />
+          <Interfaces.Sync className="h-8 w-8 animate-spin text-brand-orange mx-auto" />
           <p className="mt-4 text-gray-600">Chargement du questionnaire...</p>
         </div>
       </div>
@@ -248,7 +248,7 @@ function SessionScaleWrapper({
       {submitting && (
         <div className="fixed inset-0 bg-white/80 flex items-center justify-center z-50">
           <div className="text-center">
-            <Interfaces.Sync className="h-8 w-8 animate-spin text-indigo-600 mx-auto" />
+            <Interfaces.Sync className="h-8 w-8 animate-spin text-brand-orange mx-auto" />
             <p className="mt-4 text-gray-600">Envoi en cours...</p>
           </div>
         </div>
