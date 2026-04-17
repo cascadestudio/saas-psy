@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { Eye, EyeOff } from "lucide-react";
 import { useAuthGate } from "@/app/context/AuthGateContext";
 import { useUser } from "@/app/context/UserContext";
 import { api, ApiError } from "@/lib/api-client";
@@ -15,6 +16,7 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 import { SubmitButton } from "@/components/submit-button";
 import { FormMessage, Message } from "@/components/form-message";
 
@@ -86,6 +88,7 @@ function SignInForm({
   const { closeAuthGate } = useAuthGate();
   const [message, setMessage] = useState<Message | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -131,13 +134,26 @@ function SignInForm({
 
       <div className="space-y-2">
         <Label htmlFor="signin-password">Mot de passe</Label>
-        <Input
-          id="signin-password"
-          type="password"
-          name="password"
-          placeholder="Votre mot de passe"
-          required
-        />
+        <div className="relative">
+          <Input
+            id="signin-password"
+            type={showPassword ? "text" : "password"}
+            name="password"
+            placeholder="Votre mot de passe"
+            required
+            className="pr-10"
+          />
+          <Button
+            type="button"
+            variant="ghost"
+            size="icon"
+            className="absolute right-0 top-0 h-full px-3 text-muted-foreground hover:text-foreground"
+            onClick={() => setShowPassword((v) => !v)}
+            tabIndex={-1}
+          >
+            {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+          </Button>
+        </div>
         <Link
           href="/forgot-password"
           className="text-[11px] text-muted-foreground/60 hover:text-primary transition-colors w-fit"
@@ -173,6 +189,7 @@ function SignUpForm({
 }) {
   const [message, setMessage] = useState<Message | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -244,14 +261,27 @@ function SignUpForm({
 
       <div className="space-y-2">
         <Label htmlFor="signup-password">Mot de passe</Label>
-        <Input
-          id="signup-password"
-          type="password"
-          name="password"
-          placeholder="Minimum 8 caractères"
-          minLength={8}
-          required
-        />
+        <div className="relative">
+          <Input
+            id="signup-password"
+            type={showPassword ? "text" : "password"}
+            name="password"
+            placeholder="Minimum 8 caractères"
+            minLength={8}
+            required
+            className="pr-10"
+          />
+          <Button
+            type="button"
+            variant="ghost"
+            size="icon"
+            className="absolute right-0 top-0 h-full px-3 text-muted-foreground hover:text-foreground"
+            onClick={() => setShowPassword((v) => !v)}
+            tabIndex={-1}
+          >
+            {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+          </Button>
+        </div>
       </div>
 
       <SubmitButton

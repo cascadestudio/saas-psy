@@ -337,7 +337,7 @@ async function main() {
   // ============================================
   console.log('\n📦 Seeding test account...');
 
-  const TEST_EMAIL = 'test@melya.fr';
+  const TEST_EMAIL = 'test@melya.app';
   const TEST_PASSWORD = 'password123';
   const passwordHash = await bcrypt.hash(TEST_PASSWORD, 10);
 
@@ -562,12 +562,12 @@ async function main() {
   // ---- EMAIL LOGS ----
   await prisma.emailLog.createMany({
     data: [
-      { to: 'lucas.martin@email.com', from: 'noreply@melya.fr', subject: 'Questionnaire à compléter - Liebowitz', sessionId: null, status: 'sent', provider: 'resend', sentAt: daysAgo(90) },
-      { to: 'lucas.martin@email.com', from: 'noreply@melya.fr', subject: 'Questionnaire à compléter - BDI', sessionId: null, status: 'sent', provider: 'resend', sentAt: daysAgo(30) },
-      { to: 'emma.bernard@email.com', from: 'noreply@melya.fr', subject: 'Questionnaire à compléter - BDI', sessionId: null, status: 'sent', provider: 'resend', sentAt: daysAgo(14) },
-      { to: 'hugo.petit@email.com', from: 'noreply@melya.fr', subject: 'Questionnaire à compléter - PCL-5', sessionId: null, status: 'sent', provider: 'resend', sentAt: daysAgo(7) },
-      { to: 'lea.moreau@email.com', from: 'noreply@melya.fr', subject: 'Questionnaire à compléter - STAI', sessionId: null, status: 'failed', provider: 'resend', error: 'Temporary Resend API error', sentAt: daysAgo(2) },
-      { to: 'lea.moreau@email.com', from: 'noreply@melya.fr', subject: 'Questionnaire à compléter - STAI', sessionId: null, status: 'sent', provider: 'resend', sentAt: daysAgo(1) },
+      { to: 'lucas.martin@email.com', from: 'noreply@melya.app', subject: 'Questionnaire à compléter - Liebowitz', sessionId: null, status: 'sent', provider: 'resend', sentAt: daysAgo(90) },
+      { to: 'lucas.martin@email.com', from: 'noreply@melya.app', subject: 'Questionnaire à compléter - BDI', sessionId: null, status: 'sent', provider: 'resend', sentAt: daysAgo(30) },
+      { to: 'emma.bernard@email.com', from: 'noreply@melya.app', subject: 'Questionnaire à compléter - BDI', sessionId: null, status: 'sent', provider: 'resend', sentAt: daysAgo(14) },
+      { to: 'hugo.petit@email.com', from: 'noreply@melya.app', subject: 'Questionnaire à compléter - PCL-5', sessionId: null, status: 'sent', provider: 'resend', sentAt: daysAgo(7) },
+      { to: 'lea.moreau@email.com', from: 'noreply@melya.app', subject: 'Questionnaire à compléter - STAI', sessionId: null, status: 'failed', provider: 'resend', error: 'Temporary Resend API error', sentAt: daysAgo(2) },
+      { to: 'lea.moreau@email.com', from: 'noreply@melya.app', subject: 'Questionnaire à compléter - STAI', sessionId: null, status: 'sent', provider: 'resend', sentAt: daysAgo(1) },
     ],
   });
   console.log('  ✓ Email logs (sent + failed)');
