@@ -3,18 +3,9 @@
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { scales as localScales } from "@/app/scalesData";
-import ScaleFactory from "@/app/scale/[id]/components/ScaleFactory";
 import { Interfaces } from "doodle-icons";
 import { toast } from "sonner";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
+import SessionRunner from "./components/SessionRunner";
 
 interface SessionData {
   id: string;
@@ -180,106 +171,46 @@ function SessionScaleWrapper({
   patientLastName,
 }: WrapperProps) {
   const router = useRouter();
-  const [submitting, setSubmitting] = useState(false);
-  const [showConfirmDialog, setShowConfirmDialog] = useState(false);
-  const [pendingSubmission, setPendingSubmission] = useState<{
-    responses: Record<string, any>;
-    comments?: string;
-  } | null>(null);
 
-  // Called when user clicks "Valider" in the questionnaire
-  const handleSubmitRequest = async (responses: Record<string, any>, comments?: string) => {
-    setPendingSubmission({ responses, comments });
-    setShowConfirmDialog(true);
-  };
+  const handleSubmit = async (
+    responses: Record<string, any>,
+    comments?: string,
+  ) => {
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001/api";
+    const res = await fetch(`${apiUrl}/sessions/patient/${sessionId}/submit`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        responses,
+        patientComments: comments,
+      }),
+    });
 
-  // Called when user confirms in the modal
-  const handleConfirmSubmit = async () => {
-    if (!pendingSubmission) return;
+    if (!res.ok) {
+      const data = await res.json();
+      const message = data.message || "Erreur lors de l'envoi";
+      toast.error("Erreur", { description: message });
+      throw new Error(message);
+    }
 
-    setShowConfirmDialog(false);
-    setSubmitting(true);
-
-    try {
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001/api";
-      const res = await fetch(`${apiUrl}/sessions/patient/${sessionId}/submit`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          responses: pendingSubmission.responses,
-          patientComments: pendingSubmission.comments,
-        }),
+    if (batchId) {
+      toast.success("Réponses enregistrées", {
+        description: "Vos réponses ont été enregistrées avec succès.",
       });
-
-      if (!res.ok) {
-        const data = await res.json();
-        throw new Error(data.message || "Erreur lors de l'envoi");
-      }
-
-      // If there's a batchId, redirect to the portal
-      if (batchId) {
-        toast.success("Réponses enregistrées", {
-          description: "Vos réponses ont été enregistrées avec succès.",
-        });
-        router.push(`/p/${batchId}`);
-      } else {
-        // Fallback to thank you page for sessions without batchId
-        router.push(`/session/${sessionId}/merci`);
-      }
-    } catch (err) {
-      toast.error("Erreur", {
-        description: err instanceof Error ? err.message : "Une erreur est survenue",
-      });
-    } finally {
-      setSubmitting(false);
-      setPendingSubmission(null);
+      router.push(`/p/${batchId}`);
+    } else {
+      router.push(`/session/${sessionId}/merci`);
     }
   };
 
-  const handleCancelSubmit = () => {
-    setShowConfirmDialog(false);
-    setPendingSubmission(null);
-  };
-
   return (
-    <div className="relative">
-      {submitting && (
-        <div className="fixed inset-0 bg-white/80 flex items-center justify-center z-50">
-          <div className="text-center">
-            <Interfaces.Sync className="h-8 w-8 animate-spin text-brand-orange mx-auto" />
-            <p className="mt-4 text-gray-600">Envoi en cours...</p>
-          </div>
-        </div>
-      )}
-
-      <Dialog open={showConfirmDialog} onOpenChange={setShowConfirmDialog}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Confirmer vos réponses ?</DialogTitle>
-            <DialogDescription>
-              Une fois envoyées, vos réponses ne pourront plus être modifiées.
-            </DialogDescription>
-          </DialogHeader>
-          <DialogFooter>
-            <Button variant="outline" onClick={handleCancelSubmit}>
-              Annuler
-            </Button>
-            <Button onClick={handleConfirmSubmit}>
-              Confirmer
-            </Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
-
-      <ScaleFactory
-        scale={scale}
-        psychologistEmail="" // Not used in session mode
-        patientFirstname={patientFirstName}
-        patientLastname={patientLastName}
-        onSubmit={handleSubmitRequest}
-      />
-    </div>
+    <SessionRunner
+      scale={scale}
+      patientFirstName={patientFirstName}
+      patientLastName={patientLastName}
+      onSubmit={handleSubmit}
+    />
   );
 }

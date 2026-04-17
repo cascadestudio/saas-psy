@@ -424,6 +424,7 @@ export class SessionsService {
               title: session.scale.title,
               description: session.scale.description,
               instructions: session.scale.longDescription,
+              formType: session.scale.formType,
               questions: session.scale.questions,
               answerScales: session.scale.answerScales,
               scoring: session.scale.scoring,
