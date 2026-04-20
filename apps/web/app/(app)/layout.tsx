@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { Interfaces, Files } from "doodle-icons";
 import { useUser } from "@/app/context/UserContext";
 import { useAuthGate } from "@/app/context/AuthGateContext";
+import { FeedbackCTA } from "@/components/FeedbackModal";
 import { cn } from "@/lib/utils";
 
 const navigation = [
@@ -90,6 +91,8 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
 
       {/* Main content */}
       <main className="flex-1 min-w-0">{children}</main>
+
+      {user && <FeedbackCTA />}
     </div>
   );
 }
