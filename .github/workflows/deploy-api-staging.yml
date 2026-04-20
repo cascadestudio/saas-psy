@@ -59,6 +59,7 @@ jobs:
               -e DATABASE_URL="${{ secrets.DATABASE_URL_STAGING }}" \
               -e JWT_SECRET="${{ secrets.JWT_SECRET_STAGING }}" \
               -e ENCRYPTION_KEY="${{ secrets.ENCRYPTION_KEY_STAGING }}" \
+              -e RESEND_API_KEY="${{ secrets.RESEND_API_KEY }}" \
               -e NODE_ENV=staging \
               -e PORT=3001 \
               -e CORS_ORIGIN="https://staging-melya.vercel.app,http://localhost:3000" \
