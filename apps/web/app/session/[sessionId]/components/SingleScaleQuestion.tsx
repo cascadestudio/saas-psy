@@ -7,6 +7,7 @@ interface AnswerOption {
 
 interface SingleScaleQuestionProps {
   questionText: string;
+  subLabel?: string;
   options: AnswerOption[];
   selectedValue?: number;
   onSelect: (value: number) => void;
@@ -14,15 +15,23 @@ interface SingleScaleQuestionProps {
 
 export default function SingleScaleQuestion({
   questionText,
+  subLabel,
   options,
   selectedValue,
   onSelect,
 }: SingleScaleQuestionProps) {
   return (
     <div className="flex flex-col gap-6">
-      <h2 className="font-body text-2xl sm:text-3xl font-semibold text-gray-900 leading-tight">
-        {questionText}
-      </h2>
+      <div className="flex flex-col gap-2">
+        {subLabel && (
+          <p className="text-sm font-medium uppercase tracking-wide text-brand-orange">
+            {subLabel}
+          </p>
+        )}
+        <h2 className="font-body text-2xl sm:text-3xl font-semibold text-gray-900 leading-tight">
+          {questionText}
+        </h2>
+      </div>
 
       <div className="flex flex-col gap-3">
         {options.map((option) => {
