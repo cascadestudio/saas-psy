@@ -10,3 +10,6 @@ export * from './utils';
 // Export email builders
 export * from './email';
 
+// Export scales data
+export * from './scales';
+

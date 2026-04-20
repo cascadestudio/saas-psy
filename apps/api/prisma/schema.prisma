@@ -94,47 +94,14 @@ model Patient {
 }
 
 // ============================================
-// SCALES (Échelles psychométriques)
-// ============================================
-
-model Scale {
-  id                String   @id // e.g., "bdi", "stai-y-a"
-  title             String
-  description       String
-  longDescription   String   @map("long_description")
-  category          String
-  estimatedTime     String   @map("estimated_time")
-  formType          String   @map("form_type") @default("single-scale")
-
-  // Scale structure
-  questions         Json     // Stores the full scale structure
-  answerScales      Json?    @map("answer_scales")
-  scoring           Json?    // Scoring configuration
-
-  // Metadata
-  isPublished       Boolean  @default(true) @map("is_published")
-  requiresAuth      Boolean  @default(false) @map("requires_auth")
-  copyrightInfo     String?  @map("copyright_info")
-
-  createdAt         DateTime @default(now()) @map("created_at")
-  updatedAt         DateTime @updatedAt @map("updated_at")
-
-  // Relations
-  sessions          Session[]
-
-  @@map("scales")
-}
-
-// ============================================
 // SESSIONS (Passations)
 // ============================================
 
 model Session {
   id                String         @id @default(cuid())
 
-  // Scale reference
+  // Scale reference (hardcoded in @melya/core)
   scaleId           String         @map("scale_id")
-  scale             Scale          @relation(fields: [scaleId], references: [id])
 
   // Patient reference
   patientId         String         @map("patient_id")
