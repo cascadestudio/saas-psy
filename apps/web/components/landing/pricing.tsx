@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Interfaces } from "doodle-icons";
 import { Badge } from "@/components/ui/badge";
-import { WaitlistButton } from "./waitlist-button";
+import Link from "next/link";
 import { useScrollAnimation } from "./use-scroll-animation";
 
 export function Pricing() {
@@ -41,7 +41,7 @@ export function Pricing() {
         "Passations illimitées",
         "Historique complet des passations",
       ],
-      cta: "Rejoindre la liste d'attente",
+      cta: "Essayer Melya",
       variant: "default" as const,
       highlighted: true,
     },
@@ -137,17 +137,16 @@ export function Pricing() {
                 </ul>
 
                 <div className="mt-8">
-                  <WaitlistButton
-                    variant={plan.highlighted ? "default" : "outline"}
-                    className={
+                  <Link
+                    href="/dashboard"
+                    className={`block w-full text-center font-body font-medium text-sm rounded-full px-5 py-3 transition-colors ${
                       plan.highlighted
-                        ? "w-full bg-brand-orange text-white hover:bg-brand-orange/90"
-                        : "w-full border-brand-orange text-brand-orange hover:bg-brand-orange hover:text-white"
-                    }
-                    size="lg"
+                        ? "bg-brand-orange text-white hover:bg-brand-orange/90"
+                        : "border border-brand-orange text-brand-orange hover:bg-brand-orange hover:text-white"
+                    }`}
                   >
                     {plan.cta}
-                  </WaitlistButton>
+                  </Link>
                 </div>
               </div>
             ))}

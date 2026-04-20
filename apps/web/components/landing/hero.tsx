@@ -1,7 +1,7 @@
 "use client";
 
-import { WaitlistButton } from "./waitlist-button";
 import Image from "next/image";
+import Link from "next/link";
 import { Interfaces } from "doodle-icons";
 
 export function Hero() {
@@ -41,12 +41,12 @@ export function Hero() {
                 style={{ width: "calc(50% - 160px)" }}
               />
               <div className="relative flex flex-col items-center">
-                <WaitlistButton
-                  size="lg"
-                  className="font-body font-medium text-sm rounded-full px-8 bg-brand-orange text-white hover:bg-brand-orange/90"
+                <Link
+                  href="/dashboard"
+                  className="font-body font-medium text-sm rounded-full px-8 py-3 bg-brand-orange text-white hover:bg-brand-orange/90 transition-colors"
                 >
                   Je souhaite essayer Melya
-                </WaitlistButton>
+                </Link>
                 <span className="absolute -bottom-6 text-xs text-foreground/50 font-body">
                   100% gratuit
                 </span>
