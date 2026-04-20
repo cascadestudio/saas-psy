@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from '../prisma/prisma.service';
+import { getScaleById } from '@melya/core';
 import { ScoreResult } from './types';
 import { calculateOptionsScore } from './calculators/options';
 import { calculateSTAIScore } from './calculators/stai';
@@ -8,15 +8,11 @@ import { calculateSingleScaleScore } from './calculators/single-scale';
 
 @Injectable()
 export class ScoringService {
-  constructor(private prisma: PrismaService) {}
-
-  async calculateScore(
+  calculateScore(
     scaleId: string,
     responses: Record<string, any>,
-  ): Promise<ScoreResult> {
-    const scale = await this.prisma.scale.findUnique({
-      where: { id: scaleId },
-    });
+  ): ScoreResult {
+    const scale = getScaleById(scaleId);
 
     if (!scale) {
       throw new Error(`Scale not found: ${scaleId}`);

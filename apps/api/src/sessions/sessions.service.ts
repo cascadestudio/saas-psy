@@ -13,6 +13,7 @@ import { AuditLogService } from '../audit-log/audit-log.service';
 import { AuditAction } from '../audit-log/audit-actions';
 import { CreateSessionDto, UpdateSessionDto, SubmitResponsesDto } from './dto';
 import { createId } from '@paralleldrive/cuid2';
+import { getScaleById } from '@melya/core';
 
 @Injectable()
 export class SessionsService {
@@ -54,12 +55,7 @@ export class SessionsService {
       throw new NotFoundException('Praticien non trouvé');
     }
 
-    // Get scales data
-    const scales = await this.prisma.scale.findMany({
-      where: { id: { in: dto.scaleIds } },
-    });
-
-    const scalesMap = new Map(scales.map((s) => [s.id, s]));
+    const scalesMap = new Map(dto.scaleIds.map((id) => [id, getScaleById(id)]));
 
     // Generate a unique batchId for this group of sessions
     const batchId = createId();
@@ -313,14 +309,6 @@ export class SessionsService {
             lastName: true,
           },
         },
-        scale: {
-          select: {
-            id: true,
-            title: true,
-            description: true,
-            estimatedTime: true,
-          },
-        },
       },
       orderBy: { createdAt: 'asc' },
     });
@@ -349,16 +337,19 @@ export class SessionsService {
         pendingCount: pendingSessions.length,
         completedCount: completedSessions.length,
         allCompleted: pendingSessions.length === 0,
-        sessions: sessions.map((s) => ({
-          id: s.id,
-          scaleId: s.scale?.id,
-          scaleTitle: s.scale?.title,
-          scaleDescription: s.scale?.description,
-          estimatedTime: s.scale?.estimatedTime,
-          status: s.status,
-          isCompleted: s.status === 'COMPLETED',
-          completedAt: s.completedAt,
-        })),
+        sessions: sessions.map((s) => {
+          const scale = getScaleById(s.scaleId);
+          return {
+            id: s.id,
+            scaleId: s.scaleId,
+            scaleTitle: scale?.title,
+            scaleDescription: scale?.description,
+            estimatedTime: scale?.estimatedTime,
+            status: s.status,
+            isCompleted: s.status === 'COMPLETED',
+            completedAt: s.completedAt,
+          };
+        }),
       },
     };
   }
@@ -374,7 +365,6 @@ export class SessionsService {
             lastName: true,
           },
         },
-        scale: true,
       },
     });
 
@@ -410,6 +400,7 @@ export class SessionsService {
       });
     }
 
+    const scale = getScaleById(session.scaleId);
     return {
       session: {
         id: session.id,
@@ -418,17 +409,17 @@ export class SessionsService {
         patientFirstName: this.encryption.decryptField(session.patient.firstName),
         patientLastName: this.encryption.decryptField(session.patient.lastName),
         status: session.status === 'SENT' ? 'STARTED' : session.status,
-        scale: session.scale
+        scale: scale
           ? {
-              id: session.scale.id,
-              title: session.scale.title,
-              description: session.scale.description,
-              instructions: session.scale.longDescription,
-              formType: session.scale.formType,
-              questions: session.scale.questions,
-              answerScales: session.scale.answerScales,
-              scoring: session.scale.scoring,
-              estimatedTime: session.scale.estimatedTime,
+              id: scale.id,
+              title: scale.title,
+              description: scale.description,
+              instructions: scale.instructions ?? scale.longDescription,
+              formType: scale.formType,
+              questions: scale.questions,
+              answerScales: scale.answerScales,
+              scoring: scale.scoring,
+              estimatedTime: scale.estimatedTime,
             }
           : null,
       },
@@ -458,7 +449,7 @@ export class SessionsService {
     }
 
     // Calculate score using the scoring service
-    const scoreResult = await this.scoringService.calculateScore(
+    const scoreResult = this.scoringService.calculateScore(
       session.scaleId,
       dto.responses,
     );
