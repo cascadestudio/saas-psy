@@ -11,7 +11,7 @@ COPY apps/api/package*.json ./apps/api/
 COPY packages/core/package*.json ./packages/core/
 
 # Install all dependencies
-RUN npm ci --ignore-scripts
+RUN npm ci
 
 # Copy source code
 COPY packages/core ./packages/core
