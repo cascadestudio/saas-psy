@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { Arrow } from "doodle-icons";
 import ScaleFactory from "@/app/scale/[id]/components/ScaleFactory";
 import ProgressBar from "./ProgressBar";
@@ -18,9 +18,93 @@ interface SessionRunnerProps {
   ) => Promise<void>;
 }
 
-type Step = "intro" | "question" | "review";
+interface QuestionStep {
+  key: string;
+  questionText: string;
+  subLabel?: string;
+  options: { value: number; label: string }[];
+}
+
+type Phase = "intro" | "question" | "review";
 
 const AUTO_ADVANCE_DELAY_MS = 250;
+const SUPPORTED_FORM_TYPES = new Set([
+  "single-scale",
+  "options",
+  "dual-scale",
+  "grouped-items",
+]);
+
+function buildSteps(scale: any): QuestionStep[] {
+  const formType = scale.formType;
+  const questions = scale.questions ?? [];
+
+  if (formType === "single-scale") {
+    const options = toOptions(scale.answerScales?.intensity);
+    return (questions as string[]).map((text, idx) => ({
+      key: `intensity_${idx}`,
+      questionText: text,
+      options,
+    }));
+  }
+
+  if (formType === "options") {
+    return (questions as { title: string; options: { value: number; text: string }[] }[]).map(
+      (q, idx) => ({
+        key: `bdi_${idx}`,
+        questionText: q.title,
+        options: q.options.map((o) => ({ value: o.value, label: o.text })),
+      }),
+    );
+  }
+
+  if (formType === "dual-scale") {
+    const anxiety = toOptions(scale.answerScales?.anxiety);
+    const avoidance = toOptions(scale.answerScales?.avoidance);
+    const steps: QuestionStep[] = [];
+    (questions as { text: string }[]).forEach((q, idx) => {
+      steps.push({
+        key: `anxiety_${idx}`,
+        questionText: q.text,
+        subLabel: "Anxiété ressentie",
+        options: anxiety,
+      });
+      steps.push({
+        key: `avoidance_${idx}`,
+        questionText: q.text,
+        subLabel: "Évitement de la situation",
+        options: avoidance,
+      });
+    });
+    return steps;
+  }
+
+  if (formType === "grouped-items") {
+    const options = toOptions(scale.answerScales?.intensity);
+    const steps: QuestionStep[] = [];
+    (questions as { title: string; items: string[] }[]).forEach(
+      (group, groupIdx) => {
+        group.items.forEach((item, itemIdx) => {
+          steps.push({
+            key: `intensity_${groupIdx}_${itemIdx}`,
+            questionText: item,
+            subLabel: group.title,
+            options,
+          });
+        });
+      },
+    );
+    return steps;
+  }
+
+  return [];
+}
+
+function toOptions(
+  raw: { value: number; label: string }[] | undefined,
+): { value: number; label: string }[] {
+  return raw ?? [];
+}
 
 export default function SessionRunner({
   scale,
@@ -28,7 +112,7 @@ export default function SessionRunner({
   patientLastName,
   onSubmit,
 }: SessionRunnerProps) {
-  if (scale.formType !== "single-scale") {
+  if (!SUPPORTED_FORM_TYPES.has(scale.formType)) {
     return (
       <ScaleFactory
         scale={scale}
@@ -40,10 +124,10 @@ export default function SessionRunner({
     );
   }
 
-  return <SingleScaleRunner scale={scale} onSubmit={onSubmit} />;
+  return <Runner scale={scale} onSubmit={onSubmit} />;
 }
 
-interface SingleScaleRunnerProps {
+interface RunnerProps {
   scale: any;
   onSubmit: (
     responses: Record<string, any>,
@@ -51,69 +135,66 @@ interface SingleScaleRunnerProps {
   ) => Promise<void>;
 }
 
-function SingleScaleRunner({ scale, onSubmit }: SingleScaleRunnerProps) {
-  const intensityOptions: { value: number; label: string }[] =
-    scale.answerScales?.intensity ?? [];
-  const questions: string[] = scale.questions ?? [];
-  const total = questions.length;
+function Runner({ scale, onSubmit }: RunnerProps) {
+  const steps = useMemo(() => buildSteps(scale), [scale]);
+  const total = steps.length;
 
-  const [step, setStep] = useState<Step>("intro");
+  const [phase, setPhase] = useState<Phase>("intro");
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [responses, setResponses] = useState<Record<number, number>>({});
+  const [responses, setResponses] = useState<Record<string, number>>({});
   const [comments, setComments] = useState("");
   const [submitting, setSubmitting] = useState(false);
 
   const handleStart = () => {
-    setStep("question");
+    setPhase("question");
     setCurrentIndex(0);
   };
 
   const handleSelect = (value: number) => {
-    setResponses((prev) => ({ ...prev, [currentIndex]: value }));
+    const step = steps[currentIndex];
+    setResponses((prev) => ({ ...prev, [step.key]: value }));
 
     window.setTimeout(() => {
       if (currentIndex < total - 1) {
         setCurrentIndex((i) => i + 1);
       } else {
-        setStep("review");
+        setPhase("review");
       }
     }, AUTO_ADVANCE_DELAY_MS);
   };
 
   const handleBack = () => {
-    if (step === "review") {
-      setStep("question");
+    if (phase === "review") {
+      setPhase("question");
       setCurrentIndex(total - 1);
       return;
     }
     if (currentIndex > 0) {
       setCurrentIndex((i) => i - 1);
     } else {
-      setStep("intro");
+      setPhase("intro");
     }
   };
 
-  const canGoBack = step !== "intro" && (step === "review" || currentIndex > 0);
+  const canGoBack =
+    phase !== "intro" && (phase === "review" || currentIndex > 0);
 
   const handleSubmit = async () => {
     setSubmitting(true);
     try {
-      const payload: Record<string, number> = {};
-      for (const [idx, value] of Object.entries(responses)) {
-        payload[`intensity_${idx}`] = value;
-      }
-      await onSubmit(payload, comments || undefined);
+      await onSubmit(responses, comments || undefined);
     } finally {
       setSubmitting(false);
     }
   };
 
   const answeredCount = Object.keys(responses).length;
+  const currentStep = steps[currentIndex];
 
   return (
     <div className="min-h-[100dvh] bg-gray-50">
       <div className="mx-auto max-w-xl px-5 pt-6 pb-10 flex flex-col gap-8">
-        {step !== "intro" && (
+        {phase !== "intro" && (
           <div className="flex items-center gap-3">
             <button
               type="button"
@@ -126,14 +207,14 @@ function SingleScaleRunner({ scale, onSubmit }: SingleScaleRunnerProps) {
             </button>
             <div className="flex-1">
               <ProgressBar
-                current={step === "review" ? total : currentIndex}
+                current={phase === "review" ? total : currentIndex}
                 total={total}
               />
             </div>
           </div>
         )}
 
-        {step === "intro" && (
+        {phase === "intro" && (
           <IntroScreen
             scaleId={scale.id}
             title={scale.title}
@@ -144,16 +225,17 @@ function SingleScaleRunner({ scale, onSubmit }: SingleScaleRunnerProps) {
           />
         )}
 
-        {step === "question" && (
+        {phase === "question" && currentStep && (
           <SingleScaleQuestion
-            questionText={questions[currentIndex]}
-            options={intensityOptions}
-            selectedValue={responses[currentIndex]}
+            subLabel={currentStep.subLabel}
+            questionText={currentStep.questionText}
+            options={currentStep.options}
+            selectedValue={responses[currentStep.key]}
             onSelect={handleSelect}
           />
         )}
 
-        {step === "review" && (
+        {phase === "review" && (
           <ReviewScreen
             totalQuestions={total}
             answeredCount={answeredCount}

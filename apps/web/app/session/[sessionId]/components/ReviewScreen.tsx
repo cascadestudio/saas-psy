@@ -27,7 +27,7 @@ export default function ReviewScreen({
   return (
     <div className="flex flex-col gap-8">
       <div className="flex flex-col gap-3">
-        <h1 className="text-3xl sm:text-4xl font-semibold text-gray-900 leading-tight">
+        <h1 className="text-3xl sm:text-4xl font-normal text-gray-900 leading-tight">
           Vous avez terminé
         </h1>
         <p className="text-base text-gray-600 leading-relaxed">
@@ -40,10 +40,7 @@ export default function ReviewScreen({
       </div>
 
       <div className="flex flex-col gap-2">
-        <label
-          htmlFor="comments"
-          className="text-sm font-medium text-gray-700"
-        >
+        <label htmlFor="comments" className="text-sm font-medium text-gray-700">
           Commentaires additionnels{" "}
           <span className="text-gray-400 font-normal">(optionnel)</span>
         </label>
