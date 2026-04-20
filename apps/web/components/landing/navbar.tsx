@@ -2,8 +2,8 @@
 
 import { useState, useEffect } from "react";
 import { Interfaces } from "doodle-icons";
-import { WaitlistButton } from "./waitlist-button";
 import Image from "next/image";
+import Link from "next/link";
 
 const navLinks = [
   { href: "#fonctionnalites", label: "Fonctionnalités" },
@@ -58,12 +58,12 @@ export function Navbar() {
 
           {/* CTA — desktop */}
           <div className="hidden md:flex items-center gap-3">
-            <WaitlistButton
-              size="sm"
-              className="font-body font-medium text-sm rounded-full px-5 bg-brand-orange text-white hover:bg-brand-orange/90"
+            <Link
+              href="/dashboard"
+              className="font-body font-medium text-sm rounded-full px-5 py-2 bg-brand-orange text-white hover:bg-brand-orange/90 transition-colors"
             >
-              Rejoindre la liste d'attente
-            </WaitlistButton>
+              Essayer Melya
+            </Link>
           </div>
 
           {/* Hamburger — mobile */}
@@ -96,12 +96,13 @@ export function Navbar() {
               </a>
             ))}
             <div className="pt-2">
-              <WaitlistButton
-                className="w-full font-body font-medium text-sm rounded-full bg-brand-orange text-white hover:bg-brand-orange/90"
-                size="sm"
+              <Link
+                href="/dashboard"
+                className="block w-full text-center font-body font-medium text-sm rounded-full px-5 py-2 bg-brand-orange text-white hover:bg-brand-orange/90 transition-colors"
+                onClick={() => setMobileOpen(false)}
               >
-                Rejoindre la liste d'attente
-              </WaitlistButton>
+                Essayer Melya
+              </Link>
             </div>
           </div>
         </div>
