@@ -170,7 +170,7 @@ export function SendScaleSheet({
     <Sheet open={open} onOpenChange={onOpenChange}>
       <SheetContent
         side="right"
-        className="sm:max-w-[520px] w-full flex flex-col p-0 rounded-l-2xl"
+        className="sm:max-w-[50vw] w-full flex flex-col p-0 rounded-l-2xl"
       >
         {/* Header */}
         <SheetHeader className="px-6 pt-6 pb-4 space-y-4 bg-brand-orange/10">
