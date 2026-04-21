@@ -28,7 +28,7 @@ export function Hero() {
             <p className="text-lg font-body leading-relaxed max-w-xl">
               Melya automatise la cotation de vos échelles et questionnaires
               psychologiques. Moins de paperasse, plus de rigueur clinique, plus
-              de temps avec vos patients.
+              de temps pour vos patients.
             </p>
 
             {/* CTA — arrow left, gap, button */}
