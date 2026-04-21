@@ -176,3 +176,14 @@
 .animate-marquee:hover {
   animation-play-state: paused;
 }
+
+/* Sonner — colors per type */
+[data-sonner-toast][data-type="success"] {
+  color: hsl(var(--brand-soft-green)) !important;
+  border-color: hsl(var(--brand-soft-green) / 0.3) !important;
+}
+[data-sonner-toast][data-type="error"] {
+  color: hsl(var(--destructive)) !important;
+  border-color: hsl(var(--destructive) / 0.3) !important;
+}
+

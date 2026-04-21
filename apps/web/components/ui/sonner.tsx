@@ -2,6 +2,7 @@
 
 import { useTheme } from "next-themes"
 import { Toaster as Sonner } from "sonner"
+import { Interfaces } from "doodle-icons"
 
 type ToasterProps = React.ComponentProps<typeof Sonner>
 
@@ -11,20 +12,15 @@ const Toaster = ({ ...props }: ToasterProps) => {
   return (
     <Sonner
       theme={theme as ToasterProps["theme"]}
-      className="toaster group"
-      toastOptions={{
-        classNames: {
-          toast:
-            "group toast group-[.toaster]:bg-background group-[.toaster]:text-foreground group-[.toaster]:border-border group-[.toaster]:shadow-lg group-[.toaster]:rounded-xl group-[.toaster]:font-sans",
-          description: "group-[.toast]:text-muted-foreground",
-          actionButton:
-            "group-[.toast]:bg-primary group-[.toast]:text-primary-foreground group-[.toast]:font-heading",
-          cancelButton:
-            "group-[.toast]:bg-muted group-[.toast]:text-muted-foreground group-[.toast]:font-heading",
-          success: "group-[.toaster]:border-brand-soft-green/30 group-[.toaster]:text-brand-soft-green",
-          error: "group-[.toaster]:border-destructive/30 group-[.toaster]:text-destructive",
-        },
+      position="bottom-center"
+      icons={{
+        success: <Interfaces.Tick2 className="h-4 w-4" fill="currentColor" />,
+        error: <Interfaces.Cross className="h-4 w-4" fill="currentColor" />,
+        info: <Interfaces.Info className="h-4 w-4" fill="currentColor" />,
+        warning: <Interfaces.Info className="h-4 w-4" fill="currentColor" />,
+        loading: <Interfaces.Sync className="h-4 w-4 animate-spin" fill="currentColor" />,
       }}
+      className="toaster group"
       {...props}
     />
   )
