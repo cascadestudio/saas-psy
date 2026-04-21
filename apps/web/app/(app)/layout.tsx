@@ -92,7 +92,15 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
       {/* Main content */}
       <main className="flex-1 min-w-0">{children}</main>
 
-      {user && <FeedbackCTA />}
+      {user && (
+        <FeedbackCTA
+          userId={user.id}
+          email={user.email}
+          firstName={user.firstName}
+          lastName={user.lastName}
+          hasSubmitted={!!user.feedbackSubmittedAt}
+        />
+      )}
     </div>
   );
 }
