@@ -29,6 +29,10 @@ model User {
   passwordResetToken     String?   @unique @map("password_reset_token")
   passwordResetExpiresAt DateTime? @map("password_reset_expires_at")
 
+  // Feedback (Tally)
+  feedbackSubmittedAt DateTime? @map("feedback_submitted_at")
+  tallyResponseId     String?   @map("tally_response_id")
+
   createdAt     DateTime  @default(now()) @map("created_at")
   updatedAt     DateTime  @updatedAt @map("updated_at")
 

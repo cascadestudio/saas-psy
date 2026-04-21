@@ -24,6 +24,9 @@ export const configValidationSchema = Joi.object({
   // Frontend
   NEXT_PUBLIC_APP_URL: Joi.string().default('http://localhost:3000'),
 
+  // Tally webhook
+  TALLY_WEBHOOK_SECRET: Joi.string().optional(),
+
   // Encryption (HDS compliance)
   ENCRYPTION_KEY: Joi.string().pattern(/^[0-9a-f]{64}$/i).required()
     .messages({

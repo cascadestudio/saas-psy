@@ -10,16 +10,43 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog";
 
-const TALLY_URL =
-  "https://tally.so/embed/GxBy4Z?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1";
+const TALLY_FORM_ID = "GxBy4Z";
 const FIRST_VISIT_KEY = "melya_first_visit_at";
 const DISMISSED_KEY = "melya_feedback_prompt_dismissed";
 const AUTO_PROMPT_DELAY_DAYS = 7;
 
-export function FeedbackCTA() {
+type FeedbackCTAProps = {
+  userId: string;
+  email: string;
+  firstName?: string | null;
+  lastName?: string | null;
+  hasSubmitted: boolean;
+};
+
+export function FeedbackCTA({
+  userId,
+  email,
+  firstName,
+  lastName,
+  hasSubmitted,
+}: FeedbackCTAProps) {
   const [open, setOpen] = useState(false);
 
+  const params = new URLSearchParams({
+    alignLeft: "1",
+    hideTitle: "1",
+    transparentBackground: "1",
+    dynamicHeight: "1",
+    userId,
+    email,
+    ...(firstName ? { firstName } : {}),
+    ...(lastName ? { lastName } : {}),
+  });
+  const tallyUrl = `https://tally.so/embed/${TALLY_FORM_ID}?${params.toString()}`;
+
   useEffect(() => {
+    if (hasSubmitted) return;
+
     const now = Date.now();
     const firstVisit = localStorage.getItem(FIRST_VISIT_KEY);
     if (!firstVisit) {
@@ -33,7 +60,7 @@ export function FeedbackCTA() {
       setOpen(true);
       localStorage.setItem(DISMISSED_KEY, "1");
     }
-  }, []);
+  }, [hasSubmitted]);
 
   return (
     <>
@@ -53,7 +80,7 @@ export function FeedbackCTA() {
             </DialogDescription>
           </DialogHeader>
           <iframe
-            src={TALLY_URL}
+            src={tallyUrl}
             className="w-full h-[60vh] border-0"
             title="Formulaire de feedback Melya"
           />
