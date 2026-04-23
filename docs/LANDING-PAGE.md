@@ -15,6 +15,7 @@ Melya (melya.app) is a French SaaS platform that automates psychometric question
 ## Assets (provided separately)
 
 The following assets will be provided as files:
+
 - `logo.svg` — Melya logo (terracotta blob icon + Gelica Bold wordmark)
 - `hero-photo.jpg` — stock photo for the hero section (warm therapy/consultation scene)
 - `icon-bdi.svg`, `icon-stai.svg`, `icon-lsas.svg`, `icon-pcl5.svg`, `icon-ybocs.svg` — individual scale icons
@@ -28,10 +29,12 @@ Place assets in `public/images/landing/`.
 ## Design System
 
 ### Typography
+
 - **Headings:** Gelica (Bold / SemiBold) — load via @font-face from local files or Adobe Fonts. Gelica is a soft rounded serif by Dave Rowland / Eclectotype. Warm, friendly, not cutesy.
 - **Body text:** Rethink Sans — load from Google Fonts
 
 ### Color Palette (use CSS variables / Tailwind config)
+
 ```
 --terracotta: #C65D24       /* Primary accent, CTAs, active elements */
 --cream-light: #EDE8DF      /* Main page background (body) */
@@ -43,6 +46,7 @@ Place assets in `public/images/landing/`.
 ```
 
 ### Design Tone
+
 - **Warm, organic, minimal, human** — anti-corporate, approachable
 - Background: cream-light #EDE8DF everywhere, NOT white
 - Organic shapes, soft rounded corners (consistent with the blob in the logo)
@@ -55,6 +59,7 @@ Place assets in `public/images/landing/`.
 ## Page Structure (top to bottom)
 
 ### 1. Navbar (sticky)
+
 - **Left:** Melya logo
 - **Center:** Anchor links — Fonctionnalités, Comment ça marche, Tarifs, FAQ
 - **Right:** CTA button "Rejoindre la liste d'attente" (terracotta, opens modal)
@@ -62,6 +67,7 @@ Place assets in `public/images/landing/`.
 - Mobile: hamburger menu
 
 ### 2. Hero Section
+
 - **Left side:**
   - H1: `Envoyez vos échelles en 2 minutes, recevez les résultats cotés automatiquement`
   - Subtitle (p): `Melya automatise la cotation de vos échelles et questionnaires psychologiques. Moins de paperasse, plus de rigueur clinique, plus de temps avec vos patients.`
@@ -76,12 +82,14 @@ Place assets in `public/images/landing/`.
   - Toasts: off-white background, small, rounded, with a subtle shadow. Appear with a gentle slide-in/fade animation.
 
 ### 3. Social Proof (below hero)
+
 - Centered quote block:
   - `"La cotation manuelle est tellement chronophage qu'on finit par renoncer à utiliser les échelles, alors qu'on sait qu'elles peuvent être essentielles à la rigueur clinique du suivi."`
 - Profile photo (circular, placeholder if not provided) + attribution:
   - `Renata Dujmusic, Psychologue en TCC`
 
 ### 4. Scale Badges (horizontal scroll)
+
 - Horizontal row of 5 badges, scrollable on mobile:
   - Each badge: SVG icon + acronym + short label
   - `BDI — Dépression`
@@ -93,6 +101,7 @@ Place assets in `public/images/landing/`.
 - Style: off-white cards with subtle border, consistent with app UI
 
 ### 5. Benefits Section (id="fonctionnalites")
+
 - Section title (optional, subtle): `Melya s'occupe de votre charge administrative` or similar
 - 4 benefit cards in a 2x2 grid (single column on mobile):
 
@@ -112,6 +121,7 @@ Suivez la progression de vos patients en un coup d'œil.
 - Cards: off-white background, soft rounded corners, subtle shadow or border
 
 ### 6. How It Works (id="comment-ca-marche")
+
 - Section title: `Comment ça marche ?`
 - 3 steps in a horizontal row (stacked on mobile), with step numbers:
 
@@ -127,23 +137,28 @@ Scores calculés selon les barèmes officiels, disponibles instantanément dans 
 - Include the dashboard screenshot below or alongside the steps, displayed in a browser frame mockup (rounded corners, minimal chrome, subtle shadow)
 
 ### 7. Without / With Melya Comparison
+
 - Two-column layout (stacked on mobile):
 
 **Sans Melya** (left, neutral/muted styling):
+
 - Cotation manuelle, source d'erreurs et de perte de temps
 - Échelles sous-utilisées faute de temps
 - Résultats dispersés entre papier, PDFs et Excel
 
 **Avec Melya** (right, highlighted/positive styling with terracotta accents):
+
 - Cotation automatique, fiable et instantanée
 - Envoi d'échelles en quelques clics, avant ou après la séance
 - Un seul espace sécurisé (serveur HDS) pour tous vos résultats
 
 ### 8. Pricing Section (id="tarifs")
+
 - Section title: `Tarifs`
 - Two pricing cards side by side (stacked on mobile):
 
 **Card 1: Gratuit**
+
 - Description: `Pour découvrir Melya à votre rythme`
 - Features:
   - 5 patients ou 20 passations/mois
@@ -152,6 +167,7 @@ Scores calculés selon les barèmes officiels, disponibles instantanément dans 
 - CTA: `Commencer gratuitement` (outline/secondary style, opens waitlist modal)
 
 **Card 2: Pro — 10€/mois** (8€/mois en abonnement annuel)
+
 - Description: `Pour les praticiens qui utilisent les échelles régulièrement`
 - Features:
   - Patients illimités
@@ -161,6 +177,7 @@ Scores calculés selon les barèmes officiels, disponibles instantanément dans 
 - Optionally highlight as "recommended"
 
 ### 9. FAQ Section (id="faq")
+
 - Section title: `Questions fréquentes`
 - Accordion-style (click to expand), 6 items:
 
@@ -168,7 +185,7 @@ Scores calculés selon les barèmes officiels, disponibles instantanément dans 
 A: Melya propose au lancement 5 échelles parmi les plus utilisées en TCC : BDI (dépression), STAI (anxiété), LSAS (anxiété sociale), PCL-5 (trauma) et YBOCS (TOC). De nouvelles échelles sont ajoutées régulièrement en fonction des besoins des psychologues.
 
 **Q: Mes données sont-elles vraiment sécurisées ?**
-A: Oui. Melya est hébergé sur un serveur certifié HDS (Hébergeur de Données de Santé), conforme au RGPD. Toutes les données sont chiffrées et stockées en France. Seul·e vous, en tant que praticien·ne, pouvez accéder aux données de vos patients. Aucun·e autre praticien·ne utilisant Melya n'y a accès, et même l'équipe Melya n'a pas accès à vos données cliniques grâce au chiffrement. Vous restez propriétaire de vos données à tout moment. Pour toute question relative à la sécurité : contact@cascadestudio.fr
+A: Oui. Melya est hébergé sur un serveur certifié HDS (Hébergeur de Données de Santé), conforme au RGPD. Toutes les données sont chiffrées et stockées en France. Seul·e vous, en tant que praticien·ne, pouvez accéder aux données de vos patients. Aucun·e autre praticien·ne utilisant Melya n'y a accès, et même l'équipe Melya n'a pas accès à vos données cliniques grâce au chiffrement. Vous restez propriétaire de vos données à tout moment. Pour toute question relative à la sécurité : clement@melya.app
 
 **Q: Combien coûte Melya ?**
 A: Melya est gratuit jusqu'à 5 patients ou 20 passations par mois. Au-delà, l'abonnement Pro est à 10€/mois (ou 8€/mois en abonnement annuel).
@@ -183,6 +200,7 @@ A: Oui. Les échelles proposées au lancement sont dans le domaine public ou uti
 A: Oui, à tout moment et sans frais. Vos données restent accessibles après l'annulation. Vous pouvez les exporter si nécessaire.
 
 ### 10. Final CTA Section
+
 - Distinct background (cream-light or subtle gradient)
 - Centered:
   - H2: `Prêt·e à simplifier votre pratique clinique ?`
@@ -190,6 +208,7 @@ A: Oui, à tout moment et sans frais. Vos données restent accessibles après l'
   - CTA button: `Rejoindre la liste d'attente` (terracotta, opens modal)
 
 ### 11. Footer
+
 - Minimal, warm styling on beige-sand or slightly darker background
 - **Left:** Melya logo
 - **Center:** Links — Contact · Sécurité · Politique de confidentialité · Mentions légales · Échelles disponibles
@@ -218,9 +237,18 @@ A: Oui, à tout moment et sans frais. Vos données restent accessibles après l'
 
 ```html
 <title>Melya — Automatisez la passation de vos échelles psychologiques</title>
-<meta name="description" content="Envoyez vos échelles en 2 minutes, recevez les résultats cotés automatiquement. Melya simplifie la passation des questionnaires psychométriques pour les psychologues. Hébergé en France sur serveur certifié HDS." />
-<meta property="og:title" content="Melya — Automatisez la passation de vos échelles psychologiques" />
-<meta property="og:description" content="Envoyez vos échelles en 2 minutes, recevez les résultats cotés automatiquement." />
+<meta
+  name="description"
+  content="Envoyez vos échelles en 2 minutes, recevez les résultats cotés automatiquement. Melya simplifie la passation des questionnaires psychométriques pour les psychologues. Hébergé en France sur serveur certifié HDS."
+/>
+<meta
+  property="og:title"
+  content="Melya — Automatisez la passation de vos échelles psychologiques"
+/>
+<meta
+  property="og:description"
+  content="Envoyez vos échelles en 2 minutes, recevez les résultats cotés automatiquement."
+/>
 <meta property="og:image" content="/images/landing/og-image.png" />
 <meta property="og:url" content="https://melya.app" />
 <link rel="canonical" href="https://melya.app" />
@@ -244,10 +272,12 @@ A: Oui, à tout moment et sans frais. Vos données restent accessibles après l'
 ## Remaining To-Do
 
 ### Assets uploaded
+
 1. ~~Gelica font files (all weights)~~ → `public/fonts/`
 2. ~~`logo.svg`~~ → `public/images/landing/`
 
 ### Assets still needed
+
 4. `hero-photo.jpg` — warm therapy/consultation scene → `public/images/landing/`
 5. `icon-bdi.svg` — BDI scale icon → `public/images/landing/`
 6. `icon-stai.svg` — STAI scale icon → `public/images/landing/`
@@ -259,6 +289,7 @@ A: Oui, à tout moment et sans frais. Vos données restent accessibles après l'
 12. `og-image.png` — Open Graph social sharing image (optional) → `public/images/landing/`
 
 ### Implementation tasks remaining
+
 13. Integrate `logo.svg` into navbar and footer (replace text "Melya" with SVG)
 14. Integrate scale icons into scale badges component
 15. Wire up Resend for waitlist email collection (`app/api/waitlist/route.ts`)
