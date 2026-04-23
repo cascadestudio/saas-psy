@@ -152,15 +152,6 @@ export default function PatientPortalPage() {
             const scaleData = scales.find((s) => s.id === session.scaleId);
             return (
               <div key={session.id} className="flex items-center gap-4">
-                {/* Todo indicator */}
-                <div className="flex-shrink-0 w-7 flex items-center justify-center">
-                  {session.isCompleted ? (
-                    <Interfaces.Tick2 className="h-6 w-6 text-green-500" />
-                  ) : (
-                    <div className="h-6 w-6 rounded-full border-2 border-brand-orange/50" />
-                  )}
-                </div>
-
                 {/* Card */}
                 <div
                   className={`flex flex-col sm:flex-row overflow-hidden flex-1 ${session.isCompleted ? "opacity-60" : ""}`}
@@ -205,15 +196,18 @@ export default function PatientPortalPage() {
                       </div>
                     )}
                   </div>
-                  {!session.isCompleted && (
-                    <div className="flex-shrink-0 flex sm:block justify-center sm:justify-end">
-                      <Button asChild>
-                        <Link href={`/session/${session.id}`}>
-                          Commencer
-                        </Link>
+                  <div className="flex-shrink-0 flex sm:block justify-center sm:justify-end">
+                    {session.isCompleted ? (
+                      <Button variant="success" disabled className="disabled:opacity-100">
+                        <Interfaces.Tick2 className="h-4 w-4 mr-2 fill-white" />
+                        Complété
                       </Button>
-                    </div>
-                  )}
+                    ) : (
+                      <Button asChild>
+                        <Link href={`/session/${session.id}`}>Commencer</Link>
+                      </Button>
+                    )}
+                  </div>
                 </div>
                 </div>
               </div>
