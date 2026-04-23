@@ -17,6 +17,7 @@ export type User = {
   lastName?: string | null;
   role?: string;
   isPremium?: boolean;
+  isBetaUser?: boolean;
   feedbackSubmittedAt?: string | null;
   profile?: {
     id?: string;
