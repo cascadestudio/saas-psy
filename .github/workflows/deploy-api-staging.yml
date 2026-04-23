@@ -63,6 +63,7 @@ jobs:
               -e NODE_ENV=staging \
               -e PORT=3001 \
               -e CORS_ORIGIN="https://staging.melya.app,https://staging-melya.vercel.app,http://localhost:3000" \
+              -e APP_URL="https://staging.melya.app" \
               melya-api-staging
 
             # Cleanup
