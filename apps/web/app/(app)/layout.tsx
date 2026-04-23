@@ -68,28 +68,11 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
               </Link>
             );
           })}
-          {!user ? (
-            <button
-              onClick={() => openAuthGate()}
-              className="relative flex items-center gap-3 px-2 py-2 text-sm font-medium transition-all duration-200 text-foreground hover:text-brand-orange hover:translate-x-1"
-            >
-              <Interfaces.Login className="h-4 w-4" fill="currentColor" />
-              Se connecter
-            </button>
-          ) : (
-            <button
-              onClick={logout}
-              className="relative flex items-center gap-3 px-2 py-2 text-sm font-medium transition-all duration-200 text-foreground hover:text-brand-orange hover:translate-x-1"
-            >
-              <Interfaces.Logout className="h-4 w-4" fill="currentColor" />
-              Déconnexion
-            </button>
-          )}
         </nav>
 
         {/* Bottom actions */}
         <div className="px-4 pb-6">
-          <div className="border-t border-brand-orange/20 pt-4">
+          <div className="border-t border-brand-orange/20 pt-4 flex flex-col gap-1">
             <a
               href="mailto:clement@melya.app"
               className="flex items-center gap-3 px-2 py-2 text-sm font-medium text-foreground/60 transition-all duration-200 hover:text-brand-orange hover:translate-x-1"
@@ -97,6 +80,23 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
               <Interfaces.Message className="h-4 w-4" fill="currentColor" />
               Nous contacter
             </a>
+            {!user ? (
+              <button
+                onClick={() => openAuthGate()}
+                className="flex items-center gap-3 px-2 py-2 text-sm font-medium text-foreground/60 transition-all duration-200 hover:text-brand-orange hover:translate-x-1"
+              >
+                <Interfaces.Login className="h-4 w-4" fill="currentColor" />
+                Se connecter
+              </button>
+            ) : (
+              <button
+                onClick={logout}
+                className="flex items-center gap-3 px-2 py-2 text-sm font-medium text-foreground/60 transition-all duration-200 hover:text-brand-orange hover:translate-x-1"
+              >
+                <Interfaces.Logout className="h-4 w-4" fill="currentColor" />
+                Déconnexion
+              </button>
+            )}
           </div>
         </div>
       </aside>
