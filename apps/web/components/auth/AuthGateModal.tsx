@@ -61,14 +61,7 @@ export function AuthGateModal() {
           </TabsContent>
         </Tabs>
 
-        <div className="border-t pt-4 mt-2">
-          <p className="text-sm font-medium mb-2">Compte gratuit inclut :</p>
-          <ul className="text-sm text-muted-foreground space-y-1">
-            <li>&#10003; 5 patients</li>
-            <li>&#10003; Scoring automatique</li>
-            <li>&#10003; Historique illimité</li>
-          </ul>
-        </div>
+
       </DialogContent>
     </Dialog>
   );
