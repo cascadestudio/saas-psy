@@ -10,7 +10,7 @@ export type QuestionOption = {
   text: string;
 };
 
-export type BDIQuestion = {
+export type OptionsQuestion = {
   title: string;
   options: QuestionOption[];
 };
@@ -38,7 +38,7 @@ export type ScaleProps = {
     questions: (
       | string
       | QuestionGroup
-      | BDIQuestion
+      | OptionsQuestion
       | LiebovitshQuestion
       | BaseQuestion
     )[];

@@ -32,7 +32,6 @@ const SUPPORTED_FORM_TYPES = new Set([
   "single-scale",
   "options",
   "dual-scale",
-  "grouped-items",
 ]);
 
 function buildSteps(scale: any): QuestionStep[] {
@@ -51,7 +50,7 @@ function buildSteps(scale: any): QuestionStep[] {
   if (formType === "options") {
     return (questions as { title: string; options: { value: number; text: string }[] }[]).map(
       (q, idx) => ({
-        key: `bdi_${idx}`,
+        key: `option_${idx}`,
         questionText: q.title,
         options: q.options.map((o) => ({ value: o.value, label: o.text })),
       }),
@@ -76,24 +75,6 @@ function buildSteps(scale: any): QuestionStep[] {
         options: avoidance,
       });
     });
-    return steps;
-  }
-
-  if (formType === "grouped-items") {
-    const options = toOptions(scale.answerScales?.intensity);
-    const steps: QuestionStep[] = [];
-    (questions as { title: string; items: string[] }[]).forEach(
-      (group, groupIdx) => {
-        group.items.forEach((item, itemIdx) => {
-          steps.push({
-            key: `intensity_${groupIdx}_${itemIdx}`,
-            questionText: item,
-            subLabel: group.title,
-            options,
-          });
-        });
-      },
-    );
     return steps;
   }
 

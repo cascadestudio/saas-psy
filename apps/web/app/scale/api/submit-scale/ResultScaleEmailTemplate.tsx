@@ -21,13 +21,15 @@ interface ResultScaleEmailTemplateProps {
     totalScore: number;
     anxietyScore?: number;
     avoidanceScore?: number;
-    stateScore?: number;
-    traitScore?: number;
     anxietyPerformanceScore?: number;
     anxietyInteractionScore?: number;
     avoidancePerformanceScore?: number;
     avoidanceInteractionScore?: number;
-    interpretation: string | { trait: string; state: string };
+    obsessionsScore?: number;
+    compulsionsScore?: number;
+    maxObsessions?: number;
+    maxCompulsions?: number;
+    interpretation: string;
     maxTotal: number;
     maxAnxiety?: number;
     maxAvoidance?: number;
@@ -75,24 +77,8 @@ export const ResultScaleEmailTemplate = ({
 
           <Section style={sectionStyle}>
             <Text style={subheadingStyle}>Résultats</Text>
-            {scaleId === "stai-anxiete-generalisee" ? (
+            {scaleId === "echelle-d-anxiete-sociale-de-liebowitz" ? (
               <>
-                <Text style={textStyle}>
-                  <strong>Score Anxiété-État:</strong> {scoreResult.stateScore}
-                  /80
-                </Text>
-                <Text style={textStyle}>
-                  <strong>Score Anxiété-Trait:</strong> {scoreResult.traitScore}
-                  /80
-                </Text>
-              </>
-            ) : scaleId === "echelle-d-anxiete-sociale-de-liebowitz" ? (
-              <>
-                {/* <Text style={scoreStyle}>
-                  <strong>Score total:</strong> {scoreResult.totalScore}/
-                  {maxTotal}
-                </Text> */}
-
                 <Text style={subheadingStyle}>
                   Détails des scores d'anxiété
                 </Text>
@@ -129,34 +115,29 @@ export const ResultScaleEmailTemplate = ({
                   {scoreResult.maxInteractionAvoidance}
                 </Text>
               </>
+            ) : scaleId === "index-symptomes-ybocs" ? (
+              <>
+                <Text style={scoreStyle}>
+                  <strong>Score total:</strong> {scoreResult.totalScore}/
+                  {maxTotal}
+                </Text>
+                <Text style={scoreStyle}>
+                  <strong>Sous-score obsessions (items 1–5):</strong>{" "}
+                  {scoreResult.obsessionsScore}/{scoreResult.maxObsessions}
+                </Text>
+                <Text style={scoreStyle}>
+                  <strong>Sous-score compulsions (items 6–10):</strong>{" "}
+                  {scoreResult.compulsionsScore}/{scoreResult.maxCompulsions}
+                </Text>
+              </>
             ) : (
-              // ) : scoreResult.anxietyScore !== undefined ? (
-              //   <>
-              //     <Text style={scoreStyle}>
-              //       <strong>Score d'anxiété:</strong> {scoreResult.anxietyScore}/
-              //       {scoreResult.maxAnxiety}
-              //     </Text>
-              //     <Text style={scoreStyle}>
-              //       <strong>Score d'évitement:</strong>{" "}
-              //       {scoreResult.avoidanceScore}/{scoreResult.maxAvoidance}
-              //     </Text>
-              //   </>
               <Text style={scoreStyle}>
                 <strong>Score total:</strong> {scoreResult.totalScore}/
                 {maxTotal}
               </Text>
             )}
             <Text style={interpretationStyle}>
-              <strong>Interprétation:</strong>{" "}
-              {scaleId === "stai-anxiete-generalisee" &&
-              typeof scoreResult.interpretation !== "string" ? (
-                <>
-                  <br /> Trait : {scoreResult.interpretation.trait} <br /> État
-                  : {scoreResult.interpretation.state}
-                </>
-              ) : typeof scoreResult.interpretation === "string" ? (
-                scoreResult.interpretation
-              ) : null}
+              <strong>Interprétation:</strong> {scoreResult.interpretation}
             </Text>
           </Section>
 
