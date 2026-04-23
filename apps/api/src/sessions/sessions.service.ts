@@ -94,7 +94,7 @@ export class SessionsService {
       this.encryption.decryptField(practitioner.lastName),
     ]
       .filter(Boolean)
-      .join(' ') || 'Votre praticien';
+      .join(' ') || 'Votre psychologue';
 
     const emailResult = await this.emailService.sendBatchSessionEmail({
       patientEmail: patient.email,
