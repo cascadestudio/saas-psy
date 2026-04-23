@@ -6,7 +6,6 @@ import { usePathname } from "next/navigation";
 import { Interfaces, Files } from "doodle-icons";
 import { useUser } from "@/app/context/UserContext";
 import { useAuthGate } from "@/app/context/AuthGateContext";
-import { FeedbackCTA } from "@/components/FeedbackModal";
 import { cn } from "@/lib/utils";
 
 const navigation = [
@@ -87,20 +86,23 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
             </button>
           )}
         </nav>
+
+        {/* Bottom actions */}
+        <div className="px-4 pb-6">
+          <div className="border-t border-brand-orange/20 pt-4">
+            <a
+              href="mailto:clement@melya.app"
+              className="flex items-center gap-3 px-2 py-2 text-sm font-medium text-foreground/60 transition-all duration-200 hover:text-brand-orange hover:translate-x-1"
+            >
+              <Interfaces.Message className="h-4 w-4" fill="currentColor" />
+              Nous contacter
+            </a>
+          </div>
+        </div>
       </aside>
 
       {/* Main content */}
       <main className="flex-1 min-w-0">{children}</main>
-
-      {user && (
-        <FeedbackCTA
-          userId={user.id}
-          email={user.email}
-          firstName={user.firstName}
-          lastName={user.lastName}
-          hasSubmitted={!!user.feedbackSubmittedAt}
-        />
-      )}
     </div>
   );
 }
