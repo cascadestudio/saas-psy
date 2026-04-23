@@ -5,30 +5,30 @@
 export interface StoredScore {
   totalScore: number;
   maxTotal: number;
-  interpretation?: string | { trait: string; state: string };
+  interpretation?: string;
   anxietyScore?: number;
   avoidanceScore?: number;
-  stateScore?: number;
-  traitScore?: number;
   anxietyPerformanceScore?: number;
   anxietyInteractionScore?: number;
   avoidancePerformanceScore?: number;
   avoidanceInteractionScore?: number;
+  obsessionsScore?: number;
+  compulsionsScore?: number;
   maxAnxiety?: number;
   maxAvoidance?: number;
-  maxState?: number;
-  maxTrait?: number;
+  maxObsessions?: number;
+  maxCompulsions?: number;
 }
 
 const SUBSCORE_LABELS: Record<string, string> = {
   anxietyScore: "Anxiété",
   avoidanceScore: "Évitement",
-  stateScore: "Anxiété état",
-  traitScore: "Anxiété trait",
   anxietyPerformanceScore: "Anxiété performance",
   anxietyInteractionScore: "Anxiété interaction",
   avoidancePerformanceScore: "Évitement performance",
   avoidanceInteractionScore: "Évitement interaction",
+  obsessionsScore: "Obsessions",
+  compulsionsScore: "Compulsions",
 };
 
 // Legacy score labels for old format { total, anxiety, avoidance, ... }
@@ -93,8 +93,8 @@ export function getSubscores(score: number | Record<string, any> | undefined): {
     const maxMap: Record<string, string> = {
       anxietyScore: "maxAnxiety",
       avoidanceScore: "maxAvoidance",
-      stateScore: "maxState",
-      traitScore: "maxTrait",
+      obsessionsScore: "maxObsessions",
+      compulsionsScore: "maxCompulsions",
     };
 
     for (const [key, label] of Object.entries(SUBSCORE_LABELS)) {
@@ -146,8 +146,5 @@ export function formatScore(score: number | Record<string, any>): string {
 export function getInterpretation(score: number | Record<string, any> | undefined): string | undefined {
   if (!score || typeof score !== "object") return undefined;
   if (!isStoredScore(score)) return undefined;
-  if (!score.interpretation) return undefined;
-  if (typeof score.interpretation === "string") return score.interpretation;
-  // STAI-style object interpretation
-  return `État: ${score.interpretation.state}, Trait: ${score.interpretation.trait}`;
+  return score.interpretation;
 }

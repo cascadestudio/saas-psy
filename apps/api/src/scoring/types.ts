@@ -1,11 +1,13 @@
 export interface ScoreResult {
   totalScore: number;
   maxTotal: number;
-  interpretation: string | { trait: string; state: string };
+  interpretation: string;
+  obsessionsScore?: number;
+  compulsionsScore?: number;
+  maxObsessions?: number;
+  maxCompulsions?: number;
   anxietyScore?: number;
   avoidanceScore?: number;
-  stateScore?: number;
-  traitScore?: number;
   anxietyPerformanceScore?: number;
   anxietyInteractionScore?: number;
   avoidancePerformanceScore?: number;
@@ -16,6 +18,4 @@ export interface ScoreResult {
   maxInteractionAnxiety?: number;
   maxPerformanceAvoidance?: number;
   maxInteractionAvoidance?: number;
-  maxState?: number;
-  maxTrait?: number;
 }

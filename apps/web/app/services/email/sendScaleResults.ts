@@ -15,9 +15,11 @@ interface SendScaleResultsParams {
     totalScore: number;
     anxietyScore?: number;
     avoidanceScore?: number;
-    stateScore?: number;
-    traitScore?: number;
-    interpretation: string | { trait: string; state: string };
+    obsessionsScore?: number;
+    compulsionsScore?: number;
+    maxObsessions?: number;
+    maxCompulsions?: number;
+    interpretation: string;
     maxTotal: number;
     maxAnxiety?: number;
     maxAvoidance?: number;

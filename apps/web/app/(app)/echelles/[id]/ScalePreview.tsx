@@ -9,7 +9,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { ScaleProps } from "@/app/types";
-import { QuestionGroup, BDIQuestion } from "@/app/types";
+import { QuestionGroup, OptionsQuestion } from "@/app/types";
 
 type ScalePreviewProps = Pick<ScaleProps, "scale">;
 
@@ -73,9 +73,9 @@ function QuestionItem({
   index: number;
   scale: ScalePreviewProps["scale"];
 }) {
-  // BDI-style: question with options
+  // Options-style: question with options (e.g. Y-BOCS)
   if (typeof question === "object" && "title" in question && "options" in question) {
-    const q = question as BDIQuestion;
+    const q = question as OptionsQuestion;
     return (
       <div className="bg-muted-foreground/5 rounded-md p-3">
         <p className="text-sm font-medium mb-2">

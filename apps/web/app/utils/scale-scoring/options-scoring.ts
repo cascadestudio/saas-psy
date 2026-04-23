@@ -1,15 +1,15 @@
-import { ScoreResult } from '../types';
-import { getInterpretation } from './utils';
+import { ScoreResult } from "./types";
+import { getInterpretation, formatSingleScaleDetails } from "./utils";
 
 export function calculateOptionsScore(
   scale: any,
-  responses: Record<string, any>,
+  scaleAnswers: Record<string, any>
 ): ScoreResult {
-  const indexed = Object.entries(responses)
-    .filter(([key]) => key.startsWith('option_'))
+  const indexed = Object.entries(scaleAnswers)
+    .filter(([key]) => key.startsWith("option_"))
     .map(([key, value]) => {
-      const idx = parseInt(key.slice('option_'.length), 10);
-      return { idx, value: parseInt(String(value), 10) };
+      const idx = parseInt(key.slice("option_".length), 10);
+      return { idx, value: parseInt(value as string, 10) };
     });
 
   const totalScore = indexed.reduce((sum, { value }) => sum + value, 0);
@@ -21,23 +21,22 @@ export function calculateOptionsScore(
     ? Math.max(...scale.questions[0].options.map((o: any) => o.value))
     : 3;
   const maxTotal = questionCount * maxOptionValue;
+  const interpretation = getInterpretation(scale, totalScore);
 
   const result: ScoreResult = {
     totalScore,
     maxTotal,
-    interpretation: getInterpretation(scale, totalScore),
+    interpretation,
+    scoreDetails: formatSingleScaleDetails(totalScore, maxTotal, interpretation),
   };
 
-  // Y-BOCS: expose obsessions (items 1-5) and compulsions (items 6-10) subscores
-  if (scale.id === 'index-symptomes-ybocs' && questionCount === 10) {
-    const obsessionsScore = indexed
+  if (scale.id === "index-symptomes-ybocs" && questionCount === 10) {
+    result.obsessionsScore = indexed
       .filter(({ idx }) => idx < 5)
       .reduce((sum, { value }) => sum + value, 0);
-    const compulsionsScore = indexed
+    result.compulsionsScore = indexed
       .filter(({ idx }) => idx >= 5)
       .reduce((sum, { value }) => sum + value, 0);
-    result.obsessionsScore = obsessionsScore;
-    result.compulsionsScore = compulsionsScore;
     result.maxObsessions = 5 * maxOptionValue;
     result.maxCompulsions = 5 * maxOptionValue;
   }

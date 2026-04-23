@@ -48,31 +48,3 @@ Interprétation: ${interpretation}
   `.trim();
 }
 
-/**
- * Format the details for STAI scale
- */
-export function formatSTAIDetails(
-  stateScore: number,
-  traitScore: number,
-  stateInterpretation: string,
-  traitInterpretation: string
-): string {
-  return `Anxiété-État (situationnelle):
-Score: ${stateScore}/80
-Interprétation: ${stateInterpretation}
-
-Anxiété-Trait (générale):
-Score: ${traitScore}/80
-Interprétation: ${traitInterpretation}`;
-}
-
-/**
- * Get interpretation for STAI scores
- */
-export function getSTAIInterpretation(score: number): string {
-  if (score <= 35) return "Anxiété très faible";
-  if (score <= 45) return "Anxiété faible";
-  if (score <= 55) return "Anxiété modérée";
-  if (score <= 65) return "Anxiété élevée";
-  return "Anxiété très élevée";
-}
