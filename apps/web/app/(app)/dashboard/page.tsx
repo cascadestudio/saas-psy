@@ -158,11 +158,12 @@ function PatientRow({
       <TooltipProvider>
         <Tooltip>
           <TooltipTrigger asChild>
-            <Interfaces.Send
-              className="h-4 w-4 flex-shrink-0"
-              fill="#D6591F"
+            <button
               onClick={onSendClick}
-            />
+              className="flex-shrink-0 h-8 w-8 rounded-full bg-[#D6591F]/10 hover:bg-[#D6591F]/20 flex items-center justify-center transition-colors"
+            >
+              <Interfaces.Send className="h-4 w-4" fill="#D6591F" />
+            </button>
           </TooltipTrigger>
           <TooltipContent>
             <p>Envoyer une échelle</p>
