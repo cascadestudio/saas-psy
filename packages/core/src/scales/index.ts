@@ -12,6 +12,7 @@ export interface Scale {
   estimatedTime: string;
   longDescription: string;
   instructions?: string;
+  reverseItems?: number[];
   questions: any[];
   answerScales?: Record<string, { value: number; label: string }[]>;
   scoring?: {
@@ -92,309 +93,96 @@ export const scales: Scale[] = [
     },
   },
   {
-    id: "inventaire-de-depression-de-beck",
-    acronym: "BDI",
-    label: "Inventaire de Dépression de Beck",
-    icon: "/images/scales/bdi.svg",
+    id: "phq-9",
+    acronym: "PHQ-9",
+    label: "Questionnaire sur la Santé du Patient",
+    icon: "/images/scales/phq-9.svg",
     color: "#CBCADB",
     colorLight: "#E5E4ED",
-    formType: "options",
-    title: "Inventaire de Dépression de Beck (BDI)",
+    formType: "single-scale",
+    title: "PHQ-9 - Questionnaire sur la Santé du Patient",
     description:
-      "Une échelle d'auto-évaluation à choix multiples de 21 questions pour mesurer la sévérité de la dépression",
+      "Une échelle de 9 items évaluant la sévérité des symptômes dépressifs au cours des 2 dernières semaines",
     category: "Dépression",
-    estimatedTime: "10-15 minutes",
+    estimatedTime: "3-5 minutes",
+    longDescription:
+      "Le PHQ-9 (Patient Health Questionnaire-9) est un auto-questionnaire de 9 items issu du PRIME-MD, utilisé pour le dépistage et le suivi de la sévérité d'un épisode dépressif. Il reprend les 9 critères diagnostiques de l'épisode dépressif caractérisé du DSM. Chaque item est coté de 0 (jamais) à 3 (presque tous les jours) et le score total (0-27) permet de situer la sévérité. L'item 9 (idéation suicidaire) requiert une attention clinique particulière dès qu'il est coté ≥ 1, indépendamment du score total.",
     instructions:
-      "Choisissez l'énoncé qui décrit le mieux comment vous vous êtes senti(e) au cours des deux dernières semaines",
-    longDescription:
-      "L'Inventaire de Dépression de Beck (BDI) est un questionnaire d'auto-évaluation à choix multiples de 21 questions, l'un des tests psychométriques les plus largement utilisés pour mesurer la sévérité de la dépression. Son développement a marqué un changement parmi les professionnels de la santé mentale, qui avaient jusqu'alors considéré la dépression d'un point de vue psychodynamique, au lieu de la voir comme enracinée dans les propres pensées du patient. Le BDI est largement utilisé comme outil d'évaluation par les professionnels de la santé et les chercheurs dans divers contextes.",
+      "Au cours des 2 dernières semaines, selon quelle fréquence avez-vous été gêné(e) par les problèmes suivants ?",
     questions: [
-      {
-        title: "Tristesse",
-        options: [
-          { value: 0, text: "Je ne me sens pas triste." },
-          { value: 1, text: "Je me sens morose ou triste." },
-          { value: 2, text: "Je suis morose ou triste tout le temps et je ne peux pas me remettre d'aplomb." },
-          { value: 3, text: "Je suis tellement triste ou malheureux(se) que je ne peux plus le supporter." },
-        ],
-      },
-      {
-        title: "Pessimisme",
-        options: [
-          { value: 0, text: "Je ne suis pas particulièrement découragé(e) par l'avenir." },
-          { value: 1, text: "Je me sens découragé(e) par l'avenir." },
-          { value: 2, text: "J'ai l'impression de n'avoir aucune attente dans la vie ou que je n'arriverai jamais à surmonter mes difficultés." },
-          { value: 3, text: "Je sens que l'avenir est sans espoir et que les choses ne peuvent pas s'améliorer." },
-        ],
-      },
-      {
-        title: "Échec personnel",
-        options: [
-          { value: 0, text: "Je n'ai pas l'impression d'avoir échoué dans la vie ou d'être un(e) raté(e)." },
-          { value: 1, text: "J'ai l'impression d'avoir subi plus d'échecs que la moyenne des gens." },
-          { value: 2, text: "Quand je pense à ma vie passée, je ne vois que des échecs." },
-          { value: 3, text: "Je suis un(e) raté(e) complet(e)." },
-        ],
-      },
-      {
-        title: "Insatisfaction",
-        options: [
-          { value: 0, text: "Je tire autant de satisfaction de la vie qu'auparavant." },
-          { value: 1, text: "Je ne tire plus autant de satisfaction de la vie qu'auparavant." },
-          { value: 2, text: "Je ne tire plus de satisfaction de quoi que ce soit." },
-          { value: 3, text: "Tout me rend insatisfait ou m'ennuie." },
-        ],
-      },
-      {
-        title: "Culpabilité",
-        options: [
-          { value: 0, text: "Je ne me sens pas particulièrement coupable." },
-          { value: 1, text: "Je me sens coupable une bonne partie du temps." },
-          { value: 2, text: "Je me sens coupable la plupart du temps." },
-          { value: 3, text: "Je me sens tout le temps coupable." },
-        ],
-      },
-      {
-        title: "Sentiment d'être puni(e)",
-        options: [
-          { value: 0, text: "Je n'ai pas l'impression d'être puni(e)." },
-          { value: 1, text: "J'ai l'impression que je pourrais être puni(e)." },
-          { value: 2, text: "Je m'attends à être puni(e)." },
-          { value: 3, text: "J'ai l'impression d'être puni(e)." },
-        ],
-      },
-      {
-        title: "Déception envers soi-même",
-        options: [
-          { value: 0, text: "Je ne suis pas déçu(e) de moi-même." },
-          { value: 1, text: "Je suis déçu(e) de moi-même." },
-          { value: 2, text: "Je suis dégoûté(e) de moi-même." },
-          { value: 3, text: "Je me hais." },
-        ],
-      },
-      {
-        title: "Auto-accusation",
-        options: [
-          { value: 0, text: "Je ne pense pas être pire que les autres." },
-          { value: 1, text: "Je suis critique envers moi-même concernant mes faiblesses ou mes erreurs." },
-          { value: 2, text: "Je me blâme tout le temps pour mes fautes." },
-          { value: 3, text: "Je me blâme pour tous les malheurs qui arrivent." },
-        ],
-      },
-      {
-        title: "Idées suicidaires",
-        options: [
-          { value: 0, text: "Je ne pense pas du tout à me faire du mal." },
-          { value: 1, text: "Je pense parfois à me faire du mal, mais je ne le ferais pas." },
-          { value: 2, text: "Je pense que la mort me libérerait ou j'ai des plans précis pour me suicider." },
-          { value: 3, text: "Je me tuerais si j'en avais l'occasion." },
-        ],
-      },
-      {
-        title: "Pleurs",
-        options: [
-          { value: 0, text: "Je ne pleure pas plus que d'habitude." },
-          { value: 1, text: "Je pleure plus qu'avant." },
-          { value: 2, text: "Je pleure pour la moindre petite chose." },
-          { value: 3, text: "Je voudrais pleurer mais je n'en suis pas capable." },
-        ],
-      },
-      {
-        title: "Irritabilité",
-        options: [
-          { value: 0, text: "Je ne suis pas plus irritable qu'habituellement." },
-          { value: 1, text: "Je suis plus irritable que d'habitude." },
-          { value: 2, text: "Je suis beaucoup plus irritable que d'habitude." },
-          { value: 3, text: "Je suis constamment irritable." },
-        ],
-      },
-      {
-        title: "Retrait social",
-        options: [
-          { value: 0, text: "Je n'ai pas perdu d'intérêt pour les autres." },
-          { value: 1, text: "Je m'intéresse moins aux autres qu'avant." },
-          { value: 2, text: "J'ai perdu la plupart de mon intérêt pour les autres." },
-          { value: 3, text: "J'ai perdu tout intérêt pour les autres." },
-        ],
-      },
-      {
-        title: "Indécision",
-        options: [
-          { value: 0, text: "Je prends des décisions aussi bien qu'avant." },
-          { value: 1, text: "Je remets les décisions au lendemain plus que d'habitude." },
-          { value: 2, text: "J'ai beaucoup plus de difficultés à prendre des décisions qu'auparavant." },
-          { value: 3, text: "Je n'arrive plus à prendre de décisions." },
-        ],
-      },
-      {
-        title: "Dévalorisation",
-        options: [
-          { value: 0, text: "Je n'ai pas l'impression de paraître pire qu'avant." },
-          { value: 1, text: "Je m'inquiète de paraître vieux (vieille) ou peu attrayant(e)." },
-          { value: 2, text: "J'ai l'impression qu'il y a des changements permanents dans mon apparence qui me rendent peu attrayant(e)." },
-          { value: 3, text: "Je me trouve laid(e)." },
-        ],
-      },
-      {
-        title: "Difficulté de travail",
-        options: [
-          { value: 0, text: "Je travaille aussi bien qu'avant." },
-          { value: 1, text: "J'ai besoin de faire des efforts supplémentaires pour commencer à faire quelque chose ou je ne travaille pas aussi bien qu'avant." },
-          { value: 2, text: "Je dois me forcer pour faire quoi que ce soit." },
-          { value: 3, text: "Je ne peux faire aucun travail." },
-        ],
-      },
-      {
-        title: "Troubles du sommeil",
-        options: [
-          { value: 0, text: "Je dors aussi bien que d'habitude." },
-          { value: 1, text: "Je ne dors pas aussi bien qu'avant." },
-          { value: 2, text: "Je me réveille une à deux heures plus tôt que d'habitude et j'ai du mal à me rendormir." },
-          { value: 3, text: "Je me réveille plusieurs heures plus tôt que d'habitude et je ne peux me rendormir." },
-        ],
-      },
-      {
-        title: "Fatigue",
-        options: [
-          { value: 0, text: "Je ne me fatigue pas plus que d'habitude." },
-          { value: 1, text: "Je me fatigue plus facilement que d'habitude." },
-          { value: 2, text: "Je me fatigue en faisant presque n'importe quoi." },
-          { value: 3, text: "Je suis trop fatigué(e) pour faire quoi que ce soit." },
-        ],
-      },
-      {
-        title: "Perte d'appétit",
-        options: [
-          { value: 0, text: "Mon appétit n'est pas pire que d'habitude." },
-          { value: 1, text: "Mon appétit n'est pas aussi bon qu'il l'était." },
-          { value: 2, text: "Mon appétit a beaucoup diminué." },
-          { value: 3, text: "Je n'ai plus d'appétit du tout." },
-        ],
-      },
-      {
-        title: "Perte de poids",
-        options: [
-          { value: 0, text: "Je n'ai pas perdu de poids dernièrement." },
-          { value: 1, text: "J'ai perdu plus de 2 kilos." },
-          { value: 2, text: "J'ai perdu plus de 4 kilos." },
-          { value: 3, text: "J'ai perdu plus de 7 kilos." },
-        ],
-      },
-      {
-        title: "Préoccupations somatiques",
-        options: [
-          { value: 0, text: "Je ne suis pas plus préoccupé(e) par ma santé que d'habitude." },
-          { value: 1, text: "Je suis préoccupé(e) par des maux et des douleurs, des problèmes d'estomac ou de constipation." },
-          { value: 2, text: "Je suis tellement préoccupé(e) par ce que je ressens ou comment je me sens qu'il est difficile de penser à autre chose." },
-          { value: 3, text: "Je suis complètement absorbé(e) par ce que je ressens." },
-        ],
-      },
-      {
-        title: "Perte de libido",
-        options: [
-          { value: 0, text: "Je n'ai pas remarqué de changement récent dans mon intérêt pour le sexe." },
-          { value: 1, text: "Je m'intéresse moins au sexe qu'auparavant." },
-          { value: 2, text: "Je m'intéresse beaucoup moins au sexe maintenant." },
-          { value: 3, text: "J'ai perdu tout intérêt pour le sexe." },
-        ],
-      },
-    ],
-    scoring: {
-      ranges: [
-        { min: 0, max: 13, interpretation: "Dépression minimale" },
-        { min: 14, max: 19, interpretation: "Dépression légère" },
-        { min: 20, max: 28, interpretation: "Dépression modérée" },
-        { min: 29, max: 63, interpretation: "Dépression sévère" },
-      ],
-      method:
-        "Additionnez les scores de chaque question (0-3). Le score total varie de 0 à 63.",
-    },
-  },
-  {
-    id: "stai-anxiete-generalisee",
-    acronym: "STAI",
-    label: "Inventaire d'Anxiété État-Trait",
-    icon: "/images/scales/stai.svg",
-    color: "#6A9BCC",
-    colorLight: "#B4CDE5",
-    formType: "grouped-items",
-    title: "STAI - Inventaire d'Anxiété État-Trait",
-    description:
-      "Une échelle de 40 items évaluant l'anxiété situationnelle (état) et l'anxiété générale (trait)",
-    category: "Anxiété généralisée",
-    estimatedTime: "15-20 minutes",
-    longDescription:
-      "L'Inventaire d'Anxiété État-Trait (STAI) est un outil d'évaluation psychologique qui mesure deux types d'anxiété : l'anxiété-état (anxiété situationnelle) et l'anxiété-trait (anxiété générale). Développé par Spielberger, il est largement utilisé en recherche clinique et en pratique. Le questionnaire comprend 40 items au total, divisés en deux parties de 20 items chacune.",
-    questions: [
-      {
-        title: "Anxiété-État (comment vous vous sentez maintenant)",
-        items: [
-          "Je me sens calme",
-          "Je me sens en sécurité",
-          "Je suis tendu(e)",
-          "Je me sens surmené(e)",
-          "Je me sens tranquille",
-          "Je me sens bouleversé(e)",
-          "Je suis préoccupé(e) par des malheurs possibles",
-          "Je me sens satisfait(e)",
-          "Je me sens effrayé(e)",
-          "Je me sens à l'aise",
-          "Je me sens sûr(e) de moi",
-          "Je me sens nerveux(se)",
-          "Je suis affolé(e)",
-          "Je me sens indécis(e)",
-          "Je suis détendu(e)",
-          "Je me sens content(e)",
-          "Je suis inquiet(ète)",
-          "Je me sens troublé(e)",
-          "Je me sens stable",
-          "Je me sens bien",
-        ],
-      },
-      {
-        title: "Anxiété-Trait (comment vous vous sentez généralement)",
-        items: [
-          "Je me sens bien généralement",
-          "Je me fatigue rapidement",
-          "J'ai envie de pleurer",
-          "Je souhaiterais être aussi heureux(se) que les autres semblent l'être",
-          "Je perds de belles occasions parce que je n'arrive pas à me décider assez rapidement",
-          "Je me sens reposé(e)",
-          "Je suis calme, tranquille et en paix",
-          "Je sens que les difficultés s'accumulent au point que je ne peux pas les surmonter",
-          "Je m'inquiète à propos de choses sans importance",
-          "Je suis heureux(se)",
-          "J'ai des pensées troublantes",
-          "Je manque de confiance en moi",
-          "Je me sens en sécurité",
-          "Je prends des décisions facilement",
-          "Je me sens incompétent(e)",
-          "Je suis satisfait(e)",
-          "Des idées sans importance me trottent dans la tête et me tracassent",
-          "Je prends les déceptions tellement à cœur que je les oublie difficilement",
-          "Je suis une personne posée",
-          "Je deviens tendu(e) et agité(e) quand je réfléchis à mes soucis",
-        ],
-      },
+      "Peu d'intérêt ou de plaisir à faire les choses",
+      "Être triste, déprimé(e) ou désespéré(e)",
+      "Difficultés à s'endormir ou à rester endormi(e), ou dormir trop",
+      "Se sentir fatigué(e) ou manquer d'énergie",
+      "Avoir peu d'appétit ou manger trop",
+      "Avoir une mauvaise opinion de soi-même, ou avoir le sentiment d'être nul(le), ou d'avoir déçu sa famille ou s'être déçu(e) soi-même",
+      "Avoir du mal à se concentrer, par exemple pour lire le journal ou regarder la télévision",
+      "Bouger ou parler si lentement que les autres auraient pu le remarquer. Ou au contraire, être si agité(e) que vous avez eu du mal à tenir en place par rapport à d'habitude",
+      "Penser qu'il vaudrait mieux mourir ou envisager de vous faire du mal d'une manière ou d'une autre",
     ],
     answerScales: {
       intensity: [
-        { value: 1, label: "Pas du tout" },
-        { value: 2, label: "Un peu" },
-        { value: 3, label: "Modérément" },
-        { value: 4, label: "Beaucoup" },
+        { value: 0, label: "Jamais" },
+        { value: 1, label: "Plusieurs jours" },
+        { value: 2, label: "Plus de la moitié du temps" },
+        { value: 3, label: "Presque tous les jours" },
       ],
     },
     scoring: {
       ranges: [
-        { min: 20, max: 35, interpretation: "Anxiété très faible" },
-        { min: 36, max: 45, interpretation: "Anxiété faible" },
-        { min: 46, max: 55, interpretation: "Anxiété moyenne" },
-        { min: 56, max: 65, interpretation: "Anxiété élevée" },
-        { min: 66, max: 80, interpretation: "Anxiété très élevée" },
+        { min: 0, max: 4, interpretation: "Dépression minimale" },
+        { min: 5, max: 9, interpretation: "Dépression légère" },
+        { min: 10, max: 14, interpretation: "Dépression modérée" },
+        { min: 15, max: 19, interpretation: "Dépression modérément sévère" },
+        { min: 20, max: 27, interpretation: "Dépression sévère" },
       ],
       method:
-        "Pour chaque partie (État et Trait), additionnez les scores (1-4) des 20 items. Certains items sont inversés. Le score total pour chaque échelle varie de 20 à 80.",
+        "Additionnez les scores de chaque item (0-3). Le score total varie de 0 à 27. Tout score ≥ 1 à l'item 9 (idéation suicidaire) doit déclencher une alerte clinique indépendamment du score total.",
+    },
+  },
+  {
+    id: "gad-7",
+    acronym: "GAD-7",
+    label: "Trouble Anxieux Généralisé",
+    icon: "/images/scales/gad-7.svg",
+    color: "#6A9BCC",
+    colorLight: "#B4CDE5",
+    formType: "single-scale",
+    title: "GAD-7 - Generalized Anxiety Disorder 7-item",
+    description:
+      "Une échelle de 7 items évaluant la sévérité des symptômes d'anxiété généralisée au cours des 14 derniers jours",
+    category: "Anxiété généralisée",
+    estimatedTime: "2-3 minutes",
+    longDescription:
+      "Le GAD-7 (Generalized Anxiety Disorder 7-item) est un auto-questionnaire de 7 items développé par Spitzer et collaborateurs (2006) pour le dépistage et la mesure de la sévérité du trouble anxieux généralisé. Chaque item est coté de 0 (jamais) à 3 (presque tous les jours), le score total varie de 0 à 21. Un score ≥ 10 correspond au seuil clinique de suspicion de TAG (sensibilité 89 %, spécificité 82 %), à laisser au jugement du practicien.",
+    instructions:
+      "Au cours des 14 derniers jours, à quelle fréquence avez-vous été dérangé(e) par les problèmes suivants ?",
+    questions: [
+      "Sentiment de nervosité, d'anxiété ou de tension",
+      "Incapable d'arrêter de vous inquiéter ou de contrôler vos inquiétudes",
+      "Inquiétudes excessives à propos de tout et de rien",
+      "Difficulté à se détendre",
+      "Agitation telle qu'il est difficile de rester tranquille",
+      "Devenir facilement contrarié(e) ou irritable",
+      "Avoir peur que quelque chose d'épouvantable puisse arriver",
+    ],
+    answerScales: {
+      intensity: [
+        { value: 0, label: "Jamais" },
+        { value: 1, label: "Plusieurs jours" },
+        { value: 2, label: "Plus de la moitié des jours" },
+        { value: 3, label: "Presque tous les jours" },
+      ],
+    },
+    scoring: {
+      ranges: [
+        { min: 0, max: 4, interpretation: "Anxiété minimale" },
+        { min: 5, max: 9, interpretation: "Anxiété légère" },
+        { min: 10, max: 14, interpretation: "Anxiété modérée" },
+        { min: 15, max: 21, interpretation: "Anxiété sévère" },
+      ],
+      method:
+        "Additionnez les scores de chaque item (0-3). Le score total varie de 0 à 21.",
     },
   },
   {
@@ -583,6 +371,57 @@ export const scales: Scale[] = [
       ],
       method:
         "Additionnez les scores (0-4) pour chaque item. Le score total varie de 0 à 40. Les scores sont divisés en sous-totaux pour les obsessions (items 1-5) et les compulsions (items 6-10).",
+    },
+  },
+  {
+    id: "rses",
+    acronym: "RSES",
+    label: "Échelle d'Estime de Soi de Rosenberg",
+    icon: "/images/scales/rses.svg",
+    color: "#BCD1CA",
+    colorLight: "#DDE8E4",
+    formType: "single-scale",
+    title: "RSES - Échelle d'Estime de Soi de Rosenberg",
+    description:
+      "Une échelle de 10 items évaluant le niveau global d'estime de soi",
+    category: "Estime de soi",
+    estimatedTime: "3-5 minutes",
+    longDescription:
+      "L'Échelle d'Estime de Soi de Rosenberg (RSES) est l'outil le plus utilisé dans la recherche et la pratique clinique pour mesurer l'estime de soi globale. Elle compte 10 items (5 formulations positives, 5 négatives), cotés de 1 à 4 sur une échelle Likert. Les items négatifs (3, 5, 8, 9, 10) sont inversés avant sommation. Le score total varie de 10 à 40 ; un score plus élevé indique une estime de soi plus élevée. Version française : Vallières & Vallerand (1990).",
+    instructions:
+      "Pour chacune des caractéristiques ou descriptions suivantes, indiquez à quel point chacune est vraie pour vous.",
+    reverseItems: [3, 5, 8, 9, 10],
+    questions: [
+      "Je pense que je suis une personne de valeur, au moins égale à n'importe qui d'autre.",
+      "Je pense que je possède un certain nombre de belles qualités.",
+      "Tout bien considéré, je suis porté(e) à me considérer comme un(e) raté(e).",
+      "Je suis capable de faire les choses aussi bien que la majorité des gens.",
+      "Je sens peu de raisons d'être fier(e) de moi.",
+      "J'ai une attitude positive vis-à-vis moi-même.",
+      "Dans l'ensemble, je suis satisfait(e) de moi.",
+      "J'aimerais avoir plus de respect pour moi-même.",
+      "Parfois je me sens vraiment inutile.",
+      "Il m'arrive de penser que je suis un(e) bon(ne) à rien.",
+    ],
+    answerScales: {
+      intensity: [
+        { value: 1, label: "Tout à fait en désaccord" },
+        { value: 2, label: "Plutôt en désaccord" },
+        { value: 3, label: "Plutôt en accord" },
+        { value: 4, label: "Tout à fait en accord" },
+      ],
+    },
+    scoring: {
+      ranges: [
+        {
+          min: 10,
+          max: 40,
+          interpretation:
+            "Plus le score est élevé, plus l'estime de soi est élevée.",
+        },
+      ],
+      method:
+        "Inverser les cotes des items 3, 5, 8, 9 et 10 (1↔4, 2↔3), puis additionner les 10 items. Le score total varie de 10 à 40.",
     },
   },
 ];
