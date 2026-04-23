@@ -311,18 +311,18 @@ export default function DashboardPage() {
     <div className="container mx-auto px-4 py-6">
       <GlobalSearchBar patients={user ? patients : []} sessions={user ? sessions : []} />
       <div className="mb-6">
-        <h1 className="font-normal text-3xl">
+        <h1 className="font-normal text-4xl">
           {user
             ? `Bonjour${user.firstName ? `, ${user.firstName}` : ""}`
             : "Bienvenue sur Melya"}
         </h1>
       </div>
 
-      <div className="space-y-6">
+      <div className="space-y-12">
         {/* Suivi des passations */}
         <div>
           <div className="mb-3">
-            <h2 className="text-lg font-sans font-semibold">
+            <h2 className="text-xl font-sans font-semibold">
               Suivi des passations
             </h2>
           </div>
@@ -369,24 +369,12 @@ export default function DashboardPage() {
         {/* Mes patients */}
         <div>
           <div className="mb-3 flex items-center gap-2">
-            <h2 className="text-lg font-sans font-semibold">Mes patients</h2>
-            <TooltipProvider>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <span>
-                    <CreatePatientSheet
-                      onPatientCreated={handlePatientCreated}
-                      iconOnly
-                      buttonVariant="ghost"
-                      currentPatientCount={user ? patients.length : 0}
-                    />
-                  </span>
-                </TooltipTrigger>
-                <TooltipContent>
-                  <p>Ajouter un patient</p>
-                </TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
+            <h2 className="text-xl font-sans font-semibold">Mes patients</h2>
+            <CreatePatientSheet
+              onPatientCreated={handlePatientCreated}
+              currentPatientCount={user ? patients.length : 0}
+              buttonSize="sm"
+            />
           </div>
           {user && (
             <div className="flex gap-2 mb-3">
