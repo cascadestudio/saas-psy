@@ -24,6 +24,7 @@ model User {
   lastName      String?   @map("last_name")
   role          UserRole  @default(PRACTITIONER)
   isPremium     Boolean   @default(false) @map("is_premium")
+  isBetaUser    Boolean   @default(false) @map("is_beta_user")
 
   // Password reset
   passwordResetToken     String?   @unique @map("password_reset_token")

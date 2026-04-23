@@ -46,6 +46,8 @@ export class UsersService {
           firstName: data.firstName,
           lastName: data.lastName,
           role: 'PRACTITIONER',
+          isBetaUser: true,
+          isPremium: true,
         },
       });
 
