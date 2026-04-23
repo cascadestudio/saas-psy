@@ -361,7 +361,7 @@ export function SendScaleSheet({
                 </Label>
                 <Textarea
                   id="message"
-                  placeholder={`Ex : ${selectedPatient?.firstName ?? "Prénom"}, on avait parlé de faire un point sur ton anxiété sociale — ce questionnaire prend 10 minutes, ça nous donnera une bonne base pour notre prochaine séance.`}
+                  placeholder={`Ex : ${selectedPatient?.firstName && selectedPatient.firstName !== selectedPatient.email?.split("@")[0] ? `${selectedPatient.firstName}, on` : "On"} avait parlé de faire un point sur ton anxiété sociale — ce questionnaire prend 10 minutes, ça nous donnera une bonne base pour notre prochaine séance.`}
                   rows={6}
                   value={personalMessage}
                   onChange={(e) => setPersonalMessage(e.target.value)}
