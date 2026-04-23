@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
-import { scales as localScales } from "@/app/scalesData";
 import { Interfaces } from "doodle-icons";
 import { toast } from "sonner";
 import SessionRunner from "./components/SessionRunner";
@@ -91,26 +90,7 @@ export default function SessionPage() {
     return null;
   }
 
-  // Get scale data - prefer from API, fallback to local
-  let scaleData = session.scale;
-
-  if (!scaleData) {
-    // Fallback to local scales data
-    const localScale = localScales.find((s) => s.id === session.scaleId);
-    if (localScale) {
-      scaleData = {
-        id: localScale.id,
-        title: localScale.title,
-        description: localScale.description,
-        instructions: localScale.longDescription,
-        formType: localScale.formType,
-        questions: localScale.questions,
-        answerScales: localScale.answerScales,
-        scoring: localScale.scoring,
-        estimatedTime: localScale.estimatedTime,
-      };
-    }
-  }
+  const scaleData = session.scale;
 
   if (!scaleData) {
     return (
@@ -208,8 +188,6 @@ function SessionScaleWrapper({
   return (
     <SessionRunner
       scale={scale}
-      patientFirstName={patientFirstName}
-      patientLastName={patientLastName}
       onSubmit={handleSubmit}
     />
   );

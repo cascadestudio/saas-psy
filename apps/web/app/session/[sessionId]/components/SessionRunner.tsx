@@ -2,7 +2,6 @@
 
 import { useMemo, useState } from "react";
 import { Arrow } from "doodle-icons";
-import ScaleFactory from "@/app/scale/[id]/components/ScaleFactory";
 import ProgressBar from "./ProgressBar";
 import IntroScreen from "./IntroScreen";
 import SingleScaleQuestion from "./SingleScaleQuestion";
@@ -10,8 +9,6 @@ import ReviewScreen from "./ReviewScreen";
 
 interface SessionRunnerProps {
   scale: any;
-  patientFirstName: string;
-  patientLastName: string;
   onSubmit: (
     responses: Record<string, any>,
     comments?: string,
@@ -89,19 +86,22 @@ function toOptions(
 
 export default function SessionRunner({
   scale,
-  patientFirstName,
-  patientLastName,
   onSubmit,
 }: SessionRunnerProps) {
   if (!SUPPORTED_FORM_TYPES.has(scale.formType)) {
     return (
-      <ScaleFactory
-        scale={scale}
-        psychologistEmail=""
-        patientFirstname={patientFirstName}
-        patientLastname={patientLastName}
-        onSubmit={onSubmit}
-      />
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="text-center max-w-md mx-auto px-4">
+          <div className="bg-white rounded-lg shadow-sm p-8">
+            <h1 className="text-xl font-semibold text-gray-900 mb-2">
+              Format non supporté
+            </h1>
+            <p className="text-gray-600">
+              Ce questionnaire n&apos;est pas encore disponible en ligne.
+            </p>
+          </div>
+        </div>
+      </div>
     );
   }
 

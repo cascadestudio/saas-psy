@@ -42,7 +42,7 @@ export class EmailService {
       this.logger.warn('RESEND_API_KEY not configured - emails will be logged but not sent');
     }
     this.fromEmail = this.configService.get<string>('EMAIL_FROM', 'noreply@melya.app');
-    this.appUrl = this.configService.get<string>('NEXT_PUBLIC_APP_URL', 'http://localhost:3000');
+    this.appUrl = this.configService.get<string>('APP_URL', 'http://localhost:3000');
   }
 
   async sendSessionEmail(params: SendSessionEmailParams): Promise<{ success: boolean; error?: string }> {
