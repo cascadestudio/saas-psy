@@ -101,6 +101,7 @@ export function SendScaleSheet({
       const { patients: data } = await patientsApi.getAll();
       setPatients(data);
       setSelectedPatientId(patientId);
+      setStep("scales");
     } catch (error) {
       console.error("Error refreshing patients:", error);
     }
@@ -249,13 +250,26 @@ export function SendScaleSheet({
                 </div>
               ) : (
                 <>
-                  <div className="relative">
-                    <Interfaces.Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                    <Input
-                      placeholder="Rechercher un patient..."
-                      value={patientSearch}
-                      onChange={(e) => setPatientSearch(e.target.value)}
-                      className="pl-10 rounded-full"
+                  <p className="text-sm text-muted-foreground">
+                    Sélectionnez un patient dans la liste ou créez-en un nouveau.
+                  </p>
+                  <div className="flex items-center gap-2">
+                    <div className="relative flex-1">
+                      <Interfaces.Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                      <Input
+                        placeholder="Rechercher un patient..."
+                        value={patientSearch}
+                        onChange={(e) => setPatientSearch(e.target.value)}
+                        className="pl-10 rounded-full"
+                      />
+                    </div>
+                    <CreatePatientSheet
+                      onPatientCreated={handlePatientCreated}
+                      buttonVariant="default"
+                      buttonClassName="bg-primary text-primary-foreground text-base shrink-0"
+                      buttonText="Nouveau patient"
+                      hideIcon
+                      currentPatientCount={patients.length}
                     />
                   </div>
                   <div className="grid grid-cols-1 gap-2 max-h-[400px] overflow-y-auto">
@@ -283,16 +297,6 @@ export function SendScaleSheet({
                         </div>
                       ))
                     )}
-                  </div>
-                  <div className="pt-2">
-                    <CreatePatientSheet
-                      onPatientCreated={handlePatientCreated}
-                      buttonVariant="default"
-                      buttonClassName="bg-primary text-primary-foreground w-full text-base"
-                      buttonText="Nouveau patient"
-                      hideIcon
-                      currentPatientCount={patients.length}
-                    />
                   </div>
                 </>
               )}
