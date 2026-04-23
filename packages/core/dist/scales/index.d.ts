@@ -12,6 +12,7 @@ export interface Scale {
     estimatedTime: string;
     longDescription: string;
     instructions?: string;
+    reverseItems?: number[];
     questions: any[];
     answerScales?: Record<string, {
         value: number;
