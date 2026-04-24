@@ -27,6 +27,7 @@ import { EditPatientSheet } from "@/components/EditPatientSheet";
 import { SendScaleSheet } from "@/components/SendScaleSheet";
 import { formatScore } from "@/lib/score-utils";
 import { SESSION_STATUS_CONFIG } from "@/lib/session-status";
+import { cn } from "@/lib/utils";
 
 export default function PatientDetailPage() {
   const { user, isLoading } = useUser();
@@ -233,7 +234,7 @@ export default function PatientDetailPage() {
               )}
             </div>
           ) : (
-            <div className="bg-muted-foreground/5 rounded-lg overflow-hidden">
+            <div className="flex flex-col gap-1.5">
               {sessions.map((session) => {
                 const scale = scales.find((s) => s.id === session.scaleId);
                 const config =
@@ -245,47 +246,63 @@ export default function PatientDetailPage() {
                   <Link
                     key={session.id}
                     href={`/results/${session.id}`}
-                    className="flex items-center gap-3 p-4 border-t border-border/50 first:border-t-0 hover:bg-background/50 transition-colors cursor-pointer"
+                    className="flex overflow-hidden hover:opacity-90 transition-opacity"
+                    style={{ borderRadius: 12, height: 64 }}
                   >
-                    {scale && (
-                      <div
-                        className="w-8 h-8 rounded-md flex-shrink-0 flex items-center justify-center"
-                        style={{ backgroundColor: scale.color }}
-                      >
+                    <div
+                      className="flex items-center justify-center flex-shrink-0"
+                      style={{
+                        backgroundColor: scale?.color ?? "#e5e7eb",
+                        aspectRatio: "1 / 1",
+                        height: "100%",
+                      }}
+                    >
+                      {scale && (
                         <Image
                           src={scale.icon}
                           alt={scale.acronym}
-                          width={20}
-                          height={20}
+                          width={32}
+                          height={32}
+                          className="w-3/5 h-3/5 object-contain"
                         />
-                      </div>
-                    )}
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2 mb-0.5">
-                        <p className="font-medium text-sm truncate">
-                          {scale?.title || session.scaleId}
+                      )}
+                    </div>
+                    <div className="flex items-center px-4 flex-1 min-w-0 gap-4 bg-muted-foreground/5">
+                      <div className="min-w-0">
+                        <p className="font-heading font-bold text-black leading-tight text-base">
+                          {scale?.acronym || session.scaleId}
                         </p>
-                        <Badge
-                          className={config?.className}
-                          variant="secondary"
+                        <p
+                          className="text-xs text-black/50 leading-snug"
+                          title={new Date(session.createdAt).toLocaleDateString("fr-FR")}
                         >
-                          {config?.label ?? session.status}
-                        </Badge>
-                      </div>
-                      <div className="flex items-center gap-3">
-                        <p className="text-xs text-muted-foreground">
-                          {new Date(session.createdAt).toLocaleDateString(
-                            "fr-FR",
-                          )}
+                          {(() => {
+                            const today = new Date();
+                            today.setHours(0, 0, 0, 0);
+                            const sessionDay = new Date(session.createdAt);
+                            sessionDay.setHours(0, 0, 0, 0);
+                            const diff = Math.round((today.getTime() - sessionDay.getTime()) / 86400000);
+                            return diff === 0 ? "aujourd'hui" : diff === 1 ? "hier" : `il y a ${diff} j`;
+                          })()}
                         </p>
-                        {session.status === "COMPLETED" &&
-                          session.score != null && (
-                            <p className="text-xs font-medium text-green-700">
-                              Score : {formatScore(session.score)}
-                              {session.interpretation &&
-                                ` — ${session.interpretation}`}
+                      </div>
+                      <div className="ml-auto flex items-center flex-shrink-0">
+                        {session.status === "COMPLETED" && session.score != null ? (
+                          <div className="text-right">
+                            <p className="font-heading font-bold text-black text-base leading-tight">
+                              {formatScore(session.score)}
                             </p>
-                          )}
+                            {session.interpretation && (
+                              <p className="text-xs text-black/70 leading-snug">
+                                {session.interpretation}
+                              </p>
+                            )}
+                          </div>
+                        ) : (
+                          <Badge className={cn("pointer-events-none", config?.className)} variant="secondary">
+                            {config?.label ?? session.status}
+                          </Badge>
+                        )}
                       </div>
                     </div>
                   </Link>
