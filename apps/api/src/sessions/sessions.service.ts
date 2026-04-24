@@ -185,6 +185,15 @@ export class SessionsService {
       throw new ForbiddenException('Accès non autorisé à cette session');
     }
 
+    if (session.status === 'COMPLETED' && !session.viewedAt) {
+      const updated = await this.prisma.session.update({
+        where: { id },
+        data: { viewedAt: new Date() },
+        include: { patient: true },
+      });
+      session.viewedAt = updated.viewedAt;
+    }
+
     this.auditLog
       .log({
         userId: practitionerId,

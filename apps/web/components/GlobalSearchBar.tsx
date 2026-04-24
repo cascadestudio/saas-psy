@@ -179,7 +179,7 @@ export function GlobalSearchBar() {
             title: getScaleTitle(s.scaleId),
             subtitle: getPatientName(s),
             category: "passations",
-            href: `/results/${s.id}`,
+            href: `/passation/${s.id}`,
           }),
         );
     }

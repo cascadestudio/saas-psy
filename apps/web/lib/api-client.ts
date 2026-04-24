@@ -333,6 +333,7 @@ export interface Session {
   sentAt?: string;
   startedAt?: string;
   completedAt?: string;
+  viewedAt?: string;
   expiresAt?: string;
   createdAt: string;
   updatedAt: string;
