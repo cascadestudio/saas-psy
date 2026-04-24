@@ -3,6 +3,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
+import Image from "next/image";
 import { useSearchParams, useRouter } from "next/navigation";
 import { useUser } from "@/app/context/UserContext";
 import { useAuthGate } from "@/app/context/AuthGateContext";
@@ -15,25 +16,49 @@ import {
 } from "@/lib/api-client";
 import { scales } from "@/app/scalesData";
 import { Interfaces } from "doodle-icons";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
+import { formatScore } from "@/lib/score-utils";
+import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { CreatePatientSheet } from "@/components/CreatePatientSheet";
 import { SendScaleSheet } from "@/components/SendScaleSheet";
 import { GlobalSearchBar } from "@/components/GlobalSearchBar";
+import { PatientRow } from "@/components/PatientRow";
 import { SESSION_STATUS_CONFIG } from "@/lib/session-status";
 
 type DisplaySession = {
   id: string;
   patientName: string;
-  scaleTitle: string;
+  scaleId: string;
+  scaleAcronym: string;
+  scaleColor: string;
+  scaleIcon: string | null;
   status: Session["status"];
   dateLabel: string;
+  score: number | null;
+  interpretation: string | null;
 };
+
+function getScaleMeta(scaleId: string) {
+  const scale = scales.find((s) => s.id === scaleId);
+  return {
+    acronym: scale?.acronym ?? scaleId,
+    color: scale?.color ?? "#e5e7eb",
+    icon: scale?.icon ?? null,
+  };
+}
+
+function shortDateLabel(dateStr: string) {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const sessionDay = new Date(dateStr);
+  sessionDay.setHours(0, 0, 0, 0);
+  const diff = Math.round(
+    (today.getTime() - sessionDay.getTime()) / 86400000,
+  );
+  if (diff === 0) return "aujourd'hui";
+  if (diff === 1) return "hier";
+  return `il y a ${diff} j`;
+}
 
 type DisplayPatient = {
   id: string;
@@ -41,47 +66,54 @@ type DisplayPatient = {
   hasActive: boolean;
 };
 
-function getScaleTitle(scaleId: string) {
-  return scales.find((s) => s.id === scaleId)?.title ?? scaleId;
-}
-
-function daysSinceSent(dateStr: string) {
-  const days = Math.floor(
-    (Date.now() - new Date(dateStr).getTime()) / (1000 * 60 * 60 * 24),
-  );
-  if (days === 0) return "Aujourd'hui";
-  if (days === 1) return "Il y a 1 jour";
-  return `Il y a ${days} jours`;
-}
-
 const MOCK_SESSIONS: DisplaySession[] = [
   {
     id: "1",
     patientName: "Marie Dupont",
-    scaleTitle: getScaleTitle("inventaire-de-depression-de-beck"),
+    scaleId: "inventaire-de-depression-de-beck",
+    scaleAcronym: getScaleMeta("inventaire-de-depression-de-beck").acronym,
+    scaleColor: getScaleMeta("inventaire-de-depression-de-beck").color,
+    scaleIcon: getScaleMeta("inventaire-de-depression-de-beck").icon,
     status: "SENT",
-    dateLabel: "28/03",
+    dateLabel: "il y a 3 j",
+    score: null,
+    interpretation: null,
   },
   {
     id: "2",
     patientName: "Marie Dupont",
-    scaleTitle: getScaleTitle("stai-anxiete-generalisee"),
+    scaleId: "stai-anxiete-generalisee",
+    scaleAcronym: getScaleMeta("stai-anxiete-generalisee").acronym,
+    scaleColor: getScaleMeta("stai-anxiete-generalisee").color,
+    scaleIcon: getScaleMeta("stai-anxiete-generalisee").icon,
     status: "STARTED",
-    dateLabel: "30/03",
+    dateLabel: "hier",
+    score: null,
+    interpretation: null,
   },
   {
     id: "3",
     patientName: "Jean Martin",
-    scaleTitle: getScaleTitle("echelle-d-anxiete-sociale-de-liebowitz"),
+    scaleId: "echelle-d-anxiete-sociale-de-liebowitz",
+    scaleAcronym: getScaleMeta("echelle-d-anxiete-sociale-de-liebowitz").acronym,
+    scaleColor: getScaleMeta("echelle-d-anxiete-sociale-de-liebowitz").color,
+    scaleIcon: getScaleMeta("echelle-d-anxiete-sociale-de-liebowitz").icon,
     status: "COMPLETED",
-    dateLabel: "01/04",
+    dateLabel: "aujourd'hui",
+    score: 42,
+    interpretation: "Anxiété modérée",
   },
   {
     id: "4",
     patientName: "Sophie Bernard",
-    scaleTitle: getScaleTitle("traumatismes-pcl5"),
+    scaleId: "traumatismes-pcl5",
+    scaleAcronym: getScaleMeta("traumatismes-pcl5").acronym,
+    scaleColor: getScaleMeta("traumatismes-pcl5").color,
+    scaleIcon: getScaleMeta("traumatismes-pcl5").icon,
     status: "SENT",
-    dateLabel: "31/03",
+    dateLabel: "il y a 2 j",
+    score: null,
+    interpretation: null,
   },
 ];
 
@@ -102,90 +134,82 @@ function SessionCard({
   onClick?: () => void;
 }) {
   const config = SESSION_STATUS_CONFIG[session.status];
+  const isCompleted =
+    session.status === "COMPLETED" && session.score != null;
+
   const className =
-    "bg-muted-foreground/5 rounded-lg p-4 min-w-[200px] hover:bg-muted-foreground/10 transition-colors flex-shrink-0 text-left";
+    "flex overflow-hidden hover:opacity-90 transition-opacity flex-shrink-0 text-left";
+  const style = { borderRadius: 12, height: 96, width: 300 } as const;
+
   const content = (
     <>
-      <p className="font-medium text-sm">{session.patientName}</p>
-      <p className="text-sm text-muted-foreground mt-1">{session.scaleTitle}</p>
-      <div className="flex items-center justify-between mt-3">
-        <Badge className={config.className} variant="secondary">
-          {config.label}
-        </Badge>
-        <span className="text-xs text-muted-foreground">
-          {session.dateLabel}
-        </span>
+      <div
+        className="flex items-center justify-center flex-shrink-0"
+        style={{
+          backgroundColor: session.scaleColor,
+          aspectRatio: "1 / 1",
+          height: "100%",
+        }}
+      >
+        {session.scaleIcon && (
+          <Image
+            src={session.scaleIcon}
+            alt={session.scaleAcronym}
+            width={32}
+            height={32}
+            className="w-3/5 h-3/5 object-contain"
+          />
+        )}
+      </div>
+      <div className="flex px-4 py-3 flex-1 min-w-0 gap-3 bg-muted-foreground/5 relative">
+        <div className="min-w-0 flex flex-col justify-between flex-1">
+          <div className="min-w-0 pr-16">
+            <p className="font-heading font-bold text-black leading-tight text-base">
+              {session.scaleAcronym}
+            </p>
+            <p className="text-xs text-black/70 leading-snug truncate">
+              {session.patientName}
+            </p>
+          </div>
+          <p className="text-xs text-black/50 leading-snug">
+            {session.dateLabel}
+          </p>
+        </div>
+        <div className="absolute top-3 right-4 flex items-start">
+          {isCompleted ? (
+            <div className="text-right">
+              <p className="font-sans font-bold text-black text-base leading-tight">
+                {formatScore(session.score!)}
+              </p>
+              {session.interpretation && (
+                <p className="font-sans text-xs text-black/70 leading-snug">
+                  {session.interpretation}
+                </p>
+              )}
+            </div>
+          ) : (
+            <Badge
+              className={cn("pointer-events-none", config.className)}
+              variant="secondary"
+            >
+              {config.label}
+            </Badge>
+          )}
+        </div>
       </div>
     </>
   );
 
   if (href) {
     return (
-      <Link href={href} className={className}>
+      <Link href={href} className={className} style={style}>
         {content}
       </Link>
     );
   }
   return (
-    <button onClick={onClick} className={className}>
+    <button onClick={onClick} className={className} style={style}>
       {content}
-    </button>
-  );
-}
-
-function PatientRow({
-  patient,
-  href,
-  onRowClick,
-  onSendClick,
-}: {
-  patient: DisplayPatient;
-  href?: string;
-  onRowClick?: () => void;
-  onSendClick?: (e: React.MouseEvent) => void;
-}) {
-  const rowClassName =
-    "flex items-center justify-between p-3 border-t border-border/50 first:border-t-0 hover:bg-background/50 transition-colors";
-  const inner = (
-    <>
-      <div className="flex items-center gap-2">
-        <p className="font-medium">{patient.name}</p>
-        {patient.hasActive && (
-          <Badge variant="secondary" className="text-xs">
-            Passation en cours
-          </Badge>
-        )}
-      </div>
-      <TooltipProvider>
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <Button
-              variant="ghost-brand"
-              size="icon-sm"
-              onClick={onSendClick}
-              className="flex-shrink-0"
-            >
-              <Interfaces.Send className="h-4 w-4" />
-            </Button>
-          </TooltipTrigger>
-          <TooltipContent>
-            <p>Envoyer une échelle</p>
-          </TooltipContent>
-        </Tooltip>
-      </TooltipProvider>
-    </>
-  );
-
-  if (href) {
-    return (
-      <Link href={href} className={rowClassName}>
-        {inner}
-      </Link>
-    );
-  }
-  return (
-    <button onClick={onRowClick} className={`w-full ${rowClassName}`}>
-      {inner}
     </button>
   );
 }
@@ -292,15 +316,24 @@ export default function DashboardPage() {
       : sortedPatients;
 
   const displaySessions: DisplaySession[] = user
-    ? filteredSessions.map((s) => ({
-        id: s.id,
-        patientName: s.patient
-          ? `${s.patient.firstName} ${s.patient.lastName}`
-          : "Patient",
-        scaleTitle: getScaleTitle(s.scaleId),
-        status: s.status,
-        dateLabel: daysSinceSent(s.sentAt || s.createdAt),
-      }))
+    ? filteredSessions.map((s) => {
+        const meta = getScaleMeta(s.scaleId);
+        return {
+          id: s.id,
+          patientName: s.patient
+            ? `${s.patient.firstName} ${s.patient.lastName}`
+            : "Patient",
+          scaleId: s.scaleId,
+          scaleAcronym: meta.acronym,
+          scaleColor: meta.color,
+          scaleIcon: meta.icon,
+          status: s.status,
+          dateLabel: shortDateLabel(s.sentAt || s.createdAt),
+          score: typeof s.score === "number" ? s.score : null,
+          interpretation:
+            typeof s.interpretation === "string" ? s.interpretation : null,
+        };
+      })
     : MOCK_SESSIONS;
 
   const displayPatients: DisplayPatient[] = user
