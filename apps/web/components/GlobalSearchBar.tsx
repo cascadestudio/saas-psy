@@ -4,7 +4,12 @@ import { useState, useRef, useEffect, useMemo, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { Interfaces } from "doodle-icons";
 import { scales } from "@/app/scalesData";
-import { patientsApi, type Patient, type Session } from "@/lib/api-client";
+import {
+  patientsApi,
+  sessionsApi,
+  type Patient,
+  type Session,
+} from "@/lib/api-client";
 
 type Category = "patients" | "echelles" | "passations" | "resultats";
 
@@ -23,23 +28,37 @@ type SearchResult = {
   href: string;
 };
 
-interface GlobalSearchBarProps {
-  patients: Patient[];
-  sessions: Session[];
-}
-
-export function GlobalSearchBar({ patients, sessions }: GlobalSearchBarProps) {
+export function GlobalSearchBar() {
   const router = useRouter();
   const [query, setQuery] = useState("");
   const [activeCategories, setActiveCategories] = useState<Set<Category>>(
     new Set<Category>(CATEGORIES.map((c) => c.key)),
   );
   const [isOpen, setIsOpen] = useState(false);
+  const [patients, setPatients] = useState<Patient[]>([]);
+  const [sessions, setSessions] = useState<Session[]>([]);
+  const [dataLoaded, setDataLoaded] = useState(false);
   const [searchedPatients, setSearchedPatients] = useState<Patient[] | null>(
     null,
   );
   const containerRef = useRef<HTMLDivElement>(null);
   const debounceRef = useRef<ReturnType<typeof setTimeout>>(undefined);
+
+  const loadData = useCallback(async () => {
+    if (dataLoaded) return;
+    setDataLoaded(true);
+    try {
+      const [patientsRes, sessionsRes] = await Promise.all([
+        patientsApi.getAll("active"),
+        sessionsApi.getRecent(50),
+      ]);
+      setPatients(patientsRes.patients);
+      setSessions(sessionsRes.sessions);
+    } catch (error) {
+      console.error("Error loading search data:", error);
+      setDataLoaded(false);
+    }
+  }, [dataLoaded]);
 
   const toggleCategory = (key: Category) => {
     setActiveCategories((prev) => {
@@ -211,7 +230,7 @@ export function GlobalSearchBar({ patients, sessions }: GlobalSearchBarProps) {
     CATEGORIES.find((c) => c.key === key)!.label;
 
   return (
-    <div ref={containerRef} className="relative mb-6">
+    <div ref={containerRef} className="relative">
       <div className="flex items-center gap-3 rounded-full border border-border bg-muted-foreground/5 px-4 py-2.5">
         <Interfaces.Search
           className="h-5 w-5 flex-shrink-0 text-muted-foreground"
@@ -225,7 +244,10 @@ export function GlobalSearchBar({ patients, sessions }: GlobalSearchBarProps) {
             setQuery(e.target.value);
             setIsOpen(true);
           }}
-          onFocus={() => query.trim() && setIsOpen(true)}
+          onFocus={() => {
+            loadData();
+            if (query.trim()) setIsOpen(true);
+          }}
           onKeyDown={(e) => e.key === "Escape" && setIsOpen(false)}
           className="flex-1 bg-transparent text-sm outline-none placeholder:text-muted-foreground"
         />

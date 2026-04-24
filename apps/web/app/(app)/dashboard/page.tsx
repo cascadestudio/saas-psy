@@ -21,7 +21,6 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { CreatePatientSheet } from "@/components/CreatePatientSheet";
 import { SendScaleSheet } from "@/components/SendScaleSheet";
-import { GlobalSearchBar } from "@/components/GlobalSearchBar";
 import { PatientRow } from "@/components/PatientRow";
 import { SESSION_STATUS_CONFIG } from "@/lib/session-status";
 
@@ -346,7 +345,6 @@ export default function DashboardPage() {
 
   return (
     <div className="container mx-auto px-4 py-6">
-      <GlobalSearchBar patients={user ? patients : []} sessions={user ? sessions : []} />
       <div className="mb-6">
         <h1 className="font-normal text-4xl">
           {user
