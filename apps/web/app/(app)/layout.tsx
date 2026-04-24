@@ -8,6 +8,7 @@ import { Interfaces, Files } from "doodle-icons";
 import { useUser } from "@/app/context/UserContext";
 import { useAuthGate } from "@/app/context/AuthGateContext";
 import { SendScaleSheet } from "@/components/SendScaleSheet";
+import { GlobalSearchBar } from "@/components/GlobalSearchBar";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -116,7 +117,14 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
       </aside>
 
       {/* Main content */}
-      <main className="flex-1 min-w-0">{children}</main>
+      <main className="flex-1 min-w-0">
+        {user && (
+          <div className="container mx-auto px-4 pt-6">
+            <GlobalSearchBar />
+          </div>
+        )}
+        {children}
+      </main>
 
       <SendScaleSheet open={sendSheetOpen} onOpenChange={setSendSheetOpen} />
     </div>
