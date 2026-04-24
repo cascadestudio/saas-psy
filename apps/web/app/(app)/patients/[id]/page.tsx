@@ -19,7 +19,7 @@ import {
   type Session,
 } from "@/lib/api-client";
 import { scales } from "@/app/scalesData";
-import { Interfaces, Files } from "doodle-icons";
+import { Interfaces, Food } from "doodle-icons";
 import { ArchivePatientDialog } from "@/components/ArchivePatientDialog";
 import { RestorePatientButton } from "@/components/RestorePatientButton";
 import { EditPatientSheet } from "@/components/EditPatientSheet";
@@ -193,17 +193,13 @@ export default function PatientDetailPage() {
       <div className="flex items-center gap-4 text-sm text-muted-foreground mb-6">
         {age && (
           <span className="flex items-center gap-1.5">
-            <Interfaces.Calendar className="h-3.5 w-3.5" />
+            <Food.Cake className="h-3.5 w-3.5" />
             {age} ans
           </span>
         )}
         <span className="flex items-center gap-1.5">
           <Interfaces.Mail className="h-3.5 w-3.5" />
           {patient.email}
-        </span>
-        <span className="flex items-center gap-1.5">
-          <Files.FileText className="h-3.5 w-3.5" />
-          Depuis le {new Date(patient.createdAt).toLocaleDateString("fr-FR")}
         </span>
       </div>
 
