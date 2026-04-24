@@ -96,17 +96,10 @@ export default function ResultsPage() {
     return (
       <div className="container mx-auto px-4 py-6">
         {/* Header */}
-        <div className="flex items-center gap-3 mb-1">
-          <Button asChild variant="ghost" size="icon" className="-ml-2">
-            <Link href={backHref}>
-              <Arrow.ArrowLeft />
-            </Link>
-          </Button>
-          <h1 className="font-normal text-3xl">Résultats de passation</h1>
-        </div>
+        <h1 className="font-normal text-3xl mb-1">Résultats de passation</h1>
 
         {/* Subline */}
-        <div className="flex items-center gap-4 text-sm text-muted-foreground mb-6 pl-10">
+        <div className="flex items-center gap-4 text-sm text-muted-foreground mb-6">
           {patient && (
             <span className="flex items-center gap-1.5">
               <Interfaces.User className="h-3.5 w-3.5" />
@@ -144,7 +137,7 @@ export default function ResultsPage() {
             </p>
           )}
           {(session.status === "SENT" || session.status === "STARTED") && (
-            <Button variant="outline" size="sm" onClick={handleCopyLink}>
+            <Button variant="ghost-brand" size="sm" onClick={handleCopyLink}>
               <Interfaces.Copy />
               {copied ? "Lien copié !" : "Copier le lien de passation"}
             </Button>
@@ -208,17 +201,10 @@ export default function ResultsPage() {
   return (
     <div className="container mx-auto px-4 py-6">
       {/* Header */}
-      <div className="flex items-center gap-3 mb-1">
-        <Button asChild variant="ghost" size="icon" className="-ml-2">
-          <Link href={backHref}>
-            <Arrow.ArrowLeft />
-          </Link>
-        </Button>
-        <h1 className="font-normal text-3xl">Résultats de passation</h1>
-      </div>
+      <h1 className="font-normal text-3xl mb-1">Résultats de passation</h1>
 
       {/* Subline */}
-      <div className="flex items-center gap-4 text-sm text-muted-foreground mb-6 pl-10">
+      <div className="flex items-center gap-4 text-sm text-muted-foreground mb-6">
         {patient && (
           <span className="flex items-center gap-1.5">
             <Interfaces.User className="h-3.5 w-3.5" />
