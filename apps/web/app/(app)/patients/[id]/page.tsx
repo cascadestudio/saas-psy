@@ -12,9 +12,14 @@ import {
 import Link from "next/link";
 import { useUser } from "@/app/context/UserContext";
 import { useEffect, useState, useCallback } from "react";
-import { patientsApi, sessionsApi, type Patient, type Session } from "@/lib/api-client";
+import {
+  patientsApi,
+  sessionsApi,
+  type Patient,
+  type Session,
+} from "@/lib/api-client";
 import { scales } from "@/app/scalesData";
-import { Arrow, Interfaces, Files } from "doodle-icons";
+import { Interfaces, Files } from "doodle-icons";
 import { ArchivePatientDialog } from "@/components/ArchivePatientDialog";
 import { RestorePatientButton } from "@/components/RestorePatientButton";
 import { EditPatientSheet } from "@/components/EditPatientSheet";
@@ -45,8 +50,9 @@ export default function PatientDetailPage() {
       setPatient(patientRes.patient);
       setSessions(
         sessionsRes.sessions.sort(
-          (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-        )
+          (a, b) =>
+            new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
+        ),
       );
     } catch (error) {
       console.error("Error loading patient data:", error);
@@ -104,7 +110,10 @@ export default function PatientDetailPage() {
     const birth = new Date(birthDate);
     let age = today.getFullYear() - birth.getFullYear();
     const monthDiff = today.getMonth() - birth.getMonth();
-    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birth.getDate())) {
+    if (
+      monthDiff < 0 ||
+      (monthDiff === 0 && today.getDate() < birth.getDate())
+    ) {
       age--;
     }
     return age;
@@ -117,17 +126,16 @@ export default function PatientDetailPage() {
     <div className="container mx-auto px-4 py-6">
       {/* Header */}
       <div className="flex items-center gap-3 mb-1">
-        <Button asChild variant="ghost" size="icon" className="-ml-2">
-          <Link href="/dashboard">
-            <Arrow.ArrowLeft className="h-4 w-4" />
-          </Link>
-        </Button>
         <h1 className="font-normal text-3xl">
           {patient.firstName} {patient.lastName}
         </h1>
         {isArchived && (
-          <Badge variant="secondary" className="bg-brand-orange/10 text-brand-orange">
-            Archivé le {new Date(patient.archivedAt!).toLocaleDateString("fr-FR")}
+          <Badge
+            variant="secondary"
+            className="bg-brand-orange/10 text-brand-orange"
+          >
+            Archivé le{" "}
+            {new Date(patient.archivedAt!).toLocaleDateString("fr-FR")}
           </Badge>
         )}
         {isArchived ? (
@@ -152,13 +160,9 @@ export default function PatientDetailPage() {
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="bg-muted">
                 <DropdownMenuItem
+                  onClick={() => setEditOpen(true)}
                   className="cursor-pointer"
-                  onSelect={() => setSendScaleOpen(true)}
                 >
-                  <Interfaces.Send className="mr-2 h-4 w-4" />
-                  Envoyer une échelle
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => setEditOpen(true)} className="cursor-pointer">
                   <Interfaces.Pencil className="mr-2 h-4 w-4" />
                   Modifier
                 </DropdownMenuItem>
@@ -166,7 +170,10 @@ export default function PatientDetailPage() {
                   patient={patient}
                   onArchived={handleArchived}
                   trigger={
-                    <DropdownMenuItem onSelect={(e) => e.preventDefault()} className="cursor-pointer">
+                    <DropdownMenuItem
+                      onSelect={(e) => e.preventDefault()}
+                      className="cursor-pointer"
+                    >
                       <Interfaces.Delete className="mr-2 h-4 w-4" />
                       Archiver
                     </DropdownMenuItem>
@@ -174,12 +181,16 @@ export default function PatientDetailPage() {
                 />
               </DropdownMenuContent>
             </DropdownMenu>
+            <Button className="ml-auto" onClick={() => setSendScaleOpen(true)}>
+              <Interfaces.Send />
+              Envoyer une échelle
+            </Button>
           </>
         )}
       </div>
 
       {/* Subline */}
-      <div className="flex items-center gap-4 text-sm text-muted-foreground mb-6 pl-10">
+      <div className="flex items-center gap-4 text-sm text-muted-foreground mb-6">
         {age && (
           <span className="flex items-center gap-1.5">
             <Interfaces.Calendar className="h-3.5 w-3.5" />
@@ -219,7 +230,7 @@ export default function PatientDetailPage() {
               </p>
               {!isArchived && (
                 <Button size="sm" onClick={() => setSendScaleOpen(true)}>
-                  <Interfaces.Send className="mr-2 h-4 w-4" />
+                  <Interfaces.Send />
                   Envoyer la première échelle
                 </Button>
               )}
@@ -228,7 +239,10 @@ export default function PatientDetailPage() {
             <div className="bg-muted-foreground/5 rounded-lg overflow-hidden">
               {sessions.map((session) => {
                 const scale = scales.find((s) => s.id === session.scaleId);
-                const config = SESSION_STATUS_CONFIG[session.status as keyof typeof SESSION_STATUS_CONFIG];
+                const config =
+                  SESSION_STATUS_CONFIG[
+                    session.status as keyof typeof SESSION_STATUS_CONFIG
+                  ];
 
                 return (
                   <Link
@@ -241,20 +255,27 @@ export default function PatientDetailPage() {
                         <p className="font-medium text-sm truncate">
                           {scale?.title || session.scaleId}
                         </p>
-                        <Badge className={config?.className} variant="secondary">
+                        <Badge
+                          className={config?.className}
+                          variant="secondary"
+                        >
                           {config?.label ?? session.status}
                         </Badge>
                       </div>
                       <div className="flex items-center gap-3">
                         <p className="text-xs text-muted-foreground">
-                          {new Date(session.createdAt).toLocaleDateString("fr-FR")}
+                          {new Date(session.createdAt).toLocaleDateString(
+                            "fr-FR",
+                          )}
                         </p>
-                        {session.status === "COMPLETED" && session.score != null && (
-                          <p className="text-xs font-medium text-green-700">
-                            Score : {formatScore(session.score)}
-                            {session.interpretation && ` — ${session.interpretation}`}
-                          </p>
-                        )}
+                        {session.status === "COMPLETED" &&
+                          session.score != null && (
+                            <p className="text-xs font-medium text-green-700">
+                              Score : {formatScore(session.score)}
+                              {session.interpretation &&
+                                ` — ${session.interpretation}`}
+                            </p>
+                          )}
                       </div>
                     </div>
                   </Link>
