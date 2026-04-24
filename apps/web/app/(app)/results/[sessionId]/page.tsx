@@ -99,7 +99,7 @@ export default function ResultsPage() {
         <div className="flex items-center gap-3 mb-1">
           <Button asChild variant="ghost" size="icon" className="-ml-2">
             <Link href={backHref}>
-              <Arrow.ArrowLeft className="h-4 w-4" />
+              <Arrow.ArrowLeft />
             </Link>
           </Button>
           <h1 className="font-normal text-3xl">Résultats de passation</h1>
@@ -145,7 +145,7 @@ export default function ResultsPage() {
           )}
           {(session.status === "SENT" || session.status === "STARTED") && (
             <Button variant="outline" size="sm" onClick={handleCopyLink}>
-              <Interfaces.Copy className="mr-2 h-4 w-4" />
+              <Interfaces.Copy />
               {copied ? "Lien copié !" : "Copier le lien de passation"}
             </Button>
           )}
@@ -211,7 +211,7 @@ export default function ResultsPage() {
       <div className="flex items-center gap-3 mb-1">
         <Button asChild variant="ghost" size="icon" className="-ml-2">
           <Link href={backHref}>
-            <Arrow.ArrowLeft className="h-4 w-4" />
+            <Arrow.ArrowLeft />
           </Link>
         </Button>
         <h1 className="font-normal text-3xl">Résultats de passation</h1>

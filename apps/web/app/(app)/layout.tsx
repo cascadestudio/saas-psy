@@ -54,7 +54,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
             size="sm"
             className="w-full mb-2 gap-2"
           >
-            <Interfaces.Send className="h-4 w-4" fill="currentColor" />
+            <Interfaces.Send fill="currentColor" />
             Envoyer une échelle
           </Button>
           {navigation.map((item) => {

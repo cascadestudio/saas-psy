@@ -50,7 +50,7 @@ export function ScalePreviewModal({ scale }: ScalePreviewModalProps) {
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button variant="outline">
-          <Interfaces.Unhide className="mr-2 h-4 w-4" />
+          <Interfaces.Unhide />
           Aperçu de l'échelle
         </Button>
       </DialogTrigger>
@@ -71,7 +71,7 @@ export function ScalePreviewModal({ scale }: ScalePreviewModalProps) {
             <Button variant="outline">Fermer</Button>
           </DialogClose>
           <Button onClick={handleSendClick}>
-            <Interfaces.Send className="mr-2 h-4 w-4" />
+            <Interfaces.Send />
             Envoyer au patient
           </Button>
         </div>

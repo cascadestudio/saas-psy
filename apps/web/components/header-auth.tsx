@@ -22,12 +22,12 @@ export default function AuthButton() {
     <div className="flex items-center gap-2">
       <Button asChild variant="outline" size="sm">
         <Link href="/dashboard">
-          <Interfaces.User className="mr-2 h-4 w-4" />
+          <Interfaces.User />
           Tableau de bord
         </Link>
       </Button>
       <Button onClick={logout} variant="ghost" size="icon">
-        <Interfaces.Logout className="h-4 w-4" />
+        <Interfaces.Logout />
       </Button>
     </div>
   ) : (
