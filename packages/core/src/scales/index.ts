@@ -378,8 +378,8 @@ export const scales: Scale[] = [
     acronym: "RSES",
     label: "Échelle d'Estime de Soi de Rosenberg",
     icon: "/images/scales/rses.svg",
-    color: "#BCD1CA",
-    colorLight: "#DDE8E4",
+    color: "#E7BC92",
+    colorLight: "#F5DFC5",
     formType: "single-scale",
     title: "RSES - Échelle d'Estime de Soi de Rosenberg",
     description:

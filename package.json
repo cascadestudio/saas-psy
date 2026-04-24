@@ -11,7 +11,7 @@
     "dev:staging": "npm run dev:staging --workspace=apps/web",
     "dev:api": "npm run start:dev --workspace=apps/api",
     "studio:staging": "npm run prisma:studio:staging --workspace=apps/api",
-    "dev:all": "concurrently \"npm run dev:api\" \"npm run dev\"",
+    "dev:all": "concurrently \"npm run dev --workspace=packages/core\" \"npm run dev:api\" \"npm run dev\"",
     "build": "npm run build --workspaces",
     "build:web": "npm run build --workspace=apps/web",
     "build:api": "npm run build --workspace=apps/api",
