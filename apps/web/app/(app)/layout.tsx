@@ -35,13 +35,13 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
       {/* Sidebar */}
       <aside className="sticky top-0 flex h-screen w-52 flex-col bg-brand-orange/10 text-brand-orange rounded-r-2xl">
         {/* Logo */}
-        <div className="flex h-20 items-center justify-center px-4">
+        <div className="flex h-20 items-center justify-center px-4 mt-4">
           <Link href="/dashboard" className="flex items-center">
             <Image
               src="/images/logos/logo-melya.svg"
               alt="Melya"
-              width={96}
-              height={30}
+              width={130}
+              height={40}
               priority
             />
           </Link>
@@ -50,9 +50,10 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
         {/* Navigation */}
         <nav className="flex-1 space-y-1 px-4 py-4">
           <Button
-            onClick={() => user ? setSendSheetOpen(true) : openAuthGate()}
+            onClick={() => (user ? setSendSheetOpen(true) : openAuthGate())}
+            variant="ghost-brand"
             size="sm"
-            className="w-full mb-2 gap-2"
+            className="mb-4"
           >
             <Interfaces.Send fill="currentColor" />
             Envoyer une échelle
@@ -87,7 +88,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
           <div className="border-t border-brand-orange/20 pt-4 flex flex-col gap-1">
             <a
               href="mailto:clement@melya.app"
-              className="flex items-center gap-3 px-2 py-2 text-sm font-medium text-foreground/60 transition-all duration-200 hover:text-brand-orange hover:translate-x-1"
+              className="flex items-center gap-3 px-2 py-2 text-sm font-medium text-foreground transition-all duration-200 hover:text-brand-orange hover:translate-x-1"
             >
               <Interfaces.Message className="h-4 w-4" fill="currentColor" />
               Nous contacter
@@ -95,7 +96,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
             {!user ? (
               <button
                 onClick={() => openAuthGate()}
-                className="flex items-center gap-3 px-2 py-2 text-sm font-medium text-foreground/60 transition-all duration-200 hover:text-brand-orange hover:translate-x-1"
+                className="flex items-center gap-3 px-2 py-2 text-sm font-medium text-foreground transition-all duration-200 hover:text-brand-orange hover:translate-x-1"
               >
                 <Interfaces.Login className="h-4 w-4" fill="currentColor" />
                 Se connecter
@@ -103,7 +104,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
             ) : (
               <button
                 onClick={logout}
-                className="flex items-center gap-3 px-2 py-2 text-sm font-medium text-foreground/60 transition-all duration-200 hover:text-brand-orange hover:translate-x-1"
+                className="flex items-center gap-3 px-2 py-2 text-sm font-medium text-foreground transition-all duration-200 hover:text-brand-orange hover:translate-x-1"
               >
                 <Interfaces.Logout className="h-4 w-4" fill="currentColor" />
                 Déconnexion

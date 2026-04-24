@@ -10,6 +10,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import Link from "next/link";
+import Image from "next/image";
 import { useUser } from "@/app/context/UserContext";
 import { useEffect, useState, useCallback } from "react";
 import {
@@ -244,8 +245,21 @@ export default function PatientDetailPage() {
                   <Link
                     key={session.id}
                     href={`/results/${session.id}`}
-                    className="flex items-center justify-between p-4 border-t border-border/50 first:border-t-0 hover:bg-background/50 transition-colors cursor-pointer"
+                    className="flex items-center gap-3 p-4 border-t border-border/50 first:border-t-0 hover:bg-background/50 transition-colors cursor-pointer"
                   >
+                    {scale && (
+                      <div
+                        className="w-8 h-8 rounded-md flex-shrink-0 flex items-center justify-center"
+                        style={{ backgroundColor: scale.color }}
+                      >
+                        <Image
+                          src={scale.icon}
+                          alt={scale.acronym}
+                          width={20}
+                          height={20}
+                        />
+                      </div>
+                    )}
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2 mb-0.5">
                         <p className="font-medium text-sm truncate">
