@@ -245,7 +245,7 @@ export default function PatientDetailPage() {
                 return (
                   <Link
                     key={session.id}
-                    href={`/results/${session.id}`}
+                    href={`/passation/${session.id}`}
                     className="flex overflow-hidden hover:opacity-90 transition-opacity"
                     style={{ borderRadius: 12, height: 64 }}
                   >
