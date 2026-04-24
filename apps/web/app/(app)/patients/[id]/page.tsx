@@ -155,7 +155,7 @@ export default function PatientDetailPage() {
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" size="icon">
-                  <Interfaces.Setting className="h-4 w-4" />
+                  <Interfaces.Setting />
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="bg-muted">

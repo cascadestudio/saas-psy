@@ -49,7 +49,7 @@ export function RestorePatientButton({
       onClick={handleRestore}
       disabled={isLoading}
     >
-      <Interfaces.Sync className="mr-2 h-4 w-4" />
+      <Interfaces.Sync />
       {isLoading ? "Restauration..." : "Restaurer"}
     </Button>
   );

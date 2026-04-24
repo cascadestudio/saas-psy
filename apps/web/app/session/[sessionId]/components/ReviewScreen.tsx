@@ -61,7 +61,7 @@ export default function ReviewScreen({
         >
           {submitting ? (
             <>
-              <Interfaces.Sync className="h-4 w-4 animate-spin mr-2" />
+              <Interfaces.Sync className="animate-spin" />
               Envoi en cours...
             </>
           ) : (

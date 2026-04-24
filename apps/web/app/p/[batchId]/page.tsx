@@ -199,7 +199,7 @@ export default function PatientPortalPage() {
                   <div className="flex-shrink-0 flex sm:block justify-center sm:justify-end">
                     {session.isCompleted ? (
                       <Button variant="success" disabled className="disabled:opacity-100">
-                        <Interfaces.Tick2 className="h-4 w-4 mr-2 fill-white" />
+                        <Interfaces.Tick2 className="fill-white" />
                         Complété
                       </Button>
                     ) : (
