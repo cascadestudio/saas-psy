@@ -206,15 +206,14 @@ export default function DashboardPage() {
       </div>
 
       <div className="flex flex-wrap gap-3 mb-10">
-        <Button size="lg" onClick={() => setSendScaleOpen(true)}>
+        <Button onClick={() => setSendScaleOpen(true)}>
           <Interfaces.Send />
           Envoyer une échelle
         </Button>
         <CreatePatientSheet
           onPatientCreated={refreshData}
           currentPatientCount={patients.length}
-          buttonVariant="outline"
-          buttonSize="lg"
+          buttonVariant="secondary"
         />
       </div>
 
@@ -222,7 +221,7 @@ export default function DashboardPage() {
         <section>
           <h2 className="text-xl font-sans font-semibold mb-3">
             À relancer{" "}
-            <span className="text-muted-foreground font-normal">
+            <span className="text-muted-foreground font-normal text-sm">
               ({toRelaunch.length})
             </span>
           </h2>
@@ -241,7 +240,10 @@ export default function DashboardPage() {
                     rightSlot={
                       <div className="flex items-center gap-3">
                         <Badge
-                          className={cn("pointer-events-none", config.className)}
+                          className={cn(
+                            "pointer-events-none",
+                            config.className,
+                          )}
                           variant="secondary"
                         >
                           {config.label}
@@ -261,7 +263,7 @@ export default function DashboardPage() {
         <section>
           <h2 className="text-xl font-sans font-semibold mb-3">
             Résultats récents{" "}
-            <span className="text-muted-foreground font-normal">
+            <span className="text-muted-foreground font-normal text-sm">
               ({recentResults.length})
             </span>
           </h2>

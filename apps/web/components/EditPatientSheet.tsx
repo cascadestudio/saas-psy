@@ -140,7 +140,7 @@ export function EditPatientSheet({
           <div className="flex gap-3 pt-2">
             <Button
               type="button"
-              variant="outline"
+              variant="secondary"
               onClick={() => onOpenChange(false)}
             >
               Annuler

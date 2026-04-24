@@ -11,7 +11,7 @@ export default function AuthButton() {
   if (isLoading) {
     return (
       <div className="flex gap-2">
-        <Button size="sm" variant="outline" disabled>
+        <Button size="sm" variant="secondary" disabled>
           Chargement...
         </Button>
       </div>
@@ -20,7 +20,7 @@ export default function AuthButton() {
 
   return user ? (
     <div className="flex items-center gap-2">
-      <Button asChild variant="outline" size="sm">
+      <Button asChild variant="secondary" size="sm">
         <Link href="/dashboard">
           <Interfaces.User />
           Tableau de bord

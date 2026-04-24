@@ -3,13 +3,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+
 import { Interfaces, Files } from "doodle-icons";
 import { useUser } from "@/app/context/UserContext";
 import { useAuthGate } from "@/app/context/AuthGateContext";
-import { SendScaleSheet } from "@/components/SendScaleSheet";
+
 import { GlobalSearchBar } from "@/components/GlobalSearchBar";
-import { Button } from "@/components/ui/button";
+
 import { cn } from "@/lib/utils";
 
 const navigation = [
@@ -22,7 +22,6 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const { user, isLoading, logout } = useUser();
   const { openAuthGate } = useAuthGate();
-  const [sendSheetOpen, setSendSheetOpen] = useState(false);
 
   if (isLoading) {
     return (
@@ -51,15 +50,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
 
         {/* Navigation */}
         <nav className="flex-1 space-y-1 px-4 py-4">
-          <Button
-            onClick={() => (user ? setSendSheetOpen(true) : openAuthGate())}
-            variant="ghost-brand"
-            size="sm"
-            className="mb-4"
-          >
-            <Interfaces.Send fill="currentColor" />
-            Envoyer une échelle
-          </Button>
+
           {navigation.map((item) => {
             const Icon = item.icon;
             const isActive =
@@ -126,7 +117,6 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
         {children}
       </main>
 
-      <SendScaleSheet open={sendSheetOpen} onOpenChange={setSendSheetOpen} />
     </div>
   );
 }
