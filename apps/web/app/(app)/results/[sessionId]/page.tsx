@@ -96,7 +96,11 @@ export default function ResultsPage() {
     return (
       <div className="container mx-auto px-4 py-6">
         {/* Header */}
-        <h1 className="font-normal text-3xl mb-1">Résultats de passation</h1>
+        <h1 className="font-normal text-3xl mb-1">
+          {patient && scale
+            ? `${patient.firstName} ${patient.lastName} — ${scale.acronym}`
+            : "Passation"}
+        </h1>
 
         {/* Subline */}
         <div className="flex items-center gap-4 text-sm text-muted-foreground mb-6">

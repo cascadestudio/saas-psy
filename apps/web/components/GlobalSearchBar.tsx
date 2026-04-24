@@ -11,13 +11,12 @@ import {
   type Session,
 } from "@/lib/api-client";
 
-type Category = "patients" | "echelles" | "passations" | "resultats";
+type Category = "patients" | "echelles" | "passations";
 
 const CATEGORIES: { key: Category; label: string }[] = [
   { key: "patients", label: "Patients" },
   { key: "echelles", label: "Échelles" },
   { key: "passations", label: "Passations" },
-  { key: "resultats", label: "Résultats" },
 ];
 
 type SearchResult = {
@@ -165,10 +164,9 @@ export function GlobalSearchBar() {
         );
     }
 
-    // Passations (pending sessions)
+    // Passations (toutes sessions)
     if (activeCategories.has("passations")) {
       sessions
-        .filter((s) => ["CREATED", "SENT", "STARTED"].includes(s.status))
         .filter(
           (s) =>
             getScaleTitle(s.scaleId).toLowerCase().includes(q) ||
@@ -181,27 +179,6 @@ export function GlobalSearchBar() {
             title: getScaleTitle(s.scaleId),
             subtitle: getPatientName(s),
             category: "passations",
-            href: `/results/${s.id}`,
-          }),
-        );
-    }
-
-    // Résultats (completed sessions)
-    if (activeCategories.has("resultats")) {
-      sessions
-        .filter((s) => s.status === "COMPLETED")
-        .filter(
-          (s) =>
-            getScaleTitle(s.scaleId).toLowerCase().includes(q) ||
-            getPatientName(s).toLowerCase().includes(q),
-        )
-        .slice(0, 5)
-        .forEach((s) =>
-          items.push({
-            id: `result-${s.id}`,
-            title: getScaleTitle(s.scaleId),
-            subtitle: getPatientName(s),
-            category: "resultats",
             href: `/results/${s.id}`,
           }),
         );
