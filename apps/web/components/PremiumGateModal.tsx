@@ -67,7 +67,7 @@ export function PremiumGateModal() {
           </div>
 
           <div className="space-y-2">
-            <Button className="w-full" size="lg">
+            <Button className="w-full" >
               <Interfaces.Star />
               Passer à Premium
             </Button>

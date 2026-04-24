@@ -161,7 +161,7 @@ export default function DashboardPage() {
             Envoyez des échelles psychométriques à vos patients, suivez leurs
             résultats et leur évolution.
           </p>
-          <Button size="lg" onClick={() => openAuthGate()}>
+          <Button  onClick={() => openAuthGate()}>
             Se connecter
           </Button>
         </div>
