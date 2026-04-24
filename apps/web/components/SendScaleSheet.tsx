@@ -421,7 +421,7 @@ export function SendScaleSheet({
         <div className="px-6 py-4 flex justify-between items-center">
           {step === "patient" ? null : step === "scales" ? (
             <>
-              <Button onClick={() => setStep("patient")} variant="outline">
+              <Button onClick={() => setStep("patient")} variant="secondary">
                 Retour
               </Button>
               <Button
@@ -433,12 +433,12 @@ export function SendScaleSheet({
             </>
           ) : step === "message" ? (
             <>
-              <Button onClick={() => setStep("scales")} variant="outline">Retour</Button>
+              <Button onClick={() => setStep("scales")} variant="secondary">Retour</Button>
               <Button onClick={() => setStep("confirm")}>Continuer</Button>
             </>
           ) : (
             <>
-              <Button onClick={() => setStep("message")} variant="outline">Retour</Button>
+              <Button onClick={() => setStep("message")} variant="secondary">Retour</Button>
               <Button onClick={handleSend} disabled={isSending}>
                 {isSending ? "Envoi en cours..." : "Envoyer"}
               </Button>

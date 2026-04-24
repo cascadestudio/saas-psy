@@ -44,7 +44,7 @@ export function PatientRow({
         <Tooltip>
           <TooltipTrigger asChild>
             <Button
-              variant="ghost-brand"
+              variant="secondary"
               size="icon-sm"
               onClick={onSendClick}
               className="flex-shrink-0"

@@ -141,7 +141,7 @@ export default function ResultsPage() {
             </p>
           )}
           {(session.status === "SENT" || session.status === "STARTED") && (
-            <Button variant="ghost-brand" size="sm" onClick={handleCopyLink}>
+            <Button variant="secondary" size="sm" onClick={handleCopyLink}>
               <Interfaces.Copy />
               {copied ? "Lien copié !" : "Copier le lien de passation"}
             </Button>
@@ -359,7 +359,7 @@ export default function ResultsPage() {
                         {getMainScore(s.score)}
                       </span>
                       {isCurrent && (
-                        <Badge variant="outline" className="text-xs">
+                        <Badge variant="secondary" className="text-xs">
                           Actuel
                         </Badge>
                       )}

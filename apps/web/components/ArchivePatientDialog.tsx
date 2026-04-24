@@ -57,7 +57,7 @@ export function ArchivePatientDialog({
       {trigger ? (
         <div onClick={() => handleOpenChange(true)}>{trigger}</div>
       ) : (
-        <Button variant="outline" size="sm" onClick={() => handleOpenChange(true)}>
+        <Button variant="secondary" size="sm" onClick={() => handleOpenChange(true)}>
           Archiver
         </Button>
       )}
@@ -75,7 +75,7 @@ export function ArchivePatientDialog({
           </DialogHeader>
           <DialogFooter>
             <Button
-              variant="outline"
+              variant="secondary"
               onClick={() => setOpen(false)}
               disabled={isLoading}
             >

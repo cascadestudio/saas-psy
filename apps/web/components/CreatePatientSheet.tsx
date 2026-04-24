@@ -223,7 +223,7 @@ export function CreatePatientSheet({
             </Button>
             <Button
               type="button"
-              variant="outline"
+              variant="secondary"
               onClick={() => setOpen(false)}
             >
               Annuler

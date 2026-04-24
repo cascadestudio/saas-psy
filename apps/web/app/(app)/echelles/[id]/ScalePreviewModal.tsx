@@ -49,7 +49,7 @@ export function ScalePreviewModal({ scale }: ScalePreviewModalProps) {
     <>
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button variant="outline">
+        <Button variant="secondary">
           <Interfaces.Unhide />
           Aperçu de l'échelle
         </Button>
@@ -68,7 +68,7 @@ export function ScalePreviewModal({ scale }: ScalePreviewModalProps) {
 
         <div className="flex justify-between">
           <DialogClose asChild>
-            <Button variant="outline">Fermer</Button>
+            <Button variant="secondary">Fermer</Button>
           </DialogClose>
           <Button onClick={handleSendClick}>
             <Interfaces.Send />

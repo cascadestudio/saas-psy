@@ -116,7 +116,7 @@ export default function Home() {
         <div className="flex gap-2">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="outline">
+              <Button variant="secondary">
                 Filtrer par Catégorie
                 {selectedCategories.length > 0 && (
                   <Badge variant="secondary" className="ml-2">

@@ -156,7 +156,7 @@ export default function PatientDetailPage() {
             />
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost-brand" size="icon">
+                <Button variant="secondary" size="icon">
                   <Interfaces.Setting />
                 </Button>
               </DropdownMenuTrigger>
