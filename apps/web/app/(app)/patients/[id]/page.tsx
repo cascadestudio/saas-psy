@@ -144,7 +144,7 @@ export default function PatientDetailPage() {
           <RestorePatientButton
             patient={patient}
             onRestored={handleRestored}
-            size="lg"
+            
           />
         ) : (
           <>
