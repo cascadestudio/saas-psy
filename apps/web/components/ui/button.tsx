@@ -19,6 +19,8 @@ const buttonVariants = cva(
           "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80",
         ghost: "hover:bg-muted hover:text-foreground",
         link: "text-primary underline-offset-4 hover:underline",
+        "ghost-brand":
+          "bg-[#D6591F]/10 hover:bg-[#D6591F]/20 text-[#D6591F] [&_svg]:fill-[#D6591F]",
         accent:
           "bg-accent text-accent-foreground shadow-sm hover:bg-accent/90 hover:shadow-md",
         success:
@@ -28,7 +30,8 @@ const buttonVariants = cva(
         default: "h-11 px-6 text-base",
         sm: "h-9 px-4 text-xs",
         lg: "h-13 px-10 text-base",
-        icon: "h-10 w-10",
+        icon: "h-11 w-11 [&_svg]:mr-0 [&_svg]:h-5 [&_svg]:w-5",
+        "icon-sm": "h-8 w-8 [&_svg]:mr-0",
       },
     },
     defaultVariants: {

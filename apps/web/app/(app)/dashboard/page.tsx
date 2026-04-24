@@ -21,6 +21,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { Button } from "@/components/ui/button";
 import { CreatePatientSheet } from "@/components/CreatePatientSheet";
 import { SendScaleSheet } from "@/components/SendScaleSheet";
 import { GlobalSearchBar } from "@/components/GlobalSearchBar";
@@ -158,12 +159,14 @@ function PatientRow({
       <TooltipProvider>
         <Tooltip>
           <TooltipTrigger asChild>
-            <button
+            <Button
+              variant="ghost-brand"
+              size="icon-sm"
               onClick={onSendClick}
-              className="flex-shrink-0 h-8 w-8 rounded-full bg-[#D6591F]/10 hover:bg-[#D6591F]/20 flex items-center justify-center transition-colors"
+              className="flex-shrink-0"
             >
-              <Interfaces.Send className="h-4 w-4" fill="#D6591F" />
-            </button>
+              <Interfaces.Send className="h-4 w-4" />
+            </Button>
           </TooltipTrigger>
           <TooltipContent>
             <p>Envoyer une échelle</p>
