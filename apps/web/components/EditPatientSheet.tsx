@@ -138,15 +138,15 @@ export function EditPatientSheet({
           </div>
 
           <div className="flex gap-3 pt-2">
-            <Button type="submit" disabled={isSubmitting} className="flex-1">
-              {isSubmitting ? "Enregistrement..." : "Enregistrer"}
-            </Button>
             <Button
               type="button"
               variant="outline"
               onClick={() => onOpenChange(false)}
             >
               Annuler
+            </Button>
+            <Button type="submit" disabled={isSubmitting} className="flex-1">
+              {isSubmitting ? "Enregistrement..." : "Enregistrer"}
             </Button>
           </div>
         </form>

@@ -289,11 +289,11 @@ export default function PatientDetailPage() {
                       <div className="ml-auto flex items-center flex-shrink-0">
                         {session.status === "COMPLETED" && session.score != null ? (
                           <div className="text-right">
-                            <p className="font-heading font-bold text-black text-base leading-tight">
+                            <p className="font-sans font-bold text-black text-base leading-tight">
                               {formatScore(session.score)}
                             </p>
                             {session.interpretation && (
-                              <p className="text-xs text-black/70 leading-snug">
+                              <p className="font-sans text-xs text-black/70 leading-snug">
                                 {session.interpretation}
                               </p>
                             )}
