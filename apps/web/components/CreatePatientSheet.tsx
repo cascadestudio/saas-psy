@@ -23,7 +23,7 @@ interface CreatePatientSheetProps {
   onPatientCreated?: (patientId: string) => void;
   buttonSize?: "sm" | "lg";
   buttonText?: string;
-  buttonVariant?: "default" | "ghost" | "outline" | "secondary" | "destructive" | "link";
+  buttonVariant?: "default" | "ghost" | "secondary" | "destructive" | "link" | "accent" | "success";
   buttonClassName?: string;
   iconOnly?: boolean;
   hideIcon?: boolean;
