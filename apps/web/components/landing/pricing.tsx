@@ -27,7 +27,7 @@ export function Pricing() {
         "Cotation automatique",
       ],
       cta: "Commencer gratuitement",
-      variant: "outline" as const,
+      variant: "secondary" as const,
       highlighted: false,
     },
     {
