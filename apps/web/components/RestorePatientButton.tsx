@@ -10,14 +10,14 @@ import { usePremiumGate } from "@/app/context/PremiumGateContext";
 interface RestorePatientButtonProps {
   patient: Patient;
   onRestored?: () => void;
-  variant?: "default" | "outline" | "ghost" | "secondary";
+  variant?: "default" | "ghost" | "secondary";
   size?: "default" | "sm" | "lg" | "icon";
 }
 
 export function RestorePatientButton({
   patient,
   onRestored,
-  variant = "outline",
+  variant = "ghost",
   size = "sm",
 }: RestorePatientButtonProps) {
   const [isLoading, setIsLoading] = useState(false);
