@@ -30,20 +30,20 @@ sévérité) DOIT être en français uniquement.
 
 ## 1. Métadonnées produit
 
-| Champ                                    | Valeur                                                                                                                                                                                    |
-| ---------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Nom court**                            | [À REMPLIR — ex. PHQ-9, LSAS-SR]                                                                                                                                                          |
-| **Nom complet (FR)**                     | [À REMPLIR]                                                                                                                                                                               |
-| **Nom complet (langue originale)**       | [À REMPLIR — pour traçabilité, ne s'affiche pas dans l'app]                                                                                                                               |
-| **Thème principal**                      | [À REMPLIR — ex. Dépression, Anxiété sociale, TOC, Traumatismes, Estime de soi, Anxiété généralisée]                                                                                      |
-| **Sous-thèmes / tags**                   | [OPTIONNEL — ex. pour la LSAS : "anxiété sociale", "phobie sociale"]                                                                                                                      |
-| **Nombre d'items**                       | [À REMPLIR]                                                                                                                                                                               |
-| **Durée estimée de passation**           | [À REMPLIR — ex. 5-10 min]                                                                                                                                                                |
-| **Public cible**                         | [À REMPLIR — ex. adultes, adolescents 12-17 ans, enfants 6-12 ans]                                                                                                                        |
-| **Mode d'administration**                | [À REMPLIR — `auto` / `hétéro` / `mixte`]                                                                                                                                                 |
-| **Note sur le mode d'administration**    | [OPTIONNEL — à remplir si consensus d'usage auto sur échelle hétéro, ou autre nuance notable. Ex. pour la LSAS-SR : "Version auto-évaluation validée de la LSAS originale (hétéro)."]     |
+| Champ | Valeur |
+| --- | --- |
+| **Nom court** | [À REMPLIR — ex. PHQ-9, LSAS-SR] |
+| **Nom complet (FR)** | [À REMPLIR] |
+| **Nom complet (langue originale)** | [À REMPLIR — pour traçabilité, ne s'affiche pas dans l'app] |
+| **Thème principal** | [À REMPLIR — ex. Dépression, Anxiété sociale, TOC, Traumatismes, Estime de soi, Anxiété généralisée] |
+| **Sous-thèmes / tags** | [OPTIONNEL — ex. pour la LSAS : "anxiété sociale", "phobie sociale"] |
+| **Nombre d'items** | [À REMPLIR] |
+| **Durée estimée de passation** | [À REMPLIR — ex. 5-10 min] |
+| **Public cible** | [À REMPLIR — ex. adultes, adolescents 12-17 ans, enfants 6-12 ans] |
+| **Mode d'administration** | [À REMPLIR — `auto` / `hétéro` / `mixte`] |
+| **Note sur le mode d'administration** | [OPTIONNEL — à remplir si consensus d'usage auto sur échelle hétéro, ou autre nuance notable. Ex. pour la LSAS-SR : "Version auto-évaluation validée de la LSAS originale (hétéro)."] |
 | **Description praticien (bibliothèque)** | [À REMPLIR — 1-2 phrases factuelles visibles dans le catalogue côté praticien. Ex. "Échelle de 24 items évaluant la peur et l'évitement dans les situations sociales et de performance."] |
-| **Description patient (portail)**        | AUCUNE — règle projet : le portail patient ne comporte pas de description de l'échelle. Seule la consigne officielle (ci-dessous) est affichée.                                           |
+| **Description patient (portail)** | AUCUNE — règle projet : le portail patient ne comporte pas de description de l'échelle. Seule la consigne officielle (ci-dessous) est affichée. |
 
 ---
 
@@ -141,6 +141,15 @@ l'indiquer explicitement et soumettre à Renata pour formulation.
 
 **Source de la consigne** : [À REMPLIR — référence précise parmi les sources de la section 2]
 
+### Comportement UX de la consigne
+
+| Champ                    | Valeur                                                                     |
+| ------------------------ | -------------------------------------------------------------------------- |
+| **Persistance**          | [À REMPLIR — `persistante` / `page_de_garde_seule` / `spécifique`]        |
+| **Emplacement**          | [À REMPLIR — ex. "en-tête au-dessus du bloc d'items"]                     |
+| **Justification**        | [OBLIGATOIRE si `persistante` n'est pas la valeur retenue]                 |
+| **Cas particuliers**     | [OPTIONNEL — ex. Y-BOCS : deux consignes distinctes selon bloc]            |
+
 ### Dimensions de cotation
 
 <!--
@@ -228,6 +237,8 @@ Préciser si chaque subscore est AFFICHÉ dans l'UI ou juste CALCULÉ
 | -------- | --------- | --------- | ----------------- |
 | [Nom]    | [Formule] | [Min–Max] | [oui/non]         |
 
+**Source de la définition des subscores** : [À REMPLIR uniquement si l'échelle comporte des subscores. Doit indiquer la référence qui définit la répartition des items entre subscores. Ex. pour LSAS : "Yao S.N. et al. (1999), L'Encéphale, 25:429-435 — catégorisation Performance/Sociale des 24 items selon la version française validée." — Si pas de subscores : "Sans objet (pas de subscores)."]
+
 ### Inversions d'items [OPTIONNEL]
 
 <!--
@@ -258,7 +269,14 @@ Les libellés de sévérité doivent être en français clinique standard.
 | [borne inf]–[borne sup] | [À REMPLIR — ex. "Dépression minimale"] |
 | ...                     | ...                                     |
 
-**Source des seuils** : [À REMPLIR — référence parmi les sources de la section 2]
+**Source des seuils** :
+
+| Champ | Valeur |
+| --- | --- |
+| **Référence académique** | [À REMPLIR — citation académique complète] |
+| **URL directe vérifiable** | [À REMPLIR — lien vers PDF, PubMed Central, fiche officielle, etc.] |
+| **Date de consultation** | [À REMPLIR — format JJ/MM/AAAA] |
+| **Niveau de consensus** | [À REMPLIR — `référence universelle` / `consensus partiel` / `propre à la version FR` / `controversé`] |
 
 **Remarques sur les seuils** : [OPTIONNEL — ex. pour la LSAS : "Psychiaclic précise l'absence de valeur-seuil démontrée. Seuils issus des études anglophones, utilisés à titre indicatif pour le suivi longitudinal."]
 
@@ -274,6 +292,15 @@ Si aucune alerte : écrire "Aucune alerte spécifique."
 -->
 
 **Règle d'alerte** : [À REMPLIR — ex. "Si item 9 ≥ 1, drapeau `alerteSuicide` = true, indépendamment du score total."]
+
+**Source de la règle d'alerte** :
+
+| Champ | Valeur |
+| --- | --- |
+| **Référence** | [À REMPLIR — recommandation HAS, NICE, publication académique, ou "Choix Melya basé sur pratique clinique courante"] |
+| **URL** | [À REMPLIR si applicable, ou "Sans objet" si choix interne Melya] |
+| **Date de consultation** | [À REMPLIR — format JJ/MM/AAAA, ou "Sans objet" si choix interne] |
+| **Justification du seuil exact** | [À REMPLIR — expliquer pourquoi ce seuil précis et pas un autre] |
 
 **Comportement côté UI** : [À REMPLIR — ex. "Badge rouge sur la fiche patient côté praticien. Aucune mention côté patient."]
 
