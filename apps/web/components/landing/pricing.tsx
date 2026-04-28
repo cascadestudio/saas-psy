@@ -82,7 +82,7 @@ export function Pricing() {
               Annuel
             </span>
             {isYearly && (
-              <Badge className="text-xs bg-brand-orange/10 text-brand-orange border-brand-orange/20">
+              <Badge className="text-xs bg-surface-brand-bg text-brand-orange border-brand-orange/20">
                 -33%
               </Badge>
             )}

@@ -81,7 +81,7 @@ export function EditPatientSheet({
         className="w-full sm:max-w-xl flex flex-col gap-0 p-0 [&_label]:font-body"
         onCloseAutoFocus={(e) => e.preventDefault()}
       >
-        <SheetHeader className="p-6 border-b">
+        <SheetHeader className="p-6 bg-surface-brand-bg">
           <SheetTitle className="font-body">Modifier le patient</SheetTitle>
           <SheetDescription>
             Modifiez les informations du patient.
@@ -146,15 +146,8 @@ export function EditPatientSheet({
             </div>
           </div>
 
-          <div className="flex gap-3 p-6 border-t bg-background">
-            <Button
-              type="button"
-              variant="secondary"
-              onClick={() => onOpenChange(false)}
-            >
-              Annuler
-            </Button>
-            <Button type="submit" disabled={isSubmitting} className="flex-1">
+          <div className="p-6 bg-background">
+            <Button type="submit" disabled={isSubmitting} className="w-full">
               {isSubmitting ? "Enregistrement..." : "Enregistrer"}
             </Button>
           </div>

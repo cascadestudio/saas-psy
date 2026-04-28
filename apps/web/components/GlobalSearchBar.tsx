@@ -236,7 +236,7 @@ export function GlobalSearchBar() {
               onClick={() => toggleCategory(key)}
               className={`rounded-full border px-2.5 py-0.5 text-xs transition-colors ${
                 activeCategories.has(key)
-                  ? "border-brand-orange/30 bg-brand-orange/10 text-brand-orange"
+                  ? "border-brand-orange/30 bg-surface-brand-bg text-brand-orange"
                   : "border-border bg-background text-muted-foreground"
               }`}
             >
