@@ -20,7 +20,7 @@ export function SocialProof() {
         </blockquote>
 
         <div className="mt-8 flex items-center justify-center gap-4">
-          <div className="relative h-12 w-12 rounded-full overflow-hidden bg-brand-orange/10 flex-shrink-0">
+          <div className="relative h-12 w-12 rounded-full overflow-hidden bg-surface-brand-bg flex-shrink-0">
             <Image
               src="/images/landing/renata-illustration.png"
               alt="Renata Dujmusic"

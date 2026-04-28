@@ -285,7 +285,7 @@ export default function DashboardPage() {
                         {unread && (
                           <Badge
                             variant="secondary"
-                            className="pointer-events-none bg-brand-orange/10 text-brand-orange"
+                            className="pointer-events-none bg-surface-brand-bg text-brand-orange"
                           >
                             Non lu
                           </Badge>

@@ -155,7 +155,7 @@ export function DashboardScreenshot() {
             Une interface pensée pour les psychologues : simple, claire et sécurisée.
           </p>
           <div className="relative">
-            <div className="absolute -inset-4 bg-gradient-to-b from-brand-orange/5 via-brand-orange/10 to-transparent rounded-3xl blur-xl" />
+            <div className="absolute -inset-4 bg-gradient-to-b from-brand-orange/5 via-surface-brand-bg to-transparent rounded-3xl blur-xl" />
             <div className="relative">
               <DashboardMockup />
             </div>

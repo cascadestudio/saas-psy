@@ -60,7 +60,7 @@ export default function IntroScreen({
           </div>
         </div>
       ) : (
-        <div className="rounded-3xl bg-brand-orange/10 border border-brand-orange/20 p-8 flex items-center justify-center min-h-[120px]">
+        <div className="rounded-3xl bg-surface-brand-bg border border-brand-orange/20 p-8 flex items-center justify-center min-h-[120px]">
           <h1 className="text-2xl sm:text-3xl font-semibold text-gray-900 text-center leading-tight">
             {title}
           </h1>

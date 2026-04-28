@@ -174,7 +174,7 @@ export function SendScaleSheet({
         className="sm:max-w-[50vw] w-full flex flex-col p-0 rounded-l-2xl"
       >
         {/* Header */}
-        <SheetHeader className="px-6 pt-6 pb-4 space-y-4 bg-brand-orange/10">
+        <SheetHeader className="px-6 pt-6 pb-4 space-y-4 bg-surface-brand-bg">
           <div>
             <SheetTitle className="text-xl">Envoyer une échelle</SheetTitle>
             <SheetDescription>
