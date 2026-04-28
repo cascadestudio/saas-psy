@@ -7,6 +7,14 @@ export interface BatchEmailParams {
     portalUrl: string;
     logoUrl?: string;
 }
+export interface PractitionerCompletionEmailParams {
+    practitionerFirstName: string;
+    patientFirstName: string;
+    patientLastName: string;
+    scaleName: string;
+    sessionUrl: string;
+    logoUrl?: string;
+}
 export interface SessionEmailParams {
     patientFirstName: string;
     patientLastName: string;
@@ -17,4 +25,5 @@ export interface SessionEmailParams {
     logoUrl?: string;
 }
 export declare function buildBatchEmailHtml(params: BatchEmailParams): string;
+export declare function buildPractitionerCompletionEmailHtml(params: PractitionerCompletionEmailParams): string;
 export declare function buildSessionEmailHtml(params: SessionEmailParams): string;
