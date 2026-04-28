@@ -38,7 +38,9 @@ export default function ScalePreview({ scale }: ScalePreviewProps) {
             className="rounded-full bg-black text-white hover:bg-black/80"
             onClick={() => setOpen(true)}
           >
-            Voir toutes les questions ({scale.questions.length})
+            <span style={{ fontFeatureSettings: '"calt" 0, "liga" 0, "clig" 0' }}>
+              Voir toutes les questions ({scale.questions.length})
+            </span>
           </Button>
         </div>
       )}
