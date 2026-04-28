@@ -14,8 +14,10 @@ import {
   SheetDescription,
 } from "@/components/ui/sheet";
 import { useUser } from "@/app/context/UserContext";
+import { useAuthGate } from "@/app/context/AuthGateContext";
 import { useEffect, useState } from "react";
 import { patientsApi, sessionsApi, type Patient } from "@/lib/api-client";
+import { MOCK_PATIENTS } from "@/lib/mock-data";
 import { scales } from "@/app/scalesData";
 import { Interfaces } from "doodle-icons";
 import { toast } from "sonner";
@@ -48,6 +50,7 @@ export function SendScaleSheet({
   onSent,
 }: SendScaleSheetProps) {
   const { user } = useUser();
+  const { openAuthGate } = useAuthGate();
   const router = useRouter();
 
   const initialStep: Step = defaultPatientId ? "scales" : "patient";
@@ -77,7 +80,12 @@ export function SendScaleSheet({
 
   // Load patients
   useEffect(() => {
-    if (!user || !open) {
+    if (!open) {
+      setPatientsLoading(false);
+      return;
+    }
+    if (!user) {
+      setPatients(MOCK_PATIENTS);
       setPatientsLoading(false);
       return;
     }
@@ -129,6 +137,12 @@ export function SendScaleSheet({
   const handleSend = async () => {
     if (!selectedPatient || selectedScaleIds.length === 0) {
       toast.error("Veuillez sélectionner un patient et au moins une échelle");
+      return;
+    }
+
+    if (!user) {
+      onOpenChange(false);
+      openAuthGate();
       return;
     }
 

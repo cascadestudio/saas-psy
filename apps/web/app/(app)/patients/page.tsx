@@ -12,6 +12,8 @@ import {
 import { CreatePatientSheet } from "@/components/CreatePatientSheet";
 import { SendScaleSheet } from "@/components/SendScaleSheet";
 import { PatientRow, type PatientRowData } from "@/components/PatientRow";
+import { MOCK_PATIENTS, MOCK_SESSIONS } from "@/lib/mock-data";
+import { useAuthGate } from "@/app/context/AuthGateContext";
 
 export default function PatientsPage() {
   const { user, isLoading } = useUser();
@@ -24,8 +26,15 @@ export default function PatientsPage() {
     string | undefined
   >();
 
+  const { openAuthGate } = useAuthGate();
+
   const loadData = async () => {
-    if (!user) return;
+    if (!user) {
+      setPatients(MOCK_PATIENTS);
+      setSessions(MOCK_SESSIONS);
+      setLoading(false);
+      return;
+    }
     setLoading(true);
     try {
       const [activeRes, archivedRes, sessionsRes] = await Promise.all([
@@ -43,9 +52,7 @@ export default function PatientsPage() {
   };
 
   useEffect(() => {
-    if (user) {
-      loadData();
-    }
+    loadData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
@@ -56,8 +63,6 @@ export default function PatientsPage() {
       </div>
     );
   }
-
-  if (!user) return null;
 
   const patientIdsWithActiveSessions = new Set(
     sessions
@@ -145,6 +150,10 @@ export default function PatientsPage() {
                   href={`/patients/${patient.id}`}
                   onSendClick={(e) => {
                     e.preventDefault();
+                    if (!user) {
+                      openAuthGate();
+                      return;
+                    }
                     setSendScalePatientId(patient.id);
                     setSendScaleOpen(true);
                   }}

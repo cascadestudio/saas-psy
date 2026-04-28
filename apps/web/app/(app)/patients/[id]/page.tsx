@@ -28,6 +28,8 @@ import { SendScaleSheet } from "@/components/SendScaleSheet";
 import { formatScore } from "@/lib/score-utils";
 import { SESSION_STATUS_CONFIG } from "@/lib/session-status";
 import { cn } from "@/lib/utils";
+import { getMockPatient, getMockSessionsByPatient, isMockId } from "@/lib/mock-data";
+import { useAuthGate } from "@/app/context/AuthGateContext";
 
 export default function PatientDetailPage() {
   const { user, isLoading } = useUser();
@@ -41,8 +43,28 @@ export default function PatientDetailPage() {
   const [editOpen, setEditOpen] = useState(false);
   const [sendScaleOpen, setSendScaleOpen] = useState(false);
 
+  const { openAuthGate } = useAuthGate();
+
   const loadData = useCallback(async () => {
-    if (!user || !patientId) return;
+    if (!patientId) return;
+    if (!user) {
+      const mockPatient = getMockPatient(patientId);
+      setPatient(mockPatient);
+      setSessions(
+        getMockSessionsByPatient(patientId).sort(
+          (a, b) =>
+            new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
+        ),
+      );
+      setLoading(false);
+      return;
+    }
+    if (isMockId(patientId)) {
+      setPatient(null);
+      setSessions([]);
+      setLoading(false);
+      return;
+    }
     setLoading(true);
     try {
       const [patientRes, sessionsRes] = await Promise.all([
@@ -66,9 +88,7 @@ export default function PatientDetailPage() {
   }, [user, patientId]);
 
   useEffect(() => {
-    if (user) {
-      loadData();
-    }
+    loadData();
   }, [user, loadData]);
 
   const handleArchived = () => {
@@ -89,10 +109,6 @@ export default function PatientDetailPage() {
         <p>Chargement...</p>
       </div>
     );
-  }
-
-  if (!user) {
-    return null;
   }
 
   if (!patient) {
@@ -144,8 +160,16 @@ export default function PatientDetailPage() {
           <RestorePatientButton
             patient={patient}
             onRestored={handleRestored}
-            
+
           />
+        ) : !user ? (
+          <Button
+            className="ml-auto"
+            onClick={() => openAuthGate()}
+          >
+            <Interfaces.Send />
+            Envoyer une échelle
+          </Button>
         ) : (
           <>
             <EditPatientSheet
@@ -227,7 +251,12 @@ export default function PatientDetailPage() {
                 Aucune passation enregistrée pour ce patient
               </p>
               {!isArchived && (
-                <Button size="sm" onClick={() => setSendScaleOpen(true)}>
+                <Button
+                  size="sm"
+                  onClick={() =>
+                    user ? setSendScaleOpen(true) : openAuthGate()
+                  }
+                >
                   <Interfaces.Send />
                   Envoyer la première échelle
                 </Button>

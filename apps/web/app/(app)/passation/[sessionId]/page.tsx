@@ -15,6 +15,12 @@ import { useUser } from "@/app/context/UserContext";
 import { useEffect, useState } from "react";
 import { sessionsApi, patientsApi, type Session, type Patient } from "@/lib/api-client";
 import { scales } from "@/app/scalesData";
+import {
+  getMockPatient,
+  getMockSession,
+  getMockSessionsByPatient,
+  isMockId,
+} from "@/lib/mock-data";
 import { Interfaces, Finance, Files } from "doodle-icons";
 import {
   getMainScore,
@@ -37,8 +43,23 @@ export default function ResultsPage() {
   const [copied, setCopied] = useState(false);
 
   useEffect(() => {
+    if (!sessionId) return;
+    if (!user) {
+      const mockSession = getMockSession(sessionId);
+      setSession(mockSession);
+      if (mockSession?.patientId) {
+        setPatient(getMockPatient(mockSession.patientId));
+        setAllSessions(getMockSessionsByPatient(mockSession.patientId));
+      }
+      setLoading(false);
+      return;
+    }
+    if (isMockId(sessionId)) {
+      setSession(null);
+      setLoading(false);
+      return;
+    }
     const loadData = async () => {
-      if (!user || !sessionId) return;
       setLoading(true);
       try {
         const { session: sessionData } = await sessionsApi.getById(sessionId);
@@ -59,10 +80,7 @@ export default function ResultsPage() {
         setLoading(false);
       }
     };
-
-    if (user) {
-      loadData();
-    }
+    loadData();
   }, [user, sessionId]);
 
   const handleCopyLink = () => {
@@ -80,8 +98,6 @@ export default function ResultsPage() {
       </div>
     );
   }
-
-  if (!user) return null;
 
   if (!session) {
     return (

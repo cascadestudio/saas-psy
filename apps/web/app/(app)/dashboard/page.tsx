@@ -21,6 +21,7 @@ import { Badge } from "@/components/ui/badge";
 import { CreatePatientSheet } from "@/components/CreatePatientSheet";
 import { SendScaleSheet } from "@/components/SendScaleSheet";
 import { SESSION_STATUS_CONFIG } from "@/lib/session-status";
+import { MOCK_PATIENTS, MOCK_SESSIONS } from "@/lib/mock-data";
 
 const PENDING_THRESHOLD_DAYS = 7;
 const RECENT_WINDOW_DAYS = 30;
@@ -115,7 +116,11 @@ export default function DashboardPage() {
   }, [searchParams, openAuthGate, router]);
 
   useEffect(() => {
-    if (!user) return;
+    if (!user) {
+      setPatients(MOCK_PATIENTS);
+      setSessions(MOCK_SESSIONS);
+      return;
+    }
     const loadData = async () => {
       try {
         const [pRes, sRes] = await Promise.all([
@@ -152,23 +157,6 @@ export default function DashboardPage() {
     );
   }
 
-  if (!user) {
-    return (
-      <div className="container mx-auto px-4 py-6">
-        <div className="max-w-xl mx-auto text-center py-16">
-          <h1 className="font-normal text-4xl mb-4">Bienvenue sur Melya</h1>
-          <p className="text-muted-foreground mb-8">
-            Envoyez des échelles psychométriques à vos patients, suivez leurs
-            résultats et leur évolution.
-          </p>
-          <Button  onClick={() => openAuthGate()}>
-            Se connecter
-          </Button>
-        </div>
-      </div>
-    );
-  }
-
   const toRelaunch = sessions
     .filter(
       (s) =>
@@ -197,12 +185,25 @@ export default function DashboardPage() {
       );
     });
 
-  const firstName = user.firstName ? `, ${user.firstName}` : "";
+  const firstName = user?.firstName ? `, ${user.firstName}` : "";
 
   return (
     <div className="container mx-auto px-4 py-6">
+      {!user && (
+        <div className="mb-6 rounded-lg bg-surface-brand-bg px-4 py-3 flex items-center justify-between gap-4">
+          <p className="text-sm text-brand-orange">
+            Vous explorez Melya avec des données d'exemple. Créez un compte pour
+            ajouter vos vrais patients.
+          </p>
+          <Button size="sm" onClick={() => openAuthGate()}>
+            Se connecter
+          </Button>
+        </div>
+      )}
       <div className="mb-8">
-        <h1 className="font-normal text-4xl">Bonjour{firstName}</h1>
+        <h1 className="font-normal text-4xl">
+          {user ? `Bonjour${firstName}` : "Bienvenue sur Melya"}
+        </h1>
       </div>
 
       <div className="flex flex-wrap gap-3 mb-10">
