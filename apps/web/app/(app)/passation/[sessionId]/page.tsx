@@ -3,12 +3,19 @@
 import { useParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import Link from "next/link";
+import Image from "next/image";
 import { useUser } from "@/app/context/UserContext";
 import { useEffect, useState } from "react";
 import { sessionsApi, patientsApi, type Session, type Patient } from "@/lib/api-client";
 import { scales } from "@/app/scalesData";
-import { Arrow, Interfaces, Finance, Files } from "doodle-icons";
+import { Interfaces, Finance, Files } from "doodle-icons";
 import {
   getMainScore,
   getMaxScore,
@@ -89,40 +96,124 @@ export default function ResultsPage() {
 
   const scale = scales.find((q) => q.id === session.scaleId);
   const statusConfig = SESSION_STATUS_CONFIG[session.status];
-  const backHref = patient ? `/patients/${patient.id}` : "/dashboard";
+  const headerTitle = scale?.acronym ?? "Passation";
+
+  const scaleTitle = scale
+    ? scale.title.replace(
+        new RegExp(`^${scale.acronym}\\s*[-—:]\\s*`, "i"),
+        "",
+      )
+    : "";
+
+  const ScaleLogo = scale ? (
+    <div
+      className="flex items-center justify-center flex-shrink-0 rounded-md"
+      style={{
+        backgroundColor: scale.color ?? "#e5e7eb",
+        width: 72,
+        height: 72,
+      }}
+    >
+      {scale.icon && (
+        <Image
+          src={scale.icon}
+          alt={scale.acronym}
+          width={44}
+          height={44}
+          className="w-3/5 h-3/5 object-contain"
+        />
+      )}
+    </div>
+  ) : null;
+
+  const sentDate = session.sentAt
+    ? new Date(session.sentAt).toLocaleDateString("fr-FR", {
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+      })
+    : null;
+
+  const Header = (
+    <div className="flex items-start justify-between gap-3 mb-6">
+      <div className="flex items-center gap-3">
+        {ScaleLogo}
+        <div>
+          <div className="flex items-center gap-3">
+            {scaleTitle ? (
+              <TooltipProvider delayDuration={200}>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <h1 className="font-normal text-3xl leading-tight border-b border-dotted border-muted-foreground/40 inline-block cursor-help">
+                      {headerTitle}
+                    </h1>
+                  </TooltipTrigger>
+                  <TooltipContent className="bg-foreground text-background">
+                    {scaleTitle}
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
+            ) : (
+              <h1 className="font-normal text-3xl leading-tight">
+                {headerTitle}
+              </h1>
+            )}
+            <Badge className={statusConfig?.className} variant="secondary">
+              {statusConfig?.label ?? session.status}
+            </Badge>
+          </div>
+          {sentDate && (
+            <p className="text-sm text-muted-foreground mt-1">
+              Envoyée le {sentDate}
+            </p>
+          )}
+        </div>
+      </div>
+      {session.status === "COMPLETED" ? (
+        <Button variant="secondary">
+          <Files.FileText />
+          Imprimer les résultats
+        </Button>
+      ) : (
+        <Button variant="secondary">
+          <Interfaces.Mail />
+          Renvoyer le mail
+        </Button>
+      )}
+    </div>
+  );
+
+  const Breadcrumb = (
+    <nav className="flex items-center gap-1.5 text-sm text-muted-foreground mb-4">
+      <Link
+        href="/patients"
+        className="hover:text-foreground transition-colors"
+      >
+        Patients
+      </Link>
+      {patient && (
+        <>
+          <span className="text-muted-foreground/50">/</span>
+          <Link
+            href={`/patients/${patient.id}`}
+            className="hover:text-foreground transition-colors"
+          >
+            {patient.firstName} {patient.lastName}
+          </Link>
+        </>
+      )}
+    </nav>
+  );
 
   // --- Pending / non-completed states ---
   if (session.status !== "COMPLETED") {
     return (
       <div className="container mx-auto px-4 py-6">
-        {/* Header */}
-        <h1 className="font-normal text-3xl mb-1">
-          {patient && scale
-            ? `${patient.firstName} ${patient.lastName} — ${scale.acronym}`
-            : "Passation"}
-        </h1>
-
-        {/* Subline */}
-        <div className="flex items-center gap-4 text-sm text-muted-foreground mb-6">
-          {patient && (
-            <span className="flex items-center gap-1.5">
-              <Interfaces.User className="h-3.5 w-3.5" />
-              {patient.firstName} {patient.lastName}
-            </span>
-          )}
-          {scale && (
-            <span className="flex items-center gap-1.5">
-              <Files.FileText className="h-3.5 w-3.5" />
-              {scale.title}
-            </span>
-          )}
-          <Badge className={statusConfig?.className} variant="secondary">
-            {statusConfig?.label ?? session.status}
-          </Badge>
-        </div>
+        {Breadcrumb}
+        {Header}
 
         {/* Pending state */}
-        <div className="bg-muted-foreground/5 rounded-lg p-8 text-center space-y-4">
+        <div className="border rounded-lg p-8 text-center space-y-4">
           <p className="text-muted-foreground">
             {session.status === "EXPIRED"
               ? "Cette passation a expiré. Le patient ne peut plus y répondre."
@@ -130,16 +221,6 @@ export default function ResultsPage() {
               ? "Cette passation a été annulée."
               : "Les résultats seront disponibles une fois la passation complétée par le patient."}
           </p>
-          {session.sentAt && (
-            <p className="text-xs text-muted-foreground">
-              Envoyée le{" "}
-              {new Date(session.sentAt).toLocaleDateString("fr-FR", {
-                day: "numeric",
-                month: "long",
-                year: "numeric",
-              })}
-            </p>
-          )}
           {(session.status === "SENT" || session.status === "STARTED") && (
             <Button variant="secondary" size="sm" onClick={handleCopyLink}>
               <Interfaces.Copy />
@@ -204,34 +285,8 @@ export default function ResultsPage() {
 
   return (
     <div className="container mx-auto px-4 py-6">
-      {/* Header */}
-      <h1 className="font-normal text-3xl mb-1">Passation</h1>
-
-      {/* Subline */}
-      <div className="flex items-center gap-4 text-sm text-muted-foreground mb-6">
-        {patient && (
-          <span className="flex items-center gap-1.5">
-            <Interfaces.User className="h-3.5 w-3.5" />
-            {patient.firstName} {patient.lastName}
-          </span>
-        )}
-        {scale && (
-          <span className="flex items-center gap-1.5">
-            <Files.FileText className="h-3.5 w-3.5" />
-            {scale.title}
-          </span>
-        )}
-        {session.completedAt && (
-          <span className="flex items-center gap-1.5">
-            <Interfaces.Calendar className="h-3.5 w-3.5" />
-            {new Date(session.completedAt).toLocaleDateString("fr-FR", {
-              day: "numeric",
-              month: "long",
-              year: "numeric",
-            })}
-          </span>
-        )}
-      </div>
+      {Breadcrumb}
+      {Header}
 
       <div className="space-y-6">
         {/* Score et interprétation */}
@@ -239,7 +294,7 @@ export default function ResultsPage() {
           <h2 className="text-lg font-sans font-semibold mb-3">
             Score et interprétation
           </h2>
-          <div className="bg-muted-foreground/5 rounded-lg p-6">
+          <div className="border rounded-lg p-6">
             <div className="flex flex-col sm:flex-row gap-6">
               {/* Score */}
               <div className="flex flex-col items-center justify-center sm:w-48 shrink-0">
@@ -328,7 +383,7 @@ export default function ResultsPage() {
             <h2 className="text-lg font-sans font-semibold mb-3">
               Historique longitudinal
             </h2>
-            <div className="bg-muted-foreground/5 rounded-lg overflow-hidden">
+            <div className="border rounded-lg overflow-hidden">
               {sameScaleSessions.map((s, index) => {
                 const isCurrent = s.id === session.id;
                 return (
@@ -337,8 +392,8 @@ export default function ResultsPage() {
                     href={`/passation/${s.id}`}
                     className={`flex items-center justify-between p-4 border-t border-border/50 first:border-t-0 transition-colors ${
                       isCurrent
-                        ? "bg-primary/5 pointer-events-none"
-                        : "hover:bg-background/50 cursor-pointer"
+                        ? "border-l-4 border-l-brand-orange pointer-events-none"
+                        : "hover:bg-muted-foreground/5 cursor-pointer"
                     }`}
                   >
                     <div className="flex items-center gap-4">
