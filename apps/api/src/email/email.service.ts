@@ -1,7 +1,11 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { Resend } from 'resend';
-import { buildBatchEmailHtml, buildSessionEmailHtml } from '@melya/core';
+import {
+  buildBatchEmailHtml,
+  buildPractitionerCompletionEmailHtml,
+  buildSessionEmailHtml,
+} from '@melya/core';
 import { PrismaService } from '../prisma/prisma.service';
 
 interface SendSessionEmailParams {
@@ -224,6 +228,103 @@ export class EmailService {
         to: patientEmail,
         subject,
         sessionId: batchId,
+        status: 'failed',
+        error: errorMessage,
+      });
+
+      return { success: false, error: errorMessage };
+    }
+  }
+
+  async sendPractitionerCompletionEmail(params: {
+    practitionerEmail: string;
+    practitionerFirstName: string;
+    patientFirstName: string;
+    patientLastName: string;
+    sessionId: string;
+    scaleName: string;
+  }): Promise<{ success: boolean; error?: string }> {
+    const {
+      practitionerEmail,
+      practitionerFirstName,
+      patientFirstName,
+      patientLastName,
+      sessionId,
+      scaleName,
+    } = params;
+
+    const sessionUrl = `${this.appUrl}/passation/${sessionId}`;
+    const subject = `${patientFirstName} ${patientLastName} a complété ${scaleName}`;
+
+    const html = buildPractitionerCompletionEmailHtml({
+      practitionerFirstName,
+      patientFirstName,
+      patientLastName,
+      scaleName,
+      sessionUrl,
+      logoUrl: `${this.appUrl}/images/logos/logo-melya.svg`,
+    });
+
+    this.logger.log(
+      `Sending completion email to practitioner ${practitionerEmail} for session ${sessionId}`,
+    );
+
+    if (!this.resend) {
+      this.logger.warn(`[DEV MODE] Completion email would be sent to: ${practitionerEmail}`);
+      this.logger.warn(`[DEV MODE] Session URL: ${sessionUrl}`);
+
+      await this.logEmail({
+        to: practitionerEmail,
+        subject,
+        sessionId,
+        status: 'sent',
+        providerId: 'dev-mode',
+      });
+
+      return { success: true };
+    }
+
+    try {
+      const { data, error } = await this.resend.emails.send({
+        from: `Melya <${this.fromEmail}>`,
+        to: [practitionerEmail],
+        subject,
+        html,
+      });
+
+      if (error) {
+        this.logger.error(`Failed to send completion email: ${error.message}`);
+
+        await this.logEmail({
+          to: practitionerEmail,
+          subject,
+          sessionId,
+          status: 'failed',
+          error: error.message,
+        });
+
+        return { success: false, error: error.message };
+      }
+
+      this.logger.log(`Completion email sent successfully: ${data?.id}`);
+
+      await this.logEmail({
+        to: practitionerEmail,
+        subject,
+        sessionId,
+        status: 'sent',
+        providerId: data?.id,
+      });
+
+      return { success: true };
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : 'Unknown error';
+      this.logger.error(`Exception sending completion email: ${errorMessage}`);
+
+      await this.logEmail({
+        to: practitionerEmail,
+        subject,
+        sessionId,
         status: 'failed',
         error: errorMessage,
       });

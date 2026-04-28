@@ -481,10 +481,46 @@ export class SessionsService {
       },
     });
 
+    // Notify practitioner that the patient has completed the questionnaire (non-blocking)
+    void this.notifyPractitionerOfCompletion(updatedSession.id).catch((err) => {
+      this.logger.warn(
+        `Failed to notify practitioner for session ${updatedSession.id}: ${
+          err instanceof Error ? err.message : err
+        }`,
+      );
+    });
+
     return {
       session: this.decryptSession(updatedSession),
       message: 'Réponses enregistrées avec succès',
     };
+  }
+
+  private async notifyPractitionerOfCompletion(sessionId: string) {
+    const session = await this.prisma.session.findUnique({
+      where: { id: sessionId },
+      include: {
+        practitioner: true,
+        patient: { select: { firstName: true, lastName: true } },
+      },
+    });
+
+    if (!session || !session.practitioner?.email) return;
+
+    const scale = getScaleById(session.scaleId);
+    const scaleName = scale?.title || 'Questionnaire';
+
+    await this.emailService.sendPractitionerCompletionEmail({
+      practitionerEmail: session.practitioner.email,
+      practitionerFirstName:
+        this.encryption.decryptField(session.practitioner.firstName) || '',
+      patientFirstName:
+        this.encryption.decryptField(session.patient.firstName) || '',
+      patientLastName:
+        this.encryption.decryptField(session.patient.lastName) || '',
+      sessionId: session.id,
+      scaleName,
+    });
   }
 
   private decryptSession(session: any) {
