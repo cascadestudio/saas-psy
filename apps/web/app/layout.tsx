@@ -6,6 +6,7 @@ import { AuthGateProvider } from "@/app/context/AuthGateContext";
 import { PremiumGateProvider } from "@/app/context/PremiumGateContext";
 import { AuthGateModal } from "@/components/auth/AuthGateModal";
 import { PremiumGateModal } from "@/components/PremiumGateModal";
+import { RadixPointerEventsFix } from "@/components/RadixPointerEventsFix";
 import { Rethink_Sans } from "next/font/google";
 import { gelica } from "./fonts";
 
@@ -67,6 +68,7 @@ export default function RootLayout({
           </AuthGateProvider>
         </UserProvider>
         <Toaster />
+        <RadixPointerEventsFix />
       </body>
     </html>
   );

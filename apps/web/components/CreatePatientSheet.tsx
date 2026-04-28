@@ -3,12 +3,12 @@
 import { useState, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+} from "@/components/ui/sheet";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
@@ -61,7 +61,6 @@ export function CreatePatientSheet({
   };
 
   const handleOpen = () => {
-    // Check patient limit only for authenticated users
     if (user && !user.isPremium && currentPatientCount >= FREE_PATIENT_LIMIT) {
       openPatientLimitGate(currentPatientCount);
       return;
@@ -81,14 +80,14 @@ export function CreatePatientSheet({
         notes: data.notes || undefined,
       });
 
-      toast.success("Patient créé avec succès", {
-        description: `${patient.firstName} ${patient.lastName} a été ajouté à votre liste`,
-      });
-
       setIsSubmitting(false);
       setOpen(false);
       pendingFormDataRef.current = null;
       onPatientCreated?.(patient.id);
+
+      toast.success("Patient créé avec succès", {
+        description: `${patient.firstName} ${patient.lastName} a été ajouté à votre liste`,
+      });
     } catch (error) {
       console.error("Error creating patient:", error);
       if (error instanceof ApiError) {
@@ -113,11 +112,9 @@ export function CreatePatientSheet({
     };
 
     if (!user) {
-      // Store form data and trigger auth gate
       pendingFormDataRef.current = data;
       setOpen(false);
       openAuthGate(() => {
-        // After successful auth, create the patient automatically
         if (pendingFormDataRef.current) {
           createPatient(pendingFormDataRef.current);
         }
@@ -125,7 +122,6 @@ export function CreatePatientSheet({
       return;
     }
 
-    // Check patient limit
     if (!user?.isPremium && currentPatientCount >= FREE_PATIENT_LIMIT) {
       openPatientLimitGate(currentPatientCount);
       return;
@@ -140,98 +136,98 @@ export function CreatePatientSheet({
         {!hideIcon && <Interfaces.UserAdd fill={iconOnly ? "#D6591F" : "#ffffff"} />}
         {!iconOnly && buttonText}
       </Button>
-      <Dialog open={open} onOpenChange={handleOpenChange}>
-        <DialogContent className="sm:max-w-[500px]">
-        <DialogHeader>
-          <DialogTitle>Ajouter un nouveau patient</DialogTitle>
-          <DialogDescription>
-            Seul l'email est obligatoire. Les autres informations peuvent être ajoutées ultérieurement.
-          </DialogDescription>
-        </DialogHeader>
-        <form onSubmit={handleSubmit} className="space-y-4 mt-4">
-          <div className="space-y-2">
-            <Label htmlFor="email">
-              Email *
-            </Label>
-            <Input
-              id="email"
-              name="email"
-              type="email"
-              placeholder="patient@example.com"
-              required
-              autoFocus
-              defaultValue={pendingFormDataRef.current?.email}
-            />
-            <p className="text-xs text-muted-foreground">
-              Nécessaire pour l'envoi des questionnaires
-            </p>
-          </div>
+      <Sheet open={open} onOpenChange={handleOpenChange}>
+        <SheetContent
+          side="right"
+          className="w-full sm:max-w-xl flex flex-col gap-0 p-0 [&_label]:font-body"
+          onCloseAutoFocus={(e) => e.preventDefault()}
+        >
+          <SheetHeader className="p-6 border-b">
+            <SheetTitle className="font-body">Ajouter un nouveau patient</SheetTitle>
+            <SheetDescription>
+              Seul l'email est obligatoire. Les autres informations peuvent être ajoutées ultérieurement.
+            </SheetDescription>
+          </SheetHeader>
 
-          <div className="grid grid-cols-2 gap-4">
-            <div className="space-y-2">
-              <Label htmlFor="firstName">
-                Prénom
-              </Label>
-              <Input
-                id="firstName"
-                name="firstName"
-                placeholder="Martin"
-                defaultValue={pendingFormDataRef.current?.firstName}
-              />
+          <form
+            onSubmit={handleSubmit}
+            className="flex flex-col flex-1 min-h-0"
+          >
+            <div className="flex-1 overflow-y-auto p-6 space-y-4">
+              <div className="space-y-2">
+                <Label htmlFor="email">Email *</Label>
+                <Input
+                  id="email"
+                  name="email"
+                  type="email"
+                  placeholder="patient@example.com"
+                  required
+                  autoFocus
+                  defaultValue={pendingFormDataRef.current?.email}
+                />
+                <p className="text-xs text-muted-foreground">
+                  Nécessaire pour l'envoi des questionnaires
+                </p>
+              </div>
+
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label htmlFor="firstName">Prénom</Label>
+                  <Input
+                    id="firstName"
+                    name="firstName"
+                    placeholder="Martin"
+                    defaultValue={pendingFormDataRef.current?.firstName}
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="lastName">Nom</Label>
+                  <Input
+                    id="lastName"
+                    name="lastName"
+                    placeholder="Dubois"
+                    defaultValue={pendingFormDataRef.current?.lastName}
+                  />
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="birthDate">Date de naissance</Label>
+                <Input
+                  id="birthDate"
+                  name="birthDate"
+                  type="date"
+                  defaultValue={pendingFormDataRef.current?.birthDate}
+                />
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="notes">Notes</Label>
+                <Textarea
+                  id="notes"
+                  name="notes"
+                  placeholder="Notes confidentielles sur le patient..."
+                  rows={6}
+                  defaultValue={pendingFormDataRef.current?.notes}
+                />
+              </div>
             </div>
-            <div className="space-y-2">
-              <Label htmlFor="lastName">
-                Nom
-              </Label>
-              <Input
-                id="lastName"
-                name="lastName"
-                placeholder="Dubois"
-                defaultValue={pendingFormDataRef.current?.lastName}
-              />
+
+            <div className="flex gap-3 p-6 border-t bg-background">
+              <Button
+                type="button"
+                variant="secondary"
+                onClick={() => setOpen(false)}
+              >
+                Annuler
+              </Button>
+              <Button type="submit" disabled={isSubmitting} className="flex-1">
+                {isSubmitting ? "Création..." : "Créer le patient"}
+              </Button>
             </div>
-          </div>
-
-          <div className="space-y-2">
-            <Label htmlFor="birthDate">
-              Date de naissance
-            </Label>
-            <Input
-              id="birthDate"
-              name="birthDate"
-              type="date"
-              defaultValue={pendingFormDataRef.current?.birthDate}
-            />
-          </div>
-
-          <div className="space-y-2">
-            <Label htmlFor="notes">
-              Notes
-            </Label>
-            <Textarea
-              id="notes"
-              name="notes"
-              placeholder="Notes confidentielles sur le patient..."
-              rows={3}
-              defaultValue={pendingFormDataRef.current?.notes}
-            />
-          </div>
-
-          <div className="flex gap-3 pt-2">
-            <Button type="submit" disabled={isSubmitting} className="flex-1">
-              {isSubmitting ? "Création..." : "Créer le patient"}
-            </Button>
-            <Button
-              type="button"
-              variant="secondary"
-              onClick={() => setOpen(false)}
-            >
-              Annuler
-            </Button>
-          </div>
-        </form>
-      </DialogContent>
-    </Dialog>
+          </form>
+        </SheetContent>
+      </Sheet>
     </>
   );
 }
