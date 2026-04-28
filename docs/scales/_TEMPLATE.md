@@ -24,6 +24,14 @@ cas, justifier explicitement pourquoi une seule source est acceptée.
 
 Toute donnée de l'échelle (consignes, items, labels de réponse, labels de
 sévérité) DOIT être en français uniquement.
+
+Règles projet (s'appliquent à toutes les specs) :
+1. Nom complet (FR) = libellé exact du PDF source primaire. Pas de traduction inventée.
+2. Hiérarchie versions FR retenues : France > Suisse > Belgique > Canada.
+3. Mention copyright obligatoire :
+   - Côté patient : écran de fin de passation, gris discret, une fois.
+   - Côté praticien : fiche du questionnaire (bibliothèque).
+4. Comparaison Mentaal systématique sur chaque spec : version FR, seuils, divergences visibles.
 -->
 
 ---
