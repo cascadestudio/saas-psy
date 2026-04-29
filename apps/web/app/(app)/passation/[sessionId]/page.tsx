@@ -25,11 +25,24 @@ import { Interfaces, Finance, Files } from "doodle-icons";
 import {
   getMainScore,
   getMaxScore,
-  getScorePercentage,
   getSubscores,
   getInterpretation as getStoredInterpretation,
 } from "@/lib/score-utils";
 import { SESSION_STATUS_CONFIG } from "@/lib/session-status";
+import { getSeverityIndex, getSeverityPalette } from "@/lib/severity";
+import { ItemResponsesList } from "@/components/passation/ItemResponsesList";
+import type { Scale } from "@melya/core";
+
+/**
+ * Fallback for PHQ-9 item 9 (suicide ideation) ≥ 1, until the alerts field is
+ * wired through the backend ScoreResult contract.
+ */
+function getFlaggedItems(scale: Scale, responses: Record<string, number>): number[] {
+  if (scale.id === "phq-9" && (responses.intensity_8 ?? 0) >= 1) {
+    return [8];
+  }
+  return [];
+}
 
 export default function ResultsPage() {
   const { user, isLoading } = useUser();
@@ -267,8 +280,11 @@ export default function ResultsPage() {
   const currentMain = getMainScore(session.score);
   const previousMain = getMainScore(previousSession?.score);
   const maxScore = getMaxScore(session.score);
-  const scorePercentage = getScorePercentage(session.score);
   const subscores = getSubscores(session.score);
+
+  const ranges = scale?.scoring?.ranges;
+  const severityIndex = getSeverityIndex(currentMain, ranges);
+  const severityPalette = getSeverityPalette(severityIndex, ranges?.length ?? 0);
 
   let trend: "up" | "down" | "stable" | null = null;
   let trendPercentage = 0;
@@ -310,88 +326,125 @@ export default function ResultsPage() {
           <h2 className="text-lg font-sans font-semibold mb-3">
             Score et interprétation
           </h2>
-          <div className="border rounded-lg p-6">
-            <div className="flex flex-col sm:flex-row gap-6">
-              {/* Score */}
-              <div className="flex flex-col items-center justify-center sm:w-48 shrink-0">
-                <div className="text-7xl font-bold text-primary leading-none mb-1">
-                  {currentMain}
+          <div className="border rounded-lg p-6 space-y-6">
+            {/* Interprétation clinique — verdict en gros */}
+            {badgeInterpretation && (
+              <div>
+                <p className="text-sm font-medium mb-2">
+                  Interprétation clinique
+                </p>
+                <div
+                  className={`inline-flex items-center rounded-md border px-4 py-2 text-2xl font-medium ${severityPalette.badge}`}
+                >
+                  {badgeInterpretation}
                 </div>
-                <div className="text-sm text-muted-foreground mt-2">
-                  sur {maxScore || "?"} ({scorePercentage}%)
-                </div>
-                {subscores.length > 0 && (
-                  <div className="text-xs text-muted-foreground mt-1 text-center">
-                    {subscores
-                      .map(
-                        (s) =>
-                          `${s.label}: ${s.value}${s.max ? `/${s.max}` : ""}`
-                      )
-                      .join(" · ")}
-                  </div>
-                )}
-                {badgeInterpretation && (
-                  <Badge className="mt-3 text-sm px-3 py-1">
-                    {badgeInterpretation}
-                  </Badge>
-                )}
               </div>
+            )}
 
-              {/* Interpretation + trend */}
-              <div className="flex-1 space-y-4 sm:border-l sm:pl-6">
-                {displayInterpretation && (
-                  <div>
-                    <p className="text-sm font-medium mb-1">Interprétation clinique</p>
-                    <p className="text-sm text-muted-foreground">
-                      {displayInterpretation}
-                    </p>
-                  </div>
-                )}
+            {/* Score */}
+            <div className="text-muted-foreground">
+              Score :{" "}
+              <span className="text-foreground font-semibold text-xl">
+                {currentMain}
+              </span>
+              {maxScore !== undefined && (
+                <span className="text-muted-foreground"> / {maxScore}</span>
+              )}
+            </div>
 
-                {trend && previousSession && (
-                  <div className="border-t pt-4">
-                    <p className="text-sm font-medium mb-2">Évolution</p>
-                    <div className="flex items-center gap-2">
-                      {trend === "down" && (
-                        <>
-                          <Finance.TrendUp className="h-4 w-4 text-green-600" />
-                          <span className="text-sm text-green-600">
-                            Amélioration de {trendPercentage}% depuis la dernière
-                            passation
-                          </span>
-                        </>
-                      )}
-                      {trend === "up" && (
-                        <>
-                          <Finance.TrendUp className="h-4 w-4 text-brand-orange" />
-                          <span className="text-sm text-brand-orange">
-                            Augmentation de {trendPercentage}% depuis la dernière
-                            passation
-                          </span>
-                        </>
-                      )}
-                      {trend === "stable" && (
-                        <>
-                          <span className="inline-block w-4 h-0.5 bg-gray-500 rounded" />
-                          <span className="text-sm text-gray-600">
-                            Score stable depuis la dernière passation
-                          </span>
-                        </>
+            {/* Subscores as mini-cards */}
+            {subscores.length > 0 && (
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {subscores.map((s) => {
+                  const pct = s.max ? (s.value / s.max) * 100 : 0;
+                  return (
+                    <div
+                      key={s.label}
+                      className="border rounded-md p-3 bg-muted/30"
+                    >
+                      <div className="flex items-baseline justify-between mb-1.5">
+                        <span className="text-sm font-medium">{s.label}</span>
+                        <span className="text-sm tabular-nums">
+                          <span className="font-semibold">{s.value}</span>
+                          {s.max !== undefined && (
+                            <span className="text-muted-foreground">
+                              {" "}
+                              / {s.max}
+                            </span>
+                          )}
+                        </span>
+                      </div>
+                      {s.max !== undefined && (
+                        <div className="h-1.5 rounded-full bg-muted overflow-hidden">
+                          <div
+                            className="h-full bg-foreground/60 rounded-full"
+                            style={{ width: `${pct}%` }}
+                          />
+                        </div>
                       )}
                     </div>
-                    <p className="text-xs text-muted-foreground mt-1">
-                      Passation précédente le{" "}
-                      {new Date(previousSession.completedAt!).toLocaleDateString(
-                        "fr-FR"
-                      )}{" "}
-                      : {previousMain}
-                    </p>
-                  </div>
-                )}
+                  );
+                })}
               </div>
-            </div>
+            )}
+
+            {/* Trend — sera sorti dans sa propre section en P4 */}
+            {trend && previousSession && (
+              <div className="border-t pt-4">
+                <p className="text-sm font-medium mb-2">Évolution</p>
+                <div className="flex items-center gap-2">
+                  {trend === "down" && (
+                    <>
+                      <Finance.TrendUp className="h-4 w-4 text-green-600" />
+                      <span className="text-sm text-green-600">
+                        Amélioration de {trendPercentage}% depuis la dernière
+                        passation
+                      </span>
+                    </>
+                  )}
+                  {trend === "up" && (
+                    <>
+                      <Finance.TrendUp className="h-4 w-4 text-brand-orange" />
+                      <span className="text-sm text-brand-orange">
+                        Augmentation de {trendPercentage}% depuis la dernière
+                        passation
+                      </span>
+                    </>
+                  )}
+                  {trend === "stable" && (
+                    <>
+                      <span className="inline-block w-4 h-0.5 bg-gray-500 rounded" />
+                      <span className="text-sm text-gray-600">
+                        Score stable depuis la dernière passation
+                      </span>
+                    </>
+                  )}
+                </div>
+                <p className="text-xs text-muted-foreground mt-1">
+                  Passation précédente le{" "}
+                  {new Date(previousSession.completedAt!).toLocaleDateString(
+                    "fr-FR",
+                  )}{" "}
+                  : {previousMain}
+                </p>
+              </div>
+            )}
           </div>
         </div>
+
+        {/* Réponses du patient — item par item */}
+        {scale && session.responses && (
+          <div>
+            <h2 className="text-lg font-sans font-semibold mb-3">
+              Réponses du patient
+            </h2>
+            <ItemResponsesList
+              scale={scale}
+              responses={session.responses}
+              flaggedItems={getFlaggedItems(scale, session.responses)}
+            />
+          </div>
+        )}
 
         {/* Historique longitudinal */}
         {sameScaleSessions.length > 1 && (
