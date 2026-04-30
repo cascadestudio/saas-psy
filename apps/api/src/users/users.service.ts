@@ -95,6 +95,16 @@ export class UsersService {
     ipAddress?: string,
     userAgent?: string,
   ) {
+    if (data.email) {
+      const existing = await this.prisma.user.findUnique({
+        where: { email: data.email },
+        select: { id: true },
+      });
+      if (existing && existing.id !== id) {
+        throw new ConflictException('Un utilisateur avec cet email existe déjà');
+      }
+    }
+
     const user = await this.prisma.user.update({
       where: { id },
       data,

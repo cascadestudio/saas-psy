@@ -20,7 +20,7 @@ const navigation = [
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  const { user, logout } = useUser();
+  const { user } = useUser();
   const { openAuthGate } = useAuthGate();
 
   return (
@@ -71,6 +71,18 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
         {/* Bottom actions */}
         <div className="px-4 pb-6">
           <div className="border-t border-brand-orange/20 pt-4 flex flex-col gap-1">
+            <Link
+              href="/settings"
+              className={cn(
+                "flex items-center gap-3 px-2 py-2 text-sm font-medium transition-all duration-200",
+                pathname === "/settings" || pathname.startsWith("/settings/")
+                  ? "text-brand-orange translate-x-1"
+                  : "text-foreground hover:text-brand-orange hover:translate-x-1",
+              )}
+            >
+              <Interfaces.Setting className="h-4 w-4" fill="currentColor" />
+              Paramètres
+            </Link>
             <a
               href="mailto:clement@melya.app"
               className="flex items-center gap-3 px-2 py-2 text-sm font-medium text-foreground transition-all duration-200 hover:text-brand-orange hover:translate-x-1"
@@ -78,21 +90,13 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
               <Interfaces.Message className="h-4 w-4" fill="currentColor" />
               Nous contacter
             </a>
-            {!user ? (
+            {!user && (
               <button
                 onClick={() => openAuthGate()}
                 className="flex items-center gap-3 px-2 py-2 text-sm font-medium text-foreground transition-all duration-200 hover:text-brand-orange hover:translate-x-1"
               >
                 <Interfaces.Login className="h-4 w-4" fill="currentColor" />
                 Se connecter
-              </button>
-            ) : (
-              <button
-                onClick={logout}
-                className="flex items-center gap-3 px-2 py-2 text-sm font-medium text-foreground transition-all duration-200 hover:text-brand-orange hover:translate-x-1"
-              >
-                <Interfaces.Logout className="h-4 w-4" fill="currentColor" />
-                Déconnexion
               </button>
             )}
           </div>
@@ -101,7 +105,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
 
       {/* Main content */}
       <main className="flex-1 min-w-0">
-        {user && (
+        {user && !pathname.startsWith("/settings") && (
           <div className="container mx-auto px-4 pt-6">
             <GlobalSearchBar />
           </div>

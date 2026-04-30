@@ -129,22 +129,29 @@ export const authApi = {
 };
 
 /**
- * Profiles API methods
+ * Users API methods
  */
-export const profilesApi = {
-  getProfile: async () => {
-    return apiRequest<any>("/profiles/me");
+export const usersApi = {
+  getMe: async () => {
+    return apiRequest<any>("/users/me");
   },
 
-  updateProfile: async (data: {
+  update: async (data: {
     firstName?: string;
     lastName?: string;
     email?: string;
   }) => {
-    return apiRequest<any>("/profiles/me", {
-      method: "PUT",
+    return apiRequest<any>("/users/me", {
+      method: "PATCH",
       body: JSON.stringify(data),
     });
+  },
+
+  delete: async () => {
+    return apiRequest<{ message: string; deletedData: { patients: number; sessions: number } }>(
+      "/users/me",
+      { method: "DELETE" },
+    );
   },
 };
 
@@ -382,7 +389,7 @@ export interface Scale {
  */
 export const api = {
   auth: authApi,
-  profiles: profilesApi,
+  users: usersApi,
   favorites: favoritesApi,
   patients: patientsApi,
   sessions: sessionsApi,
