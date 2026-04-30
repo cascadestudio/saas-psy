@@ -177,6 +177,8 @@ export const MOCK_SESSIONS: Session[] = [
     },
     interpretation:
       "Présence éventuelle d'un trouble de stress post-traumatique",
+    patientComments:
+      "J'ai eu du mal à répondre aux questions sur les cauchemars, ça reste flou. Les nuits sont compliquées depuis la rentrée.",
     createdAt: daysAgo(15),
     updatedAt: daysAgo(12),
     patient: patientById["mock-patient-4"],
@@ -220,6 +222,8 @@ export const MOCK_SESSIONS: Session[] = [
       ],
     },
     interpretation: "Dépression modérée",
+    patientComments:
+      "Je me sens mieux qu'au début du suivi mais les matins restent durs.",
     createdAt: daysAgo(45),
     updatedAt: daysAgo(42),
     patient: patientById["mock-patient-1"],

@@ -329,6 +329,7 @@ export interface Session {
   status: "SENT" | "STARTED" | "COMPLETED" | "EXPIRED" | "CANCELLED";
   score?: import("@melya/core").ScoreResult;
   interpretation?: string;
+  patientComments?: string | null;
   responses?: Record<string, number>;
   sentAt?: string;
   startedAt?: string;

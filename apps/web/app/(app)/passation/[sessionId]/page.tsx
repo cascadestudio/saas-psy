@@ -27,6 +27,7 @@ import { getSeverityPalette } from "@/lib/severity";
 import { ItemResponsesList } from "@/components/passation/ItemResponsesList";
 import { AlertsBanner } from "@/components/passation/AlertsBanner";
 import { TrendBlock } from "@/components/passation/TrendBlock";
+import { PatientCommentsBlock } from "@/components/passation/PatientCommentsBlock";
 import { relativeTimeFr, formatDateLongFr } from "@/lib/relative-time";
 
 export default function ResultsPage() {
@@ -389,13 +390,18 @@ export default function ResultsPage() {
           </div>
         )}
 
+        {/* Commentaire libre du patient */}
+        {session.patientComments && (
+          <PatientCommentsBlock comments={session.patientComments} />
+        )}
+
         {/* Historique longitudinal */}
         {sameScaleSessions.length > 1 && (
           <div>
             <h2 className="text-lg font-sans font-semibold mb-3">
               Historique longitudinal
             </h2>
-            <div className="border rounded-lg overflow-hidden">
+            <ol className="relative border-l-2 border-border ml-3 space-y-6 py-2">
               {sameScaleSessions.map((s, index) => {
                 const isCurrent = s.id === session.id;
                 const olderSession = sameScaleSessions[index + 1];
@@ -421,62 +427,78 @@ export default function ResultsPage() {
                   s.score?.severityIndex ?? -1,
                   rangeCount,
                 );
+                const RowTag = isCurrent ? "div" : Link;
+                const rowProps = isCurrent
+                  ? {}
+                  : { href: `/passation/${s.id}` };
                 return (
-                  <Link
-                    key={s.id}
-                    href={`/passation/${s.id}`}
-                    className={`flex items-center justify-between p-4 border-t border-border/50 first:border-t-0 transition-colors ${
-                      isCurrent
-                        ? "bg-muted/30 pointer-events-none"
-                        : "hover:bg-muted-foreground/5 cursor-pointer"
-                    }`}
-                  >
-                    <div className="flex items-center gap-3 min-w-0">
-                      {hasSeverity && (
-                        <span
-                          className={`h-2.5 w-2.5 rounded-full shrink-0 ${dotPalette.gaugeFill}`}
-                          aria-hidden
-                        />
-                      )}
-                      <div className="min-w-0">
-                        <p className="text-sm font-medium">
-                          {s.completedAt
-                            ? formatDateLongFr(s.completedAt)
-                            : "—"}
-                          <span className="text-muted-foreground font-normal">
-                            {" · "}
+                  <li key={s.id} className="relative pl-6">
+                    <span
+                      className={`absolute -left-[7px] top-1/2 -translate-y-1/2 h-3 w-3 rounded-full ring-4 ring-background ${
+                        hasSeverity ? dotPalette.gaugeFill : "bg-border"
+                      }`}
+                      aria-hidden
+                    />
+                    <RowTag
+                      {...(rowProps as { href: string })}
+                      className={`flex items-start justify-between gap-4 rounded-md p-3 -my-1 transition-colors ${
+                        isCurrent
+                          ? "bg-brand-orange/5 ring-1 ring-brand-orange/30"
+                          : "hover:bg-zinc-100 cursor-pointer"
+                      }`}
+                    >
+                      <div className="min-w-0 space-y-1">
+                        <div className="flex items-center gap-2 flex-wrap">
+                          <span
+                            className={`text-sm font-semibold ${
+                              isCurrent ? "" : "text-muted-foreground"
+                            }`}
+                          >
+                            {s.completedAt
+                              ? formatDateLongFr(s.completedAt)
+                              : "—"}
+                          </span>
+                          <span className="text-xs text-muted-foreground">
+                            ·{" "}
                             {s.completedAt
                               ? relativeTimeFr(s.completedAt)
                               : ""}
                           </span>
-                        </p>
+                          {isCurrent && (
+                            <Badge
+                              variant="secondary"
+                              className="text-[10px] uppercase tracking-wide"
+                            >
+                              Passation actuelle
+                            </Badge>
+                          )}
+                        </div>
                         <p className="text-xs text-muted-foreground truncate">
                           {s.score?.interpretation || s.interpretation}
                         </p>
                       </div>
-                    </div>
-                    <div className="flex items-center gap-3 shrink-0">
-                      <span className="text-2xl font-bold tabular-nums">
-                        {sScore}
-                      </span>
-                      {diff !== null && diff !== 0 && (
+                      <div className="flex items-baseline gap-2 shrink-0">
                         <span
-                          className={`text-xs font-semibold tabular-nums ${deltaColor}`}
+                          className={`text-2xl font-bold tabular-nums leading-none ${
+                            isCurrent ? "" : "text-muted-foreground"
+                          }`}
                         >
-                          {diff > 0 ? "+" : "−"}
-                          {Math.abs(diff)}
+                          {sScore}
                         </span>
-                      )}
-                      {isCurrent && (
-                        <Badge variant="secondary" className="text-xs">
-                          Actuel
-                        </Badge>
-                      )}
-                    </div>
-                  </Link>
+                        {diff !== null && diff !== 0 && (
+                          <span
+                            className={`text-xs font-semibold tabular-nums ${deltaColor}`}
+                          >
+                            {diff > 0 ? "+" : "−"}
+                            {Math.abs(diff)}
+                          </span>
+                        )}
+                      </div>
+                    </RowTag>
+                  </li>
                 );
               })}
-            </div>
+            </ol>
           </div>
         )}
       </div>
