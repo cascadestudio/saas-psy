@@ -28,6 +28,7 @@ import { ItemResponsesList } from "@/components/passation/ItemResponsesList";
 import { AlertsBanner } from "@/components/passation/AlertsBanner";
 import { TrendBlock } from "@/components/passation/TrendBlock";
 import { PatientCommentsBlock } from "@/components/passation/PatientCommentsBlock";
+import { PassationSkeleton } from "@/components/passation/PassationSkeleton";
 import { relativeTimeFr, formatDateLongFr } from "@/lib/relative-time";
 
 export default function ResultsPage() {
@@ -91,11 +92,7 @@ export default function ResultsPage() {
   };
 
   if (isLoading || loading) {
-    return (
-      <div className="flex-1 w-full flex items-center justify-center">
-        <p>Chargement...</p>
-      </div>
-    );
+    return <PassationSkeleton />;
   }
 
   if (!session) {
