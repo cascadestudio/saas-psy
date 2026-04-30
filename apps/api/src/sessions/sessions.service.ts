@@ -307,6 +307,90 @@ export class SessionsService {
     return { session: this.decryptSession(cancelledSession) };
   }
 
+  async resendEmail(
+    id: string,
+    practitionerId: string,
+    ipAddress?: string,
+    userAgent?: string,
+  ) {
+    const session = await this.prisma.session.findUnique({
+      where: { id },
+      include: { patient: true },
+    });
+
+    if (!session) {
+      throw new NotFoundException('Session non trouvée');
+    }
+
+    if (session.practitionerId !== practitionerId) {
+      throw new ForbiddenException('Accès non autorisé à cette session');
+    }
+
+    if (session.status !== 'SENT' && session.status !== 'STARTED') {
+      throw new BadRequestException(
+        'Le mail ne peut être renvoyé que pour une passation envoyée ou démarrée',
+      );
+    }
+
+    if (session.expiresAt && new Date() > session.expiresAt) {
+      throw new BadRequestException('Cette session a expiré');
+    }
+
+    const practitioner = await this.prisma.user.findUnique({
+      where: { id: practitionerId },
+    });
+    if (!practitioner) {
+      throw new NotFoundException('Praticien non trouvé');
+    }
+
+    const scale = getScaleById(session.scaleId);
+    const scaleName = scale?.title || 'Questionnaire';
+
+    const practitionerName =
+      [
+        this.encryption.decryptField(practitioner.firstName),
+        this.encryption.decryptField(practitioner.lastName),
+      ]
+        .filter(Boolean)
+        .join(' ') || 'Votre psychologue';
+
+    const result = await this.emailService.sendSessionEmail({
+      patientEmail: session.patient.email,
+      patientFirstName:
+        this.encryption.decryptField(session.patient.firstName) || '',
+      patientLastName:
+        this.encryption.decryptField(session.patient.lastName) || '',
+      sessionId: session.id,
+      scaleName,
+      practitionerName,
+    });
+
+    if (!result.success) {
+      throw new BadRequestException(
+        result.error || 'Échec de l’envoi du mail de relance',
+      );
+    }
+
+    await this.prisma.session.update({
+      where: { id },
+      data: { lastReminderAt: new Date() },
+    });
+
+    this.auditLog
+      .log({
+        userId: practitionerId,
+        action: AuditAction.SESSION_REMINDER_SENT,
+        resource: 'Session',
+        resourceId: id,
+        metadata: { patientId: session.patientId },
+        ipAddress,
+        userAgent,
+      })
+      .catch(() => {});
+
+    return { success: true };
+  }
+
   // Public endpoint for patient portal (no auth required)
   async getPatientPortalSessions(batchId: string) {
     const sessions = await this.prisma.session.findMany({

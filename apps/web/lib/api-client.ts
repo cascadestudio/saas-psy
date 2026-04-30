@@ -272,6 +272,12 @@ export const sessionsApi = {
   getStats: async () => {
     return apiRequest<SessionStats>("/sessions/stats");
   },
+
+  resendEmail: async (id: string) => {
+    return apiRequest<{ success: boolean }>(`/sessions/${id}/resend-email`, {
+      method: "POST",
+    });
+  },
 };
 
 /**
@@ -332,6 +338,7 @@ export interface Session {
   patientComments?: string | null;
   responses?: Record<string, number>;
   sentAt?: string;
+  lastReminderAt?: string | null;
   startedAt?: string;
   completedAt?: string;
   viewedAt?: string;

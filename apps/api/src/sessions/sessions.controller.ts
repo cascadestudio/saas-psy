@@ -92,6 +92,20 @@ export class SessionsController {
     );
   }
 
+  @Post(':id/resend-email')
+  resendEmail(
+    @Param('id') id: string,
+    @CurrentUser('id') practitionerId: string,
+    @Req() req: Request,
+  ) {
+    return this.sessionsService.resendEmail(
+      id,
+      practitionerId,
+      req.ip,
+      req.headers['user-agent'],
+    );
+  }
+
   // Patient endpoints (public - no auth)
 
   @Public()

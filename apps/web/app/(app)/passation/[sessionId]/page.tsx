@@ -41,6 +41,10 @@ export default function ResultsPage() {
   const [allSessions, setAllSessions] = useState<Session[]>([]);
   const [loading, setLoading] = useState(true);
   const [copied, setCopied] = useState(false);
+  const [resendState, setResendState] = useState<
+    "idle" | "sending" | "sent" | "error"
+  >("idle");
+  const [resendError, setResendError] = useState<string | null>(null);
 
   useEffect(() => {
     if (!sessionId) return;
@@ -89,6 +93,23 @@ export default function ResultsPage() {
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     });
+  };
+
+  const handleResendEmail = async () => {
+    if (!user || isMockId(sessionId)) return;
+    setResendState("sending");
+    setResendError(null);
+    try {
+      await sessionsApi.resendEmail(sessionId);
+      setResendState("sent");
+      setTimeout(() => setResendState("idle"), 3000);
+    } catch (err) {
+      setResendError(
+        err instanceof Error ? err.message : "Échec de l'envoi du mail",
+      );
+      setResendState("error");
+      setTimeout(() => setResendState("idle"), 4000);
+    }
   };
 
   if (isLoading || loading) {
@@ -187,10 +208,28 @@ export default function ResultsPage() {
           Imprimer les résultats
         </Button>
       ) : (
-        <Button variant="secondary">
-          <Interfaces.Mail />
-          Renvoyer le mail
-        </Button>
+        <div className="flex flex-col items-end gap-1">
+          <Button
+            variant="secondary"
+            onClick={handleResendEmail}
+            disabled={
+              resendState === "sending" ||
+              resendState === "sent" ||
+              !user ||
+              isMockId(sessionId)
+            }
+          >
+            <Interfaces.Mail />
+            {resendState === "sending"
+              ? "Envoi…"
+              : resendState === "sent"
+                ? "Mail renvoyé"
+                : "Renvoyer le mail"}
+          </Button>
+          {resendState === "error" && resendError && (
+            <p className="text-xs text-red-600">{resendError}</p>
+          )}
+        </div>
       )}
     </div>
   );

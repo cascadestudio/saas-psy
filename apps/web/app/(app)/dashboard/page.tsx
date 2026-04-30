@@ -161,12 +161,13 @@ export default function DashboardPage() {
     .filter(
       (s) =>
         (s.status === "SENT" || s.status === "STARTED") &&
-        daysSince(s.sentAt || s.createdAt) >= PENDING_THRESHOLD_DAYS,
+        daysSince(s.lastReminderAt || s.sentAt || s.createdAt) >=
+          PENDING_THRESHOLD_DAYS,
     )
     .sort(
       (a, b) =>
-        new Date(a.sentAt || a.createdAt).getTime() -
-        new Date(b.sentAt || b.createdAt).getTime(),
+        new Date(a.lastReminderAt || a.sentAt || a.createdAt).getTime() -
+        new Date(b.lastReminderAt || b.sentAt || b.createdAt).getTime(),
     );
 
   const recentResults = sessions

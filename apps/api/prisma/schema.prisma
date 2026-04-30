@@ -130,6 +130,7 @@ model Session {
 
   // Timestamps
   sentAt            DateTime?      @map("sent_at")
+  lastReminderAt    DateTime?      @map("last_reminder_at")
   startedAt         DateTime?      @map("started_at")
   completedAt       DateTime?      @map("completed_at")
   viewedAt          DateTime?      @map("viewed_at")
