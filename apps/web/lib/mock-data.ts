@@ -349,6 +349,93 @@ export const MOCK_SESSIONS: Session[] = [
     updatedAt: daysAgo(47),
     patient: patientById["mock-patient-4"],
   },
+  // Y-BOCS Sophie — couvre formType "options", sous-scores obsessions/compulsions
+  {
+    id: "mock-session-12",
+    patientId: "mock-patient-3",
+    scaleId: "index-symptomes-ybocs",
+    status: "COMPLETED",
+    sentAt: daysAgo(10),
+    startedAt: daysAgo(9),
+    completedAt: daysAgo(8),
+    viewedAt: daysAgo(7),
+    responses: indexed("option", [2, 3, 2, 3, 2, 2, 2, 2, 2, 2]),
+    score: {
+      totalScore: 22,
+      maxScore: 40,
+      interpretation: "TOC modéré",
+      severityIndex: 2,
+      severityRangeCount: 5,
+      subscores: [
+        { key: "obsessions", label: "Obsessions", value: 12, max: 20 },
+        { key: "compulsions", label: "Compulsions", value: 10, max: 20 },
+      ],
+    },
+    interpretation: "TOC modéré",
+    createdAt: daysAgo(10),
+    updatedAt: daysAgo(7),
+    patient: patientById["mock-patient-3"],
+  },
+  // Historique Y-BOCS Sophie — score identique → trend "stable"
+  {
+    id: "mock-session-13",
+    patientId: "mock-patient-3",
+    scaleId: "index-symptomes-ybocs",
+    status: "COMPLETED",
+    sentAt: daysAgo(40),
+    startedAt: daysAgo(39),
+    completedAt: daysAgo(38),
+    viewedAt: daysAgo(37),
+    responses: indexed("option", [3, 2, 3, 2, 2, 2, 2, 2, 2, 2]),
+    score: {
+      totalScore: 22,
+      maxScore: 40,
+      interpretation: "TOC modéré",
+      severityIndex: 2,
+      severityRangeCount: 5,
+      subscores: [
+        { key: "obsessions", label: "Obsessions", value: 12, max: 20 },
+        { key: "compulsions", label: "Compulsions", value: 10, max: 20 },
+      ],
+    },
+    interpretation: "TOC modéré",
+    createdAt: daysAgo(40),
+    updatedAt: daysAgo(37),
+    patient: patientById["mock-patient-3"],
+  },
+  // PHQ-9 Lucas — alerte CRITICAL (item 9 = 3) + pas d'historique → état sans trend/historique
+  {
+    id: "mock-session-14",
+    patientId: "mock-patient-4",
+    scaleId: "phq-9",
+    status: "COMPLETED",
+    sentAt: daysAgo(3),
+    startedAt: daysAgo(2),
+    completedAt: daysAgo(1),
+    responses: indexed("intensity", [3, 3, 3, 2, 2, 2, 2, 2, 3]),
+    score: {
+      totalScore: 22,
+      maxScore: 27,
+      interpretation: "Dépression sévère",
+      severityIndex: 4,
+      severityRangeCount: 5,
+      alerts: [
+        {
+          kind: "suicide-ideation",
+          severity: "critical",
+          message:
+            "Idéation suicidaire endossée à l'item 9 avec une cotation de 3 (presque tous les jours). Évaluation immédiate du risque suicidaire requise — orientation vers un dispositif d'urgence à envisager.",
+          itemIndex: 8,
+        },
+      ],
+    },
+    interpretation: "Dépression sévère",
+    patientComments:
+      "Je n'arrive plus à voir de raison de continuer comme ça. Tout me paraît sans issue.",
+    createdAt: daysAgo(3),
+    updatedAt: daysAgo(1),
+    patient: patientById["mock-patient-4"],
+  },
 ];
 
 export const isMockId = (id: string | undefined | null): boolean =>
