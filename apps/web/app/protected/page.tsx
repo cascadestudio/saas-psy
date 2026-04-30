@@ -17,7 +17,7 @@ export default function ProtectedPage() {
   if (isLoading) {
     return (
       <div className="flex-1 w-full flex items-center justify-center">
-        <p>Chargement...</p>
+        <Interfaces.Sync className="h-6 w-6 animate-spin text-brand-orange" />
       </div>
     );
   }

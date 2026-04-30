@@ -14,6 +14,7 @@ import { SendScaleSheet } from "@/components/SendScaleSheet";
 import { PatientRow, type PatientRowData } from "@/components/PatientRow";
 import { MOCK_PATIENTS, MOCK_SESSIONS } from "@/lib/mock-data";
 import { useAuthGate } from "@/app/context/AuthGateContext";
+import { PatientsListSkeleton } from "@/components/patients/PatientsListSkeleton";
 
 export default function PatientsPage() {
   const { user, isLoading } = useUser();
@@ -56,12 +57,8 @@ export default function PatientsPage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
-  if (isLoading) {
-    return (
-      <div className="flex-1 w-full flex items-center justify-center">
-        <p>Chargement...</p>
-      </div>
-    );
+  if (isLoading || loading) {
+    return <PatientsListSkeleton />;
   }
 
   const patientIdsWithActiveSessions = new Set(
@@ -129,11 +126,7 @@ export default function PatientsPage() {
 
       <Card className="border-0 bg-muted-foreground/5 shadow-none hover:shadow-none">
         <CardContent className="p-4">
-          {loading ? (
-            <p className="text-sm text-muted-foreground text-center py-8">
-              Chargement des patients...
-            </p>
-          ) : displayPatients.length === 0 ? (
+          {displayPatients.length === 0 ? (
             <p className="text-sm text-muted-foreground text-center py-8">
               {filter === "active"
                 ? "Aucune passation en cours"

@@ -22,6 +22,7 @@ import { CreatePatientSheet } from "@/components/CreatePatientSheet";
 import { SendScaleSheet } from "@/components/SendScaleSheet";
 import { SESSION_STATUS_CONFIG } from "@/lib/session-status";
 import { MOCK_PATIENTS, MOCK_SESSIONS } from "@/lib/mock-data";
+import { DashboardSkeleton } from "@/components/dashboard/DashboardSkeleton";
 
 const PENDING_THRESHOLD_DAYS = 7;
 const RECENT_WINDOW_DAYS = 30;
@@ -106,6 +107,7 @@ export default function DashboardPage() {
   const router = useRouter();
   const [patients, setPatients] = useState<Patient[]>([]);
   const [sessions, setSessions] = useState<Session[]>([]);
+  const [loading, setLoading] = useState(true);
   const [sendScaleOpen, setSendScaleOpen] = useState(false);
 
   useEffect(() => {
@@ -119,9 +121,11 @@ export default function DashboardPage() {
     if (!user) {
       setPatients(MOCK_PATIENTS);
       setSessions(MOCK_SESSIONS);
+      setLoading(false);
       return;
     }
     const loadData = async () => {
+      setLoading(true);
       try {
         const [pRes, sRes] = await Promise.all([
           patientsApi.getAll(),
@@ -131,6 +135,8 @@ export default function DashboardPage() {
         setSessions(sRes.sessions);
       } catch (error) {
         console.error("Error loading dashboard data:", error);
+      } finally {
+        setLoading(false);
       }
     };
     loadData();
@@ -149,12 +155,8 @@ export default function DashboardPage() {
     }
   };
 
-  if (isLoading) {
-    return (
-      <div className="flex-1 w-full flex items-center justify-center">
-        <p>Chargement...</p>
-      </div>
-    );
+  if (isLoading || loading) {
+    return <DashboardSkeleton />;
   }
 
   const toRelaunch = sessions

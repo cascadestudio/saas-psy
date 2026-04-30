@@ -30,6 +30,7 @@ import { SESSION_STATUS_CONFIG } from "@/lib/session-status";
 import { cn } from "@/lib/utils";
 import { getMockPatient, getMockSessionsByPatient, isMockId } from "@/lib/mock-data";
 import { useAuthGate } from "@/app/context/AuthGateContext";
+import { PatientDetailSkeleton } from "@/components/patients/PatientDetailSkeleton";
 
 export default function PatientDetailPage() {
   const { user, isLoading } = useUser();
@@ -104,11 +105,7 @@ export default function PatientDetailPage() {
   };
 
   if (isLoading || loading) {
-    return (
-      <div className="flex-1 w-full flex items-center justify-center">
-        <p>Chargement...</p>
-      </div>
-    );
+    return <PatientDetailSkeleton />;
   }
 
   if (!patient) {

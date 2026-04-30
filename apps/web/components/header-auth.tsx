@@ -12,7 +12,7 @@ export default function AuthButton() {
     return (
       <div className="flex gap-2">
         <Button size="sm" variant="secondary" disabled>
-          Chargement...
+          <Interfaces.Sync className="h-4 w-4 animate-spin" />
         </Button>
       </div>
     );

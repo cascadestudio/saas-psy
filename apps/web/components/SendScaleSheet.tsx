@@ -250,9 +250,9 @@ export function SendScaleSheet({
           {step === "patient" && (
             <div className="space-y-4">
               {patientsLoading ? (
-                <p className="text-sm text-muted-foreground text-center py-8">
-                  Chargement des patients...
-                </p>
+                <div className="flex justify-center py-8">
+                  <Interfaces.Sync className="h-5 w-5 animate-spin text-muted-foreground" />
+                </div>
               ) : patients.length === 0 ? (
                 <div className="text-center py-8">
                   <Interfaces.User className="h-12 w-12 mx-auto mb-4 text-muted-foreground" />

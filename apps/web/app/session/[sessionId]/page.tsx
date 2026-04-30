@@ -63,10 +63,7 @@ export default function SessionPage() {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
-        <div className="text-center">
-          <Interfaces.Sync className="h-8 w-8 animate-spin text-brand-orange mx-auto" />
-          <p className="mt-4 text-gray-600">Chargement du questionnaire...</p>
-        </div>
+        <Interfaces.Sync className="h-8 w-8 animate-spin text-brand-orange" />
       </div>
     );
   }

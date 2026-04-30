@@ -20,16 +20,8 @@ const navigation = [
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  const { user, isLoading, logout } = useUser();
+  const { user, logout } = useUser();
   const { openAuthGate } = useAuthGate();
-
-  if (isLoading) {
-    return (
-      <div className="flex min-h-screen items-center justify-center">
-        <p>Chargement...</p>
-      </div>
-    );
-  }
 
   return (
     <div className="flex min-h-screen">
