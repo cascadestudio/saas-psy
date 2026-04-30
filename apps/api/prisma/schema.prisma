@@ -127,6 +127,7 @@ model Session {
   score             String?        // Encrypted calculated score
   interpretation    String?        // Encrypted auto-generated interpretation
   patientComments   String?        @map("patient_comments")
+  practitionerMessage String?      @map("practitioner_message")
 
   // Timestamps
   sentAt            DateTime?      @map("sent_at")

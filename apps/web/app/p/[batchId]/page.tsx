@@ -24,6 +24,7 @@ interface PortalData {
   batchId: string;
   patientFirstName: string;
   patientLastName: string;
+  practitionerMessage: string | null;
   totalCount: number;
   pendingCount: number;
   completedCount: number;
@@ -111,7 +112,7 @@ export default function PatientPortalPage() {
               className="mx-auto"
             />
           </div>
-          <h1 className="text-4xl font-normal text-gray-900">
+          <h1 className="font-heading text-4xl font-normal text-gray-900">
             Bonjour {portal.patientFirstName},
           </h1>
           {portal.allCompleted ? (
@@ -142,6 +143,20 @@ export default function PatientPortalPage() {
                   </p>
                 </div>
               </div>
+            </CardContent>
+          </Card>
+        )}
+
+        {/* Practitioner message */}
+        {portal.practitionerMessage && !portal.allCompleted && (
+          <Card className="mb-6">
+            <CardContent className="py-4">
+              <p className="text-sm font-medium text-gray-900 mb-1">
+                Message de votre psychologue
+              </p>
+              <p className="text-sm text-gray-700 whitespace-pre-wrap">
+                {portal.practitionerMessage}
+              </p>
             </CardContent>
           </Card>
         )}

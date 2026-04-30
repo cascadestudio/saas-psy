@@ -60,6 +60,10 @@ export class SessionsService {
     // Generate a unique batchId for this group of sessions
     const batchId = createId();
 
+    const encryptedMessage = dto.message
+      ? this.encryption.encryptField(dto.message)
+      : null;
+
     // Create sessions for each scale (one session per scale)
     const sessions = await this.prisma.$transaction(
       dto.scaleIds.map((scaleId) =>
@@ -71,6 +75,7 @@ export class SessionsService {
             batchId,
             status: 'SENT',
             sentAt: new Date(),
+            practitionerMessage: encryptedMessage,
             // Set expiration to 7 days from now
             expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
           },
@@ -421,11 +426,15 @@ export class SessionsService {
     );
     const completedSessions = sessions.filter((s) => s.status === 'COMPLETED');
 
+    const practitionerMessage =
+      this.encryption.decryptField(sessions[0].practitionerMessage) || null;
+
     return {
       portal: {
         batchId,
         patientFirstName,
         patientLastName,
+        practitionerMessage,
         totalCount: sessions.length,
         pendingCount: pendingSessions.length,
         completedCount: completedSessions.length,
