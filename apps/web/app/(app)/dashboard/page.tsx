@@ -1,13 +1,11 @@
 "use client";
 
-export const dynamic = "force-dynamic";
-
 import Link from "next/link";
 import Image from "next/image";
 import { useSearchParams, useRouter } from "next/navigation";
 import { useUser } from "@/app/context/UserContext";
 import { useAuthGate } from "@/app/context/AuthGateContext";
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import {
   patientsApi,
   sessionsApi,
@@ -102,15 +100,10 @@ function SessionRow({
   );
 }
 
-export default function DashboardPage() {
-  const { user, isLoading } = useUser();
-  const { openAuthGate } = useAuthGate();
+function LoginParamHandler() {
   const searchParams = useSearchParams();
   const router = useRouter();
-  const [patients, setPatients] = useState<Patient[]>([]);
-  const [sessions, setSessions] = useState<Session[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [sendScaleOpen, setSendScaleOpen] = useState(false);
+  const { openAuthGate } = useAuthGate();
 
   useEffect(() => {
     if (searchParams.get("login") === "true") {
@@ -118,6 +111,17 @@ export default function DashboardPage() {
       router.replace("/dashboard");
     }
   }, [searchParams, openAuthGate, router]);
+
+  return null;
+}
+
+export default function DashboardPage() {
+  const { user, isLoading } = useUser();
+  const { openAuthGate } = useAuthGate();
+  const [patients, setPatients] = useState<Patient[]>([]);
+  const [sessions, setSessions] = useState<Session[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [sendScaleOpen, setSendScaleOpen] = useState(false);
 
   useEffect(() => {
     if (!user) {
@@ -194,6 +198,9 @@ export default function DashboardPage() {
 
   return (
     <div className="container mx-auto px-4 py-6">
+      <Suspense fallback={null}>
+        <LoginParamHandler />
+      </Suspense>
       {!user && (
         <div className="mb-6 rounded-lg bg-surface-brand-bg px-4 py-3 flex items-center justify-between gap-4">
           <p className="text-sm text-brand-orange">
