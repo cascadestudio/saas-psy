@@ -216,6 +216,7 @@ export default function DashboardPage() {
           onPatientCreated={refreshData}
           currentPatientCount={patients.length}
           buttonVariant="secondary"
+          buttonSize="lg"
         />
       </div>
 

@@ -282,8 +282,6 @@ export function SendScaleSheet({
                     </div>
                     <CreatePatientSheet
                       onPatientCreated={handlePatientCreated}
-                      buttonVariant="default"
-                      buttonSize="default"
                       buttonText="Nouveau patient"
                       currentPatientCount={patients.length}
                     />

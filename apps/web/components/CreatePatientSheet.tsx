@@ -21,7 +21,7 @@ import { usePremiumGate, FREE_PATIENT_LIMIT } from "@/app/context/PremiumGateCon
 
 interface CreatePatientSheetProps {
   onPatientCreated?: (patientId: string) => void;
-  buttonSize?: "sm" | "lg";
+  buttonSize?: "default" | "sm" | "lg";
   buttonText?: string;
   buttonVariant?: "default" | "ghost" | "secondary" | "destructive" | "link" | "accent" | "success";
   buttonClassName?: string;
@@ -40,7 +40,7 @@ interface PatientFormData {
 
 export function CreatePatientSheet({
   onPatientCreated,
-  buttonSize = "lg",
+  buttonSize = "default",
   buttonText = "Ajouter un patient",
   buttonVariant = "default",
   buttonClassName,
