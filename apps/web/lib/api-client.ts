@@ -327,7 +327,7 @@ export interface Session {
   patientId: string;
   scaleId: string;
   status: "SENT" | "STARTED" | "COMPLETED" | "EXPIRED" | "CANCELLED";
-  score?: number | Record<string, any>;
+  score?: import("@melya/core").ScoreResult;
   interpretation?: string;
   responses?: Record<string, number>;
   sentAt?: string;

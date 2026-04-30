@@ -84,7 +84,17 @@ async function main() {
       startedAt: daysAgo(89),
       completedAt: daysAgo(89),
       responses: JSON.stringify({ answers: Array.from({ length: 24 }, (_, i) => ({ questionId: i + 1, anxiety: 2, avoidance: 2 })) }),
-      score: JSON.stringify({ totalScore: 96, maxTotal: 144, anxietyScore: 48, avoidanceScore: 48, maxAnxiety: 72, maxAvoidance: 72, interpretation: 'Anxiété sociale sévère' }),
+      score: JSON.stringify({
+        totalScore: 96,
+        maxScore: 144,
+        interpretation: 'Anxiété sociale sévère',
+        severityIndex: 3,
+        severityRangeCount: 4,
+        subscores: [
+          { key: 'anxiety', label: 'Anxiété', value: 48, max: 72 },
+          { key: 'avoidance', label: 'Évitement', value: 48, max: 72 },
+        ],
+      }),
       interpretation: 'Anxiété sociale sévère',
     },
     {
@@ -95,7 +105,17 @@ async function main() {
       startedAt: daysAgo(29),
       completedAt: daysAgo(29),
       responses: JSON.stringify({ answers: Array.from({ length: 24 }, (_, i) => ({ questionId: i + 1, anxiety: 1, avoidance: 1 })) }),
-      score: JSON.stringify({ totalScore: 48, maxTotal: 144, anxietyScore: 24, avoidanceScore: 24, maxAnxiety: 72, maxAvoidance: 72, interpretation: 'Anxiété sociale légère' }),
+      score: JSON.stringify({
+        totalScore: 48,
+        maxScore: 144,
+        interpretation: 'Anxiété sociale légère',
+        severityIndex: 0,
+        severityRangeCount: 4,
+        subscores: [
+          { key: 'anxiety', label: 'Anxiété', value: 24, max: 72 },
+          { key: 'avoidance', label: 'Évitement', value: 24, max: 72 },
+        ],
+      }),
       interpretation: 'Anxiété sociale légère',
     },
     // Hugo - PCL-5 completed
@@ -107,7 +127,19 @@ async function main() {
       startedAt: daysAgo(6),
       completedAt: daysAgo(6),
       responses: JSON.stringify({ answers: Array.from({ length: 20 }, (_, i) => ({ questionId: i + 1, value: 3 })) }),
-      score: JSON.stringify({ totalScore: 60, maxTotal: 80, interpretation: 'Présence éventuelle d\'un trouble de stress post-traumatique' }),
+      score: JSON.stringify({
+        totalScore: 60,
+        maxScore: 80,
+        interpretation: 'Présence éventuelle d\'un trouble de stress post-traumatique',
+        severityIndex: 1,
+        severityRangeCount: 2,
+        subscores: [
+          { key: 'cluster-b', label: 'Intrusions (B)', value: 15, max: 20 },
+          { key: 'cluster-c', label: 'Évitement (C)', value: 6, max: 8 },
+          { key: 'cluster-d', label: 'Cognitions et humeur (D)', value: 21, max: 28 },
+          { key: 'cluster-e', label: 'Hyperéveil (E)', value: 18, max: 24 },
+        ],
+      }),
       interpretation: 'Présence éventuelle d\'un trouble de stress post-traumatique',
       patientComments: 'J\'ai eu du mal à répondre aux questions sur les cauchemars.',
     },
@@ -121,7 +153,17 @@ async function main() {
       startedAt: daysAgo(20),
       completedAt: daysAgo(20),
       responses: JSON.stringify({ answers: Array.from({ length: 10 }, (_, i) => ({ questionId: i + 1, value: 3 })) }),
-      score: JSON.stringify({ totalScore: 30, maxTotal: 40, interpretation: 'TOC sévère' }),
+      score: JSON.stringify({
+        totalScore: 30,
+        maxScore: 40,
+        interpretation: 'TOC sévère',
+        severityIndex: 3,
+        severityRangeCount: 5,
+        subscores: [
+          { key: 'obsessions', label: 'Obsessions', value: 15, max: 20 },
+          { key: 'compulsions', label: 'Compulsions', value: 15, max: 20 },
+        ],
+      }),
       interpretation: 'TOC sévère',
     },
 

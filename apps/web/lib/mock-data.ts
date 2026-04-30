@@ -86,8 +86,18 @@ export const MOCK_SESSIONS: Session[] = [
     sentAt: daysAgo(5),
     startedAt: daysAgo(4),
     completedAt: daysAgo(2),
-    score: 67,
-    interpretation: "Anxiété sociale modérée",
+    score: {
+      totalScore: 67,
+      maxScore: 144,
+      interpretation: "Anxiété sociale marquée",
+      severityIndex: 2,
+      severityRangeCount: 4,
+      subscores: [
+        { key: "anxiety", label: "Anxiété", value: 35, max: 72 },
+        { key: "avoidance", label: "Évitement", value: 32, max: 72 },
+      ],
+    },
+    interpretation: "Anxiété sociale marquée",
     createdAt: daysAgo(5),
     updatedAt: daysAgo(2),
     patient: patientById["mock-patient-2"],
@@ -102,7 +112,14 @@ export const MOCK_SESSIONS: Session[] = [
     startedAt: daysAgo(7),
     completedAt: daysAgo(6),
     viewedAt: daysAgo(5),
-    score: 22,
+    score: {
+      totalScore: 22,
+      maxScore: 40,
+      interpretation:
+        "Plus le score est élevé, plus l'estime de soi est élevée.",
+      severityIndex: 0,
+      severityRangeCount: 1,
+    },
     interpretation: "Estime de soi moyenne",
     createdAt: daysAgo(8),
     updatedAt: daysAgo(5),
@@ -118,8 +135,30 @@ export const MOCK_SESSIONS: Session[] = [
     startedAt: daysAgo(14),
     completedAt: daysAgo(13),
     viewedAt: daysAgo(12),
-    score: 41,
-    interpretation: "Symptômes ESPT probables",
+    score: {
+      totalScore: 41,
+      maxScore: 80,
+      interpretation:
+        "Présence éventuelle d'un trouble de stress post-traumatique",
+      severityIndex: 1,
+      severityRangeCount: 2,
+      subscores: [
+        { key: "cluster-b", label: "Intrusions (B)", value: 12, max: 20 },
+        { key: "cluster-c", label: "Évitement (C)", value: 5, max: 8 },
+        { key: "cluster-d", label: "Cognitions et humeur (D)", value: 14, max: 28 },
+        { key: "cluster-e", label: "Hyperéveil (E)", value: 10, max: 24 },
+      ],
+      alerts: [
+        {
+          kind: "diagnostic-threshold",
+          severity: "warning",
+          message:
+            "Selon les critères DSM-5, ce profil correspond à un diagnostic provisoire de TSPT (≥1B, ≥1C, ≥2D, ≥2E avec items cotés ≥ 2). Confirmation requise par évaluation clinique structurée.",
+        },
+      ],
+    },
+    interpretation:
+      "Présence éventuelle d'un trouble de stress post-traumatique",
     createdAt: daysAgo(15),
     updatedAt: daysAgo(12),
     patient: patientById["mock-patient-4"],
@@ -145,7 +184,22 @@ export const MOCK_SESSIONS: Session[] = [
     startedAt: daysAgo(44),
     completedAt: daysAgo(43),
     viewedAt: daysAgo(42),
-    score: 14,
+    score: {
+      totalScore: 14,
+      maxScore: 27,
+      interpretation: "Dépression modérée",
+      severityIndex: 2,
+      severityRangeCount: 5,
+      alerts: [
+        {
+          kind: "suicide-ideation",
+          severity: "warning",
+          message:
+            "Idéation suicidaire endossée à l'item 9 (cotation 1). Évaluation clinique du risque suicidaire recommandée.",
+          itemIndex: 8,
+        },
+      ],
+    },
     interpretation: "Dépression modérée",
     createdAt: daysAgo(45),
     updatedAt: daysAgo(42),
