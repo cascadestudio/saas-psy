@@ -1,13 +1,9 @@
 /**
- * Maps a score to a severity index given the scale's ranges, and exposes a
- * semantic color palette for visual rendering of the verdict.
- *
- * Assumes lower = better (true for all symptom scales: PHQ-9, GAD-7, PCL-5,
- * Y-BOCS, LSAS). For scales where higher = better (RSES), no severity coloring
- * is applied (those scales have no ranges in scalesData).
+ * Maps a severity index (from ScoreResult.severityIndex) to a Tailwind color
+ * palette. Lower index = better health for symptom scales; for scales where
+ * higher = better (RSES), the backend already inverts the index meaning so the
+ * front always reads it the same way.
  */
-
-export type Range = { min: number; max: number; interpretation: string };
 
 export type SeverityPalette = {
   badge: string;
@@ -63,28 +59,12 @@ const PALETTE_BY_COUNT: Record<number, string[]> = {
   5: ["emerald", "lime", "amber", "orange", "red"],
 };
 
-export function getSeverityIndex(
-  score: number | undefined,
-  ranges: Range[] | undefined,
-): number | null {
-  if (score === undefined || !ranges || ranges.length === 0) return null;
-  const idx = ranges.findIndex((r) => score >= r.min && score <= r.max);
-  return idx === -1 ? null : idx;
-}
-
 export function getSeverityPalette(
-  index: number | null,
+  index: number,
   count: number,
 ): SeverityPalette {
-  if (index === null) return PALETTES.neutral;
+  if (index < 0 || count <= 0) return PALETTES.neutral;
   const keys = PALETTE_BY_COUNT[count] ?? PALETTE_BY_COUNT[5];
   const key = keys[Math.min(index, keys.length - 1)] ?? "neutral";
   return PALETTES[key];
-}
-
-export function getRangePalette(
-  rangeIndex: number,
-  count: number,
-): SeverityPalette {
-  return getSeverityPalette(rangeIndex, count);
 }

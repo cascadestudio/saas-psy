@@ -6,6 +6,12 @@ const daysAgo = (days: number) => {
   return d.toISOString();
 };
 
+const indexed = (
+  prefix: string,
+  values: number[],
+): Record<string, number> =>
+  Object.fromEntries(values.map((v, i) => [`${prefix}_${i}`, v]));
+
 export const MOCK_PATIENTS: Patient[] = [
   {
     id: "mock-patient-1",
@@ -86,6 +92,14 @@ export const MOCK_SESSIONS: Session[] = [
     sentAt: daysAgo(5),
     startedAt: daysAgo(4),
     completedAt: daysAgo(2),
+    responses: {
+      ...indexed("anxiety", [
+        2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 1, 1, 1, 1,
+      ]),
+      ...indexed("avoidance", [
+        2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+      ]),
+    },
     score: {
       totalScore: 67,
       maxScore: 144,
@@ -112,6 +126,7 @@ export const MOCK_SESSIONS: Session[] = [
     startedAt: daysAgo(7),
     completedAt: daysAgo(6),
     viewedAt: daysAgo(5),
+    responses: indexed("intensity", [2, 2, 3, 2, 3, 2, 3, 3, 3, 2]),
     score: {
       totalScore: 22,
       maxScore: 40,
@@ -135,6 +150,9 @@ export const MOCK_SESSIONS: Session[] = [
     startedAt: daysAgo(14),
     completedAt: daysAgo(13),
     viewedAt: daysAgo(12),
+    responses: indexed("intensity", [
+      3, 3, 2, 2, 2, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1,
+    ]),
     score: {
       totalScore: 41,
       maxScore: 80,
@@ -184,6 +202,7 @@ export const MOCK_SESSIONS: Session[] = [
     startedAt: daysAgo(44),
     completedAt: daysAgo(43),
     viewedAt: daysAgo(42),
+    responses: indexed("intensity", [2, 2, 2, 1, 2, 2, 1, 1, 1]),
     score: {
       totalScore: 14,
       maxScore: 27,
@@ -204,6 +223,127 @@ export const MOCK_SESSIONS: Session[] = [
     createdAt: daysAgo(45),
     updatedAt: daysAgo(42),
     patient: patientById["mock-patient-1"],
+  },
+  // Historique pour TrendBlock — PHQ-9 plus ancien de Marie (T0, score plus haut → amélioration vs T-7)
+  {
+    id: "mock-session-8",
+    patientId: "mock-patient-1",
+    scaleId: "phq-9",
+    status: "COMPLETED",
+    sentAt: daysAgo(90),
+    startedAt: daysAgo(89),
+    completedAt: daysAgo(88),
+    viewedAt: daysAgo(85),
+    responses: indexed("intensity", [3, 3, 2, 2, 2, 3, 2, 2, 1]),
+    score: {
+      totalScore: 20,
+      maxScore: 27,
+      interpretation: "Dépression sévère",
+      severityIndex: 4,
+      severityRangeCount: 5,
+      alerts: [
+        {
+          kind: "suicide-ideation",
+          severity: "warning",
+          message:
+            "Idéation suicidaire endossée à l'item 9 (cotation 1). Évaluation clinique du risque suicidaire recommandée.",
+          itemIndex: 8,
+        },
+      ],
+    },
+    interpretation: "Dépression sévère",
+    createdAt: daysAgo(90),
+    updatedAt: daysAgo(85),
+    patient: patientById["mock-patient-1"],
+  },
+  // Historique — LSAS plus ancien de Jean (score plus haut → amélioration vs mock-3)
+  {
+    id: "mock-session-9",
+    patientId: "mock-patient-2",
+    scaleId: "echelle-d-anxiete-sociale-de-liebowitz",
+    status: "COMPLETED",
+    sentAt: daysAgo(60),
+    startedAt: daysAgo(59),
+    completedAt: daysAgo(58),
+    viewedAt: daysAgo(57),
+    responses: {
+      ...indexed("anxiety", [
+        3, 2, 3, 2, 3, 2, 3, 2, 3, 2, 3, 2, 3, 2, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+      ]),
+      ...indexed("avoidance", [
+        3, 2, 3, 2, 3, 2, 3, 2, 3, 2, 3, 2, 3, 2, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+      ]),
+    },
+    score: {
+      totalScore: 110,
+      maxScore: 144,
+      interpretation: "Anxiété sociale sévère",
+      severityIndex: 3,
+      severityRangeCount: 4,
+      subscores: [
+        { key: "anxiety", label: "Anxiété", value: 56, max: 72 },
+        { key: "avoidance", label: "Évitement", value: 54, max: 72 },
+      ],
+    },
+    interpretation: "Anxiété sociale sévère",
+    createdAt: daysAgo(60),
+    updatedAt: daysAgo(57),
+    patient: patientById["mock-patient-2"],
+  },
+  // Historique — RSES plus ancien de Marie (score plus bas → amélioration car higherIsBetter)
+  {
+    id: "mock-session-10",
+    patientId: "mock-patient-1",
+    scaleId: "rses",
+    status: "COMPLETED",
+    sentAt: daysAgo(75),
+    startedAt: daysAgo(74),
+    completedAt: daysAgo(73),
+    viewedAt: daysAgo(70),
+    responses: indexed("intensity", [2, 2, 3, 1, 3, 1, 2, 4, 4, 3]),
+    score: {
+      totalScore: 16,
+      maxScore: 40,
+      interpretation:
+        "Plus le score est élevé, plus l'estime de soi est élevée.",
+      severityIndex: 0,
+      severityRangeCount: 1,
+    },
+    interpretation: "Estime de soi faible",
+    createdAt: daysAgo(75),
+    updatedAt: daysAgo(70),
+    patient: patientById["mock-patient-1"],
+  },
+  // Historique — PCL-5 plus ancien de Lucas (score plus bas → aggravation vs mock-5)
+  {
+    id: "mock-session-11",
+    patientId: "mock-patient-4",
+    scaleId: "traumatismes-pcl5",
+    status: "COMPLETED",
+    sentAt: daysAgo(50),
+    startedAt: daysAgo(49),
+    completedAt: daysAgo(48),
+    viewedAt: daysAgo(47),
+    responses: indexed("intensity", [
+      2, 2, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+    ]),
+    score: {
+      totalScore: 24,
+      maxScore: 80,
+      interpretation: "Pas de trouble de stress post-traumatique",
+      severityIndex: 0,
+      severityRangeCount: 2,
+      subscores: [
+        { key: "cluster-b", label: "Intrusions (B)", value: 7, max: 20 },
+        { key: "cluster-c", label: "Évitement (C)", value: 3, max: 8 },
+        { key: "cluster-d", label: "Cognitions et humeur (D)", value: 8, max: 28 },
+        { key: "cluster-e", label: "Hyperéveil (E)", value: 6, max: 24 },
+      ],
+    },
+    interpretation: "Pas de trouble de stress post-traumatique",
+    createdAt: daysAgo(50),
+    updatedAt: daysAgo(47),
+    patient: patientById["mock-patient-4"],
   },
 ];
 

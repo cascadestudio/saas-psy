@@ -21,28 +21,13 @@ import {
   getMockSessionsByPatient,
   isMockId,
 } from "@/lib/mock-data";
-import { Interfaces, Finance, Files } from "doodle-icons";
-import {
-  getMainScore,
-  getMaxScore,
-  getSubscores,
-  getInterpretation as getStoredInterpretation,
-} from "@/lib/score-utils";
+import { Interfaces, Files } from "doodle-icons";
 import { SESSION_STATUS_CONFIG } from "@/lib/session-status";
-import { getSeverityIndex, getSeverityPalette } from "@/lib/severity";
+import { getSeverityPalette } from "@/lib/severity";
 import { ItemResponsesList } from "@/components/passation/ItemResponsesList";
-import type { Scale } from "@melya/core";
-
-/**
- * Fallback for PHQ-9 item 9 (suicide ideation) ≥ 1, until the alerts field is
- * wired through the backend ScoreResult contract.
- */
-function getFlaggedItems(scale: Scale, responses: Record<string, number>): number[] {
-  if (scale.id === "phq-9" && (responses.intensity_8 ?? 0) >= 1) {
-    return [8];
-  }
-  return [];
-}
+import { AlertsBanner } from "@/components/passation/AlertsBanner";
+import { TrendBlock } from "@/components/passation/TrendBlock";
+import { relativeTimeFr, formatDateLongFr } from "@/lib/relative-time";
 
 export default function ResultsPage() {
   const { user, isLoading } = useUser();
@@ -277,43 +262,18 @@ export default function ResultsPage() {
       ? sameScaleSessions[currentSessionIndex + 1]
       : null;
 
-  const currentMain = getMainScore(session.score);
-  const previousMain = getMainScore(previousSession?.score);
-  const maxScore = getMaxScore(session.score);
-  const subscores = getSubscores(session.score);
+  const score = session.score;
+  const currentMain = score?.totalScore;
+  const previousMain = previousSession?.score?.totalScore;
+  const maxScore = score?.maxScore;
+  const subscores = score?.subscores ?? [];
+  const alerts = score?.alerts ?? [];
+  const badgeInterpretation = score?.interpretation || null;
+  const severityPalette = getSeverityPalette(
+    score?.severityIndex ?? -1,
+    score?.severityRangeCount ?? 0,
+  );
 
-  const ranges = scale?.scoring?.ranges;
-  const severityIndex = getSeverityIndex(currentMain, ranges);
-  const severityPalette = getSeverityPalette(severityIndex, ranges?.length ?? 0);
-
-  let trend: "up" | "down" | "stable" | null = null;
-  let trendPercentage = 0;
-
-  if (previousMain !== undefined && currentMain !== undefined) {
-    const diff = currentMain - previousMain;
-    trendPercentage = Math.abs(Math.round((diff / previousMain) * 100));
-    if (diff > 0) trend = "up";
-    else if (diff < 0) trend = "down";
-    else trend = "stable";
-  }
-
-  const storedInterpretation = getStoredInterpretation(session.score);
-  const displayInterpretation = storedInterpretation || session.interpretation;
-
-  const scoreRange =
-    !storedInterpretation && scale?.scoring?.ranges
-      ? scale.scoring.ranges.find(
-          (range: { min: number; max: number }) =>
-            currentMain !== undefined &&
-            currentMain >= range.min &&
-            currentMain <= range.max
-        )
-      : null;
-
-  const badgeInterpretation =
-    storedInterpretation ||
-    scoreRange?.interpretation ||
-    (typeof session.interpretation === "string" ? session.interpretation : null);
 
   return (
     <div className="container mx-auto px-4 py-6">
@@ -321,6 +281,9 @@ export default function ResultsPage() {
       {Header}
 
       <div className="space-y-6">
+        {/* Alertes cliniques — bandeau prioritaire */}
+        {alerts.length > 0 && <AlertsBanner alerts={alerts} />}
+
         {/* Score et interprétation */}
         <div>
           <h2 className="text-lg font-sans font-semibold mb-3">
@@ -388,49 +351,21 @@ export default function ResultsPage() {
               </div>
             )}
 
-            {/* Trend — sera sorti dans sa propre section en P4 */}
-            {trend && previousSession && (
-              <div className="border-t pt-4">
-                <p className="text-sm font-medium mb-2">Évolution</p>
-                <div className="flex items-center gap-2">
-                  {trend === "down" && (
-                    <>
-                      <Finance.TrendUp className="h-4 w-4 text-green-600" />
-                      <span className="text-sm text-green-600">
-                        Amélioration de {trendPercentage}% depuis la dernière
-                        passation
-                      </span>
-                    </>
-                  )}
-                  {trend === "up" && (
-                    <>
-                      <Finance.TrendUp className="h-4 w-4 text-brand-orange" />
-                      <span className="text-sm text-brand-orange">
-                        Augmentation de {trendPercentage}% depuis la dernière
-                        passation
-                      </span>
-                    </>
-                  )}
-                  {trend === "stable" && (
-                    <>
-                      <span className="inline-block w-4 h-0.5 bg-gray-500 rounded" />
-                      <span className="text-sm text-gray-600">
-                        Score stable depuis la dernière passation
-                      </span>
-                    </>
-                  )}
-                </div>
-                <p className="text-xs text-muted-foreground mt-1">
-                  Passation précédente le{" "}
-                  {new Date(previousSession.completedAt!).toLocaleDateString(
-                    "fr-FR",
-                  )}{" "}
-                  : {previousMain}
-                </p>
-              </div>
-            )}
           </div>
         </div>
+
+        {/* Évolution */}
+        {scale &&
+          previousSession?.completedAt &&
+          previousMain !== undefined &&
+          currentMain !== undefined && (
+            <TrendBlock
+              currentScore={currentMain}
+              previousScore={previousMain}
+              previousCompletedAt={previousSession.completedAt}
+              higherIsBetter={scale.higherIsBetter}
+            />
+          )}
 
         {/* Réponses du patient — item par item */}
         {scale && session.responses && (
@@ -441,7 +376,9 @@ export default function ResultsPage() {
             <ItemResponsesList
               scale={scale}
               responses={session.responses}
-              flaggedItems={getFlaggedItems(scale, session.responses)}
+              flaggedItems={alerts
+                .map((a) => a.itemIndex)
+                .filter((i): i is number => typeof i === "number")}
             />
           </div>
         )}
@@ -455,33 +392,71 @@ export default function ResultsPage() {
             <div className="border rounded-lg overflow-hidden">
               {sameScaleSessions.map((s, index) => {
                 const isCurrent = s.id === session.id;
+                const olderSession = sameScaleSessions[index + 1];
+                const sScore = s.score?.totalScore;
+                const olderScore = olderSession?.score?.totalScore;
+                const diff =
+                  sScore !== undefined && olderScore !== undefined
+                    ? sScore - olderScore
+                    : null;
+                const isImprovement =
+                  diff !== null &&
+                  ((diff < 0 && !scale?.higherIsBetter) ||
+                    (diff > 0 && scale?.higherIsBetter));
+                const deltaColor =
+                  diff === null || diff === 0
+                    ? "text-muted-foreground"
+                    : isImprovement
+                      ? "text-emerald-600"
+                      : "text-red-600";
+                const dotPalette = getSeverityPalette(
+                  s.score?.severityIndex ?? -1,
+                  s.score?.severityRangeCount ?? 0,
+                );
                 return (
                   <Link
                     key={s.id}
                     href={`/passation/${s.id}`}
                     className={`flex items-center justify-between p-4 border-t border-border/50 first:border-t-0 transition-colors ${
                       isCurrent
-                        ? "border-l-4 border-l-brand-orange pointer-events-none"
+                        ? "bg-muted/30 pointer-events-none"
                         : "hover:bg-muted-foreground/5 cursor-pointer"
                     }`}
                   >
-                    <div className="flex items-center gap-4">
-                      <span className="text-sm text-muted-foreground w-6">
-                        T{sameScaleSessions.length - 1 - index}
-                      </span>
-                      <div>
+                    <div className="flex items-center gap-3 min-w-0">
+                      <span
+                        className={`h-2.5 w-2.5 rounded-full shrink-0 ${dotPalette.gaugeFill}`}
+                        aria-hidden
+                      />
+                      <div className="min-w-0">
                         <p className="text-sm font-medium">
-                          {new Date(s.completedAt!).toLocaleDateString("fr-FR")}
+                          {s.completedAt
+                            ? formatDateLongFr(s.completedAt)
+                            : "—"}
+                          <span className="text-muted-foreground font-normal">
+                            {" · "}
+                            {s.completedAt
+                              ? relativeTimeFr(s.completedAt)
+                              : ""}
+                          </span>
                         </p>
-                        <p className="text-xs text-muted-foreground">
-                          {getStoredInterpretation(s.score) || s.interpretation}
+                        <p className="text-xs text-muted-foreground truncate">
+                          {s.score?.interpretation || s.interpretation}
                         </p>
                       </div>
                     </div>
-                    <div className="flex items-center gap-3">
-                      <span className="text-2xl font-bold">
-                        {getMainScore(s.score)}
+                    <div className="flex items-center gap-3 shrink-0">
+                      <span className="text-2xl font-bold tabular-nums">
+                        {sScore}
                       </span>
+                      {diff !== null && diff !== 0 && (
+                        <span
+                          className={`text-xs font-semibold tabular-nums ${deltaColor}`}
+                        >
+                          {diff > 0 ? "+" : "−"}
+                          {Math.abs(diff)}
+                        </span>
+                      )}
                       {isCurrent && (
                         <Badge variant="secondary" className="text-xs">
                           Actuel
