@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/sheet";
 import { useUser } from "@/app/context/UserContext";
 import { useAuthGate } from "@/app/context/AuthGateContext";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { patientsApi, sessionsApi, type Patient } from "@/lib/api-client";
 import { MOCK_PATIENTS } from "@/lib/mock-data";
 import { scales } from "@/app/scalesData";
@@ -66,6 +66,8 @@ export function SendScaleSheet({
   const [patientsLoading, setPatientsLoading] = useState(true);
   const [isSending, setIsSending] = useState(false);
   const [patientSearch, setPatientSearch] = useState("");
+  const [emailPreviewHeight, setEmailPreviewHeight] = useState<number>(480);
+  const emailPreviewRef = useRef<HTMLIFrameElement>(null);
 
   // Reset state when sheet opens with new defaults
   useEffect(() => {
@@ -265,7 +267,8 @@ export function SendScaleSheet({
               ) : (
                 <>
                   <p className="text-sm text-muted-foreground">
-                    Sélectionnez un patient dans la liste ou créez-en un nouveau.
+                    Sélectionnez un patient dans la liste ou créez-en un
+                    nouveau.
                   </p>
                   <div className="flex items-center gap-2">
                     <div className="relative flex-1">
@@ -274,15 +277,14 @@ export function SendScaleSheet({
                         placeholder="Rechercher un patient..."
                         value={patientSearch}
                         onChange={(e) => setPatientSearch(e.target.value)}
-                        className="pl-10 rounded-full"
+                        className="pl-10 h-11 rounded-full"
                       />
                     </div>
                     <CreatePatientSheet
                       onPatientCreated={handlePatientCreated}
                       buttonVariant="default"
-                      buttonClassName="bg-primary text-primary-foreground text-base shrink-0"
+                      buttonSize="default"
                       buttonText="Nouveau patient"
-                      hideIcon
                       currentPatientCount={patients.length}
                     />
                   </div>
@@ -337,7 +339,11 @@ export function SendScaleSheet({
                     >
                       <div
                         className="flex items-center justify-center flex-shrink-0"
-                        style={{ backgroundColor: scale.color, aspectRatio: "1 / 1", height: "100%" }}
+                        style={{
+                          backgroundColor: scale.color,
+                          aspectRatio: "1 / 1",
+                          height: "100%",
+                        }}
                       >
                         <Image
                           src={scale.icon}
@@ -351,12 +357,19 @@ export function SendScaleSheet({
                         className="flex flex-col justify-center px-4 flex-1 min-w-0"
                         style={{ backgroundColor: scale.colorLight }}
                       >
-                        <p className="font-heading font-bold text-black leading-tight text-lg">{scale.acronym}</p>
-                        <p className="font-body text-black/70 text-xs leading-snug mt-0.5 truncate">{scale.label}</p>
+                        <p className="font-heading font-bold text-black leading-tight text-lg">
+                          {scale.acronym}
+                        </p>
+                        <p className="font-body text-black/70 text-xs leading-snug mt-0.5 truncate">
+                          {scale.label}
+                        </p>
                       </div>
                       {isSelected && (
                         <div className="absolute top-2 right-2 w-5 h-5 rounded-full bg-primary flex items-center justify-center">
-                          <Interfaces.Tick className="h-3 w-3 text-white" fill="white" />
+                          <Interfaces.Tick
+                            className="h-3 w-3 text-white"
+                            fill="white"
+                          />
                         </div>
                       )}
                     </div>
@@ -393,11 +406,13 @@ export function SendScaleSheet({
               <div className="bg-foreground/5 border border-foreground/10 rounded-xl p-4">
                 <p className="text-sm text-foreground">
                   <strong>1 email</strong> sera envoyé à{" "}
-                  <strong>{selectedPatient?.firstName}</strong> avec un lien vers un portail
-                  contenant{" "}
-                  {selectedScales.length === 1
-                    ? "le questionnaire"
-                    : <strong>les {selectedScales.length} questionnaires</strong>}
+                  <strong>{selectedPatient?.firstName}</strong> avec un lien
+                  vers un portail contenant{" "}
+                  {selectedScales.length === 1 ? (
+                    "le questionnaire"
+                  ) : (
+                    <strong>les {selectedScales.length} questionnaires</strong>
+                  )}
                   .
                 </p>
               </div>
@@ -412,19 +427,32 @@ export function SendScaleSheet({
                   </span>
                 </div>
                 <iframe
+                  ref={emailPreviewRef}
                   srcDoc={buildBatchEmailHtml({
                     patientFirstName: selectedPatient?.firstName ?? "",
                     patientLastName: selectedPatient?.lastName ?? "",
                     scaleNames: selectedScales.map((s) => s.title),
-                    practitionerName: `${user?.firstName ?? ""} ${user?.lastName ?? ""}`.trim(),
+                    practitionerName:
+                      `${user?.firstName ?? ""} ${user?.lastName ?? ""}`.trim(),
                     message: personalMessage || undefined,
                     portalUrl: "#",
                     logoUrl: "/images/logos/logo-melya.svg",
                   })}
-                  className="w-full border-0"
-                  style={{ height: "480px" }}
+                  onLoad={() => {
+                    const doc = emailPreviewRef.current?.contentDocument;
+                    if (!doc) return;
+                    const h = Math.max(
+                      doc.documentElement.scrollHeight,
+                      doc.body.scrollHeight,
+                    );
+                    setEmailPreviewHeight(h);
+                  }}
+                  className="w-full border-0 pointer-events-none block"
+                  style={{ height: `${emailPreviewHeight}px` }}
+                  scrolling="no"
                   sandbox="allow-same-origin"
                   title="Aperçu de l'email"
+                  aria-hidden="true"
                 />
               </div>
             </div>
@@ -447,12 +475,16 @@ export function SendScaleSheet({
             </>
           ) : step === "message" ? (
             <>
-              <Button onClick={() => setStep("scales")} variant="secondary">Retour</Button>
+              <Button onClick={() => setStep("scales")} variant="secondary">
+                Retour
+              </Button>
               <Button onClick={() => setStep("confirm")}>Continuer</Button>
             </>
           ) : (
             <>
-              <Button onClick={() => setStep("message")} variant="secondary">Retour</Button>
+              <Button onClick={() => setStep("message")} variant="secondary">
+                Retour
+              </Button>
               <Button onClick={handleSend} disabled={isSending}>
                 {isSending ? "Envoi en cours..." : "Envoyer"}
               </Button>
