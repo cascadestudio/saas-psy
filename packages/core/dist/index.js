@@ -14,13 +14,6 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
     for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-// Export all types
 __exportStar(require("./types"), exports);
-// Export scoring functions
-__exportStar(require("./scoring"), exports);
-// Export utilities
-__exportStar(require("./utils"), exports);
-// Export email builders
-__exportStar(require("./email"), exports);
-// Export scales data
 __exportStar(require("./scales"), exports);
+__exportStar(require("./email"), exports);

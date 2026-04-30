@@ -1,4 +1,56 @@
-// User types
+/**
+ * Result of scoring a completed passation.
+ *
+ * Computed by the backend at the moment responses are submitted, then stored
+ * as-is on `Session.score`. The frontend only reads — it never recomputes.
+ */
+export interface ScoreResult {
+  /** Total raw score (after RSES inversion when applicable). */
+  totalScore: number;
+  /** Maximum possible score for this scale (e.g. 27 for PHQ-9). */
+  maxScore: number;
+  /** Textual interpretation matching the scale's range (e.g. "Dépression modérée"). */
+  interpretation: string;
+  /**
+   * Index of the matched range in `scale.scoring.ranges`. -1 if score falls
+   * outside any range. Used by the front to resolve the severity color.
+   */
+  severityIndex: number;
+  /** Total number of ranges on the scale, for palette resolution. */
+  severityRangeCount: number;
+  /** Optional structured subscores (PCL-5 clusters, Y-BOCS obs/comp, LSAS anx/avo). */
+  subscores?: Subscore[];
+  /** Clinical alerts (suicide ideation, diagnostic threshold, etc.). */
+  alerts?: ScoreAlert[];
+}
+
+export interface Subscore {
+  /** Stable key (e.g. "intrusion", "obsessions", "anxiety"). */
+  key: string;
+  /** Display label in French. */
+  label: string;
+  value: number;
+  max: number;
+}
+
+export type ScoreAlertKind =
+  | "suicide-ideation"
+  | "diagnostic-threshold"
+  | "critical-item";
+
+export type ScoreAlertSeverity = "info" | "warning" | "critical";
+
+export interface ScoreAlert {
+  kind: ScoreAlertKind;
+  severity: ScoreAlertSeverity;
+  /** Short message shown in the alert banner. */
+  message: string;
+  /** 0-based question index when the alert points to a specific item. */
+  itemIndex?: number;
+}
+
+// User types ----------------------------------------------------------------
+
 export interface User {
   id: string;
   email: string;
@@ -8,111 +60,7 @@ export interface User {
 }
 
 export enum UserRole {
-  PRACTITIONER = 'PRACTITIONER',
-  ADMIN = 'ADMIN',
-  PATIENT = 'PATIENT',
+  PRACTITIONER = "PRACTITIONER",
+  ADMIN = "ADMIN",
+  PATIENT = "PATIENT",
 }
-
-// Questionnaire types
-export interface Questionnaire {
-  id: string;
-  title: string;
-  description: string;
-  longDescription: string;
-  category: string;
-  estimatedTime: string;
-  questions: QuestionnaireQuestion[];
-  answerScales?: AnswerScales;
-  scoring?: ScoringConfig;
-}
-
-export interface QuestionnaireQuestion {
-  id: number;
-  text: string;
-  type: string;
-  // Additional properties based on question type
-  [key: string]: any;
-}
-
-export interface AnswerScales {
-  anxiety?: ScaleOption[];
-  avoidance?: ScaleOption[];
-  intensity?: ScaleOption[];
-  [key: string]: ScaleOption[] | undefined;
-}
-
-export interface ScaleOption {
-  value: number;
-  label: string;
-}
-
-export interface ScoringConfig {
-  method: string;
-  ranges: ScoreRange[];
-  maxTrait?: number;
-  maxState?: number;
-}
-
-export interface ScoreRange {
-  min: number;
-  max: number;
-  interpretation: string;
-}
-
-// Session types
-export interface Session {
-  id: string;
-  questionnaireId: string;
-  patientFirstName: string;
-  patientLastName: string;
-  patientEmail?: string | null;
-  practitionerId: string;
-  status: SessionStatus;
-  responses?: any;
-  score?: ScoreResult;
-  interpretation?: string | null;
-  patientComments?: string | null;
-  sentAt?: Date | null;
-  startedAt?: Date | null;
-  completedAt?: Date | null;
-  expiresAt?: Date | null;
-  createdAt: Date;
-  updatedAt: Date;
-}
-
-export enum SessionStatus {
-  CREATED = 'CREATED',
-  SENT = 'SENT',
-  STARTED = 'STARTED',
-  COMPLETED = 'COMPLETED',
-  EXPIRED = 'EXPIRED',
-  CANCELLED = 'CANCELLED',
-}
-
-// Scoring types
-export interface ScoreResult {
-  totalScore?: number;
-  interpretation?: string;
-  severity?: string;
-  stateScore?: number;
-  traitScore?: number;
-  subscores?: Record<string, number>;
-  details?: string;
-  [key: string]: any;
-}
-
-// API Response types
-export interface ApiResponse<T = any> {
-  success: boolean;
-  data?: T;
-  error?: string;
-  message?: string;
-}
-
-export interface PaginatedResponse<T> extends ApiResponse<T[]> {
-  total: number;
-  page: number;
-  limit: number;
-  totalPages: number;
-}
-

@@ -1,3 +1,24 @@
+export type ScaleFormType = "single-scale" | "dual-scale" | "options";
+
+export interface ScaleOption {
+  value: number;
+  label: string;
+}
+
+export interface ScaleRange {
+  min: number;
+  max: number;
+  interpretation: string;
+}
+
+export interface ScaleScoring {
+  ranges: ScaleRange[];
+  /** Max possible total score (e.g. 27 for PHQ-9, 144 for LSAS, 40 for Y-BOCS / RSES). */
+  maxScore: number;
+  /** Human description of how the score is computed (shown on the scale page). */
+  method: string;
+}
+
 export interface Scale {
   id: string;
   acronym: string;
@@ -5,7 +26,7 @@ export interface Scale {
   icon: string;
   color: string;
   colorLight: string;
-  formType: string;
+  formType: ScaleFormType;
   title: string;
   description: string;
   category: string;
@@ -13,14 +34,15 @@ export interface Scale {
   longDescription: string;
   instructions?: string;
   reverseItems?: number[];
+  /**
+   * True when a higher score = better health (e.g. RSES self-esteem).
+   * False for symptom scales (PHQ-9, GAD-7, PCL-5, Y-BOCS, LSAS) where higher = worse.
+   * Drives delta direction, severity coloring, and trend interpretation.
+   */
+  higherIsBetter: boolean;
   questions: any[];
-  answerScales?: Record<string, { value: number; label: string }[]>;
-  scoring?: {
-    ranges: { min: number; max: number; interpretation: string }[];
-    method: string;
-    maxTrait?: number;
-    maxState?: number;
-  };
+  answerScales?: Record<string, ScaleOption[]>;
+  scoring: ScaleScoring;
 }
 
 export const scales: Scale[] = [
@@ -41,6 +63,7 @@ export const scales: Scale[] = [
       "L'Échelle d'anxiété sociale de Liebowitz (LSAS) est un questionnaire développé par le psychiatre Michael Liebowitz pour évaluer la gravité de l'anxiété sociale. Il mesure à la fois la peur et l'évitement dans 24 situations sociales différentes. Chaque situation est évaluée deux fois : une fois pour le niveau d'anxiété qu'elle provoque (de 0 à 3, où 0 signifie aucune anxiété et 3 une anxiété sévère) et une fois pour la fréquence d'évitement de la situation (également de 0 à 3). Le LSAS est largement utilisé en recherche clinique et en pratique pour évaluer l'efficacité des traitements pour l'anxiété sociale.",
     instructions:
       "Évaluez votre niveau d'anxiété et d'évitement pour chaque situation",
+    higherIsBetter: false,
     questions: [
       { id: 1, text: "Téléphoner en public", type: "performance" },
       { id: 2, text: "Participer à un petit groupe", type: "interaction" },
@@ -88,6 +111,7 @@ export const scales: Scale[] = [
         { min: 65, max: 79, interpretation: "Anxiété sociale marquée" },
         { min: 80, max: 144, interpretation: "Anxiété sociale sévère" },
       ],
+      maxScore: 144,
       method:
         "Pour chaque situation, additionnez les scores d'anxiété (0-3) et d'évitement (0-3). Le score total varie de 0 à 144.",
     },
@@ -109,6 +133,7 @@ export const scales: Scale[] = [
       "Le PHQ-9 (Patient Health Questionnaire-9) est un auto-questionnaire de 9 items issu du PRIME-MD, utilisé pour le dépistage et le suivi de la sévérité d'un épisode dépressif. Il reprend les 9 critères diagnostiques de l'épisode dépressif caractérisé du DSM. Chaque item est coté de 0 (jamais) à 3 (presque tous les jours) et le score total (0-27) permet de situer la sévérité. L'item 9 (idéation suicidaire) requiert une attention clinique particulière dès qu'il est coté ≥ 1, indépendamment du score total.",
     instructions:
       "Au cours des 2 dernières semaines, selon quelle fréquence avez-vous été gêné(e) par les problèmes suivants ?",
+    higherIsBetter: false,
     questions: [
       "Peu d'intérêt ou de plaisir à faire les choses",
       "Être triste, déprimé(e) ou désespéré(e)",
@@ -136,6 +161,7 @@ export const scales: Scale[] = [
         { min: 15, max: 19, interpretation: "Dépression modérément sévère" },
         { min: 20, max: 27, interpretation: "Dépression sévère" },
       ],
+      maxScore: 27,
       method:
         "Additionnez les scores de chaque item (0-3). Le score total varie de 0 à 27. Tout score ≥ 1 à l'item 9 (idéation suicidaire) doit déclencher une alerte clinique indépendamment du score total.",
     },
@@ -157,6 +183,7 @@ export const scales: Scale[] = [
       "Le GAD-7 (Generalized Anxiety Disorder 7-item) est un auto-questionnaire de 7 items développé par Spitzer et collaborateurs (2006) pour le dépistage et la mesure de la sévérité du trouble anxieux généralisé. Chaque item est coté de 0 (jamais) à 3 (presque tous les jours), le score total varie de 0 à 21. Un score ≥ 10 correspond au seuil clinique de suspicion de TAG (sensibilité 89 %, spécificité 82 %), à laisser au jugement du practicien.",
     instructions:
       "Au cours des 14 derniers jours, à quelle fréquence avez-vous été dérangé(e) par les problèmes suivants ?",
+    higherIsBetter: false,
     questions: [
       "Sentiment de nervosité, d'anxiété ou de tension",
       "Incapable d'arrêter de vous inquiéter ou de contrôler vos inquiétudes",
@@ -181,6 +208,7 @@ export const scales: Scale[] = [
         { min: 10, max: 14, interpretation: "Anxiété modérée" },
         { min: 15, max: 21, interpretation: "Anxiété sévère" },
       ],
+      maxScore: 21,
       method:
         "Additionnez les scores de chaque item (0-3). Le score total varie de 0 à 21.",
     },
@@ -200,6 +228,7 @@ export const scales: Scale[] = [
     estimatedTime: "5-10 minutes",
     instructions:
       "Dans le dernier mois, dans quelle mesure avez-vous été affecté par :",
+    higherIsBetter: false,
     longDescription:
       "La PCL-5 (Post-traumatic Stress Disorder Checklist) est un questionnaire d'auto-évaluation de 20 items qui évalue la présence et la sévérité des symptômes du TSPT selon les critères du DSM-5. Cet outil est largement utilisé tant en clinique qu'en recherche pour le dépistage du TSPT, le diagnostic provisoire, et le suivi des changements de symptômes pendant et après le traitement.",
     questions: [
@@ -238,6 +267,7 @@ export const scales: Scale[] = [
         { min: 0, max: 32, interpretation: "Pas de trouble de stress post-traumatique" },
         { min: 33, max: 80, interpretation: "Présence éventuelle d'un trouble de stress post-traumatique" },
       ],
+      maxScore: 80,
       method:
         "Additionnez les scores de chaque item (0-4). Le score total varie de 0 à 80. Un score total de 33 ou plus suggère un diagnostic probable de TSPT.",
     },
@@ -255,6 +285,7 @@ export const scales: Scale[] = [
       "Une échelle d'évaluation des symptômes obsessionnels-compulsifs mesurant la sévérité du TOC",
     category: "Troubles Obsessionnels Compulsifs",
     estimatedTime: "15-20 minutes",
+    higherIsBetter: false,
     instructions:
       "Les questions 1 à 5 ont trait à vos obsessions.\n**Les obsessions** sont des idées, des images ou des impulsions qui s'insinuent dans votre esprit contre votre gré en dépit de vos efforts pour leur résister. Elles ont habituellement comme thèmes la violence, la menace et le danger. Des obsessions courantes sont une peur excessive de la contamination, un pressentiment récurrent de danger, un souci exagéré d'ordre ou de symétrie, une minutie extrême ou la peur de perdre des choses importantes.\n\nLes questions 6 à 10 ont trait à vos comportements compulsif.\n**Les compulsions** sont des actes que le sujet est poussé à accomplir pour atténuer son angoisse ou son malaise. Ces actes prennent souvent la forme de comportements répétitifs, réglés et intentionnels appelés rituels. L'acte lui-même peut sembler approprié, mais il devient un rituel quand il est accompli à l'excès. Des exemples de compulsions sont des rituels de lavage ou de désinfection, des vérifications interminables, des répétitions incessantes, le besoin de constamment ranger ou redresser des objets et le collectionnisme. Certains rituels sont d'ordre intellectuel, par exemple ressasser toujours les mêmes choses.",
     longDescription:
@@ -369,6 +400,7 @@ export const scales: Scale[] = [
         { min: 24, max: 31, interpretation: "TOC sévère" },
         { min: 32, max: 40, interpretation: "TOC extrême" },
       ],
+      maxScore: 40,
       method:
         "Additionnez les scores (0-4) pour chaque item. Le score total varie de 0 à 40. Les scores sont divisés en sous-totaux pour les obsessions (items 1-5) et les compulsions (items 6-10).",
     },
@@ -390,6 +422,7 @@ export const scales: Scale[] = [
       "L'Échelle d'Estime de Soi de Rosenberg (RSES) est l'outil le plus utilisé dans la recherche et la pratique clinique pour mesurer l'estime de soi globale. Elle compte 10 items (5 formulations positives, 5 négatives), cotés de 1 à 4 sur une échelle Likert. Les items négatifs (3, 5, 8, 9, 10) sont inversés avant sommation. Le score total varie de 10 à 40 ; un score plus élevé indique une estime de soi plus élevée. Version française : Vallières & Vallerand (1990).",
     instructions:
       "Pour chacune des caractéristiques ou descriptions suivantes, indiquez à quel point chacune est vraie pour vous.",
+    higherIsBetter: true,
     reverseItems: [3, 5, 8, 9, 10],
     questions: [
       "Je pense que je suis une personne de valeur, au moins égale à n'importe qui d'autre.",
@@ -420,6 +453,7 @@ export const scales: Scale[] = [
             "Plus le score est élevé, plus l'estime de soi est élevée.",
         },
       ],
+      maxScore: 40,
       method:
         "Inverser les cotes des items 3, 5, 8, 9 et 10 (1↔4, 2↔3), puis additionner les 10 items. Le score total varie de 10 à 40.",
     },
