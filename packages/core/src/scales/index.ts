@@ -21,6 +21,7 @@ export interface Scale {
     maxTrait?: number;
     maxState?: number;
   };
+  copyright?: string;
 }
 
 export const scales: Scale[] = [
@@ -116,7 +117,7 @@ export const scales: Scale[] = [
       "Se sentir fatigué(e) ou manquer d'énergie",
       "Avoir peu d'appétit ou manger trop",
       "Avoir une mauvaise opinion de soi-même, ou avoir le sentiment d'être nul(le), ou d'avoir déçu sa famille ou s'être déçu(e) soi-même",
-      "Avoir du mal à se concentrer, par exemple pour lire le journal ou regarder la télévision",
+      "Avoir du mal à se concentrer, par exemple, pour lire le journal ou regarder la télévision",
       "Bouger ou parler si lentement que les autres auraient pu le remarquer. Ou au contraire, être si agité(e) que vous avez eu du mal à tenir en place par rapport à d'habitude",
       "Penser qu'il vaudrait mieux mourir ou envisager de vous faire du mal d'une manière ou d'une autre",
     ],
@@ -139,6 +140,8 @@ export const scales: Scale[] = [
       method:
         "Additionnez les scores de chaque item (0-3). Le score total varie de 0 à 27. Tout score ≥ 1 à l'item 9 (idéation suicidaire) doit déclencher une alerte clinique indépendamment du score total.",
     },
+    copyright:
+      "Développé par les Dr Robert L. Spitzer, Janet B.W. Williams, Kurt Kroenke et leurs collègues grâce à une allocation d'études de Pfizer Inc.",
   },
   {
     id: "gad-7",
@@ -150,27 +153,27 @@ export const scales: Scale[] = [
     formType: "single-scale",
     title: "GAD-7 - Generalized Anxiety Disorder 7-item",
     description:
-      "Une échelle de 7 items évaluant la sévérité des symptômes d'anxiété généralisée au cours des 14 derniers jours",
+      "Une échelle de 7 items évaluant la sévérité des symptômes d'anxiété généralisée au cours des 2 dernières semaines",
     category: "Anxiété généralisée",
     estimatedTime: "2-3 minutes",
     longDescription:
-      "Le GAD-7 (Generalized Anxiety Disorder 7-item) est un auto-questionnaire de 7 items développé par Spitzer et collaborateurs (2006) pour le dépistage et la mesure de la sévérité du trouble anxieux généralisé. Chaque item est coté de 0 (jamais) à 3 (presque tous les jours), le score total varie de 0 à 21. Un score ≥ 10 correspond au seuil clinique de suspicion de TAG (sensibilité 89 %, spécificité 82 %), à laisser au jugement du practicien.",
+      "Le GAD-7 (Generalized Anxiety Disorder 7-item) est un auto-questionnaire de 7 items développé par Spitzer et collaborateurs (2006) pour le dépistage et la mesure de la sévérité du trouble anxieux généralisé. Chaque item est coté de 0 (jamais) à 3 (presque tous les jours), le score total varie de 0 à 21. Un score ≥ 10 correspond au seuil clinique de suspicion de TAG (sensibilité 89 %, spécificité 82 %), à laisser au jugement du praticien.",
     instructions:
-      "Au cours des 14 derniers jours, à quelle fréquence avez-vous été dérangé(e) par les problèmes suivants ?",
+      "Au cours des 2 dernières semaines, selon quelle fréquence avez-vous été gêné(e) par les problèmes suivants ?",
     questions: [
-      "Sentiment de nervosité, d'anxiété ou de tension",
-      "Incapable d'arrêter de vous inquiéter ou de contrôler vos inquiétudes",
-      "Inquiétudes excessives à propos de tout et de rien",
-      "Difficulté à se détendre",
-      "Agitation telle qu'il est difficile de rester tranquille",
-      "Devenir facilement contrarié(e) ou irritable",
-      "Avoir peur que quelque chose d'épouvantable puisse arriver",
+      "Un sentiment de nervosité, d'anxiété ou de tension",
+      "Une incapacité à arrêter de s'inquiéter ou à contrôler ses inquiétudes",
+      "Une inquiétude excessive à propos de différentes choses",
+      "Des difficultés à se détendre",
+      "Une agitation telle qu'il est difficile à tenir en place",
+      "Une tendance à être facilement contrarié(e) ou irritable",
+      "Un sentiment de peur comme si quelque chose de terrible risquait de se produire",
     ],
     answerScales: {
       intensity: [
         { value: 0, label: "Jamais" },
         { value: 1, label: "Plusieurs jours" },
-        { value: 2, label: "Plus de la moitié des jours" },
+        { value: 2, label: "Plus de la moitié du temps" },
         { value: 3, label: "Presque tous les jours" },
       ],
     },
@@ -184,6 +187,8 @@ export const scales: Scale[] = [
       method:
         "Additionnez les scores de chaque item (0-3). Le score total varie de 0 à 21.",
     },
+    copyright:
+      "Développé par les Dr Robert L. Spitzer, Janet B.W. Williams, Kurt Kroenke et leurs collègues grâce à une allocation d'études de Pfizer Inc.",
   },
   {
     id: "traumatismes-pcl5",
@@ -203,7 +208,7 @@ export const scales: Scale[] = [
     longDescription:
       "La PCL-5 (Post-traumatic Stress Disorder Checklist) est un questionnaire d'auto-évaluation de 20 items qui évalue la présence et la sévérité des symptômes du TSPT selon les critères du DSM-5. Cet outil est largement utilisé tant en clinique qu'en recherche pour le dépistage du TSPT, le diagnostic provisoire, et le suivi des changements de symptômes pendant et après le traitement.",
     questions: [
-      "Des souvenirs répétés, pénibles et involontaires de l'expérience stressante ?",
+      "Des souvenirs indésirables, perturbants et répétitifs de l'expérience stressante ?",
       "Des rêves répétés et pénibles de l'expérience stressante ?",
       "Se sentir ou agir soudainement comme si vous viviez à nouveau l'expérience stressante ?",
       "Se sentir mal quand quelque chose vous rappelle l'événement ?",
@@ -235,12 +240,14 @@ export const scales: Scale[] = [
     },
     scoring: {
       ranges: [
-        { min: 0, max: 32, interpretation: "Pas de trouble de stress post-traumatique" },
-        { min: 33, max: 80, interpretation: "Présence éventuelle d'un trouble de stress post-traumatique" },
+        { min: 0, max: 31, interpretation: "Pas de trouble de stress post-traumatique" },
+        { min: 32, max: 80, interpretation: "Présence éventuelle d'un trouble de stress post-traumatique" },
       ],
       method:
-        "Additionnez les scores de chaque item (0-4). Le score total varie de 0 à 80. Un score total de 33 ou plus suggère un diagnostic probable de TSPT.",
+        "Additionnez les scores de chaque item (0-4). Le score total varie de 0 à 80. Un score total ≥ 32 (seuil de la version française validée par Ashbaugh et al. 2016) suggère un diagnostic probable de TSPT. Quatre subscores par cluster DSM-5 sont calculés : B – Intrusions (items 1-5), C – Évitement (items 6-7), D – Altérations cognitions/humeur (items 8-14), E – Hyper-éveil (items 15-20). Un diagnostic provisoire DSM-5 par symptom-count est également calculé (item endossé si ≥ 2 ; au moins 1 B, 1 C, 2 D et 2 E endossés).",
     },
+    copyright:
+      "Weathers, Litz, Keane, Palmieri, Marx & Schnurr (2013), National Centre for PTSD ©2013. Traduction française et validation par Ashbaugh et al. (2016).",
   },
   {
     id: "index-symptomes-ybocs",

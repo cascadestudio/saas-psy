@@ -4,6 +4,7 @@ import { ScoreResult } from './types';
 import { calculateOptionsScore } from './calculators/options';
 import { calculateLiebowitzScore } from './calculators/liebowitz';
 import { calculateSingleScaleScore } from './calculators/single-scale';
+import { calculatePcl5Score } from './calculators/pcl-5';
 
 @Injectable()
 export class ScoringService {
@@ -15,6 +16,10 @@ export class ScoringService {
 
     if (!scale) {
       throw new Error(`Scale not found: ${scaleId}`);
+    }
+
+    if (scaleId === 'traumatismes-pcl5') {
+      return calculatePcl5Score(scale, responses);
     }
 
     switch (scale.formType) {

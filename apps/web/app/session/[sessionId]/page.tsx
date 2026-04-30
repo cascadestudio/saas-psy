@@ -181,7 +181,7 @@ function SessionScaleWrapper({
       });
       router.push(`/p/${batchId}`);
     } else {
-      router.push(`/session/${sessionId}/merci`);
+      router.push(`/session/${sessionId}/merci?scale=${encodeURIComponent(scale.id)}`);
     }
   };
 

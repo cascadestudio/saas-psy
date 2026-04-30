@@ -21,9 +21,17 @@ export function calculateSingleScaleScore(
     : 0;
   const maxTotal = questionCount * maxPossibleValue;
 
-  return {
+  const result: ScoreResult = {
     totalScore,
     maxTotal,
     interpretation: getInterpretation(scale, totalScore),
   };
+
+  // PHQ-9 — drapeau d'alerte item 9 (idéation suicidaire) ≥ 1
+  if (scale?.id === 'phq-9') {
+    const item9 = parseInt(String(responses['intensity_8']), 10);
+    result.alerteSuicide = Number.isFinite(item9) && item9 >= 1;
+  }
+
+  return result;
 }

@@ -18,4 +18,17 @@ export interface ScoreResult {
   maxInteractionAnxiety?: number;
   maxPerformanceAvoidance?: number;
   maxInteractionAvoidance?: number;
+  // PHQ-9
+  alerteSuicide?: boolean;
+  // PCL-5 — DSM-5 cluster subscores
+  subscoreClusterB?: number;
+  subscoreClusterC?: number;
+  subscoreClusterD?: number;
+  subscoreClusterE?: number;
+  maxClusterB?: number;
+  maxClusterC?: number;
+  maxClusterD?: number;
+  maxClusterE?: number;
+  // PCL-5 — provisional DSM-5 diagnosis by symptom-count
+  diagnosticProvisoireDSM5?: boolean;
 }

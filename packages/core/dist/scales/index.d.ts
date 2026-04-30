@@ -28,6 +28,7 @@ export interface Scale {
         maxTrait?: number;
         maxState?: number;
     };
+    copyright?: string;
 }
 export declare const scales: Scale[];
 export declare function getScaleById(id: string): Scale | undefined;

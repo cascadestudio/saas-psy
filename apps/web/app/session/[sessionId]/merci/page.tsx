@@ -1,6 +1,14 @@
 import { Interfaces } from "doodle-icons";
+import { getScaleById } from "@melya/core";
 
-export default function ThankYouPage() {
+export default async function ThankYouPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ scale?: string }>;
+}) {
+  const { scale: scaleId } = await searchParams;
+  const scale = scaleId ? getScaleById(scaleId) : undefined;
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50">
       <div className="text-center max-w-md mx-auto px-4">
@@ -17,6 +25,11 @@ export default function ThankYouPage() {
             Les résultats seront consultés lors de votre prochain rendez-vous.
           </p>
         </div>
+        {scale?.copyright && (
+          <p className="mt-6 text-xs text-gray-400 italic px-4 leading-relaxed">
+            {scale.copyright}
+          </p>
+        )}
       </div>
     </div>
   );

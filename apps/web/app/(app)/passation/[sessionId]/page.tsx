@@ -299,12 +299,56 @@ export default function ResultsPage() {
     scoreRange?.interpretation ||
     (typeof session.interpretation === "string" ? session.interpretation : null);
 
+  const scoreObj =
+    session.score && typeof session.score === "object"
+      ? (session.score as Record<string, unknown>)
+      : undefined;
+  const alerteSuicide = scoreObj?.alerteSuicide === true;
+  const diagnosticProvisoireDSM5 = scoreObj?.diagnosticProvisoireDSM5 as
+    | boolean
+    | undefined;
+
   return (
     <div className="container mx-auto px-4 py-6">
       {Breadcrumb}
       {Header}
 
       <div className="space-y-6">
+        {/* Alerte clinique — idéation suicidaire (PHQ-9) */}
+        {alerteSuicide && (
+          <div className="border border-red-300 bg-red-50 rounded-lg p-4 flex items-start gap-3">
+            <Interfaces.Caution className="h-5 w-5 text-red-600 flex-shrink-0 mt-0.5" />
+            <div>
+              <p className="text-sm font-semibold text-red-800">
+                Alerte clinique — idéation suicidaire
+              </p>
+              <p className="text-sm text-red-700 mt-1">
+                L&apos;item 9 du PHQ-9 (idéation suicidaire) est coté ≥ 1.
+                Évaluation clinique recommandée indépendamment du score total.
+              </p>
+            </div>
+          </div>
+        )}
+
+        {/* Diagnostic provisoire DSM-5 (PCL-5) */}
+        {diagnosticProvisoireDSM5 !== undefined && (
+          <div className="border rounded-lg p-4">
+            <p className="text-sm font-medium mb-1">
+              Diagnostic provisoire DSM-5
+            </p>
+            <p className="text-sm text-muted-foreground">
+              {diagnosticProvisoireDSM5
+                ? "Selon les critères DSM-5, ce profil correspond à un diagnostic provisoire de TSPT (à confirmer par évaluation clinique structurée)."
+                : "Selon les critères DSM-5, ce profil ne correspond pas à un diagnostic provisoire de TSPT."}
+            </p>
+            <p className="text-xs text-muted-foreground/80 mt-2 italic">
+              La PCL-5 évalue les critères B/C/D/E du DSM-5. Le critère A
+              (exposition à un événement traumatique) doit être évalué
+              cliniquement.
+            </p>
+          </div>
+        )}
+
         {/* Score et interprétation */}
         <div>
           <h2 className="text-lg font-sans font-semibold mb-3">

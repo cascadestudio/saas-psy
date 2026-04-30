@@ -18,6 +18,16 @@ export interface StoredScore {
   maxAvoidance?: number;
   maxObsessions?: number;
   maxCompulsions?: number;
+  alerteSuicide?: boolean;
+  subscoreClusterB?: number;
+  subscoreClusterC?: number;
+  subscoreClusterD?: number;
+  subscoreClusterE?: number;
+  maxClusterB?: number;
+  maxClusterC?: number;
+  maxClusterD?: number;
+  maxClusterE?: number;
+  diagnosticProvisoireDSM5?: boolean;
 }
 
 const SUBSCORE_LABELS: Record<string, string> = {
@@ -29,6 +39,10 @@ const SUBSCORE_LABELS: Record<string, string> = {
   avoidanceInteractionScore: "Évitement interaction",
   obsessionsScore: "Obsessions",
   compulsionsScore: "Compulsions",
+  subscoreClusterB: "B – Intrusions",
+  subscoreClusterC: "C – Évitement",
+  subscoreClusterD: "D – Cognitions/humeur",
+  subscoreClusterE: "E – Hyper-éveil",
 };
 
 // Legacy score labels for old format { total, anxiety, avoidance, ... }
@@ -95,6 +109,10 @@ export function getSubscores(score: number | Record<string, any> | undefined): {
       avoidanceScore: "maxAvoidance",
       obsessionsScore: "maxObsessions",
       compulsionsScore: "maxCompulsions",
+      subscoreClusterB: "maxClusterB",
+      subscoreClusterC: "maxClusterC",
+      subscoreClusterD: "maxClusterD",
+      subscoreClusterE: "maxClusterE",
     };
 
     for (const [key, label] of Object.entries(SUBSCORE_LABELS)) {

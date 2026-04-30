@@ -94,6 +94,13 @@ export default async function ScaleDescriptionPage({
           <ScalePreview scale={scale} />
         </div>
 
+        {/* Mention copyright / source */}
+        {scale.copyright && (
+          <p className="text-xs text-muted-foreground italic mb-6 px-1">
+            {scale.copyright}
+          </p>
+        )}
+
         {/* Cotations & interprétations */}
         {scale.scoring && (
           <>
