@@ -55,7 +55,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
                   "relative flex items-center gap-3 px-2 py-2 text-sm font-medium transition-all duration-200",
                   isActive
                     ? "text-brand-orange translate-x-1"
-                    : "text-foreground hover:text-brand-orange hover:translate-x-1",
+                    : "text-muted-foreground hover:text-brand-orange hover:translate-x-1",
                 )}
               >
                 {isActive && (
@@ -77,7 +77,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
                 "flex items-center gap-3 px-2 py-2 text-sm font-medium transition-all duration-200",
                 pathname === "/settings" || pathname.startsWith("/settings/")
                   ? "text-brand-orange translate-x-1"
-                  : "text-foreground hover:text-brand-orange hover:translate-x-1",
+                  : "text-muted-foreground hover:text-brand-orange hover:translate-x-1",
               )}
             >
               <Interfaces.Setting className="h-4 w-4" fill="currentColor" />
@@ -85,7 +85,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
             </Link>
             <a
               href="mailto:clement@melya.app"
-              className="flex items-center gap-3 px-2 py-2 text-sm font-medium text-foreground transition-all duration-200 hover:text-brand-orange hover:translate-x-1"
+              className="flex items-center gap-3 px-2 py-2 text-sm font-medium text-muted-foreground transition-all duration-200 hover:text-brand-orange hover:translate-x-1"
             >
               <Interfaces.Message className="h-4 w-4" fill="currentColor" />
               Nous contacter
@@ -93,7 +93,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
             {!user && (
               <button
                 onClick={() => openAuthGate()}
-                className="flex items-center gap-3 px-2 py-2 text-sm font-medium text-foreground transition-all duration-200 hover:text-brand-orange hover:translate-x-1"
+                className="flex items-center gap-3 px-2 py-2 text-sm font-medium text-muted-foreground transition-all duration-200 hover:text-brand-orange hover:translate-x-1"
               >
                 <Interfaces.Login className="h-4 w-4" fill="currentColor" />
                 Se connecter
