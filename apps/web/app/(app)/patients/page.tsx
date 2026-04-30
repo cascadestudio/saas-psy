@@ -97,7 +97,7 @@ export default function PatientsPage() {
   return (
     <div className="container mx-auto px-4 py-6">
       <div className="mb-6 flex items-center gap-3">
-        <h1 className="font-normal text-3xl">Patients</h1>
+        <h1 className="font-gelica font-normal text-3xl">Patients</h1>
         <CreatePatientSheet
           onPatientCreated={loadData}
           currentPatientCount={activeCount}

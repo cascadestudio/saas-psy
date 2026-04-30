@@ -109,29 +109,17 @@
     background-color: #EDE8DF;
   }
 
-  /* h1, h2 use Gelica */
-  h1, h2 {
-    font-family: var(--font-gelica), Georgia, serif;
-    font-style: normal;
-    @apply font-semibold tracking-tight;
-  }
-
-  /* h3+ use Rethink Sans */
-  h3, h4, h5, h6 {
+  /* All headings use Rethink Sans by default. Opt in to Gelica via .font-gelica / .font-heading. */
+  h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-rethink), sans-serif;
     @apply font-semibold tracking-tight;
-  }
-
-  /* Labels and heading utility use Gelica */
-  label, .font-heading {
-    font-family: var(--font-gelica), Georgia, serif;
-    font-style: normal;
   }
 }
 
 /* Utility classes for brand fonts */
 @layer utilities {
-  .font-gelica {
+  .font-gelica,
+  .font-heading {
     font-family: var(--font-gelica), Georgia, serif;
     font-style: normal;
   }

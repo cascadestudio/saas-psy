@@ -54,7 +54,7 @@ export function Pricing() {
           ref={ref}
           className={`scroll-animate ${isVisible ? "visible" : ""}`}
         >
-          <h2 className="text-2xl sm:text-3xl font-bold text-center text-foreground mb-6">
+          <h2 className="font-gelica text-2xl sm:text-3xl font-bold text-center text-foreground mb-6">
             Tarifs
           </h2>
 

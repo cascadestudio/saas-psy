@@ -31,7 +31,7 @@ export default function EchellesPage() {
   return (
     <div className="container mx-auto px-4 py-6">
       <div className="mb-6">
-        <h1 className="font-normal text-3xl">Échelles psychométriques</h1>
+        <h1 className="font-gelica font-normal text-3xl">Échelles psychométriques</h1>
       </div>
 
       <div className="mb-4">

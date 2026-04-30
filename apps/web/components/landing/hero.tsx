@@ -11,7 +11,7 @@ export function Hero() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 lg:gap-16 items-center overflow-visible">
           {/* Left — Copy */}
           <div className="space-y-12">
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-normal text-foreground !leading-[1.2]">
+            <h1 className="font-gelica text-3xl sm:text-4xl lg:text-5xl font-normal text-foreground !leading-[1.2]">
               Vos échelles cotées automatiquement,
               <br />
               en{" "}

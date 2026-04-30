@@ -144,7 +144,7 @@ export default function PatientDetailPage() {
     <div className="container mx-auto px-4 py-6">
       {/* Header */}
       <div className="flex items-center gap-3 mb-1">
-        <h1 className="font-normal text-3xl">
+        <h1 className="font-gelica font-normal text-3xl">
           {patient.firstName} {patient.lastName}
         </h1>
         {isArchived && (

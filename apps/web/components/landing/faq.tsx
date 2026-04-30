@@ -41,7 +41,7 @@ export function FAQ() {
           ref={ref}
           className={`scroll-animate ${isVisible ? "visible" : ""}`}
         >
-          <h2 className="text-3xl sm:text-4xl font-normal text-center text-foreground mb-12">
+          <h2 className="font-gelica text-3xl sm:text-4xl font-normal text-center text-foreground mb-12">
             Questions fréquentes
           </h2>
 

@@ -202,7 +202,7 @@ export default function DashboardPage() {
         </div>
       )}
       <div className="mb-8">
-        <h1 className="font-normal text-4xl">
+        <h1 className="font-gelica font-normal text-4xl">
           {user ? `Bonjour${firstName}` : "Bienvenue sur Melya"}
         </h1>
       </div>

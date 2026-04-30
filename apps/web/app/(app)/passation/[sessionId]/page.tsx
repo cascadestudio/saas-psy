@@ -177,7 +177,7 @@ export default function ResultsPage() {
               <TooltipProvider delayDuration={200}>
                 <Tooltip>
                   <TooltipTrigger asChild>
-                    <h1 className="font-normal text-3xl leading-tight border-b border-dotted border-muted-foreground/40 inline-block cursor-help">
+                    <h1 className="font-gelica font-normal text-3xl leading-tight border-b border-dotted border-muted-foreground/40 inline-block cursor-help">
                       {headerTitle}
                     </h1>
                   </TooltipTrigger>
@@ -187,7 +187,7 @@ export default function ResultsPage() {
                 </Tooltip>
               </TooltipProvider>
             ) : (
-              <h1 className="font-normal text-3xl leading-tight">
+              <h1 className="font-gelica font-normal text-3xl leading-tight">
                 {headerTitle}
               </h1>
             )}
