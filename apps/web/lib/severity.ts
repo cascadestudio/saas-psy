@@ -14,37 +14,37 @@ export type SeverityPalette = {
 
 const PALETTES: Record<string, SeverityPalette> = {
   emerald: {
-    badge: "bg-emerald-100 text-emerald-900 border-emerald-300",
+    badge: "text-foreground",
     badgeText: "text-emerald-700",
     gaugeFill: "bg-emerald-500",
     gaugeFillMuted: "bg-emerald-200",
   },
   lime: {
-    badge: "bg-lime-100 text-lime-900 border-lime-300",
+    badge: "text-foreground",
     badgeText: "text-lime-700",
     gaugeFill: "bg-lime-500",
     gaugeFillMuted: "bg-lime-200",
   },
   amber: {
-    badge: "bg-amber-100 text-amber-900 border-amber-300",
+    badge: "text-foreground",
     badgeText: "text-amber-700",
     gaugeFill: "bg-amber-500",
     gaugeFillMuted: "bg-amber-200",
   },
   orange: {
-    badge: "bg-orange-100 text-orange-900 border-orange-300",
+    badge: "text-foreground",
     badgeText: "text-orange-700",
     gaugeFill: "bg-orange-500",
     gaugeFillMuted: "bg-orange-200",
   },
   red: {
-    badge: "bg-red-100 text-red-900 border-red-300",
+    badge: "text-foreground",
     badgeText: "text-red-700",
     gaugeFill: "bg-red-500",
     gaugeFillMuted: "bg-red-200",
   },
   neutral: {
-    badge: "bg-muted text-foreground border-border",
+    badge: "text-foreground",
     badgeText: "text-muted-foreground",
     gaugeFill: "bg-muted-foreground",
     gaugeFillMuted: "bg-muted",

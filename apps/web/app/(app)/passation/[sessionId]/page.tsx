@@ -290,16 +290,22 @@ export default function ResultsPage() {
             Score et interprétation
           </h2>
           <div className="border rounded-lg p-6 space-y-6">
-            {/* Interprétation clinique — verdict en gros */}
+            {/* Interprétation clinique — pastille + verdict */}
             {badgeInterpretation && (
               <div>
                 <p className="text-sm font-medium mb-2">
                   Interprétation clinique
                 </p>
-                <div
-                  className={`inline-flex items-center rounded-md border px-4 py-2 text-2xl font-medium ${severityPalette.badge}`}
-                >
-                  {badgeInterpretation}
+                <div className="inline-flex items-center gap-3">
+                  {(score?.severityRangeCount ?? 0) > 1 && (
+                    <span
+                      className={`h-3 w-3 rounded-full shrink-0 ${severityPalette.gaugeFill}`}
+                      aria-hidden
+                    />
+                  )}
+                  <span className="text-2xl font-medium">
+                    {badgeInterpretation}
+                  </span>
                 </div>
               </div>
             )}
@@ -409,9 +415,11 @@ export default function ResultsPage() {
                     : isImprovement
                       ? "text-emerald-600"
                       : "text-red-600";
+                const rangeCount = s.score?.severityRangeCount ?? 0;
+                const hasSeverity = rangeCount > 1;
                 const dotPalette = getSeverityPalette(
                   s.score?.severityIndex ?? -1,
-                  s.score?.severityRangeCount ?? 0,
+                  rangeCount,
                 );
                 return (
                   <Link
@@ -424,10 +432,12 @@ export default function ResultsPage() {
                     }`}
                   >
                     <div className="flex items-center gap-3 min-w-0">
-                      <span
-                        className={`h-2.5 w-2.5 rounded-full shrink-0 ${dotPalette.gaugeFill}`}
-                        aria-hidden
-                      />
+                      {hasSeverity && (
+                        <span
+                          className={`h-2.5 w-2.5 rounded-full shrink-0 ${dotPalette.gaugeFill}`}
+                          aria-hidden
+                        />
+                      )}
                       <div className="min-w-0">
                         <p className="text-sm font-medium">
                           {s.completedAt
