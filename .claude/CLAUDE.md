@@ -6,6 +6,12 @@ SaaS pour psychologues : envoi d'échelles, passation en ligne, scoring automati
 
 - L'app est actuelement en phase de pré-lancement
 
+## Onboarding & auth model
+
+- Low-friction : l'app est ouverte sans authentification. Un visiteur non connecté peut accéder à `/dashboard` et naviguer dans l'app, qui affiche des **mock data** pour qu'il puisse l'essayer.
+- Une **modale de création de compte** s'affiche uniquement quand une action nécessite un compte (créer une vraie session, envoyer un email patient, etc.).
+- Conséquence pour le code : les CTA publics qui pointent vers `/dashboard` ne sont pas un bug. Les guards d'auth vivent au niveau des actions (via la modale signup), pas au niveau des routes.
+
 ## Stack
 
 - **Frontend**: Next.js 15 (App Router), TailwindCSS, shadcn/ui, TypeScript

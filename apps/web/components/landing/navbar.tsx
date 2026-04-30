@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { Interfaces } from "doodle-icons";
 import Image from "next/image";
 import Link from "next/link";
+import { useUser } from "@/app/context/UserContext";
 
 const navLinks = [
   { href: "#fonctionnalites", label: "Fonctionnalités" },
@@ -15,6 +16,8 @@ const navLinks = [
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const { user } = useUser();
+  const ctaLabel = user ? "Tableau de bord" : "Essayer Melya";
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -62,7 +65,7 @@ export function Navbar() {
               href="/dashboard"
               className="font-body font-medium text-sm rounded-full px-5 py-2 bg-brand-orange text-white hover:bg-brand-orange/90 transition-colors"
             >
-              Essayer Melya
+              {ctaLabel}
             </Link>
           </div>
 
@@ -101,7 +104,7 @@ export function Navbar() {
                 className="block w-full text-center font-body font-medium text-sm rounded-full px-5 py-2 bg-brand-orange text-white hover:bg-brand-orange/90 transition-colors"
                 onClick={() => setMobileOpen(false)}
               >
-                Essayer Melya
+                {ctaLabel}
               </Link>
             </div>
           </div>
