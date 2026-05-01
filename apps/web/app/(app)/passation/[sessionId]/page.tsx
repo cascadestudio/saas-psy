@@ -29,6 +29,10 @@ import { AlertsBanner } from "@/components/passation/AlertsBanner";
 import { TrendBlock } from "@/components/passation/TrendBlock";
 import { PatientCommentsBlock } from "@/components/passation/PatientCommentsBlock";
 import { PassationSkeleton } from "@/components/passation/PassationSkeleton";
+import { ConsigneBlock } from "@/components/passation/ConsigneBlock";
+import { CopyrightFooter } from "@/components/passation/CopyrightFooter";
+import { SeverityGauge } from "@/components/passation/SeverityGauge";
+import { Pcl5DiagnosticBlock } from "@/components/passation/Pcl5DiagnosticBlock";
 import { relativeTimeFr, formatDateLongFr } from "@/lib/relative-time";
 
 export default function ResultsPage() {
@@ -321,6 +325,9 @@ export default function ResultsPage() {
         {/* Alertes cliniques — bandeau prioritaire */}
         {alerts.length > 0 && <AlertsBanner alerts={alerts} />}
 
+        {/* Rappel de la consigne envoyée au patient */}
+        {scale && <ConsigneBlock scale={scale} />}
+
         {/* Score et interprétation */}
         <div>
           <h2 className="text-lg font-sans font-semibold mb-3">
@@ -357,6 +364,15 @@ export default function ResultsPage() {
                 <span className="text-muted-foreground"> / {maxScore}</span>
               )}
             </div>
+
+            {/* Jauge segmentée par seuils */}
+            {scale && currentMain !== undefined && (
+              <SeverityGauge
+                scale={scale}
+                score={currentMain}
+                severityIndex={score?.severityIndex ?? -1}
+              />
+            )}
 
             {/* Subscores as mini-cards */}
             {subscores.length > 0 && (
@@ -396,6 +412,13 @@ export default function ResultsPage() {
 
           </div>
         </div>
+
+        {/* Diagnostic provisoire DSM-5 (PCL-5 uniquement) */}
+        {scale?.id === "traumatismes-pcl5" && session.responses && (
+          <Pcl5DiagnosticBlock
+            responses={session.responses as Record<string, number>}
+          />
+        )}
 
         {/* Évolution */}
         {scale &&
@@ -536,6 +559,11 @@ export default function ResultsPage() {
               })}
             </ol>
           </div>
+        )}
+
+        {/* Mention copyright */}
+        {scale?.copyrightAttribution && (
+          <CopyrightFooter attribution={scale.copyrightAttribution} />
         )}
       </div>
     </div>

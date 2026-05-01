@@ -1,6 +1,15 @@
-import { Interfaces } from "doodle-icons";
+"use client";
 
-export default function ThankYouPage() {
+import { Suspense } from "react";
+import { useSearchParams } from "next/navigation";
+import { Interfaces } from "doodle-icons";
+import { getScaleById } from "@melya/core";
+
+function ThankYou() {
+  const searchParams = useSearchParams();
+  const scaleId = searchParams.get("scale");
+  const scale = scaleId ? getScaleById(scaleId) : undefined;
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50">
       <div className="text-center max-w-md mx-auto px-4">
@@ -17,7 +26,20 @@ export default function ThankYouPage() {
             Les résultats seront consultés lors de votre prochain rendez-vous.
           </p>
         </div>
+        {scale?.copyrightAttribution && (
+          <p className="text-[11px] text-gray-400 leading-relaxed mt-6 px-2">
+            {scale.copyrightAttribution}
+          </p>
+        )}
       </div>
     </div>
+  );
+}
+
+export default function ThankYouPage() {
+  return (
+    <Suspense fallback={null}>
+      <ThankYou />
+    </Suspense>
   );
 }

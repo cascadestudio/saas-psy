@@ -1,5 +1,11 @@
 import { Badge } from "@/components/ui/badge";
 import { Interfaces } from "doodle-icons";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import type { Scale } from "@melya/core";
 
 type Props = {
@@ -11,13 +17,18 @@ type Props = {
 type Row = {
   index: number;
   label: string;
+  prompt?: string;
   values: { dimension?: string; value: number; modalityLabel: string }[];
 };
 
-function getRows(
-  scale: Scale,
-  responses: Record<string, number>,
-): Row[] {
+type Section = {
+  title?: string;
+  rows: Row[];
+};
+
+const YBOCS_INVERTED_ITEM_INDEXES = new Set([3, 8]);
+
+function getRows(scale: Scale, responses: Record<string, number>): Row[] {
   if (scale.formType === "dual-scale") {
     const anxietyScale = scale.answerScales?.anxiety ?? [];
     const avoidanceScale = scale.answerScales?.avoidance ?? [];
@@ -52,10 +63,8 @@ function getRows(
       return {
         index: i,
         label: q.title ?? q.text ?? "",
-        values:
-          value !== undefined
-            ? [{ value, modalityLabel }]
-            : [],
+        prompt: q.prompt,
+        values: value !== undefined ? [{ value, modalityLabel }] : [],
       };
     });
   }
@@ -72,25 +81,65 @@ function getRows(
     return {
       index: i,
       label: text,
-      values:
-        value !== undefined
-          ? [{ value, modalityLabel }]
-          : [],
+      values: value !== undefined ? [{ value, modalityLabel }] : [],
     };
   });
 }
 
+function groupRows(scale: Scale, rows: Row[]): Section[] {
+  if (scale.id === "traumatismes-pcl5") {
+    return [
+      { title: "Cluster B — Intrusions", rows: rows.slice(0, 5) },
+      { title: "Cluster C — Évitement", rows: rows.slice(5, 7) },
+      {
+        title: "Cluster D — Cognitions et humeur",
+        rows: rows.slice(7, 14),
+      },
+      { title: "Cluster E — Hyperéveil", rows: rows.slice(14, 20) },
+    ];
+  }
+  if (scale.id === "index-symptomes-ybocs") {
+    return [
+      { title: "Obsessions (items 1–5)", rows: rows.slice(0, 5) },
+      { title: "Compulsions (items 6–10)", rows: rows.slice(5, 10) },
+    ];
+  }
+  if (scale.id === "echelle-d-anxiete-sociale-de-liebowitz") {
+    const performance = rows.filter((_, i) => {
+      const q: any = scale.questions[i];
+      return q?.type === "performance";
+    });
+    const interaction = rows.filter((_, i) => {
+      const q: any = scale.questions[i];
+      return q?.type === "interaction";
+    });
+    return [
+      { title: "Situations de performance", rows: performance },
+      { title: "Situations d'interaction sociale", rows: interaction },
+    ];
+  }
+  return [{ rows }];
+}
+
 function ScaleLegend({ scale }: { scale: Scale }) {
-  // Y-BOCS has per-item modalities, no single legend possible.
   if (scale.formType === "options") return null;
 
-  const dimensions: { label?: string; modalities: { value: number; label: string }[] }[] = [];
+  const dimensions: {
+    label?: string;
+    modalities: { value: number; label: string }[];
+  }[] = [];
   if (scale.formType === "dual-scale") {
     if (scale.answerScales?.anxiety) {
-      dimensions.push({ label: "Anxiété", modalities: scale.answerScales.anxiety });
+      dimensions.push({
+        label: "Anxiété",
+        modalities: scale.answerScales.anxiety,
+      });
     }
     if (scale.answerScales?.avoidance) {
-      dimensions.push({ label: "Évitement", modalities: scale.answerScales.avoidance });
+      dimensions.push({
+        label: "Évitement",
+        modalities: scale.answerScales.avoidance,
+      });
     }
   } else if (scale.answerScales?.intensity) {
     dimensions.push({ modalities: scale.answerScales.intensity });
@@ -124,61 +173,119 @@ function ScaleLegend({ scale }: { scale: Scale }) {
   );
 }
 
-export function ItemResponsesList({ scale, responses, flaggedItems = [] }: Props) {
+function ItemRow({
+  scale,
+  row,
+  isFlagged,
+}: {
+  scale: Scale;
+  row: Row;
+  isFlagged: boolean;
+}) {
+  const isYbocsInverted =
+    scale.id === "index-symptomes-ybocs" &&
+    YBOCS_INVERTED_ITEM_INDEXES.has(row.index);
+
+  return (
+    <div
+      className={`flex flex-col sm:flex-row sm:items-start gap-2 sm:gap-4 p-3 ${
+        isFlagged ? "bg-red-50 border-l-4 border-l-red-500" : ""
+      }`}
+    >
+      <div className="flex items-start gap-2 flex-1 min-w-0">
+        <span className="text-xs text-muted-foreground tabular-nums shrink-0 mt-0.5 w-6">
+          #{row.index + 1}
+        </span>
+        {isFlagged && (
+          <Interfaces.Caution className="h-4 w-4 text-red-600 shrink-0 mt-0.5" />
+        )}
+        <div className="flex-1 min-w-0">
+          <div className="flex items-center gap-1.5 flex-wrap">
+            <p className="text-sm">{row.label}</p>
+            {isYbocsInverted && (
+              <TooltipProvider delayDuration={150}>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <span className="inline-flex items-center text-[10px] font-semibold uppercase tracking-wide text-amber-700 bg-amber-100 rounded px-1.5 py-0.5 cursor-help">
+                      sens inversé
+                    </span>
+                  </TooltipTrigger>
+                  <TooltipContent className="max-w-xs">
+                    Sur les items de résistance, un score 0 indique une
+                    résistance maximale (état le moins sévère). 4 = abandon
+                    total de la résistance.
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
+            )}
+          </div>
+          {row.prompt && (
+            <p className="text-xs text-muted-foreground mt-0.5 leading-relaxed">
+              {row.prompt}
+            </p>
+          )}
+        </div>
+      </div>
+      <div className="flex flex-wrap gap-2 sm:shrink-0 sm:justify-end pl-8 sm:pl-0">
+        {row.values.length === 0 ? (
+          <span className="text-xs text-muted-foreground italic">
+            Sans réponse
+          </span>
+        ) : (
+          row.values.map((v, i) => (
+            <div key={i} className="flex flex-col items-end">
+              {v.dimension && (
+                <span className="text-[10px] uppercase tracking-wide text-muted-foreground">
+                  {v.dimension}
+                </span>
+              )}
+              <Badge variant="outline" className="text-xs font-normal">
+                <span className="font-semibold mr-1.5 tabular-nums">
+                  {v.value}
+                </span>
+                <span>{v.modalityLabel}</span>
+              </Badge>
+            </div>
+          ))
+        )}
+      </div>
+    </div>
+  );
+}
+
+export function ItemResponsesList({
+  scale,
+  responses,
+  flaggedItems = [],
+}: Props) {
   const rows = getRows(scale, responses);
+  const sections = groupRows(scale, rows);
   const flagged = new Set(flaggedItems);
 
   return (
     <>
-    <ScaleLegend scale={scale} />
-    <div className="border rounded-lg divide-y">
-      {rows.map((row) => {
-        const isFlagged = flagged.has(row.index);
-        return (
-          <div
-            key={row.index}
-            className={`flex flex-col sm:flex-row sm:items-start gap-2 sm:gap-4 p-3 ${
-              isFlagged
-                ? "bg-red-50 border-l-4 border-l-red-500"
-                : ""
-            }`}
-          >
-            <div className="flex items-start gap-2 flex-1 min-w-0">
-              <span className="text-xs text-muted-foreground tabular-nums shrink-0 mt-0.5 w-6">
-                #{row.index + 1}
-              </span>
-              {isFlagged && (
-                <Interfaces.Caution className="h-4 w-4 text-red-600 shrink-0 mt-0.5" />
-              )}
-              <span className="text-sm flex-1">{row.label}</span>
-            </div>
-            <div className="flex flex-wrap gap-2 sm:shrink-0 sm:justify-end pl-8 sm:pl-0">
-              {row.values.length === 0 ? (
-                <span className="text-xs text-muted-foreground italic">
-                  Sans réponse
-                </span>
-              ) : (
-                row.values.map((v, i) => (
-                  <div key={i} className="flex flex-col items-end">
-                    {v.dimension && (
-                      <span className="text-[10px] uppercase tracking-wide text-muted-foreground">
-                        {v.dimension}
-                      </span>
-                    )}
-                    <Badge variant="outline" className="text-xs font-normal">
-                      <span className="font-semibold mr-1.5 tabular-nums">
-                        {v.value}
-                      </span>
-                      <span>{v.modalityLabel}</span>
-                    </Badge>
-                  </div>
-                ))
-              )}
+      <ScaleLegend scale={scale} />
+      <div className="space-y-4">
+        {sections.map((section, sIdx) => (
+          <div key={sIdx}>
+            {section.title && (
+              <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-1.5">
+                {section.title}
+              </p>
+            )}
+            <div className="border rounded-lg divide-y">
+              {section.rows.map((row) => (
+                <ItemRow
+                  key={row.index}
+                  scale={scale}
+                  row={row}
+                  isFlagged={flagged.has(row.index)}
+                />
+              ))}
             </div>
           </div>
-        );
-      })}
-    </div>
+        ))}
+      </div>
     </>
   );
 }

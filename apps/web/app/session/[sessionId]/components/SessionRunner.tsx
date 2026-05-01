@@ -18,7 +18,9 @@ interface SessionRunnerProps {
 interface QuestionStep {
   key: string;
   questionText: string;
+  questionPrompt?: string;
   subLabel?: string;
+  sectionIntro?: string;
   options: { value: number; label: string }[];
 }
 
@@ -45,10 +47,17 @@ function buildSteps(scale: any): QuestionStep[] {
   }
 
   if (formType === "options") {
-    return (questions as { title: string; options: { value: number; text: string }[] }[]).map(
+    const sectionIntros: { startIndex: number; text: string }[] =
+      scale.sectionIntros ?? [];
+    const introByIndex = new Map(
+      sectionIntros.map((s) => [s.startIndex, s.text]),
+    );
+    return (questions as { title: string; prompt?: string; options: { value: number; text: string }[] }[]).map(
       (q, idx) => ({
         key: `option_${idx}`,
         questionText: q.title,
+        questionPrompt: q.prompt,
+        sectionIntro: introByIndex.get(idx),
         options: q.options.map((o) => ({ value: o.value, label: o.text })),
       }),
     );
@@ -209,7 +218,9 @@ function Runner({ scale, onSubmit }: RunnerProps) {
         {phase === "question" && currentStep && (
           <SingleScaleQuestion
             subLabel={currentStep.subLabel}
+            sectionIntro={currentStep.sectionIntro}
             questionText={currentStep.questionText}
+            questionPrompt={currentStep.questionPrompt}
             options={currentStep.options}
             selectedValue={responses[currentStep.key]}
             onSelect={handleSelect}

@@ -18,6 +18,8 @@ interface SessionData {
     title: string;
     description: string;
     instructions: string;
+    sectionIntros?: { startIndex: number; text: string }[];
+    copyrightAttribution?: string;
     formType?: string;
     questions: any[];
     answerScales?: any;
@@ -112,6 +114,8 @@ export default function SessionPage() {
     title: scaleData.title,
     description: scaleData.description,
     instructions: scaleData.instructions,
+    sectionIntros: scaleData.sectionIntros,
+    copyrightAttribution: scaleData.copyrightAttribution,
     category: "",
     formType: scaleData.formType,
     questions: scaleData.questions,
@@ -178,7 +182,7 @@ function SessionScaleWrapper({
       });
       router.push(`/p/${batchId}`);
     } else {
-      router.push(`/session/${sessionId}/merci`);
+      router.push(`/session/${sessionId}/merci?scale=${scale.id}`);
     }
   };
 

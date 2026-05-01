@@ -128,6 +128,13 @@ export default async function ScaleDescriptionPage({
             </div>
           </>
         )}
+
+        {/* Mention copyright */}
+        {scale.copyrightAttribution && (
+          <p className="text-xs text-muted-foreground/80 leading-relaxed mt-6 pt-4 border-t">
+            {scale.copyrightAttribution}
+          </p>
+        )}
       </div>
     </div>
   );

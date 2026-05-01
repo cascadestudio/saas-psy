@@ -15,6 +15,11 @@ export interface ScaleScoring {
     /** Human description of how the score is computed (shown on the scale page). */
     method: string;
 }
+export interface SectionIntro {
+    /** 0-based question index at which this intro should be shown. */
+    startIndex: number;
+    text: string;
+}
 export interface Scale {
     id: string;
     acronym: string;
@@ -29,6 +34,19 @@ export interface Scale {
     estimatedTime: string;
     longDescription: string;
     instructions?: string;
+    /**
+     * Per-section intros (e.g. Y-BOCS has distinct consignes for obsessions / compulsions).
+     * When set, the patient flow displays each text before its `startIndex` item, and the
+     * results page can surface them as separate consigne reminders.
+     */
+    sectionIntros?: SectionIntro[];
+    /**
+     * Required copyright / attribution mention. Displayed:
+     * - on the patient end-of-passation screen (gris discret, une fois)
+     * - on the practitioner scale library page
+     * - in the footer of the practitioner results page
+     */
+    copyrightAttribution: string;
     reverseItems?: number[];
     /**
      * True when a higher score = better health (e.g. RSES self-esteem).

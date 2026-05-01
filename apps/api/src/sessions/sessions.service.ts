@@ -517,6 +517,8 @@ export class SessionsService {
               title: scale.title,
               description: scale.description,
               instructions: scale.instructions ?? scale.longDescription,
+              sectionIntros: scale.sectionIntros,
+              copyrightAttribution: scale.copyrightAttribution,
               formType: scale.formType,
               questions: scale.questions,
               answerScales: scale.answerScales,
