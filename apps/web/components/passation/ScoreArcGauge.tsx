@@ -9,8 +9,8 @@ type Props = {
   interpretation?: string | null;
 };
 
-const ARC_DEGREES = 240;
-const START_ANGLE = -120;
+const ARC_DEGREES = 180;
+const START_ANGLE = -90;
 const SIZE = 240;
 const STROKE = 16;
 const SEGMENT_GAP_DEG = 10;
@@ -76,7 +76,7 @@ export function ScoreArcGauge({
     };
   });
 
-  const arcHeight = SIZE * 0.85;
+  const arcHeight = SIZE * 0.8;
 
   return (
     <div className="flex flex-col items-center">
@@ -129,29 +129,25 @@ export function ScoreArcGauge({
         </svg>
         <div
           className="absolute inset-x-0 flex flex-col items-center"
-          style={{ top: SIZE * 0.3 }}
+          style={{ top: SIZE * 0.28 }}
         >
-          <span className="text-5xl font-semibold tabular-nums leading-none">
-            {score}
-          </span>
-          {maxScore !== undefined && (
-            <span className="text-xs text-muted-foreground mt-2">
-              sur {maxScore}
+          <div className="flex items-baseline gap-1.5">
+            <span className="text-5xl font-semibold tabular-nums leading-none">
+              {score}
+            </span>
+            {maxScore !== undefined && (
+              <span className="text-sm text-muted-foreground tabular-nums">
+                / {maxScore}
+              </span>
+            )}
+          </div>
+          {interpretation && (
+            <span className="mt-4 text-sm font-medium text-foreground text-center">
+              {interpretation}
             </span>
           )}
         </div>
       </div>
-      {interpretation && (
-        <span
-          className={`-mt-2 inline-flex items-center rounded-full px-3 py-1 text-sm font-medium ${
-            hasSeverity
-              ? `${activePalette.pillBg} ${activePalette.badgeText}`
-              : "bg-muted text-muted-foreground"
-          }`}
-        >
-          {interpretation}
-        </span>
-      )}
     </div>
   );
 }

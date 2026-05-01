@@ -326,10 +326,10 @@ export default function ResultsPage() {
           <h2 className="text-lg font-sans font-semibold mb-3">
             Score et interprétation
           </h2>
-          <div className="bg-muted-foreground/5 rounded-2xl p-6 space-y-6">
+          <div className="bg-muted rounded-2xl p-6 space-y-6">
             {/* Arc gauge — score géant + pill d'interprétation */}
             {scale && currentMain !== undefined && (
-              <div className="flex justify-center pt-2">
+              <div className="flex justify-start pt-2">
                 <ScoreArcGauge
                   scale={scale}
                   score={currentMain}
