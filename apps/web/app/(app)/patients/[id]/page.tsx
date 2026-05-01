@@ -312,7 +312,26 @@ export default function PatientDetailPage() {
                           })()}
                         </p>
                       </div>
-                      <div className="ml-auto flex items-center flex-shrink-0">
+                      <div className="ml-auto flex items-center gap-2 flex-shrink-0">
+                        {(() => {
+                          const sessionAlerts = session.score?.alerts ?? [];
+                          const criticalCount = sessionAlerts.filter(a => a.severity === "critical").length;
+                          const warningCount = sessionAlerts.filter(a => a.severity === "warning").length;
+                          return (
+                            <>
+                              {criticalCount > 0 && (
+                                <Badge variant="secondary" className="pointer-events-none bg-red-100 text-red-700 border-red-200">
+                                  ⚠ {criticalCount > 1 ? `${criticalCount} alertes` : "Alerte critique"}
+                                </Badge>
+                              )}
+                              {warningCount > 0 && criticalCount === 0 && (
+                                <Badge variant="secondary" className="pointer-events-none bg-amber-100 text-amber-700 border-amber-200">
+                                  {warningCount > 1 ? `${warningCount} vigilances` : "Vigilance"}
+                                </Badge>
+                              )}
+                            </>
+                          );
+                        })()}
                         {session.status === "COMPLETED" && session.score != null ? (
                           <div className="text-right">
                             <p className="font-sans font-bold text-black text-base leading-tight">
