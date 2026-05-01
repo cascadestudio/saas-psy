@@ -51,7 +51,7 @@ export function TrendBlock({
   return (
     <div>
       <h2 className="text-lg font-sans font-semibold mb-3">Évolution</h2>
-      <div className="border rounded-lg p-6 space-y-2">
+      <div className="bg-muted-foreground/5 rounded-2xl p-6 space-y-2">
         <div className={`flex items-center gap-2 ${color}`}>
           {icon}
           <span className="text-sm font-medium">{label}</span>

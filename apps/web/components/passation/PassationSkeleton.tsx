@@ -31,7 +31,7 @@ export function PassationSkeleton() {
         {/* Score & interprétation card */}
         <div>
           <div className="h-5 w-48 bg-zinc-200 rounded mb-3" />
-          <div className="border rounded-lg p-6 space-y-6">
+          <div className="bg-muted-foreground/5 rounded-2xl p-6 space-y-6">
             <div className="space-y-2">
               <div className="h-4 w-36 bg-zinc-200 rounded" />
               <div className="flex items-center gap-3">
@@ -42,7 +42,7 @@ export function PassationSkeleton() {
             <div className="h-5 w-32 bg-zinc-200 rounded" />
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {[0, 1].map((i) => (
-                <div key={i} className="border rounded-md p-3 space-y-2">
+                <div key={i} className="bg-background rounded-lg p-3 space-y-2">
                   <div className="flex items-baseline justify-between">
                     <div className="h-4 w-24 bg-zinc-200 rounded" />
                     <div className="h-4 w-12 bg-zinc-200 rounded" />
@@ -57,7 +57,7 @@ export function PassationSkeleton() {
         {/* Réponses du patient */}
         <div>
           <div className="h-5 w-44 bg-zinc-200 rounded mb-3" />
-          <div className="border rounded-lg divide-y">
+          <div className="bg-muted-foreground/5 rounded-2xl divide-y divide-background overflow-hidden">
             {[0, 1, 2, 3, 4].map((i) => (
               <div key={i} className="flex items-center justify-between p-3">
                 <div className="flex items-center gap-2 flex-1">

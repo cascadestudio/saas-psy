@@ -148,7 +148,7 @@ function ScaleLegend({ scale }: { scale: Scale }) {
   if (dimensions.length === 0) return null;
 
   return (
-    <div className="border rounded-lg p-3 bg-muted/30 space-y-2 mb-3">
+    <div className="bg-muted-foreground/5 rounded-2xl p-3 space-y-2 mb-3">
       <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
         Modalités de réponse
       </p>
@@ -273,7 +273,7 @@ export function ItemResponsesList({
                 {section.title}
               </p>
             )}
-            <div className="border rounded-lg divide-y">
+            <div className="bg-muted-foreground/5 rounded-2xl divide-y divide-background overflow-hidden">
               {section.rows.map((row) => (
                 <ItemRow
                   key={row.index}

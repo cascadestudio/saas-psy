@@ -28,7 +28,7 @@ export function Pcl5DiagnosticBlock({ responses }: Props) {
       <h2 className="text-lg font-sans font-semibold mb-3">
         Critères DSM-5 (par symptom-count)
       </h2>
-      <div className="border rounded-lg p-4 space-y-3">
+      <div className="bg-muted-foreground/5 rounded-2xl p-4 space-y-3">
         <div className="flex items-center gap-2">
           <span
             className={`h-2.5 w-2.5 rounded-full ${

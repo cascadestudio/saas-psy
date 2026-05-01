@@ -31,7 +31,7 @@ import { PatientCommentsBlock } from "@/components/passation/PatientCommentsBloc
 import { PassationSkeleton } from "@/components/passation/PassationSkeleton";
 import { ConsigneBlock } from "@/components/passation/ConsigneBlock";
 import { CopyrightFooter } from "@/components/passation/CopyrightFooter";
-import { SeverityGauge } from "@/components/passation/SeverityGauge";
+import { ScoreArcGauge, MiniScoreArc } from "@/components/passation/ScoreArcGauge";
 import { Pcl5DiagnosticBlock } from "@/components/passation/Pcl5DiagnosticBlock";
 import { relativeTimeFr, formatDateLongFr } from "@/lib/relative-time";
 
@@ -268,7 +268,7 @@ export default function ResultsPage() {
         {Header}
 
         {/* Pending state */}
-        <div className="border rounded-lg p-8 text-center space-y-4">
+        <div className="bg-muted-foreground/5 rounded-2xl p-8 text-center space-y-4">
           <p className="text-muted-foreground">
             {session.status === "EXPIRED"
               ? "Cette passation a expiré. Le patient ne peut plus y répondre."
@@ -310,10 +310,6 @@ export default function ResultsPage() {
   const subscores = score?.subscores ?? [];
   const alerts = score?.alerts ?? [];
   const badgeInterpretation = score?.interpretation || null;
-  const severityPalette = getSeverityPalette(
-    score?.severityIndex ?? -1,
-    score?.severityRangeCount ?? 0,
-  );
 
 
   return (
@@ -325,88 +321,48 @@ export default function ResultsPage() {
         {/* Alertes cliniques — bandeau prioritaire */}
         {alerts.length > 0 && <AlertsBanner alerts={alerts} />}
 
-        {/* Rappel de la consigne envoyée au patient */}
-        {scale && <ConsigneBlock scale={scale} />}
-
         {/* Score et interprétation */}
         <div>
           <h2 className="text-lg font-sans font-semibold mb-3">
             Score et interprétation
           </h2>
-          <div className="border rounded-lg p-6 space-y-6">
-            {/* Interprétation clinique — pastille + verdict */}
-            {badgeInterpretation && (
-              <div>
-                <p className="text-sm font-medium mb-2">
-                  Interprétation clinique
-                </p>
-                <div className="inline-flex items-center gap-3">
-                  {(score?.severityRangeCount ?? 0) > 1 && (
-                    <span
-                      className={`h-3 w-3 rounded-full shrink-0 ${severityPalette.gaugeFill}`}
-                      aria-hidden
-                    />
-                  )}
-                  <span className="text-2xl font-medium">
-                    {badgeInterpretation}
-                  </span>
-                </div>
-              </div>
-            )}
-
-            {/* Score */}
-            <div className="text-muted-foreground">
-              Score :{" "}
-              <span className="text-foreground font-semibold text-xl">
-                {currentMain}
-              </span>
-              {maxScore !== undefined && (
-                <span className="text-muted-foreground"> / {maxScore}</span>
-              )}
-            </div>
-
-            {/* Jauge segmentée par seuils */}
+          <div className="bg-muted-foreground/5 rounded-2xl p-6 space-y-6">
+            {/* Arc gauge — score géant + pill d'interprétation */}
             {scale && currentMain !== undefined && (
-              <SeverityGauge
-                scale={scale}
-                score={currentMain}
-                severityIndex={score?.severityIndex ?? -1}
-              />
+              <div className="flex justify-center pt-2">
+                <ScoreArcGauge
+                  scale={scale}
+                  score={currentMain}
+                  maxScore={maxScore}
+                  severityIndex={score?.severityIndex ?? -1}
+                  interpretation={badgeInterpretation}
+                />
+              </div>
             )}
 
             {/* Subscores as mini-cards */}
             {subscores.length > 0 && (
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                {subscores.map((s) => {
-                  const pct = s.max ? (s.value / s.max) * 100 : 0;
-                  return (
-                    <div
-                      key={s.label}
-                      className="border rounded-md p-3 bg-muted/30"
-                    >
-                      <div className="flex items-baseline justify-between mb-1.5">
-                        <span className="text-sm font-medium">{s.label}</span>
-                        <span className="text-sm tabular-nums">
-                          <span className="font-semibold">{s.value}</span>
-                          {s.max !== undefined && (
-                            <span className="text-muted-foreground">
-                              {" "}
-                              / {s.max}
-                            </span>
-                          )}
-                        </span>
-                      </div>
+                {subscores.map((s) => (
+                  <div
+                    key={s.label}
+                    className="bg-background rounded-lg p-3 flex items-center gap-3"
+                  >
+                    <MiniScoreArc
+                      value={s.value}
+                      max={s.max}
+                      label={s.label}
+                    />
+                    <div className="min-w-0">
+                      <p className="text-sm font-medium truncate">{s.label}</p>
                       {s.max !== undefined && (
-                        <div className="h-1.5 rounded-full bg-muted overflow-hidden">
-                          <div
-                            className="h-full bg-foreground/60 rounded-full"
-                            style={{ width: `${pct}%` }}
-                          />
-                        </div>
+                        <p className="text-xs text-muted-foreground tabular-nums">
+                          sur {s.max}
+                        </p>
                       )}
                     </div>
-                  );
-                })}
+                  </div>
+                ))}
               </div>
             )}
 
@@ -439,6 +395,9 @@ export default function ResultsPage() {
             <h2 className="text-lg font-sans font-semibold mb-3">
               Réponses du patient
             </h2>
+            <div className="bg-muted-foreground/5 rounded-2xl px-4 py-3 mb-3">
+              <ConsigneBlock scale={scale} />
+            </div>
             <ItemResponsesList
               scale={scale}
               responses={session.responses}
