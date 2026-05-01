@@ -31,7 +31,7 @@ import { PatientCommentsBlock } from "@/components/passation/PatientCommentsBloc
 import { PassationSkeleton } from "@/components/passation/PassationSkeleton";
 import { ConsigneBlock } from "@/components/passation/ConsigneBlock";
 import { CopyrightFooter } from "@/components/passation/CopyrightFooter";
-import { ScoreArcGauge, MiniScoreArc } from "@/components/passation/ScoreArcGauge";
+import { ScoreArcGauge } from "@/components/passation/ScoreArcGauge";
 import { Pcl5DiagnosticBlock } from "@/components/passation/Pcl5DiagnosticBlock";
 import { relativeTimeFr, formatDateLongFr } from "@/lib/relative-time";
 
@@ -326,46 +326,52 @@ export default function ResultsPage() {
           <h2 className="text-lg font-sans font-semibold mb-3">
             Score et interprétation
           </h2>
-          <div className="bg-muted rounded-2xl p-6 space-y-6">
-            {/* Arc gauge — score géant + pill d'interprétation */}
-            {scale && currentMain !== undefined && (
-              <div className="flex justify-start pt-2">
-                <ScoreArcGauge
-                  scale={scale}
-                  score={currentMain}
-                  maxScore={maxScore}
-                  severityIndex={score?.severityIndex ?? -1}
-                  interpretation={badgeInterpretation}
-                />
-              </div>
-            )}
+          <div className="bg-muted rounded-2xl p-6">
+            <div className="flex items-center gap-12">
+              {/* Arc gauge — score géant + pill d'interprétation */}
+              {scale && currentMain !== undefined && (
+                <div className="pt-2 shrink-0">
+                  <ScoreArcGauge
+                    scale={scale}
+                    score={currentMain}
+                    maxScore={maxScore}
+                    severityIndex={score?.severityIndex ?? -1}
+                    interpretation={badgeInterpretation}
+                  />
+                </div>
+              )}
 
-            {/* Subscores as mini-cards */}
-            {subscores.length > 0 && (
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                {subscores.map((s) => (
-                  <div
-                    key={s.label}
-                    className="bg-background rounded-lg p-3 flex items-center gap-3"
-                  >
-                    <MiniScoreArc
-                      value={s.value}
-                      max={s.max}
-                      label={s.label}
-                    />
-                    <div className="min-w-0">
-                      <p className="text-sm font-medium truncate">{s.label}</p>
-                      {s.max !== undefined && (
-                        <p className="text-xs text-muted-foreground tabular-nums">
-                          sur {s.max}
-                        </p>
-                      )}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
-
+              {/* Subscores as mini-cards */}
+              {subscores.length > 0 && (
+                <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3 pt-2">
+                  {subscores.map((s) => {
+                    const pct = s.max && s.max > 0 ? Math.min(1, s.value / s.max) * 100 : 0;
+                    return (
+                      <div
+                        key={s.label}
+                        className="bg-background rounded-lg p-3 space-y-2"
+                      >
+                        <div className="flex items-baseline justify-between gap-2">
+                          <p className="text-sm font-medium truncate">{s.label}</p>
+                          <span className="text-sm font-semibold tabular-nums shrink-0">
+                            {s.value}
+                            {s.max !== undefined && (
+                              <span className="text-xs font-normal text-muted-foreground">/{s.max}</span>
+                            )}
+                          </span>
+                        </div>
+                        <div className="h-1.5 rounded-full bg-foreground/10 overflow-hidden">
+                          <div
+                            className="h-full rounded-full bg-foreground/60"
+                            style={{ width: `${pct}%` }}
+                          />
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
           </div>
         </div>
 

@@ -11,8 +11,8 @@ type Props = {
 
 const ARC_DEGREES = 180;
 const START_ANGLE = -90;
-const SIZE = 240;
-const STROKE = 16;
+const SIZE = 300;
+const STROKE = 18;
 const SEGMENT_GAP_DEG = 10;
 
 function polar(cx: number, cy: number, r: number, deg: number) {
@@ -132,17 +132,17 @@ export function ScoreArcGauge({
           style={{ top: SIZE * 0.28 }}
         >
           <div className="flex items-baseline gap-1.5">
-            <span className="text-5xl font-semibold tabular-nums leading-none">
+            <span className="text-7xl font-semibold tabular-nums leading-none">
               {score}
             </span>
             {maxScore !== undefined && (
-              <span className="text-sm text-muted-foreground tabular-nums">
+              <span className="text-base text-muted-foreground tabular-nums">
                 / {maxScore}
               </span>
             )}
           </div>
           {interpretation && (
-            <span className="mt-4 text-sm font-medium text-foreground text-center">
+            <span className="mt-4 text-base font-medium text-foreground text-center">
               {interpretation}
             </span>
           )}
@@ -181,7 +181,7 @@ export function MiniScoreArc({ value, max, label }: MiniProps) {
       <path
         d={arcPath(cx, cy, radius, START_ANGLE, fullEnd)}
         fill="none"
-        className="text-muted"
+        className="text-foreground/15"
         stroke="currentColor"
         strokeWidth={MINI_STROKE}
         strokeLinecap="round"
@@ -200,11 +200,14 @@ export function MiniScoreArc({ value, max, label }: MiniProps) {
         x={cx}
         y={cy + 4}
         textAnchor="middle"
-        className="fill-foreground tabular-nums"
-        fontSize="14"
+        className="tabular-nums"
+        fontSize="11"
         fontWeight="600"
       >
-        {value}
+        <tspan className="fill-foreground">{value}</tspan>
+        {max !== undefined && (
+          <tspan className="fill-foreground/40" fontWeight="400">/{max}</tspan>
+        )}
       </text>
     </svg>
   );
