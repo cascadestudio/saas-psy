@@ -13,7 +13,7 @@ const ARC_DEGREES = 240;
 const START_ANGLE = -120;
 const SIZE = 240;
 const STROKE = 16;
-const SEGMENT_GAP_DEG = 4;
+const SEGMENT_GAP_DEG = 10;
 
 function polar(cx: number, cy: number, r: number, deg: number) {
   const rad = ((deg - 90) * Math.PI) / 180;
@@ -76,7 +76,7 @@ export function ScoreArcGauge({
     };
   });
 
-  const arcHeight = SIZE * 0.78;
+  const arcHeight = SIZE * 0.85;
 
   return (
     <div className="flex flex-col items-center">
@@ -85,7 +85,7 @@ export function ScoreArcGauge({
           width={SIZE}
           height={SIZE}
           viewBox={`0 0 ${SIZE} ${SIZE}`}
-          className="block"
+          className="block overflow-visible"
         >
           {ranges.length > 1 ? (
             segments.map((s) => (
@@ -96,7 +96,7 @@ export function ScoreArcGauge({
                 className={s.color}
                 stroke="currentColor"
                 strokeWidth={STROKE}
-                strokeLinecap="butt"
+                strokeLinecap="round"
               />
             ))
           ) : (
@@ -120,10 +120,10 @@ export function ScoreArcGauge({
               cx={marker.x}
               cy={marker.y}
               r={STROKE / 2 + 3}
+              fill="white"
               className={activePalette.arcText}
-              fill="currentColor"
-              stroke="white"
-              strokeWidth={3}
+              stroke="currentColor"
+              strokeWidth={6}
             />
           )}
         </svg>
