@@ -362,7 +362,7 @@ export default function ResultsPage() {
                         </div>
                         <div className="h-1.5 rounded-full bg-foreground/10 overflow-hidden">
                           <div
-                            className="h-full rounded-full bg-foreground/60"
+                            className="h-full rounded-full bg-brand-orange/30"
                             style={{ width: `${pct}%` }}
                           />
                         </div>

@@ -100,20 +100,26 @@ export function ScoreArcGauge({
               />
             ))
           ) : (
-            <path
-              d={arcPath(
-                cx,
-                cy,
-                radius,
-                START_ANGLE,
-                START_ANGLE + ARC_DEGREES,
+            <>
+              <path
+                d={arcPath(cx, cy, radius, START_ANGLE, START_ANGLE + ARC_DEGREES)}
+                fill="none"
+                className="text-foreground/10"
+                stroke="currentColor"
+                strokeWidth={STROKE}
+                strokeLinecap="round"
+              />
+              {pct > 0 && (
+                <path
+                  d={arcPath(cx, cy, radius, START_ANGLE, START_ANGLE + pct * ARC_DEGREES)}
+                  fill="none"
+                  className="text-brand-orange/30"
+                  stroke="currentColor"
+                  strokeWidth={STROKE}
+                  strokeLinecap="round"
+                />
               )}
-              fill="none"
-              className="text-muted"
-              stroke="currentColor"
-              strokeWidth={STROKE}
-              strokeLinecap="round"
-            />
+            </>
           )}
           {hasSeverity && (
             <circle
@@ -132,7 +138,7 @@ export function ScoreArcGauge({
           style={{ top: SIZE * 0.28 }}
         >
           <div className="flex items-baseline gap-1.5">
-            <span className="text-7xl font-semibold tabular-nums leading-none">
+            <span className={"text-7xl font-semibold tabular-nums leading-none"}>
               {score}
             </span>
             {maxScore !== undefined && (
