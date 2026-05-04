@@ -20,7 +20,7 @@ interface QuestionStep {
   questionText: string;
   questionPrompt?: string;
   subLabel?: string;
-  sectionIntro?: string;
+  persistentConsigne?: string;
   options: { value: number; label: string }[];
 }
 
@@ -39,9 +39,11 @@ function buildSteps(scale: any): QuestionStep[] {
 
   if (formType === "single-scale") {
     const options = toOptions(scale.answerScales?.intensity);
+    const persistentConsigne: string | undefined = scale.instructions;
     return (questions as string[]).map((text, idx) => ({
       key: `intensity_${idx}`,
       questionText: text,
+      persistentConsigne,
       options,
     }));
   }
@@ -49,35 +51,40 @@ function buildSteps(scale: any): QuestionStep[] {
   if (formType === "options") {
     const sectionIntros: { startIndex: number; text: string }[] =
       scale.sectionIntros ?? [];
-    const introByIndex = new Map(
-      sectionIntros.map((s) => [s.startIndex, s.text]),
-    );
     return (questions as { title: string; prompt?: string; options: { value: number; text: string }[] }[]).map(
-      (q, idx) => ({
-        key: `option_${idx}`,
-        questionText: q.title,
-        questionPrompt: q.prompt,
-        sectionIntro: introByIndex.get(idx),
-        options: q.options.map((o) => ({ value: o.value, label: o.text })),
-      }),
+      (q, idx) => {
+        const activeIntro = sectionIntros
+          .filter((s) => s.startIndex <= idx)
+          .sort((a, b) => b.startIndex - a.startIndex)[0];
+        return {
+          key: `option_${idx}`,
+          questionText: q.title,
+          questionPrompt: q.prompt,
+          persistentConsigne: activeIntro?.text,
+          options: q.options.map((o) => ({ value: o.value, label: o.text })),
+        };
+      },
     );
   }
 
   if (formType === "dual-scale") {
     const anxiety = toOptions(scale.answerScales?.anxiety);
     const avoidance = toOptions(scale.answerScales?.avoidance);
+    const persistentConsigne: string | undefined = scale.instructions;
     const steps: QuestionStep[] = [];
     (questions as { text: string }[]).forEach((q, idx) => {
       steps.push({
         key: `anxiety_${idx}`,
         questionText: q.text,
         subLabel: "Anxiété ressentie",
+        persistentConsigne,
         options: anxiety,
       });
       steps.push({
         key: `avoidance_${idx}`,
         questionText: q.text,
         subLabel: "Évitement de la situation",
+        persistentConsigne,
         options: avoidance,
       });
     });
@@ -218,7 +225,7 @@ function Runner({ scale, onSubmit }: RunnerProps) {
         {phase === "question" && currentStep && (
           <SingleScaleQuestion
             subLabel={currentStep.subLabel}
-            sectionIntro={currentStep.sectionIntro}
+            persistentConsigne={currentStep.persistentConsigne}
             questionText={currentStep.questionText}
             questionPrompt={currentStep.questionPrompt}
             options={currentStep.options}

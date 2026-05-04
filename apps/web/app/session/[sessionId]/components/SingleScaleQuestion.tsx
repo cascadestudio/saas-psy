@@ -9,7 +9,7 @@ interface SingleScaleQuestionProps {
   questionText: string;
   questionPrompt?: string;
   subLabel?: string;
-  sectionIntro?: string;
+  persistentConsigne?: string;
   options: AnswerOption[];
   selectedValue?: number;
   onSelect: (value: number) => void;
@@ -19,19 +19,15 @@ export default function SingleScaleQuestion({
   questionText,
   questionPrompt,
   subLabel,
-  sectionIntro,
+  persistentConsigne,
   options,
   selectedValue,
   onSelect,
 }: SingleScaleQuestionProps) {
   return (
     <div className="flex flex-col gap-6">
-      {sectionIntro && (
-        <div className="rounded-2xl border border-brand-orange/20 bg-brand-orange/5 px-4 py-3">
-          <p className="text-sm text-gray-700 leading-relaxed">
-            {sectionIntro}
-          </p>
-        </div>
+      {persistentConsigne && (
+        <p className="text-gray-700 leading-relaxed">{persistentConsigne}</p>
       )}
       <div className="flex flex-col gap-2">
         {subLabel && (
