@@ -263,6 +263,18 @@ export const MOCK_SESSIONS: Session[] = [
     updatedAt: daysAgo(12),
     patient: patientById["mock-patient-4"],
   },
+  // Passation démarrée — patient en train de remplir
+  {
+    id: "mock-session-15",
+    patientId: "mock-patient-1",
+    scaleId: "phq-9",
+    status: "STARTED",
+    sentAt: daysAgo(3),
+    startedAt: daysAgo(0),
+    createdAt: daysAgo(3),
+    updatedAt: daysAgo(0),
+    patient: patientById["mock-patient-1"],
+  },
   // Récente envoyée (pas encore à relancer)
   {
     id: "mock-session-6",
