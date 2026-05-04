@@ -165,18 +165,21 @@ export default function DashboardPage() {
     return <DashboardSkeleton />;
   }
 
-  const toRelaunch = sessions
-    .filter(
-      (s) =>
-        (s.status === "SENT" || s.status === "STARTED") &&
-        daysSince(s.lastReminderAt || s.sentAt || s.createdAt) >=
-          PENDING_THRESHOLD_DAYS,
-    )
-    .sort(
-      (a, b) =>
-        new Date(a.lastReminderAt || a.sentAt || a.createdAt).getTime() -
-        new Date(b.lastReminderAt || b.sentAt || b.createdAt).getTime(),
-    );
+  const isToRelaunch = (s: Session) =>
+    daysSince(s.lastReminderAt || s.sentAt || s.createdAt) >=
+    PENDING_THRESHOLD_DAYS;
+
+  const inProgress = sessions
+    .filter((s) => s.status === "SENT" || s.status === "STARTED")
+    .sort((a, b) => {
+      const aRelaunch = isToRelaunch(a) ? 1 : 0;
+      const bRelaunch = isToRelaunch(b) ? 1 : 0;
+      if (aRelaunch !== bRelaunch) return bRelaunch - aRelaunch;
+      return (
+        new Date(b.sentAt || b.createdAt).getTime() -
+        new Date(a.sentAt || a.createdAt).getTime()
+      );
+    });
 
   const recentResults = sessions
     .filter(
@@ -234,25 +237,34 @@ export default function DashboardPage() {
       <div className="space-y-10">
         <section>
           <h2 className="text-xl font-sans font-semibold mb-3">
-            À relancer{" "}
+            Passations en cours{" "}
             <span className="text-muted-foreground font-normal text-sm">
-              ({toRelaunch.length})
+              ({inProgress.length})
             </span>
           </h2>
-          {toRelaunch.length === 0 ? (
+          {inProgress.length === 0 ? (
             <p className="text-sm text-muted-foreground py-4">
-              Aucune passation à relancer.
+              Vos passations en cours apparaîtront ici.
             </p>
           ) : (
             <div className="flex flex-col">
-              {toRelaunch.map((s) => {
+              {inProgress.map((s) => {
                 const config = SESSION_STATUS_CONFIG[s.status];
+                const relaunch = isToRelaunch(s);
                 return (
                   <SessionRow
                     key={s.id}
                     session={s}
                     rightSlot={
                       <div className="flex items-center gap-3">
+                        {relaunch && (
+                          <Badge
+                            variant="secondary"
+                            className="pointer-events-none bg-surface-brand-bg text-brand-orange"
+                          >
+                            À relancer
+                          </Badge>
+                        )}
                         <Badge
                           className={cn(
                             "pointer-events-none",
