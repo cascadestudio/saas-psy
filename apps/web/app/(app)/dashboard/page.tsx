@@ -260,7 +260,7 @@ export default function DashboardPage() {
                         {relaunch && (
                           <Badge
                             variant="secondary"
-                            className="pointer-events-none bg-surface-brand-bg text-brand-orange"
+                            className="pointer-events-none bg-fuchsia-100 text-fuchsia-700 ring-1 ring-fuchsia-500/30"
                           >
                             À relancer
                           </Badge>
@@ -311,7 +311,7 @@ export default function DashboardPage() {
                         {unread && (
                           <Badge
                             variant="secondary"
-                            className="pointer-events-none bg-surface-brand-bg text-brand-orange"
+                            className="pointer-events-none bg-violet-100 text-violet-700"
                           >
                             Non lu
                           </Badge>
