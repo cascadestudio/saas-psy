@@ -52,12 +52,12 @@ function relativeDayLabel(dateStr: string) {
   return `il y a ${d} j`;
 }
 
-function SessionRow({
+function SessionCard({
   session,
-  rightSlot,
+  footer,
 }: {
   session: Session;
-  rightSlot: React.ReactNode;
+  footer: React.ReactNode;
 }) {
   const meta = getScaleMeta(session.scaleId);
   const patientName = session.patient
@@ -67,35 +67,37 @@ function SessionRow({
   return (
     <Link
       href={`/passation/${session.id}`}
-      className="flex items-center gap-3 rounded-lg px-3 py-2.5 hover:bg-muted-foreground/5 transition-colors"
+      className="flex flex-col gap-10 rounded-3xl bg-card p-4 hover:shadow-sm transition-all"
     >
-      <div
-        className="flex items-center justify-center flex-shrink-0 rounded-md"
-        style={{
-          backgroundColor: meta.color,
-          width: 40,
-          height: 40,
-        }}
-      >
-        {meta.icon && (
-          <Image
-            src={meta.icon}
-            alt={meta.acronym}
-            width={24}
-            height={24}
-            className="w-3/5 h-3/5 object-contain"
-          />
-        )}
+      <div className="flex items-center gap-3">
+        <div
+          className="flex items-center justify-center flex-shrink-0 rounded-full"
+          style={{
+            backgroundColor: meta.color,
+            width: 36,
+            height: 36,
+          }}
+        >
+          {meta.icon && (
+            <Image
+              src={meta.icon}
+              alt={meta.acronym}
+              width={34}
+              height={34}
+              className="object-contain translate-x-[0.2rem] translate-y-[0.1rem]"
+            />
+          )}
+        </div>
+        <div className="flex-1 min-w-0">
+          <p className="font-bold text-black leading-tight text-base truncate">
+            {patientName}
+          </p>
+          <p className="text-xs text-muted-foreground leading-snug truncate">
+            {meta.acronym}
+          </p>
+        </div>
       </div>
-      <div className="flex-1 min-w-0">
-        <p className="font-heading font-bold text-black leading-tight text-base">
-          {meta.acronym}
-        </p>
-        <p className="text-xs text-muted-foreground leading-snug truncate">
-          {patientName}
-        </p>
-      </div>
-      <div className="flex-shrink-0">{rightSlot}</div>
+      <div className="flex items-center justify-between gap-2">{footer}</div>
     </Link>
   );
 }
@@ -247,37 +249,39 @@ export default function DashboardPage() {
               Vos passations en cours apparaîtront ici.
             </p>
           ) : (
-            <div className="flex flex-col">
+            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
               {inProgress.map((s) => {
                 const config = SESSION_STATUS_CONFIG[s.status];
                 const relaunch = isToRelaunch(s);
                 return (
-                  <SessionRow
+                  <SessionCard
                     key={s.id}
                     session={s}
-                    rightSlot={
-                      <div className="flex items-center gap-3">
-                        {relaunch && (
+                    footer={
+                      <>
+                        <div className="flex items-center gap-2 min-w-0">
                           <Badge
+                            className={cn(
+                              "pointer-events-none",
+                              config.className,
+                            )}
                             variant="secondary"
-                            className="pointer-events-none bg-fuchsia-100 text-fuchsia-700 ring-1 ring-fuchsia-500/30"
                           >
-                            À relancer
+                            {config.label}
                           </Badge>
-                        )}
-                        <Badge
-                          className={cn(
-                            "pointer-events-none",
-                            config.className,
+                          {relaunch && (
+                            <Badge
+                              variant="secondary"
+                              className="pointer-events-none bg-fuchsia-100 text-fuchsia-700 ring-1 ring-fuchsia-500/30"
+                            >
+                              À relancer
+                            </Badge>
                           )}
-                          variant="secondary"
-                        >
-                          {config.label}
-                        </Badge>
-                        <span className="text-xs text-muted-foreground whitespace-nowrap text-right">
+                        </div>
+                        <span className="text-xs text-muted-foreground whitespace-nowrap">
                           envoyée {relativeDayLabel(s.sentAt || s.createdAt)}
                         </span>
-                      </div>
+                      </>
                     }
                   />
                 );
@@ -298,16 +302,28 @@ export default function DashboardPage() {
               Aucun résultat récent.
             </p>
           ) : (
-            <div className="flex flex-col">
+            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
               {recentResults.map((s) => {
                 const unread = !s.viewedAt;
                 const score = typeof s.score === "number" ? s.score : null;
                 return (
-                  <SessionRow
+                  <SessionCard
                     key={s.id}
                     session={s}
-                    rightSlot={
-                      <div className="flex items-center gap-3">
+                    footer={
+                      <>
+                        <div className="flex items-center gap-2 min-w-0">
+                          {score != null && (
+                            <span className="font-bold text-black text-sm">
+                              {formatScore(score)}
+                            </span>
+                          )}
+                          {typeof s.interpretation === "string" && (
+                            <span className="text-xs text-muted-foreground truncate">
+                              {s.interpretation}
+                            </span>
+                          )}
+                        </div>
                         {unread && (
                           <Badge
                             variant="secondary"
@@ -316,19 +332,7 @@ export default function DashboardPage() {
                             Non lu
                           </Badge>
                         )}
-                        <div className="text-right min-w-[90px]">
-                          {score != null && (
-                            <p className="font-sans font-bold text-black text-sm leading-tight">
-                              {formatScore(score)}
-                            </p>
-                          )}
-                          {typeof s.interpretation === "string" && (
-                            <p className="text-xs text-muted-foreground truncate max-w-[140px]">
-                              {s.interpretation}
-                            </p>
-                          )}
-                        </div>
-                      </div>
+                      </>
                     }
                   />
                 );
