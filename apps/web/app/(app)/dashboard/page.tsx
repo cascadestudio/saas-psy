@@ -274,7 +274,7 @@ export default function DashboardPage() {
                         >
                           {config.label}
                         </Badge>
-                        <span className="text-xs text-muted-foreground w-20 text-right">
+                        <span className="text-xs text-muted-foreground whitespace-nowrap text-right">
                           envoyée {relativeDayLabel(s.sentAt || s.createdAt)}
                         </span>
                       </div>
