@@ -1,5 +1,10 @@
 # Test spec — PCL-5 (Post-Traumatic Stress Disorder Checklist for DSM-5)
 
+<!--
+Voir _TEMPLATE.md pour les règles projet (sourcing, copyright, FR-only,
+hiérarchie versions, comparaison Mentaal).
+-->
+
 ---
 
 ## 1. Métadonnées produit

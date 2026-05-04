@@ -280,6 +280,10 @@ scoreRses(reponses: number[]): {
 - Erreurs de validation levées avec un **message explicite typé** (cf. cas T16-T22 section 9.5). Pas de score à 0 silencieux.
 - Toute entrée invalide produit une erreur, pas un crash non géré.
 
+### Clés de réponse attendues
+
+Entrée : tableau de 10 nombres (un par item, dans l'ordre des items 1 à 10), chacun dans la plage [1, 4]. Les réponses brutes sont envoyées telles que cotées par le patient ; l'inversion sur les items 3, 5, 8, 9, 10 est appliquée côté back par `scoreRses` avant la somme (cf. note d'implémentation 2 ci-dessous).
+
 ### Notes d'implémentation
 
 **1. Plage de cotation 1-4 (spécifique RSES dans le catalogue actuel).**

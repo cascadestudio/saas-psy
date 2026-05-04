@@ -1,5 +1,10 @@
 # Test spec — GAD-7
 
+<!--
+Voir _TEMPLATE.md pour les règles projet (sourcing, copyright, FR-only,
+hiérarchie versions, comparaison Mentaal).
+-->
+
 ---
 
 ## 1. Métadonnées produit

@@ -61,6 +61,19 @@ Règles projet (s'appliquent à toutes les specs) :
 Règle : minimum 2 sources indépendantes, sauf exception "autorité unique"
 explicitement justifiée. Chaque source doit avoir : URL directe, date de
 consultation, type, auteur/éditeur.
+
+Flexibilité de structure autorisée :
+- Les sous-titres `### Source primaire` / `### Source de cross-check`
+  peuvent être qualifiés entre parenthèses pour préciser ce que la source
+  couvre (ex. `### Source primaire (libellés des items)`,
+  `### Source primaire (consigne et seuils)`).
+- Si plusieurs sources couvrent des aspects différents (libellés vs.
+  seuils vs. consigne), dupliquer/spécialiser les sous-sections plutôt
+  que de tout regrouper sous une seule. Ex. PCL-5 / RSES utilisent
+  `### Cross-check secondaire (institutionnel francophone)`.
+- Si exception "autorité unique" : remplacer `### Source de cross-check`
+  par `### Exception de sourcing — autorité unique justifiée` (cf. PHQ-9)
+  qui justifie pourquoi une seule source suffit.
 -->
 
 ### Source primaire
@@ -208,6 +221,11 @@ Toute modification nécessite re-validation clinique.
 <!--
 À utiliser uniquement si chaque item a ses propres libellés de réponses
 (comme la Y-BOCS). Sinon utiliser la Variante A.
+
+Pour les échelles multi-blocs (cas Y-BOCS : obsessions / compulsions
+avec consignes distinctes), regrouper les items par bloc avec des H4
+(ex. `#### Obsessions`, `#### Compulsions`) avant la liste des items.
+La consigne de chaque bloc est rappelée en §4 (Cas particuliers).
 -->
 
 **Item 1 — [Titre de l'item]**
@@ -329,6 +347,15 @@ Tests structurés par catégorie :
 5. Entrées invalides (rejet avec erreur explicite — jamais de score à 0 silencieux)
 
 Format : tableau avec #, description/réponses, score attendu, interprétation attendue.
+
+Flexibilité de numérotation autorisée :
+- Si une sous-catégorie comporte plusieurs sous-cas (ex. PCL-5 §9.5 :
+  diagnostic provisoire DSM-5 avec 4 configurations), introduire des
+  H4 numérotés `#### 5.1 — [titre]`, `#### 5.2 — [titre]`, etc.
+- Si une catégorie supplémentaire est nécessaire entre 4 et 5 (ex. PCL-5
+  insère un §6 "Entrées invalides" après un §5 "Diagnostic provisoire"),
+  renuméroter en conséquence : la position "Entrées invalides en
+  dernier" est plus importante que son numéro fixe.
 -->
 
 ### 1. Cas limites (min/max)
@@ -396,14 +423,16 @@ scoreXXX(réponses: number[]) → {
 - Erreurs de validation levées avec un **message explicite** (pas un score à 0 silencieux).
 - Toute entrée invalide (cf. section 9.5) doit produire une erreur typée, pas un crash non géré.
 
-### Clés de réponse attendues [OPTIONNEL]
+### Clés de réponse attendues
 
 <!--
-À remplir si le format d'entrée n'est pas un simple tableau
-(cas LSAS : { anxiety: [...], avoidance: [...] }).
+Toujours documenter le format d'entrée attendu, même pour un simple tableau.
+- Cas standard : "Entrée : tableau de N nombres (un par item, dans l'ordre des items 1 à N), chacun dans la plage [min, max]."
+- Cas non-trivial (ex. LSAS) : décrire la structure, ex. `{ anxiety: number[24], avoidance: number[24] }`.
+- Préciser tout mapping interne au calculateur générique (ex. clés `intensity_0` à `intensity_N` pour PCL-5, `option_0` à `option_N` pour Y-BOCS) si pertinent côté implémentation.
 -->
 
-[À REMPLIR si applicable]
+[À REMPLIR]
 
 ### Notes d'implémentation [OPTIONNEL]
 
@@ -436,3 +465,31 @@ retracer pourquoi un libellé est celui-ci et pas un autre.
 | Date         | Auteur               | Modification |
 | ------------ | -------------------- | ------------ |
 | [JJ/MM/AAAA] | [Clément/Renata/...] | [À REMPLIR]  |
+
+---
+
+## 13. Échelles connexes à prioriser [OPTIONNEL]
+
+<!--
+Section à remplir UNIQUEMENT quand des couplages cliniques pertinents
+apparaissent dans les sources consultées (recommandations HAS/NICE,
+manuels TCC, publications de référence sur le trouble cible) ou dans
+la pratique courante francophone.
+
+Si aucun couplage n'est explicitement recommandé dans les sources :
+SUPPRIMER la section entièrement. Ne pas écrire un paragraphe
+« aucun couplage » et ne pas inventer de couplages plausibles non sourcés
+(règle projet « ne rien inventer »).
+
+Format quand applicable : liste à puces, chaque échelle satellite avec :
+- nom court + nom complet + référence (auteurs, année)
+- nombre d'items et durée approximative si pertinent
+- justification clinique du couplage (dépistage, suivi rapproché,
+  comorbidité fréquente, granularité dimensionnelle complémentaire, etc.)
+- statut : alternative / complément / hors scope MVP
+
+À discuter en revue de roadmap pour décider quelles échelles satellites
+ajouter au catalogue Melya.
+-->
+
+[À REMPLIR — ou supprimer la section entière si aucun couplage sourcé]

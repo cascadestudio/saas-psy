@@ -1,5 +1,10 @@
 # Test spec — PHQ-9 (Questionnaire sur la Santé du Patient – 9)
 
+<!--
+Voir _TEMPLATE.md pour les règles projet (sourcing, copyright, FR-only,
+hiérarchie versions, comparaison Mentaal).
+-->
+
 ---
 
 ## 1. Métadonnées produit
