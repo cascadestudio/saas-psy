@@ -111,6 +111,8 @@ hiérarchie versions, comparaison Mentaal).
 
 **Note d'adaptation Melya** : la PCL-5 standard suppose qu'un événement traumatique de référence ait été identifié au préalable (le PCL-5 *with Criterion A* du PDF Cn2r inclut une page d'identification de l'événement "pire" avec LEC abrégée). Pour le MVP Melya, l'identification de l'événement de référence est laissée à la discrétion du praticien (en consultation préalable à l'envoi de l'échelle). La consigne ci-dessus présuppose donc que le patient ait été briefé en amont sur l'événement à garder à l'esprit. Si Renata juge nécessaire d'ajouter une étape patient d'identification de l'événement avant les 20 items, cf. point 6 de la section 10.
 
+> **🚩 Phase 2 — à valider avec Renata avant de programmer.** Pour coller entièrement au PDF source Cn2r, il faudra à terme implémenter une étape patient d'identification du pire événement (page 1 du PDF : description libre, durée, type d'exposition, cause si décès). Décision MVP = **non implémenté** ; à reposer après validation clinique avec Renata, idéalement couplé à l'implémentation de la **LEC-5** (cf. §13 « Échelles connexes à prioriser »). Aucune action côté code tant que cette validation n'est pas obtenue.
+
 ### Comportement UX de la consigne
 
 | Champ | Valeur |

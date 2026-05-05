@@ -278,6 +278,7 @@ export const scales: Scale[] = [
     id: "traumatismes-pcl5",
     acronym: "PCL-5",
     label: "Liste de vérification du TSPT",
+    patientIntroSubtitle: null,
     icon: "/images/scales/pcl-5.svg",
     color: "#C46686",
     colorLight: "#E1B2C2",
@@ -288,7 +289,7 @@ export const scales: Scale[] = [
     category: "Traumatismes",
     estimatedTime: "5-10 minutes",
     instructions:
-      "Dans le dernier mois, dans quelle mesure avez-vous été affecté par :",
+      "À présent, lisez chacun des énoncés en gardant à l'esprit ce pire événement, puis indiquez à quel point vous avez été perturbé(e) par ce problème au cours du dernier mois.",
     copyrightAttribution:
       "PCL-5 — Weathers, Litz, Keane, Palmieri, Marx & Schnurr (2013), National Center for PTSD ©2013. Traduction française : Ashbaugh, Houle-Johnson, Herbert, El-Hage & Brunet (2016).",
     higherIsBetter: false,
@@ -327,12 +328,12 @@ export const scales: Scale[] = [
     },
     scoring: {
       ranges: [
-        { min: 0, max: 32, interpretation: "Pas de trouble de stress post-traumatique" },
-        { min: 33, max: 80, interpretation: "Présence éventuelle d'un trouble de stress post-traumatique" },
+        { min: 0, max: 31, interpretation: "Pas de TSPT au seuil de dépistage" },
+        { min: 32, max: 80, interpretation: "Présence de TSPT au seuil de dépistage" },
       ],
       maxScore: 80,
       method:
-        "Additionnez les scores de chaque item (0-4). Le score total varie de 0 à 80. Un score total de 33 ou plus suggère un diagnostic probable de TSPT.",
+        "Additionnez les scores de chaque item (0-4). Le score total varie de 0 à 80. Un score total de 32 ou plus suggère un dépistage positif (version FR validée, Ashbaugh 2016).",
     },
   },
   {
