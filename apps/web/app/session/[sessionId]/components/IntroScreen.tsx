@@ -23,6 +23,10 @@ export default function IntroScreen({
   onStart,
 }: IntroScreenProps) {
   const localScale = localScales.find((s) => s.id === scaleId);
+  const introSubtitle =
+    localScale?.patientIntroSubtitle === undefined
+      ? localScale?.label
+      : localScale.patientIntroSubtitle;
 
   return (
     <div className="flex flex-col gap-8">
@@ -54,9 +58,11 @@ export default function IntroScreen({
             <p className="font-heading font-bold text-black leading-tight text-2xl">
               {localScale.acronym}
             </p>
-            <p className="font-body text-black/80 leading-snug mt-0.5 text-sm">
-              {localScale.label}
-            </p>
+            {introSubtitle && (
+              <p className="font-body text-black/80 leading-snug mt-0.5 text-sm">
+                {introSubtitle}
+              </p>
+            )}
           </div>
         </div>
       ) : (
