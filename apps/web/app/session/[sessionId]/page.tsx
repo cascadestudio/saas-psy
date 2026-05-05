@@ -23,6 +23,11 @@ interface SessionData {
     formType?: string;
     questions: any[];
     answerScales?: any;
+    followUpItem?: {
+      key: string;
+      questionText: string;
+      options: { value: number; label: string }[];
+    };
     scoring?: any;
     estimatedTime: string;
   } | null;
@@ -122,6 +127,7 @@ export default function SessionPage() {
     estimatedTime: scaleData.estimatedTime,
     longDescription: scaleData.instructions,
     answerScales: scaleData.answerScales,
+    followUpItem: scaleData.followUpItem,
     scoring: scaleData.scoring,
   };
 

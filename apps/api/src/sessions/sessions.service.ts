@@ -522,6 +522,7 @@ export class SessionsService {
               formType: scale.formType,
               questions: scale.questions,
               answerScales: scale.answerScales,
+              followUpItem: scale.followUpItem,
               scoring: scale.scoring,
               estimatedTime: scale.estimatedTime,
             }
