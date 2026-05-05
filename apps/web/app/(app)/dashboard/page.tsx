@@ -141,7 +141,7 @@ export default function DashboardPage() {
             Vous explorez Melya avec des données d'exemple. Créez un compte pour
             ajouter vos vrais patients.
           </p>
-          <Button size="sm" onClick={() => openAuthGate()}>
+          <Button onClick={() => openAuthGate()}>
             Se connecter
           </Button>
         </div>
@@ -191,6 +191,7 @@ export default function DashboardPage() {
                           : "Patient"
                       }
                       secondaryText={relativeDayLabel(s.createdAt)}
+                      rightLabel={relativeDayLabel(s.sentAt ?? s.createdAt)}
                       relaunch={isToRelaunch(s)}
                     />
                   ))}
@@ -224,7 +225,8 @@ export default function DashboardPage() {
                           ? `${s.patient.firstName} ${s.patient.lastName}`
                           : "Patient"
                       }
-                      secondaryText={relativeDayLabel(s.createdAt)}
+                      secondaryText={relativeDayLabel(s.completedAt ?? s.createdAt)}
+                      rightLabel={typeof s.interpretation === "string" ? s.interpretation : undefined}
                     />
                   ))}
                 </div>

@@ -22,11 +22,13 @@ export function SessionRow({
   session,
   primaryText,
   secondaryText,
+  rightLabel,
   relaunch = false,
 }: {
   session: Session;
   primaryText?: string;
   secondaryText: string;
+  rightLabel?: string;
   relaunch?: boolean;
 }) {
   const scale = scales.find((s) => s.id === session.scaleId);
@@ -113,14 +115,21 @@ export function SessionRow({
                 </p>
               )}
             </div>
+          ) : rightLabel ? (
+            <p className="text-xs text-muted-foreground whitespace-nowrap">{rightLabel}</p>
           ) : null
         ) : (
-          <Badge
-            className={cn("pointer-events-none", config?.className)}
-            variant="secondary"
-          >
-            {config?.label ?? session.status}
-          </Badge>
+          <>
+            <Badge
+              className={cn("pointer-events-none", config?.className)}
+              variant="secondary"
+            >
+              {config?.label ?? session.status}
+            </Badge>
+            {rightLabel && (
+              <p className="text-xs text-muted-foreground whitespace-nowrap">{rightLabel}</p>
+            )}
+          </>
         )}
       </div>
     </Link>
