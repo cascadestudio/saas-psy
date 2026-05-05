@@ -185,11 +185,12 @@ export default function DashboardPage() {
                     <SessionRow
                       key={s.id}
                       session={s}
-                      secondaryText={
+                      primaryText={
                         s.patient
                           ? `${s.patient.firstName} ${s.patient.lastName}`
                           : "Patient"
                       }
+                      secondaryText={relativeDayLabel(s.createdAt)}
                       relaunch={isToRelaunch(s)}
                     />
                   ))}
@@ -218,11 +219,12 @@ export default function DashboardPage() {
                     <SessionRow
                       key={s.id}
                       session={s}
-                      secondaryText={
+                      primaryText={
                         s.patient
                           ? `${s.patient.firstName} ${s.patient.lastName}`
                           : "Patient"
                       }
+                      secondaryText={relativeDayLabel(s.createdAt)}
                     />
                   ))}
                 </div>

@@ -20,10 +20,12 @@ export function relativeDayLabel(dateStr: string) {
 
 export function SessionRow({
   session,
+  primaryText,
   secondaryText,
   relaunch = false,
 }: {
   session: Session;
+  primaryText?: string;
   secondaryText: string;
   relaunch?: boolean;
 }) {
@@ -59,11 +61,11 @@ export function SessionRow({
         )}
       </div>
       <div className="flex-1 min-w-0">
-        <p className="font-heading font-bold text-black leading-tight text-base">
-          {scale?.acronym ?? session.scaleId}
+        <p className="font-sans font-bold text-black leading-tight text-base">
+          {primaryText ?? scale?.acronym ?? session.scaleId}
         </p>
         <p className="text-xs text-muted-foreground leading-snug truncate">
-          {secondaryText}
+          {primaryText ? scale?.acronym ?? session.scaleId : secondaryText}
         </p>
       </div>
       <div className="flex-shrink-0 flex items-center gap-3">
