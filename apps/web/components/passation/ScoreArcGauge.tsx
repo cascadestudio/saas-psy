@@ -76,82 +76,96 @@ export function ScoreArcGauge({
 
   return (
     <div className="max-w-[200px] sm:max-w-[300px] mx-auto w-full">
-    <div className="flex flex-col items-center">
-      <div className="relative w-full">
-        <svg
-          width="100%"
-          height="auto"
-          viewBox={`0 0 ${SIZE} ${SIZE / 2 + STROKE + 12}`}
-          className="block overflow-visible"
-        >
-          {ranges.length > 1 ? (
-            segments.map((s) => (
-              <path
-                key={s.key}
-                d={s.d}
-                fill="none"
-                className={s.color}
-                stroke="currentColor"
-                strokeWidth={STROKE}
-                strokeLinecap="round"
-              />
-            ))
-          ) : (
-            <>
-              <path
-                d={arcPath(cx, cy, radius, START_ANGLE, START_ANGLE + ARC_DEGREES)}
-                fill="none"
-                className="text-foreground/10"
-                stroke="currentColor"
-                strokeWidth={STROKE}
-                strokeLinecap="round"
-              />
-              {pct > 0 && (
+      <div className="flex flex-col items-center">
+        <div className="relative w-full pb-10 sm:pb-4">
+          <svg
+            width="100%"
+            height="auto"
+            viewBox={`0 0 ${SIZE} ${SIZE / 2 + STROKE + 12}`}
+            className="block overflow-visible"
+          >
+            {ranges.length > 1 ? (
+              segments.map((s) => (
                 <path
-                  d={arcPath(cx, cy, radius, START_ANGLE, START_ANGLE + pct * ARC_DEGREES)}
+                  key={s.key}
+                  d={s.d}
                   fill="none"
-                  className="text-brand-orange/30"
+                  className={s.color}
                   stroke="currentColor"
                   strokeWidth={STROKE}
                   strokeLinecap="round"
                 />
+              ))
+            ) : (
+              <>
+                <path
+                  d={arcPath(
+                    cx,
+                    cy,
+                    radius,
+                    START_ANGLE,
+                    START_ANGLE + ARC_DEGREES,
+                  )}
+                  fill="none"
+                  className="text-foreground/10"
+                  stroke="currentColor"
+                  strokeWidth={STROKE}
+                  strokeLinecap="round"
+                />
+                {pct > 0 && (
+                  <path
+                    d={arcPath(
+                      cx,
+                      cy,
+                      radius,
+                      START_ANGLE,
+                      START_ANGLE + pct * ARC_DEGREES,
+                    )}
+                    fill="none"
+                    className="text-brand-orange/30"
+                    stroke="currentColor"
+                    strokeWidth={STROKE}
+                    strokeLinecap="round"
+                  />
+                )}
+              </>
+            )}
+            {hasSeverity && (
+              <circle
+                cx={marker.x}
+                cy={marker.y}
+                r={STROKE / 2 + 3}
+                fill="white"
+                className="text-brand-orange"
+                stroke="currentColor"
+                strokeWidth={6}
+              />
+            )}
+          </svg>
+          <div
+            className="absolute inset-x-0 flex flex-col items-center"
+            style={{ top: "28%" }}
+          >
+            <div className="flex items-baseline gap-1.5">
+              <span
+                className={"text-7xl font-semibold tabular-nums leading-none"}
+              >
+                {score}
+              </span>
+              {maxScore !== undefined && (
+                <span className="text-base text-muted-foreground tabular-nums">
+                  / {maxScore}
+                </span>
               )}
-            </>
-          )}
-          {hasSeverity && (
-            <circle
-              cx={marker.x}
-              cy={marker.y}
-              r={STROKE / 2 + 3}
-              fill="white"
-              className="text-brand-orange"
-              stroke="currentColor"
-              strokeWidth={6}
-            />
-          )}
-        </svg>
-        <div
-          className="absolute inset-x-0 flex flex-col items-center"
-          style={{ top: "28%" }}
-        >
-          <div className="flex items-baseline gap-1.5">
-            <span className={"text-7xl font-semibold tabular-nums leading-none"}>
-              {score}
-            </span>
-            {maxScore !== undefined && (
-              <span className="text-base text-muted-foreground tabular-nums">
-                / {maxScore}
+            </div>
+            {interpretation && (
+              <span className="mt-4 text-base font-medium text-foreground text-center max-w-[140px] sm:max-w-[200px]">
+                {interpretation}
               </span>
             )}
           </div>
-          {interpretation && (
-            <span className="mt-4 text-base font-medium text-foreground text-center">
-              {interpretation}
-            </span>
-          )}
         </div>
       </div>
-    </div>
     </div>
   );
 }
@@ -210,7 +224,9 @@ export function MiniScoreArc({ value, max, label }: MiniProps) {
       >
         <tspan className="fill-foreground">{value}</tspan>
         {max !== undefined && (
-          <tspan className="fill-foreground/40" fontWeight="400">/{max}</tspan>
+          <tspan className="fill-foreground/40" fontWeight="400">
+            /{max}
+          </tspan>
         )}
       </text>
     </svg>
