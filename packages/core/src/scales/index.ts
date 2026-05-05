@@ -110,29 +110,81 @@ export const scales: Scale[] = [
     higherIsBetter: false,
     questions: [
       { id: 1, text: "Téléphoner en public", type: "performance" },
-      { id: 2, text: "Participer au sein d'un petit groupe", type: "interaction" },
+      {
+        id: 2,
+        text: "Participer au sein d'un petit groupe",
+        type: "interaction",
+      },
       { id: 3, text: "Manger dans un lieu public", type: "performance" },
-      { id: 4, text: "Boire en compagnie dans un lieu public", type: "performance" },
-      { id: 5, text: "Parler à des personnes qui détiennent une autorité", type: "interaction" },
-      { id: 6, text: "Jouer, donner une représentation ou une conférence devant un public", type: "performance" },
+      {
+        id: 4,
+        text: "Boire en compagnie dans un lieu public",
+        type: "performance",
+      },
+      {
+        id: 5,
+        text: "Parler à des personnes qui détiennent une autorité",
+        type: "interaction",
+      },
+      {
+        id: 6,
+        text: "Jouer, donner une représentation ou une conférence devant un public",
+        type: "performance",
+      },
       { id: 7, text: "Aller à une soirée", type: "interaction" },
       { id: 8, text: "Travailler en étant observé", type: "performance" },
       { id: 9, text: "Écrire en étant observé", type: "performance" },
-      { id: 10, text: "Appeler quelqu'un que vous ne connaissez pas très bien", type: "interaction" },
-      { id: 11, text: "Parler à des personnes que vous ne connaissez pas très bien", type: "interaction" },
+      {
+        id: 10,
+        text: "Appeler quelqu'un que vous ne connaissez pas très bien",
+        type: "interaction",
+      },
+      {
+        id: 11,
+        text: "Parler à des personnes que vous ne connaissez pas très bien",
+        type: "interaction",
+      },
       { id: 12, text: "Rencontrer des inconnus", type: "interaction" },
-      { id: 13, text: "Uriner dans des toilettes publiques", type: "performance" },
-      { id: 14, text: "Entrer dans une pièce alors que tout le monde est déjà assis", type: "performance" },
+      {
+        id: 13,
+        text: "Uriner dans des toilettes publiques",
+        type: "performance",
+      },
+      {
+        id: 14,
+        text: "Entrer dans une pièce alors que tout le monde est déjà assis",
+        type: "performance",
+      },
       { id: 15, text: "Être le centre d'attention", type: "performance" },
       { id: 16, text: "Prendre la parole à une réunion", type: "performance" },
       { id: 17, text: "Passer un examen", type: "performance" },
-      { id: 18, text: "Exprimer son désaccord ou sa désapprobation à des personnes que vous ne connaissez pas très bien", type: "interaction" },
-      { id: 19, text: "Regarder dans les yeux des personnes que vous ne connaissez pas très bien", type: "interaction" },
-      { id: 20, text: "Faire un compte rendu à un groupe", type: "performance" },
+      {
+        id: 18,
+        text: "Exprimer son désaccord ou sa désapprobation à des personnes que vous ne connaissez pas très bien",
+        type: "interaction",
+      },
+      {
+        id: 19,
+        text: "Regarder dans les yeux des personnes que vous ne connaissez pas très bien",
+        type: "interaction",
+      },
+      {
+        id: 20,
+        text: "Faire un compte rendu à un groupe",
+        type: "performance",
+      },
       { id: 21, text: "Essayer de séduire quelqu'un", type: "interaction" },
-      { id: 22, text: "Rapporter des marchandises dans un magasin", type: "performance" },
+      {
+        id: 22,
+        text: "Rapporter des marchandises dans un magasin",
+        type: "performance",
+      },
       { id: 23, text: "Donner une soirée", type: "interaction" },
-      { id: 24, text: "Résister aux pressions d'un vendeur insistant", type: "interaction" },
+      {
+        id: 24,
+        text: "Résister aux pressions d'un vendeur insistant",
+        type: "interaction",
+      },
     ],
     answerScales: {
       anxiety: [
@@ -289,7 +341,7 @@ export const scales: Scale[] = [
     category: "Traumatismes",
     estimatedTime: "5-10 minutes",
     instructions:
-      "À présent, lisez chacun des énoncés en gardant à l'esprit ce pire événement, puis indiquez à quel point vous avez été perturbé(e) par ce problème au cours du dernier mois.",
+      "Lisez chacun des énoncés en gardant à l'esprit le pire évènement que vous avez vécu ; celui qui vous perturbe le plus actuellement. Puis indiquez à quel point vous avez été perturbé(e) par ce problème au cours du dernier mois.",
     copyrightAttribution:
       "PCL-5 — Weathers, Litz, Keane, Palmieri, Marx & Schnurr (2013), National Center for PTSD ©2013. Traduction française : Ashbaugh, Houle-Johnson, Herbert, El-Hage & Brunet (2016).",
     higherIsBetter: false,
@@ -328,8 +380,16 @@ export const scales: Scale[] = [
     },
     scoring: {
       ranges: [
-        { min: 0, max: 31, interpretation: "Pas de TSPT au seuil de dépistage" },
-        { min: 32, max: 80, interpretation: "Présence de TSPT au seuil de dépistage" },
+        {
+          min: 0,
+          max: 31,
+          interpretation: "Pas de TSPT au seuil de dépistage",
+        },
+        {
+          min: 32,
+          max: 80,
+          interpretation: "Présence de TSPT au seuil de dépistage",
+        },
       ],
       maxScore: 80,
       method:
@@ -373,10 +433,22 @@ export const scales: Scale[] = [
           "Combien de temps durent les pensées obsédantes ? Combien de fois la pensée obsédante arrive-t-elle ?",
         options: [
           { value: 0, text: "Aucun" },
-          { value: 1, text: "Moins d'une heure par jour, ou survenue occasionnelle (pas plus de 8 fois par jour)" },
-          { value: 2, text: "1 à 3 heures par jour, ou survenue très fréquente (plus de 8 fois par jour, mais la majorité de ma journée se passe sans)" },
-          { value: 3, text: "3 à 8 heures par jour, ou survenue très fréquente (plus de 8 fois par jour, occupant une très grande partie de ma journée)" },
-          { value: 4, text: "Plus de 8 heures par jour, ou envahissement pratiquement constant (pensées tellement nombreuses que je ne peux les compter)" },
+          {
+            value: 1,
+            text: "Moins d'une heure par jour, ou survenue occasionnelle (pas plus de 8 fois par jour)",
+          },
+          {
+            value: 2,
+            text: "1 à 3 heures par jour, ou survenue très fréquente (plus de 8 fois par jour, mais la majorité de ma journée se passe sans)",
+          },
+          {
+            value: 3,
+            text: "3 à 8 heures par jour, ou survenue très fréquente (plus de 8 fois par jour, occupant une très grande partie de ma journée)",
+          },
+          {
+            value: 4,
+            text: "Plus de 8 heures par jour, ou envahissement pratiquement constant (pensées tellement nombreuses que je ne peux les compter)",
+          },
         ],
       },
       {
@@ -385,9 +457,18 @@ export const scales: Scale[] = [
           "Dans quelle mesure vos pensées obsédantes vous gênent-elles dans votre vie sociale ou professionnelle ? Y a-t-il des choses qu'il vous est impossible de faire à cause de ces pensées obsédantes ?",
         options: [
           { value: 0, text: "Aucune" },
-          { value: 1, text: "Faible gêne dans mes activités sociales ou professionnelles, mais mon efficacité globale n'est pas altérée" },
-          { value: 2, text: "Gêne nette dans mes activités sociales ou professionnelles, mais je peux encore faire face" },
-          { value: 3, text: "Altération réelle de mes activités sociales ou professionnelles" },
+          {
+            value: 1,
+            text: "Faible gêne dans mes activités sociales ou professionnelles, mais mon efficacité globale n'est pas altérée",
+          },
+          {
+            value: 2,
+            text: "Gêne nette dans mes activités sociales ou professionnelles, mais je peux encore faire face",
+          },
+          {
+            value: 3,
+            text: "Altération réelle de mes activités sociales ou professionnelles",
+          },
           { value: 4, text: "Gêne invalidante" },
         ],
       },
@@ -398,9 +479,15 @@ export const scales: Scale[] = [
         options: [
           { value: 0, text: "Aucune" },
           { value: 1, text: "Légère, rare et très peu gênante" },
-          { value: 2, text: "Moyenne, fréquente et gênante, mais je la gère encore assez bien" },
+          {
+            value: 2,
+            text: "Moyenne, fréquente et gênante, mais je la gère encore assez bien",
+          },
           { value: 3, text: "Importante, très fréquente et très gênante" },
-          { value: 4, text: "Extrêmement importante, pratiquement constante et d'une gêne invalidante" },
+          {
+            value: 4,
+            text: "Extrêmement importante, pratiquement constante et d'une gêne invalidante",
+          },
         ],
       },
       {
@@ -408,11 +495,20 @@ export const scales: Scale[] = [
         prompt:
           "Quel effort fournissez-vous pour résister aux pensées obsédantes ? Essayez-vous souvent de détourner votre attention de ces pensées quand elles vous viennent à l'esprit ?",
         options: [
-          { value: 0, text: "Je fais toujours l'effort de résister, ou les symptômes sont si minimes qu'il n'est pas nécessaire de leur résister" },
+          {
+            value: 0,
+            text: "Je fais toujours l'effort de résister, ou les symptômes sont si minimes qu'il n'est pas nécessaire de leur résister",
+          },
           { value: 1, text: "J'essaie de résister la plupart du temps" },
           { value: 2, text: "Je fais quelques efforts pour résister" },
-          { value: 3, text: "Je cède à toutes les obsessions sans essayer de les contrôler, mais je suis quelque peu contrarié(e) de ne pouvoir mieux faire" },
-          { value: 4, text: "Je cède volontiers et totalement à toutes les obsessions" },
+          {
+            value: 3,
+            text: "Je cède à toutes les obsessions sans essayer de les contrôler, mais je suis quelque peu contrarié(e) de ne pouvoir mieux faire",
+          },
+          {
+            value: 4,
+            text: "Je cède volontiers et totalement à toutes les obsessions",
+          },
         ],
       },
       {
@@ -421,10 +517,22 @@ export const scales: Scale[] = [
           "Quel contrôle exercez-vous sur vos pensées obsédantes ? Dans quelle mesure arrivez-vous à stopper ou à détourner vos pensées obsédantes ?",
         options: [
           { value: 0, text: "Contrôle total" },
-          { value: 1, text: "Beaucoup de contrôle ; je suis généralement capable de stopper ou détourner les obsessions avec quelques efforts et de la concentration" },
-          { value: 2, text: "Contrôle moyen, j'arrive de temps en temps à stopper ou détourner mes obsessions" },
-          { value: 3, text: "Peu de contrôle, j'arrive rarement à stopper mes obsessions, je peux seulement détourner mon attention avec difficulté" },
-          { value: 4, text: "Aucun contrôle, je me sens totalement dépourvu(e) de volonté, rarement capable de détourner mon attention de mes obsessions, même momentanément" },
+          {
+            value: 1,
+            text: "Beaucoup de contrôle ; je suis généralement capable de stopper ou détourner les obsessions avec quelques efforts et de la concentration",
+          },
+          {
+            value: 2,
+            text: "Contrôle moyen, j'arrive de temps en temps à stopper ou détourner mes obsessions",
+          },
+          {
+            value: 3,
+            text: "Peu de contrôle, j'arrive rarement à stopper mes obsessions, je peux seulement détourner mon attention avec difficulté",
+          },
+          {
+            value: 4,
+            text: "Aucun contrôle, je me sens totalement dépourvu(e) de volonté, rarement capable de détourner mon attention de mes obsessions, même momentanément",
+          },
         ],
       },
       {
@@ -433,10 +541,22 @@ export const scales: Scale[] = [
           "Combien de temps passez-vous à faire des rituels ? Quelle est la fréquence de vos rituels ?",
         options: [
           { value: 0, text: "Aucun rituel" },
-          { value: 1, text: "Moins d'une heure par jour, ou émission occasionnelle de conduites ritualisées (pas plus de 8 fois par jour)" },
-          { value: 2, text: "1 à 3 heures par jour, ou apparition fréquente (plus de 8 fois par jour, mais le temps n'est pas en majorité envahi)" },
-          { value: 3, text: "3 à 8 heures par jour, ou apparition très fréquente (plus de 8 fois par jour, la plupart du temps est pris par les compulsions)" },
-          { value: 4, text: "Plus de 8 heures par jour, ou présence pratiquement constante (conduites trop nombreuses pour être dénombrées)" },
+          {
+            value: 1,
+            text: "Moins d'une heure par jour, ou émission occasionnelle de conduites ritualisées (pas plus de 8 fois par jour)",
+          },
+          {
+            value: 2,
+            text: "1 à 3 heures par jour, ou apparition fréquente (plus de 8 fois par jour, mais le temps n'est pas en majorité envahi)",
+          },
+          {
+            value: 3,
+            text: "3 à 8 heures par jour, ou apparition très fréquente (plus de 8 fois par jour, la plupart du temps est pris par les compulsions)",
+          },
+          {
+            value: 4,
+            text: "Plus de 8 heures par jour, ou présence pratiquement constante (conduites trop nombreuses pour être dénombrées)",
+          },
         ],
       },
       {
@@ -445,9 +565,18 @@ export const scales: Scale[] = [
           "Dans quelle mesure les rituels vous gênent-ils dans votre vie sociale ou professionnelle ? Y a-t-il des choses qu'il vous est impossible de faire à cause de vos rituels ?",
         options: [
           { value: 0, text: "Aucune gêne" },
-          { value: 1, text: "Faible gêne dans mes activités sociales ou professionnelles, mais mon efficacité globale n'est pas altérée" },
-          { value: 2, text: "Gêne nette dans mes activités sociales ou professionnelles, mais je peux encore faire face" },
-          { value: 3, text: "Altération réelle de mes activités sociales ou professionnelles" },
+          {
+            value: 1,
+            text: "Faible gêne dans mes activités sociales ou professionnelles, mais mon efficacité globale n'est pas altérée",
+          },
+          {
+            value: 2,
+            text: "Gêne nette dans mes activités sociales ou professionnelles, mais je peux encore faire face",
+          },
+          {
+            value: 3,
+            text: "Altération réelle de mes activités sociales ou professionnelles",
+          },
           { value: 4, text: "Gêne invalidante" },
         ],
       },
@@ -457,21 +586,42 @@ export const scales: Scale[] = [
           "Comment vous sentiriez-vous si l'on vous empêchait de faire votre/vos rituel(s) ? Seriez-vous très anxieux ?",
         options: [
           { value: 0, text: "Aucune angoisse" },
-          { value: 1, text: "Légère anxiété si l'on m'empêchait de ritualiser, ou légère anxiété pendant l'accomplissement" },
-          { value: 2, text: "L'angoisse monterait mais resterait contrôlable si l'on m'empêchait, ou l'anxiété augmente mais reste contrôlée pendant l'accomplissement" },
-          { value: 3, text: "Augmentation très nette et très éprouvante de l'anxiété si les rituels sont interrompus, ou pendant leur accomplissement" },
-          { value: 4, text: "Anxiété invalidante dès qu'une intervention vise à modifier l'activité ritualisée, ou pendant l'accomplissement" },
+          {
+            value: 1,
+            text: "Légère anxiété si l'on m'empêchait de ritualiser, ou légère anxiété pendant l'accomplissement",
+          },
+          {
+            value: 2,
+            text: "L'angoisse monterait mais resterait contrôlable si l'on m'empêchait, ou l'anxiété augmente mais reste contrôlée pendant l'accomplissement",
+          },
+          {
+            value: 3,
+            text: "Augmentation très nette et très éprouvante de l'anxiété si les rituels sont interrompus, ou pendant leur accomplissement",
+          },
+          {
+            value: 4,
+            text: "Anxiété invalidante dès qu'une intervention vise à modifier l'activité ritualisée, ou pendant l'accomplissement",
+          },
         ],
       },
       {
         title: "RÉSISTANCE AUX COMPULSIONS",
         prompt: "Quel effort fournissez-vous pour résister aux compulsions ?",
         options: [
-          { value: 0, text: "Je fais toujours l'effort de résister, ou les symptômes sont si minimes qu'il n'est pas nécessaire de leur résister" },
+          {
+            value: 0,
+            text: "Je fais toujours l'effort de résister, ou les symptômes sont si minimes qu'il n'est pas nécessaire de leur résister",
+          },
           { value: 1, text: "J'essaie de résister la plupart du temps" },
           { value: 2, text: "Je fais quelques efforts pour résister" },
-          { value: 3, text: "Je cède à tous les rituels sans essayer de les contrôler, mais je suis quelque peu contrarié(e) de ne pouvoir mieux faire" },
-          { value: 4, text: "Je cède volontiers et totalement à tous les rituels" },
+          {
+            value: 3,
+            text: "Je cède à tous les rituels sans essayer de les contrôler, mais je suis quelque peu contrarié(e) de ne pouvoir mieux faire",
+          },
+          {
+            value: 4,
+            text: "Je cède volontiers et totalement à tous les rituels",
+          },
         ],
       },
       {
@@ -480,10 +630,22 @@ export const scales: Scale[] = [
           "Quelle est l'intensité de la pulsion qui vous oblige à ritualiser ? Quel contrôle pouvez-vous exercer sur les rituels ?",
         options: [
           { value: 0, text: "Contrôle total" },
-          { value: 1, text: "Beaucoup de contrôle ; je ressens une certaine obligation à accomplir les rituels, mais je peux généralement exercer un contrôle volontaire sur cette pression" },
-          { value: 2, text: "Contrôle moyen, forte obligation à accomplir les rituels, je peux la contrôler mais avec difficulté" },
-          { value: 3, text: "Peu de contrôle, très forte obligation à accomplir les rituels ; je dois aller jusqu'au bout de l'activité ritualisée et ne peux différer qu'avec difficulté" },
-          { value: 4, text: "Aucun contrôle, l'obligation à accomplir les rituels est vécue comme complètement involontaire et irrésistible ; je ne peux que rarement différer même momentanément l'activité" },
+          {
+            value: 1,
+            text: "Beaucoup de contrôle ; je ressens une certaine obligation à accomplir les rituels, mais je peux généralement exercer un contrôle volontaire sur cette pression",
+          },
+          {
+            value: 2,
+            text: "Contrôle moyen, forte obligation à accomplir les rituels, je peux la contrôler mais avec difficulté",
+          },
+          {
+            value: 3,
+            text: "Peu de contrôle, très forte obligation à accomplir les rituels ; je dois aller jusqu'au bout de l'activité ritualisée et ne peux différer qu'avec difficulté",
+          },
+          {
+            value: 4,
+            text: "Aucun contrôle, l'obligation à accomplir les rituels est vécue comme complètement involontaire et irrésistible ; je ne peux que rarement différer même momentanément l'activité",
+          },
         ],
       },
     ],
