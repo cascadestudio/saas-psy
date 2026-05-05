@@ -18,6 +18,7 @@ interface SessionData {
     title: string;
     description: string;
     instructions: string;
+    persistentInstructions?: string;
     sectionIntros?: { startIndex: number; text: string }[];
     copyrightAttribution?: string;
     formType?: string;
@@ -119,6 +120,7 @@ export default function SessionPage() {
     title: scaleData.title,
     description: scaleData.description,
     instructions: scaleData.instructions,
+    persistentInstructions: scaleData.persistentInstructions,
     sectionIntros: scaleData.sectionIntros,
     copyrightAttribution: scaleData.copyrightAttribution,
     category: "",

@@ -39,7 +39,8 @@ function buildSteps(scale: any): QuestionStep[] {
 
   if (formType === "single-scale") {
     const options = toOptions(scale.answerScales?.intensity);
-    const persistentConsigne: string | undefined = scale.instructions;
+    const persistentConsigne: string | undefined =
+      scale.persistentInstructions ?? scale.instructions;
     return (questions as string[]).map((text, idx) => ({
       key: `intensity_${idx}`,
       questionText: text,
@@ -70,7 +71,8 @@ function buildSteps(scale: any): QuestionStep[] {
   if (formType === "dual-scale") {
     const anxiety = toOptions(scale.answerScales?.anxiety);
     const avoidance = toOptions(scale.answerScales?.avoidance);
-    const persistentConsigne: string | undefined = scale.instructions;
+    const persistentConsigne: string | undefined =
+      scale.persistentInstructions ?? scale.instructions;
     const steps: QuestionStep[] = [];
     (questions as { text: string }[]).forEach((q, idx) => {
       steps.push({

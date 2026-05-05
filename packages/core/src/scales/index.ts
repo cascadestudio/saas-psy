@@ -40,6 +40,12 @@ export interface Scale {
   longDescription: string;
   instructions?: string;
   /**
+   * Consigne affichée en en-tête persistant au-dessus de chaque item pendant la passation.
+   * Si absent, fallback sur `instructions`. Utile quand la consigne d'intro (longue,
+   * contextualisante) diffère du rappel actionnable item par item (ex. PCL-5).
+   */
+  persistentInstructions?: string;
+  /**
    * Per-section intros (e.g. Y-BOCS has distinct consignes for obsessions / compulsions).
    * When set, the patient flow displays each text before its `startIndex` item, and the
    * results page can surface them as separate consigne reminders.
@@ -341,6 +347,8 @@ export const scales: Scale[] = [
     category: "Traumatismes",
     estimatedTime: "5-10 minutes",
     instructions:
+      "À présent, lisez chacun des énoncés en gardant à l'esprit ce pire événement, puis indiquez à quel point vous avez été perturbé(e) par ce problème au cours du dernier mois.",
+    persistentInstructions:
       "Lisez chacun des énoncés en gardant à l'esprit le pire évènement que vous avez vécu ; celui qui vous perturbe le plus actuellement. Puis indiquez à quel point vous avez été perturbé(e) par ce problème au cours du dernier mois.",
     copyrightAttribution:
       "PCL-5 — Weathers, Litz, Keane, Palmieri, Marx & Schnurr (2013), National Center for PTSD ©2013. Traduction française : Ashbaugh, Houle-Johnson, Herbert, El-Hage & Brunet (2016).",

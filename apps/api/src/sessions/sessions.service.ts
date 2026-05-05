@@ -517,6 +517,7 @@ export class SessionsService {
               title: scale.title,
               description: scale.description,
               instructions: scale.instructions ?? scale.longDescription,
+              persistentInstructions: scale.persistentInstructions,
               sectionIntros: scale.sectionIntros,
               copyrightAttribution: scale.copyrightAttribution,
               formType: scale.formType,
