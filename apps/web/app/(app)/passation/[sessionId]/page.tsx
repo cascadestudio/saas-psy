@@ -26,7 +26,6 @@ import { SESSION_STATUS_CONFIG } from "@/lib/session-status";
 import { getSeverityPalette } from "@/lib/severity";
 import { ItemResponsesList } from "@/components/passation/ItemResponsesList";
 import { AlertsBanner } from "@/components/passation/AlertsBanner";
-import { TrendBlock } from "@/components/passation/TrendBlock";
 import { PatientCommentsBlock } from "@/components/passation/PatientCommentsBlock";
 import { PassationSkeleton } from "@/components/passation/PassationSkeleton";
 import { ConsigneBlock } from "@/components/passation/ConsigneBlock";
@@ -307,17 +306,8 @@ export default function ResultsPage() {
         new Date(b.completedAt!).getTime() - new Date(a.completedAt!).getTime()
     );
 
-  const currentSessionIndex = sameScaleSessions.findIndex(
-    (s) => s.id === session.id
-  );
-  const previousSession =
-    currentSessionIndex < sameScaleSessions.length - 1
-      ? sameScaleSessions[currentSessionIndex + 1]
-      : null;
-
   const score = session.score;
   const currentMain = score?.totalScore;
-  const previousMain = previousSession?.score?.totalScore;
   const maxScore = score?.maxScore;
   const subscores = score?.subscores ?? [];
   const alerts = score?.alerts ?? [];
@@ -393,19 +383,6 @@ export default function ResultsPage() {
             responses={session.responses as Record<string, number>}
           />
         )}
-
-        {/* Évolution */}
-        {scale &&
-          previousSession?.completedAt &&
-          previousMain !== undefined &&
-          currentMain !== undefined && (
-            <TrendBlock
-              currentScore={currentMain}
-              previousScore={previousMain}
-              previousCompletedAt={previousSession.completedAt}
-              higherIsBetter={scale.higherIsBetter}
-            />
-          )}
 
         {/* Réponses du patient — item par item */}
         {scale && session.responses && (
