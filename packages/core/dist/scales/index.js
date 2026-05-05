@@ -108,7 +108,7 @@ exports.scales = [
         },
         followUpItem: {
             key: "functional_impact",
-            questionText: "Si vous avez coché au moins un des problèmes évoqués, à quel point ce(s) problème(s) a-t-il (ont-ils) rendu votre travail, vos tâches à la maison ou votre capacité à vous entendre avec les autres difficile(s) ?",
+            questionText: "Si vous avez indiqué au moins un des problèmes évoqués, à quel point ce(s) problème(s) a-t-il (ont-ils) rendu votre travail, vos tâches à la maison ou votre capacité à vous entendre avec les autres difficile(s) ?",
             options: [
                 { value: 0, label: "Pas du tout difficile(s)" },
                 { value: 1, label: "Assez difficile(s)" },

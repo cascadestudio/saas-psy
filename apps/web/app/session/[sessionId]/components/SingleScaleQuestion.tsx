@@ -13,6 +13,7 @@ interface SingleScaleQuestionProps {
   options: AnswerOption[];
   selectedValue?: number;
   onSelect: (value: number) => void;
+  onSkip?: () => void;
 }
 
 export default function SingleScaleQuestion({
@@ -23,6 +24,7 @@ export default function SingleScaleQuestion({
   options,
   selectedValue,
   onSelect,
+  onSkip,
 }: SingleScaleQuestionProps) {
   return (
     <div className="flex flex-col gap-6">
@@ -63,6 +65,15 @@ export default function SingleScaleQuestion({
             </button>
           );
         })}
+        {onSkip && (
+          <button
+            type="button"
+            onClick={onSkip}
+            className="self-center mt-2 text-sm text-gray-500 underline underline-offset-4 hover:text-gray-700"
+          >
+            Passer
+          </button>
+        )}
       </div>
     </div>
   );

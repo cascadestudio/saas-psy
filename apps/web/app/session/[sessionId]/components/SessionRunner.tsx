@@ -178,6 +178,17 @@ function Runner({ scale, onSubmit }: RunnerProps) {
     }, AUTO_ADVANCE_DELAY_MS);
   };
 
+  const handleFollowUpSkip = () => {
+    if (!followUpStep) return;
+    setResponses((prev) => {
+      if (!(followUpStep.key in prev)) return prev;
+      const next = { ...prev };
+      delete next[followUpStep.key];
+      return next;
+    });
+    setPhase("review");
+  };
+
   const handleBack = () => {
     if (phase === "review") {
       if (followUpStep) {
@@ -213,8 +224,9 @@ function Runner({ scale, onSubmit }: RunnerProps) {
     }
   };
 
-  const answeredCount = Object.keys(responses).length;
-  const expectedAnswers = total + (followUpStep ? 1 : 0);
+  const scoredAnsweredCount = followUpStep
+    ? Object.keys(responses).filter((k) => k !== followUpStep.key).length
+    : Object.keys(responses).length;
   const currentStep = steps[currentIndex];
 
   return (
@@ -235,7 +247,7 @@ function Runner({ scale, onSubmit }: RunnerProps) {
               <ProgressBar
                 current={phase === "question" ? currentIndex : total}
                 total={total}
-                showCounter={phase === "question"}
+                showCounter={phase !== "review"}
               />
             </div>
           </div>
@@ -270,13 +282,14 @@ function Runner({ scale, onSubmit }: RunnerProps) {
             options={followUpStep.options}
             selectedValue={responses[followUpStep.key]}
             onSelect={handleFollowUpSelect}
+            onSkip={handleFollowUpSkip}
           />
         )}
 
         {phase === "review" && (
           <ReviewScreen
-            totalQuestions={expectedAnswers}
-            answeredCount={answeredCount}
+            totalQuestions={total}
+            answeredCount={scoredAnsweredCount}
             comments={comments}
             onCommentsChange={setComments}
             onBack={handleBack}
