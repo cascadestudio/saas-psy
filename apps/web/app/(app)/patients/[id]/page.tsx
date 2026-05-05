@@ -265,6 +265,13 @@ export default function PatientDetailPage() {
                       key={session.id}
                       session={session}
                       secondaryText={relativeDayLabel(session.createdAt)}
+                      rightLabel={
+                        session.status === "COMPLETED"
+                          ? typeof session.interpretation === "string"
+                            ? session.interpretation
+                            : undefined
+                          : relativeDayLabel(session.sentAt ?? session.createdAt)
+                      }
                     />
                   ))}
                 </div>
