@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { useSearchParams, useRouter } from "next/navigation";
 import { useUser } from "@/app/context/UserContext";
 import { useAuthGate } from "@/app/context/AuthGateContext";
@@ -12,30 +11,17 @@ import {
   type Patient,
   type Session,
 } from "@/lib/api-client";
-import { scales } from "@/app/scalesData";
 import { Interfaces, Arrow } from "doodle-icons";
-import { formatScore } from "@/lib/score-utils";
-import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
+import { Card, CardContent } from "@/components/ui/card";
 import { CreatePatientSheet } from "@/components/CreatePatientSheet";
 import { SendScaleSheet } from "@/components/SendScaleSheet";
-import { SESSION_STATUS_CONFIG } from "@/lib/session-status";
 import { MOCK_PATIENTS, MOCK_SESSIONS } from "@/lib/mock-data";
 import { DashboardSkeleton } from "@/components/dashboard/DashboardSkeleton";
+import { SessionRow, relativeDayLabel } from "@/components/sessions/SessionRow";
 
 const PENDING_THRESHOLD_DAYS = 7;
 const RECENT_WINDOW_DAYS = 30;
-
-function getScaleMeta(scaleId: string) {
-  const scale = scales.find((s) => s.id === scaleId);
-  return {
-    acronym: scale?.acronym ?? scaleId,
-    title: scale?.title ?? scaleId,
-    color: scale?.color ?? "#e5e7eb",
-    icon: scale?.icon ?? null,
-  };
-}
 
 function daysSince(dateStr: string) {
   const then = new Date(dateStr);
@@ -43,61 +29,6 @@ function daysSince(dateStr: string) {
   const now = new Date();
   now.setHours(0, 0, 0, 0);
   return Math.round((now.getTime() - then.getTime()) / 86400000);
-}
-
-function relativeDayLabel(dateStr: string) {
-  const d = daysSince(dateStr);
-  if (d === 0) return "aujourd'hui";
-  if (d === 1) return "hier";
-  return `il y a ${d} j`;
-}
-
-function SessionRow({
-  session,
-  rightSlot,
-}: {
-  session: Session;
-  rightSlot: React.ReactNode;
-}) {
-  const meta = getScaleMeta(session.scaleId);
-  const patientName = session.patient
-    ? `${session.patient.firstName} ${session.patient.lastName}`
-    : "Patient";
-
-  return (
-    <Link
-      href={`/passation/${session.id}`}
-      className="flex items-center gap-3 rounded-lg px-3 py-2.5 hover:bg-muted-foreground/5 transition-colors"
-    >
-      <div
-        className="flex items-center justify-center flex-shrink-0 rounded-md"
-        style={{
-          backgroundColor: meta.color,
-          width: 40,
-          height: 40,
-        }}
-      >
-        {meta.icon && (
-          <Image
-            src={meta.icon}
-            alt={meta.acronym}
-            width={24}
-            height={24}
-            className="w-3/5 h-3/5 object-contain"
-          />
-        )}
-      </div>
-      <div className="flex-1 min-w-0">
-        <p className="font-heading font-bold text-black leading-tight text-base">
-          {meta.acronym}
-        </p>
-        <p className="text-xs text-muted-foreground leading-snug truncate">
-          {patientName}
-        </p>
-      </div>
-      <div className="flex-shrink-0">{rightSlot}</div>
-    </Link>
-  );
 }
 
 function LoginParamHandler() {
@@ -247,42 +178,24 @@ export default function DashboardPage() {
               Vos passations en cours apparaîtront ici.
             </p>
           ) : (
-            <div className="flex flex-col">
-              {inProgress.map((s) => {
-                const config = SESSION_STATUS_CONFIG[s.status];
-                const relaunch = isToRelaunch(s);
-                return (
-                  <SessionRow
-                    key={s.id}
-                    session={s}
-                    rightSlot={
-                      <div className="flex items-center gap-3">
-                        {relaunch && (
-                          <Badge
-                            variant="secondary"
-                            className="pointer-events-none bg-fuchsia-100 text-fuchsia-700 ring-1 ring-fuchsia-500/30"
-                          >
-                            À relancer
-                          </Badge>
-                        )}
-                        <Badge
-                          className={cn(
-                            "pointer-events-none",
-                            config.className,
-                          )}
-                          variant="secondary"
-                        >
-                          {config.label}
-                        </Badge>
-                        <span className="text-xs text-muted-foreground whitespace-nowrap text-right">
-                          envoyée {relativeDayLabel(s.sentAt || s.createdAt)}
-                        </span>
-                      </div>
-                    }
-                  />
-                );
-              })}
-            </div>
+            <Card className="border-0 bg-muted-foreground/5 shadow-none hover:shadow-none">
+              <CardContent className="p-4">
+                <div className="rounded-lg overflow-hidden">
+                  {inProgress.map((s) => (
+                    <SessionRow
+                      key={s.id}
+                      session={s}
+                      secondaryText={
+                        s.patient
+                          ? `${s.patient.firstName} ${s.patient.lastName}`
+                          : "Patient"
+                      }
+                      relaunch={isToRelaunch(s)}
+                    />
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
           )}
         </section>
 
@@ -298,42 +211,23 @@ export default function DashboardPage() {
               Aucun résultat récent.
             </p>
           ) : (
-            <div className="flex flex-col">
-              {recentResults.map((s) => {
-                const unread = !s.viewedAt;
-                const score = typeof s.score === "number" ? s.score : null;
-                return (
-                  <SessionRow
-                    key={s.id}
-                    session={s}
-                    rightSlot={
-                      <div className="flex items-center gap-3">
-                        {unread && (
-                          <Badge
-                            variant="secondary"
-                            className="pointer-events-none bg-violet-100 text-violet-700"
-                          >
-                            Non lu
-                          </Badge>
-                        )}
-                        <div className="text-right min-w-[90px]">
-                          {score != null && (
-                            <p className="font-sans font-bold text-black text-sm leading-tight">
-                              {formatScore(score)}
-                            </p>
-                          )}
-                          {typeof s.interpretation === "string" && (
-                            <p className="text-xs text-muted-foreground truncate max-w-[140px]">
-                              {s.interpretation}
-                            </p>
-                          )}
-                        </div>
-                      </div>
-                    }
-                  />
-                );
-              })}
-            </div>
+            <Card className="border-0 bg-muted-foreground/5 shadow-none hover:shadow-none">
+              <CardContent className="p-4">
+                <div className="rounded-lg overflow-hidden">
+                  {recentResults.map((s) => (
+                    <SessionRow
+                      key={s.id}
+                      session={s}
+                      secondaryText={
+                        s.patient
+                          ? `${s.patient.firstName} ${s.patient.lastName}`
+                          : "Patient"
+                      }
+                    />
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
           )}
         </section>
 

@@ -3,6 +3,7 @@
 import { useParams, useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Card, CardContent } from "@/components/ui/card";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -10,7 +11,6 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import Link from "next/link";
-import Image from "next/image";
 import { useUser } from "@/app/context/UserContext";
 import { useEffect, useState, useCallback } from "react";
 import {
@@ -19,15 +19,12 @@ import {
   type Patient,
   type Session,
 } from "@/lib/api-client";
-import { scales } from "@/app/scalesData";
 import { Interfaces, Food } from "doodle-icons";
 import { ArchivePatientDialog } from "@/components/ArchivePatientDialog";
 import { RestorePatientButton } from "@/components/RestorePatientButton";
 import { EditPatientSheet } from "@/components/EditPatientSheet";
 import { SendScaleSheet } from "@/components/SendScaleSheet";
-import { formatScore } from "@/lib/score-utils";
-import { SESSION_STATUS_CONFIG } from "@/lib/session-status";
-import { cn } from "@/lib/utils";
+import { SessionRow, relativeDayLabel } from "@/components/sessions/SessionRow";
 import { getMockPatient, getMockSessionsByPatient, isMockId } from "@/lib/mock-data";
 import { useAuthGate } from "@/app/context/AuthGateContext";
 import { PatientDetailSkeleton } from "@/components/patients/PatientDetailSkeleton";
@@ -260,100 +257,19 @@ export default function PatientDetailPage() {
               )}
             </div>
           ) : (
-            <div className="flex flex-col gap-1.5">
-              {sessions.map((session) => {
-                const scale = scales.find((s) => s.id === session.scaleId);
-                const config =
-                  SESSION_STATUS_CONFIG[
-                    session.status as keyof typeof SESSION_STATUS_CONFIG
-                  ];
-
-                return (
-                  <Link
-                    key={session.id}
-                    href={`/passation/${session.id}`}
-                    className="flex overflow-hidden hover:opacity-90 transition-opacity"
-                    style={{ borderRadius: 12, height: 64 }}
-                  >
-                    <div
-                      className="flex items-center justify-center flex-shrink-0"
-                      style={{
-                        backgroundColor: scale?.color ?? "#e5e7eb",
-                        aspectRatio: "1 / 1",
-                        height: "100%",
-                      }}
-                    >
-                      {scale && (
-                        <Image
-                          src={scale.icon}
-                          alt={scale.acronym}
-                          width={32}
-                          height={32}
-                          className="w-3/5 h-3/5 object-contain"
-                        />
-                      )}
-                    </div>
-                    <div className="flex items-center px-4 flex-1 min-w-0 gap-4 bg-muted-foreground/5">
-                      <div className="min-w-0">
-                        <p className="font-heading font-bold text-black leading-tight text-base">
-                          {scale?.acronym || session.scaleId}
-                        </p>
-                        <p
-                          className="text-xs text-black/50 leading-snug"
-                          title={new Date(session.createdAt).toLocaleDateString("fr-FR")}
-                        >
-                          {(() => {
-                            const today = new Date();
-                            today.setHours(0, 0, 0, 0);
-                            const sessionDay = new Date(session.createdAt);
-                            sessionDay.setHours(0, 0, 0, 0);
-                            const diff = Math.round((today.getTime() - sessionDay.getTime()) / 86400000);
-                            return diff === 0 ? "aujourd'hui" : diff === 1 ? "hier" : `il y a ${diff} j`;
-                          })()}
-                        </p>
-                      </div>
-                      <div className="ml-auto flex items-center gap-2 flex-shrink-0">
-                        {(() => {
-                          const sessionAlerts = session.score?.alerts ?? [];
-                          const criticalCount = sessionAlerts.filter(a => a.severity === "critical").length;
-                          const warningCount = sessionAlerts.filter(a => a.severity === "warning").length;
-                          return (
-                            <>
-                              {criticalCount > 0 && (
-                                <Badge variant="secondary" className="pointer-events-none bg-red-100 text-red-700 border-red-200">
-                                  ⚠ {criticalCount > 1 ? `${criticalCount} alertes` : "Alerte critique"}
-                                </Badge>
-                              )}
-                              {warningCount > 0 && criticalCount === 0 && (
-                                <Badge variant="secondary" className="pointer-events-none bg-amber-100 text-amber-700 border-amber-200">
-                                  {warningCount > 1 ? `${warningCount} vigilances` : "Vigilance"}
-                                </Badge>
-                              )}
-                            </>
-                          );
-                        })()}
-                        {session.status === "COMPLETED" && session.score != null ? (
-                          <div className="text-right">
-                            <p className="font-sans font-bold text-black text-base leading-tight">
-                              {formatScore(session.score)}
-                            </p>
-                            {session.interpretation && (
-                              <p className="font-sans text-xs text-black/70 leading-snug">
-                                {session.interpretation}
-                              </p>
-                            )}
-                          </div>
-                        ) : (
-                          <Badge className={cn("pointer-events-none", config?.className)} variant="secondary">
-                            {config?.label ?? session.status}
-                          </Badge>
-                        )}
-                      </div>
-                    </div>
-                  </Link>
-                );
-              })}
-            </div>
+            <Card className="border-0 bg-muted-foreground/5 shadow-none hover:shadow-none">
+              <CardContent className="p-4">
+                <div className="rounded-lg overflow-hidden">
+                  {sessions.map((session) => (
+                    <SessionRow
+                      key={session.id}
+                      session={session}
+                      secondaryText={relativeDayLabel(session.createdAt)}
+                    />
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
           )}
         </div>
       </div>
