@@ -8,10 +8,18 @@ import {
   ReactNode,
 } from "react";
 
+type OpenAuthGateOptions = {
+  onSuccess?: () => void;
+  reason?: string;
+};
+
 type AuthGateContextType = {
   isOpen: boolean;
   pendingAction: (() => void) | null;
-  openAuthGate: (onSuccess?: () => void) => void;
+  reason: string | null;
+  openAuthGate: (
+    optionsOrOnSuccess?: OpenAuthGateOptions | (() => void)
+  ) => void;
   closeAuthGate: () => void;
   executePendingAction: () => void;
 };
@@ -23,15 +31,26 @@ const AuthGateContext = createContext<AuthGateContextType | undefined>(
 export function AuthGateProvider({ children }: { children: ReactNode }) {
   const [isOpen, setIsOpen] = useState(false);
   const [pendingAction, setPendingAction] = useState<(() => void) | null>(null);
+  const [reason, setReason] = useState<string | null>(null);
 
-  const openAuthGate = useCallback((onSuccess?: () => void) => {
-    setPendingAction(() => onSuccess || null);
-    setIsOpen(true);
-  }, []);
+  const openAuthGate = useCallback(
+    (optionsOrOnSuccess?: OpenAuthGateOptions | (() => void)) => {
+      if (typeof optionsOrOnSuccess === "function") {
+        setPendingAction(() => optionsOrOnSuccess);
+        setReason(null);
+      } else {
+        setPendingAction(() => optionsOrOnSuccess?.onSuccess || null);
+        setReason(optionsOrOnSuccess?.reason ?? null);
+      }
+      setIsOpen(true);
+    },
+    []
+  );
 
   const closeAuthGate = useCallback(() => {
     setIsOpen(false);
     setPendingAction(null);
+    setReason(null);
   }, []);
 
   const executePendingAction = useCallback(() => {
@@ -46,6 +65,7 @@ export function AuthGateProvider({ children }: { children: ReactNode }) {
       value={{
         isOpen,
         pendingAction,
+        reason,
         openAuthGate,
         closeAuthGate,
         executePendingAction,
