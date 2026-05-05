@@ -175,7 +175,7 @@ export default function PatientPortalPage() {
                 >
                 {/* Icon block */}
                 <div
-                  className="flex items-center justify-center flex-shrink-0 h-20 w-full sm:h-auto sm:w-24 sm:self-stretch"
+                  className="flex items-center justify-center flex-shrink-0 h-16 w-full sm:h-auto sm:w-20 sm:self-stretch"
                   style={{ backgroundColor: scaleData?.color ?? "#D6591F" }}
                 >
                   {scaleData?.icon ? (

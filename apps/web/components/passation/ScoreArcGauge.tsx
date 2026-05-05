@@ -76,14 +76,13 @@ export function ScoreArcGauge({
     };
   });
 
-  const arcHeight = SIZE * 0.8;
-
   return (
+    <div className="max-w-[200px] sm:max-w-[300px] mx-auto w-full">
     <div className="flex flex-col items-center">
-      <div className="relative" style={{ width: SIZE, height: arcHeight }}>
+      <div className="relative w-full">
         <svg
-          width={SIZE}
-          height={SIZE}
+          width="100%"
+          height="auto"
           viewBox={`0 0 ${SIZE} ${SIZE}`}
           className="block overflow-visible"
         >
@@ -135,7 +134,7 @@ export function ScoreArcGauge({
         </svg>
         <div
           className="absolute inset-x-0 flex flex-col items-center"
-          style={{ top: SIZE * 0.28 }}
+          style={{ top: "28%" }}
         >
           <div className="flex items-baseline gap-1.5">
             <span className={"text-7xl font-semibold tabular-nums leading-none"}>
@@ -154,6 +153,7 @@ export function ScoreArcGauge({
           )}
         </div>
       </div>
+    </div>
     </div>
   );
 }

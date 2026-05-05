@@ -190,7 +190,7 @@ function Runner({ scale, onSubmit }: RunnerProps) {
 
   return (
     <div className="min-h-[100dvh] bg-gray-50">
-      <div className="mx-auto max-w-xl px-5 pt-6 pb-10 flex flex-col gap-8">
+      <div className="mx-auto max-w-xl px-4 sm:px-5 pt-6 pb-10 flex flex-col gap-8">
         {phase !== "intro" && (
           <div className="flex items-center gap-3">
             <button

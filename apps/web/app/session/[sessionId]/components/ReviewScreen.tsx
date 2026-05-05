@@ -49,7 +49,7 @@ export default function ReviewScreen({
           value={comments}
           onChange={(e) => onCommentsChange(e.target.value)}
           placeholder="Si vous souhaitez ajouter des précisions, vous pouvez les écrire ici..."
-          className="w-full min-h-[120px] p-3 rounded-xl border border-gray-200 bg-white text-base text-gray-900 placeholder:text-gray-400 focus:outline-none focus:border-brand-orange focus:ring-1 focus:ring-brand-orange resize-none"
+          className="w-full min-h-[100px] sm:min-h-[120px] p-3 rounded-xl border border-gray-200 bg-white text-base text-gray-900 placeholder:text-gray-400 focus:outline-none focus:border-brand-orange focus:ring-1 focus:ring-brand-orange resize-none"
         />
       </div>
 

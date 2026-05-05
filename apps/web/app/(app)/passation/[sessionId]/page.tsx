@@ -144,11 +144,9 @@ export default function ResultsPage() {
 
   const ScaleLogo = scale ? (
     <div
-      className="flex items-center justify-center flex-shrink-0 rounded-md"
+      className="flex items-center justify-center flex-shrink-0 rounded-md w-14 h-14 sm:w-[72px] sm:h-[72px]"
       style={{
         backgroundColor: scale.color ?? "#e5e7eb",
-        width: 72,
-        height: 72,
       }}
     >
       {scale.icon && (
@@ -343,7 +341,7 @@ export default function ResultsPage() {
 
               {/* Subscores as mini-cards */}
               {subscores.length > 0 && (
-                <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3 pt-2">
+                <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-x-3 sm:gap-x-6 gap-y-3 pt-2">
                   {subscores.map((s) => {
                     const pct = s.max && s.max > 0 ? Math.min(1, s.value / s.max) * 100 : 0;
                     return (

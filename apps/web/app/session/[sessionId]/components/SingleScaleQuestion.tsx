@@ -35,7 +35,7 @@ export default function SingleScaleQuestion({
             {subLabel}
           </p>
         )}
-        <h2 className="font-body text-2xl sm:text-3xl font-semibold text-gray-900 leading-tight">
+        <h2 className="font-body text-xl sm:text-2xl lg:text-3xl font-semibold text-gray-900 leading-tight">
           {questionText}
         </h2>
         {questionPrompt && (

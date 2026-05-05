@@ -46,7 +46,7 @@ export default function ScalePreview({ scale }: ScalePreviewProps) {
       )}
 
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent className="sm:max-w-[700px] max-h-[90vh] overflow-y-auto border-none">
+        <DialogContent className="w-[calc(100vw-2rem)] sm:max-w-[700px] max-h-[90vh] overflow-y-auto border-none">
           <DialogHeader>
             <DialogTitle className="font-body">{scale.title}</DialogTitle>
           </DialogHeader>
@@ -131,7 +131,7 @@ function QuestionItem({
           {index + 1}. {question.text}
         </p>
         {scale.answerScales?.anxiety && scale.answerScales?.avoidance && (
-          <div className="grid grid-cols-2 gap-4 mt-2">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-2">
             <div>
               <p className="text-xs font-medium text-muted-foreground mb-2">Anxiété</p>
               <div className="flex flex-wrap gap-1">

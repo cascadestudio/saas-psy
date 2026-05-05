@@ -22,7 +22,7 @@ export default async function ScaleDescriptionPage({
   return (
     <div>
       {/* Header fullwidth 2 couleurs + CTA */}
-      <div className="sticky top-0 z-10 px-4 pt-2">
+      <div className="sticky top-14 md:top-0 z-10 px-4 pt-2">
         <div className="flex h-[80px]">
           <div
             className="flex items-center justify-center flex-shrink-0 aspect-square h-full rounded-l-2xl"

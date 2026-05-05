@@ -82,7 +82,7 @@ export function Hero() {
               </span>
             </div>
             <div
-              className="toast-animate absolute left-14 bottom-20 flex items-center gap-2 sm:gap-2.5 bg-card rounded-full px-3 py-2 sm:px-4 sm:py-2.5 shadow-md border border-border/50"
+              className="toast-animate absolute left-2 sm:left-14 bottom-16 sm:bottom-20 flex items-center gap-2 sm:gap-2.5 bg-card rounded-full px-3 py-2 sm:px-4 sm:py-2.5 shadow-md border border-border/50"
               style={{ animationDelay: "1.6s" }}
             >
               <Interfaces.Analytics

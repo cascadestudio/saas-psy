@@ -87,7 +87,7 @@ export default function SettingsPage() {
   }
 
   return (
-    <div className="container mx-auto px-4 py-6 max-w-2xl">
+    <div className="container mx-auto px-4 py-6 max-w-full sm:max-w-2xl">
       <h1 className="font-gelica font-normal text-3xl mb-8">Paramètres</h1>
 
       {!user && (
@@ -101,7 +101,7 @@ export default function SettingsPage() {
         <section className="space-y-4">
           <h2 className="font-body text-lg font-medium">Identité</h2>
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label htmlFor="firstName">Prénom</Label>
               <Input
@@ -171,7 +171,7 @@ export default function SettingsPage() {
       )}
 
       <Dialog open={deleteOpen} onOpenChange={setDeleteOpen}>
-        <DialogContent>
+        <DialogContent className="w-[calc(100vw-2rem)] sm:max-w-lg">
           <DialogHeader>
             <DialogTitle>Supprimer définitivement le compte ?</DialogTitle>
             <DialogDescription>
