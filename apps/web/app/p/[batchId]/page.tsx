@@ -162,6 +162,10 @@ export default function PatientPortalPage() {
         <div className="space-y-3 my-10">
           {portal.sessions.map((session) => {
             const scaleData = scales.find((s) => s.id === session.scaleId);
+            const cardSubtitle =
+              scaleData?.patientIntroSubtitle === undefined
+                ? scaleData?.label ?? session.scaleDescription
+                : scaleData.patientIntroSubtitle;
             return (
               <div key={session.id} className="flex items-center gap-4">
                 {/* Card */}
@@ -198,9 +202,11 @@ export default function PatientPortalPage() {
                     <p className="font-heading font-bold text-black leading-tight text-xl">
                       {scaleData?.acronym ?? session.scaleTitle}
                     </p>
-                    <p className="font-body text-black/70 text-sm leading-snug mt-0.5 truncate">
-                      {scaleData?.label ?? session.scaleDescription}
-                    </p>
+                    {cardSubtitle && (
+                      <p className="font-body text-black/70 text-sm leading-snug mt-0.5 truncate">
+                        {cardSubtitle}
+                      </p>
+                    )}
                     {session.estimatedTime && !session.isCompleted && (
                       <div className="flex items-center gap-1 text-xs text-black/50 mt-1">
                         <Interfaces.Clock className="h-3 w-3" />

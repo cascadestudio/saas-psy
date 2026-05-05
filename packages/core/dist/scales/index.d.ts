@@ -47,6 +47,18 @@ export interface Scale {
      * - in the footer of the practitioner results page
      */
     copyrightAttribution: string;
+    /**
+     * Sous-titre affiché sous l'acronyme sur **toutes les surfaces vues par le patient** :
+     * écran d'intro (`IntroScreen`) ET cards du batch (`p/[batchId]/page.tsx`).
+     * Doit reproduire ce qui figure sur le PDF de la source primaire :
+     * - `undefined` : fallback sur `label` (comportement par défaut historique).
+     * - `null` : aucun sous-titre — le PDF n'affiche que l'acronyme (ex. GAD-7).
+     * - `string` : libellé exact du PDF s'il diffère de `label`.
+     * Les surfaces praticien (catalogue, fiche patient, résultats) ne sont **pas**
+     * concernées : elles continuent d'afficher `label` / `title` enrichis.
+     * Documenter le choix dans le §4 du spec correspondant.
+     */
+    patientIntroSubtitle?: string | null;
     reverseItems?: number[];
     /**
      * True when a higher score = better health (e.g. RSES self-esteem).

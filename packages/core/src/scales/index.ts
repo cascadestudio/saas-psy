@@ -52,6 +52,18 @@ export interface Scale {
    * - in the footer of the practitioner results page
    */
   copyrightAttribution: string;
+  /**
+   * Sous-titre affiché sous l'acronyme sur **toutes les surfaces vues par le patient** :
+   * écran d'intro (`IntroScreen`) ET cards du batch (`p/[batchId]/page.tsx`).
+   * Doit reproduire ce qui figure sur le PDF de la source primaire :
+   * - `undefined` : fallback sur `label` (comportement par défaut historique).
+   * - `null` : aucun sous-titre — le PDF n'affiche que l'acronyme (ex. GAD-7).
+   * - `string` : libellé exact du PDF s'il diffère de `label`.
+   * Les surfaces praticien (catalogue, fiche patient, résultats) ne sont **pas**
+   * concernées : elles continuent d'afficher `label` / `title` enrichis.
+   * Documenter le choix dans le §4 du spec correspondant.
+   */
+  patientIntroSubtitle?: string | null;
   reverseItems?: number[];
   /**
    * True when a higher score = better health (e.g. RSES self-esteem).
@@ -193,36 +205,37 @@ export const scales: Scale[] = [
     id: "gad-7",
     acronym: "GAD-7",
     label: "Trouble Anxieux Généralisé",
+    patientIntroSubtitle: null,
     icon: "/images/scales/gad-7.svg",
     color: "#6A9BCC",
     colorLight: "#B4CDE5",
     formType: "single-scale",
     title: "GAD-7 - Generalized Anxiety Disorder 7-item",
     description:
-      "Une échelle de 7 items évaluant la sévérité des symptômes d'anxiété généralisée au cours des 14 derniers jours",
+      "Une échelle de 7 items évaluant la sévérité des symptômes d'anxiété généralisée au cours des 2 dernières semaines",
     category: "Anxiété généralisée",
     estimatedTime: "2-3 minutes",
     longDescription:
       "Le GAD-7 (Generalized Anxiety Disorder 7-item) est un auto-questionnaire de 7 items développé par Spitzer et collaborateurs (2006) pour le dépistage et la mesure de la sévérité du trouble anxieux généralisé. Chaque item est coté de 0 (jamais) à 3 (presque tous les jours), le score total varie de 0 à 21. Un score ≥ 10 correspond au seuil clinique de suspicion de TAG (sensibilité 89 %, spécificité 82 %), à laisser au jugement du practicien.",
     instructions:
-      "Au cours des 14 derniers jours, à quelle fréquence avez-vous été dérangé(e) par les problèmes suivants ?",
+      "Au cours des 2 dernières semaines, selon quelle fréquence avez-vous été gêné(e) par les problèmes suivants ?",
     copyrightAttribution:
-      "GAD-7 — Spitzer R.L., Kroenke K., Williams J.B.W., Löwe B. (2006). Développé avec une allocation d'études de Pfizer Inc.",
+      "Développé par les Dr Robert L. Spitzer, Janet B.W. Williams, Kurt Kroenke et leurs collègues grâce à une allocation d'études de Pfizer Inc.",
     higherIsBetter: false,
     questions: [
-      "Sentiment de nervosité, d'anxiété ou de tension",
-      "Incapable d'arrêter de vous inquiéter ou de contrôler vos inquiétudes",
-      "Inquiétudes excessives à propos de tout et de rien",
-      "Difficulté à se détendre",
-      "Agitation telle qu'il est difficile de rester tranquille",
-      "Devenir facilement contrarié(e) ou irritable",
-      "Avoir peur que quelque chose d'épouvantable puisse arriver",
+      "Un sentiment de nervosité, d'anxiété ou de tension",
+      "Une incapacité à arrêter de s'inquiéter ou à contrôler ses inquiétudes",
+      "Une inquiétude excessive à propos de différentes choses",
+      "Des difficultés à se détendre",
+      "Une agitation telle qu'il est difficile à tenir en place",
+      "Une tendance à être facilement contrarié(e) ou irritable",
+      "Un sentiment de peur comme si quelque chose de terrible risquait de se produire",
     ],
     answerScales: {
       intensity: [
         { value: 0, label: "Jamais" },
         { value: 1, label: "Plusieurs jours" },
-        { value: 2, label: "Plus de la moitié des jours" },
+        { value: 2, label: "Plus de la moitié du temps" },
         { value: 3, label: "Presque tous les jours" },
       ],
     },
