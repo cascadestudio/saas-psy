@@ -74,6 +74,7 @@ exports.scales = [
         id: "phq-9",
         acronym: "PHQ-9",
         label: "Questionnaire sur la santé du patient",
+        patientIntroSubtitle: "Questionnaire sur la santé du patient – 9",
         icon: "/images/scales/phq-9.svg",
         color: "#CBCADB",
         colorLight: "#E5E4ED",
@@ -93,7 +94,7 @@ exports.scales = [
             "Se sentir fatigué(e) ou manquer d'énergie",
             "Avoir peu d'appétit ou manger trop",
             "Avoir une mauvaise opinion de soi-même, ou avoir le sentiment d'être nul(le), ou d'avoir déçu sa famille ou s'être déçu(e) soi-même",
-            "Avoir du mal à se concentrer, par exemple pour lire le journal ou regarder la télévision",
+            "Avoir du mal à se concentrer, par exemple, pour lire le journal ou regarder la télévision",
             "Bouger ou parler si lentement que les autres auraient pu le remarquer. Ou au contraire, être si agité(e) que vous avez eu du mal à tenir en place par rapport à d'habitude",
             "Penser qu'il vaudrait mieux mourir ou envisager de vous faire du mal d'une manière ou d'une autre",
         ],
@@ -103,6 +104,16 @@ exports.scales = [
                 { value: 1, label: "Plusieurs jours" },
                 { value: 2, label: "Plus de la moitié du temps" },
                 { value: 3, label: "Presque tous les jours" },
+            ],
+        },
+        followUpItem: {
+            key: "functional_impact",
+            questionText: "Si vous avez coché au moins un des problèmes évoqués, à quel point ce(s) problème(s) a-t-il (ont-ils) rendu votre travail, vos tâches à la maison ou votre capacité à vous entendre avec les autres difficile(s) ?",
+            options: [
+                { value: 0, label: "Pas du tout difficile(s)" },
+                { value: 1, label: "Assez difficile(s)" },
+                { value: 2, label: "Très difficile(s)" },
+                { value: 3, label: "Extrêmement difficile(s)" },
             ],
         },
         scoring: {

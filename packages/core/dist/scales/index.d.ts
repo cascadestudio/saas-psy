@@ -68,6 +68,17 @@ export interface Scale {
     higherIsBetter: boolean;
     questions: any[];
     answerScales?: Record<string, ScaleOption[]>;
+    /**
+     * Item de suivi non scoré, présenté au patient après les items scorés.
+     * Sa réponse est stockée sous `key` dans le record de réponses ; les scorers
+     * doivent ignorer cette clé. Affiché côté praticien dans une section dédiée.
+     * Exemple : item d'impact fonctionnel du PHQ-9.
+     */
+    followUpItem?: {
+        key: string;
+        questionText: string;
+        options: ScaleOption[];
+    };
     scoring: ScaleScoring;
 }
 export declare const scales: Scale[];

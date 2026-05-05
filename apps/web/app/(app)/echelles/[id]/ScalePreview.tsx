@@ -59,9 +59,37 @@ export default function ScalePreview({ scale }: ScalePreviewProps) {
             {scale.questions.map((question, index) => (
               <QuestionItem key={index} question={question} index={index} scale={scale} />
             ))}
+            {scale.followUpItem && (
+              <FollowUpItem followUp={scale.followUpItem} />
+            )}
           </div>
         </DialogContent>
       </Dialog>
+    </div>
+  );
+}
+
+function FollowUpItem({
+  followUp,
+}: {
+  followUp: NonNullable<ScalePreviewProps["scale"]["followUpItem"]>;
+}) {
+  return (
+    <div className="bg-muted-foreground/5 rounded-md p-3">
+      <p className="text-[10px] font-semibold uppercase tracking-wide text-muted-foreground mb-1">
+        Question de suivi (non scorée)
+      </p>
+      <p className="text-sm">{followUp.questionText}</p>
+      <div className="flex flex-wrap gap-2 mt-2">
+        {followUp.options.map((opt) => (
+          <span
+            key={opt.value}
+            className="text-xs text-muted-foreground bg-muted-foreground/10 px-2 py-0.5 rounded-full"
+          >
+            {opt.label}
+          </span>
+        ))}
+      </div>
     </div>
   );
 }

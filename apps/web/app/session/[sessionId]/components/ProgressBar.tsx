@@ -3,9 +3,14 @@
 interface ProgressBarProps {
   current: number;
   total: number;
+  showCounter?: boolean;
 }
 
-export default function ProgressBar({ current, total }: ProgressBarProps) {
+export default function ProgressBar({
+  current,
+  total,
+  showCounter = true,
+}: ProgressBarProps) {
   const pct = Math.max(0, Math.min(100, (current / total) * 100));
 
   return (
@@ -16,9 +21,11 @@ export default function ProgressBar({ current, total }: ProgressBarProps) {
           style={{ width: `${pct}%` }}
         />
       </div>
-      <p className="mt-3 text-sm text-gray-500">
-        Question {Math.min(current + 1, total)}/{total}
-      </p>
+      {showCounter && (
+        <p className="mt-3 text-sm text-gray-500">
+          Question {Math.min(current + 1, total)}/{total}
+        </p>
+      )}
     </div>
   );
 }

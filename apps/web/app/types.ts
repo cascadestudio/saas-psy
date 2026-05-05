@@ -53,6 +53,11 @@ export type ScaleProps = {
       ranges: { min: number; max: number; interpretation: string }[];
       method: string;
     };
+    followUpItem?: {
+      key: string;
+      questionText: string;
+      options: { value: number; label: string }[];
+    };
   };
   psychologistEmail: string;
   patientFirstname: string;

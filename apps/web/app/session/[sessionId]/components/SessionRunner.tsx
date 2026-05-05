@@ -24,7 +24,7 @@ interface QuestionStep {
   options: { value: number; label: string }[];
 }
 
-type Phase = "intro" | "question" | "review";
+type Phase = "intro" | "question" | "follow-up" | "review";
 
 const AUTO_ADVANCE_DELAY_MS = 250;
 const SUPPORTED_FORM_TYPES = new Set([
@@ -135,6 +135,14 @@ interface RunnerProps {
 function Runner({ scale, onSubmit }: RunnerProps) {
   const steps = useMemo(() => buildSteps(scale), [scale]);
   const total = steps.length;
+  const followUpStep: QuestionStep | null = useMemo(() => {
+    if (!scale.followUpItem) return null;
+    return {
+      key: scale.followUpItem.key,
+      questionText: scale.followUpItem.questionText,
+      options: scale.followUpItem.options,
+    };
+  }, [scale.followUpItem]);
 
   const [phase, setPhase] = useState<Phase>("intro");
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -154,14 +162,33 @@ function Runner({ scale, onSubmit }: RunnerProps) {
     window.setTimeout(() => {
       if (currentIndex < total - 1) {
         setCurrentIndex((i) => i + 1);
+      } else if (followUpStep) {
+        setPhase("follow-up");
       } else {
         setPhase("review");
       }
     }, AUTO_ADVANCE_DELAY_MS);
   };
 
+  const handleFollowUpSelect = (value: number) => {
+    if (!followUpStep) return;
+    setResponses((prev) => ({ ...prev, [followUpStep.key]: value }));
+    window.setTimeout(() => {
+      setPhase("review");
+    }, AUTO_ADVANCE_DELAY_MS);
+  };
+
   const handleBack = () => {
     if (phase === "review") {
+      if (followUpStep) {
+        setPhase("follow-up");
+      } else {
+        setPhase("question");
+        setCurrentIndex(total - 1);
+      }
+      return;
+    }
+    if (phase === "follow-up") {
       setPhase("question");
       setCurrentIndex(total - 1);
       return;
@@ -174,7 +201,8 @@ function Runner({ scale, onSubmit }: RunnerProps) {
   };
 
   const canGoBack =
-    phase !== "intro" && (phase === "review" || currentIndex > 0);
+    phase !== "intro" &&
+    (phase === "review" || phase === "follow-up" || currentIndex > 0);
 
   const handleSubmit = async () => {
     setSubmitting(true);
@@ -186,6 +214,7 @@ function Runner({ scale, onSubmit }: RunnerProps) {
   };
 
   const answeredCount = Object.keys(responses).length;
+  const expectedAnswers = total + (followUpStep ? 1 : 0);
   const currentStep = steps[currentIndex];
 
   return (
@@ -204,8 +233,9 @@ function Runner({ scale, onSubmit }: RunnerProps) {
             </button>
             <div className="flex-1">
               <ProgressBar
-                current={phase === "review" ? total : currentIndex}
+                current={phase === "question" ? currentIndex : total}
                 total={total}
+                showCounter={phase === "question"}
               />
             </div>
           </div>
@@ -234,9 +264,18 @@ function Runner({ scale, onSubmit }: RunnerProps) {
           />
         )}
 
+        {phase === "follow-up" && followUpStep && (
+          <SingleScaleQuestion
+            questionText={followUpStep.questionText}
+            options={followUpStep.options}
+            selectedValue={responses[followUpStep.key]}
+            onSelect={handleFollowUpSelect}
+          />
+        )}
+
         {phase === "review" && (
           <ReviewScreen
-            totalQuestions={total}
+            totalQuestions={expectedAnswers}
             answeredCount={answeredCount}
             comments={comments}
             onCommentsChange={setComments}

@@ -262,6 +262,13 @@ export function ItemResponsesList({
   const sections = groupRows(scale, rows);
   const flagged = new Set(flaggedItems);
 
+  const followUp = scale.followUpItem;
+  const followUpValue = followUp ? responses[followUp.key] : undefined;
+  const followUpLabel =
+    followUp && followUpValue !== undefined
+      ? followUp.options.find((o) => o.value === followUpValue)?.label ?? ""
+      : "";
+
   return (
     <>
       <ScaleLegend scale={scale} />
@@ -285,6 +292,30 @@ export function ItemResponsesList({
             </div>
           </div>
         ))}
+        {followUp && (
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-1.5">
+              Impact fonctionnel <span className="font-normal normal-case tracking-normal">(non scoré)</span>
+            </p>
+            <div className="bg-muted-foreground/5 rounded-2xl p-3 flex flex-col sm:flex-row sm:items-start gap-2 sm:gap-4">
+              <p className="text-sm flex-1">{followUp.questionText}</p>
+              <div className="sm:shrink-0 sm:justify-end">
+                {followUpValue === undefined ? (
+                  <span className="text-xs text-muted-foreground italic">
+                    Sans réponse
+                  </span>
+                ) : (
+                  <Badge variant="outline" className="text-xs font-normal">
+                    <span className="font-semibold mr-1.5 tabular-nums">
+                      {followUpValue}
+                    </span>
+                    <span>{followUpLabel}</span>
+                  </Badge>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </>
   );

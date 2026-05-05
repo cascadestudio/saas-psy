@@ -4,7 +4,7 @@ SaaS pour psychologues : envoi d'échelles, passation en ligne, scoring automati
 
 ## Current app state
 
-- L'app est actuelement en phase de pré-lancement
+- L'app est actuelement en phase de pré-lancement. Nous sommes en train de finaliser une app livrable aux beta testeurs psys.
 
 ## Onboarding & auth model
 
