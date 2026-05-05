@@ -85,7 +85,7 @@ export const scales: Scale[] = [
     color: "#6A9BCC",
     colorLight: "#B4CDE5",
     formType: "dual-scale",
-    title: "Échelle d'anxiété sociale de Liebowitz",
+    title: "LSAS - Échelle d'anxiété sociale de Liebowitz",
     description:
       "Une échelle clinique de 24 items qui mesure la peur et l'évitement dans des situations sociales et de performance",
     category: "Anxiété sociale",
@@ -152,12 +152,12 @@ export const scales: Scale[] = [
   {
     id: "phq-9",
     acronym: "PHQ-9",
-    label: "Questionnaire sur la Santé du Patient",
+    label: "Questionnaire sur la santé du patient",
     icon: "/images/scales/phq-9.svg",
     color: "#CBCADB",
     colorLight: "#E5E4ED",
     formType: "single-scale",
-    title: "PHQ-9 - Questionnaire sur la Santé du Patient",
+    title: "PHQ-9 - Questionnaire sur la santé du patient",
     description:
       "Une échelle de 9 items évaluant la sévérité des symptômes dépressifs au cours des 2 dernières semaines",
     category: "Dépression",
@@ -204,13 +204,13 @@ export const scales: Scale[] = [
   {
     id: "gad-7",
     acronym: "GAD-7",
-    label: "Trouble Anxieux Généralisé",
+    label: "Trouble anxieux généralisé",
     patientIntroSubtitle: null,
     icon: "/images/scales/gad-7.svg",
     color: "#6A9BCC",
     colorLight: "#B4CDE5",
     formType: "single-scale",
-    title: "GAD-7 - Generalized Anxiety Disorder 7-item",
+    title: "GAD-7 - Trouble anxieux généralisé",
     description:
       "Une échelle de 7 items évaluant la sévérité des symptômes d'anxiété généralisée au cours des 2 dernières semaines",
     category: "Anxiété généralisée",
@@ -254,12 +254,12 @@ export const scales: Scale[] = [
   {
     id: "traumatismes-pcl5",
     acronym: "PCL-5",
-    label: "Liste de Vérification du TSPT",
+    label: "Liste de vérification du TSPT",
     icon: "/images/scales/pcl-5.svg",
     color: "#C46686",
     colorLight: "#E1B2C2",
     formType: "single-scale",
-    title: "PCL-5 - Liste de Vérification du TSPT",
+    title: "PCL-5 - Liste de vérification du TSPT",
     description:
       "Une échelle de 20 items évaluant les symptômes du trouble de stress post-traumatique (TSPT)",
     category: "Traumatismes",
@@ -315,12 +315,12 @@ export const scales: Scale[] = [
   {
     id: "index-symptomes-ybocs",
     acronym: "Y-BOCS",
-    label: "Index des Symptômes Obsessionnels-Compulsifs",
+    label: "Échelle d'obsession-compulsion de Yale-Brown",
     icon: "/images/scales/y-bocs.svg",
     color: "#BCD1CA",
     colorLight: "#DDE8E4",
     formType: "options",
-    title: "Y-BOCS - Index des Symptômes Obsessionnels-Compulsifs",
+    title: "Y-BOCS - Échelle d'obsession-compulsion de Yale-Brown",
     description:
       "Une échelle d'évaluation des symptômes obsessionnels-compulsifs mesurant la sévérité du TOC",
     category: "Troubles Obsessionnels Compulsifs",
@@ -479,12 +479,12 @@ export const scales: Scale[] = [
   {
     id: "rses",
     acronym: "RSES",
-    label: "Échelle d'Estime de Soi de Rosenberg",
+    label: "Échelle d'estime de soi de Rosenberg",
     icon: "/images/scales/rses.svg",
     color: "#E7BC92",
     colorLight: "#F5DFC5",
     formType: "single-scale",
-    title: "RSES - Échelle d'Estime de Soi de Rosenberg",
+    title: "RSES - Échelle d'estime de soi de Rosenberg",
     description:
       "Une échelle de 10 items évaluant le niveau global d'estime de soi",
     category: "Estime de soi",
