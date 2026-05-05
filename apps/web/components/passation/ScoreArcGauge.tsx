@@ -81,7 +81,7 @@ export function ScoreArcGauge({
         <svg
           width="100%"
           height="auto"
-          viewBox={`0 0 ${SIZE} ${SIZE}`}
+          viewBox={`0 0 ${SIZE} ${SIZE / 2 + STROKE + 12}`}
           className="block overflow-visible"
         >
           {ranges.length > 1 ? (

@@ -243,7 +243,7 @@ export const scales: Scale[] = [
     instructions:
       "Au cours des 2 dernières semaines, selon quelle fréquence avez-vous été gêné(e) par les problèmes suivants ?",
     copyrightAttribution:
-      "Développé par les Dr Robert L. Spitzer, Janet B.W. Williams, Kurt Kroenke et leurs collègues grâce à une allocation d'études de Pfizer Inc.",
+      "Échelle développée par les Dr Robert L. Spitzer, Janet B.W. Williams, Kurt Kroenke et leurs collègues grâce à une allocation d'études de Pfizer Inc.",
     higherIsBetter: false,
     questions: [
       "Un sentiment de nervosité, d'anxiété ou de tension",
