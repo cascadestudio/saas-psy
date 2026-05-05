@@ -171,6 +171,26 @@ l'indiquer explicitement et soumettre à Renata pour formulation.
 | **Justification**        | [OBLIGATOIRE si `persistante` n'est pas la valeur retenue]                 |
 | **Cas particuliers**     | [OPTIONNEL — ex. Y-BOCS : deux consignes distinctes selon bloc]            |
 
+### Affichage du titre côté portail patient
+
+<!--
+Règle projet : le bloc d'intro côté patient doit reproduire fidèlement ce
+qui figure en titre sur le PDF de la source primaire (§2). Toute divergence
+est à documenter.
+
+Mécanisme côté code : champ `patientIntroSubtitle` (Scale, packages/core).
+- `undefined` (champ absent) : fallback sur `label` — sous-titre par défaut.
+- `null` : aucun sous-titre, l'acronyme seul est affiché (ex. GAD-7).
+- `string` : libellé exact à afficher s'il diffère du `label`.
+-->
+
+| Champ | Valeur |
+| --- | --- |
+| **Élément(s) affiché(s) en titre sur le PDF source primaire** | [À REMPLIR — `acronyme seul` / `acronyme + libellé` / autre formulation présente sur le PDF] |
+| **Référence PDF** | [À REMPLIR — page / section / "première page, en-tête"] |
+| **Sous-titre à afficher dans l'app (`patientIntroSubtitle`)** | [À REMPLIR — chaîne exacte, `null` si seul l'acronyme apparaît sur le PDF, ou laisser vide pour fallback sur `label`] |
+| **Divergence avec le PDF** | [OPTIONNEL — à remplir si on s'écarte volontairement du PDF, avec justification] |
+
 ### Dimensions de cotation
 
 <!--

@@ -102,6 +102,15 @@ hiérarchie versions, comparaison Mentaal).
 | **Justification** | N/A (valeur par défaut) |
 | **Cas particuliers** | Aucun |
 
+### Affichage du titre côté portail patient
+
+| Champ | Valeur |
+| --- | --- |
+| **Élément(s) affiché(s) en titre sur le PDF source primaire** | Acronyme seul (`GAD-7`) |
+| **Référence PDF** | Première page, en-tête (PDF Center-TBI / Pfizer "French for France"). Aucun libellé long ni traduction du nom complet n'apparaît à côté de l'acronyme. |
+| **Sous-titre à afficher dans l'app (`patientIntroSubtitle`)** | `null` — masqué côté portail patient pour reproduire fidèlement le PDF |
+| **Divergence avec le PDF** | Aucune |
+
 ### Dimensions de cotation
 
 **Dimension unique — Fréquence**
