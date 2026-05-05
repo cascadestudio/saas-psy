@@ -169,6 +169,14 @@ export default function ResultsPage() {
       })
     : null;
 
+  const completedDate = session.completedAt
+    ? new Date(session.completedAt).toLocaleDateString("fr-FR", {
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+      })
+    : null;
+
   const Header = (
     <div className="flex items-start justify-between gap-3 mb-6">
       <div className="flex items-center gap-3">
@@ -193,15 +201,21 @@ export default function ResultsPage() {
                 {headerTitle}
               </h1>
             )}
-            <Badge className={statusConfig?.className} variant="secondary">
-              {statusConfig?.label ?? session.status}
-            </Badge>
+            {session.status !== "COMPLETED" && (
+              <Badge className={statusConfig?.className} variant="secondary">
+                {statusConfig?.label ?? session.status}
+              </Badge>
+            )}
           </div>
-          {sentDate && (
+          {session.status === "COMPLETED" && completedDate ? (
+            <p className="text-sm text-muted-foreground mt-1">
+              Complété le {completedDate}
+            </p>
+          ) : sentDate ? (
             <p className="text-sm text-muted-foreground mt-1">
               Envoyée le {sentDate}
             </p>
-          )}
+          ) : null}
         </div>
       </div>
       {session.status === "COMPLETED" ? (

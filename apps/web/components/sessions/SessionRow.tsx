@@ -99,17 +99,19 @@ export function SessionRow({
             {warningCount > 1 ? `${warningCount} vigilances` : "Vigilance"}
           </Badge>
         )}
-        {session.status === "COMPLETED" && score != null ? (
-          <div className="text-right min-w-[90px]">
-            <p className="font-sans font-bold text-black text-sm leading-tight">
-              {formatScore(score)}
-            </p>
-            {typeof session.interpretation === "string" && (
-              <p className="text-xs text-muted-foreground truncate max-w-[140px]">
-                {session.interpretation}
+        {session.status === "COMPLETED" ? (
+          score != null ? (
+            <div className="text-right min-w-[90px]">
+              <p className="font-sans font-bold text-black text-sm leading-tight">
+                {formatScore(score)}
               </p>
-            )}
-          </div>
+              {typeof session.interpretation === "string" && (
+                <p className="text-xs text-muted-foreground truncate max-w-[140px]">
+                  {session.interpretation}
+                </p>
+              )}
+            </div>
+          ) : null
         ) : (
           <Badge
             className={cn("pointer-events-none", config?.className)}
