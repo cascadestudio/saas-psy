@@ -49,7 +49,6 @@ export function ScoreArcGauge({
   const pct =
     span > 0 ? Math.min(1, Math.max(0, (score - totalMin) / span)) : 0;
 
-  const activePalette = getSeverityPalette(severityIndex, ranges.length);
   const hasSeverity = ranges.length > 1 && severityIndex >= 0;
 
   const radius = (SIZE - STROKE) / 2;
@@ -65,13 +64,12 @@ export function ScoreArcGauge({
     const segStart = START_ANGLE + cursor * ARC_DEGREES;
     const segEnd = START_ANGLE + (cursor + frac) * ARC_DEGREES;
     cursor += frac;
-    const palette = getSeverityPalette(i, ranges.length);
-    const isActive = i === severityIndex;
+    const palette = getSeverityPalette(i, ranges.length, scale.higherIsBetter);
     const a = segStart + SEGMENT_GAP_DEG / 2;
     const b = segEnd - SEGMENT_GAP_DEG / 2;
     return {
       d: arcPath(cx, cy, radius, a, b),
-      color: isActive ? palette.arcText : `${palette.arcText} opacity-25`,
+      color: palette.arcText,
       key: i,
     };
   });
@@ -126,7 +124,7 @@ export function ScoreArcGauge({
               cy={marker.y}
               r={STROKE / 2 + 3}
               fill="white"
-              className={activePalette.arcText}
+              className="text-brand-orange"
               stroke="currentColor"
               strokeWidth={6}
             />

@@ -32,7 +32,7 @@ export function SeverityGauge({ scale, score, severityIndex }: Props) {
       <div className="flex h-2.5 rounded-full overflow-hidden ring-1 ring-border">
         {ranges.map((r, i) => {
           const widthPct = ((r.max - r.min + 1) / (span + 1)) * 100;
-          const palette = getSeverityPalette(i, ranges.length);
+          const palette = getSeverityPalette(i, ranges.length, scale.higherIsBetter);
           const isActive = i === severityIndex;
           return (
             <div

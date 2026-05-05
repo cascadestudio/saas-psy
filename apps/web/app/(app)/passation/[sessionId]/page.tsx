@@ -462,6 +462,7 @@ export default function ResultsPage() {
                 const dotPalette = getSeverityPalette(
                   s.score?.severityIndex ?? -1,
                   rangeCount,
+                  scale?.higherIsBetter,
                 );
                 const RowTag = isCurrent ? "div" : Link;
                 const rowProps = isCurrent
