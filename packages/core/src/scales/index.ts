@@ -347,9 +347,9 @@ export const scales: Scale[] = [
     category: "Traumatismes",
     estimatedTime: "5-10 minutes",
     instructions:
-      "À présent, lisez chacun des énoncés en gardant à l'esprit ce pire événement, puis indiquez à quel point vous avez été perturbé(e) par ce problème au cours du dernier mois.",
-    persistentInstructions:
       "Lisez chacun des énoncés en gardant à l'esprit le pire évènement que vous avez vécu ; celui qui vous perturbe le plus actuellement. Puis indiquez à quel point vous avez été perturbé(e) par ce problème au cours du dernier mois.",
+    persistentInstructions:
+      "Dans le dernier mois, dans quelle mesure avez-vous été affecté par :",
     copyrightAttribution:
       "PCL-5 — Weathers, Litz, Keane, Palmieri, Marx & Schnurr (2013), National Center for PTSD ©2013. Traduction française : Ashbaugh, Houle-Johnson, Herbert, El-Hage & Brunet (2016).",
     higherIsBetter: false,
