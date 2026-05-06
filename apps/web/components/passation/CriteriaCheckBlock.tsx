@@ -54,11 +54,21 @@ export function CriteriaCheckBlock({
           {rows.map((r) => (
             <div
               key={r.key}
-              className="flex items-baseline justify-between rounded-md px-3 py-2 bg-muted/30"
+              className="flex items-center justify-between rounded-md px-3 py-2 bg-muted/30"
             >
-              <span className="text-muted-foreground">
-                <span className="font-semibold text-foreground">{r.key}</span> ·{" "}
-                {r.label.replace(/\s*\([A-E]\)\s*$/, "")}
+              <span className="flex items-center gap-2 text-muted-foreground">
+                <span
+                  className={`h-2 w-2 rounded-full shrink-0 ${
+                    r.met
+                      ? "bg-brand-orange"
+                      : "border border-foreground/30 bg-transparent"
+                  }`}
+                  aria-hidden
+                />
+                <span>
+                  <span className="font-semibold text-foreground">{r.key}</span>{" "}
+                  · {r.label.replace(/\s*\([A-E]\)\s*$/, "")}
+                </span>
               </span>
               <span className="tabular-nums font-semibold text-foreground">
                 {r.count}
