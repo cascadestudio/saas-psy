@@ -13,7 +13,12 @@ import Link from "next/link";
 import Image from "next/image";
 import { useUser } from "@/app/context/UserContext";
 import { useEffect, useState } from "react";
-import { sessionsApi, patientsApi, type Session, type Patient } from "@/lib/api-client";
+import {
+  sessionsApi,
+  patientsApi,
+  type Session,
+  type Patient,
+} from "@/lib/api-client";
 import { scales } from "@/app/scalesData";
 import {
   getMockPatient,
@@ -31,7 +36,7 @@ import { PassationSkeleton } from "@/components/passation/PassationSkeleton";
 import { ConsigneBlock } from "@/components/passation/ConsigneBlock";
 import { CopyrightFooter } from "@/components/passation/CopyrightFooter";
 import { ScoreArcGauge } from "@/components/passation/ScoreArcGauge";
-import { Pcl5DiagnosticBlock } from "@/components/passation/Pcl5DiagnosticBlock";
+import { CriteriaCheckBlock } from "@/components/passation/CriteriaCheckBlock";
 import { relativeTimeFr, formatDateLongFr } from "@/lib/relative-time";
 
 export default function ResultsPage() {
@@ -135,10 +140,7 @@ export default function ResultsPage() {
   const headerTitle = scale?.acronym ?? "Passation";
 
   const scaleTitle = scale
-    ? scale.title.replace(
-        new RegExp(`^${scale.acronym}\\s*[-—:]\\s*`, "i"),
-        "",
-      )
+    ? scale.title.replace(new RegExp(`^${scale.acronym}\\s*[-—:]\\s*`, "i"), "")
     : "";
 
   const ScaleLogo = scale ? (
@@ -284,8 +286,8 @@ export default function ResultsPage() {
             {session.status === "EXPIRED"
               ? "Cette passation a expiré. Le patient ne peut plus y répondre."
               : session.status === "CANCELLED"
-              ? "Cette passation a été annulée."
-              : "Les résultats seront disponibles une fois la passation complétée par le patient."}
+                ? "Cette passation a été annulée."
+                : "Les résultats seront disponibles une fois la passation complétée par le patient."}
           </p>
           {(session.status === "SENT" || session.status === "STARTED") && (
             <Button variant="secondary" size="sm" onClick={handleCopyLink}>
@@ -303,7 +305,7 @@ export default function ResultsPage() {
     .filter((s) => s.scaleId === session.scaleId && s.status === "COMPLETED")
     .sort(
       (a, b) =>
-        new Date(b.completedAt!).getTime() - new Date(a.completedAt!).getTime()
+        new Date(b.completedAt!).getTime() - new Date(a.completedAt!).getTime(),
     );
 
   const score = session.score;
@@ -312,7 +314,6 @@ export default function ResultsPage() {
   const subscores = score?.subscores ?? [];
   const alerts = score?.alerts ?? [];
   const badgeInterpretation = score?.interpretation || null;
-
 
   return (
     <div className="container mx-auto px-4 py-6">
@@ -347,18 +348,25 @@ export default function ResultsPage() {
               {subscores.length > 0 && (
                 <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-x-3 sm:gap-x-6 gap-y-3 pt-2">
                   {subscores.map((s) => {
-                    const pct = s.max && s.max > 0 ? Math.min(1, s.value / s.max) * 100 : 0;
+                    const pct =
+                      s.max && s.max > 0
+                        ? Math.min(1, s.value / s.max) * 100
+                        : 0;
                     return (
                       <div
                         key={s.label}
                         className="bg-background rounded-lg p-3 space-y-2"
                       >
                         <div className="flex items-baseline justify-between gap-2">
-                          <p className="text-sm font-medium truncate">{s.label}</p>
+                          <p className="text-sm font-medium truncate">
+                            {s.label}
+                          </p>
                           <span className="text-sm font-semibold tabular-nums shrink-0">
                             {s.value}
                             {s.max !== undefined && (
-                              <span className="text-xs font-normal text-muted-foreground">/{s.max}</span>
+                              <span className="text-xs font-normal text-muted-foreground">
+                                /{s.max}
+                              </span>
                             )}
                           </span>
                         </div>
@@ -377,12 +385,22 @@ export default function ResultsPage() {
           </div>
         </div>
 
-        {/* Diagnostic provisoire DSM-5 (PCL-5 uniquement) */}
-        {scale?.id === "traumatismes-pcl5" && session.responses && (
-          <Pcl5DiagnosticBlock
-            responses={session.responses as Record<string, number>}
-          />
-        )}
+        {/* Critères structurés (générique, ex. PCL-5 DSM-5) */}
+        {score?.criteriaCheck &&
+          currentMain !== undefined &&
+          scale &&
+          (() => {
+            const aboveRange =
+              scale.scoring.ranges[scale.scoring.ranges.length - 1];
+            const threshold = aboveRange?.min ?? 0;
+            return (
+              <CriteriaCheckBlock
+                criteriaCheck={score.criteriaCheck}
+                aboveThreshold={currentMain >= threshold}
+                threshold={threshold}
+              />
+            );
+          })()}
 
         {/* Réponses du patient — item par item */}
         {scale && session.responses && (
@@ -474,9 +492,7 @@ export default function ResultsPage() {
                           </span>
                           <span className="text-xs text-muted-foreground">
                             ·{" "}
-                            {s.completedAt
-                              ? relativeTimeFr(s.completedAt)
-                              : ""}
+                            {s.completedAt ? relativeTimeFr(s.completedAt) : ""}
                           </span>
                           {isCurrent && (
                             <Badge

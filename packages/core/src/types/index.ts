@@ -20,8 +20,35 @@ export interface ScoreResult {
   severityRangeCount: number;
   /** Optional structured subscores (PCL-5 clusters, Y-BOCS obs/comp, LSAS anx/avo). */
   subscores?: Subscore[];
-  /** Clinical alerts (suicide ideation, diagnostic threshold, etc.). */
+  /** Clinical alerts (suicide ideation, critical-item, etc.). */
   alerts?: ScoreAlert[];
+  /**
+   * Optional symptom-count style criteria check (e.g. PCL-5 DSM-5 provisional
+   * diagnosis). Distinct from `alerts` because this is a documented decision
+   * aid, not a clinical urgency signal — see PCL-5 spec §6.
+   */
+  criteriaCheck?: CriteriaCheck;
+}
+
+export interface CriteriaCheckRow {
+  key: string;
+  label: string;
+  count: number;
+  required: number;
+  met: boolean;
+}
+
+export interface CriteriaCheck {
+  /** Stable identifier (e.g. "dsm5-pcl5"). */
+  key: string;
+  /** Source officielle attribuée (ex. "DSM-5 / National Center for PTSD"). */
+  source: string;
+  /** Whether all rows meet their requirements. */
+  met: boolean;
+  /** One row per criterion (e.g. one per cluster B/C/D/E for PCL-5). */
+  rows: CriteriaCheckRow[];
+  /** Endorsement threshold used to count an item as endorsed (e.g. 2 for PCL-5). */
+  endorsementThreshold: number;
 }
 
 export interface Subscore {

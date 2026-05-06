@@ -103,7 +103,7 @@ hiérarchie versions, comparaison Mentaal).
 
 ### Consigne officielle (affichée au patient avant les items)
 
-> *« A présent, lisez chacun des énoncés de la page suivante en gardant à l'esprit ce pire événement, puis encerclez le chiffre qui indique à quel point vous avez été perturbé(e) par ce problème au cours du dernier mois.*
+> *« Lisez chacun des énoncés en gardant à l'esprit le pire évènement que vous avez vécu ; celui qui vous perturbe le plus actuellement. Puis indiquez à quel point vous avez été perturbé(e) par ce problème au cours du dernier mois.*
 >
 > *Dans le dernier mois, dans quelle mesure avez-vous été affecté par : »*
 
@@ -470,3 +470,24 @@ La PCL-5 et la LEC-5 sont **systématiquement couplées en pratique clinique** :
 
 - **CAPS-5** (Clinician-Administered PTSD Scale for DSM-5) — gold standard du diagnostic TSPT, mais **hétéro-évaluation en entretien structuré** : hors scope MVP Melya (cabinet libéral, auto-évaluation à distance). À mentionner comme outil de référence dans la fiche praticien de la PCL-5 (la mention "à confirmer par évaluation clinique structurée" pointe implicitement vers le CAPS-5).
 - **PC-PTSD-5** (Primary Care PTSD Screen for DSM-5) — version courte de dépistage en 5 items, utilisée en soins primaires. Pas prioritaire pour Melya (la PCL-5 couvre le besoin avec plus de précision), mais à documenter si une demande émerge côté médecins généralistes.
+
+---
+
+## 14. UX Résultats — à implémenter ultérieurement
+
+<!--
+Section de parking pour les chantiers UX explicitement reportés à une tâche
+dédiée plus large (ex. "UX longitudinale multi-échelles"). À retirer de cette
+liste au fur et à mesure de leur implémentation.
+-->
+
+### Tendances de subscores dans l'historique longitudinal
+
+Sous le score total de chaque entrée d'historique (`apps/web/app/(app)/passation/[sessionId]/page.tsx`, boucle `sameScaleSessions.map`), afficher en ligne compacte les deltas par subscore quand `s.score?.subscores` et `olderSession?.score?.subscores` sont disponibles.
+
+- **Format** : flèches directionnelles (↓ baisse, → stable, ↑ hausse) suivies de la magnitude numérique. Exemple : `B ↓2  C →  D ↓3  E ↑1`.
+- **Pas de couleur sémantique** (cf. décision produit générale "no semantic colors"). Couleur brand Melya ou gris foncé. **Jamais vert/rouge.**
+- Pas de delta si `olderSession` absent (entrée la plus ancienne).
+- **Générique** : conditionné à la présence de subscores → fonctionnera automatiquement pour LSAS, Y-BOCS, etc. quand ils auront le même affichage.
+
+À implémenter dans une tâche ultérieure dédiée à l'UX longitudinale multi-échelles. À retirer de cette section une fois implémentée.

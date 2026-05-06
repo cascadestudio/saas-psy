@@ -1,10 +1,12 @@
-import { Scale, ScoreAlert, ScoreResult, Subscore } from '@melya/core';
+import { CriteriaCheck, Scale, ScoreResult, Subscore } from '@melya/core';
 import {
   collectByPrefix,
   countEndorsed,
   resolveSeverity,
   sumRange,
 } from './helpers';
+
+const ENDORSEMENT_THRESHOLD = 2;
 
 /**
  * DSM-5 cluster ranges (0-based item indices):
@@ -18,10 +20,16 @@ import {
  * Diagnosis is provisional when ≥1B, ≥1C, ≥2D, ≥2E are endorsed simultaneously.
  */
 const CLUSTERS = {
-  B: { start: 0, end: 4, max: 20, label: 'Intrusions (B)' },
-  C: { start: 5, end: 6, max: 8, label: 'Évitement (C)' },
-  D: { start: 7, end: 13, max: 28, label: 'Cognitions et humeur (D)' },
-  E: { start: 14, end: 19, max: 24, label: 'Hyperéveil (E)' },
+  B: { start: 0, end: 4, max: 20, label: 'Intrusions (B)', required: 1 },
+  C: { start: 5, end: 6, max: 8, label: 'Évitement (C)', required: 1 },
+  D: {
+    start: 7,
+    end: 13,
+    max: 28,
+    label: 'Cognitions et humeur (D)',
+    required: 2,
+  },
+  E: { start: 14, end: 19, max: 24, label: 'Hyperéveil (E)', required: 2 },
 } as const;
 
 export function scorePcl5(
@@ -59,21 +67,25 @@ export function scorePcl5(
     },
   ];
 
-  const provisionalDx =
-    countEndorsed(values, CLUSTERS.B.start, CLUSTERS.B.end) >= 1 &&
-    countEndorsed(values, CLUSTERS.C.start, CLUSTERS.C.end) >= 1 &&
-    countEndorsed(values, CLUSTERS.D.start, CLUSTERS.D.end) >= 2 &&
-    countEndorsed(values, CLUSTERS.E.start, CLUSTERS.E.end) >= 2;
+  const rows = (Object.keys(CLUSTERS) as (keyof typeof CLUSTERS)[]).map((k) => {
+    const c = CLUSTERS[k];
+    const count = countEndorsed(values, c.start, c.end, ENDORSEMENT_THRESHOLD);
+    return {
+      key: k,
+      label: c.label,
+      count,
+      required: c.required,
+      met: count >= c.required,
+    };
+  });
 
-  const alerts: ScoreAlert[] = [];
-  if (provisionalDx) {
-    alerts.push({
-      kind: 'diagnostic-threshold',
-      severity: 'warning',
-      message:
-        'Selon les critères DSM-5, ce profil correspond à un diagnostic provisoire de TSPT (≥1B, ≥1C, ≥2D, ≥2E avec items cotés ≥ 2). Confirmation requise par évaluation clinique structurée.',
-    });
-  }
+  const criteriaCheck: CriteriaCheck = {
+    key: 'dsm5-pcl5',
+    source: 'DSM-5 / National Center for PTSD',
+    met: rows.every((r) => r.met),
+    rows,
+    endorsementThreshold: ENDORSEMENT_THRESHOLD,
+  };
 
   return {
     totalScore,
@@ -82,6 +94,6 @@ export function scorePcl5(
     severityIndex: severity.severityIndex,
     severityRangeCount: severity.severityRangeCount,
     subscores,
-    ...(alerts.length > 0 && { alerts }),
+    criteriaCheck,
   };
 }
