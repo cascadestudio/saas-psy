@@ -1,4 +1,4 @@
-import type { CriteriaCheck } from "@melya/core";
+import type { CriteriaCheck, CriteriaCheckRow } from "@melya/core";
 
 type Props = {
   criteriaCheck: CriteriaCheck;
@@ -7,6 +7,23 @@ type Props = {
   /** Valeur du seuil affichée dans les messages contextualisés. */
   threshold: number;
 };
+
+/**
+ * Libellés DSM-5 normatifs PCL-5 — dérivés de la clé pour rester cohérents
+ * avec la spec quel que soit le label éventuellement persisté dans une session
+ * antérieure (rétrocompat).
+ */
+const PCL5_LABELS: Record<string, string> = {
+  B: "Intrusions (Reviviscences)",
+  C: "Évitement",
+  D: "Altérations négatives des cognitions et de l’humeur",
+  E: "Altérations de l’éveil et de la réactivité (Hyper-éveil)",
+};
+
+function labelFor(cc: CriteriaCheck, row: CriteriaCheckRow): string {
+  if (cc.key === "dsm5-pcl5") return PCL5_LABELS[row.key] ?? row.label;
+  return row.label;
+}
 
 const CONVERGENT_MESSAGE =
   "Score total et critères DSM-5 convergent. Les deux indicateurs évaluent des dimensions complémentaires : le score total mesure l'intensité globale des symptômes, le diagnostic provisoire vérifie la structure DSM-5 (présence de symptômes endossés dans chaque cluster requis).";
@@ -67,7 +84,7 @@ export function CriteriaCheckBlock({
                 />
                 <span>
                   <span className="font-semibold text-foreground">{r.key}</span>{" "}
-                  · {r.label.replace(/\s*\([A-E]\)\s*$/, "")}
+                  · {labelFor(criteriaCheck, r)}
                 </span>
               </span>
               <span className="tabular-nums font-semibold text-foreground">

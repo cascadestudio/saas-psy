@@ -37,6 +37,18 @@ import { ConsigneBlock } from "@/components/passation/ConsigneBlock";
 import { CopyrightFooter } from "@/components/passation/CopyrightFooter";
 import { ScoreArcGauge } from "@/components/passation/ScoreArcGauge";
 import { CriteriaCheckBlock } from "@/components/passation/CriteriaCheckBlock";
+
+/**
+ * Libellés courts pour les mini-cards de subscores (vue dataviz en haut).
+ * Le bloc Critères DSM-5 (CriteriaCheckBlock) utilise les libellés longs
+ * normatifs définis dans son propre composant.
+ */
+const SUBSCORE_LABEL_OVERRIDES: Record<string, string> = {
+  "cluster-b": "Intrusions (B)",
+  "cluster-c": "Évitement (C)",
+  "cluster-d": "Cognitions et humeur (D)",
+  "cluster-e": "Hyperéveil (E)",
+};
 import { relativeTimeFr, formatDateLongFr } from "@/lib/relative-time";
 
 export default function ResultsPage() {
@@ -359,7 +371,7 @@ export default function ResultsPage() {
                       >
                         <div className="flex items-baseline justify-between gap-2">
                           <p className="text-sm font-medium truncate">
-                            {s.label}
+                            {SUBSCORE_LABEL_OVERRIDES[s.key] ?? s.label}
                           </p>
                           <span className="text-sm font-semibold tabular-nums shrink-0">
                             {s.value}

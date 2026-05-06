@@ -20,16 +20,28 @@ const ENDORSEMENT_THRESHOLD = 2;
  * Diagnosis is provisional when ≥1B, ≥1C, ≥2D, ≥2E are endorsed simultaneously.
  */
 const CLUSTERS = {
-  B: { start: 0, end: 4, max: 20, label: 'Intrusions (B)', required: 1 },
-  C: { start: 5, end: 6, max: 8, label: 'Évitement (C)', required: 1 },
+  B: {
+    start: 0,
+    end: 4,
+    max: 20,
+    label: 'Intrusions (Reviviscences)',
+    required: 1,
+  },
+  C: { start: 5, end: 6, max: 8, label: 'Évitement', required: 1 },
   D: {
     start: 7,
     end: 13,
     max: 28,
-    label: 'Cognitions et humeur (D)',
+    label: 'Altérations négatives des cognitions et de l’humeur',
     required: 2,
   },
-  E: { start: 14, end: 19, max: 24, label: 'Hyperéveil (E)', required: 2 },
+  E: {
+    start: 14,
+    end: 19,
+    max: 24,
+    label: 'Altérations de l’éveil et de la réactivité (Hyper-éveil)',
+    required: 2,
+  },
 } as const;
 
 export function scorePcl5(

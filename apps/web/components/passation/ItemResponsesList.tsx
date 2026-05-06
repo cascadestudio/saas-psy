@@ -89,13 +89,21 @@ function getRows(scale: Scale, responses: Record<string, number>): Row[] {
 function groupRows(scale: Scale, rows: Row[]): Section[] {
   if (scale.id === "traumatismes-pcl5") {
     return [
-      { title: "Cluster B — Intrusions", rows: rows.slice(0, 5) },
+      {
+        title: "Cluster B — Intrusions (Reviviscences)",
+        rows: rows.slice(0, 5),
+      },
       { title: "Cluster C — Évitement", rows: rows.slice(5, 7) },
       {
-        title: "Cluster D — Cognitions et humeur",
+        title:
+          "Cluster D — Altérations négatives des cognitions et de l’humeur",
         rows: rows.slice(7, 14),
       },
-      { title: "Cluster E — Hyperéveil", rows: rows.slice(14, 20) },
+      {
+        title:
+          "Cluster E — Altérations de l’éveil et de la réactivité (Hyper-éveil)",
+        rows: rows.slice(14, 20),
+      },
     ];
   }
   if (scale.id === "index-symptomes-ybocs") {
