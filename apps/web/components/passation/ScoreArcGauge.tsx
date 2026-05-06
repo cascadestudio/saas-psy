@@ -141,6 +141,53 @@ export function ScoreArcGauge({
                 strokeWidth={6}
               />
             )}
+            {ranges.length === 2 &&
+              (() => {
+                const boundaryFrac =
+                  (ranges[0].max - ranges[0].min + 1) / denom;
+                const boundaryAngle =
+                  START_ANGLE + boundaryFrac * ARC_DEGREES;
+                const tickInner = polar(
+                  cx,
+                  cy,
+                  radius - STROKE / 2 - 2,
+                  boundaryAngle,
+                );
+                const tickOuter = polar(
+                  cx,
+                  cy,
+                  radius + STROKE / 2 + 4,
+                  boundaryAngle,
+                );
+                const labelPos = polar(
+                  cx,
+                  cy,
+                  radius + STROKE / 2 + 18,
+                  boundaryAngle,
+                );
+                return (
+                  <>
+                    <line
+                      x1={tickInner.x}
+                      y1={tickInner.y}
+                      x2={tickOuter.x}
+                      y2={tickOuter.y}
+                      className="stroke-muted-foreground/40"
+                      strokeWidth={1.5}
+                    />
+                    <text
+                      x={labelPos.x}
+                      y={labelPos.y}
+                      textAnchor="middle"
+                      dominantBaseline="middle"
+                      className="fill-muted-foreground tabular-nums"
+                      fontSize="12"
+                    >
+                      seuil {ranges[1].min}
+                    </text>
+                  </>
+                );
+              })()}
           </svg>
           <div
             className="absolute inset-x-0 flex flex-col items-center"
@@ -161,11 +208,6 @@ export function ScoreArcGauge({
             {interpretation && (
               <span className="mt-4 text-base font-medium text-foreground text-center max-w-[140px] sm:max-w-[200px]">
                 {interpretation}
-              </span>
-            )}
-            {ranges.length === 2 && (
-              <span className="mt-1 text-xs text-muted-foreground">
-                Seuil : ≥ {ranges[1].min}
               </span>
             )}
           </div>
