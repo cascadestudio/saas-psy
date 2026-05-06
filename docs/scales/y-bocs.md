@@ -98,7 +98,7 @@ Le PDF source primaire (7 pages, L'Encéphale 1989) a été récupéré et lu in
 | **Détenteur des droits**            | Y-BOCS originale : Goodman et al. / University of Florida (Gainesville). Traduction FR : Mollard, Cottraux & Bouvard (1989), publiée dans L'Encéphale (Elsevier Masson).                                                        |
 | **Mention obligatoire à afficher**  | « Échelle Y-BOCS — Goodman et al. (1989). Traduction française : Mollard, Cottraux & Bouvard (1989), L'Encéphale, XV, 335-341. »                                                                                                |
 | **Restrictions d'usage commercial** | À clarifier. La Y-BOCS est largement reproduite en recherche académique sans mention de licence libre dans les sources consultées. Aucune publication consultée ne mentionne explicitement une autorisation d'usage commercial. |
-| **Décision Melya**                  | `bloqué` (à passer en `go` après clarification avec les ayants-droit)                                                                                                                                                           |
+| **Décision Melya**                  | `go` — exposition autorisée pour la phase de tests beta restreinte (cercle de psys connus). Risque copyright à retraiter avant ouverture publique : démarche de clarification ayants-droit (University of Florida + Elsevier Masson) à mener avant lancement commercial.                                                                                                                                                           |
 
 ### Suivi des démarches externes
 
@@ -113,26 +113,27 @@ Le PDF source primaire (7 pages, L'Encéphale 1989) a été récupéré et lu in
 
 ### Consigne officielle (affichée au patient avant les items)
 
-L'échelle comporte **deux consignes distinctes**, l'une avant le bloc obsessions (items 1-5), l'autre avant le bloc compulsions (items 6-10), conformément à la traduction Mollard/Cottraux/Bouvard 1989.
+Une **consigne unique** est affichée sur la page d'introduction patient. Elle se compose d'un cadrage produit (objet de l'échelle, période d'évaluation, structure des 10 questions) suivi des deux définitions cliniques (obsessions, puis compulsions) reprises littéralement depuis Mollard 1989. Les deux blocs de questions sont ensuite simplement séparés par un titre court (« Obsessions » / « Compulsions »).
 
-#### Consigne du bloc obsessions (avant item 1)
+> _« Cette échelle évalue la sévérité de vos symptômes obsessionnels et compulsifs au cours de la semaine écoulée. Vous trouverez 10 questions, réparties en deux blocs : 5 questions sur les obsessions, puis 5 sur les compulsions._
+>
+> _Les obsessions sont des idées pénibles, des pensées, des images ou des désirs impulsifs qui vous viennent à l'esprit d'une manière répétitive. Elles peuvent vous sembler apparaître contre votre volonté. Vous pouvez aussi les trouver répugnantes, reconnaître qu'elles sont dénuées de sens, ou estimer qu'elles ne correspondent pas du tout à votre personnalité. Elles sont souvent source d'angoisse._
+>
+> _Les compulsions, d'un autre côté, sont des comportements ou des actes que vous vous sentez obligé d'accomplir, même si vous les reconnaissez comme dénués de sens ou excessifs. Parfois, vous essayez de résister et de ne pas les faire, mais ceci s'avère souvent difficile. Vous pouvez ressentir une anxiété qui ne diminuera pas, tant que l'acte n'est pas accompli. »_
 
-> _« Les obsessions sont des idées pénibles, des pensées, des images ou des désirs impulsifs qui vous viennent à l'esprit d'une manière répétitive. Elles peuvent vous sembler apparaître contre votre volonté. Vous pouvez aussi les trouver répugnantes, reconnaître qu'elles sont dénuées de sens, ou estimer qu'elles ne correspondent pas du tout à votre personnalité. Elles sont souvent source d'angoisse. »_
+**Sources** :
 
-#### Consigne du bloc compulsions (avant item 6)
-
-> _« Les compulsions, d'un autre côté, sont des comportements ou des actes que vous vous sentez obligé d'accomplir, même si vous les reconnaissez comme dénués de sens ou excessifs. Parfois, vous essayez de résister et de ne pas les faire, mais ceci s'avère souvent difficile. Vous pouvez ressentir une anxiété qui ne diminuera pas, tant que l'acte n'est pas accompli. »_
-
-**Source de la consigne** : Mollard, Cottraux & Bouvard (1989), L'Encéphale, XV, 335-341, p. 336 — texte littéral du script de définition des obsessions et compulsions à donner au patient avant la passation. Texte récupéré directement depuis le PDF source primaire.
+- Cadrage initial — Mollard, Cottraux & Bouvard (1989), L'Encéphale, XV, 335-341, **p. 336** : *« L'objectif de cette échelle est de mesurer la gravité et le type des symptômes décrits par les patients souffrant d'obsession-compulsion »* ; *« Il s'agit d'évaluer les caractéristiques de chaque item pendant la semaine qui a précédé l'entretien d'évaluation »* ; *« les scores devront refléter la survenue moyenne de chaque item pour la semaine écoulée »*. Structure 5 + 5 — **p. 335** (Résumé) : *« échelle de 10 items cotés de 0 à 4 : 5 pour les obsessions, 5 pour les compulsions »*.
+- Définitions obsessions et compulsions — Mollard 1989 **p. 336**, texte littéral du script à donner au patient avant la passation. Reproduction verbatim, conforme à l'instruction Mollard *« Avant d'engager l'entretien avec les questions donnez au patient une définition des « obsessions » et des « compulsions » »*.
 
 ### Comportement UX de la consigne
 
-| Champ                | Valeur                                                                                                                                                                                                                                                                                     |
-| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Persistance**      | `spécifique`                                                                                                                                                                                                                                                                               |
-| **Emplacement**      | Consigne obsessions affichée en en-tête au-dessus des items 1 à 5 ; consigne compulsions affichée en en-tête au-dessus des items 6 à 10.                                                                                                                                                   |
-| **Justification**    | La Y-BOCS comporte structurellement deux blocs avec deux définitions cliniques distinctes (obsessions vs compulsions) que le patient doit comprendre séparément. La consigne unique en page de garde ne suffit pas — la définition de chaque concept doit accompagner les items concernés. |
-| **Cas particuliers** | UI doit prévoir un séparateur visuel clair entre items 5 et 6 pour signaler la transition obsessions → compulsions.                                                                                                                                                                        |
+| Champ                | Valeur                                                                                                                                                                                                                                                                                                                                                          |
+| -------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Persistance**      | `non persistante`                                                                                                                                                                                                                                                                                                                                               |
+| **Emplacement**      | Page d'introduction patient (avant l'item 1). Pas de réaffichage en cours de passation.                                                                                                                                                                                                                                                                         |
+| **Justification**    | Adaptation auto-passation de la prescription Mollard *« donnez au patient une définition »* avant les questions. Les deux définitions sont présentées ensemble en intro, conformément à la séquence Mollard p. 336. La transition obsessions → compulsions est ensuite signalée par un titre court de section, sans répéter la définition complète.            |
+| **Cas particuliers** | UI doit afficher un séparateur visuel et un titre de section (« Obsessions » / « Compulsions ») au-dessus des items 1 et 6 pour marquer la bascule. Le patient garde ainsi un repère structurel sans lecture redondante de la définition.                                                                                                                       |
 
 ### Dimensions de cotation
 
@@ -186,7 +187,7 @@ Le PDF source primaire Mollard, Cottraux & Bouvard (1989, _L'Encéphale_, XV, 33
 | 1      | Moins d'une heure par jour, ou survenue occasionnelle (pas plus de 8 fois par jour)                                         |
 | 2      | 1 à 3 heures par jour, ou survenue très fréquente (plus de 8 fois par jour, mais la majorité de ma journée se passe sans)   |
 | 3      | 3 à 8 heures par jour, ou survenue très fréquente (plus de 8 fois par jour, occupant une très grande partie de ma journée)  |
-| 4      | Plus de 8 heures par jour, ou envahissement pratiquement constant (pensées tellement nombreuses que je ne peux les compter) |
+| 4      | Plus de 8 heures par jour, ou envahissement pratiquement constant ; pensées tellement nombreuses que je ne peux les compter, et il est très rare de passer 1 heure dans ma journée sans que plusieurs pensées ne surviennent |
 
 **Item 2 — Gêne liée aux obsessions**
 
@@ -258,7 +259,7 @@ Le PDF source primaire Mollard, Cottraux & Bouvard (1989, _L'Encéphale_, XV, 33
 | 1      | Moins d'une heure par jour, ou émission occasionnelle de conduites ritualisées (pas plus de 8 fois par jour)                    |
 | 2      | 1 à 3 heures par jour, ou apparition fréquente (plus de 8 fois par jour, mais le temps n'est pas en majorité envahi)            |
 | 3      | 3 à 8 heures par jour, ou apparition très fréquente (plus de 8 fois par jour, la plupart du temps est pris par les compulsions) |
-| 4      | Plus de 8 heures par jour, ou présence pratiquement constante (conduites trop nombreuses pour être dénombrées)                  |
+| 4      | Plus de 8 heures par jour, ou présence pratiquement constante de conduites ritualisées (trop nombreuses pour être dénombrées) ; une heure se passe rarement sans que plusieurs compulsions n'apparaissent                  |
 
 **Item 7 — Gêne liée aux compulsions**
 

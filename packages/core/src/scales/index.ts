@@ -301,7 +301,7 @@ export const scales: Scale[] = [
     instructions:
       "Au cours des 2 dernières semaines, selon quelle fréquence avez-vous été gêné(e) par les problèmes suivants ?",
     copyrightAttribution:
-      "Échelle développée par les Dr Robert L. Spitzer, Janet B.W. Williams, Kurt Kroenke et leurs collègues grâce à une allocation d'études de Pfizer Inc.",
+      "Développé par les Dr Robert L. Spitzer, Janet B.W. Williams, Kurt Kroenke et leurs collègues grâce à une allocation d'études de Pfizer Inc.",
     higherIsBetter: false,
     questions: [
       "Un sentiment de nervosité, d'anxiété ou de tension",
@@ -416,18 +416,18 @@ export const scales: Scale[] = [
     description:
       "Une échelle d'évaluation des symptômes obsessionnels-compulsifs mesurant la sévérité du TOC",
     category: "Troubles Obsessionnels Compulsifs",
-    estimatedTime: "15-20 minutes",
+    estimatedTime: "10-15 minutes",
     higherIsBetter: false,
     instructions:
-      "Les obsessions sont des idées pénibles, des pensées, des images ou des désirs impulsifs qui vous viennent à l'esprit d'une manière répétitive. Elles peuvent vous sembler apparaître contre votre volonté. Vous pouvez aussi les trouver répugnantes, reconnaître qu'elles sont dénuées de sens, ou estimer qu'elles ne correspondent pas du tout à votre personnalité. Elles sont souvent source d'angoisse.",
+      "Cette échelle évalue la sévérité de vos symptômes obsessionnels et compulsifs au cours de la semaine écoulée. Vous trouverez 10 questions, réparties en deux blocs : 5 questions sur les obsessions, puis 5 sur les compulsions.\n\nLes obsessions sont des idées pénibles, des pensées, des images ou des désirs impulsifs qui vous viennent à l'esprit d'une manière répétitive. Elles peuvent vous sembler apparaître contre votre volonté. Vous pouvez aussi les trouver répugnantes, reconnaître qu'elles sont dénuées de sens, ou estimer qu'elles ne correspondent pas du tout à votre personnalité. Elles sont souvent source d'angoisse.\n\nLes compulsions, d'un autre côté, sont des comportements ou des actes que vous vous sentez obligé d'accomplir, même si vous les reconnaissez comme dénués de sens ou excessifs. Parfois, vous essayez de résister et de ne pas les faire, mais ceci s'avère souvent difficile. Vous pouvez ressentir une anxiété qui ne diminuera pas, tant que l'acte n'est pas accompli.",
     sectionIntros: [
       {
         startIndex: 0,
-        text: "Les obsessions sont des idées pénibles, des pensées, des images ou des désirs impulsifs qui vous viennent à l'esprit d'une manière répétitive. Elles peuvent vous sembler apparaître contre votre volonté. Vous pouvez aussi les trouver répugnantes, reconnaître qu'elles sont dénuées de sens, ou estimer qu'elles ne correspondent pas du tout à votre personnalité. Elles sont souvent source d'angoisse.",
+        text: "Obsessions",
       },
       {
         startIndex: 5,
-        text: "Les compulsions, d'un autre côté, sont des comportements ou des actes que vous vous sentez obligé d'accomplir, même si vous les reconnaissez comme dénués de sens ou excessifs. Parfois, vous essayez de résister et de ne pas les faire, mais ceci s'avère souvent difficile. Vous pouvez ressentir une anxiété qui ne diminuera pas, tant que l'acte n'est pas accompli.",
+        text: "Compulsions",
       },
     ],
     copyrightAttribution:
@@ -455,7 +455,7 @@ export const scales: Scale[] = [
           },
           {
             value: 4,
-            text: "Plus de 8 heures par jour, ou envahissement pratiquement constant (pensées tellement nombreuses que je ne peux les compter)",
+            text: "Plus de 8 heures par jour, ou envahissement pratiquement constant ; pensées tellement nombreuses que je ne peux les compter, et il est très rare de passer 1 heure dans ma journée sans que plusieurs pensées ne surviennent",
           },
         ],
       },
@@ -563,7 +563,7 @@ export const scales: Scale[] = [
           },
           {
             value: 4,
-            text: "Plus de 8 heures par jour, ou présence pratiquement constante (conduites trop nombreuses pour être dénombrées)",
+            text: "Plus de 8 heures par jour, ou présence pratiquement constante de conduites ritualisées (trop nombreuses pour être dénombrées) ; une heure se passe rarement sans que plusieurs compulsions n'apparaissent",
           },
         ],
       },

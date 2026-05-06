@@ -195,7 +195,7 @@ exports.scales = [
         estimatedTime: "2-3 minutes",
         longDescription: "Le GAD-7 (Generalized Anxiety Disorder 7-item) est un auto-questionnaire de 7 items développé par Spitzer et collaborateurs (2006) pour le dépistage et la mesure de la sévérité du trouble anxieux généralisé. Chaque item est coté de 0 (jamais) à 3 (presque tous les jours), le score total varie de 0 à 21. Un score ≥ 10 correspond au seuil clinique de suspicion de TAG (sensibilité 89 %, spécificité 82 %), à laisser au jugement du practicien.",
         instructions: "Au cours des 2 dernières semaines, selon quelle fréquence avez-vous été gêné(e) par les problèmes suivants ?",
-        copyrightAttribution: "Échelle développée par les Dr Robert L. Spitzer, Janet B.W. Williams, Kurt Kroenke et leurs collègues grâce à une allocation d'études de Pfizer Inc.",
+        copyrightAttribution: "Développé par les Dr Robert L. Spitzer, Janet B.W. Williams, Kurt Kroenke et leurs collègues grâce à une allocation d'études de Pfizer Inc.",
         higherIsBetter: false,
         questions: [
             "Un sentiment de nervosité, d'anxiété ou de tension",
@@ -302,17 +302,17 @@ exports.scales = [
         title: "Y-BOCS - Échelle d'obsession-compulsion de Yale-Brown",
         description: "Une échelle d'évaluation des symptômes obsessionnels-compulsifs mesurant la sévérité du TOC",
         category: "Troubles Obsessionnels Compulsifs",
-        estimatedTime: "15-20 minutes",
+        estimatedTime: "10-15 minutes",
         higherIsBetter: false,
-        instructions: "Les obsessions sont des idées pénibles, des pensées, des images ou des désirs impulsifs qui vous viennent à l'esprit d'une manière répétitive. Elles peuvent vous sembler apparaître contre votre volonté. Vous pouvez aussi les trouver répugnantes, reconnaître qu'elles sont dénuées de sens, ou estimer qu'elles ne correspondent pas du tout à votre personnalité. Elles sont souvent source d'angoisse.",
+        instructions: "Cette échelle évalue la sévérité de vos symptômes obsessionnels et compulsifs au cours de la semaine écoulée. Vous trouverez 10 questions, réparties en deux blocs : 5 questions sur les obsessions, puis 5 sur les compulsions.\n\nLes obsessions sont des idées pénibles, des pensées, des images ou des désirs impulsifs qui vous viennent à l'esprit d'une manière répétitive. Elles peuvent vous sembler apparaître contre votre volonté. Vous pouvez aussi les trouver répugnantes, reconnaître qu'elles sont dénuées de sens, ou estimer qu'elles ne correspondent pas du tout à votre personnalité. Elles sont souvent source d'angoisse.\n\nLes compulsions, d'un autre côté, sont des comportements ou des actes que vous vous sentez obligé d'accomplir, même si vous les reconnaissez comme dénués de sens ou excessifs. Parfois, vous essayez de résister et de ne pas les faire, mais ceci s'avère souvent difficile. Vous pouvez ressentir une anxiété qui ne diminuera pas, tant que l'acte n'est pas accompli.",
         sectionIntros: [
             {
                 startIndex: 0,
-                text: "Les obsessions sont des idées pénibles, des pensées, des images ou des désirs impulsifs qui vous viennent à l'esprit d'une manière répétitive. Elles peuvent vous sembler apparaître contre votre volonté. Vous pouvez aussi les trouver répugnantes, reconnaître qu'elles sont dénuées de sens, ou estimer qu'elles ne correspondent pas du tout à votre personnalité. Elles sont souvent source d'angoisse.",
+                text: "Obsessions",
             },
             {
                 startIndex: 5,
-                text: "Les compulsions, d'un autre côté, sont des comportements ou des actes que vous vous sentez obligé d'accomplir, même si vous les reconnaissez comme dénués de sens ou excessifs. Parfois, vous essayez de résister et de ne pas les faire, mais ceci s'avère souvent difficile. Vous pouvez ressentir une anxiété qui ne diminuera pas, tant que l'acte n'est pas accompli.",
+                text: "Compulsions",
             },
         ],
         copyrightAttribution: "Échelle Y-BOCS — Goodman et al. (1989). Traduction française : Mollard, Cottraux & Bouvard (1989), L'Encéphale, XV, 335-341.",
@@ -337,7 +337,7 @@ exports.scales = [
                     },
                     {
                         value: 4,
-                        text: "Plus de 8 heures par jour, ou envahissement pratiquement constant (pensées tellement nombreuses que je ne peux les compter)",
+                        text: "Plus de 8 heures par jour, ou envahissement pratiquement constant ; pensées tellement nombreuses que je ne peux les compter, et il est très rare de passer 1 heure dans ma journée sans que plusieurs pensées ne surviennent",
                     },
                 ],
             },
@@ -440,7 +440,7 @@ exports.scales = [
                     },
                     {
                         value: 4,
-                        text: "Plus de 8 heures par jour, ou présence pratiquement constante (conduites trop nombreuses pour être dénombrées)",
+                        text: "Plus de 8 heures par jour, ou présence pratiquement constante de conduites ritualisées (trop nombreuses pour être dénombrées) ; une heure se passe rarement sans que plusieurs compulsions n'apparaissent",
                     },
                 ],
             },
