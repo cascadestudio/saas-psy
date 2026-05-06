@@ -163,6 +163,11 @@ export function ScoreArcGauge({
                 {interpretation}
               </span>
             )}
+            {ranges.length === 2 && (
+              <span className="mt-1 text-xs text-muted-foreground">
+                Seuil : ≥ {ranges[1].min}
+              </span>
+            )}
           </div>
         </div>
       </div>
