@@ -19,6 +19,11 @@ export interface SectionIntro {
     /** 0-based question index at which this intro should be shown. */
     startIndex: number;
     text: string;
+    /**
+     * Optional long-form definition shown as a full-screen transition before the
+     * section's first item during patient passation.
+     */
+    description?: string;
 }
 export interface Scale {
     id: string;

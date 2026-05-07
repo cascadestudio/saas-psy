@@ -175,3 +175,32 @@
   border-color: hsl(var(--destructive) / 0.3) !important;
 }
 
+@media print {
+  body {
+    background: white !important;
+  }
+
+  /* Retire toutes les couleurs de fond sauf exceptions */
+  *:not(.scale-logo-bg):not(.subscore-bar-track):not(.subscore-bar-fill) {
+    background-color: transparent !important;
+    background-image: none !important;
+  }
+
+  .scale-logo-bg,
+  .subscore-bar-track,
+  .subscore-bar-fill {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Retire le padding-bottom mobile (bottom nav fixe) */
+  main {
+    padding-bottom: 0 !important;
+  }
+
+  /* Pas de saut de page intempestif dans les blocs */
+  .space-y-6 > * {
+    break-inside: avoid;
+  }
+}
+

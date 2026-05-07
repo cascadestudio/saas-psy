@@ -16,7 +16,8 @@ exports.scales = [
         category: "Anxiété sociale",
         estimatedTime: "10-15 minutes",
         longDescription: "L'Échelle d'anxiété sociale de Liebowitz (LSAS) est un questionnaire développé par le psychiatre Michael Liebowitz pour évaluer la gravité de l'anxiété sociale. Il mesure à la fois la peur et l'évitement dans 24 situations sociales différentes. Chaque situation est évaluée deux fois : une fois pour le niveau d'anxiété qu'elle provoque (de 0 à 3, où 0 signifie aucune anxiété et 3 une anxiété sévère) et une fois pour la fréquence d'évitement de la situation (également de 0 à 3). Le LSAS est largement utilisé en recherche clinique et en pratique pour évaluer l'efficacité des traitements pour l'anxiété sociale.",
-        instructions: "Cette échelle évalue la façon dont l'anxiété sociale joue un rôle dans votre vie au travers de différentes situations.\n\nLisez chaque situation attentivement et répondez à deux questions à son sujet. La première concerne le niveau de peur ou d'anxiété que vous ressentez dans cette situation. La seconde concerne la fréquence à laquelle vous évitez cette situation.\n\nSi vous rencontrez une situation que vous ne vivez pas habituellement, imaginez « que se passerait-il si j'y étais confronté(e) », et cotez le niveau de peur que vous ressentiriez ainsi que la fréquence à laquelle vous l'éviteriez. Basez vos réponses sur la façon dont ces situations vous ont affecté(e) au cours de la semaine écoulée.",
+        instructions: "Cette échelle évalue la façon dont l'anxiété sociale joue un rôle dans votre vie au travers de différentes situations.\n\nLisez chaque situation attentivement et répondez à deux questions à son sujet. La première concerne le niveau de peur ou d'anxiété que vous ressentez dans cette situation. La seconde concerne la fréquence à laquelle vous évitez cette situation.\n\nSi vous rencontrez une situation que vous ne vivez pas habituellement, imaginez « que se passerait-il si j'y étais confronté(e) », et évaluez le niveau de peur que vous ressentiriez ainsi que la fréquence à laquelle vous l'éviteriez. Basez vos réponses sur la façon dont ces situations vous ont affecté(e) au cours de la semaine écoulée.",
+        persistentInstructions: "",
         copyrightAttribution: "Liebowitz Social Anxiety Scale (LSAS) — Liebowitz M.R., 1987. Traduction française : J.P. Lépine & H. Cardot, 1990. Validation française : Yao et al., L'Encéphale, 1999.",
         higherIsBetter: false,
         questions: [
@@ -24,7 +25,7 @@ exports.scales = [
             {
                 id: 2,
                 text: "Participer au sein d'un petit groupe",
-                type: "interaction",
+                type: "performance",
             },
             { id: 3, text: "Manger dans un lieu public", type: "performance" },
             {
@@ -34,7 +35,7 @@ exports.scales = [
             },
             {
                 id: 5,
-                text: "Parler à des personnes qui détiennent une autorité",
+                text: "Parler à des gens qui détiennent une autorité",
                 type: "interaction",
             },
             {
@@ -47,18 +48,18 @@ exports.scales = [
             { id: 9, text: "Écrire en étant observé", type: "performance" },
             {
                 id: 10,
-                text: "Appeler quelqu'un que vous ne connaissez pas très bien",
+                text: "Contacter par téléphone quelqu'un que vous ne connaissez pas très bien",
                 type: "interaction",
             },
             {
                 id: 11,
-                text: "Parler à des personnes que vous ne connaissez pas très bien",
+                text: "Parler à des gens que vous ne connaissez pas très bien",
                 type: "interaction",
             },
             { id: 12, text: "Rencontrer des inconnus", type: "interaction" },
             {
                 id: 13,
-                text: "Uriner dans des toilettes publiques",
+                text: "Uriner dans les toilettes publiques",
                 type: "performance",
             },
             {
@@ -66,29 +67,29 @@ exports.scales = [
                 text: "Entrer dans une pièce alors que tout le monde est déjà assis",
                 type: "performance",
             },
-            { id: 15, text: "Être le centre d'attention", type: "performance" },
+            { id: 15, text: "Être le centre d'attention", type: "interaction" },
             { id: 16, text: "Prendre la parole à une réunion", type: "performance" },
             { id: 17, text: "Passer un examen", type: "performance" },
             {
                 id: 18,
-                text: "Exprimer son désaccord ou sa désapprobation à des personnes que vous ne connaissez pas très bien",
+                text: "Exprimer son désaccord ou sa désapprobation à des gens que vous ne connaissez pas très bien",
                 type: "interaction",
             },
             {
                 id: 19,
-                text: "Regarder dans les yeux des personnes que vous ne connaissez pas très bien",
+                text: "Regarder dans les yeux des gens que vous ne connaissez pas très bien",
                 type: "interaction",
             },
             {
                 id: 20,
-                text: "Faire un compte rendu à un groupe",
+                text: "Faire un compte-rendu à un groupe",
                 type: "performance",
             },
-            { id: 21, text: "Essayer de séduire quelqu'un", type: "interaction" },
+            { id: 21, text: "Essayer de « draguer » quelqu'un", type: "interaction" },
             {
                 id: 22,
                 text: "Rapporter des marchandises dans un magasin",
-                type: "performance",
+                type: "interaction",
             },
             { id: 23, text: "Donner une soirée", type: "interaction" },
             {
@@ -113,10 +114,12 @@ exports.scales = [
         },
         scoring: {
             ranges: [
-                { min: 0, max: 54, interpretation: "Anxiété sociale légère" },
-                { min: 55, max: 64, interpretation: "Anxiété sociale modérée" },
+                { min: 0, max: 29, interpretation: "Pas d'anxiété sociale" },
+                { min: 30, max: 49, interpretation: "Anxiété sociale légère" },
+                { min: 50, max: 64, interpretation: "Anxiété sociale modérée" },
                 { min: 65, max: 79, interpretation: "Anxiété sociale marquée" },
-                { min: 80, max: 144, interpretation: "Anxiété sociale sévère" },
+                { min: 80, max: 94, interpretation: "Anxiété sociale sévère" },
+                { min: 95, max: 144, interpretation: "Anxiété sociale très sévère" },
             ],
             maxScore: 144,
             method: "Pour chaque situation, additionnez les scores d'anxiété (0-3) et d'évitement (0-3). Le score total varie de 0 à 144.",
@@ -304,7 +307,7 @@ exports.scales = [
         category: "Troubles Obsessionnels Compulsifs",
         estimatedTime: "10-15 minutes",
         higherIsBetter: false,
-        instructions: "Cette échelle évalue la sévérité de vos symptômes obsessionnels et compulsifs au cours de la semaine écoulée. Vous trouverez 10 questions, réparties en deux blocs : 5 questions sur les obsessions, puis 5 sur les compulsions.\n\nLes obsessions sont des idées pénibles, des pensées, des images ou des désirs impulsifs qui vous viennent à l'esprit d'une manière répétitive. Elles peuvent vous sembler apparaître contre votre volonté. Vous pouvez aussi les trouver répugnantes, reconnaître qu'elles sont dénuées de sens, ou estimer qu'elles ne correspondent pas du tout à votre personnalité. Elles sont souvent source d'angoisse.\n\nLes compulsions, d'un autre côté, sont des comportements ou des actes que vous vous sentez obligé d'accomplir, même si vous les reconnaissez comme dénués de sens ou excessifs. Parfois, vous essayez de résister et de ne pas les faire, mais ceci s'avère souvent difficile. Vous pouvez ressentir une anxiété qui ne diminuera pas, tant que l'acte n'est pas accompli.",
+        instructions: "Cette échelle évalue la sévérité de vos symptômes obsessionnels et compulsifs au cours de la semaine écoulée.\n\nVous trouverez 10 questions, réparties en deux blocs : 5 questions sur les obsessions, puis 5 sur les compulsions.\n\nLes obsessions sont des idées pénibles, des pensées, des images ou des désirs impulsifs qui vous viennent à l'esprit d'une manière répétitive.\n\nElles peuvent vous sembler apparaître contre votre volonté. Vous pouvez aussi les trouver répugnantes, reconnaître qu'elles sont dénuées de sens, ou estimer qu'elles ne correspondent pas du tout à votre personnalité.\n\nElles sont souvent source d'angoisse.\n\nLes compulsions, d'un autre côté, sont des comportements ou des actes que vous vous sentez obligé d'accomplir, même si vous les reconnaissez comme dénués de sens ou excessifs.\n\nParfois, vous essayez de résister et de ne pas les faire, mais ceci s'avère souvent difficile. Vous pouvez ressentir une anxiété qui ne diminuera pas, tant que l'acte n'est pas accompli.",
         sectionIntros: [
             {
                 startIndex: 0,
@@ -313,6 +316,7 @@ exports.scales = [
             {
                 startIndex: 5,
                 text: "Compulsions",
+                description: "Les compulsions sont des actes que vous vous sentez obligé d'accomplir, même si vous les reconnaissez comme dénués de sens ou excessifs. Parfois, vous essayez de résister et de ne pas les faire, mais ceci s'avère souvent difficile. Vous pouvez ressentir une anxiété qui ne diminuera pas, tant que l'acte n'est pas accompli.",
             },
         ],
         copyrightAttribution: "Échelle Y-BOCS — Goodman et al. (1989). Traduction française : Mollard, Cottraux & Bouvard (1989), L'Encéphale, XV, 335-341.",
@@ -384,7 +388,7 @@ exports.scales = [
                 options: [
                     {
                         value: 0,
-                        text: "Je fais toujours l'effort de résister, ou les symptômes sont si minimes qu'il n'est pas nécessaire de leur résister",
+                        text: "Je fais toujours l'effort de résister, ou les obsessions sont si minimes qu'il n'est pas nécessaire de leur résister",
                     },
                     { value: 1, text: "J'essaie de résister la plupart du temps" },
                     { value: 2, text: "Je fais quelques efforts pour résister" },
@@ -422,13 +426,13 @@ exports.scales = [
                 ],
             },
             {
-                title: "DURÉE DES RITUELS",
-                prompt: "Combien de temps passez-vous à faire des rituels ? Quelle est la fréquence de vos rituels ?",
+                title: "DURÉE DES COMPULSIONS",
+                prompt: "Combien de temps passez-vous à faire des compulsions ? Quelle est la fréquence de vos compulsions ?",
                 options: [
-                    { value: 0, text: "Aucun rituel" },
+                    { value: 0, text: "Aucune compulsion" },
                     {
                         value: 1,
-                        text: "Moins d'une heure par jour, ou émission occasionnelle de conduites ritualisées (pas plus de 8 fois par jour)",
+                        text: "Moins d'une heure par jour, ou émission occasionnelle de compulsions (pas plus de 8 fois par jour)",
                     },
                     {
                         value: 2,
@@ -440,13 +444,13 @@ exports.scales = [
                     },
                     {
                         value: 4,
-                        text: "Plus de 8 heures par jour, ou présence pratiquement constante de conduites ritualisées (trop nombreuses pour être dénombrées) ; une heure se passe rarement sans que plusieurs compulsions n'apparaissent",
+                        text: "Plus de 8 heures par jour, ou présence pratiquement constante de compulsions (trop nombreuses pour être dénombrées) ; une heure se passe rarement sans que plusieurs compulsions n'apparaissent",
                     },
                 ],
             },
             {
-                title: "GÊNE LIÉE AUX RITUELS",
-                prompt: "Dans quelle mesure les rituels vous gênent-ils dans votre vie sociale ou professionnelle ? Y a-t-il des choses qu'il vous est impossible de faire à cause de vos rituels ?",
+                title: "GÊNE LIÉE AUX COMPULSIONS",
+                prompt: "Dans quelle mesure les compulsions vous gênent-elles dans votre vie sociale ou professionnelle ? Y a-t-il des choses qu'il vous est impossible de faire à cause de vos compulsions ?",
                 options: [
                     { value: 0, text: "Aucune gêne" },
                     {
@@ -465,13 +469,13 @@ exports.scales = [
                 ],
             },
             {
-                title: "ANGOISSE ASSOCIÉE AUX RITUELS",
-                prompt: "Comment vous sentiriez-vous si l'on vous empêchait de faire votre/vos rituel(s) ? Seriez-vous très anxieux ?",
+                title: "ANGOISSE ASSOCIÉE AUX COMPULSIONS",
+                prompt: "Comment vous sentiriez-vous si l'on vous empêchait de faire vos compulsions ? Seriez-vous très anxieux ?",
                 options: [
                     { value: 0, text: "Aucune angoisse" },
                     {
                         value: 1,
-                        text: "Légère anxiété si l'on m'empêchait de ritualiser, ou légère anxiété pendant l'accomplissement",
+                        text: "Légère anxiété si l'on m'empêchait d'accomplir mes compulsions, ou légère anxiété pendant l'accomplissement",
                     },
                     {
                         value: 2,
@@ -479,11 +483,11 @@ exports.scales = [
                     },
                     {
                         value: 3,
-                        text: "Augmentation très nette et très éprouvante de l'anxiété si les rituels sont interrompus, ou pendant leur accomplissement",
+                        text: "Augmentation très nette et très éprouvante de l'anxiété si les compulsions sont interrompues, ou pendant leur accomplissement",
                     },
                     {
                         value: 4,
-                        text: "Anxiété invalidante dès qu'une intervention vise à modifier l'activité ritualisée, ou pendant l'accomplissement",
+                        text: "Anxiété invalidante dès qu'une intervention vise à modifier la compulsion, ou pendant l'accomplissement",
                     },
                 ],
             },
@@ -499,34 +503,34 @@ exports.scales = [
                     { value: 2, text: "Je fais quelques efforts pour résister" },
                     {
                         value: 3,
-                        text: "Je cède à tous les rituels sans essayer de les contrôler, mais je suis quelque peu contrarié(e) de ne pouvoir mieux faire",
+                        text: "Je cède à toutes les compulsions sans essayer de les contrôler, mais je suis quelque peu contrarié(e) de ne pouvoir mieux faire",
                     },
                     {
                         value: 4,
-                        text: "Je cède volontiers et totalement à tous les rituels",
+                        text: "Je cède volontiers et totalement à toutes les compulsions",
                     },
                 ],
             },
             {
-                title: "DEGRÉ DE CONTRÔLE SUR LES RITUELS",
-                prompt: "Quelle est l'intensité de la pulsion qui vous oblige à ritualiser ? Quel contrôle pouvez-vous exercer sur les rituels ?",
+                title: "DEGRÉ DE CONTRÔLE SUR LES COMPULSIONS",
+                prompt: "Quelle est l'intensité de la pulsion qui vous oblige à accomplir vos compulsions ? Quel contrôle pouvez-vous exercer sur les compulsions ?",
                 options: [
                     { value: 0, text: "Contrôle total" },
                     {
                         value: 1,
-                        text: "Beaucoup de contrôle ; je ressens une certaine obligation à accomplir les rituels, mais je peux généralement exercer un contrôle volontaire sur cette pression",
+                        text: "Beaucoup de contrôle ; je ressens une certaine obligation à accomplir les compulsions, mais je peux généralement exercer un contrôle volontaire sur cette pression",
                     },
                     {
                         value: 2,
-                        text: "Contrôle moyen, forte obligation à accomplir les rituels, je peux la contrôler mais avec difficulté",
+                        text: "Contrôle moyen, forte obligation à accomplir les compulsions, je peux la contrôler mais avec difficulté",
                     },
                     {
                         value: 3,
-                        text: "Peu de contrôle, très forte obligation à accomplir les rituels ; je dois aller jusqu'au bout de l'activité ritualisée et ne peux différer qu'avec difficulté",
+                        text: "Peu de contrôle, très forte obligation à accomplir les compulsions ; je dois aller jusqu'au bout de la compulsion et ne peux différer qu'avec difficulté",
                     },
                     {
                         value: 4,
-                        text: "Aucun contrôle, l'obligation à accomplir les rituels est vécue comme complètement involontaire et irrésistible ; je ne peux que rarement différer même momentanément l'activité",
+                        text: "Aucun contrôle, l'obligation à accomplir les compulsions est vécue comme complètement involontaire et irrésistible ; je ne peux que rarement différer même momentanément l'activité",
                     },
                 ],
             },

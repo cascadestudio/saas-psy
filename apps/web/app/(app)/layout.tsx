@@ -35,7 +35,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex min-h-screen">
       {/* Sidebar (desktop) */}
-      <aside className="sticky top-0 hidden h-screen w-52 flex-col bg-surface-brand-bg text-brand-orange rounded-r-2xl md:flex">
+      <aside className="sticky top-0 hidden h-screen w-52 flex-col bg-surface-brand-bg text-brand-orange rounded-r-2xl md:flex print:hidden">
         {/* Logo */}
         <div className="flex h-20 items-center justify-center px-4 mt-4">
           <Link href="/dashboard" className="flex items-center">
@@ -115,7 +115,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
       {/* Main content */}
       <main className="flex-1 min-w-0 pb-16 md:pb-0">
         {/* Mobile header */}
-        <div className="flex h-14 items-center justify-between border-b border-border bg-surface-brand-bg px-4 md:hidden">
+        <div className="flex h-14 items-center justify-between border-b border-border bg-surface-brand-bg px-4 md:hidden print:hidden">
           <Link href="/dashboard" className="flex items-center">
             <Image
               src="/images/logos/logo-melya.svg"
@@ -162,7 +162,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
         </div>
 
         {user && !pathname.startsWith("/settings") && (
-          <div className="container mx-auto px-4 pt-6">
+          <div className="container mx-auto px-4 pt-6 print:hidden">
             <GlobalSearchBar />
           </div>
         )}
@@ -170,7 +170,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
       </main>
 
       {/* Bottom tab bar (mobile) */}
-      <nav className="fixed bottom-0 left-0 right-0 z-40 flex h-16 items-center justify-around border-t border-border bg-[#FBEEE9] md:hidden">
+      <nav className="fixed bottom-0 left-0 right-0 z-40 flex h-16 items-center justify-around border-t border-border bg-[#FBEEE9] md:hidden print:hidden">
         {navigation.map((item) => {
           const Icon = item.icon;
           const isActive =

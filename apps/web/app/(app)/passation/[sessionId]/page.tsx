@@ -170,7 +170,7 @@ export default function ResultsPage() {
 
   const ScaleLogo = scale ? (
     <div
-      className="flex items-center justify-center flex-shrink-0 rounded-md w-14 h-14 sm:w-[72px] sm:h-[72px]"
+      className="scale-logo-bg flex items-center justify-center flex-shrink-0 rounded-md w-14 h-14 sm:w-[72px] sm:h-[72px]"
       style={{
         backgroundColor: scale.color ?? "#e5e7eb",
       }}
@@ -245,7 +245,11 @@ export default function ResultsPage() {
         </div>
       </div>
       {session.status === "COMPLETED" ? (
-        <Button variant="secondary">
+        <Button
+          variant="secondary"
+          className="print:hidden"
+          onClick={() => window.print()}
+        >
           <Files.FileText />
           Imprimer les résultats
         </Button>
@@ -402,9 +406,9 @@ export default function ResultsPage() {
                               )}
                             </span>
                           </div>
-                          <div className="h-1.5 rounded-full bg-foreground/10 overflow-hidden">
+                          <div className="subscore-bar-track h-1.5 rounded-full bg-foreground/10 overflow-hidden">
                             <div
-                              className="h-full rounded-full bg-brand-orange/30"
+                              className="subscore-bar-fill h-full rounded-full bg-brand-orange/30"
                               style={{ width: `${pct}%` }}
                             />
                           </div>
@@ -449,9 +453,9 @@ export default function ResultsPage() {
                                     )}
                                   </span>
                                 </div>
-                                <div className="h-1.5 rounded-full bg-foreground/10 overflow-hidden">
+                                <div className="subscore-bar-track h-1.5 rounded-full bg-foreground/10 overflow-hidden">
                                   <div
-                                    className="h-full rounded-full bg-brand-orange/30"
+                                    className="subscore-bar-fill h-full rounded-full bg-brand-orange/30"
                                     style={{ width: `${pct}%` }}
                                   />
                                 </div>
@@ -619,6 +623,20 @@ export default function ResultsPage() {
         {scale?.copyrightAttribution && (
           <CopyrightFooter attribution={scale.copyrightAttribution} />
         )}
+
+        {/* Footer Melya */}
+        <div className="flex items-center justify-center gap-2 pt-4 border-t border-border">
+          <p className="text-xs text-muted-foreground">
+            Passation réalisée avec
+          </p>
+          <Image
+            src="/images/logos/logo-melya.svg"
+            alt="Melya"
+            width={56}
+            height={18}
+            className="opacity-60"
+          />
+        </div>
       </div>
     </div>
   );
