@@ -692,10 +692,12 @@ export const scales: Scale[] = [
     description:
       "Une échelle de 10 items évaluant le niveau global d'estime de soi",
     category: "Estime de soi",
-    estimatedTime: "3-5 minutes",
+    estimatedTime: "2-5 minutes",
     longDescription:
       "L'Échelle d'Estime de Soi de Rosenberg (RSES) est l'outil le plus utilisé dans la recherche et la pratique clinique pour mesurer l'estime de soi globale. Elle compte 10 items (5 formulations positives, 5 négatives), cotés de 1 à 4 sur une échelle Likert. Les items négatifs (3, 5, 8, 9, 10) sont inversés avant sommation. Le score total varie de 10 à 40 ; un score plus élevé indique une estime de soi plus élevée. Version française : Vallières & Vallerand (1990).",
     instructions:
+      "Pour chacune des caractéristiques ou descriptions suivantes, indiquez à quel point chacune est vraie pour vous en cliquant sur le chiffre approprié.",
+    persistentInstructions:
       "Pour chacune des caractéristiques ou descriptions suivantes, indiquez à quel point chacune est vraie pour vous en cliquant sur le chiffre approprié.",
     copyrightAttribution:
       "© Évelyne F. Vallières et Robert J. Vallerand, 1990. Traduction de la Rosenberg Self-Esteem Scale (Rosenberg, 1965).",
