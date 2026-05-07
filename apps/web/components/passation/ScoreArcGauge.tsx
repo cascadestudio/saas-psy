@@ -181,19 +181,10 @@ export function ScoreArcGauge({
                         y={labelPos.y}
                         textAnchor="middle"
                         dominantBaseline="middle"
-                        className="fill-muted-foreground"
-                        fontSize="11"
+                        className="fill-muted-foreground tabular-nums"
+                        fontSize="12"
                       >
-                        <tspan x={labelPos.x} dy="-0.5em">
-                          {ranges[i + 1].interpretation}
-                        </tspan>
-                        <tspan
-                          x={labelPos.x}
-                          dy="1.1em"
-                          className="tabular-nums"
-                        >
-                          ≥ {ranges[i + 1].min}
-                        </tspan>
+                        {ranges[i + 1].min}
                       </text>
                     </g>
                   );
@@ -223,6 +214,17 @@ export function ScoreArcGauge({
             )}
           </div>
         </div>
+        {ranges.length >= 2 && (
+          <ul className="mt-4 flex flex-col gap-1 text-xs text-muted-foreground">
+            {ranges.slice(1).map((r) => (
+              <li key={r.min} className="flex items-baseline gap-2">
+                <span className="tabular-nums">≥ {r.min}</span>
+                <span>—</span>
+                <span>{r.interpretation}</span>
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
     </div>
   );
