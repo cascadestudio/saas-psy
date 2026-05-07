@@ -116,6 +116,7 @@ export const scales: Scale[] = [
       "L'Échelle d'anxiété sociale de Liebowitz (LSAS) est un questionnaire développé par le psychiatre Michael Liebowitz pour évaluer la gravité de l'anxiété sociale. Il mesure à la fois la peur et l'évitement dans 24 situations sociales différentes. Chaque situation est évaluée deux fois : une fois pour le niveau d'anxiété qu'elle provoque (de 0 à 3, où 0 signifie aucune anxiété et 3 une anxiété sévère) et une fois pour la fréquence d'évitement de la situation (également de 0 à 3). Le LSAS est largement utilisé en recherche clinique et en pratique pour évaluer l'efficacité des traitements pour l'anxiété sociale.",
     instructions:
       "Cette échelle évalue la façon dont l'anxiété sociale joue un rôle dans votre vie au travers de différentes situations.\n\nLisez chaque situation attentivement et répondez à deux questions à son sujet. La première concerne le niveau de peur ou d'anxiété que vous ressentez dans cette situation. La seconde concerne la fréquence à laquelle vous évitez cette situation.\n\nSi vous rencontrez une situation que vous ne vivez pas habituellement, imaginez « que se passerait-il si j'y étais confronté(e) », et cotez le niveau de peur que vous ressentiriez ainsi que la fréquence à laquelle vous l'éviteriez. Basez vos réponses sur la façon dont ces situations vous ont affecté(e) au cours de la semaine écoulée.",
+    persistentInstructions: "",
     copyrightAttribution:
       "Liebowitz Social Anxiety Scale (LSAS) — Liebowitz M.R., 1987. Traduction française : J.P. Lépine & H. Cardot, 1990. Validation française : Yao et al., L'Encéphale, 1999.",
     higherIsBetter: false,
@@ -124,7 +125,7 @@ export const scales: Scale[] = [
       {
         id: 2,
         text: "Participer au sein d'un petit groupe",
-        type: "interaction",
+        type: "performance",
       },
       { id: 3, text: "Manger dans un lieu public", type: "performance" },
       {
@@ -134,7 +135,7 @@ export const scales: Scale[] = [
       },
       {
         id: 5,
-        text: "Parler à des personnes qui détiennent une autorité",
+        text: "Parler à des gens qui détiennent une autorité",
         type: "interaction",
       },
       {
@@ -147,18 +148,18 @@ export const scales: Scale[] = [
       { id: 9, text: "Écrire en étant observé", type: "performance" },
       {
         id: 10,
-        text: "Appeler quelqu'un que vous ne connaissez pas très bien",
+        text: "Contacter par téléphone quelqu'un que vous ne connaissez pas très bien",
         type: "interaction",
       },
       {
         id: 11,
-        text: "Parler à des personnes que vous ne connaissez pas très bien",
+        text: "Parler à des gens que vous ne connaissez pas très bien",
         type: "interaction",
       },
       { id: 12, text: "Rencontrer des inconnus", type: "interaction" },
       {
         id: 13,
-        text: "Uriner dans des toilettes publiques",
+        text: "Uriner dans les toilettes publiques",
         type: "performance",
       },
       {
@@ -166,29 +167,29 @@ export const scales: Scale[] = [
         text: "Entrer dans une pièce alors que tout le monde est déjà assis",
         type: "performance",
       },
-      { id: 15, text: "Être le centre d'attention", type: "performance" },
+      { id: 15, text: "Être le centre d'attention", type: "interaction" },
       { id: 16, text: "Prendre la parole à une réunion", type: "performance" },
       { id: 17, text: "Passer un examen", type: "performance" },
       {
         id: 18,
-        text: "Exprimer son désaccord ou sa désapprobation à des personnes que vous ne connaissez pas très bien",
+        text: "Exprimer son désaccord ou sa désapprobation à des gens que vous ne connaissez pas très bien",
         type: "interaction",
       },
       {
         id: 19,
-        text: "Regarder dans les yeux des personnes que vous ne connaissez pas très bien",
+        text: "Regarder dans les yeux des gens que vous ne connaissez pas très bien",
         type: "interaction",
       },
       {
         id: 20,
-        text: "Faire un compte rendu à un groupe",
+        text: "Faire un compte-rendu à un groupe",
         type: "performance",
       },
-      { id: 21, text: "Essayer de séduire quelqu'un", type: "interaction" },
+      { id: 21, text: "Essayer de « draguer » quelqu'un", type: "interaction" },
       {
         id: 22,
         text: "Rapporter des marchandises dans un magasin",
-        type: "performance",
+        type: "interaction",
       },
       { id: 23, text: "Donner une soirée", type: "interaction" },
       {
@@ -213,10 +214,12 @@ export const scales: Scale[] = [
     },
     scoring: {
       ranges: [
-        { min: 0, max: 54, interpretation: "Anxiété sociale légère" },
-        { min: 55, max: 64, interpretation: "Anxiété sociale modérée" },
+        { min: 0, max: 29, interpretation: "Pas d'anxiété sociale" },
+        { min: 30, max: 49, interpretation: "Anxiété sociale légère" },
+        { min: 50, max: 64, interpretation: "Anxiété sociale modérée" },
         { min: 65, max: 79, interpretation: "Anxiété sociale marquée" },
-        { min: 80, max: 144, interpretation: "Anxiété sociale sévère" },
+        { min: 80, max: 94, interpretation: "Anxiété sociale sévère" },
+        { min: 95, max: 144, interpretation: "Anxiété sociale très sévère" },
       ],
       maxScore: 144,
       method:
