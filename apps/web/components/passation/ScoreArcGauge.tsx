@@ -56,7 +56,7 @@ export function ScoreArcGauge({
   const cy = SIZE / 2;
 
   const markerAngle = START_ANGLE + pct * ARC_DEGREES;
-  const marker = polar(cx, cy, radius, markerAngle);
+  const marker = polar(cx, cy, radius - STROKE / 2 - 14, markerAngle);
 
   let cursor = 0;
   const segments = ranges.map((r, i) => {
@@ -131,14 +131,13 @@ export function ScoreArcGauge({
               </>
             )}
             {hasSeverity && (
-              <circle
-                cx={marker.x}
-                cy={marker.y}
-                r={STROKE / 2 + 3}
-                fill="white"
-                className="text-brand-orange"
-                stroke="currentColor"
-                strokeWidth={6}
+              <polygon
+                points={`${marker.x},${marker.y - 10} ${marker.x - 8},${marker.y + 6} ${marker.x + 8},${marker.y + 6}`}
+                fill="black"
+                stroke="black"
+                strokeWidth={3}
+                strokeLinejoin="round"
+                transform={`rotate(${markerAngle}, ${marker.x}, ${marker.y})`}
               />
             )}
             {ranges.length >= 2 &&
@@ -146,8 +145,7 @@ export function ScoreArcGauge({
                 let cumulative = 0;
                 return ranges.slice(0, -1).map((r, i) => {
                   cumulative += (r.max - r.min + 1) / denom;
-                  const boundaryAngle =
-                    START_ANGLE + cumulative * ARC_DEGREES;
+                  const boundaryAngle = START_ANGLE + cumulative * ARC_DEGREES;
                   const tickInner = polar(
                     cx,
                     cy,
