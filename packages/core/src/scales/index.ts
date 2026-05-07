@@ -23,6 +23,11 @@ export interface SectionIntro {
   /** 0-based question index at which this intro should be shown. */
   startIndex: number;
   text: string;
+  /**
+   * Optional long-form definition shown as a full-screen transition before the
+   * section's first item during patient passation.
+   */
+  description?: string;
 }
 
 export interface Scale {
@@ -428,6 +433,8 @@ export const scales: Scale[] = [
       {
         startIndex: 5,
         text: "Compulsions",
+        description:
+          "Les compulsions sont des actes que vous vous sentez obligé d'accomplir, même si vous les reconnaissez comme dénués de sens ou excessifs. Parfois, vous essayez de résister et de ne pas les faire, mais ceci s'avère souvent difficile. Vous pouvez ressentir une anxiété qui ne diminuera pas, tant que l'acte n'est pas accompli.",
       },
     ],
     copyrightAttribution:
@@ -505,7 +512,7 @@ export const scales: Scale[] = [
         options: [
           {
             value: 0,
-            text: "Je fais toujours l'effort de résister, ou les symptômes sont si minimes qu'il n'est pas nécessaire de leur résister",
+            text: "Je fais toujours l'effort de résister, ou les obsessions sont si minimes qu'il n'est pas nécessaire de leur résister",
           },
           { value: 1, text: "J'essaie de résister la plupart du temps" },
           { value: 2, text: "Je fais quelques efforts pour résister" },

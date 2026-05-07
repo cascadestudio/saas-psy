@@ -5,6 +5,7 @@ import { Arrow } from "doodle-icons";
 import ProgressBar from "./ProgressBar";
 import IntroScreen from "./IntroScreen";
 import SingleScaleQuestion from "./SingleScaleQuestion";
+import SectionTransitionScreen from "./SectionTransitionScreen";
 import ReviewScreen from "./ReviewScreen";
 
 interface SessionRunnerProps {
@@ -24,7 +25,13 @@ interface QuestionStep {
   options: { value: number; label: string }[];
 }
 
-type Phase = "intro" | "question" | "follow-up" | "review";
+type Phase = "intro" | "transition" | "question" | "follow-up" | "review";
+
+interface SectionTransition {
+  startIndex: number;
+  title: string;
+  description: string;
+}
 
 const AUTO_ADVANCE_DELAY_MS = 250;
 const SUPPORTED_FORM_TYPES = new Set([
@@ -129,6 +136,15 @@ interface RunnerProps {
 function Runner({ scale, onSubmit }: RunnerProps) {
   const steps = useMemo(() => buildSteps(scale), [scale]);
   const total = steps.length;
+  const transitions: SectionTransition[] = useMemo(() => {
+    const sectionIntros: { startIndex: number; text: string; description?: string }[] =
+      scale.sectionIntros ?? [];
+    return sectionIntros
+      .filter((s) => s.description && s.startIndex > 0)
+      .map((s) => ({ startIndex: s.startIndex, title: s.text, description: s.description! }));
+  }, [scale.sectionIntros]);
+  const transitionAt = (idx: number): SectionTransition | undefined =>
+    transitions.find((t) => t.startIndex === idx);
   const followUpStep: QuestionStep | null = useMemo(() => {
     if (!scale.followUpItem) return null;
     return {
@@ -155,13 +171,21 @@ function Runner({ scale, onSubmit }: RunnerProps) {
 
     window.setTimeout(() => {
       if (currentIndex < total - 1) {
-        setCurrentIndex((i) => i + 1);
+        const nextIndex = currentIndex + 1;
+        setCurrentIndex(nextIndex);
+        if (transitionAt(nextIndex)) {
+          setPhase("transition");
+        }
       } else if (followUpStep) {
         setPhase("follow-up");
       } else {
         setPhase("review");
       }
     }, AUTO_ADVANCE_DELAY_MS);
+  };
+
+  const handleTransitionContinue = () => {
+    setPhase("question");
   };
 
   const handleFollowUpSelect = (value: number) => {
@@ -198,6 +222,15 @@ function Runner({ scale, onSubmit }: RunnerProps) {
       setCurrentIndex(total - 1);
       return;
     }
+    if (phase === "transition") {
+      setPhase("question");
+      setCurrentIndex((i) => Math.max(0, i - 1));
+      return;
+    }
+    if (transitionAt(currentIndex)) {
+      setPhase("transition");
+      return;
+    }
     if (currentIndex > 0) {
       setCurrentIndex((i) => i - 1);
     } else {
@@ -207,7 +240,10 @@ function Runner({ scale, onSubmit }: RunnerProps) {
 
   const canGoBack =
     phase !== "intro" &&
-    (phase === "review" || phase === "follow-up" || currentIndex > 0);
+    (phase === "review" ||
+      phase === "follow-up" ||
+      phase === "transition" ||
+      currentIndex > 0);
 
   const handleSubmit = async () => {
     setSubmitting(true);
@@ -239,7 +275,11 @@ function Runner({ scale, onSubmit }: RunnerProps) {
             </button>
             <div className="flex-1">
               <ProgressBar
-                current={phase === "question" ? currentIndex : total}
+                current={
+                  phase === "question" || phase === "transition"
+                    ? currentIndex
+                    : total
+                }
                 total={total}
                 showCounter={phase !== "review"}
               />
@@ -255,6 +295,14 @@ function Runner({ scale, onSubmit }: RunnerProps) {
             estimatedTime={scale.estimatedTime}
             questionsCount={total}
             onStart={handleStart}
+          />
+        )}
+
+        {phase === "transition" && transitionAt(currentIndex) && (
+          <SectionTransitionScreen
+            title={transitionAt(currentIndex)!.title}
+            description={transitionAt(currentIndex)!.description}
+            onContinue={handleTransitionContinue}
           />
         )}
 

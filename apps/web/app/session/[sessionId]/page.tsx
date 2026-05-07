@@ -19,7 +19,7 @@ interface SessionData {
     description: string;
     instructions: string;
     persistentInstructions?: string;
-    sectionIntros?: { startIndex: number; text: string }[];
+    sectionIntros?: { startIndex: number; text: string; description?: string }[];
     copyrightAttribution?: string;
     formType?: string;
     questions: any[];
