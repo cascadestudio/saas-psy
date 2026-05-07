@@ -84,9 +84,9 @@ Compte tenu de la convergence des libellés et de l'absence de validation publi�
 
 ### Consigne officielle (affichée au patient avant les items)
 
-> _« Pour chacune des caractéristiques ou descriptions suivantes, indiquez à quel point chacune est vraie pour vous en cliquant sur le chiffre approprié. »_
+> _« Pour chacune des caractéristiques ou descriptions suivantes, indiquez à quel point chacune est vraie pour vous en sélectionnant la réponse appropriée. »_
 
-**Source de la consigne** : Vallières & Vallerand (1990), PDF officiel LRCS. Une seule adaptation par rapport au verbatim source : substitution de « en encerclant » par « en cliquant », pour cohérence avec le mode d'administration digital (le verbe original suppose un support papier et perd son sens dans l'app).
+**Source de la consigne** : Vallières & Vallerand (1990), PDF officiel LRCS. Une seule adaptation par rapport au verbatim source : substitution de « en encerclant le chiffre approprié » par « en sélectionnant la réponse appropriée », pour cohérence avec le mode d'administration digital (le verbe original suppose un support papier ; « cliquant sur le chiffre » est ambigu en UI à boutons radio).
 
 ### Comportement UX de la consigne
 
