@@ -551,14 +551,14 @@ export const scales: Scale[] = [
         ],
       },
       {
-        title: "DURÉE DES RITUELS",
+        title: "DURÉE DES COMPULSIONS",
         prompt:
-          "Combien de temps passez-vous à faire des rituels ? Quelle est la fréquence de vos rituels ?",
+          "Combien de temps passez-vous à faire des compulsions ? Quelle est la fréquence de vos compulsions ?",
         options: [
-          { value: 0, text: "Aucun rituel" },
+          { value: 0, text: "Aucune compulsion" },
           {
             value: 1,
-            text: "Moins d'une heure par jour, ou émission occasionnelle de conduites ritualisées (pas plus de 8 fois par jour)",
+            text: "Moins d'une heure par jour, ou émission occasionnelle de compulsions (pas plus de 8 fois par jour)",
           },
           {
             value: 2,
@@ -570,14 +570,14 @@ export const scales: Scale[] = [
           },
           {
             value: 4,
-            text: "Plus de 8 heures par jour, ou présence pratiquement constante de conduites ritualisées (trop nombreuses pour être dénombrées) ; une heure se passe rarement sans que plusieurs compulsions n'apparaissent",
+            text: "Plus de 8 heures par jour, ou présence pratiquement constante de compulsions (trop nombreuses pour être dénombrées) ; une heure se passe rarement sans que plusieurs compulsions n'apparaissent",
           },
         ],
       },
       {
-        title: "GÊNE LIÉE AUX RITUELS",
+        title: "GÊNE LIÉE AUX COMPULSIONS",
         prompt:
-          "Dans quelle mesure les rituels vous gênent-ils dans votre vie sociale ou professionnelle ? Y a-t-il des choses qu'il vous est impossible de faire à cause de vos rituels ?",
+          "Dans quelle mesure les compulsions vous gênent-elles dans votre vie sociale ou professionnelle ? Y a-t-il des choses qu'il vous est impossible de faire à cause de vos compulsions ?",
         options: [
           { value: 0, text: "Aucune gêne" },
           {
@@ -596,14 +596,14 @@ export const scales: Scale[] = [
         ],
       },
       {
-        title: "ANGOISSE ASSOCIÉE AUX RITUELS",
+        title: "ANGOISSE ASSOCIÉE AUX COMPULSIONS",
         prompt:
-          "Comment vous sentiriez-vous si l'on vous empêchait de faire votre/vos rituel(s) ? Seriez-vous très anxieux ?",
+          "Comment vous sentiriez-vous si l'on vous empêchait de faire vos compulsions ? Seriez-vous très anxieux ?",
         options: [
           { value: 0, text: "Aucune angoisse" },
           {
             value: 1,
-            text: "Légère anxiété si l'on m'empêchait de ritualiser, ou légère anxiété pendant l'accomplissement",
+            text: "Légère anxiété si l'on m'empêchait d'accomplir mes compulsions, ou légère anxiété pendant l'accomplissement",
           },
           {
             value: 2,
@@ -611,11 +611,11 @@ export const scales: Scale[] = [
           },
           {
             value: 3,
-            text: "Augmentation très nette et très éprouvante de l'anxiété si les rituels sont interrompus, ou pendant leur accomplissement",
+            text: "Augmentation très nette et très éprouvante de l'anxiété si les compulsions sont interrompues, ou pendant leur accomplissement",
           },
           {
             value: 4,
-            text: "Anxiété invalidante dès qu'une intervention vise à modifier l'activité ritualisée, ou pendant l'accomplissement",
+            text: "Anxiété invalidante dès qu'une intervention vise à modifier la compulsion, ou pendant l'accomplissement",
           },
         ],
       },
@@ -631,35 +631,35 @@ export const scales: Scale[] = [
           { value: 2, text: "Je fais quelques efforts pour résister" },
           {
             value: 3,
-            text: "Je cède à tous les rituels sans essayer de les contrôler, mais je suis quelque peu contrarié(e) de ne pouvoir mieux faire",
+            text: "Je cède à toutes les compulsions sans essayer de les contrôler, mais je suis quelque peu contrarié(e) de ne pouvoir mieux faire",
           },
           {
             value: 4,
-            text: "Je cède volontiers et totalement à tous les rituels",
+            text: "Je cède volontiers et totalement à toutes les compulsions",
           },
         ],
       },
       {
-        title: "DEGRÉ DE CONTRÔLE SUR LES RITUELS",
+        title: "DEGRÉ DE CONTRÔLE SUR LES COMPULSIONS",
         prompt:
-          "Quelle est l'intensité de la pulsion qui vous oblige à ritualiser ? Quel contrôle pouvez-vous exercer sur les rituels ?",
+          "Quelle est l'intensité de la pulsion qui vous oblige à accomplir vos compulsions ? Quel contrôle pouvez-vous exercer sur les compulsions ?",
         options: [
           { value: 0, text: "Contrôle total" },
           {
             value: 1,
-            text: "Beaucoup de contrôle ; je ressens une certaine obligation à accomplir les rituels, mais je peux généralement exercer un contrôle volontaire sur cette pression",
+            text: "Beaucoup de contrôle ; je ressens une certaine obligation à accomplir les compulsions, mais je peux généralement exercer un contrôle volontaire sur cette pression",
           },
           {
             value: 2,
-            text: "Contrôle moyen, forte obligation à accomplir les rituels, je peux la contrôler mais avec difficulté",
+            text: "Contrôle moyen, forte obligation à accomplir les compulsions, je peux la contrôler mais avec difficulté",
           },
           {
             value: 3,
-            text: "Peu de contrôle, très forte obligation à accomplir les rituels ; je dois aller jusqu'au bout de l'activité ritualisée et ne peux différer qu'avec difficulté",
+            text: "Peu de contrôle, très forte obligation à accomplir les compulsions ; je dois aller jusqu'au bout de la compulsion et ne peux différer qu'avec difficulté",
           },
           {
             value: 4,
-            text: "Aucun contrôle, l'obligation à accomplir les rituels est vécue comme complètement involontaire et irrésistible ; je ne peux que rarement différer même momentanément l'activité",
+            text: "Aucun contrôle, l'obligation à accomplir les compulsions est vécue comme complètement involontaire et irrésistible ; je ne peux que rarement différer même momentanément l'activité",
           },
         ],
       },

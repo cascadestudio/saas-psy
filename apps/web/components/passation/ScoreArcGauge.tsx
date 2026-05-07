@@ -181,10 +181,19 @@ export function ScoreArcGauge({
                         y={labelPos.y}
                         textAnchor="middle"
                         dominantBaseline="middle"
-                        className="fill-muted-foreground tabular-nums"
-                        fontSize="12"
+                        className="fill-muted-foreground"
+                        fontSize="11"
                       >
-                        seuil {ranges[i + 1].min}
+                        <tspan x={labelPos.x} dy="-0.5em">
+                          {ranges[i + 1].interpretation}
+                        </tspan>
+                        <tspan
+                          x={labelPos.x}
+                          dy="1.1em"
+                          className="tabular-nums"
+                        >
+                          ≥ {ranges[i + 1].min}
+                        </tspan>
                       </text>
                     </g>
                   );
