@@ -89,9 +89,11 @@ export default function IntroScreen({
       </div>
 
       {instructions && (
-        <p className="text-base text-gray-600 leading-relaxed">
-          {instructions}
-        </p>
+        <div className="flex flex-col gap-4 text-base text-gray-600 leading-relaxed">
+          {instructions.split(/\n\n+/).map((para, i) => (
+            <p key={i}>{para}</p>
+          ))}
+        </div>
       )}
 
       <Button className="w-full h-12 text-base" onClick={onStart}>

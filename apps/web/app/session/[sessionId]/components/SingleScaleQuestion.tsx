@@ -37,13 +37,19 @@ export default function SingleScaleQuestion({
             {subLabel}
           </p>
         )}
-        <h2 className="font-body text-xl sm:text-2xl lg:text-3xl font-semibold text-gray-900 leading-tight">
-          {questionText}
-        </h2>
-        {questionPrompt && (
-          <p className="text-base text-gray-600 leading-relaxed">
-            {questionPrompt}
-          </p>
+        {questionPrompt ? (
+          <>
+            <p className="text-xs font-medium uppercase tracking-wider text-gray-500">
+              {questionText}
+            </p>
+            <h2 className="font-body text-xl sm:text-2xl lg:text-3xl font-semibold text-gray-900 leading-tight">
+              {questionPrompt}
+            </h2>
+          </>
+        ) : (
+          <h2 className="font-body text-xl sm:text-2xl lg:text-3xl font-semibold text-gray-900 leading-tight">
+            {questionText}
+          </h2>
         )}
       </div>
 
