@@ -637,7 +637,7 @@ export default function ResultsPage() {
         )}
 
         {/* Footer Melya */}
-        <div className="flex items-center justify-center gap-2 pt-4 border-t border-border">
+        <div className="hidden print:flex items-center justify-center gap-2 pt-4 border-t border-border">
           <p className="text-xs text-muted-foreground">
             Passation réalisée avec
           </p>
