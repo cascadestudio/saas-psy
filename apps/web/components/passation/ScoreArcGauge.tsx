@@ -1,5 +1,11 @@
 import type { Scale } from "@melya/core";
 import { getSeverityPalette } from "@/lib/severity";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 type Props = {
   scale: Scale;
@@ -67,9 +73,20 @@ export function ScoreArcGauge({
     const palette = getSeverityPalette(i, ranges.length, scale.higherIsBetter);
     const a = segStart + SEGMENT_GAP_DEG / 2;
     const b = segEnd - SEGMENT_GAP_DEG / 2;
+    const isFirst = i === 0;
+    const isLast = i === ranges.length - 1;
     return {
       d: arcPath(cx, cy, radius, a, b),
+      dWide: arcPath(
+        cx,
+        cy,
+        radius,
+        isFirst ? segStart - 10 : segStart,
+        isLast ? segEnd + 10 : segEnd,
+      ),
       color: palette.arcText,
+      interpretation: r.interpretation,
+      range: `${r.min}–${r.max}`,
       key: i,
     };
   });
@@ -165,7 +182,7 @@ export function ScoreArcGauge({
                     boundaryAngle,
                   );
                   return (
-                    <g key={i}>
+                    <g key={i} pointerEvents="none">
                       <line
                         x1={tickInner.x}
                         y1={tickInner.y}
@@ -188,10 +205,30 @@ export function ScoreArcGauge({
                   );
                 });
               })()}
+            {ranges.length > 1 &&
+              segments.map((s) => (
+                <TooltipProvider key={s.key} delayDuration={200}>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <path
+                        d={s.dWide}
+                        fill="none"
+                        stroke="transparent"
+                        strokeWidth={STROKE + 12}
+                        strokeLinecap="round"
+                        style={{ cursor: "pointer" }}
+                      />
+                    </TooltipTrigger>
+                    <TooltipContent className="bg-black text-white">
+                      {s.interpretation}
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
+              ))}
           </svg>
           <div
-            className="absolute inset-x-0 flex flex-col items-center"
-            style={{ top: "28%" }}
+            className="absolute inset-x-0 flex flex-col items-center pointer-events-none"
+            style={{ top: "40%" }}
           >
             <div className="flex items-baseline gap-1.5">
               <span
