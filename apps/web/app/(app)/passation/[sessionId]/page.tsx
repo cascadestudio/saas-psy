@@ -49,6 +49,18 @@ const SUBSCORE_LABEL_OVERRIDES: Record<string, string> = {
   "cluster-d": "Cognitions et humeur (D)",
   "cluster-e": "Hyperéveil (E)",
 };
+
+/**
+ * Subscores croisés (LSAS) : sortis du bloc principal et repliés derrière
+ * "Voir le détail". Les 4 principaux (anxiety, avoidance, performance,
+ * interaction) restent en évidence.
+ */
+const SECONDARY_SUBSCORE_KEYS = new Set([
+  "anxiety_performance",
+  "anxiety_interaction",
+  "avoidance_performance",
+  "avoidance_interaction",
+]);
 import { relativeTimeFr, formatDateLongFr } from "@/lib/relative-time";
 
 export default function ResultsPage() {
@@ -65,6 +77,7 @@ export default function ResultsPage() {
     "idle" | "sending" | "sent" | "error"
   >("idle");
   const [resendError, setResendError] = useState<string | null>(null);
+  const [showDetailSubscores, setShowDetailSubscores] = useState(false);
 
   useEffect(() => {
     if (!sessionId) return;
@@ -324,6 +337,12 @@ export default function ResultsPage() {
   const currentMain = score?.totalScore;
   const maxScore = score?.maxScore;
   const subscores = score?.subscores ?? [];
+  const primarySubscores = subscores.filter(
+    (s) => !SECONDARY_SUBSCORE_KEYS.has(s.key),
+  );
+  const secondarySubscores = subscores.filter((s) =>
+    SECONDARY_SUBSCORE_KEYS.has(s.key),
+  );
   const alerts = score?.alerts ?? [];
   const badgeInterpretation = score?.interpretation || null;
 
@@ -357,16 +376,16 @@ export default function ResultsPage() {
               )}
 
               {/* Subscores as mini-cards */}
-              {subscores.length > 0 && (
+              {primarySubscores.length > 0 && (
                 <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-x-3 sm:gap-x-6 gap-y-3 pt-2">
-                  {subscores.map((s) => {
+                  {primarySubscores.map((s) => {
                     const pct =
                       s.max && s.max > 0
                         ? Math.min(1, s.value / s.max) * 100
                         : 0;
                     return (
                       <div
-                        key={s.label}
+                        key={s.key}
                         className="bg-background rounded-lg p-3 space-y-2"
                       >
                         <div className="flex items-baseline justify-between gap-2">
@@ -394,6 +413,56 @@ export default function ResultsPage() {
                 </div>
               )}
             </div>
+
+            {secondarySubscores.length > 0 && (
+              <div className="mt-4 pt-4 border-t border-foreground/10">
+                <button
+                  type="button"
+                  onClick={() => setShowDetailSubscores((v) => !v)}
+                  className="text-sm font-medium text-brand-orange hover:underline underline-offset-4"
+                >
+                  {showDetailSubscores
+                    ? "Masquer le détail"
+                    : "Voir le détail"}
+                </button>
+                {showDetailSubscores && (
+                  <div className="mt-3 grid grid-cols-1 md:grid-cols-2 gap-x-3 sm:gap-x-6 gap-y-3">
+                    {secondarySubscores.map((s) => {
+                      const pct =
+                        s.max && s.max > 0
+                          ? Math.min(1, s.value / s.max) * 100
+                          : 0;
+                      return (
+                        <div
+                          key={s.key}
+                          className="bg-background rounded-lg p-3 space-y-2"
+                        >
+                          <div className="flex items-baseline justify-between gap-2">
+                            <p className="text-sm font-medium truncate">
+                              {SUBSCORE_LABEL_OVERRIDES[s.key] ?? s.label}
+                            </p>
+                            <span className="text-sm font-semibold tabular-nums shrink-0">
+                              {s.value}
+                              {s.max !== undefined && (
+                                <span className="text-xs font-normal text-muted-foreground">
+                                  /{s.max}
+                                </span>
+                              )}
+                            </span>
+                          </div>
+                          <div className="h-1.5 rounded-full bg-foreground/10 overflow-hidden">
+                            <div
+                              className="h-full rounded-full bg-brand-orange/30"
+                              style={{ width: `${pct}%` }}
+                            />
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
+            )}
           </div>
         </div>
 
