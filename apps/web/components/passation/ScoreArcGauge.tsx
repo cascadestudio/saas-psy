@@ -141,52 +141,54 @@ export function ScoreArcGauge({
                 strokeWidth={6}
               />
             )}
-            {ranges.length === 2 &&
+            {ranges.length >= 2 &&
               (() => {
-                const boundaryFrac =
-                  (ranges[0].max - ranges[0].min + 1) / denom;
-                const boundaryAngle =
-                  START_ANGLE + boundaryFrac * ARC_DEGREES;
-                const tickInner = polar(
-                  cx,
-                  cy,
-                  radius - STROKE / 2 - 2,
-                  boundaryAngle,
-                );
-                const tickOuter = polar(
-                  cx,
-                  cy,
-                  radius + STROKE / 2 + 4,
-                  boundaryAngle,
-                );
-                const labelPos = polar(
-                  cx,
-                  cy,
-                  radius + STROKE / 2 + 18,
-                  boundaryAngle,
-                );
-                return (
-                  <>
-                    <line
-                      x1={tickInner.x}
-                      y1={tickInner.y}
-                      x2={tickOuter.x}
-                      y2={tickOuter.y}
-                      className="stroke-muted-foreground/40"
-                      strokeWidth={1.5}
-                    />
-                    <text
-                      x={labelPos.x}
-                      y={labelPos.y}
-                      textAnchor="middle"
-                      dominantBaseline="middle"
-                      className="fill-muted-foreground tabular-nums"
-                      fontSize="12"
-                    >
-                      seuil {ranges[1].min}
-                    </text>
-                  </>
-                );
+                let cumulative = 0;
+                return ranges.slice(0, -1).map((r, i) => {
+                  cumulative += (r.max - r.min + 1) / denom;
+                  const boundaryAngle =
+                    START_ANGLE + cumulative * ARC_DEGREES;
+                  const tickInner = polar(
+                    cx,
+                    cy,
+                    radius - STROKE / 2 - 2,
+                    boundaryAngle,
+                  );
+                  const tickOuter = polar(
+                    cx,
+                    cy,
+                    radius + STROKE / 2 + 4,
+                    boundaryAngle,
+                  );
+                  const labelPos = polar(
+                    cx,
+                    cy,
+                    radius + STROKE / 2 + 18,
+                    boundaryAngle,
+                  );
+                  return (
+                    <g key={i}>
+                      <line
+                        x1={tickInner.x}
+                        y1={tickInner.y}
+                        x2={tickOuter.x}
+                        y2={tickOuter.y}
+                        className="stroke-muted-foreground/40"
+                        strokeWidth={1.5}
+                      />
+                      <text
+                        x={labelPos.x}
+                        y={labelPos.y}
+                        textAnchor="middle"
+                        dominantBaseline="middle"
+                        className="fill-muted-foreground tabular-nums"
+                        fontSize="12"
+                      >
+                        seuil {ranges[i + 1].min}
+                      </text>
+                    </g>
+                  );
+                });
               })()}
           </svg>
           <div
