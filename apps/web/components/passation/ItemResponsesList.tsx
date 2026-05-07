@@ -129,7 +129,7 @@ function groupRows(scale: Scale, rows: Row[]): Section[] {
   return [{ rows }];
 }
 
-function ScaleLegend({ scale }: { scale: Scale }) {
+export function ScaleLegend({ scale }: { scale: Scale }) {
   if (scale.formType === "options") return null;
 
   const dimensions: {
@@ -156,10 +156,7 @@ function ScaleLegend({ scale }: { scale: Scale }) {
   if (dimensions.length === 0) return null;
 
   return (
-    <div className="bg-muted-foreground/5 rounded-2xl p-3 space-y-2 mb-3">
-      <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
-        Modalités de réponse
-      </p>
+    <div className="space-y-2">
       <div className="space-y-2">
         {dimensions.map((dim, i) => (
           <div key={i}>
@@ -170,7 +167,7 @@ function ScaleLegend({ scale }: { scale: Scale }) {
               {dim.modalities.map((m) => (
                 <span key={m.value}>
                   <span className="font-semibold tabular-nums">{m.value}</span>
-                  <span className="text-muted-foreground"> — {m.label}</span>
+                  <span className="text-foreground/70"> — {m.label}</span>
                 </span>
               ))}
             </div>
@@ -196,16 +193,16 @@ function ItemRow({
 
   return (
     <div
-      className={`flex flex-col sm:flex-row sm:items-start gap-2 sm:gap-4 p-3 ${
+      className={`flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 p-3 ${
         isFlagged ? "bg-red-50 border-l-4 border-l-red-500" : ""
       }`}
     >
-      <div className="flex items-start gap-2 flex-1 min-w-0">
-        <span className="text-xs text-muted-foreground tabular-nums shrink-0 mt-0.5 w-6">
-          #{row.index + 1}
+      <div className="flex items-center gap-2 flex-1 min-w-0">
+        <span className="text-xs text-muted-foreground tabular-nums shrink-0 w-5 h-5 rounded-full bg-foreground/10 flex items-center justify-center">
+          {row.index + 1}
         </span>
         {isFlagged && (
-          <Interfaces.Caution className="h-4 w-4 text-red-600 shrink-0 mt-0.5" />
+          <Interfaces.Caution className="h-4 w-4 text-red-600 shrink-0" />
         )}
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-1.5 flex-wrap">
@@ -234,25 +231,20 @@ function ItemRow({
           )}
         </div>
       </div>
-      <div className="flex flex-wrap gap-2 sm:shrink-0 sm:justify-end pl-8 sm:pl-0">
+      <div className="flex flex-wrap gap-2 sm:shrink-0 sm:justify-end sm:items-center pl-8 sm:pl-0">
         {row.values.length === 0 ? (
-          <span className="text-xs text-muted-foreground italic">
+          <span className="text-xs text-foreground/70 italic">
             Sans réponse
           </span>
         ) : (
           row.values.map((v, i) => (
             <div key={i} className="flex flex-col items-end">
               {v.dimension && (
-                <span className="text-[10px] uppercase tracking-wide text-muted-foreground">
+                <span className="text-xs uppercase tracking-wide text-foreground/70">
                   {v.dimension}
                 </span>
               )}
-              <Badge variant="outline" className="text-xs font-normal">
-                <span className="font-semibold mr-1.5 tabular-nums">
-                  {v.value}
-                </span>
-                <span>{v.modalityLabel}</span>
-              </Badge>
+              <span className="text-sm italic">{v.modalityLabel}</span>
             </div>
           ))
         )}
@@ -279,8 +271,7 @@ export function ItemResponsesList({
 
   return (
     <>
-      <ScaleLegend scale={scale} />
-      <div className="space-y-4">
+      <div className="space-y-6">
         {sections.map((section, sIdx) => (
           <div key={sIdx}>
             {section.title && (
@@ -288,7 +279,7 @@ export function ItemResponsesList({
                 {section.title}
               </p>
             )}
-            <div className="bg-muted-foreground/5 rounded-2xl divide-y divide-background overflow-hidden">
+            <div className="bg-muted rounded-2xl divide-y divide-foreground/10 overflow-hidden">
               {section.rows.map((row) => (
                 <ItemRow
                   key={row.index}
@@ -305,7 +296,7 @@ export function ItemResponsesList({
             <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-1.5">
               Impact fonctionnel <span className="font-normal normal-case tracking-normal">(non scoré)</span>
             </p>
-            <div className="bg-muted-foreground/5 rounded-2xl p-3 flex flex-col sm:flex-row sm:items-start gap-2 sm:gap-4">
+            <div className="bg-muted rounded-2xl p-3 flex flex-col sm:flex-row sm:items-start gap-2 sm:gap-4">
               <p className="text-sm flex-1">{followUp.questionText}</p>
               <div className="sm:shrink-0 sm:justify-end">
                 {followUpValue === undefined ? (

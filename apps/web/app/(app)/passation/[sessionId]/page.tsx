@@ -29,7 +29,7 @@ import {
 import { Interfaces, Files } from "doodle-icons";
 import { SESSION_STATUS_CONFIG } from "@/lib/session-status";
 import { getSeverityPalette } from "@/lib/severity";
-import { ItemResponsesList } from "@/components/passation/ItemResponsesList";
+import { ItemResponsesList, ScaleLegend } from "@/components/passation/ItemResponsesList";
 import { AlertsBanner } from "@/components/passation/AlertsBanner";
 import { PatientCommentsBlock } from "@/components/passation/PatientCommentsBlock";
 import { PassationSkeleton } from "@/components/passation/PassationSkeleton";
@@ -247,6 +247,7 @@ export default function ResultsPage() {
       {session.status === "COMPLETED" ? (
         <Button
           variant="secondary"
+          size="sm"
           className="print:hidden"
           onClick={() => window.print()}
         >
@@ -492,12 +493,23 @@ export default function ResultsPage() {
         {/* Réponses du patient — item par item */}
         {scale && session.responses && (
           <div>
+            <div className="flex flex-col sm:flex-row gap-4 mb-10">
+              <div className="flex-1 min-w-0">
+                <h3 className="text-lg font-sans font-semibold mb-3">Consigne</h3>
+                <div className="bg-foreground/5 rounded-2xl p-4">
+                  <ConsigneBlock scale={scale} />
+                </div>
+              </div>
+              <div className="sm:shrink-0">
+                <h3 className="text-lg font-sans font-semibold mb-3">Modalités de réponse</h3>
+                <div className="bg-foreground/5 rounded-2xl p-4">
+                  <ScaleLegend scale={scale} />
+                </div>
+              </div>
+            </div>
             <h2 className="text-lg font-sans font-semibold mb-3">
               Réponses du patient
             </h2>
-            <div className="bg-muted-foreground/5 rounded-2xl px-4 py-3 mb-3">
-              <ConsigneBlock scale={scale} />
-            </div>
             <ItemResponsesList
               scale={scale}
               responses={session.responses}

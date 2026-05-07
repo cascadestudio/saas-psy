@@ -13,9 +13,6 @@ export function ConsigneBlock({ scale }: Props) {
 
   return (
     <div className="space-y-3 text-sm text-muted-foreground leading-relaxed">
-      <p className="text-xs font-semibold uppercase tracking-wide text-foreground/70">
-        Consigne envoyée au patient
-      </p>
       {hasSections ? (
         sections.map((s, i) => (
           <div key={i}>

@@ -249,17 +249,6 @@ export function ScoreArcGauge({
             )}
           </div>
         </div>
-        {ranges.length >= 2 && (
-          <ul className="mt-4 flex flex-col gap-1 text-xs text-muted-foreground">
-            {ranges.map((r) => (
-              <li key={r.min} className="flex items-baseline gap-2">
-                <span className="tabular-nums">≥ {r.min}</span>
-                <span>—</span>
-                <span>{r.interpretation}</span>
-              </li>
-            ))}
-          </ul>
-        )}
       </div>
     </div>
   );
