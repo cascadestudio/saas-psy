@@ -50,21 +50,13 @@ function buildSteps(scale: any): QuestionStep[] {
   }
 
   if (formType === "options") {
-    const sectionIntros: { startIndex: number; text: string }[] =
-      scale.sectionIntros ?? [];
     return (questions as { title: string; prompt?: string; options: { value: number; text: string }[] }[]).map(
-      (q, idx) => {
-        const activeIntro = sectionIntros
-          .filter((s) => s.startIndex <= idx)
-          .sort((a, b) => b.startIndex - a.startIndex)[0];
-        return {
-          key: `option_${idx}`,
-          questionText: q.title,
-          questionPrompt: q.prompt,
-          persistentConsigne: activeIntro?.text,
-          options: q.options.map((o) => ({ value: o.value, label: o.text })),
-        };
-      },
+      (q, idx) => ({
+        key: `option_${idx}`,
+        questionText: q.title,
+        questionPrompt: q.prompt,
+        options: q.options.map((o) => ({ value: o.value, label: o.text })),
+      }),
     );
   }
 
