@@ -199,55 +199,60 @@ function ItemRow({
     scale.id === "index-symptomes-ybocs" &&
     YBOCS_INVERTED_ITEM_INDEXES.has(row.index);
 
+  const isOptions = scale.formType === "options";
+
   return (
     <div
-      className={`flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 p-3 ${
-        isFlagged ? "bg-red-50 border-l-4 border-l-red-500" : ""
-      }`}
+      className={`grid gap-2 p-3 ${
+        isOptions ? "grid-cols-[auto_1fr_1fr]" : "grid-cols-[auto_1fr_auto]"
+      } items-center ${isFlagged ? "bg-red-50 border-l-4 border-l-red-500" : ""}`}
     >
-      <div className="flex items-center gap-2 flex-1 min-w-0">
-        <span className="text-xs text-muted-foreground tabular-nums shrink-0 w-5 h-5 rounded-full bg-foreground/10 flex items-center justify-center">
+      {/* Numéro + flag */}
+      <div className="flex items-center gap-1 shrink-0">
+        <span className="text-xs text-muted-foreground tabular-nums w-5 h-5 rounded-full bg-foreground/10 flex items-center justify-center">
           {row.index + 1}
         </span>
         {isFlagged && (
-          <Interfaces.Caution className="h-4 w-4 text-red-600 shrink-0" />
+          <Interfaces.Caution className="h-4 w-4 text-red-600" />
         )}
-        <div className="flex-1 min-w-0">
-          <div className="flex items-center gap-1.5 flex-wrap">
-            {row.prompt ? (
-              <TooltipProvider delayDuration={150}>
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <p className="text-sm border-b border-dotted border-muted-foreground/40 cursor-help">{row.label}</p>
-                  </TooltipTrigger>
-                  <TooltipContent className="max-w-xs">
-                    {row.prompt}
-                  </TooltipContent>
-                </Tooltip>
-              </TooltipProvider>
-            ) : (
-              <p className="text-sm">{row.label}</p>
-            )}
-            {isYbocsInverted && (
-              <TooltipProvider delayDuration={150}>
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <span className="inline-flex items-center text-[10px] font-semibold uppercase tracking-wide text-amber-700 bg-amber-100 rounded px-1.5 py-0.5 cursor-help">
-                      sens inversé
-                    </span>
-                  </TooltipTrigger>
-                  <TooltipContent className="max-w-xs">
-                    Sur les items de résistance, un score 0 indique une
-                    résistance maximale (état le moins sévère). 4 = abandon
-                    total de la résistance.
-                  </TooltipContent>
-                </Tooltip>
-              </TooltipProvider>
-            )}
-          </div>
-        </div>
       </div>
-      <div className="flex flex-wrap gap-2 sm:shrink-0 sm:justify-end sm:items-center pl-8 sm:pl-0">
+
+      {/* Question */}
+      <div className="flex items-center gap-1.5 flex-wrap min-w-0">
+        {row.prompt ? (
+          <TooltipProvider delayDuration={150}>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <p className="text-sm border-b border-dotted border-muted-foreground/40 cursor-help">{row.label}</p>
+              </TooltipTrigger>
+              <TooltipContent className="max-w-xs">
+                {row.prompt}
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+        ) : (
+          <p className="text-sm">{row.label}</p>
+        )}
+        {isYbocsInverted && (
+          <TooltipProvider delayDuration={150}>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <span className="inline-flex items-center text-[10px] font-semibold uppercase tracking-wide text-amber-700 bg-amber-100 rounded px-1.5 py-0.5 cursor-help">
+                  sens inversé
+                </span>
+              </TooltipTrigger>
+              <TooltipContent className="max-w-xs">
+                Sur les items de résistance, un score 0 indique une
+                résistance maximale (état le moins sévère). 4 = abandon
+                total de la résistance.
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+        )}
+      </div>
+
+      {/* Réponse */}
+      <div className={`flex flex-wrap gap-2 ${isOptions ? "" : "shrink-0"} justify-end items-center text-right`}>
         {row.values.length === 0 ? (
           <span className="text-xs text-foreground/70 italic">
             Sans réponse
@@ -260,7 +265,7 @@ function ItemRow({
                   {v.dimension}
                 </span>
               )}
-              <span className="text-sm italic">{v.modalityLabel}</span>
+              <span className="text-sm italic text-right">{v.modalityLabel}</span>
             </div>
           ))
         )}
