@@ -575,7 +575,7 @@ export default function ResultsPage() {
                       className={`flex items-start justify-between gap-4 rounded-md p-3 -my-1 transition-colors ${
                         isCurrent
                           ? "bg-brand-orange/5 ring-1 ring-brand-orange/30"
-                          : "hover:bg-zinc-100 cursor-pointer"
+                          : "hover:bg-black/10 cursor-pointer"
                       }`}
                     >
                       <div className="min-w-0 space-y-1">
