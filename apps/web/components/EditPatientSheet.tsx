@@ -14,6 +14,8 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { patientsApi, ApiError, type Patient } from "@/lib/api-client";
 import { toast } from "sonner";
+import { useUser } from "@/app/context/UserContext";
+import { useAuthGate } from "@/app/context/AuthGateContext";
 
 interface EditPatientSheetProps {
   patient: Patient;
@@ -29,6 +31,8 @@ export function EditPatientSheet({
   onOpenChange,
 }: EditPatientSheetProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const { user } = useUser();
+  const { openAuthGate } = useAuthGate();
 
   const handleOpenChange = (newOpen: boolean) => {
     if (!newOpen && isSubmitting) return;
@@ -37,7 +41,6 @@ export function EditPatientSheet({
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setIsSubmitting(true);
 
     const formData = new FormData(e.currentTarget);
     const data = {
@@ -48,6 +51,13 @@ export function EditPatientSheet({
       notes: (formData.get("notes") as string) || undefined,
     };
 
+    if (!user) {
+      onOpenChange(false);
+      openAuthGate();
+      return;
+    }
+
+    setIsSubmitting(true);
     try {
       const { patient: updated } = await patientsApi.update(patient.id, data);
 
