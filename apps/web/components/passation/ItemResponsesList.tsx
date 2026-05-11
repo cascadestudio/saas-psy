@@ -204,7 +204,9 @@ function ItemRow({
   return (
     <div
       className={`grid gap-2 p-3 ${
-        isOptions ? "grid-cols-[auto_1fr_1fr]" : "grid-cols-[auto_1fr_auto]"
+        isOptions
+          ? "grid-cols-[auto_1fr] sm:grid-cols-[auto_1fr_1fr]"
+          : "grid-cols-[auto_1fr_auto]"
       } items-center ${isFlagged ? "bg-red-50 border-l-4 border-l-red-500" : ""}`}
     >
       {/* Numéro + flag */}
@@ -252,7 +254,7 @@ function ItemRow({
       </div>
 
       {/* Réponse */}
-      <div className={`flex flex-wrap gap-2 ${isOptions ? "" : "shrink-0"} justify-end items-center text-right`}>
+      <div className={`flex flex-wrap gap-2 ${isOptions ? "sm:col-start-3 col-start-2 justify-start sm:justify-end" : "shrink-0 justify-end"} items-center text-right`}>
         {row.values.length === 0 ? (
           <span className="text-xs text-foreground/70 italic">
             Sans réponse
