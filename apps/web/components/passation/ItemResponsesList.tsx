@@ -214,7 +214,20 @@ function ItemRow({
         )}
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-1.5 flex-wrap">
-            <p className="text-sm">{row.label}</p>
+            {row.prompt ? (
+              <TooltipProvider delayDuration={150}>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <p className="text-sm border-b border-dotted border-muted-foreground/40 cursor-help">{row.label}</p>
+                  </TooltipTrigger>
+                  <TooltipContent className="max-w-xs">
+                    {row.prompt}
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
+            ) : (
+              <p className="text-sm">{row.label}</p>
+            )}
             {isYbocsInverted && (
               <TooltipProvider delayDuration={150}>
                 <Tooltip>
@@ -232,11 +245,6 @@ function ItemRow({
               </TooltipProvider>
             )}
           </div>
-          {row.prompt && (
-            <p className="text-xs text-muted-foreground mt-0.5 leading-relaxed">
-              {row.prompt}
-            </p>
-          )}
         </div>
       </div>
       <div className="flex flex-wrap gap-2 sm:shrink-0 sm:justify-end sm:items-center pl-8 sm:pl-0">
