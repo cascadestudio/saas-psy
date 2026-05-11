@@ -254,6 +254,18 @@ export const MOCK_SESSIONS: Session[] = [
             "Selon les critères DSM-5, ce profil correspond à un diagnostic provisoire de TSPT (≥1B, ≥1C, ≥2D, ≥2E avec items cotés ≥ 2). Confirmation requise par évaluation clinique structurée.",
         },
       ],
+      criteriaCheck: {
+        key: "dsm5-pcl5",
+        source: "DSM-5 / National Center for PTSD",
+        met: true,
+        endorsementThreshold: 2,
+        rows: [
+          { key: "B", label: "Intrusions (Reviviscences)", count: 5, required: 1, met: true },
+          { key: "C", label: "Évitement", count: 2, required: 1, met: true },
+          { key: "D", label: "Altérations négatives des cognitions et de l'humeur", count: 7, required: 2, met: true },
+          { key: "E", label: "Altérations de l'éveil et de la réactivité (Hyper-éveil)", count: 4, required: 2, met: true },
+        ],
+      },
     },
     interpretation:
       "Présence éventuelle d'un trouble de stress post-traumatique",
@@ -435,6 +447,18 @@ export const MOCK_SESSIONS: Session[] = [
         { key: "cluster-d", label: "Cognitions et humeur (D)", value: 8, max: 28 },
         { key: "cluster-e", label: "Hyperéveil (E)", value: 6, max: 24 },
       ],
+      criteriaCheck: {
+        key: "dsm5-pcl5",
+        source: "DSM-5 / National Center for PTSD",
+        met: false,
+        endorsementThreshold: 2,
+        rows: [
+          { key: "B", label: "Intrusions (Reviviscences)", count: 2, required: 1, met: true },
+          { key: "C", label: "Évitement", count: 1, required: 1, met: true },
+          { key: "D", label: "Altérations négatives des cognitions et de l'humeur", count: 0, required: 2, met: false },
+          { key: "E", label: "Altérations de l'éveil et de la réactivité (Hyper-éveil)", count: 0, required: 2, met: false },
+        ],
+      },
     },
     interpretation: "Pas de trouble de stress post-traumatique",
     createdAt: daysAgo(50),
