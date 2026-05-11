@@ -29,7 +29,11 @@ import {
 import { Interfaces, Files } from "doodle-icons";
 import { SESSION_STATUS_CONFIG } from "@/lib/session-status";
 import { getSeverityPalette } from "@/lib/severity";
-import { ItemResponsesList, ScaleLegend, scaleLegendHasContent } from "@/components/passation/ItemResponsesList";
+import {
+  ItemResponsesList,
+  ScaleLegend,
+  scaleLegendHasContent,
+} from "@/components/passation/ItemResponsesList";
 import { AlertsBanner } from "@/components/passation/AlertsBanner";
 import { PatientCommentsBlock } from "@/components/passation/PatientCommentsBlock";
 import { PassationSkeleton } from "@/components/passation/PassationSkeleton";
@@ -419,15 +423,17 @@ export default function ResultsPage() {
                   </div>
                   {secondarySubscores.length > 0 && (
                     <>
-                      <button
-                        type="button"
+                      <Button
+                        variant="secondary"
+                        size="sm"
                         onClick={() => setShowDetailSubscores((v) => !v)}
-                        className="text-sm font-medium text-brand-orange hover:underline underline-offset-4"
+                        aria-expanded={showDetailSubscores}
+                        className="ml-3"
                       >
                         {showDetailSubscores
                           ? "Masquer le détail"
                           : "Voir le détail"}
-                      </button>
+                      </Button>
                       {showDetailSubscores && (
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-3 sm:gap-x-6 gap-y-3">
                           {secondarySubscores.map((s) => {
@@ -442,8 +448,7 @@ export default function ResultsPage() {
                               >
                                 <div className="flex items-baseline justify-between gap-2">
                                   <p className="text-sm font-medium truncate">
-                                    {SUBSCORE_LABEL_OVERRIDES[s.key] ??
-                                      s.label}
+                                    {SUBSCORE_LABEL_OVERRIDES[s.key] ?? s.label}
                                   </p>
                                   <span className="text-sm font-semibold tabular-nums shrink-0">
                                     {s.value}
@@ -495,14 +500,18 @@ export default function ResultsPage() {
           <div>
             <div className="flex flex-col sm:flex-row gap-4 mb-10">
               <div className="flex-1 min-w-0">
-                <h3 className="text-lg font-sans font-semibold mb-3">Consigne</h3>
+                <h3 className="text-lg font-sans font-semibold mb-3">
+                  Consigne
+                </h3>
                 <div className="bg-foreground/5 rounded-2xl p-4">
                   <ConsigneBlock scale={scale} />
                 </div>
               </div>
               {scaleLegendHasContent(scale) && (
                 <div className="sm:shrink-0">
-                  <h3 className="text-lg font-sans font-semibold mb-3">Modalités de réponse</h3>
+                  <h3 className="text-lg font-sans font-semibold mb-3">
+                    Modalités de réponse
+                  </h3>
                   <div className="bg-foreground/5 rounded-2xl p-4">
                     <ScaleLegend scale={scale} />
                   </div>
