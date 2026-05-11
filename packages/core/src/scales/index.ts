@@ -207,9 +207,9 @@ export const scales: Scale[] = [
       ],
       avoidance: [
         { value: 0, label: "Jamais" },
-        { value: 1, label: "Occasionnel (0-33%)" },
-        { value: 2, label: "Fréquent (34-66%)" },
-        { value: 3, label: "Habituel (67-100%)" },
+        { value: 1, label: "Occasionnel" },
+        { value: 2, label: "Fréquent" },
+        { value: 3, label: "Habituel" },
       ],
     },
     scoring: {
