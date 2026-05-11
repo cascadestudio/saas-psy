@@ -129,6 +129,14 @@ function groupRows(scale: Scale, rows: Row[]): Section[] {
   return [{ rows }];
 }
 
+export function scaleLegendHasContent(scale: Scale): boolean {
+  if (scale.formType === "options") return false;
+  if (scale.formType === "dual-scale") {
+    return !!(scale.answerScales?.anxiety || scale.answerScales?.avoidance);
+  }
+  return !!(scale.answerScales?.intensity);
+}
+
 export function ScaleLegend({ scale }: { scale: Scale }) {
   if (scale.formType === "options") return null;
 

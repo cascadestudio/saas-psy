@@ -29,7 +29,7 @@ import {
 import { Interfaces, Files } from "doodle-icons";
 import { SESSION_STATUS_CONFIG } from "@/lib/session-status";
 import { getSeverityPalette } from "@/lib/severity";
-import { ItemResponsesList, ScaleLegend } from "@/components/passation/ItemResponsesList";
+import { ItemResponsesList, ScaleLegend, scaleLegendHasContent } from "@/components/passation/ItemResponsesList";
 import { AlertsBanner } from "@/components/passation/AlertsBanner";
 import { PatientCommentsBlock } from "@/components/passation/PatientCommentsBlock";
 import { PassationSkeleton } from "@/components/passation/PassationSkeleton";
@@ -500,12 +500,14 @@ export default function ResultsPage() {
                   <ConsigneBlock scale={scale} />
                 </div>
               </div>
-              <div className="sm:shrink-0">
-                <h3 className="text-lg font-sans font-semibold mb-3">Modalités de réponse</h3>
-                <div className="bg-foreground/5 rounded-2xl p-4">
-                  <ScaleLegend scale={scale} />
+              {scaleLegendHasContent(scale) && (
+                <div className="sm:shrink-0">
+                  <h3 className="text-lg font-sans font-semibold mb-3">Modalités de réponse</h3>
+                  <div className="bg-foreground/5 rounded-2xl p-4">
+                    <ScaleLegend scale={scale} />
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
             <h2 className="text-lg font-sans font-semibold mb-3">
               Réponses du patient
