@@ -18,7 +18,7 @@ export function ScaleCard({ scale }: ScaleCardProps) {
   return (
     <Link
       href={`/echelles/${scale.id}`}
-      className="flex overflow-hidden hover:opacity-90 transition-opacity min-h-[100px] sm:min-h-[120px]"
+      className="flex overflow-hidden hover:opacity-90 transition-opacity h-[100px] sm:h-[120px]"
       style={{ borderRadius: 20 }}
     >
       <div

@@ -120,6 +120,12 @@ export function SendScaleSheet({
   const selectedPatient = patients.find((p) => p.id === selectedPatientId);
   const selectedScales = scales.filter((s) => selectedScaleIds.includes(s.id));
 
+  // Pin scales pre-selected on open (e.g. coming from a scale detail page) to the top
+  const orderedScales = [
+    ...scales.filter((s) => defaultScaleIds?.includes(s.id)),
+    ...scales.filter((s) => !defaultScaleIds?.includes(s.id)),
+  ];
+
   const filteredPatients = patients.filter((patient) => {
     const query = patientSearch.toLowerCase();
     const fullName = `${patient.firstName} ${patient.lastName}`.toLowerCase();
@@ -324,7 +330,7 @@ export function SendScaleSheet({
                 {selectedScaleIds.length} échelle(s) sélectionnée(s)
               </p>
               <div className="grid grid-cols-1 gap-3">
-                {scales.map((scale) => {
+                {orderedScales.map((scale) => {
                   const isSelected = selectedScaleIds.includes(scale.id);
                   return (
                     <div
