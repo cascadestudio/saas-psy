@@ -35,7 +35,10 @@ export function PatientRow({
       <div className="flex items-center gap-2">
         <p className="font-medium">{patient.name}</p>
         {patient.hasActive && (
-          <Badge variant="secondary" className="text-xs">
+          <Badge
+            variant="secondary"
+            className="text-xs bg-blue-100 text-blue-700"
+          >
             Passation en cours
           </Badge>
         )}
