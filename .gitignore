@@ -47,3 +47,4 @@ apps/api/prisma/migrations/*.sql
 
 # Turbo
 .turbo
+tmp/
