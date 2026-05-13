@@ -26,7 +26,7 @@ import {
   getMockSessionsByPatient,
   isMockId,
 } from "@/lib/mock-data";
-import { Interfaces, Files } from "doodle-icons";
+import { Interfaces, Files, Arrow } from "doodle-icons";
 import { SESSION_STATUS_CONFIG } from "@/lib/session-status";
 import { getSeverityPalette } from "@/lib/severity";
 import {
@@ -285,26 +285,19 @@ export default function ResultsPage() {
     </div>
   );
 
+  const backHref = patient ? `/patients/${patient.id}` : "/patients";
+  const backLabel = patient
+    ? `${patient.firstName} ${patient.lastName}`
+    : "Mes patient·es";
+
   const Breadcrumb = (
-    <nav className="flex items-center gap-1.5 text-sm text-muted-foreground mb-4">
-      <Link
-        href="/patients"
-        className="hover:text-foreground transition-colors"
-      >
-        Patients
-      </Link>
-      {patient && (
-        <>
-          <span className="text-muted-foreground/50">/</span>
-          <Link
-            href={`/patients/${patient.id}`}
-            className="hover:text-foreground transition-colors"
-          >
-            {patient.firstName} {patient.lastName}
-          </Link>
-        </>
-      )}
-    </nav>
+    <Link
+      href={backHref}
+      className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors mb-4"
+    >
+      <Arrow.ArrowLeft className="h-4 w-4" />
+      {backLabel}
+    </Link>
   );
 
   // --- Pending / non-completed states ---

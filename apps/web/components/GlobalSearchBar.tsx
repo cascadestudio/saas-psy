@@ -14,7 +14,7 @@ import {
 type Category = "patients" | "echelles" | "passations";
 
 const CATEGORIES: { key: Category; label: string }[] = [
-  { key: "patients", label: "Patients" },
+  { key: "patients", label: "Mes patients" },
   { key: "echelles", label: "Échelles" },
   { key: "passations", label: "Passations" },
 ];

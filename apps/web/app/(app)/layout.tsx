@@ -20,7 +20,7 @@ import { cn } from "@/lib/utils";
 
 const navigation = [
   { name: "Tableau de bord", href: "/dashboard", icon: Interfaces.Home },
-  { name: "Patients", href: "/patients", icon: Interfaces.User },
+  { name: "Mes patients", href: "/patients", icon: Interfaces.User },
   { name: "Échelles", href: "/echelles", icon: Files.FileText },
 ];
 

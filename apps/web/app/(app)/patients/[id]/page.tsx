@@ -19,7 +19,7 @@ import {
   type Patient,
   type Session,
 } from "@/lib/api-client";
-import { Interfaces, Food } from "doodle-icons";
+import { Interfaces, Food, Arrow } from "doodle-icons";
 import { ArchivePatientDialog } from "@/components/ArchivePatientDialog";
 import { RestorePatientButton } from "@/components/RestorePatientButton";
 import { EditPatientSheet } from "@/components/EditPatientSheet";
@@ -136,6 +136,15 @@ export default function PatientDetailPage() {
 
   return (
     <div className="container mx-auto px-4 py-6">
+      {/* Retour */}
+      <Link
+        href="/patients"
+        className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors mb-4"
+      >
+        <Arrow.ArrowLeft className="h-4 w-4" />
+        Mes patient·es
+      </Link>
+
       {/* Header */}
       <div className="flex items-center gap-3 mb-1">
         <h1 className="font-gelica font-normal text-3xl">
