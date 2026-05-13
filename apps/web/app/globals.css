@@ -109,6 +109,16 @@
     background-color: #EDE8DF;
   }
 
+  ::placeholder {
+    color: hsl(30 6% 45%);
+    opacity: 1;
+  }
+
+  .dark ::placeholder {
+    color: hsl(30 6% 55%);
+    opacity: 1;
+  }
+
   /* All headings use Rethink Sans by default. Opt in to Gelica via .font-gelica / .font-heading. */
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-rethink), sans-serif;
