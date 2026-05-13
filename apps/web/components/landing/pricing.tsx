@@ -16,7 +16,7 @@ export function Pricing() {
 
   const plans = [
     {
-      name: "Gratuit",
+      name: "Gratuit pour un temps limité",
       price: "0€",
       period: "",
       note: "",

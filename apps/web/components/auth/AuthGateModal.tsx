@@ -51,7 +51,7 @@ export function AuthGateModal() {
             </DialogTitle>
             <DialogDescription className="text-sm">
               {mode === "signup"
-                ? "Gratuit. Aucune carte bancaire requise."
+                ? "Gratuit pour un temps limité. Aucune carte bancaire requise."
                 : "Connectez-vous pour reprendre votre travail."}
             </DialogDescription>
           </DialogHeader>
@@ -99,7 +99,7 @@ export function AuthGateModal() {
           <ul className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-[11px] text-muted-foreground">
             <li className="flex items-center gap-1.5">
               <Interfaces.Gift className="h-3.5 w-3.5" />
-              Gratuit
+              Gratuit pour un temps limité
             </li>
             <li className="flex items-center gap-1.5">
               <Interfaces.Shield className="h-3.5 w-3.5" />
