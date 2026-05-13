@@ -51,7 +51,6 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
 
         {/* Navigation */}
         <nav className="flex-1 space-y-1 px-4 py-4">
-
           {navigation.map((item) => {
             const Icon = item.icon;
             const isActive =
@@ -114,6 +113,18 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
 
       {/* Main content */}
       <main className="flex-1 min-w-0 pb-16 md:pb-0">
+        {/* Beta banner */}
+        <div className="bg-brand-orange text-white text-[12px] px-4 py-1 text-center print:hidden">
+          Vous utilisez Melya en avant-première, n’hésitez pas à{" "}
+          <a
+            href="mailto:clement@melya.app?subject=Feedback%20beta%20Melya"
+            className="underline underline-offset-2 hover:opacity-90"
+          >
+            nous donner vos retours
+          </a>
+          , ils sont précieux
+        </div>
+
         {/* Mobile header */}
         <div className="flex h-14 items-center justify-between border-b border-border bg-surface-brand-bg px-4 md:hidden print:hidden">
           <Link href="/dashboard" className="flex items-center">
