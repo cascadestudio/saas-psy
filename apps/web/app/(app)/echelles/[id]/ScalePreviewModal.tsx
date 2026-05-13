@@ -58,7 +58,7 @@ export function ScalePreviewModal({ scale }: ScalePreviewModalProps) {
         <DialogHeader>
           <DialogTitle>Aperçu de l'échelle</DialogTitle>
           <DialogDescription>
-            Voici un aperçu de l'échelle telle qu'elle sera présentée au patient.
+            Voici un aperçu de l'échelle telle qu'elle sera présentée à patient·e.
           </DialogDescription>
         </DialogHeader>
 
@@ -72,7 +72,7 @@ export function ScalePreviewModal({ scale }: ScalePreviewModalProps) {
           </DialogClose>
           <Button onClick={handleSendClick}>
             <Interfaces.Send />
-            Envoyer au patient
+            Envoyer à patient·e
           </Button>
         </div>
       </DialogContent>

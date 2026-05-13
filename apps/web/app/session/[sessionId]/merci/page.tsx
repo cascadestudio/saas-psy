@@ -19,7 +19,7 @@ function ThankYou() {
             Merci pour vos réponses
           </h1>
           <p className="text-gray-600 mb-6">
-            Votre questionnaire a bien été envoyé à votre praticien. Vous pouvez
+            Votre questionnaire a bien été envoyé à votre praticien·ne. Vous pouvez
             fermer cette page.
           </p>
           <p className="text-sm text-gray-500">

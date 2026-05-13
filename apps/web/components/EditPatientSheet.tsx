@@ -92,9 +92,9 @@ export function EditPatientSheet({
         onCloseAutoFocus={(e) => e.preventDefault()}
       >
         <SheetHeader className="p-6 bg-surface-brand-bg">
-          <SheetTitle className="font-body">Modifier le patient</SheetTitle>
+          <SheetTitle className="font-body">Modifier patient·e</SheetTitle>
           <SheetDescription>
-            Modifiez les informations du patient.
+            Modifiez les informations de patient·e.
           </SheetDescription>
         </SheetHeader>
 
@@ -149,7 +149,7 @@ export function EditPatientSheet({
               <Textarea
                 id="edit-notes"
                 name="notes"
-                placeholder="Notes confidentielles sur le patient..."
+                placeholder="Notes confidentielles..."
                 rows={6}
                 defaultValue={patient.notes || ""}
               />

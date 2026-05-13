@@ -26,8 +26,8 @@ export function PremiumGateModal() {
           </DialogTitle>
           <DialogDescription>
             {isPatientLimit
-              ? `Vous avez atteint la limite de ${maxCount} patients du plan gratuit`
-              : `${featureName} est une fonctionnalité réservée aux abonnés Premium`}
+              ? `Vous avez atteint la limite de ${maxCount} patient·e·s du plan gratuit`
+              : `${featureName} est une fonctionnalité réservée aux abonné·e·s Premium`}
           </DialogDescription>
         </DialogHeader>
 
@@ -53,7 +53,7 @@ export function PremiumGateModal() {
               </li>
               <li className="flex items-center gap-2 text-sm">
                 <Interfaces.Tick className="h-4 w-4 text-primary" />
-                Archivage des patients
+                Archivage des patient·e·s
               </li>
               <li className="flex items-center gap-2 text-sm">
                 <Interfaces.Tick className="h-4 w-4 text-primary" />
@@ -84,7 +84,7 @@ export function PremiumGateModal() {
         {isPatientLimit && (
           <div className="border-t pt-4">
             <p className="text-xs text-muted-foreground text-center">
-              Vous pouvez aussi libérer de la place en supprimant des patients existants.
+              Vous pouvez aussi libérer de la place en supprimant des patient·e·s existant·e·s.
             </p>
           </div>
         )}

@@ -41,7 +41,7 @@ interface PatientFormData {
 export function CreatePatientSheet({
   onPatientCreated,
   buttonSize = "default",
-  buttonText = "Ajouter un patient",
+  buttonText = "Ajouter patient·e",
   buttonVariant = "default",
   buttonClassName,
   iconOnly = false,
@@ -86,7 +86,7 @@ export function CreatePatientSheet({
       onPatientCreated?.(patient.id);
 
       toast.success("Patient créé avec succès", {
-        description: `${patient.firstName} ${patient.lastName} a été ajouté à votre liste`,
+        description: `${patient.firstName} ${patient.lastName} a été ajouté·e à votre liste`,
       });
     } catch (error) {
       console.error("Error creating patient:", error);
@@ -143,7 +143,7 @@ export function CreatePatientSheet({
           onCloseAutoFocus={(e) => e.preventDefault()}
         >
           <SheetHeader className="p-6 bg-surface-brand-bg">
-            <SheetTitle className="font-body">Ajouter un nouveau patient</SheetTitle>
+            <SheetTitle className="font-body">Ajouter patient·e</SheetTitle>
             <SheetDescription>
               Seul l'email est obligatoire. Les autres informations peuvent être ajoutées ultérieurement.
             </SheetDescription>
@@ -206,7 +206,7 @@ export function CreatePatientSheet({
                 <Textarea
                   id="notes"
                   name="notes"
-                  placeholder="Notes confidentielles sur le patient..."
+                  placeholder="Notes confidentielles..."
                   rows={6}
                   defaultValue={pendingFormDataRef.current?.notes}
                 />
@@ -215,7 +215,7 @@ export function CreatePatientSheet({
 
             <div className="p-6 bg-background">
               <Button type="submit" disabled={isSubmitting} className="w-full">
-                {isSubmitting ? "Création..." : "Créer le patient"}
+                {isSubmitting ? "Création..." : "Créer patient·e"}
               </Button>
             </div>
           </form>

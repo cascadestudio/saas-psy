@@ -35,7 +35,7 @@ export function Pricing() {
       price: proPrice,
       period: proPeriod,
       note: proNote,
-      description: "Pour les praticiens qui utilisent les échelles régulièrement",
+      description: "Pour les praticien·ne·s qui utilisent les échelles régulièrement",
       features: [
         "Patients illimités",
         "Passations illimitées",

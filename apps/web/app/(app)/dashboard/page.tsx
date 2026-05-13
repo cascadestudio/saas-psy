@@ -139,7 +139,7 @@ export default function DashboardPage() {
         <div className="mb-6 rounded-lg bg-surface-brand-bg px-4 py-3 flex items-center justify-between gap-4">
           <p className="text-sm text-brand-orange">
             Vous explorez Melya avec des données d'exemple. Créez un compte pour
-            ajouter vos vrais patients.
+            ajouter vos vrais patient·e·s.
           </p>
           <Button onClick={() => openAuthGate()}>
             Se connecter
@@ -240,7 +240,7 @@ export default function DashboardPage() {
             href="/patients"
             className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
           >
-            Tous mes patients
+            Tous mes patient·e·s
             <Arrow.ArrowRight className="h-4 w-4" />
           </Link>
         </div>

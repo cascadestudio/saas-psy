@@ -131,8 +131,8 @@ export default function PatientsPage() {
               {filter === "active"
                 ? "Aucune passation en cours"
                 : filter === "archived"
-                  ? "Aucun patient archivé"
-                  : "Aucun patient dans votre liste"}
+                  ? "Aucun·e patient·e archivé·e"
+                  : "Aucun·e patient·e dans votre liste"}
             </p>
           ) : (
             <div className="rounded-lg overflow-hidden">

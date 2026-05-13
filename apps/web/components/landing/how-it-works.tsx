@@ -4,13 +4,13 @@ import { useScrollAnimation } from "./use-scroll-animation";
 const steps = [
   {
     number: "1",
-    title: "Choisissez votre patient et vos échelles",
+    title: "Choisissez patient·e et échelles",
     description:
-      "Sélectionnez un patient existant ou créez-en un en quelques secondes, puis choisissez une ou plusieurs échelles à lui envoyer.",
+      "Sélectionnez patient·e existant·e ou créez-en un·e en quelques secondes, puis choisissez une ou plusieurs échelles à envoyer.",
   },
   {
     number: "2",
-    title: "Le patient répond en ligne",
+    title: "Patient·e répond en ligne",
     description:
       "Votre patient·e reçoit un lien par email, remplit le questionnaire depuis son téléphone ou ordinateur, sans créer de compte.",
   },

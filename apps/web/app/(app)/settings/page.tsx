@@ -92,7 +92,7 @@ export default function SettingsPage() {
 
       {!user && (
         <p className="mb-6 text-sm text-muted-foreground">
-          Vous n'êtes pas connecté. Les valeurs ci-dessous sont des exemples.
+          Vous n'êtes pas connecté·e. Les valeurs ci-dessous sont des exemples.
           Créez un compte pour personnaliser votre profil.
         </p>
       )}
@@ -157,7 +157,7 @@ export default function SettingsPage() {
         <section className="mt-10 pt-6 border-t space-y-3">
           <h2 className="font-body text-lg font-medium">Zone de danger</h2>
           <p className="text-sm text-muted-foreground">
-            La suppression du compte efface définitivement vos patients,
+            La suppression du compte efface définitivement vos patient·e·s,
             sessions et données associées. Cette action est irréversible.
           </p>
           <Button
@@ -175,8 +175,8 @@ export default function SettingsPage() {
           <DialogHeader>
             <DialogTitle>Supprimer définitivement le compte ?</DialogTitle>
             <DialogDescription>
-              Tous vos patients, sessions et données associées seront
-              supprimés. Cette action est irréversible.
+              Tous vos patient·e·s, sessions et données associées seront
+              supprimé·e·s. Cette action est irréversible.
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>

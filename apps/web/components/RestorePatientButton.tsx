@@ -27,7 +27,7 @@ export function RestorePatientButton({
   const handleRestore = async () => {
     // Check premium status
     if (!user?.isPremium) {
-      openPremiumFeatureGate("La restauration des patients");
+      openPremiumFeatureGate("La restauration des patient·e·s");
       return;
     }
 

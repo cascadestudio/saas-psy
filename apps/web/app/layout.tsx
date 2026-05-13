@@ -25,11 +25,11 @@ export const metadata = {
   metadataBase: new URL(defaultUrl),
   title: "Melya",
   description:
-    "Plateforme d'échelles psychométriques pour psychologues. Envoi, passation en ligne, scoring automatique et suivi longitudinal.",
+    "Plateforme d'échelles psychométriques pour psychologue·s. Envoi, passation en ligne, scoring automatique et suivi longitudinal.",
   openGraph: {
     title: "Melya",
     description:
-      "Plateforme d'échelles psychométriques pour psychologues. Envoi, passation en ligne, scoring automatique et suivi longitudinal.",
+      "Plateforme d'échelles psychométriques pour psychologue·s. Envoi, passation en ligne, scoring automatique et suivi longitudinal.",
     url: "https://www.melya.app",
     siteName: "Melya",
     locale: "fr_FR",
@@ -39,7 +39,7 @@ export const metadata = {
     card: "summary_large_image",
     title: "Melya",
     description:
-      "Plateforme d'échelles psychométriques pour psychologues. Envoi, passation en ligne, scoring automatique et suivi longitudinal.",
+      "Plateforme d'échelles psychométriques pour psychologue·s. Envoi, passation en ligne, scoring automatique et suivi longitudinal.",
   },
 };
 

@@ -12,7 +12,7 @@ const faqItems = [
   {
     question: "Quelles échelles psychologiques sont disponibles ?",
     answer:
-      "Melya propose 6 échelles parmi les plus utilisées en TCC : PHQ-9 (dépression), GAD-7 (anxiété généralisée), RSES (estime de soi), LSAS (anxiété sociale), PCL-5 (trauma) et Y-BOCS (TOC). De nouvelles échelles sont ajoutées régulièrement en fonction des besoins des psychologues.",
+      "Melya propose 6 échelles parmi les plus utilisées en TCC : PHQ-9 (dépression), GAD-7 (anxiété généralisée), RSES (estime de soi), LSAS (anxiété sociale), PCL-5 (trauma) et Y-BOCS (TOC). De nouvelles échelles sont ajoutées régulièrement en fonction des besoins des psychologue·s.",
   },
   {
     question: "Mes données sont-elles vraiment sécurisées ?",
@@ -20,9 +20,9 @@ const faqItems = [
       "Oui. Melya est hébergé sur un serveur certifié HDS (Hébergeur de Données de Santé), conforme au RGPD. Toutes les données sont chiffrées et stockées en France. Seul·e vous, en tant que praticien·ne, pouvez accéder aux données de vos patients. Aucun·e autre praticien·ne utilisant Melya n'y a accès, et même l'équipe Melya n'a pas accès à vos données cliniques grâce au chiffrement. Vous restez propriétaire de vos données à tout moment. Pour toute question relative à la sécurité : clement@melya.app",
   },
   {
-    question: "Comment mes patients reçoivent-ils les questionnaires ?",
+    question: "Comment mes patient·e·s reçoivent les questionnaires ?",
     answer:
-      "Vos patients reçoivent un lien par email. Ils répondent directement depuis leur smartphone, tablette ou ordinateur, sans créer de compte.",
+      "Vos patient·e·s reçoivent un lien par email. Il·elle·s répondent directement depuis leur smartphone, tablette ou ordinateur, sans créer de compte.",
   },
   {
     question: "Respectez-vous le droit d'auteur des échelles ?",

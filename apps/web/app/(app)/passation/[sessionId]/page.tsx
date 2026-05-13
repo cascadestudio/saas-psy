@@ -318,10 +318,10 @@ export default function ResultsPage() {
         <div className="bg-muted-foreground/5 rounded-2xl p-8 text-center space-y-4">
           <p className="text-muted-foreground">
             {session.status === "EXPIRED"
-              ? "Cette passation a expiré. Le patient ne peut plus y répondre."
+              ? "Cette passation a expiré. patient·e ne peut plus y répondre."
               : session.status === "CANCELLED"
                 ? "Cette passation a été annulée."
-                : "Les résultats seront disponibles une fois la passation complétée par le patient."}
+                : "Les résultats seront disponibles une fois la passation complétée par patient·e."}
           </p>
           {(session.status === "SENT" || session.status === "STARTED") && (
             <Button variant="secondary" size="sm" onClick={handleCopyLink}>
@@ -519,7 +519,7 @@ export default function ResultsPage() {
               )}
             </div>
             <h2 className="text-lg font-sans font-semibold mb-3">
-              Réponses du patient
+              Réponses de patient·e
             </h2>
             <ItemResponsesList
               scale={scale}

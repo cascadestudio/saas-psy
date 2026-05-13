@@ -16,7 +16,7 @@ export function FinalCTA() {
           Prêt·e à simplifier votre pratique clinique ?
         </h2>
         <p className="text-lg text-muted-foreground font-body mb-8 max-w-xl mx-auto">
-          Rejoignez les psychologues qui utilisent Melya pour automatiser leurs
+          Rejoignez les psychologue·s qui utilisent Melya pour automatiser leurs
           cotations.
         </p>
         <div className="relative inline-flex flex-col items-center">

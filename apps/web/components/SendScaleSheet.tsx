@@ -27,7 +27,7 @@ import { buildBatchEmailHtml } from "@melya/core";
 type Step = "patient" | "scales" | "message" | "confirm";
 
 const STEPS: { key: Step; label: string }[] = [
-  { key: "patient", label: "Patient" },
+  { key: "patient", label: "Patient·e" },
   { key: "scales", label: "Échelles" },
   { key: "message", label: "Message" },
   { key: "confirm", label: "Confirmation" },
@@ -144,7 +144,7 @@ export function SendScaleSheet({
 
   const handleSend = async () => {
     if (!selectedPatient || selectedScaleIds.length === 0) {
-      toast.error("Veuillez sélectionner un patient et au moins une échelle");
+      toast.error("Veuillez sélectionner patient·e et au moins une échelle");
       return;
     }
 
@@ -202,7 +202,7 @@ export function SendScaleSheet({
             <SheetDescription>
               {selectedPatient
                 ? `Pour ${selectedPatient.firstName} ${selectedPatient.lastName}`
-                : "Sélectionnez un patient"}
+                : "Sélectionnez patient·e"}
             </SheetDescription>
           </div>
 
@@ -263,7 +263,7 @@ export function SendScaleSheet({
                 <div className="text-center py-8">
                   <Interfaces.User className="h-12 w-12 mx-auto mb-4 text-muted-foreground" />
                   <p className="text-sm text-muted-foreground mb-4">
-                    Aucun patient dans votre liste
+                    Aucun·e patient·e dans votre liste
                   </p>
                   <CreatePatientSheet
                     onPatientCreated={handlePatientCreated}
@@ -273,14 +273,13 @@ export function SendScaleSheet({
               ) : (
                 <>
                   <p className="text-sm text-muted-foreground">
-                    Sélectionnez un patient dans la liste ou créez-en un
-                    nouveau.
+                    Sélectionnez patient·e dans la liste ou créez-en un·e.
                   </p>
                   <div className="flex items-center gap-2">
                     <div className="relative flex-1">
                       <Interfaces.Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                       <Input
-                        placeholder="Rechercher un patient..."
+                        placeholder="Rechercher patient·e..."
                         value={patientSearch}
                         onChange={(e) => setPatientSearch(e.target.value)}
                         className="pl-10 h-11 rounded-full"
@@ -288,14 +287,14 @@ export function SendScaleSheet({
                     </div>
                     <CreatePatientSheet
                       onPatientCreated={handlePatientCreated}
-                      buttonText="Nouveau patient"
+                      buttonText="Ajouter patient·e"
                       currentPatientCount={patients.length}
                     />
                   </div>
                   <div className="grid grid-cols-1 gap-2 max-h-[400px] overflow-y-auto">
                     {filteredPatients.length === 0 ? (
                       <p className="text-sm text-muted-foreground text-center py-8">
-                        Aucun patient trouvé
+                        Aucun·e patient·e trouvé·e
                       </p>
                     ) : (
                       filteredPatients.map((patient) => (
@@ -398,7 +397,7 @@ export function SendScaleSheet({
                   onChange={(e) => setPersonalMessage(e.target.value)}
                 />
                 <p className="text-xs text-muted-foreground">
-                  Ce message sera inclus dans l'email envoyé au patient
+                  Ce message sera inclus dans l'email envoyé à patient·e
                 </p>
               </div>
             </div>

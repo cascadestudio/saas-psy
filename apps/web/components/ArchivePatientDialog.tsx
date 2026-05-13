@@ -33,7 +33,7 @@ export function ArchivePatientDialog({
   const handleOpenChange = (newOpen: boolean) => {
     if (newOpen && !user?.isPremium) {
       // User is not premium, show premium gate
-      openPremiumFeatureGate("L'archivage des patients");
+      openPremiumFeatureGate("L'archivage des patient·e·s");
       return;
     }
     setOpen(newOpen);
@@ -64,7 +64,7 @@ export function ArchivePatientDialog({
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Archiver ce patient ?</DialogTitle>
+            <DialogTitle>Archiver patient·e ?</DialogTitle>
             <DialogDescription>
               <span className="font-medium text-foreground">
                 {patient.firstName} {patient.lastName}
