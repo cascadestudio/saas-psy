@@ -1,5 +1,17 @@
 "use client";
 
+import { Info } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+
+const PERSISTENT_CONSIGNE_MODAL_THRESHOLD = 200;
+
 interface AnswerOption {
   value: number;
   label: string;
@@ -26,16 +38,53 @@ export default function SingleScaleQuestion({
   onSelect,
   onSkip,
 }: SingleScaleQuestionProps) {
+  const hasLongConsigne =
+    !!persistentConsigne &&
+    persistentConsigne.length > PERSISTENT_CONSIGNE_MODAL_THRESHOLD;
+
+  const consigneTrigger = hasLongConsigne ? (
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button
+          type="button"
+          variant="secondary"
+          size="sm"
+          className="[&_svg]:fill-none"
+        >
+          <Info className="h-4 w-4" />
+          Voir la consigne
+        </Button>
+      </DialogTrigger>
+      <DialogContent className="max-w-lg">
+        <DialogHeader>
+          <DialogTitle>Consigne</DialogTitle>
+        </DialogHeader>
+        <div className="flex flex-col gap-3 text-base text-gray-700 leading-relaxed">
+          {persistentConsigne!.split(/\n\n+/).map((para, i) => (
+            <p key={i}>{para}</p>
+          ))}
+        </div>
+      </DialogContent>
+    </Dialog>
+  ) : null;
+
   return (
     <div className="flex flex-col gap-6">
-      {persistentConsigne && (
+      {persistentConsigne && !hasLongConsigne && (
         <p className="text-gray-700 leading-relaxed">{persistentConsigne}</p>
       )}
       <div className="flex flex-col gap-2">
-        {subLabel && (
-          <p className="text-sm font-medium uppercase tracking-wide text-brand-orange">
-            {subLabel}
-          </p>
+        {(subLabel || consigneTrigger) && (
+          <div className="flex items-center justify-between gap-3">
+            {subLabel ? (
+              <p className="text-sm font-medium uppercase tracking-wide text-brand-orange">
+                {subLabel}
+              </p>
+            ) : (
+              <span />
+            )}
+            {consigneTrigger}
+          </div>
         )}
         {questionPrompt ? (
           <>
