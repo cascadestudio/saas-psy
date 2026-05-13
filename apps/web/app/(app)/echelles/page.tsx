@@ -1,97 +1,44 @@
 "use client";
 
-import { useState, useEffect, useMemo } from "react";
+import { useState, useMemo } from "react";
 import { Input } from "@/components/ui/input";
-import { Badge } from "@/components/ui/badge";
 import { ScaleCard } from "@/components/ScaleCard";
 import { scales } from "@/app/scalesData";
 import { Interfaces } from "doodle-icons";
-import { useUser } from "@/app/context/UserContext";
-import { favoritesApi } from "@/lib/api-client";
 
 export default function EchellesPage() {
-  const { user, isLoading } = useUser();
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-  const [favorites, setFavorites] = useState<string[]>([]);
-  const [favoritesLoading, setFavoritesLoading] = useState(true);
 
-  // Extract unique categories from scales (excluding "Test")
   const categories = useMemo(() => {
     const uniqueCategories = Array.from(new Set(scales.map((s) => s.category)));
-    return uniqueCategories.filter((c) => c !== "Test").sort();
+    return uniqueCategories.sort();
   }, []);
 
-  // Load favorites from API (only for authenticated users)
-  useEffect(() => {
-    const loadFavorites = async () => {
-      if (!user) {
-        setFavoritesLoading(false);
-        return;
-      }
-      setFavoritesLoading(true);
-      try {
-        const { favorites: data } = await favoritesApi.getFavorites();
-        setFavorites(data);
-      } catch (error) {
-        console.error("Error loading favorites:", error);
-        setFavorites([]);
-      } finally {
-        setFavoritesLoading(false);
-      }
-    };
-
-    loadFavorites();
-  }, [user]);
-
-  if (isLoading) {
+  const filteredScales = scales.filter((s) => {
+    if (selectedCategory && s.category !== selectedCategory) {
+      return false;
+    }
+    const query = searchQuery.toLowerCase();
+    if (!query) return true;
     return (
-      <div className="flex-1 w-full flex items-center justify-center">
-        <p>Chargement...</p>
-      </div>
+      s.title.toLowerCase().includes(query) ||
+      s.description.toLowerCase().includes(query) ||
+      s.category.toLowerCase().includes(query)
     );
-  }
-
-  // Filtrer les échelles par catégorie et par recherche
-  const filteredScales = scales
-    .filter((s) => {
-      // Category filter
-      if (selectedCategory && s.category !== selectedCategory) {
-        return false;
-      }
-      // Search filter
-      const query = searchQuery.toLowerCase();
-      if (!query) return true;
-      return (
-        s.title.toLowerCase().includes(query) ||
-        s.description.toLowerCase().includes(query) ||
-        s.category.toLowerCase().includes(query)
-      );
-    })
-    // Trier pour afficher les favoris en premier
-    .sort((a, b) => {
-      const aIsFavorite = favorites.includes(a.id);
-      const bIsFavorite = favorites.includes(b.id);
-
-      if (aIsFavorite && !bIsFavorite) return -1;
-      if (!aIsFavorite && bIsFavorite) return 1;
-      return 0;
-    });
+  });
 
   return (
     <div className="container mx-auto px-4 py-6">
       <div className="mb-6">
-        <h1 className="font-bold text-3xl mb-2">Échelles psychométriques</h1>
-        <p className="text-muted-foreground">
-          Parcourez notre catalogue d'échelles et questionnaires validés scientifiquement
-        </p>
+        <h1 className="font-gelica font-normal text-3xl">Échelles psychométriques</h1>
       </div>
 
       <div className="mb-4">
         <div className="relative">
           <Interfaces.Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
           <Input
-            placeholder="Rechercher une échelle par nom..."
+            placeholder="Rechercher une échelle..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="pl-10"
@@ -100,42 +47,35 @@ export default function EchellesPage() {
       </div>
 
       <div className="mb-6 flex flex-wrap gap-2">
-        <Badge
-          variant={selectedCategory === null ? "default" : "outline"}
-          className="cursor-pointer hover:bg-primary/90 transition-colors"
+        <button
+          className={`px-3 py-1 text-sm rounded-full transition-colors ${selectedCategory === null ? "bg-foreground text-background" : "bg-muted text-muted-foreground"}`}
           onClick={() => setSelectedCategory(null)}
         >
           Toutes
-        </Badge>
+        </button>
         {categories.map((category) => (
-          <Badge
+          <button
             key={category}
-            variant={selectedCategory === category ? "default" : "outline"}
-            className="cursor-pointer hover:bg-primary/90 transition-colors"
+            className={`px-3 py-1 text-sm rounded-full transition-colors ${selectedCategory === category ? "bg-foreground text-background" : "bg-muted text-muted-foreground"}`}
             onClick={() => setSelectedCategory(category)}
           >
             {category}
-          </Badge>
+          </button>
         ))}
       </div>
 
       {filteredScales.length === 0 ? (
         <div className="text-center py-12">
-          <p className="text-muted-foreground">
+          <p className="text-sm text-muted-foreground">
             Aucune échelle trouvée
             {searchQuery && ` pour "${searchQuery}"`}
             {selectedCategory && ` dans la catégorie "${selectedCategory}"`}
           </p>
         </div>
       ) : (
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
           {filteredScales.map((scale) => (
-            <ScaleCard
-              key={scale.id}
-              scale={scale}
-              isLoadingFavorites={favoritesLoading}
-              isFavorite={favorites.includes(scale.id)}
-            />
+            <ScaleCard key={scale.id} scale={scale} />
           ))}
         </div>
       )}

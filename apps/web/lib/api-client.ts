@@ -129,22 +129,29 @@ export const authApi = {
 };
 
 /**
- * Profiles API methods
+ * Users API methods
  */
-export const profilesApi = {
-  getProfile: async () => {
-    return apiRequest<any>("/profiles/me");
+export const usersApi = {
+  getMe: async () => {
+    return apiRequest<any>("/users/me");
   },
 
-  updateProfile: async (data: {
+  update: async (data: {
     firstName?: string;
     lastName?: string;
     email?: string;
   }) => {
-    return apiRequest<any>("/profiles/me", {
-      method: "PUT",
+    return apiRequest<any>("/users/me", {
+      method: "PATCH",
       body: JSON.stringify(data),
     });
+  },
+
+  delete: async () => {
+    return apiRequest<{ message: string; deletedData: { patients: number; sessions: number } }>(
+      "/users/me",
+      { method: "DELETE" },
+    );
   },
 };
 
@@ -272,6 +279,12 @@ export const sessionsApi = {
   getStats: async () => {
     return apiRequest<SessionStats>("/sessions/stats");
   },
+
+  resendEmail: async (id: string) => {
+    return apiRequest<{ success: boolean }>(`/sessions/${id}/resend-email`, {
+      method: "POST",
+    });
+  },
 };
 
 /**
@@ -327,12 +340,15 @@ export interface Session {
   patientId: string;
   scaleId: string;
   status: "SENT" | "STARTED" | "COMPLETED" | "EXPIRED" | "CANCELLED";
-  score?: number | Record<string, any>;
+  score?: import("@melya/core").ScoreResult;
   interpretation?: string;
+  patientComments?: string | null;
   responses?: Record<string, number>;
   sentAt?: string;
+  lastReminderAt?: string | null;
   startedAt?: string;
   completedAt?: string;
+  viewedAt?: string;
   expiresAt?: string;
   createdAt: string;
   updatedAt: string;
@@ -373,7 +389,7 @@ export interface Scale {
  */
 export const api = {
   auth: authApi,
-  profiles: profilesApi,
+  users: usersApi,
   favorites: favoritesApi,
   patients: patientsApi,
   sessions: sessionsApi,

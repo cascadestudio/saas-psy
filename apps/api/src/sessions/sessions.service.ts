@@ -13,6 +13,7 @@ import { AuditLogService } from '../audit-log/audit-log.service';
 import { AuditAction } from '../audit-log/audit-actions';
 import { CreateSessionDto, UpdateSessionDto, SubmitResponsesDto } from './dto';
 import { createId } from '@paralleldrive/cuid2';
+import { getScaleById } from '@melya/core';
 
 @Injectable()
 export class SessionsService {
@@ -54,15 +55,14 @@ export class SessionsService {
       throw new NotFoundException('Praticien non trouvé');
     }
 
-    // Get scales data
-    const scales = await this.prisma.scale.findMany({
-      where: { id: { in: dto.scaleIds } },
-    });
-
-    const scalesMap = new Map(scales.map((s) => [s.id, s]));
+    const scalesMap = new Map(dto.scaleIds.map((id) => [id, getScaleById(id)]));
 
     // Generate a unique batchId for this group of sessions
     const batchId = createId();
+
+    const encryptedMessage = dto.message
+      ? this.encryption.encryptField(dto.message)
+      : null;
 
     // Create sessions for each scale (one session per scale)
     const sessions = await this.prisma.$transaction(
@@ -75,6 +75,7 @@ export class SessionsService {
             batchId,
             status: 'SENT',
             sentAt: new Date(),
+            practitionerMessage: encryptedMessage,
             // Set expiration to 7 days from now
             expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
           },
@@ -98,7 +99,7 @@ export class SessionsService {
       this.encryption.decryptField(practitioner.lastName),
     ]
       .filter(Boolean)
-      .join(' ') || 'Votre praticien';
+      .join(' ') || 'Votre psychologue';
 
     const emailResult = await this.emailService.sendBatchSessionEmail({
       patientEmail: patient.email,
@@ -187,6 +188,15 @@ export class SessionsService {
 
     if (session.practitionerId !== practitionerId) {
       throw new ForbiddenException('Accès non autorisé à cette session');
+    }
+
+    if (session.status === 'COMPLETED' && !session.viewedAt) {
+      const updated = await this.prisma.session.update({
+        where: { id },
+        data: { viewedAt: new Date() },
+        include: { patient: true },
+      });
+      session.viewedAt = updated.viewedAt;
     }
 
     this.auditLog
@@ -302,6 +312,90 @@ export class SessionsService {
     return { session: this.decryptSession(cancelledSession) };
   }
 
+  async resendEmail(
+    id: string,
+    practitionerId: string,
+    ipAddress?: string,
+    userAgent?: string,
+  ) {
+    const session = await this.prisma.session.findUnique({
+      where: { id },
+      include: { patient: true },
+    });
+
+    if (!session) {
+      throw new NotFoundException('Session non trouvée');
+    }
+
+    if (session.practitionerId !== practitionerId) {
+      throw new ForbiddenException('Accès non autorisé à cette session');
+    }
+
+    if (session.status !== 'SENT' && session.status !== 'STARTED') {
+      throw new BadRequestException(
+        'Le mail ne peut être renvoyé que pour une passation envoyée ou démarrée',
+      );
+    }
+
+    if (session.expiresAt && new Date() > session.expiresAt) {
+      throw new BadRequestException('Cette session a expiré');
+    }
+
+    const practitioner = await this.prisma.user.findUnique({
+      where: { id: practitionerId },
+    });
+    if (!practitioner) {
+      throw new NotFoundException('Praticien non trouvé');
+    }
+
+    const scale = getScaleById(session.scaleId);
+    const scaleName = scale?.title || 'Questionnaire';
+
+    const practitionerName =
+      [
+        this.encryption.decryptField(practitioner.firstName),
+        this.encryption.decryptField(practitioner.lastName),
+      ]
+        .filter(Boolean)
+        .join(' ') || 'Votre psychologue';
+
+    const result = await this.emailService.sendSessionEmail({
+      patientEmail: session.patient.email,
+      patientFirstName:
+        this.encryption.decryptField(session.patient.firstName) || '',
+      patientLastName:
+        this.encryption.decryptField(session.patient.lastName) || '',
+      sessionId: session.id,
+      scaleName,
+      practitionerName,
+    });
+
+    if (!result.success) {
+      throw new BadRequestException(
+        result.error || 'Échec de l’envoi du mail de relance',
+      );
+    }
+
+    await this.prisma.session.update({
+      where: { id },
+      data: { lastReminderAt: new Date() },
+    });
+
+    this.auditLog
+      .log({
+        userId: practitionerId,
+        action: AuditAction.SESSION_REMINDER_SENT,
+        resource: 'Session',
+        resourceId: id,
+        metadata: { patientId: session.patientId },
+        ipAddress,
+        userAgent,
+      })
+      .catch(() => {});
+
+    return { success: true };
+  }
+
   // Public endpoint for patient portal (no auth required)
   async getPatientPortalSessions(batchId: string) {
     const sessions = await this.prisma.session.findMany({
@@ -311,14 +405,6 @@ export class SessionsService {
           select: {
             firstName: true,
             lastName: true,
-          },
-        },
-        scale: {
-          select: {
-            id: true,
-            title: true,
-            description: true,
-            estimatedTime: true,
           },
         },
       },
@@ -340,25 +426,32 @@ export class SessionsService {
     );
     const completedSessions = sessions.filter((s) => s.status === 'COMPLETED');
 
+    const practitionerMessage =
+      this.encryption.decryptField(sessions[0].practitionerMessage) || null;
+
     return {
       portal: {
         batchId,
         patientFirstName,
         patientLastName,
+        practitionerMessage,
         totalCount: sessions.length,
         pendingCount: pendingSessions.length,
         completedCount: completedSessions.length,
         allCompleted: pendingSessions.length === 0,
-        sessions: sessions.map((s) => ({
-          id: s.id,
-          scaleId: s.scale?.id,
-          scaleTitle: s.scale?.title,
-          scaleDescription: s.scale?.description,
-          estimatedTime: s.scale?.estimatedTime,
-          status: s.status,
-          isCompleted: s.status === 'COMPLETED',
-          completedAt: s.completedAt,
-        })),
+        sessions: sessions.map((s) => {
+          const scale = getScaleById(s.scaleId);
+          return {
+            id: s.id,
+            scaleId: s.scaleId,
+            scaleTitle: scale?.title,
+            scaleDescription: scale?.description,
+            estimatedTime: scale?.estimatedTime,
+            status: s.status,
+            isCompleted: s.status === 'COMPLETED',
+            completedAt: s.completedAt,
+          };
+        }),
       },
     };
   }
@@ -374,7 +467,6 @@ export class SessionsService {
             lastName: true,
           },
         },
-        scale: true,
       },
     });
 
@@ -410,6 +502,7 @@ export class SessionsService {
       });
     }
 
+    const scale = getScaleById(session.scaleId);
     return {
       session: {
         id: session.id,
@@ -418,16 +511,21 @@ export class SessionsService {
         patientFirstName: this.encryption.decryptField(session.patient.firstName),
         patientLastName: this.encryption.decryptField(session.patient.lastName),
         status: session.status === 'SENT' ? 'STARTED' : session.status,
-        scale: session.scale
+        scale: scale
           ? {
-              id: session.scale.id,
-              title: session.scale.title,
-              description: session.scale.description,
-              instructions: session.scale.longDescription,
-              questions: session.scale.questions,
-              answerScales: session.scale.answerScales,
-              scoring: session.scale.scoring,
-              estimatedTime: session.scale.estimatedTime,
+              id: scale.id,
+              title: scale.title,
+              description: scale.description,
+              instructions: scale.instructions ?? scale.longDescription,
+              persistentInstructions: scale.persistentInstructions,
+              sectionIntros: scale.sectionIntros,
+              copyrightAttribution: scale.copyrightAttribution,
+              formType: scale.formType,
+              questions: scale.questions,
+              answerScales: scale.answerScales,
+              followUpItem: scale.followUpItem,
+              scoring: scale.scoring,
+              estimatedTime: scale.estimatedTime,
             }
           : null,
       },
@@ -457,7 +555,7 @@ export class SessionsService {
     }
 
     // Calculate score using the scoring service
-    const scoreResult = await this.scoringService.calculateScore(
+    const scoreResult = this.scoringService.calculateScore(
       session.scaleId,
       dto.responses,
     );
@@ -480,10 +578,46 @@ export class SessionsService {
       },
     });
 
+    // Notify practitioner that the patient has completed the questionnaire (non-blocking)
+    void this.notifyPractitionerOfCompletion(updatedSession.id).catch((err) => {
+      this.logger.warn(
+        `Failed to notify practitioner for session ${updatedSession.id}: ${
+          err instanceof Error ? err.message : err
+        }`,
+      );
+    });
+
     return {
       session: this.decryptSession(updatedSession),
       message: 'Réponses enregistrées avec succès',
     };
+  }
+
+  private async notifyPractitionerOfCompletion(sessionId: string) {
+    const session = await this.prisma.session.findUnique({
+      where: { id: sessionId },
+      include: {
+        practitioner: true,
+        patient: { select: { firstName: true, lastName: true } },
+      },
+    });
+
+    if (!session || !session.practitioner?.email) return;
+
+    const scale = getScaleById(session.scaleId);
+    const scaleName = scale?.title || 'Questionnaire';
+
+    await this.emailService.sendPractitionerCompletionEmail({
+      practitionerEmail: session.practitioner.email,
+      practitionerFirstName:
+        this.encryption.decryptField(session.practitioner.firstName) || '',
+      patientFirstName:
+        this.encryption.decryptField(session.patient.firstName) || '',
+      patientLastName:
+        this.encryption.decryptField(session.patient.lastName) || '',
+      sessionId: session.id,
+      scaleName,
+    });
   }
 
   private decryptSession(session: any) {

@@ -3,6 +3,7 @@
 import { useParams, useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Card, CardContent } from "@/components/ui/card";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -12,15 +13,21 @@ import {
 import Link from "next/link";
 import { useUser } from "@/app/context/UserContext";
 import { useEffect, useState, useCallback } from "react";
-import { patientsApi, sessionsApi, type Patient, type Session } from "@/lib/api-client";
-import { scales } from "@/app/scalesData";
-import { Arrow, Interfaces, Files } from "doodle-icons";
-import { MoreVertical, Pencil, Archive } from "lucide-react";
+import {
+  patientsApi,
+  sessionsApi,
+  type Patient,
+  type Session,
+} from "@/lib/api-client";
+import { Interfaces, Food, Arrow } from "doodle-icons";
 import { ArchivePatientDialog } from "@/components/ArchivePatientDialog";
 import { RestorePatientButton } from "@/components/RestorePatientButton";
 import { EditPatientSheet } from "@/components/EditPatientSheet";
-import { formatScore } from "@/lib/score-utils";
-import { SESSION_STATUS_CONFIG } from "@/lib/session-status";
+import { SendScaleSheet } from "@/components/SendScaleSheet";
+import { SessionRow, relativeDayLabel } from "@/components/sessions/SessionRow";
+import { getMockPatient, getMockSessionsByPatient, isMockId } from "@/lib/mock-data";
+import { useAuthGate } from "@/app/context/AuthGateContext";
+import { PatientDetailSkeleton } from "@/components/patients/PatientDetailSkeleton";
 
 export default function PatientDetailPage() {
   const { user, isLoading } = useUser();
@@ -32,9 +39,30 @@ export default function PatientDetailPage() {
   const [sessions, setSessions] = useState<Session[]>([]);
   const [loading, setLoading] = useState(true);
   const [editOpen, setEditOpen] = useState(false);
+  const [sendScaleOpen, setSendScaleOpen] = useState(false);
+
+  const { openAuthGate } = useAuthGate();
 
   const loadData = useCallback(async () => {
-    if (!user || !patientId) return;
+    if (!patientId) return;
+    if (!user) {
+      const mockPatient = getMockPatient(patientId);
+      setPatient(mockPatient);
+      setSessions(
+        getMockSessionsByPatient(patientId).sort(
+          (a, b) =>
+            new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
+        ),
+      );
+      setLoading(false);
+      return;
+    }
+    if (isMockId(patientId)) {
+      setPatient(null);
+      setSessions([]);
+      setLoading(false);
+      return;
+    }
     setLoading(true);
     try {
       const [patientRes, sessionsRes] = await Promise.all([
@@ -44,8 +72,9 @@ export default function PatientDetailPage() {
       setPatient(patientRes.patient);
       setSessions(
         sessionsRes.sessions.sort(
-          (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-        )
+          (a, b) =>
+            new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
+        ),
       );
     } catch (error) {
       console.error("Error loading patient data:", error);
@@ -57,9 +86,7 @@ export default function PatientDetailPage() {
   }, [user, patientId]);
 
   useEffect(() => {
-    if (user) {
-      loadData();
-    }
+    loadData();
   }, [user, loadData]);
 
   const handleArchived = () => {
@@ -75,15 +102,7 @@ export default function PatientDetailPage() {
   };
 
   if (isLoading || loading) {
-    return (
-      <div className="flex-1 w-full flex items-center justify-center">
-        <p>Chargement...</p>
-      </div>
-    );
-  }
-
-  if (!user) {
-    return null;
+    return <PatientDetailSkeleton />;
   }
 
   if (!patient) {
@@ -103,7 +122,10 @@ export default function PatientDetailPage() {
     const birth = new Date(birthDate);
     let age = today.getFullYear() - birth.getFullYear();
     const monthDiff = today.getMonth() - birth.getMonth();
-    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birth.getDate())) {
+    if (
+      monthDiff < 0 ||
+      (monthDiff === 0 && today.getDate() < birth.getDate())
+    ) {
       age--;
     }
     return age;
@@ -114,27 +136,43 @@ export default function PatientDetailPage() {
 
   return (
     <div className="container mx-auto px-4 py-6">
+      {/* Retour */}
+      <Link
+        href="/patients"
+        className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors mb-4"
+      >
+        <Arrow.ArrowLeft className="h-4 w-4" />
+        Mes patient·es
+      </Link>
+
       {/* Header */}
       <div className="flex items-center gap-3 mb-1">
-        <Button asChild variant="ghost" size="icon" className="-ml-2">
-          <Link href="/dashboard">
-            <Arrow.ArrowLeft className="h-4 w-4" />
-          </Link>
-        </Button>
-        <h1 className="font-normal text-3xl">
+        <h1 className="font-gelica font-normal text-3xl">
           {patient.firstName} {patient.lastName}
         </h1>
         {isArchived && (
-          <Badge variant="secondary" className="bg-orange-100 text-orange-800">
-            Archivé le {new Date(patient.archivedAt!).toLocaleDateString("fr-FR")}
+          <Badge
+            variant="secondary"
+            className="bg-surface-brand-bg text-brand-orange"
+          >
+            Archivé le{" "}
+            {new Date(patient.archivedAt!).toLocaleDateString("fr-FR")}
           </Badge>
         )}
         {isArchived ? (
           <RestorePatientButton
             patient={patient}
             onRestored={handleRestored}
-            size="lg"
+
           />
+        ) : !user ? (
+          <Button
+            className="ml-auto"
+            onClick={() => openAuthGate()}
+          >
+            <Interfaces.Send />
+            Envoyer une échelle
+          </Button>
         ) : (
           <>
             <EditPatientSheet
@@ -145,52 +183,52 @@ export default function PatientDetailPage() {
             />
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="icon">
-                  <MoreVertical className="h-4 w-4" />
+                <Button variant="secondary" size="icon">
+                  <Interfaces.Setting />
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
-                <DropdownMenuItem asChild>
-                  <Link href={`/send-scale?patientId=${patient.id}`}>
-                    <Interfaces.Send className="mr-2 h-4 w-4" />
-                    Envoyer une échelle
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => setEditOpen(true)}>
-                  <Pencil className="mr-2 h-4 w-4" />
+              <DropdownMenuContent align="end" className="bg-muted">
+                <DropdownMenuItem
+                  onClick={() => setEditOpen(true)}
+                  className="cursor-pointer"
+                >
+                  <Interfaces.Pencil className="mr-2 h-4 w-4" />
                   Modifier
                 </DropdownMenuItem>
                 <ArchivePatientDialog
                   patient={patient}
                   onArchived={handleArchived}
                   trigger={
-                    <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
-                      <Archive className="mr-2 h-4 w-4" />
+                    <DropdownMenuItem
+                      onSelect={(e) => e.preventDefault()}
+                      className="cursor-pointer"
+                    >
+                      <Interfaces.Delete className="mr-2 h-4 w-4" />
                       Archiver
                     </DropdownMenuItem>
                   }
                 />
               </DropdownMenuContent>
             </DropdownMenu>
+            <Button className="ml-auto" onClick={() => setSendScaleOpen(true)}>
+              <Interfaces.Send />
+              Envoyer une échelle
+            </Button>
           </>
         )}
       </div>
 
       {/* Subline */}
-      <div className="flex items-center gap-4 text-sm text-muted-foreground mb-6 pl-10">
+      <div className="flex items-center gap-4 text-sm text-muted-foreground mb-6">
         {age && (
           <span className="flex items-center gap-1.5">
-            <Interfaces.Calendar className="h-3.5 w-3.5" />
+            <Food.Cake className="h-3.5 w-3.5" />
             {age} ans
           </span>
         )}
         <span className="flex items-center gap-1.5">
           <Interfaces.Mail className="h-3.5 w-3.5" />
           {patient.email}
-        </span>
-        <span className="flex items-center gap-1.5">
-          <Files.FileText className="h-3.5 w-3.5" />
-          Depuis le {new Date(patient.createdAt).toLocaleDateString("fr-FR")}
         </span>
       </div>
 
@@ -213,63 +251,50 @@ export default function PatientDetailPage() {
           {sessions.length === 0 ? (
             <div className="bg-muted-foreground/5 rounded-lg p-8 text-center">
               <p className="text-sm text-muted-foreground mb-4">
-                Aucune passation enregistrée pour ce patient
+                Aucune passation enregistrée pour ce·tte patient·e
               </p>
               {!isArchived && (
-                <Button asChild size="sm">
-                  <Link href={`/send-scale?patientId=${patient.id}`}>
-                    <Interfaces.Send className="mr-2 h-4 w-4" />
-                    Envoyer la première échelle
-                  </Link>
+                <Button
+                  size="sm"
+                  onClick={() =>
+                    user ? setSendScaleOpen(true) : openAuthGate()
+                  }
+                >
+                  <Interfaces.Send />
+                  Envoyer la première échelle
                 </Button>
               )}
             </div>
           ) : (
-            <div className="bg-muted-foreground/5 rounded-lg overflow-hidden">
-              {sessions.map((session) => {
-                const scale = scales.find((s) => s.id === session.scaleId);
-                const config = SESSION_STATUS_CONFIG[session.status as keyof typeof SESSION_STATUS_CONFIG];
-
-                return (
-                  <div
-                    key={session.id}
-                    className="flex items-center justify-between p-4 border-t border-border/50 first:border-t-0 hover:bg-background/50 transition-colors"
-                  >
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2 mb-0.5">
-                        <p className="font-medium text-sm truncate">
-                          {scale?.title || session.scaleId}
-                        </p>
-                        <Badge className={config?.className} variant="secondary">
-                          {config?.label ?? session.status}
-                        </Badge>
-                      </div>
-                      <div className="flex items-center gap-3">
-                        <p className="text-xs text-muted-foreground">
-                          {new Date(session.createdAt).toLocaleDateString("fr-FR")}
-                        </p>
-                        {session.status === "COMPLETED" && session.score != null && (
-                          <p className="text-xs font-medium text-green-700">
-                            Score : {formatScore(session.score)}
-                            {session.interpretation && ` — ${session.interpretation}`}
-                          </p>
-                        )}
-                      </div>
-                    </div>
-                    {session.status === "COMPLETED" && (
-                      <Button asChild variant="outline" size="sm">
-                        <Link href={`/results/${session.id}`}>
-                          Voir résultats
-                        </Link>
-                      </Button>
-                    )}
-                  </div>
-                );
-              })}
-            </div>
+            <Card className="border-0 bg-muted-foreground/5 shadow-none hover:shadow-none">
+              <CardContent className="p-4">
+                <div className="rounded-lg overflow-hidden">
+                  {sessions.map((session) => (
+                    <SessionRow
+                      key={session.id}
+                      session={session}
+                      secondaryText={relativeDayLabel(session.createdAt)}
+                      rightLabel={
+                        session.status === "COMPLETED"
+                          ? typeof session.interpretation === "string"
+                            ? session.interpretation
+                            : undefined
+                          : relativeDayLabel(session.sentAt ?? session.createdAt)
+                      }
+                    />
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
           )}
         </div>
       </div>
+      <SendScaleSheet
+        open={sendScaleOpen}
+        onOpenChange={setSendScaleOpen}
+        defaultPatientId={patient.id}
+        onSent={loadData}
+      />
     </div>
   );
 }

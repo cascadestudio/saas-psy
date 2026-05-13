@@ -1,0 +1,340 @@
+"use client";
+
+import { useMemo, useState } from "react";
+import { Arrow } from "doodle-icons";
+import ProgressBar from "./ProgressBar";
+import IntroScreen from "./IntroScreen";
+import SingleScaleQuestion from "./SingleScaleQuestion";
+import SectionTransitionScreen from "./SectionTransitionScreen";
+import ReviewScreen from "./ReviewScreen";
+
+interface SessionRunnerProps {
+  scale: any;
+  onSubmit: (
+    responses: Record<string, any>,
+    comments?: string,
+  ) => Promise<void>;
+}
+
+interface QuestionStep {
+  key: string;
+  questionText: string;
+  questionPrompt?: string;
+  subLabel?: string;
+  persistentConsigne?: string;
+  options: { value: number; label: string }[];
+}
+
+type Phase = "intro" | "transition" | "question" | "follow-up" | "review";
+
+interface SectionTransition {
+  startIndex: number;
+  title: string;
+  description: string;
+}
+
+const AUTO_ADVANCE_DELAY_MS = 250;
+const SUPPORTED_FORM_TYPES = new Set([
+  "single-scale",
+  "options",
+  "dual-scale",
+]);
+
+function buildSteps(scale: any): QuestionStep[] {
+  const formType = scale.formType;
+  const questions = scale.questions ?? [];
+
+  if (formType === "single-scale") {
+    const options = toOptions(scale.answerScales?.intensity);
+    const persistentConsigne: string | undefined =
+      scale.persistentInstructions ?? scale.instructions;
+    return (questions as string[]).map((text, idx) => ({
+      key: `intensity_${idx}`,
+      questionText: text,
+      persistentConsigne,
+      options,
+    }));
+  }
+
+  if (formType === "options") {
+    return (questions as { title: string; prompt?: string; options: { value: number; text: string }[] }[]).map(
+      (q, idx) => ({
+        key: `option_${idx}`,
+        questionText: q.title,
+        questionPrompt: q.prompt,
+        options: q.options.map((o) => ({ value: o.value, label: o.text })),
+      }),
+    );
+  }
+
+  if (formType === "dual-scale") {
+    const anxiety = toOptions(scale.answerScales?.anxiety);
+    const avoidance = toOptions(scale.answerScales?.avoidance);
+    const persistentConsigne: string | undefined =
+      scale.persistentInstructions ?? scale.instructions;
+    const steps: QuestionStep[] = [];
+    (questions as { text: string }[]).forEach((q, idx) => {
+      steps.push({
+        key: `anxiety_${idx}`,
+        questionText: q.text,
+        subLabel: "Anxiété ressentie",
+        persistentConsigne,
+        options: anxiety,
+      });
+      steps.push({
+        key: `avoidance_${idx}`,
+        questionText: q.text,
+        subLabel: "Évitement de la situation",
+        persistentConsigne,
+        options: avoidance,
+      });
+    });
+    return steps;
+  }
+
+  return [];
+}
+
+function toOptions(
+  raw: { value: number; label: string }[] | undefined,
+): { value: number; label: string }[] {
+  return raw ?? [];
+}
+
+export default function SessionRunner({
+  scale,
+  onSubmit,
+}: SessionRunnerProps) {
+  if (!SUPPORTED_FORM_TYPES.has(scale.formType)) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="text-center max-w-md mx-auto px-4">
+          <div className="bg-white rounded-lg shadow-sm p-8">
+            <h1 className="text-xl font-semibold text-gray-900 mb-2">
+              Format non supporté
+            </h1>
+            <p className="text-gray-600">
+              Ce questionnaire n&apos;est pas encore disponible en ligne.
+            </p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  return <Runner scale={scale} onSubmit={onSubmit} />;
+}
+
+interface RunnerProps {
+  scale: any;
+  onSubmit: (
+    responses: Record<string, any>,
+    comments?: string,
+  ) => Promise<void>;
+}
+
+function Runner({ scale, onSubmit }: RunnerProps) {
+  const steps = useMemo(() => buildSteps(scale), [scale]);
+  const total = steps.length;
+  const transitions: SectionTransition[] = useMemo(() => {
+    const sectionIntros: { startIndex: number; text: string; description?: string }[] =
+      scale.sectionIntros ?? [];
+    return sectionIntros
+      .filter((s) => s.description && s.startIndex > 0)
+      .map((s) => ({ startIndex: s.startIndex, title: s.text, description: s.description! }));
+  }, [scale.sectionIntros]);
+  const transitionAt = (idx: number): SectionTransition | undefined =>
+    transitions.find((t) => t.startIndex === idx);
+  const followUpStep: QuestionStep | null = useMemo(() => {
+    if (!scale.followUpItem) return null;
+    return {
+      key: scale.followUpItem.key,
+      questionText: scale.followUpItem.questionText,
+      options: scale.followUpItem.options,
+    };
+  }, [scale.followUpItem]);
+
+  const [phase, setPhase] = useState<Phase>("intro");
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [responses, setResponses] = useState<Record<string, number>>({});
+  const [comments, setComments] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+
+  const handleStart = () => {
+    setPhase("question");
+    setCurrentIndex(0);
+  };
+
+  const handleSelect = (value: number) => {
+    const step = steps[currentIndex];
+    setResponses((prev) => ({ ...prev, [step.key]: value }));
+
+    window.setTimeout(() => {
+      if (currentIndex < total - 1) {
+        const nextIndex = currentIndex + 1;
+        setCurrentIndex(nextIndex);
+        if (transitionAt(nextIndex)) {
+          setPhase("transition");
+        }
+      } else if (followUpStep) {
+        setPhase("follow-up");
+      } else {
+        setPhase("review");
+      }
+    }, AUTO_ADVANCE_DELAY_MS);
+  };
+
+  const handleTransitionContinue = () => {
+    setPhase("question");
+  };
+
+  const handleFollowUpSelect = (value: number) => {
+    if (!followUpStep) return;
+    setResponses((prev) => ({ ...prev, [followUpStep.key]: value }));
+    window.setTimeout(() => {
+      setPhase("review");
+    }, AUTO_ADVANCE_DELAY_MS);
+  };
+
+  const handleFollowUpSkip = () => {
+    if (!followUpStep) return;
+    setResponses((prev) => {
+      if (!(followUpStep.key in prev)) return prev;
+      const next = { ...prev };
+      delete next[followUpStep.key];
+      return next;
+    });
+    setPhase("review");
+  };
+
+  const handleBack = () => {
+    if (phase === "review") {
+      if (followUpStep) {
+        setPhase("follow-up");
+      } else {
+        setPhase("question");
+        setCurrentIndex(total - 1);
+      }
+      return;
+    }
+    if (phase === "follow-up") {
+      setPhase("question");
+      setCurrentIndex(total - 1);
+      return;
+    }
+    if (phase === "transition") {
+      setPhase("question");
+      setCurrentIndex((i) => Math.max(0, i - 1));
+      return;
+    }
+    if (transitionAt(currentIndex)) {
+      setPhase("transition");
+      return;
+    }
+    if (currentIndex > 0) {
+      setCurrentIndex((i) => i - 1);
+    } else {
+      setPhase("intro");
+    }
+  };
+
+  const canGoBack = phase !== "intro";
+
+  const handleSubmit = async () => {
+    setSubmitting(true);
+    try {
+      await onSubmit(responses, comments || undefined);
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  const scoredAnsweredCount = followUpStep
+    ? Object.keys(responses).filter((k) => k !== followUpStep.key).length
+    : Object.keys(responses).length;
+  const currentStep = steps[currentIndex];
+
+  return (
+    <div className="min-h-[100dvh] bg-gray-50">
+      <div className="mx-auto max-w-xl px-4 sm:px-5 pt-6 pb-10 flex flex-col gap-8">
+        {phase !== "intro" && (
+          <div className="flex items-center gap-3">
+            <button
+              type="button"
+              onClick={handleBack}
+              disabled={submitting || !canGoBack}
+              aria-label="Retour"
+              className="shrink-0 h-10 w-10 rounded-full border border-gray-200 bg-white flex items-center justify-center text-gray-600 hover:border-gray-300 disabled:opacity-30 disabled:cursor-not-allowed"
+            >
+              <Arrow.ArrowLeft className="h-4 w-4" />
+            </button>
+            <div className="flex-1">
+              <ProgressBar
+                current={
+                  phase === "question" || phase === "transition"
+                    ? currentIndex
+                    : total
+                }
+                total={total}
+                showCounter={phase !== "review"}
+              />
+            </div>
+          </div>
+        )}
+
+        {phase === "intro" && (
+          <IntroScreen
+            scaleId={scale.id}
+            title={scale.title}
+            instructions={scale.instructions}
+            estimatedTime={scale.estimatedTime}
+            questionsCount={total}
+            onStart={handleStart}
+          />
+        )}
+
+        {phase === "transition" && transitionAt(currentIndex) && (
+          <SectionTransitionScreen
+            title={transitionAt(currentIndex)!.title}
+            description={transitionAt(currentIndex)!.description}
+            onContinue={handleTransitionContinue}
+          />
+        )}
+
+        {phase === "question" && currentStep && (
+          <SingleScaleQuestion
+            subLabel={currentStep.subLabel}
+            persistentConsigne={currentStep.persistentConsigne}
+            questionText={currentStep.questionText}
+            questionPrompt={currentStep.questionPrompt}
+            options={currentStep.options}
+            selectedValue={responses[currentStep.key]}
+            onSelect={handleSelect}
+          />
+        )}
+
+        {phase === "follow-up" && followUpStep && (
+          <SingleScaleQuestion
+            questionText={followUpStep.questionText}
+            options={followUpStep.options}
+            selectedValue={responses[followUpStep.key]}
+            onSelect={handleFollowUpSelect}
+            onSkip={handleFollowUpSkip}
+          />
+        )}
+
+        {phase === "review" && (
+          <ReviewScreen
+            totalQuestions={total}
+            answeredCount={scoredAnsweredCount}
+            comments={comments}
+            onCommentsChange={setComments}
+            onBack={handleBack}
+            onSubmit={handleSubmit}
+            submitting={submitting}
+          />
+        )}
+      </div>
+    </div>
+  );
+}

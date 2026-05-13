@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { Interfaces } from "doodle-icons";
 import { useAuthGate } from "@/app/context/AuthGateContext";
 import { useUser } from "@/app/context/UserContext";
 import { api, ApiError } from "@/lib/api-client";
@@ -12,59 +13,102 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 import { SubmitButton } from "@/components/submit-button";
 import { FormMessage, Message } from "@/components/form-message";
 
+type Mode = "signup" | "signin";
+
 export function AuthGateModal() {
-  const { isOpen, closeAuthGate, executePendingAction } = useAuthGate();
+  const { isOpen, closeAuthGate, executePendingAction, reason } =
+    useAuthGate();
   const { login, refreshUser } = useUser();
+  const [mode, setMode] = useState<Mode>("signup");
+
+  const handleSuccess = () => {
+    refreshUser();
+    executePendingAction();
+  };
+
+  const handleOpenChange = (open: boolean) => {
+    if (!open) {
+      closeAuthGate();
+      setMode("signup");
+    }
+  };
 
   return (
-    <Dialog open={isOpen} onOpenChange={(open) => !open && closeAuthGate()}>
-      <DialogContent className="sm:max-w-md">
-        <DialogHeader>
-          <DialogTitle>Connexion requise</DialogTitle>
-          <DialogDescription>
-            Créez un compte gratuit pour sauvegarder vos données
-          </DialogDescription>
-        </DialogHeader>
+    <Dialog open={isOpen} onOpenChange={handleOpenChange}>
+      <DialogContent className="sm:max-w-md p-0 overflow-hidden">
+        <div className="px-6 pt-6 pb-2">
+          <DialogHeader className="space-y-2">
+            <DialogTitle className="font-gelica text-2xl leading-tight">
+              {mode === "signup"
+                ? reason || "Créez votre compte Melya"
+                : "Bon retour !"}
+            </DialogTitle>
+            <DialogDescription className="text-sm">
+              {mode === "signup"
+                ? "Gratuit pour un temps limité. Aucune carte bancaire requise."
+                : "Connectez-vous pour reprendre votre travail."}
+            </DialogDescription>
+          </DialogHeader>
+        </div>
 
-        <Tabs defaultValue="signin" className="w-full">
-          <TabsList className="grid w-full grid-cols-2">
-            <TabsTrigger value="signin">Se connecter</TabsTrigger>
-            <TabsTrigger value="signup">S'inscrire</TabsTrigger>
-          </TabsList>
+        <div className="px-6 pb-6">
+          {mode === "signup" ? (
+            <SignUpForm onSuccess={handleSuccess} login={login} />
+          ) : (
+            <SignInForm onSuccess={handleSuccess} login={login} />
+          )}
 
-          <TabsContent value="signin" className="mt-4">
-            <SignInForm
-              onSuccess={() => {
-                refreshUser();
-                executePendingAction();
-              }}
-              login={login}
-            />
-          </TabsContent>
+          <p className="mt-3 text-xs text-muted-foreground">
+            <span className="text-primary">*</span> Champs obligatoires
+          </p>
 
-          <TabsContent value="signup" className="mt-4">
-            <SignUpForm
-              onSuccess={() => {
-                refreshUser();
-                executePendingAction();
-              }}
-              login={login}
-            />
-          </TabsContent>
-        </Tabs>
+          <p className="mt-4 text-center text-sm text-muted-foreground">
+            {mode === "signup" ? (
+              <>
+                Déjà un compte ?{" "}
+                <button
+                  type="button"
+                  onClick={() => setMode("signin")}
+                  className="text-primary font-medium hover:underline"
+                >
+                  Se connecter
+                </button>
+              </>
+            ) : (
+              <>
+                Pas encore de compte ?{" "}
+                <button
+                  type="button"
+                  onClick={() => setMode("signup")}
+                  className="text-primary font-medium hover:underline"
+                >
+                  Créer un compte
+                </button>
+              </>
+            )}
+          </p>
+        </div>
 
-        <div className="border-t pt-4 mt-2">
-          <p className="text-sm font-medium mb-2">Compte gratuit inclut :</p>
-          <ul className="text-sm text-muted-foreground space-y-1">
-            <li>&#10003; 5 patients</li>
-            <li>&#10003; Scoring automatique</li>
-            <li>&#10003; Historique illimité</li>
+        <div className="border-t bg-muted/30 px-6 py-3">
+          <ul className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-[11px] text-muted-foreground">
+            <li className="flex items-center gap-1.5">
+              <Interfaces.Gift className="h-3.5 w-3.5" />
+              Gratuit pour un temps limité
+            </li>
+            <li className="flex items-center gap-1.5">
+              <Interfaces.Shield className="h-3.5 w-3.5" />
+              Hébergement HDS
+            </li>
+            <li className="flex items-center gap-1.5">
+              <Interfaces.Lock className="h-3.5 w-3.5" />
+              Données chiffrées
+            </li>
           </ul>
         </div>
       </DialogContent>
@@ -72,7 +116,6 @@ export function AuthGateModal() {
   );
 }
 
-// Embedded Sign In Form
 function SignInForm({
   onSuccess,
   login,
@@ -86,6 +129,7 @@ function SignInForm({
   const { closeAuthGate } = useAuthGate();
   const [message, setMessage] = useState<Message | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -107,7 +151,9 @@ function SignInForm({
       if (result.success) {
         onSuccess();
       } else {
-        setMessage({ error: result.error || "Email ou mot de passe incorrect" });
+        setMessage({
+          error: result.error || "Email ou mot de passe incorrect",
+        });
       }
     } catch {
       setMessage({ error: "Une erreur est survenue" });
@@ -119,7 +165,9 @@ function SignInForm({
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <div className="space-y-2">
-        <Label htmlFor="signin-email">Email</Label>
+        <Label htmlFor="signin-email">
+          Email <span className="text-primary">*</span>
+        </Label>
         <Input
           id="signin-email"
           name="email"
@@ -130,21 +178,42 @@ function SignInForm({
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="signin-password">Mot de passe</Label>
-        <Input
-          id="signin-password"
-          type="password"
-          name="password"
-          placeholder="Votre mot de passe"
-          required
-        />
-        <Link
-          href="/forgot-password"
-          className="text-[11px] text-muted-foreground/60 hover:text-primary transition-colors w-fit"
-          onClick={closeAuthGate}
-        >
-          Mot de passe oublié ?
-        </Link>
+        <div className="flex items-center justify-between">
+          <Label htmlFor="signin-password">
+            Mot de passe <span className="text-primary">*</span>
+          </Label>
+          <Link
+            href="/forgot-password"
+            className="text-xs text-muted-foreground hover:text-primary transition-colors"
+            onClick={closeAuthGate}
+          >
+            Oublié ?
+          </Link>
+        </div>
+        <div className="relative">
+          <Input
+            id="signin-password"
+            type={showPassword ? "text" : "password"}
+            name="password"
+            placeholder="Votre mot de passe"
+            required
+            className="pr-10"
+          />
+          <Button
+            type="button"
+            variant="ghost"
+            size="icon"
+            className="absolute right-0 top-0 h-full px-3 text-muted-foreground hover:text-foreground"
+            onClick={() => setShowPassword((v) => !v)}
+            tabIndex={-1}
+          >
+            {showPassword ? (
+              <Interfaces.Hide className="h-4 w-4" />
+            ) : (
+              <Interfaces.Unhide className="h-4 w-4" />
+            )}
+          </Button>
+        </div>
       </div>
 
       <SubmitButton
@@ -160,7 +229,6 @@ function SignInForm({
   );
 }
 
-// Embedded Sign Up Form
 function SignUpForm({
   onSuccess,
   login,
@@ -173,6 +241,7 @@ function SignUpForm({
 }) {
   const [message, setMessage] = useState<Message | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -192,15 +261,7 @@ function SignUpForm({
     }
 
     try {
-      // Register the user
-      await api.auth.register({
-        email,
-        password,
-        firstName,
-        lastName,
-      });
-
-      // Auto-login after successful registration
+      await api.auth.register({ email, password, firstName, lastName });
       const loginResult = await login(email, password);
       if (loginResult.success) {
         onSuccess();
@@ -220,19 +281,20 @@ function SignUpForm({
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
-      <div className="grid grid-cols-2 gap-4">
-        <div className="space-y-2">
-          <Label htmlFor="signup-firstName">Prénom</Label>
-          <Input id="signup-firstName" name="firstName" placeholder="Jean" />
-        </div>
-        <div className="space-y-2">
-          <Label htmlFor="signup-lastName">Nom</Label>
-          <Input id="signup-lastName" name="lastName" placeholder="Dupont" />
-        </div>
+      <div className="space-y-2">
+        <Label htmlFor="signup-firstName">Prénom</Label>
+        <Input id="signup-firstName" name="firstName" placeholder="Jean" />
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="signup-email">Email</Label>
+        <Label htmlFor="signup-lastName">Nom</Label>
+        <Input id="signup-lastName" name="lastName" placeholder="Dupont" />
+      </div>
+
+      <div className="space-y-2">
+        <Label htmlFor="signup-email">
+          Email <span className="text-primary">*</span>
+        </Label>
         <Input
           id="signup-email"
           name="email"
@@ -243,23 +305,42 @@ function SignUpForm({
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="signup-password">Mot de passe</Label>
-        <Input
-          id="signup-password"
-          type="password"
-          name="password"
-          placeholder="Minimum 8 caractères"
-          minLength={8}
-          required
-        />
+        <Label htmlFor="signup-password">
+          Mot de passe <span className="text-primary">*</span>
+        </Label>
+        <div className="relative">
+          <Input
+            id="signup-password"
+            type={showPassword ? "text" : "password"}
+            name="password"
+            placeholder="Minimum 8 caractères"
+            minLength={8}
+            required
+            className="pr-10"
+          />
+          <Button
+            type="button"
+            variant="ghost"
+            size="icon"
+            className="absolute right-0 top-0 h-full px-3 text-muted-foreground hover:text-foreground"
+            onClick={() => setShowPassword((v) => !v)}
+            tabIndex={-1}
+          >
+            {showPassword ? (
+              <Interfaces.Hide className="h-4 w-4" />
+            ) : (
+              <Interfaces.Unhide className="h-4 w-4" />
+            )}
+          </Button>
+        </div>
       </div>
 
       <SubmitButton
-        pendingText="Inscription..."
+        pendingText="Création du compte..."
         isLoading={isLoading}
         className="w-full"
       >
-        S'inscrire
+        Créer mon compte
       </SubmitButton>
 
       {message && <FormMessage message={message} />}

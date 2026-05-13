@@ -3,9 +3,11 @@
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Loader2, CheckCircle2, Clock, ChevronRight } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Interfaces } from "doodle-icons";
 import Link from "next/link";
+import Image from "next/image";
+import { scales } from "@/app/scalesData";
 
 interface PortalSession {
   id: string;
@@ -22,6 +24,7 @@ interface PortalData {
   batchId: string;
   patientFirstName: string;
   patientLastName: string;
+  practitionerMessage: string | null;
   totalCount: number;
   pendingCount: number;
   completedCount: number;
@@ -53,7 +56,7 @@ export default function PatientPortalPage() {
         setPortal(data.portal);
       } catch (err) {
         setError(
-          err instanceof Error ? err.message : "Une erreur est survenue"
+          err instanceof Error ? err.message : "Une erreur est survenue",
         );
       } finally {
         setLoading(false);
@@ -68,10 +71,7 @@ export default function PatientPortalPage() {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
-        <div className="text-center">
-          <Loader2 className="h-8 w-8 animate-spin text-indigo-600 mx-auto" />
-          <p className="mt-4 text-gray-600">Chargement...</p>
-        </div>
+        <Interfaces.Sync className="h-8 w-8 animate-spin text-brand-orange" />
       </div>
     );
   }
@@ -99,11 +99,17 @@ export default function PatientPortalPage() {
     <div className="min-h-screen bg-gray-50 py-8 px-4">
       <div className="max-w-2xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-indigo-100 rounded-full mb-4">
-            <span className="text-2xl font-bold text-indigo-600">M</span>
+        <div className="text-center mt-6 mb-10">
+          <div className="mb-12">
+            <Image
+              src="/images/logos/logo-melya.svg"
+              alt="Melya"
+              width={120}
+              height={40}
+              className="mx-auto"
+            />
           </div>
-          <h1 className="text-2xl font-semibold text-gray-900">
+          <h1 className="font-heading text-4xl font-normal text-gray-900">
             Bonjour {portal.patientFirstName},
           </h1>
           {portal.allCompleted ? (
@@ -124,7 +130,7 @@ export default function PatientPortalPage() {
           <Card className="mb-6 border-green-200 bg-green-50">
             <CardContent className="py-6">
               <div className="flex items-center justify-center gap-3">
-                <CheckCircle2 className="h-8 w-8 text-green-600" />
+                <Interfaces.Tick2 className="h-8 w-8 text-green-600" />
                 <div className="text-center">
                   <p className="font-medium text-green-900">
                     Merci pour vos réponses !
@@ -138,62 +144,93 @@ export default function PatientPortalPage() {
           </Card>
         )}
 
+        {/* Practitioner message */}
+        {portal.practitionerMessage && !portal.allCompleted && (
+          <Card className="mb-6">
+            <CardContent className="py-4">
+              <p className="text-sm font-medium text-gray-900 mb-1">
+                Message de votre psychologue
+              </p>
+              <p className="text-sm text-gray-700 whitespace-pre-wrap">
+                {portal.practitionerMessage}
+              </p>
+            </CardContent>
+          </Card>
+        )}
+
         {/* Sessions list */}
-        <div className="space-y-3">
-          {portal.sessions.map((session) => (
-            <Card
-              key={session.id}
-              className={session.isCompleted ? "opacity-75" : ""}
-            >
-              <CardContent className="py-4">
-                <div className="flex items-center justify-between gap-4">
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2">
-                      {session.isCompleted ? (
-                        <CheckCircle2 className="h-5 w-5 text-green-600 flex-shrink-0" />
-                      ) : (
-                        <div className="h-5 w-5 rounded-full border-2 border-indigo-300 flex-shrink-0" />
-                      )}
-                      <h3
-                        className={`font-medium truncate ${
-                          session.isCompleted
-                            ? "text-gray-500"
-                            : "text-gray-900"
-                        }`}
-                      >
-                        {session.scaleTitle}
-                      </h3>
-                    </div>
-                    {session.scaleDescription && (
-                      <p className="text-sm text-gray-500 mt-1 ml-7 line-clamp-1">
-                        {session.scaleDescription}
+        <div className="space-y-3 my-10">
+          {portal.sessions.map((session) => {
+            const scaleData = scales.find((s) => s.id === session.scaleId);
+            const cardSubtitle =
+              scaleData?.patientIntroSubtitle === undefined
+                ? scaleData?.label ?? session.scaleDescription
+                : scaleData.patientIntroSubtitle;
+            return (
+              <div key={session.id} className="flex items-center gap-4">
+                {/* Card */}
+                <div
+                  className={`flex flex-col sm:flex-row overflow-hidden flex-1 ${session.isCompleted ? "opacity-60" : ""}`}
+                  style={{ borderRadius: 20 }}
+                >
+                {/* Icon block */}
+                <div
+                  className="flex items-center justify-center flex-shrink-0 h-16 w-full sm:h-auto sm:w-20 sm:self-stretch"
+                  style={{ backgroundColor: scaleData?.color ?? "#D6591F" }}
+                >
+                  {scaleData?.icon ? (
+                    <Image
+                      src={scaleData.icon}
+                      alt={session.scaleTitle}
+                      width={48}
+                      height={48}
+                      className="w-3/5 h-3/5 object-contain"
+                    />
+                  ) : (
+                    <span className="text-white font-bold text-lg">
+                      {session.scaleTitle.slice(0, 2).toUpperCase()}
+                    </span>
+                  )}
+                </div>
+
+                {/* Content block */}
+                <div
+                  className="flex flex-col sm:flex-row sm:items-center sm:justify-between px-5 py-4 flex-1 min-w-0 gap-3"
+                  style={{ backgroundColor: scaleData?.colorLight ?? "#F5DDD4" }}
+                >
+                  <div className="flex-1 min-w-0 overflow-hidden">
+                    <p className="font-heading font-bold text-black leading-tight text-xl">
+                      {scaleData?.acronym ?? session.scaleTitle}
+                    </p>
+                    {cardSubtitle && (
+                      <p className="font-body text-black/70 text-sm leading-snug mt-0.5 truncate">
+                        {cardSubtitle}
                       </p>
                     )}
                     {session.estimatedTime && !session.isCompleted && (
-                      <div className="flex items-center gap-1 text-xs text-gray-400 mt-1 ml-7">
-                        <Clock className="h-3 w-3" />
+                      <div className="flex items-center gap-1 text-xs text-black/50 mt-1">
+                        <Interfaces.Clock className="h-3 w-3" />
                         <span>{session.estimatedTime}</span>
                       </div>
                     )}
                   </div>
-                  <div className="flex-shrink-0">
+                  <div className="flex-shrink-0 flex sm:block justify-center sm:justify-end">
                     {session.isCompleted ? (
-                      <span className="inline-flex items-center px-3 py-1.5 text-sm font-medium text-green-700 bg-green-100 rounded-full">
-                        Terminé
-                      </span>
+                      <Button variant="success" disabled className="disabled:opacity-100">
+                        <Interfaces.Tick2 className="fill-white" />
+                        Complété
+                      </Button>
                     ) : (
-                      <Button asChild size="sm">
-                        <Link href={`/session/${session.id}`}>
-                          Commencer
-                          <ChevronRight className="h-4 w-4 ml-1" />
-                        </Link>
+                      <Button asChild>
+                        <Link href={`/session/${session.id}`}>Commencer</Link>
                       </Button>
                     )}
                   </div>
                 </div>
-              </CardContent>
-            </Card>
-          ))}
+                </div>
+              </div>
+            );
+          })}
         </div>
 
         {/* Progress indicator */}

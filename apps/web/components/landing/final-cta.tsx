@@ -1,6 +1,6 @@
 "use client";
 
-import { WaitlistButton } from "./waitlist-button";
+import Link from "next/link";
 import { useScrollAnimation } from "./use-scroll-animation";
 
 export function FinalCTA() {
@@ -12,16 +12,24 @@ export function FinalCTA() {
         ref={ref}
         className={`mx-auto max-w-3xl px-4 sm:px-6 text-center scroll-animate ${isVisible ? "visible" : ""}`}
       >
-        <h2 className="text-3xl sm:text-4xl font-normal text-foreground mb-4">
+        <h2 className="font-gelica text-3xl sm:text-4xl font-normal text-foreground mb-4">
           Prêt·e à simplifier votre pratique clinique ?
         </h2>
         <p className="text-lg text-muted-foreground font-body mb-8 max-w-xl mx-auto">
-          Rejoignez les psychologues qui utilisent Melya pour automatiser leurs
+          Rejoignez les psychologue·s qui utilisent Melya pour automatiser leurs
           cotations.
         </p>
-        <WaitlistButton size="lg" className="font-body font-medium text-sm rounded-full px-8 bg-brand-orange text-white hover:bg-brand-orange/90">
-          Je souhaite essayer Melya (gratuit)
-        </WaitlistButton>
+        <div className="relative inline-flex flex-col items-center">
+          <Link
+            href="/dashboard"
+            className="font-body font-medium text-sm rounded-full px-8 py-3 bg-brand-orange text-white hover:bg-brand-orange/90 transition-colors"
+          >
+            Je souhaite essayer Melya
+          </Link>
+          <span className="absolute -bottom-6 text-xs text-foreground/50 font-body">
+            100% gratuit
+          </span>
+        </div>
       </div>
     </section>
   );

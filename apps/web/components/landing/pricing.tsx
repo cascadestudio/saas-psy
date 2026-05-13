@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Interfaces } from "doodle-icons";
 import { Badge } from "@/components/ui/badge";
-import { WaitlistButton } from "./waitlist-button";
+import Link from "next/link";
 import { useScrollAnimation } from "./use-scroll-animation";
 
 export function Pricing() {
@@ -16,7 +16,7 @@ export function Pricing() {
 
   const plans = [
     {
-      name: "Gratuit",
+      name: "Gratuit pour un temps limité",
       price: "0€",
       period: "",
       note: "",
@@ -27,7 +27,7 @@ export function Pricing() {
         "Cotation automatique",
       ],
       cta: "Commencer gratuitement",
-      variant: "outline" as const,
+      variant: "secondary" as const,
       highlighted: false,
     },
     {
@@ -35,13 +35,13 @@ export function Pricing() {
       price: proPrice,
       period: proPeriod,
       note: proNote,
-      description: "Pour les praticiens qui utilisent les échelles régulièrement",
+      description: "Pour les praticien·ne·s qui utilisent les échelles régulièrement",
       features: [
         "Patients illimités",
         "Passations illimitées",
         "Historique complet des passations",
       ],
-      cta: "Rejoindre la liste d'attente",
+      cta: "Essayer Melya",
       variant: "default" as const,
       highlighted: true,
     },
@@ -54,7 +54,7 @@ export function Pricing() {
           ref={ref}
           className={`scroll-animate ${isVisible ? "visible" : ""}`}
         >
-          <h2 className="text-2xl sm:text-3xl font-bold text-center text-foreground mb-6">
+          <h2 className="font-gelica text-2xl sm:text-3xl font-bold text-center text-foreground mb-6">
             Tarifs
           </h2>
 
@@ -82,7 +82,7 @@ export function Pricing() {
               Annuel
             </span>
             {isYearly && (
-              <Badge className="text-xs bg-brand-orange/10 text-brand-orange border-brand-orange/20">
+              <Badge className="text-xs bg-surface-brand-bg text-brand-orange border-brand-orange/20">
                 -33%
               </Badge>
             )}
@@ -137,17 +137,16 @@ export function Pricing() {
                 </ul>
 
                 <div className="mt-8">
-                  <WaitlistButton
-                    variant={plan.highlighted ? "default" : "outline"}
-                    className={
+                  <Link
+                    href="/dashboard"
+                    className={`block w-full text-center font-body font-medium text-sm rounded-full px-5 py-3 transition-colors ${
                       plan.highlighted
-                        ? "w-full bg-brand-orange text-white hover:bg-brand-orange/90"
-                        : "w-full border-brand-orange text-brand-orange hover:bg-brand-orange hover:text-white"
-                    }
-                    size="lg"
+                        ? "bg-brand-orange text-white hover:bg-brand-orange/90"
+                        : "border border-brand-orange text-brand-orange hover:bg-brand-orange hover:text-white"
+                    }`}
                   >
                     {plan.cta}
-                  </WaitlistButton>
+                  </Link>
                 </div>
               </div>
             ))}

@@ -10,7 +10,6 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Interfaces } from "doodle-icons";
-import { Check } from "lucide-react";
 
 export function PremiumGateModal() {
   const { isOpen, closePremiumGate, gateType, currentCount, maxCount, featureName } = usePremiumGate();
@@ -27,8 +26,8 @@ export function PremiumGateModal() {
           </DialogTitle>
           <DialogDescription>
             {isPatientLimit
-              ? `Vous avez atteint la limite de ${maxCount} patients du plan gratuit`
-              : `${featureName} est une fonctionnalité réservée aux abonnés Premium`}
+              ? `Vous avez atteint la limite de ${maxCount} patient·e·s du plan gratuit`
+              : `${featureName} est une fonctionnalité réservée aux abonné·e·s Premium`}
           </DialogDescription>
         </DialogHeader>
 
@@ -49,27 +48,27 @@ export function PremiumGateModal() {
             </p>
             <ul className="space-y-2">
               <li className="flex items-center gap-2 text-sm">
-                <Check className="h-4 w-4 text-primary" />
+                <Interfaces.Tick className="h-4 w-4 text-primary" />
                 Patients illimités
               </li>
               <li className="flex items-center gap-2 text-sm">
-                <Check className="h-4 w-4 text-primary" />
-                Archivage des patients
+                <Interfaces.Tick className="h-4 w-4 text-primary" />
+                Archivage des patient·e·s
               </li>
               <li className="flex items-center gap-2 text-sm">
-                <Check className="h-4 w-4 text-primary" />
+                <Interfaces.Tick className="h-4 w-4 text-primary" />
                 Export PDF des résultats
               </li>
               <li className="flex items-center gap-2 text-sm">
-                <Check className="h-4 w-4 text-primary" />
+                <Interfaces.Tick className="h-4 w-4 text-primary" />
                 Support prioritaire
               </li>
             </ul>
           </div>
 
           <div className="space-y-2">
-            <Button className="w-full" size="lg">
-              <Interfaces.Star className="mr-2 h-4 w-4" />
+            <Button className="w-full" >
+              <Interfaces.Star />
               Passer à Premium
             </Button>
             <Button
@@ -85,7 +84,7 @@ export function PremiumGateModal() {
         {isPatientLimit && (
           <div className="border-t pt-4">
             <p className="text-xs text-muted-foreground text-center">
-              Vous pouvez aussi libérer de la place en supprimant des patients existants.
+              Vous pouvez aussi libérer de la place en supprimant des patient·e·s existant·e·s.
             </p>
           </div>
         )}

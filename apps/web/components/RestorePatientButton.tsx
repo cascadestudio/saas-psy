@@ -10,14 +10,14 @@ import { usePremiumGate } from "@/app/context/PremiumGateContext";
 interface RestorePatientButtonProps {
   patient: Patient;
   onRestored?: () => void;
-  variant?: "default" | "outline" | "ghost" | "secondary";
+  variant?: "default" | "ghost" | "secondary";
   size?: "default" | "sm" | "lg" | "icon";
 }
 
 export function RestorePatientButton({
   patient,
   onRestored,
-  variant = "outline",
+  variant = "ghost",
   size = "sm",
 }: RestorePatientButtonProps) {
   const [isLoading, setIsLoading] = useState(false);
@@ -27,7 +27,7 @@ export function RestorePatientButton({
   const handleRestore = async () => {
     // Check premium status
     if (!user?.isPremium) {
-      openPremiumFeatureGate("La restauration des patients");
+      openPremiumFeatureGate("La restauration des patient·e·s");
       return;
     }
 
@@ -49,7 +49,7 @@ export function RestorePatientButton({
       onClick={handleRestore}
       disabled={isLoading}
     >
-      <Interfaces.Sync className="mr-2 h-4 w-4" />
+      <Interfaces.Sync />
       {isLoading ? "Restauration..." : "Restaurer"}
     </Button>
   );

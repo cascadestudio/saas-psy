@@ -19,7 +19,7 @@ export function Footer() {
           {/* Links */}
           <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm font-body text-muted-foreground">
             <a
-              href="mailto:contact@cascadestudio.fr"
+              href="mailto:clement@melya.app"
               className="hover:text-foreground transition-colors"
             >
               Contact

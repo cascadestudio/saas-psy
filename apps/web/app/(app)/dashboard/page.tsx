@@ -1,58 +1,41 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
 import { useSearchParams, useRouter } from "next/navigation";
 import { useUser } from "@/app/context/UserContext";
 import { useAuthGate } from "@/app/context/AuthGateContext";
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import {
   patientsApi,
   sessionsApi,
   type Patient,
   type Session,
 } from "@/lib/api-client";
-import { scales } from "@/app/scalesData";
-import { Interfaces } from "doodle-icons";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
+import { Interfaces, Arrow } from "doodle-icons";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
 import { CreatePatientSheet } from "@/components/CreatePatientSheet";
-import { GlobalSearchBar } from "@/components/GlobalSearchBar";
-import { SESSION_STATUS_CONFIG } from "@/lib/session-status";
+import { SendScaleSheet } from "@/components/SendScaleSheet";
+import { MOCK_PATIENTS, MOCK_SESSIONS } from "@/lib/mock-data";
+import { DashboardSkeleton } from "@/components/dashboard/DashboardSkeleton";
+import { SessionRow, relativeDayLabel } from "@/components/sessions/SessionRow";
 
-function daysSinceSent(dateStr: string) {
-  const days = Math.floor(
-    (Date.now() - new Date(dateStr).getTime()) / (1000 * 60 * 60 * 24),
-  );
-  if (days === 0) return "Aujourd'hui";
-  if (days === 1) return "Il y a 1 jour";
-  return `Il y a ${days} jours`;
+const PENDING_THRESHOLD_DAYS = 7;
+const RECENT_WINDOW_DAYS = 30;
+
+function daysSince(dateStr: string) {
+  const then = new Date(dateStr);
+  then.setHours(0, 0, 0, 0);
+  const now = new Date();
+  now.setHours(0, 0, 0, 0);
+  return Math.round((now.getTime() - then.getTime()) / 86400000);
 }
 
-export default function DashboardPage() {
-  const { user, isLoading } = useUser();
-  const { openAuthGate } = useAuthGate();
+function LoginParamHandler() {
   const searchParams = useSearchParams();
   const router = useRouter();
-  const [patients, setPatients] = useState<Patient[]>([]);
-  const [patientsLoading, setPatientsLoading] = useState(true);
-  const [sessions, setSessions] = useState<Session[]>([]);
-  const [patientFilter, setPatientFilter] = useState<"all" | "active">("all");
-  const [sessionFilter, setSessionFilter] = useState<"all" | "SENT" | "STARTED" | "COMPLETED">("all");
+  const { openAuthGate } = useAuthGate();
 
-  // Open auth modal if redirected from password reset
   useEffect(() => {
     if (searchParams.get("login") === "true") {
       openAuthGate();
@@ -60,399 +43,214 @@ export default function DashboardPage() {
     }
   }, [searchParams, openAuthGate, router]);
 
-  // Load patients and sessions from API (only for authenticated users)
+  return null;
+}
+
+export default function DashboardPage() {
+  const { user, isLoading } = useUser();
+  const { openAuthGate } = useAuthGate();
+  const [patients, setPatients] = useState<Patient[]>([]);
+  const [sessions, setSessions] = useState<Session[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [sendScaleOpen, setSendScaleOpen] = useState(false);
+
   useEffect(() => {
     if (!user) {
-      setPatientsLoading(false);
+      setPatients(MOCK_PATIENTS);
+      setSessions(MOCK_SESSIONS);
+      setLoading(false);
       return;
     }
-
     const loadData = async () => {
-      setPatientsLoading(true);
+      setLoading(true);
       try {
-        const { patients: data } = await patientsApi.getAll();
-        setPatients(data);
+        const [pRes, sRes] = await Promise.all([
+          patientsApi.getAll(),
+          sessionsApi.getRecent(50),
+        ]);
+        setPatients(pRes.patients);
+        setSessions(sRes.sessions);
       } catch (error) {
-        console.error("Error loading patients:", error);
+        console.error("Error loading dashboard data:", error);
       } finally {
-        setPatientsLoading(false);
-      }
-      try {
-        const { sessions: data } = await sessionsApi.getRecent(20);
-        setSessions(data);
-      } catch (error) {
-        console.error("Error loading sessions:", error);
+        setLoading(false);
       }
     };
-
     loadData();
   }, [user]);
 
-  const handlePatientCreated = async () => {
+  const refreshData = async () => {
     try {
-      const { patients: data } = await patientsApi.getAll();
-      setPatients(data);
+      const [pRes, sRes] = await Promise.all([
+        patientsApi.getAll(),
+        sessionsApi.getRecent(50),
+      ]);
+      setPatients(pRes.patients);
+      setSessions(sRes.sessions);
     } catch (error) {
-      console.error("Error refreshing patients:", error);
+      console.error("Error refreshing data:", error);
     }
   };
 
-  if (isLoading) {
-    return (
-      <div className="flex-1 w-full flex items-center justify-center">
-        <p>Chargement...</p>
-      </div>
-    );
+  if (isLoading || loading) {
+    return <DashboardSkeleton />;
   }
 
-  // Mock data for anonymous users
-  const mockSessions: {
-    id: string;
-    patientName: string;
-    scaleId: string;
-    status: Session["status"];
-    date: string;
-  }[] = [
-    {
-      id: "1",
-      patientName: "Marie Dupont",
-      scaleId: "inventaire-de-depression-de-beck",
-      status: "SENT",
-      date: "28/03",
-    },
-    {
-      id: "2",
-      patientName: "Marie Dupont",
-      scaleId: "stai-anxiete-generalisee",
-      status: "STARTED",
-      date: "30/03",
-    },
-    {
-      id: "3",
-      patientName: "Jean Martin",
-      scaleId: "echelle-d-anxiete-sociale-de-liebowitz",
-      status: "COMPLETED",
-      date: "01/04",
-    },
-    {
-      id: "4",
-      patientName: "Sophie Bernard",
-      scaleId: "traumatismes-pcl5",
-      status: "SENT",
-      date: "31/03",
-    },
-  ];
+  const isToRelaunch = (s: Session) =>
+    daysSince(s.lastReminderAt || s.sentAt || s.createdAt) >=
+    PENDING_THRESHOLD_DAYS;
 
-  const mockPatients = [
-    { id: "1", name: "Marie Dupont", hasActive: true },
-    { id: "2", name: "Jean Martin", hasActive: false },
-    { id: "3", name: "Sophie Bernard", hasActive: true },
-    { id: "4", name: "Lucas Moreau", hasActive: false },
-  ];
+  const inProgress = sessions
+    .filter((s) => s.status === "SENT" || s.status === "STARTED")
+    .sort((a, b) => {
+      const aRelaunch = isToRelaunch(a) ? 1 : 0;
+      const bRelaunch = isToRelaunch(b) ? 1 : 0;
+      if (aRelaunch !== bRelaunch) return bRelaunch - aRelaunch;
+      return (
+        new Date(b.sentAt || b.createdAt).getTime() -
+        new Date(a.sentAt || a.createdAt).getTime()
+      );
+    });
 
-  const getScaleTitle = (scaleId: string) => {
-    return scales.find((s) => s.id === scaleId)?.title ?? scaleId;
-  };
+  const recentResults = sessions
+    .filter(
+      (s) =>
+        s.status === "COMPLETED" &&
+        s.completedAt &&
+        daysSince(s.completedAt) <= RECENT_WINDOW_DAYS,
+    )
+    .sort((a, b) => {
+      const aUnread = !a.viewedAt ? 1 : 0;
+      const bUnread = !b.viewedAt ? 1 : 0;
+      if (aUnread !== bUnread) return bUnread - aUnread;
+      return (
+        new Date(b.completedAt!).getTime() - new Date(a.completedAt!).getTime()
+      );
+    });
 
-  // Anonymous user view with mock data
-  if (!user) {
-    return (
-      <div className="container mx-auto px-4 py-6">
-        <div className="mb-6">
-          <h1 className="text-4xl font-normal not-italic">
-            Bienvenue sur Melya
-          </h1>
-        </div>
-
-        <div className="space-y-6">
-          {/* Suivi des passations - mock */}
-          <div>
-            <div className="mb-3">
-              <h2 className="text-lg font-sans font-semibold">
-                Suivi des passations
-              </h2>
-            </div>
-            <div className="flex gap-3 overflow-x-auto pb-2">
-              {mockSessions.map((session) => {
-                const config = SESSION_STATUS_CONFIG[session.status];
-                return (
-                  <Link
-                    key={session.id}
-                    href={`/results/${session.id}`}
-                    className="bg-muted-foreground/5 rounded-lg p-4 min-w-[200px] hover:bg-muted-foreground/10 transition-colors flex-shrink-0"
-                  >
-                    <p className="font-medium text-sm">{session.patientName}</p>
-                    <p className="text-sm text-muted-foreground mt-1">
-                      {getScaleTitle(session.scaleId)}
-                    </p>
-                    <div className="flex items-center justify-between mt-3">
-                      <Badge className={config.className} variant="secondary">
-                        {config.label}
-                      </Badge>
-                      <span className="text-xs text-muted-foreground">
-                        {session.date}
-                      </span>
-                    </div>
-                  </Link>
-                );
-              })}
-            </div>
-          </div>
-
-          {/* Mes patients - mock */}
-          <div>
-            <div className="mb-3 flex items-center justify-between">
-              <div>
-                <h2 className="text-lg font-sans font-semibold">
-                  Mes patients
-                </h2>
-              </div>
-              <CreatePatientSheet
-                onPatientCreated={handlePatientCreated}
-                buttonSize="sm"
-                buttonText="Ajouter"
-                currentPatientCount={0}
-              />
-            </div>
-            <Card className="border-0 bg-muted-foreground/5 shadow-none hover:shadow-none">
-              <CardContent className="p-4">
-                <div className="rounded-lg overflow-hidden">
-                  <table className="w-full">
-                    <tbody>
-                      {mockPatients.map((patient) => (
-                        <tr
-                          key={patient.id}
-                          className="border-t border-border/50 first:border-t-0 hover:bg-background/50 transition-colors"
-                        >
-                          <td className="p-3">
-                            <div className="flex items-center gap-2">
-                              <p className="font-medium">{patient.name}</p>
-                              {patient.hasActive && (
-                                <Badge variant="secondary" className="text-xs">
-                                  Passation en cours
-                                </Badge>
-                              )}
-                            </div>
-                          </td>
-                          <td className="p-3 text-right">
-                            <Button
-                              variant="default"
-                              size="sm"
-                              onClick={() => openAuthGate()}
-                            >
-                              <Interfaces.Send className="mr-2 h-4 w-4" />
-                              Envoyer une échelle
-                            </Button>
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  // Sort sessions: pending first, then completed
-  const sortedSessions = [...sessions].sort((a, b) => {
-    const aIsPending = ["SENT", "STARTED"].includes(a.status);
-    const bIsPending = ["SENT", "STARTED"].includes(b.status);
-    if (aIsPending && !bIsPending) return -1;
-    if (!aIsPending && bIsPending) return 1;
-    return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
-  });
-
-  const activeSessions =
-    sessionFilter === "all"
-      ? sortedSessions
-      : sortedSessions.filter((s) => s.status === sessionFilter);
-
-  // Sort patients: those with active sessions first
-  const patientIdsWithActiveSessions = new Set(
-    sessions
-      .filter((s) => ["SENT", "STARTED"].includes(s.status))
-      .map((s) => s.patientId),
-  );
-
-  const sortedPatients = [...patients].sort((a, b) => {
-    const aHasActive = patientIdsWithActiveSessions.has(a.id);
-    const bHasActive = patientIdsWithActiveSessions.has(b.id);
-    if (aHasActive && !bHasActive) return -1;
-    if (!aHasActive && bHasActive) return 1;
-    return 0;
-  });
-
-  const filteredPatients =
-    patientFilter === "active"
-      ? sortedPatients.filter((p) => patientIdsWithActiveSessions.has(p.id))
-      : sortedPatients;
+  const firstName = user?.firstName ? `, ${user.firstName}` : "";
 
   return (
     <div className="container mx-auto px-4 py-6">
-      <GlobalSearchBar patients={patients} sessions={sessions} />
-      <div className="mb-6">
-        <h1 className="font-normal text-3xl">
-          Bonjour{user.firstName ? `, ${user.firstName}` : ""}
+      <Suspense fallback={null}>
+        <LoginParamHandler />
+      </Suspense>
+      {!user && (
+        <div className="mb-6 rounded-lg bg-surface-brand-bg px-4 py-3 flex items-center justify-between gap-4">
+          <p className="text-sm text-brand-orange">
+            Vous explorez Melya avec des données d'exemple. Créez un compte pour
+            ajouter vos vrais patient·e·s.
+          </p>
+          <Button onClick={() => openAuthGate()}>
+            Se connecter
+          </Button>
+        </div>
+      )}
+      <div className="mb-8">
+        <h1 className="font-gelica font-normal text-4xl">
+          {user ? `Bonjour${firstName}` : "Bienvenue sur Melya"}
         </h1>
       </div>
 
-      <div className="space-y-6">
-        {/* Suivi des passations */}
-        <div>
-          <div className="mb-3">
-            <h2 className="text-lg font-sans font-semibold">
-              Suivi des passations
-            </h2>
-          </div>
-          <div className="flex gap-2 mb-3">
-            {(["all", "SENT", "STARTED", "COMPLETED"] as const).map((filter) => {
-              const label =
-                filter === "all"
-                  ? "Toutes"
-                  : SESSION_STATUS_CONFIG[filter].label;
-              return (
-                <button
-                  key={filter}
-                  className={`px-3 py-1 text-sm rounded-full transition-colors ${sessionFilter === filter ? "bg-foreground text-background" : "bg-muted text-muted-foreground"}`}
-                  onClick={() => setSessionFilter(filter)}
-                >
-                  {label}
-                </button>
-              );
-            })}
-          </div>
-          {activeSessions.length === 0 ? (
-            <p className="text-sm text-muted-foreground text-center py-8">
-              Aucune passation en cours
+      <div className="flex flex-wrap gap-3 mb-10">
+        <Button onClick={() => setSendScaleOpen(true)}>
+          <Interfaces.Send />
+          Envoyer une échelle
+        </Button>
+        <CreatePatientSheet
+          onPatientCreated={refreshData}
+          currentPatientCount={patients.length}
+          buttonVariant="secondary"
+          buttonSize="lg"
+        />
+      </div>
+
+      <div className="space-y-10">
+        <section>
+          <h2 className="text-xl font-sans font-semibold mb-3">
+            Passations en cours{" "}
+            <span className="text-muted-foreground font-normal text-sm">
+              ({inProgress.length})
+            </span>
+          </h2>
+          {inProgress.length === 0 ? (
+            <p className="text-sm text-muted-foreground py-4">
+              Vos passations en cours apparaîtront ici.
             </p>
           ) : (
-            <div className="flex gap-3 overflow-x-auto pb-2">
-              {activeSessions.map((session) => {
-                const config = SESSION_STATUS_CONFIG[session.status];
-                return (
-                  <Link
-                    key={session.id}
-                    href={`/results/${session.id}`}
-                    className="bg-muted-foreground/5 rounded-lg p-4 min-w-[200px] hover:bg-muted-foreground/10 transition-colors flex-shrink-0"
-                  >
-                    <p className="font-medium text-sm">
-                      {session.patient
-                        ? `${session.patient.firstName} ${session.patient.lastName}`
-                        : "Patient"}
-                    </p>
-                    <p className="text-sm text-muted-foreground mt-1">
-                      {getScaleTitle(session.scaleId)}
-                    </p>
-                    <div className="flex items-center justify-between mt-3">
-                      <Badge className={config.className} variant="secondary">
-                        {config.label}
-                      </Badge>
-                      <span className="text-xs text-muted-foreground">
-                        {daysSinceSent(session.sentAt || session.createdAt)}
-                      </span>
-                    </div>
-                  </Link>
-                );
-              })}
-            </div>
-          )}
-        </div>
-
-        {/* Mes patients */}
-        <div>
-          <div className="mb-3 flex items-center gap-2">
-            <h2 className="text-lg font-sans font-semibold">Mes patients</h2>
-            <TooltipProvider>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <span>
-                    <CreatePatientSheet
-                      onPatientCreated={handlePatientCreated}
-                      iconOnly
-                      buttonVariant="ghost"
-                      currentPatientCount={patients.length}
-                    />
-                  </span>
-                </TooltipTrigger>
-                <TooltipContent>
-                  <p>Ajouter un patient</p>
-                </TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
-          </div>
-          <div className="flex gap-2 mb-3">
-            <button
-              className={`px-3 py-1 text-sm rounded-full transition-colors ${patientFilter === "all" ? "bg-foreground text-background" : "bg-muted text-muted-foreground"}`}
-              onClick={() => setPatientFilter("all")}
-            >
-              Tous
-            </button>
-            <button
-              className={`px-3 py-1 text-sm rounded-full transition-colors ${patientFilter === "active" ? "bg-foreground text-background" : "bg-muted text-muted-foreground"}`}
-              onClick={() => setPatientFilter("active")}
-            >
-              Passation en cours
-            </button>
-          </div>
-          <Card className="border-0 bg-muted-foreground/5 shadow-none hover:shadow-none">
-            <CardContent className="p-4">
-              {patientsLoading ? (
-                <p className="text-sm text-muted-foreground text-center py-8">
-                  Chargement des patients...
-                </p>
-              ) : filteredPatients.length === 0 ? (
-                <p className="text-sm text-muted-foreground text-center py-8">
-                  {patientFilter === "active"
-                    ? "Aucune passation en cours"
-                    : "Aucun patient dans votre liste"}
-                </p>
-              ) : (
+            <Card className="border-0 bg-muted-foreground/5 shadow-none hover:shadow-none">
+              <CardContent className="p-4">
                 <div className="rounded-lg overflow-hidden">
-                  {filteredPatients.map((patient) => (
-                    <Link
-                      key={patient.id}
-                      href={`/patients/${patient.id}`}
-                      className="flex items-center justify-between p-3 border-t border-border/50 first:border-t-0 hover:bg-background/50 transition-colors"
-                    >
-                      <div className="flex items-center gap-2">
-                        <p className="font-medium">
-                          {patient.firstName} {patient.lastName}
-                        </p>
-                        {patientIdsWithActiveSessions.has(patient.id) && (
-                          <Badge variant="secondary" className="text-xs">
-                            Passation en cours
-                          </Badge>
-                        )}
-                      </div>
-                      <TooltipProvider>
-                        <Tooltip>
-                          <TooltipTrigger asChild>
-                            <Interfaces.Send
-                              className="h-4 w-4 flex-shrink-0"
-                              fill="#f97316"
-                              onClick={(e: React.MouseEvent) => {
-                                e.preventDefault();
-                                window.location.href = `/send-scale?patientId=${patient.id}`;
-                              }}
-                            />
-                          </TooltipTrigger>
-                          <TooltipContent>
-                            <p>Envoyer une échelle</p>
-                          </TooltipContent>
-                        </Tooltip>
-                      </TooltipProvider>
-                    </Link>
+                  {inProgress.map((s) => (
+                    <SessionRow
+                      key={s.id}
+                      session={s}
+                      primaryText={
+                        s.patient
+                          ? `${s.patient.firstName} ${s.patient.lastName}`
+                          : "Patient"
+                      }
+                      secondaryText={relativeDayLabel(s.createdAt)}
+                      rightLabel={relativeDayLabel(s.sentAt ?? s.createdAt)}
+                      relaunch={isToRelaunch(s)}
+                    />
                   ))}
                 </div>
-              )}
-            </CardContent>
-          </Card>
+              </CardContent>
+            </Card>
+          )}
+        </section>
+
+        <section>
+          <h2 className="text-xl font-sans font-semibold mb-3">
+            Résultats récents{" "}
+            <span className="text-muted-foreground font-normal text-sm">
+              ({recentResults.length})
+            </span>
+          </h2>
+          {recentResults.length === 0 ? (
+            <p className="text-sm text-muted-foreground py-4">
+              Aucun résultat récent.
+            </p>
+          ) : (
+            <Card className="border-0 bg-muted-foreground/5 shadow-none hover:shadow-none">
+              <CardContent className="p-4">
+                <div className="rounded-lg overflow-hidden">
+                  {recentResults.map((s) => (
+                    <SessionRow
+                      key={s.id}
+                      session={s}
+                      primaryText={
+                        s.patient
+                          ? `${s.patient.firstName} ${s.patient.lastName}`
+                          : "Patient"
+                      }
+                      secondaryText={relativeDayLabel(s.completedAt ?? s.createdAt)}
+                      rightLabel={typeof s.interpretation === "string" ? s.interpretation : undefined}
+                    />
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          )}
+        </section>
+
+        <div>
+          <Link
+            href="/patients"
+            className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+          >
+            Tous mes patient·e·s
+            <Arrow.ArrowRight className="h-4 w-4" />
+          </Link>
         </div>
       </div>
+
+      <SendScaleSheet
+        open={sendScaleOpen}
+        onOpenChange={setSendScaleOpen}
+        onSent={refreshData}
+      />
     </div>
   );
 }

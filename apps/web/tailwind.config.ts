@@ -7,6 +7,7 @@ const config = {
     "./components/**/*.{ts,tsx}",
     "./app/**/*.{ts,tsx}",
     "./src/**/*.{ts,tsx}",
+    "./lib/**/*.{ts,tsx}",
   ],
   prefix: "",
   theme: {
@@ -20,8 +21,8 @@ const config = {
     extend: {
       fontFamily: {
         sans: ["var(--font-rethink)", "sans-serif"],
-        heading: ["Gelica", "Georgia", "serif"],
-        gelica: ["Gelica", "Georgia", "serif"],
+        heading: ["var(--font-gelica)", "Georgia", "serif"],
+        gelica: ["var(--font-gelica)", "Georgia", "serif"],
         body: ["var(--font-rethink)", "sans-serif"],
       },
       colors: {
@@ -65,8 +66,10 @@ const config = {
           "4": "hsl(var(--chart-4))",
           "5": "hsl(var(--chart-5))",
         },
+        "surface-brand-bg": "hsl(var(--brand-orange) / 0.1)",
         brand: {
           orange: "hsl(var(--brand-orange))",
+          "orange-light": "hsl(var(--brand-orange-light))",
           terracotta: "hsl(var(--brand-terracotta))",
           beige: "hsl(var(--brand-beige))",
           cream: "hsl(var(--brand-cream))",

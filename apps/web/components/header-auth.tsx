@@ -11,8 +11,8 @@ export default function AuthButton() {
   if (isLoading) {
     return (
       <div className="flex gap-2">
-        <Button size="sm" variant="outline" disabled>
-          Chargement...
+        <Button size="sm" variant="secondary" disabled>
+          <Interfaces.Sync className="h-4 w-4 animate-spin" />
         </Button>
       </div>
     );
@@ -20,14 +20,14 @@ export default function AuthButton() {
 
   return user ? (
     <div className="flex items-center gap-2">
-      <Button asChild variant="outline" size="sm">
+      <Button asChild variant="secondary" size="sm">
         <Link href="/dashboard">
-          <Interfaces.User className="mr-2 h-4 w-4" />
+          <Interfaces.User />
           Tableau de bord
         </Link>
       </Button>
       <Button onClick={logout} variant="ghost" size="icon">
-        <Interfaces.Logout className="h-4 w-4" />
+        <Interfaces.Logout />
       </Button>
     </div>
   ) : (

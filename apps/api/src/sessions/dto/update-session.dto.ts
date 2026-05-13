@@ -1,7 +1,6 @@
 import { IsString, IsOptional, IsEnum, IsObject } from 'class-validator';
 
 export enum SessionStatus {
-  CREATED = 'CREATED',
   SENT = 'SENT',
   STARTED = 'STARTED',
   COMPLETED = 'COMPLETED',

@@ -3,17 +3,19 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+} from "@/components/ui/sheet";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { patientsApi, ApiError, type Patient } from "@/lib/api-client";
 import { toast } from "sonner";
+import { useUser } from "@/app/context/UserContext";
+import { useAuthGate } from "@/app/context/AuthGateContext";
 
 interface EditPatientSheetProps {
   patient: Patient;
@@ -29,6 +31,8 @@ export function EditPatientSheet({
   onOpenChange,
 }: EditPatientSheetProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const { user } = useUser();
+  const { openAuthGate } = useAuthGate();
 
   const handleOpenChange = (newOpen: boolean) => {
     if (!newOpen && isSubmitting) return;
@@ -37,7 +41,6 @@ export function EditPatientSheet({
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setIsSubmitting(true);
 
     const formData = new FormData(e.currentTarget);
     const data = {
@@ -48,15 +51,22 @@ export function EditPatientSheet({
       notes: (formData.get("notes") as string) || undefined,
     };
 
+    if (!user) {
+      onOpenChange(false);
+      openAuthGate();
+      return;
+    }
+
+    setIsSubmitting(true);
     try {
       const { patient: updated } = await patientsApi.update(patient.id, data);
+
+      onOpenChange(false);
+      onPatientUpdated?.(updated);
 
       toast.success("Patient modifié avec succès", {
         description: `${updated.firstName} ${updated.lastName} a été mis à jour`,
       });
-
-      onOpenChange(false);
-      onPatientUpdated?.(updated);
     } catch (error) {
       console.error("Error updating patient:", error);
       if (error instanceof ApiError) {
@@ -69,88 +79,90 @@ export function EditPatientSheet({
     }
   };
 
-  // Format birthDate for input[type="date"] (YYYY-MM-DD)
   const formatBirthDate = (date?: string) => {
     if (!date) return "";
     return new Date(date).toISOString().split("T")[0];
   };
 
   return (
-    <Dialog open={open} onOpenChange={handleOpenChange}>
-      <DialogContent className="sm:max-w-[500px]">
-        <DialogHeader>
-          <DialogTitle>Modifier le patient</DialogTitle>
-          <DialogDescription>
-            Modifiez les informations du patient.
-          </DialogDescription>
-        </DialogHeader>
-        <form onSubmit={handleSubmit} className="space-y-4 mt-4">
-          <div className="space-y-2">
-            <Label htmlFor="edit-email">Email *</Label>
-            <Input
-              id="edit-email"
-              name="email"
-              type="email"
-              required
-              autoFocus
-              defaultValue={patient.email}
-            />
-          </div>
+    <Sheet open={open} onOpenChange={handleOpenChange}>
+      <SheetContent
+        side="right"
+        className="w-full sm:max-w-xl flex flex-col gap-0 p-0 [&_label]:font-body"
+        onCloseAutoFocus={(e) => e.preventDefault()}
+      >
+        <SheetHeader className="p-6 bg-surface-brand-bg">
+          <SheetTitle className="font-body">Modifier patient·e</SheetTitle>
+          <SheetDescription>
+            Modifiez les informations de patient·e.
+          </SheetDescription>
+        </SheetHeader>
 
-          <div className="grid grid-cols-2 gap-4">
+        <form
+          onSubmit={handleSubmit}
+          className="flex flex-col flex-1 min-h-0"
+        >
+          <div className="flex-1 overflow-y-auto p-6 space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="edit-firstName">Prénom</Label>
+              <Label htmlFor="edit-email">Email *</Label>
               <Input
-                id="edit-firstName"
-                name="firstName"
-                defaultValue={patient.firstName}
+                id="edit-email"
+                name="email"
+                type="email"
+                required
+                autoFocus
+                defaultValue={patient.email}
               />
             </div>
+
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label htmlFor="edit-firstName">Prénom</Label>
+                <Input
+                  id="edit-firstName"
+                  name="firstName"
+                  defaultValue={patient.firstName}
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="edit-lastName">Nom</Label>
+                <Input
+                  id="edit-lastName"
+                  name="lastName"
+                  defaultValue={patient.lastName}
+                />
+              </div>
+            </div>
+
             <div className="space-y-2">
-              <Label htmlFor="edit-lastName">Nom</Label>
+              <Label htmlFor="edit-birthDate">Date de naissance</Label>
               <Input
-                id="edit-lastName"
-                name="lastName"
-                defaultValue={patient.lastName}
+                id="edit-birthDate"
+                name="birthDate"
+                type="date"
+                defaultValue={formatBirthDate(patient.birthDate)}
+              />
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="edit-notes">Notes</Label>
+              <Textarea
+                id="edit-notes"
+                name="notes"
+                placeholder="Notes confidentielles..."
+                rows={6}
+                defaultValue={patient.notes || ""}
               />
             </div>
           </div>
 
-          <div className="space-y-2">
-            <Label htmlFor="edit-birthDate">Date de naissance</Label>
-            <Input
-              id="edit-birthDate"
-              name="birthDate"
-              type="date"
-              defaultValue={formatBirthDate(patient.birthDate)}
-            />
-          </div>
-
-          <div className="space-y-2">
-            <Label htmlFor="edit-notes">Notes</Label>
-            <Textarea
-              id="edit-notes"
-              name="notes"
-              placeholder="Notes confidentielles sur le patient..."
-              rows={3}
-              defaultValue={patient.notes || ""}
-            />
-          </div>
-
-          <div className="flex gap-3 pt-2">
-            <Button type="submit" disabled={isSubmitting} className="flex-1">
+          <div className="p-6 bg-background">
+            <Button type="submit" disabled={isSubmitting} className="w-full">
               {isSubmitting ? "Enregistrement..." : "Enregistrer"}
-            </Button>
-            <Button
-              type="button"
-              variant="outline"
-              onClick={() => onOpenChange(false)}
-            >
-              Annuler
             </Button>
           </div>
         </form>
-      </DialogContent>
-    </Dialog>
+      </SheetContent>
+    </Sheet>
   );
 }

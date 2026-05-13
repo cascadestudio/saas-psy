@@ -24,10 +24,15 @@ model User {
   lastName      String?   @map("last_name")
   role          UserRole  @default(PRACTITIONER)
   isPremium     Boolean   @default(false) @map("is_premium")
+  isBetaUser    Boolean   @default(false) @map("is_beta_user")
 
   // Password reset
   passwordResetToken     String?   @unique @map("password_reset_token")
   passwordResetExpiresAt DateTime? @map("password_reset_expires_at")
+
+  // Feedback (Tally)
+  feedbackSubmittedAt DateTime? @map("feedback_submitted_at")
+  tallyResponseId     String?   @map("tally_response_id")
 
   createdAt     DateTime  @default(now()) @map("created_at")
   updatedAt     DateTime  @updatedAt @map("updated_at")
@@ -94,47 +99,14 @@ model Patient {
 }
 
 // ============================================
-// SCALES (Échelles psychométriques)
-// ============================================
-
-model Scale {
-  id                String   @id // e.g., "bdi", "stai-y-a"
-  title             String
-  description       String
-  longDescription   String   @map("long_description")
-  category          String
-  estimatedTime     String   @map("estimated_time")
-  formType          String   @map("form_type") @default("single-scale")
-
-  // Scale structure
-  questions         Json     // Stores the full scale structure
-  answerScales      Json?    @map("answer_scales")
-  scoring           Json?    // Scoring configuration
-
-  // Metadata
-  isPublished       Boolean  @default(true) @map("is_published")
-  requiresAuth      Boolean  @default(false) @map("requires_auth")
-  copyrightInfo     String?  @map("copyright_info")
-
-  createdAt         DateTime @default(now()) @map("created_at")
-  updatedAt         DateTime @updatedAt @map("updated_at")
-
-  // Relations
-  sessions          Session[]
-
-  @@map("scales")
-}
-
-// ============================================
 // SESSIONS (Passations)
 // ============================================
 
 model Session {
   id                String         @id @default(cuid())
 
-  // Scale reference
+  // Scale reference (hardcoded in @melya/core)
   scaleId           String         @map("scale_id")
-  scale             Scale          @relation(fields: [scaleId], references: [id])
 
   // Patient reference
   patientId         String         @map("patient_id")
@@ -155,11 +127,14 @@ model Session {
   score             String?        // Encrypted calculated score
   interpretation    String?        // Encrypted auto-generated interpretation
   patientComments   String?        @map("patient_comments")
+  practitionerMessage String?      @map("practitioner_message")
 
   // Timestamps
   sentAt            DateTime?      @map("sent_at")
+  lastReminderAt    DateTime?      @map("last_reminder_at")
   startedAt         DateTime?      @map("started_at")
   completedAt       DateTime?      @map("completed_at")
+  viewedAt          DateTime?      @map("viewed_at")
   createdAt         DateTime       @default(now()) @map("created_at")
   updatedAt         DateTime       @updatedAt @map("updated_at")
 

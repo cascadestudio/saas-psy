@@ -14,6 +14,7 @@ import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
 import { configValidationSchema } from './config/config.schema';
 import { EncryptionModule } from './encryption/encryption.module';
 import { AuditLogModule } from './audit-log/audit-log.module';
+import { FeedbackModule } from './feedback/feedback.module';
 
 @Module({
   imports: [
@@ -35,6 +36,7 @@ import { AuditLogModule } from './audit-log/audit-log.module';
     SessionsModule,
     ScalesModule,
     AuditLogModule,
+    FeedbackModule,
   ],
   controllers: [AppController],
   providers: [

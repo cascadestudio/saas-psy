@@ -12,32 +12,22 @@ const faqItems = [
   {
     question: "Quelles échelles psychologiques sont disponibles ?",
     answer:
-      "Melya propose au lancement 5 échelles parmi les plus utilisées en TCC : BDI (dépression), STAI (anxiété), LSAS (anxiété sociale), PCL-5 (trauma) et YBOCS (TOC). De nouvelles échelles sont ajoutées régulièrement en fonction des besoins des psychologues.",
+      "Melya propose 6 échelles parmi les plus utilisées en TCC : PHQ-9 (dépression), GAD-7 (anxiété généralisée), RSES (estime de soi), LSAS (anxiété sociale), PCL-5 (trauma) et Y-BOCS (TOC). De nouvelles échelles sont ajoutées régulièrement en fonction des besoins des psychologue·s.",
   },
   {
     question: "Mes données sont-elles vraiment sécurisées ?",
     answer:
-      "Oui. Melya est hébergé sur un serveur certifié HDS (Hébergeur de Données de Santé), conforme au RGPD. Toutes les données sont chiffrées et stockées en France. Seul·e vous, en tant que praticien·ne, pouvez accéder aux données de vos patients. Aucun·e autre praticien·ne utilisant Melya n'y a accès, et même l'équipe Melya n'a pas accès à vos données cliniques grâce au chiffrement. Vous restez propriétaire de vos données à tout moment. Pour toute question relative à la sécurité : contact@cascadestudio.fr",
+      "Oui. Melya est hébergé sur un serveur certifié HDS (Hébergeur de Données de Santé), conforme au RGPD. Toutes les données sont chiffrées et stockées en France. Seul·e vous, en tant que praticien·ne, pouvez accéder aux données de vos patients. Aucun·e autre praticien·ne utilisant Melya n'y a accès, et même l'équipe Melya n'a pas accès à vos données cliniques grâce au chiffrement. Vous restez propriétaire de vos données à tout moment. Pour toute question relative à la sécurité : clement@melya.app",
   },
   {
-    question: "Combien coûte Melya ?",
+    question: "Comment mes patient·e·s reçoivent les questionnaires ?",
     answer:
-      "Melya est gratuit jusqu'à 5 patients ou 20 passations par mois. Au-delà, l'abonnement Pro est à 10€/mois (ou 8€/mois en abonnement annuel).",
-  },
-  {
-    question: "Comment mes patients reçoivent-ils les questionnaires ?",
-    answer:
-      "Vos patients reçoivent un lien par email. Ils répondent directement depuis leur smartphone, tablette ou ordinateur, sans créer de compte.",
+      "Vos patient·e·s reçoivent un lien par email. Il·elle·s répondent directement depuis leur smartphone, tablette ou ordinateur, sans créer de compte.",
   },
   {
     question: "Respectez-vous le droit d'auteur des échelles ?",
     answer:
       "Oui. Les échelles proposées au lancement sont dans le domaine public ou utilisées avec les autorisations appropriées. Nous travaillons avec les éditeurs pour élargir progressivement le catalogue dans le respect des droits d'auteur.",
-  },
-  {
-    question: "Puis-je annuler mon abonnement ?",
-    answer:
-      "Oui, à tout moment et sans frais. Vos données restent accessibles après l'annulation. Vous pouvez les exporter si nécessaire.",
   },
 ];
 
@@ -51,7 +41,7 @@ export function FAQ() {
           ref={ref}
           className={`scroll-animate ${isVisible ? "visible" : ""}`}
         >
-          <h2 className="text-3xl sm:text-4xl font-normal text-center text-foreground mb-12">
+          <h2 className="font-gelica text-3xl sm:text-4xl font-normal text-center text-foreground mb-12">
             Questions fréquentes
           </h2>
 

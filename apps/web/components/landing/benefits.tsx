@@ -12,20 +12,20 @@ const benefits = [
     icon: Interfaces.Tick,
   },
   {
-    title: "Vos patients remplissent depuis leur téléphone",
+    title: "Vos patient·e·s remplissent depuis leur téléphone",
     description:
-      "Pas d'impression, pas de papier à récupérer. Le patient répond où et quand il veut avant la séance.",
+      "Pas d'impression, pas de papier à récupérer. Votre patient·e répond où et quand il·elle veut avant la séance.",
     icon: Interfaces.Tablet,
   },
   {
     title: "Toutes vos passations au même endroit",
     description:
-      "Plus de fichiers Excel éparpillés, de PDFs perdus ou de classeurs papier. Un patient, un historique.",
+      "Plus de fichiers Excel éparpillés, de PDFs perdus ou de classeurs papier. patient·e, un historique.",
     icon: Interfaces.Folder,
   },
   {
     title: "Visualisez l'évolution séance après séance",
-    description: "Suivez la progression de vos patients en un coup d'œil.",
+    description: "Suivez la progression de vos patient·e·s en un coup d'œil.",
     icon: Finance.TrendUp,
     comingSoon: true,
   },
@@ -41,7 +41,7 @@ export function Benefits() {
           ref={ref}
           className={`scroll-animate ${isVisible ? "visible" : ""}`}
         >
-          <h2 className="text-3xl sm:text-4xl font-normal text-center text-foreground mb-12">
+          <h2 className="font-gelica text-3xl sm:text-4xl font-normal text-center text-foreground mb-12">
             Melya allège votre charge administrative
           </h2>
 

@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 import { Interfaces } from "doodle-icons";
-import { X } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 
@@ -110,14 +109,14 @@ export default function Home() {
               className="absolute right-2.5 top-2.5 h-4 w-4 text-muted-foreground hover:text-foreground"
               onClick={() => setSearchTerm("")}
             >
-              <X className="h-4 w-4" />
+              <Interfaces.Cross className="h-4 w-4" />
             </button>
           )}
         </div>
         <div className="flex gap-2">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="outline">
+              <Button variant="secondary">
                 Filtrer par Catégorie
                 {selectedCategories.length > 0 && (
                   <Badge variant="secondary" className="ml-2">
@@ -162,8 +161,6 @@ export default function Home() {
             <ScaleCard
               key={scale.id}
               scale={scale}
-              isLoadingFavorites={isLoadingFavorites}
-              isFavorite={favorites.includes(scale.id)}
             />
           ))}
         </div>

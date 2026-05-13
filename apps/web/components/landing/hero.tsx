@@ -1,7 +1,7 @@
 "use client";
 
-import { WaitlistButton } from "./waitlist-button";
 import Image from "next/image";
+import Link from "next/link";
 import { Interfaces } from "doodle-icons";
 
 export function Hero() {
@@ -11,7 +11,7 @@ export function Hero() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 lg:gap-16 items-center overflow-visible">
           {/* Left — Copy */}
           <div className="space-y-12">
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-normal text-foreground !leading-[1.2]">
+            <h1 className="font-gelica text-3xl sm:text-4xl lg:text-5xl font-normal text-foreground !leading-[1.2]">
               Vos échelles cotées automatiquement,
               <br />
               en{" "}
@@ -28,7 +28,7 @@ export function Hero() {
             <p className="text-lg font-body leading-relaxed max-w-xl">
               Melya automatise la cotation de vos échelles et questionnaires
               psychologiques. Moins de paperasse, plus de rigueur clinique, plus
-              de temps avec vos patients.
+              de temps pour vos patient·e·s.
             </p>
 
             {/* CTA — arrow left, gap, button */}
@@ -41,12 +41,12 @@ export function Hero() {
                 style={{ width: "calc(50% - 160px)" }}
               />
               <div className="relative flex flex-col items-center">
-                <WaitlistButton
-                  size="lg"
-                  className="font-body font-medium text-sm rounded-full px-8 bg-brand-orange text-white hover:bg-brand-orange/90"
+                <Link
+                  href="/dashboard"
+                  className="font-body font-medium text-sm rounded-full px-8 py-3 bg-brand-orange text-white hover:bg-brand-orange/90 transition-colors"
                 >
                   Je souhaite essayer Melya
-                </WaitlistButton>
+                </Link>
                 <span className="absolute -bottom-6 text-xs text-foreground/50 font-body">
                   100% gratuit
                 </span>
@@ -82,7 +82,7 @@ export function Hero() {
               </span>
             </div>
             <div
-              className="toast-animate absolute left-14 bottom-20 flex items-center gap-2 sm:gap-2.5 bg-card rounded-full px-3 py-2 sm:px-4 sm:py-2.5 shadow-md border border-border/50"
+              className="toast-animate absolute left-2 sm:left-14 bottom-16 sm:bottom-20 flex items-center gap-2 sm:gap-2.5 bg-card rounded-full px-3 py-2 sm:px-4 sm:py-2.5 shadow-md border border-border/50"
               style={{ animationDelay: "1.6s" }}
             >
               <Interfaces.Analytics

@@ -10,7 +10,7 @@ export type QuestionOption = {
   text: string;
 };
 
-export type BDIQuestion = {
+export type OptionsQuestion = {
   title: string;
   options: QuestionOption[];
 };
@@ -38,7 +38,7 @@ export type ScaleProps = {
     questions: (
       | string
       | QuestionGroup
-      | BDIQuestion
+      | OptionsQuestion
       | LiebovitshQuestion
       | BaseQuestion
     )[];
@@ -52,6 +52,11 @@ export type ScaleProps = {
     scoring?: {
       ranges: { min: number; max: number; interpretation: string }[];
       method: string;
+    };
+    followUpItem?: {
+      key: string;
+      questionText: string;
+      options: { value: number; label: string }[];
     };
   };
   psychologistEmail: string;

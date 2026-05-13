@@ -1,70 +1,52 @@
 "use client";
 
 import Link from "next/link";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { FavoriteButton } from "@/components/FavoriteButton";
-import { questionCount } from "@/app/utils/utils";
+import Image from "next/image";
 
 interface ScaleCardProps {
   scale: {
     id: string;
-    title: string;
-    description: string;
-    category: string;
-    questions: any[];
-    estimatedTime: string;
+    acronym: string;
+    label: string;
+    icon: string;
+    color: string;
+    colorLight: string;
   };
-  isLoadingFavorites: boolean;
-  isFavorite: boolean;
 }
 
-export function ScaleCard({
-  scale,
-  isLoadingFavorites,
-  isFavorite,
-}: ScaleCardProps) {
+export function ScaleCard({ scale }: ScaleCardProps) {
   return (
-    <Card className="flex flex-col">
-      <CardHeader>
-        <div className="flex justify-between items-start">
-          <div className="text-sm text-muted-foreground mb-1">
-            {scale.category}
-          </div>
-          {!isLoadingFavorites && (
-            <FavoriteButton
-              scaleId={scale.id}
-              initialIsFavorite={isFavorite}
-              size="sm"
-            />
-          )}
-        </div>
-        <CardTitle>{scale.title}</CardTitle>
-        <CardDescription className="line-clamp-2">
-          {scale.description}
-        </CardDescription>
-      </CardHeader>
-      <CardContent className="flex-grow">
-        <div className="flex justify-between text-sm text-muted-foreground">
-          <span>{questionCount(scale)} questions</span>
-          <span>{scale.estimatedTime}</span>
-        </div>
-      </CardContent>
-      <CardFooter>
-        <Link
-          href={`/scale/description/${scale.id}`}
-          className="w-full"
-        >
-          <Button className="w-full">Voir les détails</Button>
-        </Link>
-      </CardFooter>
-    </Card>
+    <Link
+      href={`/echelles/${scale.id}`}
+      className="flex overflow-hidden hover:opacity-90 transition-opacity h-[100px] sm:h-[120px]"
+      style={{ borderRadius: 20 }}
+    >
+      <div
+        className="flex items-center justify-center flex-shrink-0 p-5 self-stretch"
+        style={{
+          backgroundColor: scale.color,
+          aspectRatio: "1 / 1",
+        }}
+      >
+        <Image
+          src={scale.icon}
+          alt={scale.acronym}
+          width={56}
+          height={56}
+          className="w-3/5 h-3/5 object-contain"
+        />
+      </div>
+      <div
+        className="flex flex-col justify-center px-4 flex-1 min-w-0"
+        style={{ backgroundColor: scale.colorLight }}
+      >
+        <p className="font-heading font-bold text-black leading-tight text-2xl">
+          {scale.acronym}
+        </p>
+        <p className="font-body text-black/80 leading-snug mt-0.5 text-sm">
+          {scale.label}
+        </p>
+      </div>
+    </Link>
   );
 }

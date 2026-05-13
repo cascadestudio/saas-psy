@@ -6,7 +6,9 @@ import { AuthGateProvider } from "@/app/context/AuthGateContext";
 import { PremiumGateProvider } from "@/app/context/PremiumGateContext";
 import { AuthGateModal } from "@/components/auth/AuthGateModal";
 import { PremiumGateModal } from "@/components/PremiumGateModal";
+import { RadixPointerEventsFix } from "@/components/RadixPointerEventsFix";
 import { Rethink_Sans } from "next/font/google";
+import { gelica } from "./fonts";
 
 const rethinkSans = Rethink_Sans({
   subsets: ["latin"],
@@ -23,11 +25,11 @@ export const metadata = {
   metadataBase: new URL(defaultUrl),
   title: "Melya",
   description:
-    "Plateforme d'échelles psychométriques pour psychologues. Envoi, passation en ligne, scoring automatique et suivi longitudinal.",
+    "Plateforme d'échelles psychométriques pour psychologue·s. Envoi, passation en ligne, scoring automatique et suivi longitudinal.",
   openGraph: {
     title: "Melya",
     description:
-      "Plateforme d'échelles psychométriques pour psychologues. Envoi, passation en ligne, scoring automatique et suivi longitudinal.",
+      "Plateforme d'échelles psychométriques pour psychologue·s. Envoi, passation en ligne, scoring automatique et suivi longitudinal.",
     url: "https://www.melya.app",
     siteName: "Melya",
     locale: "fr_FR",
@@ -37,7 +39,7 @@ export const metadata = {
     card: "summary_large_image",
     title: "Melya",
     description:
-      "Plateforme d'échelles psychométriques pour psychologues. Envoi, passation en ligne, scoring automatique et suivi longitudinal.",
+      "Plateforme d'échelles psychométriques pour psychologue·s. Envoi, passation en ligne, scoring automatique et suivi longitudinal.",
   },
 };
 
@@ -47,7 +49,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="fr" suppressHydrationWarning className={rethinkSans.variable}>
+    <html lang="fr" suppressHydrationWarning className={`${rethinkSans.variable} ${gelica.variable}`}>
       <body className="text-foreground font-sans">
         <UserProvider>
           <AuthGateProvider>
@@ -66,6 +68,7 @@ export default function RootLayout({
           </AuthGateProvider>
         </UserProvider>
         <Toaster />
+        <RadixPointerEventsFix />
       </body>
     </html>
   );

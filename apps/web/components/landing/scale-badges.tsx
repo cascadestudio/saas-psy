@@ -1,62 +1,27 @@
 "use client";
 
-import { useState, useRef, useCallback } from "react";
+import { useRef, useCallback } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { useScrollAnimation } from "./use-scroll-animation";
 import { scales as scalesData } from "@/app/scalesData";
-import { questionCount } from "@/app/utils/utils";
-import { Arrow, Interfaces, Files } from "doodle-icons";
-import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-} from "@/components/ui/sheet";
+import { Arrow } from "doodle-icons";
 
-const scales = [
-  {
-    id: "inventaire-de-depression-de-beck",
-    acronym: "BDI",
-    label: "Inventaire de Dépression de Beck",
-    icon: "/images/scales/bdi.svg",
-    color: "#CBCADB",
-  },
-  {
-    id: "echelle-d-anxiete-sociale-de-liebowitz",
-    acronym: "LSAS",
-    label: "Échelle d'anxiété sociale de Liebowitz",
-    icon: "/images/scales/lsas.svg",
-    color: "#6A9BCC",
-  },
-  {
-    id: "traumatismes-pcl5",
-    acronym: "PCL-5",
-    label: "Liste de Vérification du TSPT",
-    icon: "/images/scales/pcl-5.svg",
-    color: "#C46686",
-  },
-  {
-    id: "stai-anxiete-generalisee",
-    acronym: "STAI",
-    label: "Inventaire d'Anxiété État-Trait",
-    icon: "/images/scales/stai.svg",
-    color: "#6A9BCC",
-  },
-  {
-    id: "index-symptomes-ybocs",
-    acronym: "Y-BOCS",
-    label: "Index des Symptômes Obsessionnels-Compulsifs",
-    icon: "/images/scales/y-bocs.svg",
-    color: "#BCD1CA",
-  },
-];
+const badgeScales = scalesData.map((s) => ({
+  id: s.id,
+  acronym: s.acronym,
+  label: s.label,
+  icon: s.icon,
+  color: s.color,
+  colorLight: s.colorLight,
+}));
 
-type BadgeScale = (typeof scales)[number];
+type BadgeScale = (typeof badgeScales)[number];
 
-function ScaleBadge({ scale, onClick }: { scale: BadgeScale; onClick: () => void }) {
+function ScaleBadge({ scale }: { scale: BadgeScale }) {
   return (
-    <button
-      onClick={onClick}
+    <Link
+      href={`/echelles/${scale.id}`}
       className="flex-shrink-0 flex overflow-hidden text-left cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange"
       style={{
         borderRadius: 20,
@@ -74,7 +39,7 @@ function ScaleBadge({ scale, onClick }: { scale: BadgeScale; onClick: () => void
       >
         <Image
           src={scale.icon}
-          alt={scale.acronym}
+          alt={scale.label}
           width={56}
           height={56}
           className="w-3/5 h-3/5 object-contain"
@@ -82,7 +47,7 @@ function ScaleBadge({ scale, onClick }: { scale: BadgeScale; onClick: () => void
       </div>
       <div
         className="flex flex-col justify-center px-4 flex-1 min-w-0"
-        style={{ backgroundColor: `${scale.color}80` }}
+        style={{ backgroundColor: scale.colorLight }}
       >
         <p className="font-heading font-bold text-black leading-tight text-[clamp(1.25rem,1.8vw,1.75rem)]">
           {scale.acronym}
@@ -91,20 +56,17 @@ function ScaleBadge({ scale, onClick }: { scale: BadgeScale; onClick: () => void
           {scale.label}
         </p>
       </div>
-    </button>
+    </Link>
   );
 }
 
 export function ScaleBadges() {
   const { ref, isVisible } = useScrollAnimation();
-  const [selected, setSelected] = useState<BadgeScale | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
   const isDragging = useRef(false);
   const startX = useRef(0);
   const scrollLeft = useRef(0);
   const hasDragged = useRef(false);
-
-  const fullScale = selected ? scalesData.find((s) => s.id === selected.id) : null;
 
   const onPointerDown = useCallback((e: React.PointerEvent) => {
     const el = scrollRef.current;
@@ -156,13 +118,10 @@ export function ScaleBadges() {
             onPointerCancel={onPointerUp}
             style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
           >
-            {scales.map((scale) => (
+            {badgeScales.map((scale) => (
               <ScaleBadge
-                key={scale.acronym}
+                key={scale.id}
                 scale={scale}
-                onClick={() => {
-                  if (!hasDragged.current) setSelected(scale);
-                }}
               />
             ))}
           </div>
@@ -182,71 +141,6 @@ export function ScaleBadges() {
           scientifiquement
         </p>
       </div>
-
-      <Sheet open={!!selected} onOpenChange={(open) => !open && setSelected(null)}>
-        <SheetContent className="w-full sm:max-w-md overflow-y-auto p-0">
-          {selected && (
-            <>
-              {/* Colored header */}
-              <div
-                className="flex items-center gap-4 px-6 py-8"
-                style={{ backgroundColor: selected.color }}
-              >
-                <div
-                  className="flex items-center justify-center rounded-2xl p-3 flex-shrink-0"
-                  style={{ backgroundColor: `${selected.color}CC` }}
-                >
-                  <Image
-                    src={selected.icon}
-                    alt={selected.acronym}
-                    width={48}
-                    height={48}
-                    className="w-12 h-12 object-contain"
-                  />
-                </div>
-                <SheetHeader className="text-left space-y-0.5">
-                  <SheetTitle className="font-heading text-2xl font-bold text-black leading-tight">
-                    {selected.acronym}
-                  </SheetTitle>
-                  <p className="font-body text-black/70 text-sm leading-snug">
-                    {selected.label}
-                  </p>
-                </SheetHeader>
-              </div>
-
-              {/* Body */}
-              <div className="px-6 py-6 space-y-6">
-                {fullScale && (
-                  <>
-                    {/* Meta */}
-                    <div className="flex flex-col gap-2.5 text-sm font-body text-muted-foreground">
-                      <span className="inline-flex items-center gap-2">
-                        <Interfaces.Bookmark className="h-4 w-4 flex-shrink-0" fill="currentColor" />
-                        {fullScale.category}
-                      </span>
-                      <span className="inline-flex items-center gap-2">
-                        <Files.FileText className="h-4 w-4 flex-shrink-0" fill="currentColor" />
-                        {questionCount(fullScale)} questions
-                      </span>
-                      <span className="inline-flex items-center gap-2">
-                        <Interfaces.Clock className="h-4 w-4 flex-shrink-0" fill="currentColor" />
-                        {fullScale.estimatedTime}
-                      </span>
-                    </div>
-
-                    {/* Description */}
-                    <div>
-                      <p className="font-body text-muted-foreground leading-relaxed text-sm">
-                        {fullScale.longDescription}
-                      </p>
-                    </div>
-                  </>
-                )}
-              </div>
-            </>
-          )}
-        </SheetContent>
-      </Sheet>
     </section>
   );
 }

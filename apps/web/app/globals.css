@@ -2,33 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Melya Brand Fonts — Rethink Sans loaded via next/font in layout.tsx */
-
-@font-face {
-  font-family: 'Gelica';
-  src: url('/fonts/Gelica-Regular.otf') format('opentype');
-  font-weight: 400;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Gelica';
-  src: url('/fonts/Gelica-Semi-Bold.otf') format('opentype');
-  font-weight: 600;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Gelica';
-  src: url('/fonts/Gelica-Bold.otf') format('opentype');
-  font-weight: 700;
-  font-display: swap;
-}
+/* Melya Brand Fonts — loaded via next/font in layout.tsx */
 
 @layer base {
   :root {
     /* Melya Brand Colors */
-    --background: 39 28% 90%;           /* cream-light #EDE8DF */
+    --background: 39 18% 92%;           /* cream-light #EFEBE3 */
     --foreground: 0 0% 10%;             /* warm-black #1A1A1A */
 
     --card: 40 33% 97%;                 /* off-white #FAF8F5 */
@@ -37,7 +16,7 @@
     --popover: 40 33% 97%;              /* off-white #FAF8F5 */
     --popover-foreground: 0 0% 10%;     /* warm-black #1A1A1A */
 
-    --primary: 24 70% 46%;              /* terracotta #C65D24 */
+    --primary: 19 75% 48%;              /* brand-orange #D6591F */
     --primary-foreground: 40 33% 97%;   /* off-white #FAF8F5 */
 
     --secondary: 37 22% 90%;            /* cream-light #EDE8DF */
@@ -54,12 +33,12 @@
 
     --border: 37 18% 74%;               /* slightly darker beige */
     --input: 37 18% 74%;                /* input border */
-    --ring: 24 70% 46%;                 /* terracotta focus ring */
+    --ring: 19 75% 48%;                 /* brand-orange focus ring */
 
     --radius: 0.5rem;
 
     /* Chart colors */
-    --chart-1: 24 70% 46%;              /* terracotta */
+    --chart-1: 19 75% 48%;              /* brand-orange */
     --chart-2: 140 22% 45%;             /* soft-green */
     --chart-3: 37 22% 90%;              /* cream-light */
     --chart-4: 30 6% 27%;               /* warm-gray */
@@ -67,6 +46,7 @@
 
     /* Brand colors for direct use */
     --brand-orange: 19 75% 48%;           /* #D6591F */
+    --brand-orange-light: 19 75% 93%;     /* solid light orange */
     --brand-terracotta: 24 70% 46%;
     --brand-beige: 41 26% 78%;
     --brand-cream: 37 22% 90%;
@@ -87,7 +67,7 @@
     --popover: 0 0% 14%;
     --popover-foreground: 40 33% 97%;
 
-    --primary: 24 70% 46%;              /* terracotta stays same */
+    --primary: 19 75% 48%;              /* brand-orange */
     --primary-foreground: 0 0% 10%;
 
     --secondary: 0 0% 18%;
@@ -107,7 +87,7 @@
     --ring: 24 70% 46%;
 
     /* Chart colors - adjusted for dark mode */
-    --chart-1: 24 70% 50%;
+    --chart-1: 19 75% 50%;
     --chart-2: 140 22% 50%;
     --chart-3: 37 22% 60%;
     --chart-4: 30 6% 60%;
@@ -126,31 +106,32 @@
 
   body {
     @apply text-foreground;
-    background-color: #EDE8DF;
+    background-color: #EFEBE3;
   }
 
-  /* h1, h2 use Gelica */
-  h1, h2 {
-    font-family: 'Gelica', Georgia, serif;
-    @apply font-semibold tracking-tight;
+  ::placeholder {
+    color: hsl(30 6% 45%);
+    opacity: 1;
   }
 
-  /* h3+ use Rethink Sans */
-  h3, h4, h5, h6 {
+  .dark ::placeholder {
+    color: hsl(30 6% 55%);
+    opacity: 1;
+  }
+
+  /* All headings use Rethink Sans by default. Opt in to Gelica via .font-gelica / .font-heading. */
+  h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-rethink), sans-serif;
     @apply font-semibold tracking-tight;
-  }
-
-  /* Labels and heading utility use Gelica */
-  label, .font-heading {
-    font-family: 'Gelica', Georgia, serif;
   }
 }
 
 /* Utility classes for brand fonts */
 @layer utilities {
-  .font-gelica {
-    font-family: 'Gelica', Georgia, serif;
+  .font-gelica,
+  .font-heading {
+    font-family: var(--font-gelica), Georgia, serif;
+    font-style: normal;
   }
 
   .font-body {
@@ -193,3 +174,43 @@
 .animate-marquee:hover {
   animation-play-state: paused;
 }
+
+/* Sonner — colors per type */
+[data-sonner-toast][data-type="success"] {
+  color: hsl(var(--brand-soft-green)) !important;
+  border-color: hsl(var(--brand-soft-green) / 0.3) !important;
+}
+[data-sonner-toast][data-type="error"] {
+  color: hsl(var(--destructive)) !important;
+  border-color: hsl(var(--destructive) / 0.3) !important;
+}
+
+@media print {
+  body {
+    background: white !important;
+  }
+
+  /* Retire toutes les couleurs de fond sauf exceptions */
+  *:not(.scale-logo-bg):not(.subscore-bar-track):not(.subscore-bar-fill) {
+    background-color: transparent !important;
+    background-image: none !important;
+  }
+
+  .scale-logo-bg,
+  .subscore-bar-track,
+  .subscore-bar-fill {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Retire le padding-bottom mobile (bottom nav fixe) */
+  main {
+    padding-bottom: 0 !important;
+  }
+
+  /* Pas de saut de page intempestif dans les blocs */
+  .space-y-6 > * {
+    break-inside: avoid;
+  }
+}
+

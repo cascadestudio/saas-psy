@@ -56,7 +56,8 @@ export function FavoriteButton({
       aria-label={isFavorite ? "Retirer des favoris" : "Ajouter aux favoris"}
     >
       <Interfaces.Star
-        className={`${isFavorite ? "fill-primary text-primary" : "text-muted-foreground hover:text-primary"} transition-colors`}
+        className="transition-colors"
+        fill={isFavorite ? "#D6591F" : "currentColor"}
       />
     </Button>
   );

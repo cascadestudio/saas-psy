@@ -1,0 +1,659 @@
+"use client";
+
+import { useParams } from "next/navigation";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import Link from "next/link";
+import Image from "next/image";
+import { useUser } from "@/app/context/UserContext";
+import { useEffect, useState } from "react";
+import {
+  sessionsApi,
+  patientsApi,
+  type Session,
+  type Patient,
+} from "@/lib/api-client";
+import { scales } from "@/app/scalesData";
+import {
+  getMockPatient,
+  getMockSession,
+  getMockSessionsByPatient,
+  isMockId,
+} from "@/lib/mock-data";
+import { Interfaces, Files, Arrow } from "doodle-icons";
+import { SESSION_STATUS_CONFIG } from "@/lib/session-status";
+import { getSeverityPalette } from "@/lib/severity";
+import {
+  ItemResponsesList,
+  ScaleLegend,
+  scaleLegendHasContent,
+} from "@/components/passation/ItemResponsesList";
+import { AlertsBanner } from "@/components/passation/AlertsBanner";
+import { PatientCommentsBlock } from "@/components/passation/PatientCommentsBlock";
+import { PassationSkeleton } from "@/components/passation/PassationSkeleton";
+import { ConsigneBlock } from "@/components/passation/ConsigneBlock";
+import { CopyrightFooter } from "@/components/passation/CopyrightFooter";
+import { ScoreArcGauge } from "@/components/passation/ScoreArcGauge";
+import { CriteriaCheckBlock } from "@/components/passation/CriteriaCheckBlock";
+
+/**
+ * Libellés courts pour les mini-cards de subscores (vue dataviz en haut).
+ * Le bloc Critères DSM-5 (CriteriaCheckBlock) utilise les libellés longs
+ * normatifs définis dans son propre composant.
+ */
+const SUBSCORE_LABEL_OVERRIDES: Record<string, string> = {
+  "cluster-b": "Intrusions (B)",
+  "cluster-c": "Évitement (C)",
+  "cluster-d": "Cognitions et humeur (D)",
+  "cluster-e": "Hyperéveil (E)",
+};
+
+/**
+ * Subscores croisés (LSAS) : sortis du bloc principal et repliés derrière
+ * "Voir le détail". Les 4 principaux (anxiety, avoidance, performance,
+ * interaction) restent en évidence.
+ */
+const SECONDARY_SUBSCORE_KEYS = new Set([
+  "anxiety_performance",
+  "anxiety_interaction",
+  "avoidance_performance",
+  "avoidance_interaction",
+]);
+import { relativeTimeFr, formatDateLongFr } from "@/lib/relative-time";
+
+export default function ResultsPage() {
+  const { user, isLoading } = useUser();
+  const params = useParams();
+  const sessionId = params.sessionId as string;
+
+  const [session, setSession] = useState<Session | null>(null);
+  const [patient, setPatient] = useState<Patient | null>(null);
+  const [allSessions, setAllSessions] = useState<Session[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [copied, setCopied] = useState(false);
+  const [resendState, setResendState] = useState<
+    "idle" | "sending" | "sent" | "error"
+  >("idle");
+  const [resendError, setResendError] = useState<string | null>(null);
+  const [showDetailSubscores, setShowDetailSubscores] = useState(false);
+
+  useEffect(() => {
+    if (!sessionId) return;
+    if (!user) {
+      const mockSession = getMockSession(sessionId);
+      setSession(mockSession);
+      if (mockSession?.patientId) {
+        setPatient(getMockPatient(mockSession.patientId));
+        setAllSessions(getMockSessionsByPatient(mockSession.patientId));
+      }
+      setLoading(false);
+      return;
+    }
+    if (isMockId(sessionId)) {
+      setSession(null);
+      setLoading(false);
+      return;
+    }
+    const loadData = async () => {
+      setLoading(true);
+      try {
+        const { session: sessionData } = await sessionsApi.getById(sessionId);
+        setSession(sessionData);
+
+        if (sessionData.patientId) {
+          const [patientRes, sessionsRes] = await Promise.all([
+            patientsApi.getById(sessionData.patientId),
+            sessionsApi.getByPatientId(sessionData.patientId),
+          ]);
+          setPatient(patientRes.patient);
+          setAllSessions(sessionsRes.sessions);
+        }
+      } catch (error) {
+        console.error("Error loading session:", error);
+        setSession(null);
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadData();
+  }, [user, sessionId]);
+
+  const handleCopyLink = () => {
+    const link = `${window.location.origin}/session/${sessionId}`;
+    navigator.clipboard.writeText(link).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    });
+  };
+
+  const handleResendEmail = async () => {
+    if (!user || isMockId(sessionId)) return;
+    setResendState("sending");
+    setResendError(null);
+    try {
+      await sessionsApi.resendEmail(sessionId);
+      setResendState("sent");
+      setTimeout(() => setResendState("idle"), 3000);
+    } catch (err) {
+      setResendError(
+        err instanceof Error ? err.message : "Échec de l'envoi du mail",
+      );
+      setResendState("error");
+      setTimeout(() => setResendState("idle"), 4000);
+    }
+  };
+
+  if (isLoading || loading) {
+    return <PassationSkeleton />;
+  }
+
+  if (!session) {
+    return (
+      <div className="flex-1 w-full flex flex-col items-center justify-center gap-4">
+        <p className="text-lg text-muted-foreground">Session non trouvée</p>
+        <Button asChild>
+          <Link href="/dashboard">Retour au tableau de bord</Link>
+        </Button>
+      </div>
+    );
+  }
+
+  const scale = scales.find((q) => q.id === session.scaleId);
+  const statusConfig = SESSION_STATUS_CONFIG[session.status];
+  const headerTitle = scale?.acronym ?? "Passation";
+
+  const scaleTitle = scale
+    ? scale.title.replace(new RegExp(`^${scale.acronym}\\s*[-—:]\\s*`, "i"), "")
+    : "";
+
+  const ScaleLogo = scale ? (
+    <div
+      className="scale-logo-bg flex items-center justify-center flex-shrink-0 rounded-md w-14 h-14 sm:w-[72px] sm:h-[72px]"
+      style={{
+        backgroundColor: scale.color ?? "#e5e7eb",
+      }}
+    >
+      {scale.icon && (
+        <Image
+          src={scale.icon}
+          alt={scale.acronym}
+          width={44}
+          height={44}
+          className="w-3/5 h-3/5 object-contain"
+        />
+      )}
+    </div>
+  ) : null;
+
+  const sentDate = session.sentAt
+    ? new Date(session.sentAt).toLocaleDateString("fr-FR", {
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+      })
+    : null;
+
+  const completedDate = session.completedAt
+    ? new Date(session.completedAt).toLocaleDateString("fr-FR", {
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+      })
+    : null;
+
+  const Header = (
+    <div className="flex items-start justify-between gap-3 mb-6">
+      <div className="flex items-center gap-3">
+        {ScaleLogo}
+        <div>
+          <div className="flex items-center gap-3">
+            {scaleTitle ? (
+              <TooltipProvider delayDuration={200}>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <h1 className="font-gelica font-normal text-3xl leading-tight border-b border-dotted border-muted-foreground/40 inline-block cursor-help">
+                      {headerTitle}
+                    </h1>
+                  </TooltipTrigger>
+                  <TooltipContent className="bg-foreground text-background">
+                    {scaleTitle}
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
+            ) : (
+              <h1 className="font-gelica font-normal text-3xl leading-tight">
+                {headerTitle}
+              </h1>
+            )}
+            {session.status !== "COMPLETED" && (
+              <Badge className={statusConfig?.className} variant="secondary">
+                {statusConfig?.label ?? session.status}
+              </Badge>
+            )}
+          </div>
+          {session.status === "COMPLETED" && completedDate ? (
+            <p className="text-sm text-muted-foreground mt-1">
+              Complété le {completedDate}
+            </p>
+          ) : sentDate ? (
+            <p className="text-sm text-muted-foreground mt-1">
+              Envoyée le {sentDate}
+            </p>
+          ) : null}
+        </div>
+      </div>
+      {session.status === "COMPLETED" ? (
+        <Button
+          variant="secondary"
+          size="sm"
+          className="print:hidden"
+          onClick={() => window.print()}
+        >
+          <Files.FileText />
+          Imprimer les résultats
+        </Button>
+      ) : (
+        <div className="flex flex-col items-end gap-1">
+          <Button
+            variant="secondary"
+            onClick={handleResendEmail}
+            disabled={
+              resendState === "sending" ||
+              resendState === "sent" ||
+              !user ||
+              isMockId(sessionId)
+            }
+          >
+            <Interfaces.Mail />
+            {resendState === "sending"
+              ? "Envoi…"
+              : resendState === "sent"
+                ? "Mail renvoyé"
+                : "Renvoyer le mail"}
+          </Button>
+          {resendState === "error" && resendError && (
+            <p className="text-xs text-red-600">{resendError}</p>
+          )}
+        </div>
+      )}
+    </div>
+  );
+
+  const backHref = patient ? `/patients/${patient.id}` : "/patients";
+  const backLabel = patient
+    ? `${patient.firstName} ${patient.lastName}`
+    : "Mes patient·es";
+
+  const Breadcrumb = (
+    <Link
+      href={backHref}
+      className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors mb-4"
+    >
+      <Arrow.ArrowLeft className="h-4 w-4" />
+      {backLabel}
+    </Link>
+  );
+
+  // --- Pending / non-completed states ---
+  if (session.status !== "COMPLETED") {
+    return (
+      <div className="container mx-auto px-4 py-6">
+        {Breadcrumb}
+        {Header}
+
+        {/* Pending state */}
+        <div className="bg-muted-foreground/5 rounded-2xl p-8 text-center space-y-4">
+          <p className="text-muted-foreground">
+            {session.status === "EXPIRED"
+              ? "Cette passation a expiré. patient·e ne peut plus y répondre."
+              : session.status === "CANCELLED"
+                ? "Cette passation a été annulée."
+                : "Les résultats seront disponibles une fois la passation complétée par patient·e."}
+          </p>
+          {(session.status === "SENT" || session.status === "STARTED") && (
+            <Button variant="secondary" size="sm" onClick={handleCopyLink}>
+              <Interfaces.Copy />
+              {copied ? "Lien copié !" : "Copier le lien de passation"}
+            </Button>
+          )}
+        </div>
+      </div>
+    );
+  }
+
+  // --- Completed state ---
+  const sameScaleSessions = allSessions
+    .filter((s) => s.scaleId === session.scaleId && s.status === "COMPLETED")
+    .sort(
+      (a, b) =>
+        new Date(b.completedAt!).getTime() - new Date(a.completedAt!).getTime(),
+    );
+
+  const score = session.score;
+  const currentMain = score?.totalScore;
+  const maxScore = score?.maxScore;
+  const subscores = score?.subscores ?? [];
+  const primarySubscores = subscores.filter(
+    (s) => !SECONDARY_SUBSCORE_KEYS.has(s.key),
+  );
+  const secondarySubscores = subscores.filter((s) =>
+    SECONDARY_SUBSCORE_KEYS.has(s.key),
+  );
+  const alerts = score?.alerts ?? [];
+  const badgeInterpretation = score?.interpretation || null;
+
+  return (
+    <div className="container mx-auto px-4 py-6">
+      {Breadcrumb}
+      {Header}
+
+      <div className="space-y-6">
+        {/* Alertes cliniques — bandeau prioritaire */}
+        {alerts.length > 0 && <AlertsBanner alerts={alerts} />}
+
+        {/* Score et interprétation */}
+        <div>
+          <h2 className="text-lg font-sans font-semibold mb-3">
+            Score et interprétation
+          </h2>
+          <div className="rounded-2xl p-6">
+            <div className="flex items-center gap-12">
+              {/* Arc gauge — score géant + pill d'interprétation */}
+              {scale && currentMain !== undefined && (
+                <div className="pt-2 shrink-0">
+                  <ScoreArcGauge
+                    scale={scale}
+                    score={currentMain}
+                    maxScore={maxScore}
+                    severityIndex={score?.severityIndex ?? -1}
+                    interpretation={badgeInterpretation}
+                  />
+                </div>
+              )}
+
+              {/* Subscores as mini-cards */}
+              {primarySubscores.length > 0 && (
+                <div className="flex-1 pt-2 space-y-3">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-x-3 sm:gap-x-6 gap-y-3">
+                    {primarySubscores.map((s) => {
+                      const pct =
+                        s.max && s.max > 0
+                          ? Math.min(1, s.value / s.max) * 100
+                          : 0;
+                      return (
+                        <div
+                          key={s.key}
+                          className="rounded-lg p-3 space-y-2"
+                        >
+                          <div className="flex items-baseline justify-between gap-2">
+                            <p className="text-sm font-medium truncate">
+                              {SUBSCORE_LABEL_OVERRIDES[s.key] ?? s.label}
+                            </p>
+                            <span className="text-sm font-semibold tabular-nums shrink-0">
+                              {s.value}
+                              {s.max !== undefined && (
+                                <span className="text-xs font-normal text-muted-foreground">
+                                  /{s.max}
+                                </span>
+                              )}
+                            </span>
+                          </div>
+                          <div className="subscore-bar-track h-1.5 rounded-full bg-foreground/10 overflow-hidden">
+                            <div
+                              className="subscore-bar-fill h-full rounded-full bg-brand-orange/30"
+                              style={{ width: `${pct}%` }}
+                            />
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                  {secondarySubscores.length > 0 && (
+                    <>
+                      <Button
+                        variant="secondary"
+                        size="sm"
+                        onClick={() => setShowDetailSubscores((v) => !v)}
+                        aria-expanded={showDetailSubscores}
+                        className="ml-3"
+                      >
+                        {showDetailSubscores
+                          ? "Masquer le détail"
+                          : "Voir le détail"}
+                      </Button>
+                      {showDetailSubscores && (
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-3 sm:gap-x-6 gap-y-3">
+                          {secondarySubscores.map((s) => {
+                            const pct =
+                              s.max && s.max > 0
+                                ? Math.min(1, s.value / s.max) * 100
+                                : 0;
+                            return (
+                              <div
+                                key={s.key}
+                                className="rounded-lg p-3 space-y-2"
+                              >
+                                <div className="flex items-baseline justify-between gap-2">
+                                  <p className="text-sm font-medium truncate">
+                                    {SUBSCORE_LABEL_OVERRIDES[s.key] ?? s.label}
+                                  </p>
+                                  <span className="text-sm font-semibold tabular-nums shrink-0">
+                                    {s.value}
+                                    {s.max !== undefined && (
+                                      <span className="text-xs font-normal text-muted-foreground">
+                                        /{s.max}
+                                      </span>
+                                    )}
+                                  </span>
+                                </div>
+                                <div className="subscore-bar-track h-1.5 rounded-full bg-foreground/10 overflow-hidden">
+                                  <div
+                                    className="subscore-bar-fill h-full rounded-full bg-brand-orange/30"
+                                    style={{ width: `${pct}%` }}
+                                  />
+                                </div>
+                              </div>
+                            );
+                          })}
+                        </div>
+                      )}
+                    </>
+                  )}
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+
+        {/* Critères structurés (générique, ex. PCL-5 DSM-5) */}
+        {score?.criteriaCheck &&
+          currentMain !== undefined &&
+          scale &&
+          (() => {
+            const aboveRange =
+              scale.scoring.ranges[scale.scoring.ranges.length - 1];
+            const threshold = aboveRange?.min ?? 0;
+            return (
+              <CriteriaCheckBlock
+                criteriaCheck={score.criteriaCheck}
+                aboveThreshold={currentMain >= threshold}
+                threshold={threshold}
+              />
+            );
+          })()}
+
+        {/* Réponses du patient — item par item */}
+        {scale && session.responses && (
+          <div>
+            <div className="flex flex-col sm:flex-row gap-4 mb-10">
+              <div className="flex-1 min-w-0">
+                <h3 className="text-lg font-sans font-semibold mb-3">
+                  Consigne
+                </h3>
+                <div className="bg-muted rounded-2xl p-4">
+                  <ConsigneBlock scale={scale} />
+                </div>
+              </div>
+              {scaleLegendHasContent(scale) && (
+                <div className="sm:shrink-0">
+                  <h3 className="text-lg font-sans font-semibold mb-3">
+                    Modalités de réponse
+                  </h3>
+                  <div className="bg-muted rounded-2xl p-4">
+                    <ScaleLegend scale={scale} />
+                  </div>
+                </div>
+              )}
+            </div>
+            <h2 className="text-lg font-sans font-semibold mb-3">
+              Réponses de patient·e
+            </h2>
+            <ItemResponsesList
+              scale={scale}
+              responses={session.responses}
+              flaggedItems={alerts
+                .filter((a): a is typeof a & { itemIndex: number } => typeof a.itemIndex === "number")
+                .map((a) => ({ index: a.itemIndex, severity: a.severity }))}
+            />
+          </div>
+        )}
+
+        {/* Commentaire libre du patient */}
+        {session.patientComments && (
+          <PatientCommentsBlock comments={session.patientComments} />
+        )}
+
+        {/* Historique longitudinal */}
+        {sameScaleSessions.length > 1 && (
+          <div>
+            <h2 className="text-lg font-sans font-semibold mb-3">
+              Historique longitudinal
+            </h2>
+            <ol className="relative border-l-2 border-border ml-3 space-y-6 py-2">
+              {sameScaleSessions.map((s, index) => {
+                const isCurrent = s.id === session.id;
+                const olderSession = sameScaleSessions[index + 1];
+                const sScore = s.score?.totalScore;
+                const olderScore = olderSession?.score?.totalScore;
+                const diff =
+                  sScore !== undefined && olderScore !== undefined
+                    ? sScore - olderScore
+                    : null;
+                const isImprovement =
+                  diff !== null &&
+                  ((diff < 0 && !scale?.higherIsBetter) ||
+                    (diff > 0 && scale?.higherIsBetter));
+                const deltaColor =
+                  diff === null || diff === 0
+                    ? "text-muted-foreground"
+                    : isImprovement
+                      ? "text-emerald-600"
+                      : "text-red-600";
+                const rangeCount = s.score?.severityRangeCount ?? 0;
+                const hasSeverity = rangeCount > 1;
+                const dotPalette = getSeverityPalette(
+                  s.score?.severityIndex ?? -1,
+                  rangeCount,
+                  scale?.higherIsBetter,
+                );
+                const RowTag = isCurrent ? "div" : Link;
+                const rowProps = isCurrent
+                  ? {}
+                  : { href: `/passation/${s.id}` };
+                return (
+                  <li key={s.id} className="relative pl-6">
+                    <span
+                      className={`absolute -left-[7px] top-1/2 -translate-y-1/2 h-3 w-3 rounded-full ring-4 ring-background ${
+                        hasSeverity ? dotPalette.gaugeFill : "bg-border"
+                      }`}
+                      aria-hidden
+                    />
+                    <RowTag
+                      {...(rowProps as { href: string })}
+                      className={`flex items-start justify-between gap-4 rounded-md p-3 -my-1 transition-colors ${
+                        isCurrent
+                          ? "bg-brand-orange/5 ring-1 ring-brand-orange/30"
+                          : "hover:bg-black/10 cursor-pointer"
+                      }`}
+                    >
+                      <div className="min-w-0 space-y-1">
+                        <div className="flex items-center gap-2 flex-wrap">
+                          <span
+                            className={`text-sm font-semibold ${
+                              isCurrent ? "" : "text-muted-foreground"
+                            }`}
+                          >
+                            {s.completedAt
+                              ? formatDateLongFr(s.completedAt)
+                              : "—"}
+                          </span>
+                          <span className="text-xs text-muted-foreground">
+                            ·{" "}
+                            {s.completedAt ? relativeTimeFr(s.completedAt) : ""}
+                          </span>
+                          {isCurrent && (
+                            <Badge
+                              variant="secondary"
+                              className="text-[10px] uppercase tracking-wide"
+                            >
+                              Passation actuelle
+                            </Badge>
+                          )}
+                        </div>
+                        <p className="text-xs text-muted-foreground truncate">
+                          {s.score?.interpretation || s.interpretation}
+                        </p>
+                      </div>
+                      <div className="flex items-baseline gap-2 shrink-0">
+                        <span
+                          className={`text-2xl font-bold tabular-nums leading-none ${
+                            isCurrent ? "" : "text-muted-foreground"
+                          }`}
+                        >
+                          {sScore}
+                        </span>
+                        {diff !== null && diff !== 0 && (
+                          <span
+                            className={`text-xs font-semibold tabular-nums ${deltaColor}`}
+                          >
+                            {diff > 0 ? "+" : "−"}
+                            {Math.abs(diff)}
+                          </span>
+                        )}
+                      </div>
+                    </RowTag>
+                  </li>
+                );
+              })}
+            </ol>
+          </div>
+        )}
+
+        {/* Mention copyright */}
+        {scale?.copyrightAttribution && (
+          <CopyrightFooter attribution={scale.copyrightAttribution} />
+        )}
+
+        {/* Footer Melya */}
+        <div className="hidden print:flex items-center justify-center gap-2 pt-4 border-t border-border">
+          <p className="text-xs text-muted-foreground">
+            Passation réalisée avec
+          </p>
+          <Image
+            src="/images/logos/logo-melya.svg"
+            alt="Melya"
+            width={56}
+            height={18}
+            className="opacity-60"
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
