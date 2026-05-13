@@ -362,7 +362,7 @@ export default function ResultsPage() {
           <h2 className="text-lg font-sans font-semibold mb-3">
             Score et interprétation
           </h2>
-          <div className="bg-muted rounded-2xl p-6">
+          <div className="rounded-2xl p-6">
             <div className="flex items-center gap-12">
               {/* Arc gauge — score géant + pill d'interprétation */}
               {scale && currentMain !== undefined && (
@@ -389,7 +389,7 @@ export default function ResultsPage() {
                       return (
                         <div
                           key={s.key}
-                          className="bg-background rounded-lg p-3 space-y-2"
+                          className="rounded-lg p-3 space-y-2"
                         >
                           <div className="flex items-baseline justify-between gap-2">
                             <p className="text-sm font-medium truncate">
@@ -437,7 +437,7 @@ export default function ResultsPage() {
                             return (
                               <div
                                 key={s.key}
-                                className="bg-background rounded-lg p-3 space-y-2"
+                                className="rounded-lg p-3 space-y-2"
                               >
                                 <div className="flex items-baseline justify-between gap-2">
                                   <p className="text-sm font-medium truncate">
@@ -496,7 +496,7 @@ export default function ResultsPage() {
                 <h3 className="text-lg font-sans font-semibold mb-3">
                   Consigne
                 </h3>
-                <div className="bg-foreground/5 rounded-2xl p-4">
+                <div className="bg-muted rounded-2xl p-4">
                   <ConsigneBlock scale={scale} />
                 </div>
               </div>
@@ -505,7 +505,7 @@ export default function ResultsPage() {
                   <h3 className="text-lg font-sans font-semibold mb-3">
                     Modalités de réponse
                   </h3>
-                  <div className="bg-foreground/5 rounded-2xl p-4">
+                  <div className="bg-muted rounded-2xl p-4">
                     <ScaleLegend scale={scale} />
                   </div>
                 </div>
@@ -518,8 +518,8 @@ export default function ResultsPage() {
               scale={scale}
               responses={session.responses}
               flaggedItems={alerts
-                .map((a) => a.itemIndex)
-                .filter((i): i is number => typeof i === "number")}
+                .filter((a): a is typeof a & { itemIndex: number } => typeof a.itemIndex === "number")
+                .map((a) => ({ index: a.itemIndex, severity: a.severity }))}
             />
           </div>
         )}

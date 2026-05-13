@@ -6,12 +6,32 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import type { Scale } from "@melya/core";
+import type { Scale, ScoreAlertSeverity } from "@melya/core";
+
+type FlaggedItem = { index: number; severity: ScoreAlertSeverity };
 
 type Props = {
   scale: Scale;
   responses: Record<string, number>;
-  flaggedItems?: number[];
+  flaggedItems?: FlaggedItem[];
+};
+
+const FLAG_STYLES: Record<
+  ScoreAlertSeverity,
+  { row: string; text: string }
+> = {
+  critical: {
+    row: "bg-destructive/5 border-l-4 border-l-destructive/30",
+    text: "text-destructive",
+  },
+  warning: {
+    row: "bg-amber-50 border-l-4 border-l-amber-300",
+    text: "text-amber-600",
+  },
+  info: {
+    row: "bg-sky-50 border-l-4 border-l-sky-300",
+    text: "text-sky-600",
+  },
 };
 
 type Row = {
@@ -189,17 +209,18 @@ export function ScaleLegend({ scale }: { scale: Scale }) {
 function ItemRow({
   scale,
   row,
-  isFlagged,
+  flagSeverity,
 }: {
   scale: Scale;
   row: Row;
-  isFlagged: boolean;
+  flagSeverity?: ScoreAlertSeverity;
 }) {
   const isYbocsInverted =
     scale.id === "index-symptomes-ybocs" &&
     YBOCS_INVERTED_ITEM_INDEXES.has(row.index);
 
   const isOptions = scale.formType === "options";
+  const flagStyles = flagSeverity ? FLAG_STYLES[flagSeverity] : null;
 
   return (
     <div
@@ -207,16 +228,13 @@ function ItemRow({
         isOptions
           ? "grid-cols-[auto_1fr] sm:grid-cols-[auto_1fr_1fr]"
           : "grid-cols-[auto_1fr_auto]"
-      } items-center ${isFlagged ? "bg-red-50 border-l-4 border-l-red-500" : ""}`}
+      } items-center ${flagStyles?.row ?? ""}`}
     >
-      {/* Numéro + flag */}
+      {/* Numéro */}
       <div className="flex items-center gap-1 shrink-0">
         <span className="text-xs text-muted-foreground tabular-nums w-5 h-5 rounded-full bg-foreground/10 flex items-center justify-center">
           {row.index + 1}
         </span>
-        {isFlagged && (
-          <Interfaces.Caution className="h-4 w-4 text-red-600" />
-        )}
       </div>
 
       {/* Question */}
@@ -254,7 +272,10 @@ function ItemRow({
       </div>
 
       {/* Réponse */}
-      <div className={`flex flex-wrap gap-2 ${isOptions ? "sm:col-start-3 col-start-2 justify-start sm:justify-end" : "shrink-0 justify-end"} items-center text-right`}>
+      <div className={`flex flex-wrap gap-2 ${isOptions ? "sm:col-start-3 col-start-2 justify-start sm:justify-end" : "shrink-0 justify-end"} items-center text-right ${flagStyles?.text ?? ""}`}>
+        {flagSeverity && (
+          <Interfaces.Caution className={`h-4 w-4 [&_path]:fill-current ${flagStyles?.text ?? ""}`} />
+        )}
         {row.values.length === 0 ? (
           <span className="text-xs text-foreground/70 italic">
             Sans réponse
@@ -283,7 +304,7 @@ export function ItemResponsesList({
 }: Props) {
   const rows = getRows(scale, responses);
   const sections = groupRows(scale, rows);
-  const flagged = new Set(flaggedItems);
+  const flagged = new Map(flaggedItems.map((f) => [f.index, f.severity]));
 
   const followUp = scale.followUpItem;
   const followUpValue = followUp ? responses[followUp.key] : undefined;
@@ -308,7 +329,7 @@ export function ItemResponsesList({
                   key={row.index}
                   scale={scale}
                   row={row}
-                  isFlagged={flagged.has(row.index)}
+                  flagSeverity={flagged.get(row.index)}
                 />
               ))}
             </div>
