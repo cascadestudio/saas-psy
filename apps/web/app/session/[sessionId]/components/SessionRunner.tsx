@@ -238,12 +238,7 @@ function Runner({ scale, onSubmit }: RunnerProps) {
     }
   };
 
-  const canGoBack =
-    phase !== "intro" &&
-    (phase === "review" ||
-      phase === "follow-up" ||
-      phase === "transition" ||
-      currentIndex > 0);
+  const canGoBack = phase !== "intro";
 
   const handleSubmit = async () => {
     setSubmitting(true);
