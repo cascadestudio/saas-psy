@@ -59,7 +59,6 @@ jobs:
               -e JWT_SECRET="${{ secrets.JWT_SECRET_PROD }}" \
               -e ENCRYPTION_KEY="${{ secrets.ENCRYPTION_KEY_PROD }}" \
               -e RESEND_API_KEY="${{ secrets.RESEND_API_KEY }}" \
-              -e TALLY_WEBHOOK_SECRET="${{ secrets.TALLY_WEBHOOK_SECRET }}" \
               -e NODE_ENV=production \
               -e PORT=3002 \
               -e CORS_ORIGIN="https://melya.app,https://www.melya.app" \
