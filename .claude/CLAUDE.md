@@ -6,6 +6,10 @@ SaaS pour psychologues : envoi d'échelles, passation en ligne, scoring automati
 
 - L'app est actuelement en phase de pré-lancement. Nous sommes en train de finaliser une app livrable aux beta testeurs psys.
 
+## Contact
+
+- Email de contact unique de Melya (pour le moment) : **clement@melya.app**
+
 ## Onboarding & auth model
 
 - Low-friction : l'app est ouverte sans authentification. Un visiteur non connecté peut accéder à `/dashboard` et naviguer dans l'app, qui affiche des **mock data** pour qu'il puisse l'essayer.

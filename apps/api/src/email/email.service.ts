@@ -459,6 +459,42 @@ export class EmailService {
     }
   }
 
+  async sendSignupNotificationEmail(params: {
+    email: string;
+    firstName?: string | null;
+    lastName?: string | null;
+  }): Promise<void> {
+    const to = 'clement@melya.app';
+    const fullName =
+      `${params.firstName ?? ''} ${params.lastName ?? ''}`.trim() || '(non renseigné)';
+    const subject = `Nouvelle inscription Melya — ${params.email}`;
+    const html = `
+      <p>Nouvelle inscription sur Melya :</p>
+      <ul>
+        <li><strong>Email :</strong> ${params.email}</li>
+        <li><strong>Nom :</strong> ${fullName}</li>
+        <li><strong>Date :</strong> ${new Date().toISOString()}</li>
+      </ul>
+      <p>Fiche Attio : <a href="https://app.attio.com/studio-cascade/people">ouvrir Attio</a></p>
+    `;
+
+    if (!this.resend) {
+      this.logger.warn(`[DEV MODE] Signup notification would be sent to ${to} for ${params.email}`);
+      return;
+    }
+
+    const { error } = await this.resend.emails.send({
+      from: `Melya <${this.fromEmail}>`,
+      to: [to],
+      subject,
+      html,
+    });
+
+    if (error) {
+      this.logger.error(`Failed to send signup notification: ${error.message}`);
+    }
+  }
+
   async sendPasswordResetEmail(email: string, resetToken: string): Promise<{ success: boolean; error?: string }> {
     const resetUrl = `${this.appUrl}/reset-password/${resetToken}`;
     const subject = 'Réinitialisation de votre mot de passe - Melya';

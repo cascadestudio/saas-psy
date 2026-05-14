@@ -9,6 +9,7 @@ import * as crypto from 'crypto';
 import { UsersService } from '../users/users.service';
 import { EmailService } from '../email/email.service';
 import { AuditLogService } from '../audit-log/audit-log.service';
+import { AttioService } from '../attio/attio.service';
 import { AuditAction } from '../audit-log/audit-actions';
 import { RegisterDto, LoginDto } from './dto';
 import { ForgotPasswordDto } from './dto/forgot-password.dto';
@@ -23,6 +24,7 @@ export class AuthService {
     private configService: ConfigService,
     private emailService: EmailService,
     private auditLog: AuditLogService,
+    private attioService: AttioService,
   ) {}
 
   async register(
@@ -52,6 +54,28 @@ export class AuthService {
         .catch((err) => {
           // Don't fail registration if email fails
           console.error('Failed to send welcome email:', err);
+        });
+
+      // Internal signup notification (non-blocking)
+      this.emailService
+        .sendSignupNotificationEmail({
+          email: user.email,
+          firstName: user.firstName,
+          lastName: user.lastName,
+        })
+        .catch((err) => {
+          console.error('Failed to send signup notification:', err);
+        });
+
+      // Sync to Attio CRM (non-blocking)
+      this.attioService
+        .upsertPerson({
+          email: user.email,
+          firstName: user.firstName,
+          lastName: user.lastName,
+        })
+        .catch((err) => {
+          console.error('Failed to sync user to Attio:', err);
         });
 
       // Audit log (non-blocking)

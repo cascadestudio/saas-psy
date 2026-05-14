@@ -9,12 +9,14 @@ import { JwtAuthGuard } from './guards/jwt-auth.guard';
 import { UsersModule } from '../users/users.module';
 import { EmailModule } from '../email/email.module';
 import { AuditLogModule } from '../audit-log/audit-log.module';
+import { AttioModule } from '../attio/attio.module';
 
 @Module({
   imports: [
     UsersModule,
     EmailModule,
     AuditLogModule,
+    AttioModule,
     PassportModule.register({ defaultStrategy: 'jwt' }),
     JwtModule.registerAsync({
       imports: [ConfigModule],

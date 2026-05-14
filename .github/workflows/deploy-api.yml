@@ -4,10 +4,10 @@ on:
   push:
     branches: [main]
     paths:
-      - 'apps/api/**'
-      - 'packages/core/**'
-      - 'package-lock.json'
-      - '.github/workflows/deploy-api.yml'
+      - "apps/api/**"
+      - "packages/core/**"
+      - "package-lock.json"
+      - ".github/workflows/deploy-api.yml"
 
 jobs:
   deploy:
@@ -59,6 +59,7 @@ jobs:
               -e JWT_SECRET="${{ secrets.JWT_SECRET_PROD }}" \
               -e ENCRYPTION_KEY="${{ secrets.ENCRYPTION_KEY_PROD }}" \
               -e RESEND_API_KEY="${{ secrets.RESEND_API_KEY }}" \
+              -e ATTIO_API_KEY="${{ secrets.ATTIO_API_KEY }}" \
               -e NODE_ENV=production \
               -e PORT=3002 \
               -e CORS_ORIGIN="https://melya.app,https://www.melya.app" \
