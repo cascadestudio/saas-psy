@@ -360,8 +360,8 @@ export class EmailService {
         faire confiance à ce stade.
       </p>
       <p style="${p}">
-        Ton accès est actif. Tu peux te connecter dès maintenant sur
-        <a href="${appUrl}/dashboard" style="color: #D6591F; font-weight: 600;">melya.app</a>.
+        Ton accès est actif. Tu peux dès maintenant accéder à
+        <a href="${appUrl}/dashboard" style="color: #D6591F; font-weight: 600;">ton tableau de bord</a>.
       </p>
       <p style="${p}">Pour démarrer, trois choses simples :</p>
       <p style="margin: 0 0 8px 0; color: #374151; font-size: 16px; line-height: 26px;">→ Crée ton premier patient</p>
