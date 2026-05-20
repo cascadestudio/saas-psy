@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
+import { ScheduleModule } from '@nestjs/schedule';
 import { APP_GUARD } from '@nestjs/core';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -15,6 +16,7 @@ import { configValidationSchema } from './config/config.schema';
 import { EncryptionModule } from './encryption/encryption.module';
 import { AuditLogModule } from './audit-log/audit-log.module';
 import { FeedbackModule } from './feedback/feedback.module';
+import { EmailModule } from './email/email.module';
 
 @Module({
   imports: [
@@ -27,7 +29,9 @@ import { FeedbackModule } from './feedback/feedback.module';
         abortEarly: true,
       },
     }),
+    ScheduleModule.forRoot(),
     PrismaModule,
+    EmailModule,
     EncryptionModule,
     AuthModule,
     UsersModule,

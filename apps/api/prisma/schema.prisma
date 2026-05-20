@@ -34,6 +34,10 @@ model User {
   feedbackSubmittedAt DateTime? @map("feedback_submitted_at")
   tallyResponseId     String?   @map("tally_response_id")
 
+  // Onboarding email sequence (time-based)
+  onboardingDay3SentAt  DateTime? @map("onboarding_day3_sent_at")
+  onboardingDay14SentAt DateTime? @map("onboarding_day14_sent_at")
+
   createdAt     DateTime  @default(now()) @map("created_at")
   updatedAt     DateTime  @updatedAt @map("updated_at")
 

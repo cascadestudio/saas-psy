@@ -34,6 +34,11 @@ export class EmailService {
   private resend: Resend | null = null;
   private readonly fromEmail: string;
   private readonly appUrl: string;
+  // Onboarding sequence is sent personally by Clément (founder), not the
+  // neutral "Melya" sender used for patient/transactional emails. The human
+  // From address also means replies land directly in Clément's inbox, so no
+  // separate Reply-To is needed.
+  private readonly onboardingFrom = 'Clément de Melya <clement@melya.app>';
 
   constructor(
     private configService: ConfigService,
@@ -333,12 +338,185 @@ export class EmailService {
     }
   }
 
-  async sendWelcomeEmail(email: string, firstName?: string): Promise<{ success: boolean; error?: string }> {
-    const subject = 'Bienvenue sur Melya !';
-    const dashboardUrl = `${this.appUrl}/dashboard`;
-    const greeting = firstName ? `Bonjour ${firstName},` : 'Bonjour,';
+  // ------------------------------------------------------------------
+  // Onboarding sequence (time-based): J+0 welcome, J+3 scales, J+14 feedback.
+  // All three are sent personally by Clément (see onboardingFrom).
+  // ------------------------------------------------------------------
 
-    const html = `
+  /** Mail 1 — sent immediately on registration. */
+  async sendWelcomeEmail(
+    email: string,
+    firstName?: string,
+  ): Promise<{ success: boolean; error?: string }> {
+    const greeting = firstName ? `Bonjour ${firstName},` : 'Bonjour,';
+    const appUrl = this.appUrl;
+    const p =
+      'margin: 0 0 16px 0; color: #374151; font-size: 16px; line-height: 26px;';
+
+    const body = `
+      <p style="${p}">${greeting}</p>
+      <p style="${p}">
+        Tu fais partie des premiers psychologues à tester Melya, merci de nous
+        faire confiance à ce stade.
+      </p>
+      <p style="${p}">
+        Ton accès est actif. Tu peux te connecter dès maintenant sur
+        <a href="${appUrl}/dashboard" style="color: #D6591F; font-weight: 600;">melya.app</a>.
+      </p>
+      <p style="${p}">Pour démarrer, trois choses simples :</p>
+      <p style="margin: 0 0 8px 0; color: #374151; font-size: 16px; line-height: 26px;">→ Crée ton premier patient</p>
+      <p style="margin: 0 0 8px 0; color: #374151; font-size: 16px; line-height: 26px;">→ Envoie-lui une échelle — ça prend moins d'une minute</p>
+      <p style="margin: 0 0 24px 0; color: #374151; font-size: 16px; line-height: 26px;">→ Regarde ce que tu reçois de notre côté</p>
+      <p style="${p}">
+        Si tu bloques quelque part, réponds directement à ce mail. C'est Clément
+        qui te lira : pas un bot, pas un support externalisé.
+      </p>
+      <p style="${p}">On est vraiment curieux de savoir ce que tu en penses !</p>
+      <p style="margin: 24px 0 4px 0; color: #374151; font-size: 16px; line-height: 24px;">
+        Clément, Adrien et James,<br>co-fondateurs de Melya
+      </p>
+    `;
+
+    return this.sendOnboarding(
+      email,
+      'Bienvenue dans Melya (tes échelles psychométriques) 👋',
+      this.buildOnboardingHtml(body),
+      'welcome',
+    );
+  }
+
+  /** Mail 2 — sent at J+3 (time-based). Available free scales, BDI excluded. */
+  async sendOnboardingDay3Email(
+    email: string,
+    firstName?: string,
+  ): Promise<{ success: boolean; error?: string }> {
+    const greeting = firstName ? `Bonjour ${firstName},` : 'Bonjour,';
+    const p =
+      'margin: 0 0 16px 0; color: #374151; font-size: 16px; line-height: 26px;';
+
+    const scales: { name: string; text: string }[] = [
+      {
+        name: 'PHQ-9 — Dépression',
+        text: "L'outil de référence pour dépister et suivre la sévérité d'un épisode dépressif. 9 items, score de 0 à 27. À noter : un score ≥ 1 à l'item 9 (idéation suicidaire) nécessite une attention clinique immédiate — indépendamment du score total.",
+      },
+      {
+        name: 'GAD-7 — Anxiété généralisée',
+        text: "7 items pour mesurer la sévérité de l'anxiété. Rapide à administrer, très utile en suivi. Un score élevé ne signifie pas automatiquement un TAG — il reste un outil de dépistage, pas de diagnostic.",
+      },
+      {
+        name: 'PCL-5 — PTSD',
+        text: 'En 20 items répartis en 4 clusters DSM-5. Le score total seul appauvrit la lecture clinique — scorer par dimension (intrusion, évitement, cognitions, hyperéveil) change ce que tu peux conclure sur l\'évolution de ton patient.',
+      },
+      {
+        name: 'LSAS — Anxiété sociale',
+        text: '24 situations évaluées sur deux dimensions indépendantes : la peur et l\'évitement. Un patient peut avoir une peur élevée avec peu d\'évitement — ou l\'inverse. Les deux sous-scores racontent des histoires très différentes.',
+      },
+      {
+        name: 'Y-BOCS — TOC',
+        text: '10 items, 5 sur les obsessions, 5 sur les compulsions. Sous thérapie EPR, les compulsions diminuent souvent avant les obsessions ; sans scorer les deux séparément, tu rates cette dissociation.',
+      },
+      {
+        name: 'RSES — Estime de soi',
+        text: '10 items dont 5 inversés : c\'est le piège le plus fréquent sur cette échelle. Melya gère l\'inversion automatiquement. Utile en suivi transversal pour objectiver ce que la thérapie change sur l\'image de soi.',
+      },
+    ];
+
+    const scalesHtml = scales
+      .map(
+        (s) => `
+      <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="margin: 0 0 18px 0;">
+        <tr>
+          <td style="padding: 0 0 0 14px; border-left: 3px solid #D6591F;">
+            <p style="margin: 0 0 4px 0; color: #1f2937; font-size: 15px; font-weight: 700; line-height: 22px;">${s.name}</p>
+            <p style="margin: 0; color: #4b5563; font-size: 14px; line-height: 22px;">${s.text}</p>
+          </td>
+        </tr>
+      </table>`,
+      )
+      .join('');
+
+    const body = `
+      <p style="${p}">${greeting}</p>
+      <p style="${p}">
+        Si tu n'as pas encore eu le temps d'explorer, voilà ce qui t'attend sur
+        Melya en ce moment.
+      </p>
+      ${scalesHtml}
+      <p style="${p}">
+        Pour chaque échelle : envoi en quelques secondes par email ou QR code,
+        scoring automatique, suivi longitudinal séance après séance. Tout hébergé
+        en France, conforme RGPD.
+      </p>
+      <p style="${p}">
+        Si tu as la moindre question ou si quelque chose te bloque, réponds
+        directement à ce mail.
+      </p>
+      <p style="margin: 24px 0 4px 0; color: #374151; font-size: 16px; line-height: 24px;">
+        Clément de Melya
+      </p>
+      <p style="margin: 20px 0 0 0; color: #9ca3af; font-size: 12px; line-height: 18px;">
+        Tu reçois ces emails parce que tu testes Melya. Si tu ne souhaites plus
+        en recevoir, réponds simplement « stop » à ce mail.
+      </p>
+    `;
+
+    return this.sendOnboarding(
+      email,
+      'Voici les échelles gratuites disponibles sur Melya :)',
+      this.buildOnboardingHtml(body),
+      'onboarding-day3',
+    );
+  }
+
+  /** Mail 3 — sent at J+14 (time-based). Structured first feedback. */
+  async sendOnboardingDay14Email(
+    email: string,
+    firstName?: string,
+  ): Promise<{ success: boolean; error?: string }> {
+    const greeting = firstName ? `Bonjour ${firstName},` : 'Bonjour,';
+    const p =
+      'margin: 0 0 16px 0; color: #374151; font-size: 16px; line-height: 26px;';
+    const q =
+      'margin: 0 0 6px 0; color: #1f2937; font-size: 16px; font-weight: 700; line-height: 24px;';
+    const qd =
+      'margin: 0 0 20px 0; color: #4b5563; font-size: 15px; line-height: 23px;';
+
+    const body = `
+      <p style="${p}">${greeting}</p>
+      <p style="${p}">
+        Ça fait deux semaines que tu as accès à Melya. On a trois questions pour
+        toi, ça prend 5 minutes :
+      </p>
+      <p style="${q}">① Qu'est-ce qui t'a vraiment aidé jusqu'ici ?</p>
+      <p style="${qd}">Une fonctionnalité, un gain de temps concret, quelque chose que tu n'attendais pas.</p>
+      <p style="${q}">② Qu'est-ce qui t'a frustré ou manqué ?</p>
+      <p style="${qd}">Sois honnête : c'est exactement ce dont on a besoin pour améliorer le produit.</p>
+      <p style="${q}">③ Tu en parlerais à un collègue aujourd'hui ?</p>
+      <p style="${qd}">Oui / Pas encore / Non, et pourquoi.</p>
+      <p style="${p}">
+        Tu peux répondre directement à ce mail. Pas de formulaire, pas de lien
+        externe.
+      </p>
+      <p style="${p}">
+        Merci d'avance : ces retours sont directement intégrés dans ce qu'on
+        développe.
+      </p>
+      <p style="margin: 24px 0 4px 0; color: #374151; font-size: 16px; line-height: 24px;">
+        Clément, James et Adrien,<br>co-fondateurs de Melya
+      </p>
+    `;
+
+    return this.sendOnboarding(
+      email,
+      '2 semaines — on aimerait ton avis',
+      this.buildOnboardingHtml(body),
+      'onboarding-day14',
+    );
+  }
+
+  /** Shared light layout for the founder-voiced onboarding sequence. */
+  private buildOnboardingHtml(innerBody: string): string {
+    return `
 <!DOCTYPE html>
 <html>
 <head>
@@ -350,76 +528,21 @@ export class EmailService {
     <tr>
       <td align="center" style="padding: 40px 20px;">
         <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="max-width: 580px;">
-          <!-- Logo header -->
           <tr>
             <td style="padding: 0 0 24px 0; text-align: center;">
               <img src="${this.appUrl}/images/logos/logo-melya.svg" alt="Melya" width="120" height="34" style="display: inline-block; border: 0;" />
             </td>
           </tr>
-          <!-- Card -->
           <tr>
-            <td style="background-color: #ffffff; border-radius: 20px; box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06); overflow: hidden;">
-              <!-- Orange top bar -->
-              <table role="presentation" width="100%" cellspacing="0" cellpadding="0">
-                <tr>
-                  <td style="background-color: #D6591F; padding: 32px 40px; text-align: center;">
-                    <h1 style="margin: 0; color: #ffffff; font-size: 22px; font-weight: 700; letter-spacing: -0.3px;">
-                      Bienvenue sur Melya !
-                    </h1>
-                  </td>
-                </tr>
-                <!-- Body -->
-                <tr>
-                  <td style="padding: 36px 40px;">
-                    <p style="margin: 0 0 16px 0; color: #374151; font-size: 16px; line-height: 26px;">
-                      ${greeting}
-                    </p>
-                    <p style="margin: 0 0 16px 0; color: #374151; font-size: 16px; line-height: 26px;">
-                      Votre compte a &eacute;t&eacute; cr&eacute;&eacute; avec succ&egrave;s. Vous pouvez d&egrave;s maintenant commencer &agrave; utiliser Melya pour g&eacute;rer vos questionnaires psychom&eacute;triques.
-                    </p>
-                    <p style="margin: 0 0 20px 0; color: #374151; font-size: 16px; line-height: 26px;">
-                      Avec Melya, vous pouvez :
-                    </p>
-                    <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="margin: 0 0 32px 0;">
-                      <tr>
-                        <td style="padding: 7px 0;">
-                          <span style="display: inline-block; width: 7px; height: 7px; background-color: #D6591F; border-radius: 50%; margin-right: 12px; vertical-align: middle;"></span>
-                          <span style="color: #374151; font-size: 15px; line-height: 22px;">Envoyer des questionnaires &agrave; vos patients en quelques clics</span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td style="padding: 7px 0;">
-                          <span style="display: inline-block; width: 7px; height: 7px; background-color: #D6591F; border-radius: 50%; margin-right: 12px; vertical-align: middle;"></span>
-                          <span style="color: #374151; font-size: 15px; line-height: 22px;">Obtenir un scoring et une interpr&eacute;tation automatiques</span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td style="padding: 7px 0;">
-                          <span style="display: inline-block; width: 7px; height: 7px; background-color: #D6591F; border-radius: 50%; margin-right: 12px; vertical-align: middle;"></span>
-                          <span style="color: #374151; font-size: 15px; line-height: 22px;">Suivre l'&eacute;volution de vos patients dans le temps</span>
-                        </td>
-                      </tr>
-                    </table>
-                    <table role="presentation" width="100%" cellspacing="0" cellpadding="0">
-                      <tr>
-                        <td align="center">
-                          <a href="${dashboardUrl}" style="display: inline-block; padding: 14px 36px; background-color: #D6591F; color: #ffffff; text-decoration: none; font-size: 15px; font-weight: 600; border-radius: 100px;">
-                            Acc&eacute;der &agrave; mon tableau de bord
-                          </a>
-                        </td>
-                      </tr>
-                    </table>
-                  </td>
-                </tr>
-                <!-- Footer -->
-                <tr>
-                  <td style="padding: 20px 40px 28px 40px; text-align: center; border-top: 1px solid #f3f4f6;">
-                    <p style="margin: 0; color: #9ca3af; font-size: 12px; line-height: 18px;">
-                      Melya &mdash; Plateforme de questionnaires psychom&eacute;triques
-                    </p>
-                  </td>
-                </tr>
-              </table>
+            <td style="background-color: #ffffff; border-radius: 20px; box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06); padding: 36px 40px;">
+              ${innerBody}
+            </td>
+          </tr>
+          <tr>
+            <td style="padding: 20px 40px 0 40px; text-align: center;">
+              <p style="margin: 0; color: #9ca3af; font-size: 12px; line-height: 18px;">
+                Melya &mdash; Plateforme de questionnaires psychom&eacute;triques
+              </p>
             </td>
           </tr>
         </table>
@@ -429,32 +552,40 @@ export class EmailService {
 </body>
 </html>
     `.trim();
+  }
 
-    this.logger.log(`Sending welcome email to ${email}`);
+  /** Sends an onboarding email from Clément (replies land in his inbox). */
+  private async sendOnboarding(
+    to: string,
+    subject: string,
+    html: string,
+    label: string,
+  ): Promise<{ success: boolean; error?: string }> {
+    this.logger.log(`Sending ${label} email to ${to}`);
 
     if (!this.resend) {
-      this.logger.warn(`[DEV MODE] Welcome email would be sent to: ${email}`);
+      this.logger.warn(`[DEV MODE] ${label} email would be sent to: ${to}`);
       return { success: true };
     }
 
     try {
       const { data, error } = await this.resend.emails.send({
-        from: `Melya <${this.fromEmail}>`,
-        to: [email],
+        from: this.onboardingFrom,
+        to: [to],
         subject,
         html,
       });
 
       if (error) {
-        this.logger.error(`Failed to send welcome email: ${error.message}`);
+        this.logger.error(`Failed to send ${label} email: ${error.message}`);
         return { success: false, error: error.message };
       }
 
-      this.logger.log(`Welcome email sent successfully: ${data?.id}`);
+      this.logger.log(`${label} email sent successfully: ${data?.id}`);
       return { success: true };
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'Unknown error';
-      this.logger.error(`Exception sending welcome email: ${errorMessage}`);
+      this.logger.error(`Exception sending ${label} email: ${errorMessage}`);
       return { success: false, error: errorMessage };
     }
   }
