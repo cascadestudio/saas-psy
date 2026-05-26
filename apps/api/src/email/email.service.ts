@@ -48,13 +48,23 @@ export class EmailService {
     if (apiKey) {
       this.resend = new Resend(apiKey);
     } else {
-      this.logger.warn('RESEND_API_KEY not configured - emails will be logged but not sent');
+      this.logger.warn(
+        'RESEND_API_KEY not configured - emails will be logged but not sent',
+      );
     }
-    this.fromEmail = this.configService.get<string>('EMAIL_FROM', 'noreply@melya.app');
-    this.appUrl = this.configService.get<string>('APP_URL', 'http://localhost:3000');
+    this.fromEmail = this.configService.get<string>(
+      'EMAIL_FROM',
+      'noreply@melya.app',
+    );
+    this.appUrl = this.configService.get<string>(
+      'APP_URL',
+      'http://localhost:3000',
+    );
   }
 
-  async sendSessionEmail(params: SendSessionEmailParams): Promise<{ success: boolean; error?: string }> {
+  async sendSessionEmail(
+    params: SendSessionEmailParams,
+  ): Promise<{ success: boolean; error?: string }> {
     const {
       patientEmail,
       patientFirstName,
@@ -79,7 +89,9 @@ export class EmailService {
     });
 
     // Log the attempt
-    this.logger.log(`Sending session email to ${patientEmail} for session ${sessionId}`);
+    this.logger.log(
+      `Sending session email to ${patientEmail} for session ${sessionId}`,
+    );
 
     if (!this.resend) {
       // Dev mode without Resend - log and simulate success
@@ -146,7 +158,9 @@ export class EmailService {
     }
   }
 
-  async sendBatchSessionEmail(params: SendBatchSessionEmailParams): Promise<{ success: boolean; error?: string }> {
+  async sendBatchSessionEmail(
+    params: SendBatchSessionEmailParams,
+  ): Promise<{ success: boolean; error?: string }> {
     const {
       patientEmail,
       patientFirstName,
@@ -159,9 +173,10 @@ export class EmailService {
 
     const portalUrl = `${this.appUrl}/p/${batchId}`;
     const scaleCount = scaleNames.length;
-    const subject = scaleCount === 1
-      ? 'Votre questionnaire est disponible'
-      : `${scaleCount} questionnaires à compléter`;
+    const subject =
+      scaleCount === 1
+        ? 'Votre questionnaire est disponible'
+        : `${scaleCount} questionnaires à compléter`;
 
     const html = buildBatchEmailHtml({
       patientFirstName,
@@ -174,7 +189,9 @@ export class EmailService {
     });
 
     // Log the attempt
-    this.logger.log(`Sending batch email to ${patientEmail} for batch ${batchId} with ${scaleCount} scale(s)`);
+    this.logger.log(
+      `Sending batch email to ${patientEmail} for batch ${batchId} with ${scaleCount} scale(s)`,
+    );
 
     if (!this.resend) {
       // Dev mode without Resend - log and simulate success
@@ -275,7 +292,9 @@ export class EmailService {
     );
 
     if (!this.resend) {
-      this.logger.warn(`[DEV MODE] Completion email would be sent to: ${practitionerEmail}`);
+      this.logger.warn(
+        `[DEV MODE] Completion email would be sent to: ${practitionerEmail}`,
+      );
       this.logger.warn(`[DEV MODE] Session URL: ${sessionUrl}`);
 
       await this.logEmail({
@@ -366,7 +385,7 @@ export class EmailService {
       <p style="${p}">Pour démarrer, trois choses simples :</p>
       <p style="margin: 0 0 8px 0; color: #374151; font-size: 16px; line-height: 26px;">→ Crée ton premier patient</p>
       <p style="margin: 0 0 8px 0; color: #374151; font-size: 16px; line-height: 26px;">→ Envoie-lui une échelle — ça prend moins d'une minute</p>
-      <p style="margin: 0 0 24px 0; color: #374151; font-size: 16px; line-height: 26px;">→ Regarde ce que tu reçois de notre côté</p>
+      <p style="margin: 0 0 24px 0; color: #374151; font-size: 16px; line-height: 26px;">→ Regarde ce que tu reçois</p>
       <p style="${p}">
         Si tu bloques quelque part, réponds directement à ce mail. C'est Clément
         qui te lira : pas un bot, pas un support externalisé.
@@ -405,11 +424,11 @@ export class EmailService {
       },
       {
         name: 'PCL-5 — PTSD',
-        text: 'En 20 items répartis en 4 clusters DSM-5. Le score total seul appauvrit la lecture clinique — scorer par dimension (intrusion, évitement, cognitions, hyperéveil) change ce que tu peux conclure sur l\'évolution de ton patient.',
+        text: "En 20 items répartis en 4 clusters DSM-5. Le score total seul appauvrit la lecture clinique — scorer par dimension (intrusion, évitement, cognitions, hyperéveil) change ce que tu peux conclure sur l'évolution de ton patient.",
       },
       {
         name: 'LSAS — Anxiété sociale',
-        text: '24 situations évaluées sur deux dimensions indépendantes : la peur et l\'évitement. Un patient peut avoir une peur élevée avec peu d\'évitement — ou l\'inverse. Les deux sous-scores racontent des histoires très différentes.',
+        text: "24 situations évaluées sur deux dimensions indépendantes : la peur et l'évitement. Un patient peut avoir une peur élevée avec peu d'évitement — ou l'inverse. Les deux sous-scores racontent des histoires très différentes.",
       },
       {
         name: 'Y-BOCS — TOC',
@@ -417,7 +436,7 @@ export class EmailService {
       },
       {
         name: 'RSES — Estime de soi',
-        text: '10 items dont 5 inversés : c\'est le piège le plus fréquent sur cette échelle. Melya gère l\'inversion automatiquement. Utile en suivi transversal pour objectiver ce que la thérapie change sur l\'image de soi.',
+        text: "10 items dont 5 inversés : c'est le piège le plus fréquent sur cette échelle. Melya gère l'inversion automatiquement. Utile en suivi transversal pour objectiver ce que la thérapie change sur l'image de soi.",
       },
     ];
 
@@ -597,7 +616,8 @@ export class EmailService {
   }): Promise<void> {
     const to = 'clement@melya.app';
     const fullName =
-      `${params.firstName ?? ''} ${params.lastName ?? ''}`.trim() || '(non renseigné)';
+      `${params.firstName ?? ''} ${params.lastName ?? ''}`.trim() ||
+      '(non renseigné)';
     const subject = `Nouvelle inscription Melya — ${params.email}`;
     const html = `
       <p>Nouvelle inscription sur Melya :</p>
@@ -610,7 +630,9 @@ export class EmailService {
     `;
 
     if (!this.resend) {
-      this.logger.warn(`[DEV MODE] Signup notification would be sent to ${to} for ${params.email}`);
+      this.logger.warn(
+        `[DEV MODE] Signup notification would be sent to ${to} for ${params.email}`,
+      );
       return;
     }
 
@@ -626,7 +648,10 @@ export class EmailService {
     }
   }
 
-  async sendPasswordResetEmail(email: string, resetToken: string): Promise<{ success: boolean; error?: string }> {
+  async sendPasswordResetEmail(
+    email: string,
+    resetToken: string,
+  ): Promise<{ success: boolean; error?: string }> {
     const resetUrl = `${this.appUrl}/reset-password/${resetToken}`;
     const subject = 'Réinitialisation de votre mot de passe - Melya';
 
@@ -709,7 +734,9 @@ export class EmailService {
     this.logger.log(`Sending password reset email to ${email}`);
 
     if (!this.resend) {
-      this.logger.warn(`[DEV MODE] Password reset email would be sent to: ${email}`);
+      this.logger.warn(
+        `[DEV MODE] Password reset email would be sent to: ${email}`,
+      );
       this.logger.warn(`[DEV MODE] Reset URL: ${resetUrl}`);
       return { success: true };
     }
@@ -723,7 +750,9 @@ export class EmailService {
       });
 
       if (error) {
-        this.logger.error(`Failed to send password reset email: ${error.message}`);
+        this.logger.error(
+          `Failed to send password reset email: ${error.message}`,
+        );
         return { success: false, error: error.message };
       }
 
@@ -731,7 +760,9 @@ export class EmailService {
       return { success: true };
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'Unknown error';
-      this.logger.error(`Exception sending password reset email: ${errorMessage}`);
+      this.logger.error(
+        `Exception sending password reset email: ${errorMessage}`,
+      );
       return { success: false, error: errorMessage };
     }
   }
