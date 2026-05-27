@@ -1,5 +1,6 @@
 import { Logos } from "doodle-icons";
 import Image from "next/image";
+import Link from "next/link";
 
 export function Footer() {
   return (
@@ -25,24 +26,33 @@ export function Footer() {
               Contact
             </a>
             <span className="hidden sm:inline text-border">·</span>
-            <a href="#" className="hover:text-foreground transition-colors">
+            <Link
+              href="/securite"
+              className="hover:text-foreground transition-colors"
+            >
               Sécurité
-            </a>
+            </Link>
             <span className="hidden sm:inline text-border">·</span>
-            <a href="#" className="hover:text-foreground transition-colors">
+            <Link
+              href="/confidentialite"
+              className="hover:text-foreground transition-colors"
+            >
               Politique de confidentialité
-            </a>
+            </Link>
             <span className="hidden sm:inline text-border">·</span>
-            <a href="#" className="hover:text-foreground transition-colors">
+            <Link
+              href="/mentions-legales"
+              className="hover:text-foreground transition-colors"
+            >
               Mentions légales
-            </a>
+            </Link>
             <span className="hidden sm:inline text-border">·</span>
-            <a
-              href="#fonctionnalites"
+            <Link
+              href="/echelles"
               className="hover:text-foreground transition-colors"
             >
               Échelles disponibles
-            </a>
+            </Link>
           </div>
 
           {/* Social */}

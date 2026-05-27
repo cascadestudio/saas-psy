@@ -7,10 +7,10 @@ import Link from "next/link";
 import { useUser } from "@/app/context/UserContext";
 
 const navLinks = [
-  { href: "#fonctionnalites", label: "Fonctionnalités" },
-  { href: "#comment-ca-marche", label: "Comment ça marche" },
+  { href: "/#fonctionnalites", label: "Fonctionnalités" },
+  { href: "/#comment-ca-marche", label: "Comment ça marche" },
   // { href: "#tarifs", label: "Tarifs" },
-  { href: "#faq", label: "FAQ" },
+  { href: "/#faq", label: "FAQ" },
 ];
 
 export function Navbar() {
@@ -36,7 +36,7 @@ export function Navbar() {
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
-          <a href="#" className="flex items-center gap-2">
+          <Link href="/" className="flex items-center gap-2">
             <Image
               src="/images/logos/logo-melya.svg"
               alt="Melya"
@@ -44,7 +44,7 @@ export function Navbar() {
               height={35}
               priority
             />
-          </a>
+          </Link>
 
           {/* Center links — desktop */}
           <div className="hidden md:flex items-center gap-8">
