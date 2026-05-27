@@ -19,6 +19,82 @@ const CATEGORIES: { key: Category; label: string }[] = [
   { key: "passations", label: "Passations" },
 ];
 
+const normalize = (s: string) =>
+  s
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[̀-ͯ]/g, "")
+    .replace(/[^a-z0-9]+/g, "");
+
+// Seuil de tolérance aux fautes selon la longueur du token (règle "Algolia")
+const maxDistance = (len: number) => (len <= 3 ? 0 : len <= 7 ? 1 : 2);
+
+// Damerau-Levenshtein avec early-exit si la distance dépasse `max`
+const damerauLevenshtein = (a: string, b: string, max: number): number => {
+  const al = a.length;
+  const bl = b.length;
+  if (Math.abs(al - bl) > max) return max + 1;
+  if (al === 0) return bl;
+  if (bl === 0) return al;
+
+  let prev2: number[] = new Array(bl + 1).fill(0);
+  let prev: number[] = new Array(bl + 1);
+  let curr: number[] = new Array(bl + 1);
+  for (let j = 0; j <= bl; j++) prev[j] = j;
+
+  for (let i = 1; i <= al; i++) {
+    curr[0] = i;
+    let rowMin = curr[0];
+    for (let j = 1; j <= bl; j++) {
+      const cost = a[i - 1] === b[j - 1] ? 0 : 1;
+      curr[j] = Math.min(curr[j - 1] + 1, prev[j] + 1, prev[j - 1] + cost);
+      if (
+        i > 1 &&
+        j > 1 &&
+        a[i - 1] === b[j - 2] &&
+        a[i - 2] === b[j - 1]
+      ) {
+        curr[j] = Math.min(curr[j], prev2[j - 2] + 1);
+      }
+      if (curr[j] < rowMin) rowMin = curr[j];
+    }
+    if (rowMin > max) return max + 1;
+    [prev2, prev, curr] = [prev, curr, prev2];
+  }
+  return prev[bl];
+};
+
+// Match d'un token dans haystack : substring exact OU fenêtre à distance ≤ seuil
+const fuzzyTokenInHaystack = (haystack: string, token: string): boolean => {
+  if (haystack.includes(token)) return true;
+  const max = maxDistance(token.length);
+  if (max === 0) return false;
+  const minLen = Math.max(1, token.length - max);
+  const maxLen = token.length + max;
+  for (let start = 0; start <= haystack.length - minLen; start++) {
+    for (
+      let len = minLen;
+      len <= maxLen && start + len <= haystack.length;
+      len++
+    ) {
+      const window = haystack.slice(start, start + len);
+      if (damerauLevenshtein(token, window, max) <= max) return true;
+    }
+  }
+  return false;
+};
+
+const fuzzyMatch = (text: string | null | undefined, query: string) => {
+  if (!text) return false;
+  const haystack = normalize(text);
+  const tokens = query.split(/\s+/).map(normalize).filter(Boolean);
+  if (tokens.length === 0) return false;
+  return tokens.every((tok) => fuzzyTokenInHaystack(haystack, tok));
+};
+
+const fuzzyMatchAny = (texts: (string | null | undefined)[], query: string) =>
+  texts.some((t) => fuzzyMatch(t, query));
+
 type SearchResult = {
   id: string;
   title: string;
@@ -122,17 +198,19 @@ export function GlobalSearchBar() {
     if (!q) return [];
     const items: SearchResult[] = [];
 
-    // Patients
+    // Patients : merge API results + local fuzzy match (déduplicate)
     if (activeCategories.has("patients")) {
-      const source = searchedPatients ?? patients;
-      const filtered =
-        searchedPatients ??
-        source.filter(
-          (p) =>
-            `${p.firstName} ${p.lastName}`.toLowerCase().includes(q) ||
-            p.email?.toLowerCase().includes(q),
-        );
-      filtered.slice(0, 5).forEach((p) =>
+      const localMatches = patients.filter((p) =>
+        fuzzyMatchAny([`${p.firstName} ${p.lastName}`, p.email], q),
+      );
+      const merged: Patient[] = [];
+      const seen = new Set<string>();
+      for (const p of [...(searchedPatients ?? []), ...localMatches]) {
+        if (seen.has(p.id)) continue;
+        seen.add(p.id);
+        merged.push(p);
+      }
+      merged.slice(0, 5).forEach((p) =>
         items.push({
           id: `patient-${p.id}`,
           title: `${p.firstName} ${p.lastName}`,
@@ -146,12 +224,7 @@ export function GlobalSearchBar() {
     // Échelles
     if (activeCategories.has("echelles")) {
       scales
-        .filter(
-          (s) =>
-            s.title.toLowerCase().includes(q) ||
-            s.description?.toLowerCase().includes(q) ||
-            s.category?.toLowerCase().includes(q),
-        )
+        .filter((s) => fuzzyMatchAny([s.title, s.description, s.category], q))
         .slice(0, 5)
         .forEach((s) =>
           items.push({
@@ -167,10 +240,8 @@ export function GlobalSearchBar() {
     // Passations (toutes sessions)
     if (activeCategories.has("passations")) {
       sessions
-        .filter(
-          (s) =>
-            getScaleTitle(s.scaleId).toLowerCase().includes(q) ||
-            getPatientName(s).toLowerCase().includes(q),
+        .filter((s) =>
+          fuzzyMatchAny([getScaleTitle(s.scaleId), getPatientName(s)], q),
         )
         .slice(0, 5)
         .forEach((s) =>
