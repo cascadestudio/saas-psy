@@ -626,7 +626,7 @@ export class EmailService {
         <li><strong>Nom :</strong> ${fullName}</li>
         <li><strong>Date :</strong> ${new Date().toISOString()}</li>
       </ul>
-      <p>Fiche Attio : <a href="https://app.attio.com/studio-cascade/people">ouvrir Attio</a></p>
+      <p>Fiche Attio : <a href="https://app.attio.com/melyaapp/people">ouvrir Attio</a></p>
     `;
 
     if (!this.resend) {
