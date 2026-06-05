@@ -42,6 +42,9 @@ export class AttioService {
         values: {
           email_addresses: [{ email_address: params.email }],
           ...(name ? { name } : {}),
+          // Marque l'inscription : promeut automatiquement un prospect
+          // existant (matching par email) vers le statut "Inscrit".
+          status: [{ option: 'Inscrit' }],
         },
       },
     };
