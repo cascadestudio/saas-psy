@@ -37,6 +37,11 @@ export class AttioService {
           ]
         : undefined;
 
+    // On ne tague la source "App" que si le contact n'a pas déjà une
+    // source (prospect Instagram/Clément déjà connu) : la conversion ne
+    // doit pas écraser le canal d'acquisition d'origine.
+    const tagAppSource = await this.shouldTagAppSource(params.email);
+
     const body = {
       data: {
         values: {
@@ -46,6 +51,7 @@ export class AttioService {
           // existant (matching par email) vers le statut "Inscrit".
           // NB : l'attribut titré "Status" dans Attio a pour slug `type`.
           type: [{ option: 'Inscrit' }],
+          ...(tagAppSource ? { source: [{ option: 'App' }] } : {}),
         },
       },
     };
@@ -67,6 +73,38 @@ export class AttioService {
       throw new Error(
         `Attio upsertPerson failed (${res.status}): ${text}`,
       );
+    }
+  }
+
+  /**
+   * Retourne true si l'on peut taguer la source "App" : contact inexistant
+   * ou sans source. En cas de doute (erreur réseau/API), retourne false pour
+   * ne jamais écraser une source d'acquisition existante.
+   */
+  private async shouldTagAppSource(email: string): Promise<boolean> {
+    try {
+      const res = await fetch(
+        `${this.baseUrl}/objects/people/records/query`,
+        {
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${this.apiKey}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            filter: { email_addresses: email },
+            limit: 1,
+          }),
+        },
+      );
+      if (!res.ok) return false;
+      const json = (await res.json()) as {
+        data?: Array<{ values?: { source?: unknown[] } }>;
+      };
+      const record = json.data?.[0];
+      return !record || !record.values?.source?.length;
+    } catch {
+      return false;
     }
   }
 }
