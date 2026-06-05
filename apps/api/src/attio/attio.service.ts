@@ -44,7 +44,8 @@ export class AttioService {
           ...(name ? { name } : {}),
           // Marque l'inscription : promeut automatiquement un prospect
           // existant (matching par email) vers le statut "Inscrit".
-          status: [{ option: 'Inscrit' }],
+          // NB : l'attribut titré "Status" dans Attio a pour slug `type`.
+          type: [{ option: 'Inscrit' }],
         },
       },
     };
