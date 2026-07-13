@@ -73,6 +73,7 @@ export class AuthService {
           email: user.email,
           firstName: user.firstName,
           lastName: user.lastName,
+          signupDate: user.createdAt,
         })
         .catch((err) => {
           console.error('Failed to sync user to Attio:', err);
