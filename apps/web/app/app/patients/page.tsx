@@ -140,7 +140,7 @@ export default function PatientsPage() {
                 <PatientRow
                   key={patient.id}
                   patient={patient}
-                  href={`/patients/${patient.id}`}
+                  href={`/app/patients/${patient.id}`}
                   onSendClick={(e) => {
                     e.preventDefault();
                     if (!user) {

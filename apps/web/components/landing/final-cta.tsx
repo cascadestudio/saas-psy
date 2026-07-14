@@ -21,7 +21,7 @@ export function FinalCTA() {
         </p>
         <div className="relative inline-flex flex-col items-center">
           <Link
-            href="/dashboard"
+            href="/app/dashboard"
             className="font-body font-medium text-sm rounded-full px-8 py-3 bg-brand-orange text-white hover:bg-brand-orange/90 transition-colors"
           >
             Je souhaite essayer Melya

@@ -41,7 +41,7 @@ export function SessionRow({
 
   return (
     <Link
-      href={`/passation/${session.id}`}
+      href={`/app/passation/${session.id}`}
       className="flex items-center gap-3 px-3 py-2.5 border-t border-border/50 first:border-t-0 hover:bg-background/50 transition-colors"
     >
       <div

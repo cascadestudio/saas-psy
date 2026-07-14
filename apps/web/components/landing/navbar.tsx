@@ -62,7 +62,7 @@ export function Navbar() {
           {/* CTA — desktop */}
           <div className="hidden md:flex items-center gap-3">
             <Link
-              href="/dashboard"
+              href="/app/dashboard"
               className="font-body font-medium text-sm rounded-full px-5 py-2 bg-brand-orange text-white hover:bg-brand-orange/90 transition-colors"
             >
               {ctaLabel}
@@ -100,7 +100,7 @@ export function Navbar() {
             ))}
             <div className="pt-2">
               <Link
-                href="/dashboard"
+                href="/app/dashboard"
                 className="block w-full text-center font-body font-medium text-sm rounded-full px-5 py-2 bg-brand-orange text-white hover:bg-brand-orange/90 transition-colors"
                 onClick={() => setMobileOpen(false)}
               >

@@ -21,7 +21,7 @@ type BadgeScale = (typeof badgeScales)[number];
 function ScaleBadge({ scale }: { scale: BadgeScale }) {
   return (
     <Link
-      href={`/echelles/${scale.id}`}
+      href={`/app/echelles/${scale.id}`}
       className="flex-shrink-0 flex overflow-hidden text-left cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange"
       style={{
         borderRadius: 20,

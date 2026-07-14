@@ -158,7 +158,7 @@ export default function ResultsPage() {
       <div className="flex-1 w-full flex flex-col items-center justify-center gap-4">
         <p className="text-lg text-muted-foreground">Session non trouvée</p>
         <Button asChild>
-          <Link href="/dashboard">Retour au tableau de bord</Link>
+          <Link href="/app/dashboard">Retour au tableau de bord</Link>
         </Button>
       </div>
     );
@@ -285,7 +285,7 @@ export default function ResultsPage() {
     </div>
   );
 
-  const backHref = patient ? `/patients/${patient.id}` : "/patients";
+  const backHref = patient ? `/app/patients/${patient.id}` : "/app/patients";
   const backLabel = patient
     ? `${patient.firstName} ${patient.lastName}`
     : "Mes patient·es";
@@ -565,7 +565,7 @@ export default function ResultsPage() {
                 const RowTag = isCurrent ? "div" : Link;
                 const rowProps = isCurrent
                   ? {}
-                  : { href: `/passation/${s.id}` };
+                  : { href: `/app/passation/${s.id}` };
                 return (
                   <li key={s.id} className="relative pl-6">
                     <span

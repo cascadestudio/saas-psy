@@ -216,7 +216,7 @@ export function GlobalSearchBar() {
           title: `${p.firstName} ${p.lastName}`,
           subtitle: p.email,
           category: "patients",
-          href: `/patients/${p.id}`,
+          href: `/app/patients/${p.id}`,
         }),
       );
     }
@@ -232,7 +232,7 @@ export function GlobalSearchBar() {
             title: s.title,
             subtitle: s.category,
             category: "echelles",
-            href: `/echelles/${s.id}`,
+            href: `/app/echelles/${s.id}`,
           }),
         );
     }
@@ -250,7 +250,7 @@ export function GlobalSearchBar() {
             title: getScaleTitle(s.scaleId),
             subtitle: getPatientName(s),
             category: "passations",
-            href: `/passation/${s.id}`,
+            href: `/app/passation/${s.id}`,
           }),
         );
     }

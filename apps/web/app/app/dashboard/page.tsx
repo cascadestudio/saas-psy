@@ -39,7 +39,7 @@ function LoginParamHandler() {
   useEffect(() => {
     if (searchParams.get("login") === "true") {
       openAuthGate();
-      router.replace("/dashboard");
+      router.replace("/app/dashboard");
     }
   }, [searchParams, openAuthGate, router]);
 
@@ -237,7 +237,7 @@ export default function DashboardPage() {
 
         <div>
           <Link
-            href="/patients"
+            href="/app/patients"
             className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
           >
             Tous mes patient·e·s

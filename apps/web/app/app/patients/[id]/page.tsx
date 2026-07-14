@@ -90,7 +90,7 @@ export default function PatientDetailPage() {
   }, [user, loadData]);
 
   const handleArchived = () => {
-    router.push("/patients");
+    router.push("/app/patients");
   };
 
   const handleRestored = () => {
@@ -110,7 +110,7 @@ export default function PatientDetailPage() {
       <div className="flex-1 w-full flex flex-col items-center justify-center gap-4">
         <p className="text-lg text-muted-foreground">Patient non trouvé</p>
         <Button asChild>
-          <Link href="/dashboard">Retour à la liste</Link>
+          <Link href="/app/dashboard">Retour à la liste</Link>
         </Button>
       </div>
     );
@@ -138,7 +138,7 @@ export default function PatientDetailPage() {
     <div className="container mx-auto px-4 py-6">
       {/* Retour */}
       <Link
-        href="/patients"
+        href="/app/patients"
         className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors mb-4"
       >
         <Arrow.ArrowLeft className="h-4 w-4" />

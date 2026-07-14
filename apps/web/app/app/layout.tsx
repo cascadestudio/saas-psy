@@ -6,7 +6,10 @@ import { usePathname } from "next/navigation";
 
 import { Interfaces, Files } from "doodle-icons";
 import { useUser } from "@/app/context/UserContext";
-import { useAuthGate } from "@/app/context/AuthGateContext";
+import { AuthGateProvider, useAuthGate } from "@/app/context/AuthGateContext";
+import { PremiumGateProvider } from "@/app/context/PremiumGateContext";
+import { AuthGateModal } from "@/components/auth/AuthGateModal";
+import { PremiumGateModal } from "@/components/PremiumGateModal";
 
 import { GlobalSearchBar } from "@/components/GlobalSearchBar";
 import {
@@ -19,18 +22,30 @@ import {
 import { cn } from "@/lib/utils";
 
 const navigation = [
-  { name: "Tableau de bord", href: "/dashboard", icon: Interfaces.Home },
-  { name: "Mes patients", href: "/patients", icon: Interfaces.User },
-  { name: "Échelles", href: "/echelles", icon: Files.FileText },
+  { name: "Tableau de bord", href: "/app/dashboard", icon: Interfaces.Home },
+  { name: "Mes patients", href: "/app/patients", icon: Interfaces.User },
+  { name: "Échelles", href: "/app/echelles", icon: Files.FileText },
 ];
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <AuthGateProvider>
+      <PremiumGateProvider>
+        <AppShell>{children}</AppShell>
+        <AuthGateModal />
+        <PremiumGateModal />
+      </PremiumGateProvider>
+    </AuthGateProvider>
+  );
+}
+
+function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const { user } = useUser();
   const { openAuthGate } = useAuthGate();
 
   const isSettingsActive =
-    pathname === "/settings" || pathname.startsWith("/settings/");
+    pathname === "/app/settings" || pathname.startsWith("/app/settings/");
 
   return (
     <div className="flex min-h-screen">
@@ -38,7 +53,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
       <aside className="sticky top-0 hidden h-screen w-52 flex-col bg-surface-brand-bg text-brand-orange rounded-r-2xl md:flex print:hidden">
         {/* Logo */}
         <div className="flex h-20 items-center justify-center px-4 mt-4">
-          <Link href="/dashboard" className="flex items-center">
+          <Link href="/app/dashboard" className="flex items-center">
             <Image
               src="/images/logos/logo-melya.svg"
               alt="Melya"
@@ -80,10 +95,10 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
         <div className="px-4 pb-6">
           <div className="border-t border-brand-orange/20 pt-4 flex flex-col gap-1">
             <Link
-              href="/settings"
+              href="/app/settings"
               className={cn(
                 "flex items-center gap-3 px-2 py-2 text-sm font-medium transition-all duration-200",
-                pathname === "/settings" || pathname.startsWith("/settings/")
+                pathname === "/app/settings" || pathname.startsWith("/app/settings/")
                   ? "text-brand-orange translate-x-1"
                   : "text-muted-foreground hover:text-brand-orange hover:translate-x-1",
               )}
@@ -127,7 +142,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
 
         {/* Mobile header */}
         <div className="flex h-14 items-center justify-between border-b border-border bg-surface-brand-bg px-4 md:hidden print:hidden">
-          <Link href="/dashboard" className="flex items-center">
+          <Link href="/app/dashboard" className="flex items-center">
             <Image
               src="/images/logos/logo-melya.svg"
               alt="Melya"
@@ -145,7 +160,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-56">
               <DropdownMenuItem asChild>
-                <Link href="/settings" className="flex items-center gap-2">
+                <Link href="/app/settings" className="flex items-center gap-2">
                   <Interfaces.Setting className="h-4 w-4" fill="currentColor" />
                   Paramètres
                 </Link>
@@ -172,7 +187,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
           </DropdownMenu>
         </div>
 
-        {user && !pathname.startsWith("/settings") && (
+        {user && !pathname.startsWith("/app/settings") && (
           <div className="container mx-auto px-4 pt-6 print:hidden">
             <GlobalSearchBar />
           </div>

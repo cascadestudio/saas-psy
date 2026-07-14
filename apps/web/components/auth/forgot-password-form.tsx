@@ -50,7 +50,7 @@ export function ForgotPasswordForm() {
 
         <div className="text-center">
           <Link
-            href="/dashboard"
+            href="/app/dashboard"
             className="text-sm text-primary hover:underline"
           >
             Retour à l'application
@@ -96,7 +96,7 @@ export function ForgotPasswordForm() {
 
         <div className="text-center">
           <Link
-            href="/dashboard"
+            href="/app/dashboard"
             className="text-sm text-muted-foreground hover:underline"
           >
             Retour à l'application

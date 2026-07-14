@@ -17,7 +17,7 @@ interface ScaleCardProps {
 export function ScaleCard({ scale }: ScaleCardProps) {
   return (
     <Link
-      href={`/echelles/${scale.id}`}
+      href={`/app/echelles/${scale.id}`}
       className="flex overflow-hidden hover:opacity-90 transition-opacity h-[100px] sm:h-[120px]"
       style={{ borderRadius: 20 }}
     >
