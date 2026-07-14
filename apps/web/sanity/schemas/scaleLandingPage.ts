@@ -69,7 +69,7 @@ export const scaleLandingPage = defineType({
       name: "sections",
       title: "Sections",
       description:
-        "Le corps de la page. Par exemple : « Pour qui ? », « Quand l'utiliser en consultation ? », « Comment Melya l'automatise ».",
+        "Le corps de la page. Par exemple : « Pour qui ? », « Quand l'utiliser en consultation ? », « Comment Melya l'automatise ». N'y écris pas la cotation ni les seuils d'interprétation : la page les affiche automatiquement, tels que l'application les calcule.",
       type: "array",
       of: [
         {

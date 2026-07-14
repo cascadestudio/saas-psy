@@ -62,3 +62,49 @@ export async function getScaleLandingPage(
     return null;
   }
 }
+
+export type BlogPostSummary = {
+  title: string;
+  slug: string;
+  excerpt: string;
+  publishedAt: string;
+};
+
+export type BlogPost = BlogPostSummary & {
+  seoTitle?: string;
+  seoDescription: string;
+  body: unknown[];
+};
+
+/**
+ * Le blog, lui, n'a pas de source de secours : un article n'existe que dans
+ * Sanity. Un échec du CMS rend donc la liste vide plutôt que de casser la page,
+ * et l'article introuvable renvoie un 404 — mais jamais une 500.
+ */
+export async function getBlogPosts(): Promise<BlogPostSummary[]> {
+  try {
+    return await sanityClient.fetch<BlogPostSummary[]>(
+      groq`*[_type == "blogPost" && defined(slug.current)] | order(publishedAt desc){
+        title, "slug": slug.current, excerpt, publishedAt
+      }`,
+    );
+  } catch (error) {
+    console.error("[sanity] liste des articles indisponible", error);
+    return [];
+  }
+}
+
+export async function getBlogPost(slug: string): Promise<BlogPost | null> {
+  try {
+    return await sanityClient.fetch<BlogPost | null>(
+      groq`*[_type == "blogPost" && slug.current == $slug][0]{
+        title, "slug": slug.current, excerpt, publishedAt,
+        seoTitle, seoDescription, body
+      }`,
+      { slug },
+    );
+  } catch (error) {
+    console.error(`[sanity] article "${slug}" indisponible`, error);
+    return null;
+  }
+}

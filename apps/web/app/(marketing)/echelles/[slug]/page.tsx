@@ -127,6 +127,49 @@ export default async function ScaleLandingPage({
           </div>
         </section>
 
+        {/*
+          La cotation est rendue depuis @melya/core, jamais saisie dans le CMS.
+          Les seuils affichés ici sont, par construction, ceux que le scoring
+          applique réellement : une page publique ne peut plus annoncer une
+          interprétation que l'app contredit.
+        */}
+        <section className="px-4 py-12">
+          <div className="mx-auto max-w-3xl">
+            <h2 className="font-title text-2xl md:text-3xl">
+              Cotation et interprétation
+            </h2>
+            <p className="mt-4 text-muted-foreground">
+              {scale.scoring.method}
+            </p>
+
+            <table className="mt-6 w-full text-left text-sm">
+              <thead>
+                <tr className="border-b">
+                  <th className="py-2 font-medium">Score</th>
+                  <th className="py-2 font-medium">Interprétation</th>
+                </tr>
+              </thead>
+              <tbody>
+                {scale.scoring.ranges.map((range) => (
+                  <tr key={`${range.min}-${range.max}`} className="border-b">
+                    <td className="py-2 tabular-nums">
+                      {range.min} – {range.max}
+                    </td>
+                    <td className="py-2 text-muted-foreground">
+                      {range.interpretation}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+
+            <p className="mt-4 text-xs text-muted-foreground">
+              Ce sont les seuils appliqués par Melya lors de la cotation
+              automatique du {scale.acronym}.
+            </p>
+          </div>
+        </section>
+
         {content?.sections?.length ? (
           <section className="px-4 py-12">
             <div className="mx-auto max-w-3xl space-y-12">

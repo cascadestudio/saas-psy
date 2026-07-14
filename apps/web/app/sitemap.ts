@@ -1,8 +1,11 @@
 import type { MetadataRoute } from "next";
 
 import { allScaleSlugs } from "@/lib/scale-slug";
+import { getBlogPosts } from "@/sanity/lib/queries";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export const revalidate = 60;
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const lastModified = new Date();
 
   const scalePages: MetadataRoute.Sitemap = allScaleSlugs().map((slug) => ({
@@ -10,6 +13,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
     lastModified,
     changeFrequency: "monthly",
     priority: 0.9,
+  }));
+
+  // getBlogPosts avale ses erreurs : si Sanity tombe, le sitemap perd les
+  // articles mais reste servi avec les pages statiques.
+  const posts = await getBlogPosts();
+  const blogPages: MetadataRoute.Sitemap = posts.map((post) => ({
+    url: `https://www.melya.app/blog/${post.slug}`,
+    lastModified: new Date(post.publishedAt),
+    changeFrequency: "monthly",
+    priority: 0.7,
   }));
 
   return [
@@ -26,6 +39,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     ...scalePages,
+    {
+      url: "https://www.melya.app/blog",
+      lastModified,
+      changeFrequency: "weekly",
+      priority: 0.7,
+    },
+    ...blogPages,
     {
       url: "https://www.melya.app/securite",
       lastModified,
