@@ -39,19 +39,26 @@ const scaleLandingPageFields = groq`
 /**
  * Le contenu Sanity est optionnel : une échelle sans page publiée reste servie
  * avec les seules données de `@melya/core`. Le CMS enrichit la page, il n'en
- * conditionne pas l'existence — et une panne Sanity ne fait pas tomber le SEO.
+ * conditionne pas l'existence.
+ *
+ * Un échec de Sanity est donc traité comme une absence de contenu, pas comme
+ * une erreur : la page retombe sur `@melya/core` et reste indexable. Laisser
+ * l'exception remonter ferait tomber le build (et le SEO) sur une panne du CMS
+ * marketing, ce qui inverserait complètement la hiérarchie des priorités.
  */
 export async function getScaleLandingPage(
   scaleId: string,
 ): Promise<ScaleLandingPage | null> {
-  return sanityClient.fetch<ScaleLandingPage | null>(
-    groq`*[_type == "scaleLandingPage" && scaleId == $scaleId][0]{ ${scaleLandingPageFields} }`,
-    { scaleId },
-  );
-}
-
-export async function getAllScaleLandingPages(): Promise<ScaleLandingPage[]> {
-  return sanityClient.fetch<ScaleLandingPage[]>(
-    groq`*[_type == "scaleLandingPage"]{ ${scaleLandingPageFields} }`,
-  );
+  try {
+    return await sanityClient.fetch<ScaleLandingPage | null>(
+      groq`*[_type == "scaleLandingPage" && scaleId == $scaleId][0]{ ${scaleLandingPageFields} }`,
+      { scaleId },
+    );
+  } catch (error) {
+    console.error(
+      `[sanity] contenu indisponible pour "${scaleId}", page servie depuis @melya/core`,
+      error,
+    );
+    return null;
+  }
 }
