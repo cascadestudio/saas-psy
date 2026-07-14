@@ -1,12 +1,11 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PortableText } from "@portabletext/react";
 
 import { Navbar } from "@/components/landing/navbar";
 import { Footer } from "@/components/landing/footer";
-import { Button } from "@/components/ui/button";
+import { CtaButton } from "@/components/landing/cta-button";
 import { questionCount } from "@/app/utils/utils";
 import { allScaleSlugs, getScaleBySlug } from "@/lib/scale-slug";
 import { getScaleLandingPage } from "@/sanity/lib/queries";
@@ -106,10 +105,13 @@ export default async function ScaleLandingPage({
               {intro}
             </p>
 
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Button asChild size="lg">
-                <Link href={`/app/echelles/${scale.id}`}>{ctaLabel}</Link>
-              </Button>
+            <div className="relative mt-8 inline-flex flex-col items-center">
+              <CtaButton href={`/app/echelles/${scale.id}`}>
+                {ctaLabel}
+              </CtaButton>
+              <span className="absolute -bottom-6 font-body text-xs text-foreground/50">
+                100% gratuit
+              </span>
             </div>
 
             <dl className="mt-12 grid grid-cols-2 gap-px overflow-hidden rounded-2xl bg-border md:grid-cols-4">
@@ -171,9 +173,12 @@ export default async function ScaleLandingPage({
               Passation en ligne, cotation automatique, suivi longitudinal.
               Hébergement HDS en France.
             </p>
-            <Button asChild size="lg" className="mt-6">
-              <Link href={`/app/echelles/${scale.id}`}>{ctaLabel}</Link>
-            </Button>
+            <CtaButton
+              href={`/app/echelles/${scale.id}`}
+              className="mt-6 inline-block"
+            >
+              {ctaLabel}
+            </CtaButton>
           </div>
 
           <p className="mx-auto mt-8 max-w-3xl text-xs text-muted-foreground">

@@ -1,7 +1,7 @@
 "use client";
 
-import Link from "next/link";
 import { useScrollAnimation } from "./use-scroll-animation";
+import { CtaButton } from "./cta-button";
 
 export function FinalCTA() {
   const { ref, isVisible } = useScrollAnimation();
@@ -20,12 +20,7 @@ export function FinalCTA() {
           cotations.
         </p>
         <div className="relative inline-flex flex-col items-center">
-          <Link
-            href="/app/dashboard"
-            className="font-body font-medium text-sm rounded-full px-8 py-3 bg-brand-orange text-white hover:bg-brand-orange/90 transition-colors"
-          >
-            Je souhaite essayer Melya
-          </Link>
+          <CtaButton>Je souhaite essayer Melya</CtaButton>
           <span className="absolute -bottom-6 text-xs text-foreground/50 font-body">
             100% gratuit
           </span>

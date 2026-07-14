@@ -1,8 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { Interfaces } from "doodle-icons";
+import { CtaButton } from "./cta-button";
 
 export function Hero() {
   return (
@@ -41,12 +41,7 @@ export function Hero() {
                 style={{ width: "calc(50% - 160px)" }}
               />
               <div className="relative flex flex-col items-center">
-                <Link
-                  href="/app/dashboard"
-                  className="font-body font-medium text-sm rounded-full px-8 py-3 bg-brand-orange text-white hover:bg-brand-orange/90 transition-colors"
-                >
-                  Je souhaite essayer Melya
-                </Link>
+                <CtaButton>Je souhaite essayer Melya</CtaButton>
                 <span className="absolute -bottom-6 text-xs text-foreground/50 font-body">
                   100% gratuit
                 </span>
