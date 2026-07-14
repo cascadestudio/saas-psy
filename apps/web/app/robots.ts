@@ -10,6 +10,8 @@ export default function robots(): MetadataRoute.Robots {
           "/api/",
           "/app",
           "/app/",
+          "/studio",
+          "/studio/",
           "/session/",
           "/p/",
           "/protected",

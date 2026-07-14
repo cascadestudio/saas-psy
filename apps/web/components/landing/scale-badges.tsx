@@ -5,10 +5,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { useScrollAnimation } from "./use-scroll-animation";
 import { scales as scalesData } from "@/app/scalesData";
+import { scaleSlug } from "@/lib/scale-slug";
 import { Arrow } from "doodle-icons";
 
 const badgeScales = scalesData.map((s) => ({
   id: s.id,
+  slug: scaleSlug(s),
   acronym: s.acronym,
   label: s.label,
   icon: s.icon,
@@ -21,7 +23,7 @@ type BadgeScale = (typeof badgeScales)[number];
 function ScaleBadge({ scale }: { scale: BadgeScale }) {
   return (
     <Link
-      href={`/app/echelles/${scale.id}`}
+      href={`/echelles/${scale.slug}`}
       className="flex-shrink-0 flex overflow-hidden text-left cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange"
       style={{
         borderRadius: 20,

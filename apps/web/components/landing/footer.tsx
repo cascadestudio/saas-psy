@@ -48,7 +48,7 @@ export function Footer() {
             </Link>
             <span className="hidden sm:inline text-border">·</span>
             <Link
-              href="/app/echelles"
+              href="/echelles"
               className="hover:text-foreground transition-colors"
             >
               Échelles disponibles
