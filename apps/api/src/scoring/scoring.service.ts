@@ -8,6 +8,7 @@ import { scoreRses } from './scorers/rses';
 import { scoreLsas } from './scorers/lsas';
 import { scoreSpin } from './scorers/spin';
 import { scoreQips } from './scorers/qips';
+import { scoreAudit } from './scorers/audit';
 
 type Scorer = (scale: Scale, responses: Record<string, unknown>) => ScoreResult;
 
@@ -20,6 +21,7 @@ const SCORERS: Record<string, Scorer> = {
   'echelle-d-anxiete-sociale-de-liebowitz': scoreLsas,
   spin: scoreSpin,
   qips: scoreQips,
+  audit: scoreAudit,
 };
 
 @Injectable()

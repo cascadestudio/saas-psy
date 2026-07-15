@@ -712,6 +712,150 @@ exports.scales = [
             method: "Inverser les cotes des items 3, 5, 8, 9 et 10 (1↔4, 2↔3), puis additionner les 10 items. Le score total varie de 10 à 40.",
         },
     },
+    {
+        id: "audit",
+        acronym: "AUDIT",
+        label: "Test de repérage des troubles liés à l'usage de l'alcool",
+        patientIntroSubtitle: null,
+        icon: "/images/scales/audit.svg",
+        color: "#A97BA5",
+        colorLight: "#D6BDD3",
+        formType: "options",
+        title: "AUDIT - Test de repérage des troubles liés à l'usage de l'alcool",
+        description: "Un questionnaire de 10 items développé par l'OMS pour repérer une consommation d'alcool à risque, nocive ou une dépendance au cours des 12 derniers mois",
+        category: "Addictions",
+        estimatedTime: "2-3 minutes",
+        longDescription: "L'AUDIT (Alcohol Use Disorders Identification Test) est un auto-questionnaire de 10 items développé par l'Organisation mondiale de la Santé (Saunders et al., 1993) pour repérer les consommations d'alcool problématiques. Les items 1 à 3 portent sur la consommation (fréquence, quantité, ivresses), les items 4 à 6 sur les signes de dépendance et les items 7 à 10 sur les conséquences. Chaque item est coté de 0 à 4 (items 9 et 10 : 0, 2 ou 4), pour un score total de 0 à 40 portant sur les 12 derniers mois. Selon la Société Française d'Alcoologie (2015), un score ≥ 7 chez l'homme et ≥ 6 chez la femme évoque un mésusage actuel, et un score > 12 (quel que soit le sexe) est en faveur d'une dépendance. Ce seuil de repérage est sexe-spécifique : l'interprétation affichée retient le seuil le plus sensible (≥ 6) et doit être lue en tenant compte du sexe de la personne.",
+        instructions: "Ce questionnaire porte sur votre consommation d'alcool au cours des douze derniers mois. Veillez à ce que vos réponses reflètent bien cette période, et pas seulement les dernières semaines.\n\nUn « verre standard » correspond à la quantité d'alcool servie dans un bar (environ 10 g d'alcool pur) : un ballon de vin, un demi de bière, une dose de spiritueux.",
+        persistentInstructions: "Au cours des douze derniers mois :",
+        copyrightAttribution: "AUDIT (Alcohol Use Disorders Identification Test) — Organisation mondiale de la Santé ; Saunders, Aasland, Babor, de la Fuente & Grant (1993). Version française validée : Gache et al. (2005). Seuils : Société Française d'Alcoologie (2015).",
+        higherIsBetter: false,
+        questions: [
+            {
+                title: "Fréquence de consommation",
+                prompt: "Combien de fois vous arrive-t-il de consommer de l'alcool ?",
+                options: [
+                    { value: 0, text: "Jamais" },
+                    { value: 1, text: "Une fois par mois ou moins" },
+                    { value: 2, text: "2 à 4 fois par mois" },
+                    { value: 3, text: "2 à 3 fois par semaine" },
+                    { value: 4, text: "4 fois ou plus par semaine" },
+                ],
+            },
+            {
+                title: "Quantité par occasion",
+                prompt: "Combien de verres standards buvez-vous au cours d'une journée ordinaire où vous buvez de l'alcool ?",
+                options: [
+                    { value: 0, text: "Un ou deux" },
+                    { value: 1, text: "Trois ou quatre" },
+                    { value: 2, text: "Cinq ou six" },
+                    { value: 3, text: "Sept à neuf" },
+                    { value: 4, text: "Dix ou plus" },
+                ],
+            },
+            {
+                title: "Consommations importantes",
+                prompt: "Au cours d'une même occasion, combien de fois vous arrive-t-il de boire six verres standards ou plus ?",
+                options: [
+                    { value: 0, text: "Jamais" },
+                    { value: 1, text: "Moins d'une fois par mois" },
+                    { value: 2, text: "Une fois par mois" },
+                    { value: 3, text: "Une fois par semaine" },
+                    { value: 4, text: "Chaque jour ou presque" },
+                ],
+            },
+            {
+                title: "Perte de contrôle",
+                prompt: "Combien de fois avez-vous observé que vous n'étiez plus capable de vous arrêter de boire après avoir commencé ?",
+                options: [
+                    { value: 0, text: "Jamais" },
+                    { value: 1, text: "Moins d'une fois par mois" },
+                    { value: 2, text: "Une fois par mois" },
+                    { value: 3, text: "Une fois par semaine" },
+                    { value: 4, text: "Chaque jour ou presque" },
+                ],
+            },
+            {
+                title: "Obligations non remplies",
+                prompt: "Combien de fois le fait d'avoir bu de l'alcool vous a-t-il empêché de faire ce qu'on attendait normalement de vous ?",
+                options: [
+                    { value: 0, text: "Jamais" },
+                    { value: 1, text: "Moins d'une fois par mois" },
+                    { value: 2, text: "Une fois par mois" },
+                    { value: 3, text: "Une fois par semaine" },
+                    { value: 4, text: "Chaque jour ou presque" },
+                ],
+            },
+            {
+                title: "Consommation matinale",
+                prompt: "Combien de fois, après une période de forte consommation, avez-vous dû boire de l'alcool dès le matin pour vous remettre en forme ?",
+                options: [
+                    { value: 0, text: "Jamais" },
+                    { value: 1, text: "Moins d'une fois par mois" },
+                    { value: 2, text: "Une fois par mois" },
+                    { value: 3, text: "Une fois par semaine" },
+                    { value: 4, text: "Chaque jour ou presque" },
+                ],
+            },
+            {
+                title: "Culpabilité",
+                prompt: "Combien de fois avez-vous eu un sentiment de culpabilité ou de regret après avoir bu ?",
+                options: [
+                    { value: 0, text: "Jamais" },
+                    { value: 1, text: "Moins d'une fois par mois" },
+                    { value: 2, text: "Une fois par mois" },
+                    { value: 3, text: "Une fois par semaine" },
+                    { value: 4, text: "Chaque jour ou presque" },
+                ],
+            },
+            {
+                title: "Trous de mémoire",
+                prompt: "Combien de fois avez-vous été incapable de vous souvenir de ce qui s'était passé la nuit précédente parce que vous aviez bu ?",
+                options: [
+                    { value: 0, text: "Jamais" },
+                    { value: 1, text: "Moins d'une fois par mois" },
+                    { value: 2, text: "Une fois par mois" },
+                    { value: 3, text: "Une fois par semaine" },
+                    { value: 4, text: "Chaque jour ou presque" },
+                ],
+            },
+            {
+                title: "Blessures",
+                prompt: "Vous êtes-vous blessé ou avez-vous blessé quelqu'un parce que vous aviez bu ?",
+                options: [
+                    { value: 0, text: "Non" },
+                    { value: 2, text: "Oui, mais pas au cours de l'année écoulée" },
+                    { value: 4, text: "Oui, au cours de l'année écoulée" },
+                ],
+            },
+            {
+                title: "Inquiétude de l'entourage",
+                prompt: "Un parent, un ami, un médecin ou un autre professionnel de santé s'est-il déjà préoccupé de votre consommation d'alcool et vous a-t-il conseillé de la diminuer ?",
+                options: [
+                    { value: 0, text: "Non" },
+                    { value: 2, text: "Oui, mais pas au cours de l'année écoulée" },
+                    { value: 4, text: "Oui, au cours de l'année écoulée" },
+                ],
+            },
+        ],
+        scoring: {
+            ranges: [
+                { min: 0, max: 5, interpretation: "Consommation à faible risque" },
+                {
+                    min: 6,
+                    max: 12,
+                    interpretation: "Mésusage d'alcool probable (seuil ≥ 6 femme / ≥ 7 homme)",
+                },
+                {
+                    min: 13,
+                    max: 40,
+                    interpretation: "Dépendance à l'alcool probable",
+                },
+            ],
+            maxScore: 40,
+            method: "Additionnez les scores de chaque item (items 1-8 : 0-4 ; items 9-10 : 0, 2 ou 4). Le score total varie de 0 à 40. Seuils Société Française d'Alcoologie (2015) : mésusage ≥ 7 chez l'homme / ≥ 6 chez la femme ; dépendance probable > 12.",
+        },
+    },
 ];
 function getScaleById(id) {
     return exports.scales.find((s) => s.id === id);
