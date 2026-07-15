@@ -1,8 +1,142 @@
-# Benchmark catalogue Mentaal
+# Suivi d'implémentation des échelles
 
+> Document de pilotage du catalogue Melya. **Objectif : rattraper le catalogue
+> disponible de Mentaal** sur le périmètre libre de droits, et rester devant sur
+> les échelles qu'ils n'ont pas. La partie 2 conserve le benchmark Mentaal figé
+> (extraction 2026-07-15) qui a servi à prioriser.
+
+## Tableau de bord
+
+**🔵 9 implémentées · 🚧 5 en cours · 📋 9 prévues · 🔍 22 à instruire · ⬜ 26 non planifiées · 🚫 12 écartées**
+
+**Rattrapage Mentaal : 8/42.** Le plafond n'est pas 74 : sur leur catalogue
+disponible, 12 sont écartées d'office (payantes, outils maison Mentaal, ou
+licence incompatible) et 20 restent à instruire côté droits — il reste **42
+échelles vraisemblablement libres**, dont 8 déjà chez Melya. S'y ajoutent les
+échelles hors catalogue Mentaal (SPIN déjà en prod, DES/EPDS/… en file) où
+Melya prend de l'avance.
+
+### Légende
+
+- ✅ **Validée** — recette manuelle passée (cf. `RECETTE_PLAYBOOK.md`)
+- 🔵 **Implémentée** — code mergé (`packages/core` + scorer), recette à confirmer → passer en ✅
+- 🚧 **En cours** — sources récupérées / doc de portage en rédaction
+- 📋 **Prévue (n)** — priorisée, n = ordre de la file d'attente (partie 2)
+- 🔍 **À instruire** — candidate, mais droits à vérifier avant toute décision
+- ⬜ **Non planifiée** — vraisemblablement libre, pas encore priorisée
+- 🚫 **Écartée** — payante 💰, outil maison Mentaal, ou licence incompatible
+
+**Droits** : ✅ = vraisemblablement libre (estimation — **à recocher contre la
+source primaire avant intégration**), ⚠️ = incertain, 💰 = payant.
+**Classe** (faisabilité, cf. partie 2) : 🟢 A data seule · 🟡 B scorer patterné
+(~30 l.) · 🟠 C petite évolution de brique · 🔴 D hors flux d'auto-passation.
+**Mentaal** : `#n` = position dans leur catalogue disponible (74 outils — la
+75ᵉ entrée est la fonctionnalité « créez votre questionnaire ») ; `Bientôt · x v.`
+= dans leur file d'attente avec x votes ; `Absent` = pas à leur catalogue.
+
+## Tableau de suivi
+
+| Échelle | Nom | Statut | Droits | Classe | Mentaal | Notes |
+|---------|-----|--------|--------|--------|---------|-------|
+| RSES | Estime de soi de Rosenberg | 🔵 | ✅ | — | #7 | |
+| GAD-7 | Dépistage du TAG | 🔵 | ✅ | — | #8 | |
+| LSAS | Anxiété sociale de Liebowitz | 🔵 | ✅ | — | #13 | |
+| PHQ-9 | Questionnaire santé patient (dépression) | 🔵 | ✅ | — | #18 | alerte item 9 |
+| PCL-5 | TSPT (DSM-5) | 🔵 | ✅ | — | #20 | |
+| Y-BOCS | TOC de Yale-Brown | 🔵 | ✅ | — | #44 | |
+| PSWQ | Inquiétude de Penn State | 🔵 | ✅ | — | #53 | porté sous l'id **QIPS** |
+| AUDIT | Troubles liés à l'alcool | 🔵 | ✅ OMS | 🟢 A | #66 | ordre 2 de la file — fait |
+| SPIN | Inventaire de la phobie sociale | 🔵 | ✅ | — | Bientôt · 31 v. | **Melya devant Mentaal** |
+| HSPS | Hypersensibilité (Aron) | 🚧 | ✅ | 🟢 A | #19 | source : `hsps/HSPS_Aron.pdf` |
+| WAQ | Inquiétude et anxiété (Dugas) | 🚧 | ✅ | 🟢 A | #25 | source : `waq-qia/WAQ_QIA_UQO.pdf` |
+| IUS | Intolérance à l'incertitude | 🚧 | ✅ | 🟢 A | #26 | source : `ius/IUS_EII_UQO.pdf` |
+| PDEQ | Dissociation péritraumatique | 🚧 | ✅ | 🟢 A | #59 | source : `pdeq/PDEQ_Cn2r.pdf` |
+| CUDIT-R | Troubles liés au cannabis | 🚧 | ✅ | 🟢 A | #70 | source : `cudit-r/CUDIT-R_RESPADD.pdf` ; file ordre 9 |
+| ASRS | TDAH adulte | 📋 (1) | ✅ OMS | 🟡 B | #3 | `criteriaCheck` façon PCL-5 ; motif le + demandé |
+| DES | Expériences dissociatives | 📋 (3) | ✅ | 🟠 C | Bientôt · 130 v. | #1 des votes ; widget de réponse 0–100 à créer |
+| EPDS | Dépression périnatale (Édimbourg) | 📋 (4) | ✅ | 🟢 A | Bientôt · 96 v. | alerte item 10 (idéation) façon PHQ-9 |
+| DASS-21 | Dépression, anxiété et stress | 📋 (5) | ✅ | 🟠 C | #2 | sévérité par sous-échelle → étendre `Subscore` |
+| ATQ | Pensées automatiques | 📋 (6) | ✅ | 🟢 A | Bientôt · 77 v. | |
+| PDSS | Sévérité du trouble panique | 📋 (7) | ✅ | 🟢 A | Bientôt · 62 v. | |
+| DERS | Régulation émotionnelle | 📋 (8) | ✅ | 🟡 B | #14 | reverse + subscores |
+| FTND | Dépendance à la nicotine (Fagerström) | 📋 (9) | ✅ | — | Bientôt · 29 v. | complète le motif addictions |
+| TAS-20 | Alexithymie de Toronto | 📋 (10) | ✅ | 🟡 B | #37 | reverse + 3 subscores |
+| ASQ-SF | Styles d'attachement | 🔍 | ⚠️ | — | #10 | |
+| SCT | Test de confiance en soi | 🔍 | ⚠️ | — | #15 | |
+| ADHD-RS | Évaluation du TDAH | 🔍 | ⚠️ | — | #16 | DuPaul/Guilford — alternative libre : ASRS |
+| PDQ-4 | Diagnostic des personnalités | 🔍 | ⚠️ | — | #24 | |
+| BPQ | Personnalité borderline | 🔍 | ⚠️ | — | #28 | |
+| CAQ | Évitements cognitifs | 🔍 | ⚠️ | — | #32 | |
+| BIG-5 | Cinq grands facteurs | 🔍 | ⚠️ | — | #33 | items IPIP libres — version exacte à confirmer |
+| PPAG | Phobie, panique, anxiété généralisée | 🔍 | ⚠️ | — | #35 | |
+| SCQ | Cognitions sociales | 🔍 | ⚠️ | — | #39 | |
+| GAD-SBQ | Comportements sécurisants du TAG | 🔍 | ⚠️ | — | #40 | |
+| CAT | Assertivité de Chalvin | 🔍 | ⚠️ | — | #41 | |
+| EDQ | Dépendance affective | 🔍 | ⚠️ | — | #42 | |
+| COPSOQ | Risques psychosociaux | 🔍 | ⚠️ | — | #51 | libre non commercial — usage commercial à vérifier |
+| SPRS | Cotation de la phobie sociale | 🔍 | ⚠️ | — | #55 | |
+| QAP | Attitudes face aux problèmes | 🔍 | ⚠️ | — | #56 | |
+| CST | Stress de Cungi | 🔍 | ⚠️ | — | #60 | |
+| RIASEC | Intérêts professionnels | 🔍 | ⚠️ | — | #62 | modèle libre, version des items à vérifier |
+| ASA-27 | Anxiété de séparation adulte | 🔍 | ⚠️ | — | #63 | |
+| FSS | Échelle des peurs | 🔍 | ⚠️ | — | #64 | |
+| IAT | Addiction à Internet | 🔍 | ⚠️ | — | #71 | Young/Stoelting — licence à vérifier |
+| ISI | Sévérité de l'insomnie | 🔍 | ⚠️ | — | Non dispo | motif sommeil = trou Mentaal → opportunité |
+| PSQI | Qualité de sommeil de Pittsburgh | 🔍 | ⚠️ | — | Non dispo | idem ISI |
+| AQ | Quotient du spectre de l'autisme | ⬜ | ✅ | 🟡 B | #4 | 50 items, recode binaire + 5 subscores |
+| RAADS-R | Autisme / Asperger de Ritvo | ⬜ | ✅ | 🟡 B | #6 | 80 items — lourd |
+| CAT-Q | Camouflage autistique | ⬜ | ✅ | 🟡 B | #9 | |
+| EQ | Quotient empathique | ⬜ | ✅ | 🟡 B | #11 | recode + reverse |
+| PID-5 | Personnalité DSM-5 | ⬜ | ✅ APA | — | #17 | 220 items (ou brève 25) — volume énorme |
+| RAS | Affirmation de soi de Rathus | ⬜ | ✅ | 🟡 B | #21 | reverse + offset |
+| SNAP-IV | TDAH enfant | ⬜ | ✅ | 🟡 B | #23 | public enfant |
+| MDQ | Troubles de l'humeur | ⬜ | ✅ | 🟡 B | #30 | criteriaCheck + oui/non |
+| SCARED | Troubles anxieux enfant | ⬜ | ✅ | 🟡 B | #34 | public enfant |
+| PCL-S | État de stress post-traumatique | ⬜ | ✅ | — | #36 | redondant avec PCL-5 |
+| ASSQ | Dépistage TSA enfant | ⬜ | ✅ | 🟡 B | #38 | public enfant |
+| FMPS | Perfectionnisme de Frost | ⬜ | ✅ | 🟡 B | #45 | subscores |
+| BAT-G | Burnout (version générale) | ⬜ | ✅ | 🟡 B | #48 | alternative libre au MBI |
+| IES-R | Impact des événements | ⬜ | ✅ | 🟡 B | #49 | 3 subscores |
+| SVS | Valeurs de Schwartz | ⬜ | ✅ | — | #50 | centrage ipsatif = calcul spécifique |
+| EAT-26 | Attitudes alimentaires | ⬜ | ✅ | 🟡 B | #52 | recode asymétrique + seuil |
+| ADRS | Dépression pour adolescents | ⬜ | ✅ | — | #57 | public ado |
+| WW-II | Pourquoi s'inquiéter ? | ⬜ | ✅ | 🟡 B | #58 | subscores |
+| BAT-W | Burnout (version travail) | ⬜ | ✅ | 🟡 B | #61 | |
+| BSQ | Sensations corporelles | ⬜ | ✅ | 🟢 A | #65 | Likert + somme |
+| FQ | Peurs de Marks & Mathews | ⬜ | ✅ | 🟡 B | #67 | subscores |
+| PVQ-RR | Valeurs par portraits | ⬜ | ✅ | — | #68 | ipsatif, usage niche |
+| CRIES-13 | Stress post-traumatique enfant | ⬜ | ✅ | 🟡 B | #69 | public enfant |
+| EDS-R | Dépendance à l'exercice | ⬜ | ✅ | 🟡 B | #73 | criteria + subscores |
+| THI | Handicap pour acouphènes | ⬜ | ✅ | 🟢 A | #74 | hors psycho (ORL) |
+| WHO-5 | Bien-être (OMS) | ⬜ | ✅ | — | Absent | idéal suivi longitudinal — angle différenciation |
+| CDI | Distorsions cognitives | 🚫 | ⚠️ | — | #1 | outil maison Mentaal (≠ CDI Pearson) |
+| YSQ-L3 | Schémas de Young (long) | 🚫 | 💰 | — | #5 | payant |
+| YSQ-S3 | Schémas de Young (court) | 🚫 | 💰 | — | #12 | payant |
+| SCID-II-PQ | Dépistage troubles de personnalité | 🚫 | 💰 | — | #22 | SCID/APA |
+| ASTA-20 | Anxiété d'état et de trait | 🚫 | ⚠️ | — | #27 | outil maison Mentaal, proche STAI (payante) — alt. : STICSA |
+| SDQ | Forces et difficultés | 🚫 | ⚠️ | — | #29 | licence requise pour usage électronique/commercial |
+| MBI | Burnout de Maslach | 🚫 | 💰 | — | #31 | Mind Garden — alternative libre : BAT |
+| TOMQ-36 | Théorie de l'esprit | 🚫 | ⚠️ | — | #43 | outil maison Mentaal |
+| MSQ | Questionnaire sur le sommeil | 🚫 | ⚠️ | — | #46 | outil maison Mentaal — le vrai motif sommeil passe par ISI/PSQI |
+| EDI-2 | Troubles alimentaires | 🚫 | 💰 | — | #47 | Pearson — alternative libre : EAT-26 |
+| QPC-L | Première consultation (long) | 🚫 | ⚠️ | — | #54 | outil maison Mentaal |
+| QPC-S | Première consultation (court) | 🚫 | ⚠️ | — | #72 | outil maison Mentaal |
+
+_Maintenance : à chaque échelle mergée → 🔵 ; recette manuelle passée → ✅ ;
+mettre à jour le tableau de bord. Les candidates hors catalogue Mentaal
+(cluster enfant/ado, réserve votée…) sont dans la partie 2 — les remonter ici
+quand elles entrent en file._
+
+---
+
+# Partie 2 — Benchmark catalogue Mentaal
+
+> ⚠️ **Snapshot figé (extraction 2026-07-15)** — sert de référence de
+> priorisation. L'état Melya à jour vit dans la partie 1 ci-dessus (les
+> mentions « 6 échelles Melya » ci-dessous sont datées).
+>
 > Relevé du catalogue de [mentaal.fr](https://mentaal.fr/outils) — concurrent direct
 > (même positionnement psys, HDS Scaleway, passation sans compte patient, ~10 €/mois illimité).
-> Extraction : 2026-07-15.
 
 ## Chiffres clés
 
