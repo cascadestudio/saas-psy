@@ -33,7 +33,7 @@ hiérarchie versions, comparaison Mentaal).
 - **Type** : traduction française officielle diffusée par le dépositaire international de l'AUDIT.
 - **Référence** : *A.U.D.I.T. (Alcohol Use Disorders Identification Test)* — version française, auditscreen.org (site officiel de diffusion de l'AUDIT).
 - **URL** : https://auditscreen.org/cmsb/uploads/audit-french.pdf
-- **Fichier de portage** : `docs/scales/sources/AUDIT_auditscreen_official.pdf`
+- **Fichier de portage** : `docs/scales/audit/AUDIT_auditscreen_official.pdf`
 - **Date de consultation** : 15/07/2026
 
 ### Source de cross-check (items + seuils — France)
@@ -41,7 +41,7 @@ hiérarchie versions, comparaison Mentaal).
 - **Type** : institutionnel FR — Observatoire français des drogues et des tendances addictives (OFDT), reprenant la cotation de la **Société Française d'Alcoologie (2015)**.
 - **Référence** : *Questionnaire AUDIT — Repérage des consommations problématiques*, OFDT (fiche datée 28/02/2019), seuils SFA 2015.
 - **URL** : https://www.ofdt.fr/sites/ofdt/files/2024-06/audit_vf_28-02-19.pdf
-- **Fichier de portage** : `docs/scales/sources/AUDIT_OFDT.pdf`
+- **Fichier de portage** : `docs/scales/audit/AUDIT_OFDT.pdf`
 - **Date de consultation** : 15/07/2026
 
 ### Instrument original
@@ -52,7 +52,7 @@ hiérarchie versions, comparaison Mentaal).
 ### Divergences constatées entre sources
 
 - **Libellés retenus = version OMS auditscreen.org** (source primaire). L'OFDT reformule légèrement (« À quelle fréquence consommez-vous de l'alcool ? ») ; sur le fond, items et cotations identiques.
-- ⚠️ **Le flyer Addict'AIDE** (`docs/scales/sources/AUDIT_addictaide.pdf`) **contient des erreurs** et a été **écarté** pour les libellés : item 2 saute la modalité « 9 » (« 7 ou 8 » au lieu de « 7 à 9 ») ; libellés de fréquence des items 3-8 incohérents (« Moins d'1 fois/semaine = 1 » puis « 1 fois/mois = 2 »). Conservé seulement comme repère de seuils (identiques à la SFA).
+- ⚠️ **Le flyer Addict'AIDE** (`docs/scales/audit/AUDIT_addictaide.pdf`) **contient des erreurs** et a été **écarté** pour les libellés : item 2 saute la modalité « 9 » (« 7 ou 8 » au lieu de « 7 à 9 ») ; libellés de fréquence des items 3-8 incohérents (« Moins d'1 fois/semaine = 1 » puis « 1 fois/mois = 2 »). Conservé seulement comme repère de seuils (identiques à la SFA).
 
 ### Version française retenue
 
