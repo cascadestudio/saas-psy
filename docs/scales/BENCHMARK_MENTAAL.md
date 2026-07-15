@@ -42,7 +42,7 @@ Ordre = ordre d'affichage Mentaal (reflète vraisemblablement leur curation / po
 | 13 | LSAS | Échelle d'anxiété sociale de Liebowitz | Standardisé | ✅ | ✓ |
 | 14 | DERS | Échelle des difficultés de régulation émotionnelle | Standardisé | ✅ | |
 | 15 | SCT | Test de confiance en soi | Standardisé | ⚠️ | |
-| 16 | ADHD-RS | Échelle d'évaluation du TDAH | Standardisé | ✅ | |
+| 16 | ADHD-RS | Échelle d'évaluation du TDAH | Standardisé | ⚠️⁸ | |
 | 17 | PID-5 | Inventaire de personnalité pour le DSM-5 | Standardisé | ✅ (APA) | |
 | 18 | PHQ-9 | Questionnaire santé patient | Standardisé | ✅ | ✓ |
 | 19 | HSPS | Questionnaire hypersensibilité d'Elaine Aron | Standardisé | ✅ | |
@@ -113,6 +113,66 @@ _(Ligne « Créez votre propre questionnaire » exclue — c'est une fonctionnal
 5. **COPSOQ** : libre pour usage non commercial ; l'usage commercial demande une vérification.
 6. **RIASEC / Holland** : le modèle est libre, mais le Self-Directed Search (PAR) est payant. Dépend de la version des items.
 7. **IAT** (Young) : diffusé par Stoelting — statut de licence à vérifier avant tout usage.
+8. **ADHD-RS** (DuPaul) : diffusé par **Guilford Press** (formulaires reproductibles sous conditions) — statut à revérifier avant usage électronique commercial. Alternative TDAH libre : **ASRS** (OMS). Corrigé de ✅ → ⚠️.
+
+## 🔧 Implémentables directement (libre × réutilise UI + scoring existants)
+
+Parmi les 75, ceux qu'on peut porter **sans nouvelle UI/UX ni nouvelle brique de calcul** — filtrés sur **libre de droits ✅** ET **réutilisation des méthodes en place** (formTypes `single-scale`/`options`/`dual-scale`, `reverseItems`, subscores, `criteriaCheck`, `alerts`, `ScoreArcGauge`, `CriteriaCheckBlock`). Exclus d'office : les 6 déjà dans Melya, les payantes 💰, les droits incertains ⚠️, les outils Communauté maison.
+
+Rappel : ✅ = estimation à recocher contre la source primaire avant intégration.
+
+### 🟢 Tier 1 — réutilisation quasi-totale (data + scorer « somme » type GAD-7)
+
+Likert/options unique, scoring = somme + seuils. Scorer = copier-coller de `gad7.ts`. Zéro nouvelle logique.
+
+| Échelle | Motif | Format |
+|---------|-------|--------|
+| **AUDIT** | Addictions alcool | `options` (réponses par item) + somme + seuil |
+| **CUDIT** | Addictions cannabis | idem AUDIT |
+| **IUS** | Intolérance à l'incertitude | Likert + somme |
+| **WAQ** | Inquiétude / anxiété (Dugas) | Likert 0-8 + somme |
+| **PSWQ** | Inquiétude (Penn State) | Likert + `reverseItems` + somme |
+| **PDEQ** | Dissociation péritraumatique | Likert + somme |
+| **BSQ** | Sensations corporelles (panique) | Likert + somme |
+| **HSPS** | Hypersensibilité (Aron) | Likert + somme |
+| **THI** | Acouphènes (ORL — hors psycho) | 3 options + somme + grades |
+
+### 🟡 Tier 2 — UI réutilisée + scorer dédié déjà « patterné »
+
+Même UI de passation, scoring = subscores / `criteriaCheck` / reverse / recode → scorer ~20-30 l. calqué sur PCL-5, Y-BOCS, LSAS ou RSES. Toujours zéro nouvelle UI.
+
+| Échelle | Motif | Pattern réutilisé |
+|---------|-------|-------------------|
+| **ASRS** ⭐ | TDAH adulte | `criteriaCheck` (PCL-5) — cases grisées |
+| **MDQ** | Bipolarité | `criteriaCheck` + réponses oui/non |
+| **TAS-20** | Alexithymie | reverse + 3 subscores |
+| **DERS** | Régulation émotionnelle | reverse + subscores |
+| **IES-R** | Impact d'un événement | 3 subscores |
+| **BAT-G / BAT-W** | Burnout (alt. libre au MBI) | subscores |
+| **FMPS** | Perfectionnisme | subscores |
+| **WW-II** | Inquiétude (pourquoi s'inquiéter) | subscores |
+| **FQ** | Peurs / phobies | subscores |
+| **EAT-26** | TCA | recode asymétrique + seuil |
+| **RAS** | Affirmation de soi (Rathus) | reverse + offset |
+| **CAT-Q** | Camouflage autistique | 7 pts + reverse + subscores |
+| **EQ** | Empathie | recode + reverse |
+| **AQ** ⚠️lourd | Autisme (50 items) | recode binaire + 5 subscores |
+| **RAADS-R** ⚠️lourd | Autisme (80 items) | recode + subscores |
+| **EDS-R** | Dépendance à l'exercice | criteria + subscores |
+| **SCARED, ASSQ, SNAP-IV, CRIES-13** | Anxiété / TSA / TDAH / trauma **enfant** | subscores — **public ≠ le vôtre** |
+
+### Exclus du « direct » parmi les 75 (et pourquoi)
+
+- **DASS-21** → 🟠 chaque sous-échelle a sa **propre sévérité**, or `Subscore` ne porte pas de `ranges` → petite extension du type à faire une fois.
+- **PID-5** → réutilisable mais **220 items** (ou brève 25) : volume de data énorme.
+- **SVS / PVQ-RR** (valeurs de Schwartz) → centrage ipsatif = calcul spécifique + usage clinique niche.
+- **ADHD-RS** → repassé en ⚠️ : DuPaul/**Guilford**, statut à revérifier (marqué ✅ un peu vite plus haut).
+- **COPSOQ** → transform 0-100 + usage commercial à vérifier.
+- **PCL-S** → réutilisable, mais redondant avec PCL-5 déjà en place.
+
+> ⚠️ **Deux nuances honnêtes.** (1) Les ✅ restent des estimations — plusieurs Tier 1/2 sont des échelles TCC françaises (WAQ, WW-II, PDEQ) ou anglo-saxonnes libres pour la recherche (BAT, TAS-20, IES-R) : chacune passe par la recoche source avant intégration. (2) « Recode » ≠ « somme » — AQ / EQ / RAADS-R / EAT-26 / RAS demandent une **logique de cotation par item** (vrai scorer à écrire, même s'il suit un pattern connu). Seul le Tier 1 est du quasi-pur data.
+
+**Premier lot « zéro risque technique »** = Tier 1 (AUDIT, IUS, PSWQ, BSQ, HSPS…) + **ASRS** du Tier 2 pour l'impact motif.
 
 ## Lecture stratégique
 
