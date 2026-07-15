@@ -30,9 +30,15 @@ export class OnboardingScheduler {
 
   // Daily at 09:00 Europe/Paris.
   @Cron('0 9 * * *', { timeZone: 'Europe/Paris' })
+  // eslint-disable-next-line @typescript-eslint/require-await
   async runOnboardingSequence(): Promise<void> {
-    await this.processStep(3);
-    await this.processStep(14);
+    // DÉSACTIVÉ : on ne garde que le mail 1 (welcome, envoyé inline à
+    // l'inscription). Les mails 2 (J+3) et 3 (J+14) sont suspendus.
+    // Pour réactiver la séquence, retirer ce `return` + le eslint-disable
+    // ci-dessus et décommenter les deux lignes ci-dessous.
+    return;
+    // await this.processStep(3);
+    // await this.processStep(14);
   }
 
   private async processStep(dayOffset: 3 | 14): Promise<void> {
