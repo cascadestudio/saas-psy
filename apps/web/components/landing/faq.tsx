@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/accordion";
 import { useScrollAnimation } from "./use-scroll-animation";
 
-const faqItems = [
+export const faqItems = [
   {
     question: "Quelles échelles psychologiques sont disponibles ?",
     answer:
