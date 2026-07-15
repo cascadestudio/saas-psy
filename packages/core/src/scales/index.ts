@@ -226,6 +226,68 @@ export const scales: Scale[] = [
     },
   },
   {
+    id: "spin",
+    acronym: "SPIN",
+    label: "Inventaire de phobie sociale",
+    patientIntroSubtitle: null,
+    icon: "/images/scales/spin.svg",
+    color: "#6A9BCC",
+    colorLight: "#B4CDE5",
+    formType: "single-scale",
+    title: "SPIN - Inventaire de phobie sociale",
+    description:
+      "Une échelle de 17 items mesurant la sévérité de l'anxiété sociale (peur, évitement, symptômes physiologiques) au cours de la semaine écoulée",
+    category: "Anxiété sociale",
+    estimatedTime: "3-5 minutes",
+    longDescription:
+      "Le SPIN (Social Phobia Inventory) est un auto-questionnaire de 17 items développé par Jonathan Davidson et son équipe à l'Université Duke pour dépister et mesurer la sévérité du trouble d'anxiété sociale (phobie sociale). Il couvre les trois dimensions du trouble : la peur, l'évitement et les symptômes physiologiques (rougissement, transpiration, palpitations, tremblements). Chaque item porte sur la semaine écoulée et est coté de 0 (pas du tout) à 4 (extrêmement) ; le score total varie de 0 à 68. Un score plus élevé indique une anxiété sociale plus sévère.",
+    instructions:
+      "Indiquez à quel point les problèmes suivants vous ont gêné(e) au cours de la semaine écoulée. Répondez à tous les items en choisissant une seule réponse par ligne.",
+    copyrightAttribution:
+      "Social Phobia Inventory (SPIN) — © Jonathan R. T. Davidson, 1995, 2008, 2015, Duke University. Toute reproduction est soumise à l'autorisation du détenteur des droits (mail@cd-risc.com).",
+    higherIsBetter: false,
+    questions: [
+      "J'ai peur des personnes qui ont de l'autorité",
+      "Le fait de rougir devant les gens me dérange",
+      "Les fêtes et les événements sociaux me font peur",
+      "J'évite de parler à des personnes que je ne connais pas",
+      "Être critiqué m'effraie beaucoup",
+      "La peur d'être gêné me pousse à éviter de faire des choses ou de parler aux gens",
+      "Transpirer devant les autres me perturbe",
+      "J'évite d'aller aux fêtes",
+      "J'évite les activités où je suis le centre de l'attention",
+      "Parler à des inconnus me fait peur",
+      "J'évite d'avoir à faire des discours",
+      "Je ferais n'importe quoi pour éviter d'être critiqué",
+      "Les palpitations cardiaques me gênent quand je suis entouré de gens",
+      "J'ai peur de faire des choses quand les gens pourraient me regarder",
+      "Être gêné ou avoir l'air stupide fait partie de mes pires craintes",
+      "J'évite de parler à toute personne ayant de l'autorité",
+      "Trembler devant les autres me perturbe",
+    ],
+    answerScales: {
+      intensity: [
+        { value: 0, label: "Pas du tout" },
+        { value: 1, label: "Un peu" },
+        { value: 2, label: "Modérément" },
+        { value: 3, label: "Beaucoup" },
+        { value: 4, label: "Extrêmement" },
+      ],
+    },
+    scoring: {
+      ranges: [
+        { min: 0, max: 20, interpretation: "Pas d'anxiété sociale" },
+        { min: 21, max: 30, interpretation: "Anxiété sociale légère" },
+        { min: 31, max: 40, interpretation: "Anxiété sociale modérée" },
+        { min: 41, max: 50, interpretation: "Anxiété sociale sévère" },
+        { min: 51, max: 68, interpretation: "Anxiété sociale très sévère" },
+      ],
+      maxScore: 68,
+      method:
+        "Additionnez les scores de chaque item (0-4). Le score total varie de 0 à 68. Aucun item n'est inversé.",
+    },
+  },
+  {
     id: "phq-9",
     acronym: "PHQ-9",
     label: "Questionnaire sur la santé du patient",
@@ -337,6 +399,71 @@ export const scales: Scale[] = [
       maxScore: 21,
       method:
         "Additionnez les scores de chaque item (0-3). Le score total varie de 0 à 21.",
+    },
+  },
+  {
+    id: "qips",
+    acronym: "QIPS",
+    label: "Questionnaire sur les inquiétudes du Penn State",
+    icon: "/images/scales/qips.svg",
+    color: "#6A9BCC",
+    colorLight: "#B4CDE5",
+    formType: "single-scale",
+    title: "QIPS - Questionnaire sur les inquiétudes du Penn State",
+    description:
+      "Une échelle de 16 items mesurant la tendance générale à s'inquiéter (inquiétude excessive du trouble anxieux généralisé)",
+    category: "Anxiété généralisée",
+    estimatedTime: "5-10 minutes",
+    longDescription:
+      "Le QIPS (Questionnaire sur les inquiétudes du Penn State) est la traduction française du Penn State Worry Questionnaire (PSWQ, Meyer et al. 1990), validée par Gosselin et collaborateurs (2001). C'est un auto-questionnaire de 16 items évaluant la tendance générale, excessive et incontrôlable à s'inquiéter, symptôme central du trouble anxieux généralisé. Chaque item est coté de 1 (pas du tout caractéristique) à 5 (extrêmement caractéristique). Les items 1, 3, 8, 10 et 11, formulés à l'inverse, sont recodés avant sommation. Le score total varie de 16 à 80 ; un score plus élevé traduit une propension à s'inquiéter plus marquée.",
+    instructions:
+      "Veuillez utiliser l'échelle ci-dessous pour exprimer jusqu'à quel point chacun des énoncés suivants vous correspond.",
+    persistentInstructions:
+      "Jusqu'à quel point cet énoncé vous correspond-il ?",
+    copyrightAttribution:
+      "Penn State Worry Questionnaire (PSWQ) — Meyer, Miller, Metzger & Borkovec, 1990. Traduction française (QIPS) : P. Gosselin, M. J. Dugas, R. Ladouceur & M. H. Freeston, 2001, L'Encéphale.",
+    higherIsBetter: false,
+    reverseItems: [1, 3, 8, 10, 11],
+    questions: [
+      "Si je n'ai pas assez de temps pour tout faire, je ne m'en inquiète pas.",
+      "Mes inquiétudes me submergent.",
+      "Je n'ai pas tendance à m'inquiéter à propos des choses.",
+      "Plusieurs situations m'amènent à m'inquiéter.",
+      "Je sais que je ne devrais pas m'inquiéter, mais je n'y peux rien.",
+      "Quand je suis sous pression, je m'inquiète beaucoup.",
+      "Je m'inquiète continuellement à propos de tout.",
+      "Il m'est facile de me débarrasser de pensées inquiétantes.",
+      "Aussitôt que j'ai fini une tâche, je commence immédiatement à m'inquiéter au sujet de toutes les autres choses que j'ai encore à faire.",
+      "Je ne m'inquiète jamais.",
+      "Quand je ne peux plus rien faire au sujet d'un souci, je ne m'en inquiète plus.",
+      "J'ai été un inquiet tout au long de ma vie.",
+      "Je remarque que je m'inquiète pour certains sujets.",
+      "Quand je commence à m'inquiéter, je ne peux plus m'arrêter.",
+      "Je m'inquiète tout le temps.",
+      "Je m'inquiète au sujet de mes projets jusqu'à ce qu'ils soient terminés.",
+    ],
+    answerScales: {
+      intensity: [
+        { value: 1, label: "Pas du tout caractéristique" },
+        { value: 2, label: "Un peu caractéristique" },
+        { value: 3, label: "Assez caractéristique" },
+        { value: 4, label: "Très caractéristique" },
+        { value: 5, label: "Extrêmement caractéristique" },
+      ],
+    },
+    scoring: {
+      ranges: [
+        { min: 16, max: 39, interpretation: "Inquiétude faible" },
+        { min: 40, max: 54, interpretation: "Inquiétude modérée" },
+        {
+          min: 55,
+          max: 80,
+          interpretation: "Inquiétude élevée (évocatrice d'un TAG)",
+        },
+      ],
+      maxScore: 80,
+      method:
+        "Inverser les cotes des items 1, 3, 8, 10 et 11 (1↔5, 2↔4), puis additionner les 16 items. Le score total varie de 16 à 80.",
     },
   },
   {
