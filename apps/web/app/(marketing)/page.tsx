@@ -8,7 +8,8 @@ import { HowItWorks } from "@/components/landing/how-it-works";
 import { DashboardScreenshot } from "@/components/landing/dashboard-screenshot";
 import { Comparison } from "@/components/landing/comparison";
 // import { Pricing } from "@/components/landing/pricing";
-import { FAQ, faqItems } from "@/components/landing/faq";
+import { FAQ } from "@/components/landing/faq";
+import { faqItems } from "@/components/landing/faq-items";
 import { FinalCTA } from "@/components/landing/final-cta";
 import { Footer } from "@/components/landing/footer";
 
