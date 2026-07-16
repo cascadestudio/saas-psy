@@ -32,9 +32,9 @@ hiérarchie versions, comparaison Mentaal).
 
 - **Type** : traduction française officielle **validée** — QIPS de Gosselin et al.
 - **Référence complète** : Gosselin, P., Dugas, M. J., Ladouceur, R., & Freeston, M. H. (2001). *Évaluation des inquiétudes : validation d'une traduction française du Penn State Worry Questionnaire*. L'Encéphale, 27(5), 475–484.
-- **Fichier de portage** : formulaire QIPS (mise en page cabinet F. Ballet) reprenant la traduction Gosselin — 16 items, consigne, échelle 1–5 « caractéristique », items inversés et cotation identifiés.
-- **URL** : https://pubmed.ncbi.nlm.nih.gov/11760697/ (validation) · formulaire consulté : fabienneballet-psychologue.fr
-- **Date de consultation** : 15/07/2026
+- **Fichier de portage** : `gosselin-ea-2001.pdf` (article complet) — **annexe 1** = questionnaire officiel : 16 items, consigne, échelle 1–5 « correspondant », mention de copyright. Items inversés (1, 3, 8, 10, 11) identifiés p. 477.
+- **URL** : https://pubmed.ncbi.nlm.nih.gov/11760697/
+- **Date de consultation** : 15/07/2026 (article récupéré et items recochés le 16/07/2026)
 
 ### Instrument original
 
@@ -42,7 +42,9 @@ hiérarchie versions, comparaison Mentaal).
 
 ### Divergences constatées entre sources
 
-- Le libellé de l'échelle de réponse **retenu** est celui du formulaire Gosselin : *Pas du tout / Un peu / Assez / Très / Extrêmement **caractéristique***. Certaines vulgarisations en ligne raccourcissent en « Pas du tout … Extrêmement » (sans « caractéristique ») — **écarté**, car « caractéristique » traduit fidèlement l'ancre originale « typical of me » et fait partie de la version validée.
+- **Échelle de réponse** : l'annexe 1 de Gosselin et al. (2001) — source primaire — donne *Pas du tout / Un peu / Assez / Très / Extrêmement **correspondant***. Le formulaire de cabinet (F. Ballet) initialement utilisé pour le portage disait « caractéristique » ; les vulgarisations en ligne raccourcissent en « Pas du tout … Extrêmement ». **Retenu : « correspondant »** (verbatim de la version validée). Corrigé le 16/07/2026 — la première version de cette spec affirmait à tort que « caractéristique » était le verbatim Gosselin.
+- **Items** : le formulaire Ballet divergeait de l'annexe 1 sur 5 items (1 : « je ne m'en inquiète pas » ; 11 : « je ne peux plus rien faire au sujet d'un souci » ; 12 : « un inquiet » ; 14 : « je ne peux plus m'arrêter » ; 16 : « terminés »). **Retenu : verbatim annexe 1** pour les items 1, 5, 11, 12 et 14. Seule exception : item 16, « complétés » (québécisme de la version validée) → « **terminés** », adaptation FR-France assumée (règle projet : versions FR-France privilégiées).
+- **Consigne** : annexe 1 = « …chacun des énoncés suivants **correspond à vous** » (retenu), formulaire Ballet = « …vous correspond ».
 
 ### Version française retenue
 
@@ -57,9 +59,9 @@ hiérarchie versions, comparaison Mentaal).
 |-------|--------|
 | **Statut** | libre (usage clinique et recherche) |
 | **Détenteur des droits** | Auteurs originaux (Meyer, Miller, Metzger, Borkovec, 1990) ; traduction Gosselin et al. (2001). |
-| **Mention obligatoire à afficher** | *« Penn State Worry Questionnaire (PSWQ) — Meyer, Miller, Metzger & Borkovec, 1990. Traduction française (QIPS) : P. Gosselin, M. J. Dugas, R. Ladouceur & M. H. Freeston, 2001, L'Encéphale. »* |
+| **Mention obligatoire à afficher** | *« Penn State Worry Questionnaire (PSWQ) — Meyer, Miller, Metzger & Borkovec, 1990. Traduction française (QIPS) © P. Gosselin, M. J. Dugas, R. Ladouceur & M. H. Freeston (2001), Université Laval — L'Encéphale, 27(5). Tous droits réservés. »* (l'annexe 1 porte « © Tous droits réservés » + Université Laval — repris tel quel) |
 | **Emplacement de la mention (règle projet)** | Côté patient : écran de fin de passation (post-soumission), texte gris discret, une fois. Côté praticien : fiche du questionnaire en bibliothèque. |
-| **Restrictions d'usage** | Le PSWQ est largement diffusé en accès libre pour l'usage clinique et de recherche, avec attribution. |
+| **Restrictions d'usage** | Le PSWQ est largement diffusé en accès libre pour l'usage clinique et de recherche, avec attribution. ⚠️ Nuance : la traduction QIPS est publiée avec la mention « © Tous droits réservés » (Gosselin et al., Université Laval) — diffusée librement en pratique (annexe d'article), mais le statut n'est pas une licence explicite. |
 | **Décision Melya** | go |
 
 ---
@@ -68,9 +70,9 @@ hiérarchie versions, comparaison Mentaal).
 
 ### Consigne officielle (affichée au patient avant les items)
 
-> *« Veuillez utiliser l'échelle ci-dessous pour exprimer jusqu'à quel point chacun des énoncés suivants vous correspond. »*
+> *« Veuillez utiliser l'échelle ci-dessous pour exprimer jusqu'à quel point chacun des énoncés suivants correspond à vous. »*
 
-**Source de la consigne** : formulaire QIPS Gosselin (verbatim, hors mention du report du numéro « en tête de chacun des énoncés » propre au format papier, sans objet en passation numérique).
+**Source de la consigne** : annexe 1 de Gosselin et al. (2001), verbatim — hors parenthèse « (écrivez le numéro vous représentant, à l'avant de chacun des énoncés) », propre au format papier, sans objet en passation numérique.
 
 ### Comportement UX de la consigne
 
@@ -89,15 +91,15 @@ hiérarchie versions, comparaison Mentaal).
 
 ### Dimensions de cotation
 
-**Dimension unique — Correspondance (« caractéristique »)**
+**Dimension unique — Correspondance (« correspondant »)**
 
 - Plage : 1 à 5
-- Modalités :
-  - `1` — Pas du tout caractéristique
-  - `2` — Un peu caractéristique
-  - `3` — Assez caractéristique
-  - `4` — Très caractéristique
-  - `5` — Extrêmement caractéristique
+- Modalités (annexe 1, verbatim) :
+  - `1` — Pas du tout correspondant
+  - `2` — Un peu correspondant
+  - `3` — Assez correspondant
+  - `4` — Très correspondant
+  - `5` — Extrêmement correspondant
 
 ⚠️ **Cotation débutant à 1** (comme le RSES), pas à 0. Le score minimal théorique est 16 (et non 0).
 
@@ -109,22 +111,24 @@ hiérarchie versions, comparaison Mentaal).
 
 | # | Item | Inversé |
 |---|------|:---:|
-| 1 | Si je n'ai pas assez de temps pour tout faire, je ne m'en inquiète pas. | ✅ |
+| 1 | Si je n'ai pas assez de temps pour tout faire, je ne m'inquiète pas. | ✅ |
 | 2 | Mes inquiétudes me submergent. | |
 | 3 | Je n'ai pas tendance à m'inquiéter à propos des choses. | ✅ |
 | 4 | Plusieurs situations m'amènent à m'inquiéter. | |
-| 5 | Je sais que je ne devrais pas m'inquiéter, mais je n'y peux rien. | |
+| 5 | Je sais que je ne devrais pas m'inquiéter mais je n'y peux rien. | |
 | 6 | Quand je suis sous pression, je m'inquiète beaucoup. | |
 | 7 | Je m'inquiète continuellement à propos de tout. | |
 | 8 | Il m'est facile de me débarrasser de pensées inquiétantes. | ✅ |
 | 9 | Aussitôt que j'ai fini une tâche, je commence immédiatement à m'inquiéter au sujet de toutes les autres choses que j'ai encore à faire. | |
 | 10 | Je ne m'inquiète jamais. | ✅ |
-| 11 | Quand je ne peux plus rien faire au sujet d'un souci, je ne m'en inquiète plus. | ✅ |
-| 12 | J'ai été un inquiet tout au long de ma vie. | |
+| 11 | Quand je n'ai plus rien à faire au sujet d'un tracas, je ne m'en inquiète plus. | ✅ |
+| 12 | J'ai été inquiet tout au long de ma vie. | |
 | 13 | Je remarque que je m'inquiète pour certains sujets. | |
-| 14 | Quand je commence à m'inquiéter, je ne peux plus m'arrêter. | |
+| 14 | Quand je commence à m'inquiéter, je ne peux pas m'arrêter. | |
 | 15 | Je m'inquiète tout le temps. | |
-| 16 | Je m'inquiète au sujet de mes projets jusqu'à ce qu'ils soient terminés. | |
+| 16 | Je m'inquiète au sujet de mes projets jusqu'à ce qu'ils soient terminés. ⚠️ annexe 1 : « complétés » (québécisme) → adaptation FR-France | |
+
+Items 1–15 : verbatim annexe 1 (Gosselin et al., 2001). Item 16 : seule adaptation (« complétés » → « terminés »).
 
 ---
 
@@ -161,9 +165,21 @@ Refus de la passation incomplète. Les 16 items sont requis ; pas d'imputation.
 
 **Source des seuils** — ⚠️ **à valider** :
 
-- Le formulaire Gosselin ne donne que deux « scores théoriques » **non contigus** : *25–40 = normal* et *55–75 = TAG*, laissant des zones sans étiquette (16–24, 41–54, 76–80).
+- L'article de validation (Gosselin et al., 2001) ne définit **aucun seuil clinique**. Le formulaire de cabinet consulté au portage donne deux « scores théoriques » **non contigus** : *25–40 = normal* et *55–75 = TAG*, laissant des zones sans étiquette (16–24, 41–54, 76–80).
 - Melya a construit une grille **contiguë en 3 niveaux** couvrant tout l'intervalle 16–80, ancrée sur ces repères : borne haute du « normal » ≈ 40, borne basse du « TAG » = 55. La bande intermédiaire 40–54 (« modérée ») est un **choix produit Melya** pour combler le vide et permettre l'affichage de la gauge.
-- **À faire valider par le·la psychologue référent·e** (voir section 10). Alternative possible : n'afficher que deux zones (normal / évocateur de TAG) sans bande intermédiaire, si la·le référent·e préfère coller strictement aux repères Gosselin.
+- **À faire valider par le·la psychologue référent·e** (voir section 10). Alternative possible : n'afficher que deux zones (normal / évocateur de TAG) sans bande intermédiaire, si la·le référent·e préfère coller strictement aux repères.
+
+### Données normatives (Gosselin et al., 2001)
+
+| Échantillon | M | ET | n |
+|-------------|-----|-----|-----|
+| Non clinique (étudiants, étude 1) | 44,52 | 11,97 | 352 |
+| Non clinique (étude 2, passation 1) | 46,43 | 11,35 | 95 |
+| Clinique TAG (étude 3) | 62,55 | 9,06 | 75 |
+
+Fidélité : α = 0,92 (non clinique) / 0,82 (TAG) ; test-retest 4 semaines r = 0,86.
+
+⚠️ **Tension avec la grille Melya** : la moyenne **non clinique** (≈ 44,5) tombe dans la bande « Inquiétude modérée » (40–54). Un score « dans la moyenne de la population générale » est donc étiqueté « modéré » — libellé à rediscuter (cf. section 10).
 
 ---
 
@@ -206,9 +222,9 @@ Rappel : les items 1, 3, 8, 10, 11 sont inversés (`6 − v`).
 
 ## 10. Points à valider avec le·la psychologue référent·e
 
-1. **Seuils / bandes de sévérité** — valider la grille contiguë en 3 niveaux (16–39 / 40–54 / 55–80) construite par Melya à partir des repères Gosselin non contigus (25–40 normal, 55–75 TAG). Notamment la bande intermédiaire 40–54 (« modérée ») qui est un choix produit. Alternative : affichage en 2 zones seulement.
-2. **Libellés de niveaux** — valider *Inquiétude faible / modérée / élevée*.
-3. **Échelle 1–5** — confirmer les libellés « … caractéristique » (version Gosselin validée) plutôt que la forme raccourcie.
+1. **Seuils / bandes de sévérité** — valider la grille contiguë en 3 niveaux (16–39 / 40–54 / 55–80) construite par Melya à partir des repères non contigus du formulaire de cabinet (25–40 normal, 55–75 TAG). Notamment la bande intermédiaire 40–54 (« modérée ») qui est un choix produit. Alternative : affichage en 2 zones seulement.
+2. **Libellés de niveaux** — valider *Inquiétude faible / modérée / élevée*, sachant que la moyenne non clinique (≈ 44,5, Gosselin 2001) tombe dans la bande « modérée » : envisager « dans la moyenne » ou l'affichage des moyennes de référence (non clinique ≈ 45 / TAG ≈ 62) en complément.
+3. **Item 16** — valider l'adaptation FR-France « terminés » (annexe 1 : « complétés », québécisme). Seul écart au verbatim de la version validée.
 
 ---
 
@@ -240,3 +256,4 @@ scoreQips(scale, responses) → {
 | Date | Auteur | Modification |
 |------|--------|--------------|
 | 15/07/2026 | Adrien (avec Claude) | Création de l'échelle QIPS : entrée `Scale` dans `packages/core`, scorer `qips.ts` (inversion `6 − v`) + enregistrement, icône placeholder, spec. Items FR issus de la traduction validée Gosselin et al. (2001), portés verbatim depuis un formulaire QIPS. Inversés 1/3/8/10/11, échelle 1–5 « caractéristique », score 16–80. Grille de seuils contiguë en 3 niveaux construite par Melya à partir des repères Gosselin non contigus — à valider. |
+| 16/07/2026 | Adrien (avec Claude) | Recoche contre la source primaire (`gosselin-ea-2001.pdf`, annexe 1) : échelle de réponse corrigée « caractéristique » → « **correspondant** » (verbatim validé), items 1/5/11/12/14 alignés sur l'annexe 1, consigne alignée (« correspond à vous »), item 16 conservé en « terminés » (adaptation FR-France documentée). Mention de copyright enrichie (© Gosselin et al., Université Laval, tous droits réservés). Ajout des données normatives (non clinique ≈ 44,5 / TAG ≈ 62,6) + alerte sur le libellé de la bande 40–54. `psi-ii.pdf` (source WW-II, mal rangé ici) déplacé vers `docs/scales/ww-ii/`. |
