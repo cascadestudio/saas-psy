@@ -29,6 +29,11 @@ interface SessionData {
       questionText: string;
       options: { value: number; label: string }[];
     };
+    openingTextItem?: {
+      key: string;
+      questionText: string;
+      helperText?: string;
+    };
     scoring?: any;
     estimatedTime: string;
   } | null;
@@ -130,6 +135,7 @@ export default function SessionPage() {
     longDescription: scaleData.instructions,
     answerScales: scaleData.answerScales,
     followUpItem: scaleData.followUpItem,
+    openingTextItem: scaleData.openingTextItem,
     scoring: scaleData.scoring,
   };
 

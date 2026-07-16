@@ -5,6 +5,7 @@ import { Arrow } from "doodle-icons";
 import ProgressBar from "./ProgressBar";
 import IntroScreen from "./IntroScreen";
 import SingleScaleQuestion from "./SingleScaleQuestion";
+import OpeningTextQuestion from "./OpeningTextQuestion";
 import SectionTransitionScreen from "./SectionTransitionScreen";
 import ReviewScreen from "./ReviewScreen";
 
@@ -25,7 +26,13 @@ interface QuestionStep {
   options: { value: number; label: string }[];
 }
 
-type Phase = "intro" | "transition" | "question" | "follow-up" | "review";
+type Phase =
+  | "intro"
+  | "opening-text"
+  | "transition"
+  | "question"
+  | "follow-up"
+  | "review";
 
 interface SectionTransition {
   startIndex: number;
@@ -154,13 +161,35 @@ function Runner({ scale, onSubmit }: RunnerProps) {
     };
   }, [scale.followUpItem]);
 
+  const openingTextItem: {
+    key: string;
+    questionText: string;
+    helperText?: string;
+  } | null = scale.openingTextItem ?? null;
+
   const [phase, setPhase] = useState<Phase>("intro");
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [responses, setResponses] = useState<Record<string, number>>({});
+  const [responses, setResponses] = useState<Record<string, number | string>>(
+    {},
+  );
   const [comments, setComments] = useState("");
   const [submitting, setSubmitting] = useState(false);
 
   const handleStart = () => {
+    if (openingTextItem) {
+      setPhase("opening-text");
+      return;
+    }
+    setPhase("question");
+    setCurrentIndex(0);
+  };
+
+  const handleOpeningTextChange = (value: string) => {
+    if (!openingTextItem) return;
+    setResponses((prev) => ({ ...prev, [openingTextItem.key]: value }));
+  };
+
+  const handleOpeningTextContinue = () => {
     setPhase("question");
     setCurrentIndex(0);
   };
@@ -227,12 +256,18 @@ function Runner({ scale, onSubmit }: RunnerProps) {
       setCurrentIndex((i) => Math.max(0, i - 1));
       return;
     }
+    if (phase === "opening-text") {
+      setPhase("intro");
+      return;
+    }
     if (transitionAt(currentIndex)) {
       setPhase("transition");
       return;
     }
     if (currentIndex > 0) {
       setCurrentIndex((i) => i - 1);
+    } else if (openingTextItem) {
+      setPhase("opening-text");
     } else {
       setPhase("intro");
     }
@@ -249,9 +284,12 @@ function Runner({ scale, onSubmit }: RunnerProps) {
     }
   };
 
-  const scoredAnsweredCount = followUpStep
-    ? Object.keys(responses).filter((k) => k !== followUpStep.key).length
-    : Object.keys(responses).length;
+  const unscoredKeys = new Set(
+    [followUpStep?.key, openingTextItem?.key].filter(Boolean) as string[],
+  );
+  const scoredAnsweredCount = Object.keys(responses).filter(
+    (k) => !unscoredKeys.has(k),
+  ).length;
   const currentStep = steps[currentIndex];
 
   return (
@@ -271,12 +309,14 @@ function Runner({ scale, onSubmit }: RunnerProps) {
             <div className="flex-1">
               <ProgressBar
                 current={
-                  phase === "question" || phase === "transition"
-                    ? currentIndex
-                    : total
+                  phase === "opening-text"
+                    ? 0
+                    : phase === "question" || phase === "transition"
+                      ? currentIndex
+                      : total
                 }
                 total={total}
-                showCounter={phase !== "review"}
+                showCounter={phase !== "review" && phase !== "opening-text"}
               />
             </div>
           </div>
@@ -290,6 +330,16 @@ function Runner({ scale, onSubmit }: RunnerProps) {
             estimatedTime={scale.estimatedTime}
             questionsCount={total}
             onStart={handleStart}
+          />
+        )}
+
+        {phase === "opening-text" && openingTextItem && (
+          <OpeningTextQuestion
+            questionText={openingTextItem.questionText}
+            helperText={openingTextItem.helperText}
+            value={(responses[openingTextItem.key] as string) ?? ""}
+            onChange={handleOpeningTextChange}
+            onContinue={handleOpeningTextContinue}
           />
         )}
 
@@ -308,7 +358,7 @@ function Runner({ scale, onSubmit }: RunnerProps) {
             questionText={currentStep.questionText}
             questionPrompt={currentStep.questionPrompt}
             options={currentStep.options}
-            selectedValue={responses[currentStep.key]}
+            selectedValue={responses[currentStep.key] as number | undefined}
             onSelect={handleSelect}
           />
         )}
@@ -317,7 +367,7 @@ function Runner({ scale, onSubmit }: RunnerProps) {
           <SingleScaleQuestion
             questionText={followUpStep.questionText}
             options={followUpStep.options}
-            selectedValue={responses[followUpStep.key]}
+            selectedValue={responses[followUpStep.key] as number | undefined}
             onSelect={handleFollowUpSelect}
             onSkip={handleFollowUpSkip}
           />

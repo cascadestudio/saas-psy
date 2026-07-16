@@ -7,9 +7,9 @@
 
 ## Tableau de bord
 
-**🔵 9 implémentées · 🚧 5 en cours · 📋 9 prévues · 🔍 22 à instruire · ⬜ 26 non planifiées · 🚫 12 écartées**
+**🔵 14 implémentées · 🚧 0 en cours · 📋 9 prévues · 🔍 22 à instruire · ⬜ 26 non planifiées · 🚫 12 écartées**
 
-**Rattrapage Mentaal : 8/42.** Le plafond n'est pas 74 : sur leur catalogue
+**Rattrapage Mentaal : 13/42.** Le plafond n'est pas 74 : sur leur catalogue
 disponible, 12 sont écartées d'office (payantes, outils maison Mentaal, ou
 licence incompatible) et 20 restent à instruire côté droits — il reste **42
 échelles vraisemblablement libres**, dont 8 déjà chez Melya. S'y ajoutent les
@@ -47,11 +47,11 @@ source primaire avant intégration**), ⚠️ = incertain, 💰 = payant.
 | PSWQ | Inquiétude de Penn State | 🔵 | ✅ | — | #53 | porté sous l'id **QIPS** |
 | AUDIT | Troubles liés à l'alcool | 🔵 | ✅ OMS | 🟢 A | #66 | ordre 2 de la file — fait |
 | SPIN | Inventaire de la phobie sociale | 🔵 | ✅ | — | Bientôt · 31 v. | **Melya devant Mentaal** |
-| HSPS | Hypersensibilité (Aron) | 🚧 | ✅ | 🟢 A | #19 | source : `hsps/HSPS_Aron.pdf` |
-| WAQ | Inquiétude et anxiété (Dugas) | 🚧 | ✅ | 🟢 A | #25 | source : `waq-qia/WAQ_QIA_UQO.pdf` |
-| IUS | Intolérance à l'incertitude | 🚧 | ✅ | 🟢 A | #26 | source : `ius/IUS_EII_UQO.pdf` |
-| PDEQ | Dissociation péritraumatique | 🚧 | ✅ | 🟢 A | #59 | source : `pdeq/PDEQ_Cn2r.pdf` |
-| CUDIT-R | Troubles liés au cannabis | 🚧 | ✅ | 🟢 A | #70 | source : `cudit-r/CUDIT-R_RESPADD.pdf` ; file ordre 9 |
+| HSPS | Hypersensibilité (Aron) | 🔵 | ⚠️ | 🟢 A | #19 | auto-test du livre (23 items OUI/NON, seuil 12) — droits trad. Éditions de l'Homme à instruire avant sortie de beta |
+| WAQ | Inquiétude et anxiété (Dugas) | 🔵 | ✅ | 🟡 B | #25 | porté sous l'id **QIA** — criteriaCheck TAG (pas une simple somme) + item thèmes en texte libre (nouvelle brique `openingTextItem`) |
+| IUS | Intolérance à l'incertitude | 🔵 | ✅ | 🟢 A | #26 | porté sous l'id **EII** — score brut 27-135 sans bandes (aucun cutoff établi) + sous-scores bifactoriels |
+| PDEQ | Dissociation péritraumatique | 🔵 | ✅ | 🟢 A | #59 | seuil ≥ 15 (fiche Cn2r) |
+| CUDIT-R | Troubles liés au cannabis | 🔵 | ✅ | 🟢 A | #70 | question-porte « 6 derniers mois » portée en consigne ; seuils 8-10 / > 10 (RESPADD) |
 | ASRS | TDAH adulte | 📋 (1) | ✅ OMS | 🟡 B | #3 | `criteriaCheck` façon PCL-5 ; motif le + demandé |
 | DES | Expériences dissociatives | 📋 (3) | ✅ | 🟠 C | Bientôt · 130 v. | #1 des votes ; widget de réponse 0–100 à créer |
 | EPDS | Dépression périnatale (Édimbourg) | 📋 (4) | ✅ | 🟢 A | Bientôt · 96 v. | alerte item 10 (idéation) façon PHQ-9 |

@@ -524,6 +524,7 @@ export class SessionsService {
               questions: scale.questions,
               answerScales: scale.answerScales,
               followUpItem: scale.followUpItem,
+              openingTextItem: scale.openingTextItem,
               scoring: scale.scoring,
               estimatedTime: scale.estimatedTime,
             }

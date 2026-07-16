@@ -313,9 +313,39 @@ export function ItemResponsesList({
       ? followUp.options.find((o) => o.value === followUpValue)?.label ?? ""
       : "";
 
+  const openingText = scale.openingTextItem;
+  const openingTextValue = openingText
+    ? (responses as Record<string, unknown>)[openingText.key]
+    : undefined;
+  const openingTextDisplay =
+    typeof openingTextValue === "string" && openingTextValue.trim().length > 0
+      ? openingTextValue.trim()
+      : null;
+
   return (
     <>
       <div className="space-y-6">
+        {openingText && (
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-1.5">
+              {openingText.questionText}{" "}
+              <span className="font-normal normal-case tracking-normal">
+                (non scoré)
+              </span>
+            </p>
+            <div className="bg-muted rounded-2xl p-3">
+              {openingTextDisplay ? (
+                <p className="text-sm whitespace-pre-wrap">
+                  {openingTextDisplay}
+                </p>
+              ) : (
+                <span className="text-xs text-muted-foreground italic">
+                  Sans réponse
+                </span>
+              )}
+            </div>
+          </div>
+        )}
         {sections.map((section, sIdx) => (
           <div key={sIdx}>
             {section.title && (
