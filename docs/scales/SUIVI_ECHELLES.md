@@ -7,7 +7,7 @@
 
 ## Tableau de bord
 
-**🔵 14 implémentées · 🚧 0 en cours · 📋 9 prévues · 🔍 22 à instruire · ⬜ 26 non planifiées · 🚫 12 écartées**
+**✅ 6 validées · 🔵 8 implémentées · 🚧 0 en cours · 📋 9 prévues · 🔍 22 à instruire · ⬜ 26 non planifiées · 🚫 12 écartées**
 
 **Rattrapage Mentaal : 13/42.** Le plafond n'est pas 74 : sur leur catalogue
 disponible, 12 sont écartées d'office (payantes, outils maison Mentaal, ou
@@ -38,12 +38,12 @@ source primaire avant intégration**), ⚠️ = incertain, 💰 = payant.
 
 | Échelle | Nom | Statut | Droits | Classe | Mentaal | Notes |
 |---------|-----|--------|--------|--------|---------|-------|
-| RSES | Estime de soi de Rosenberg | 🔵 | ✅ | — | #7 | |
-| GAD-7 | Dépistage du TAG | 🔵 | ✅ | — | #8 | |
-| LSAS | Anxiété sociale de Liebowitz | 🔵 | ✅ | — | #13 | |
-| PHQ-9 | Questionnaire santé patient (dépression) | 🔵 | ✅ | — | #18 | alerte item 9 |
-| PCL-5 | TSPT (DSM-5) | 🔵 | ✅ | — | #20 | |
-| Y-BOCS | TOC de Yale-Brown | 🔵 | ✅ | — | #44 | |
+| RSES | Estime de soi de Rosenberg | ✅ | ✅ | — | #7 | |
+| GAD-7 | Dépistage du TAG | ✅ | ✅ | — | #8 | |
+| LSAS | Anxiété sociale de Liebowitz | ✅ | ✅ | — | #13 | |
+| PHQ-9 | Questionnaire santé patient (dépression) | ✅ | ✅ | — | #18 | alerte item 9 |
+| PCL-5 | TSPT (DSM-5) | ✅ | ✅ | — | #20 | |
+| Y-BOCS | TOC de Yale-Brown | ✅ | ✅ | — | #44 | |
 | PSWQ | Inquiétude de Penn State | 🔵 | ✅ | — | #53 | porté sous l'id **QIPS** |
 | AUDIT | Troubles liés à l'alcool | 🔵 | ✅ OMS | 🟢 A | #66 | ordre 2 de la file — fait |
 | SPIN | Inventaire de la phobie sociale | 🔵 | ✅ | — | Bientôt · 31 v. | **Melya devant Mentaal** |
