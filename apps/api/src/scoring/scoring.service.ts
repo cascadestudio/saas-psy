@@ -9,6 +9,11 @@ import { scoreLsas } from './scorers/lsas';
 import { scoreSpin } from './scorers/spin';
 import { scoreQips } from './scorers/qips';
 import { scoreAudit } from './scorers/audit';
+import { scorePdeq } from './scorers/pdeq';
+import { scoreEii } from './scorers/eii';
+import { scoreCuditR } from './scorers/cudit';
+import { scoreHsps } from './scorers/hsps';
+import { scoreQia } from './scorers/qia';
 
 type Scorer = (scale: Scale, responses: Record<string, unknown>) => ScoreResult;
 
@@ -22,6 +27,11 @@ const SCORERS: Record<string, Scorer> = {
   spin: scoreSpin,
   qips: scoreQips,
   audit: scoreAudit,
+  pdeq: scorePdeq,
+  eii: scoreEii,
+  'cudit-r': scoreCuditR,
+  hsps: scoreHsps,
+  qia: scoreQia,
 };
 
 @Injectable()

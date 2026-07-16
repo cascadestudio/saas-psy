@@ -90,6 +90,19 @@ export interface Scale {
         questionText: string;
         options: ScaleOption[];
     };
+    /**
+     * Item d'ouverture en texte libre, non scoré, présenté au patient AVANT les
+     * items scorés (ex. QIA item 1 : thèmes d'inquiétude). Sa réponse (string)
+     * est stockée sous `key` dans le record de réponses ; les scorers ne la
+     * somment jamais mais peuvent la lire (ex. critère « au moins un thème »).
+     * Le patient peut poursuivre sans remplir le champ (fidèle au papier).
+     */
+    openingTextItem?: {
+        key: string;
+        questionText: string;
+        /** Texte d'aide affiché sous le champ. */
+        helperText?: string;
+    };
     scoring: ScaleScoring;
 }
 export declare const scales: Scale[];
