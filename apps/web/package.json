@@ -3,8 +3,11 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
+    "predev": "npm run build --workspace=@melya/core",
     "dev": "next dev",
+    "predev:staging": "npm run build --workspace=@melya/core",
     "dev:staging": "cp .env.staging .env.local && next dev",
+    "prebuild": "npm run build --workspace=@melya/core",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
