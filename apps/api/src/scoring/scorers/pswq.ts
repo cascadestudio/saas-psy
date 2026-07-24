@@ -2,12 +2,13 @@ import { Scale, ScoreResult } from '@melya/core';
 import { collectByPrefix, resolveSeverity } from './helpers';
 
 /**
- * Questionnaire sur les inquiétudes du Penn State (QIPS / PSWQ).
+ * Penn State Worry Questionnaire (PSWQ) — version française validée QIPS
+ * (Gosselin et al., 2001). Registered under the scale's stable id `qips`.
  * Items 1, 3, 8, 10, 11 (1-based in the catalogue's `reverseItems`) are
  * reverse-worded and inverted on a Likert 1-5 (1↔5, 2↔4) before summing all
  * 16 items. Final score range: 16-80, higher = more worry-prone.
  */
-export function scoreQips(
+export function scorePswq(
   scale: Scale,
   responses: Record<string, unknown>,
 ): ScoreResult {

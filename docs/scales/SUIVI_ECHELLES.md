@@ -44,7 +44,7 @@ source primaire avant intégration**), ⚠️ = incertain, 💰 = payant.
 | PHQ-9 | Questionnaire santé patient (dépression) | ✅ | ✅ | — | #18 | alerte item 9 |
 | PCL-5 | TSPT (DSM-5) | ✅ | ✅ | — | #20 | |
 | Y-BOCS | TOC de Yale-Brown | ✅ | ✅ | — | #44 | |
-| PSWQ | Inquiétude de Penn State | 🔵 | ✅ | — | #53 | porté sous l'id **QIPS** |
+| PSWQ | Inquiétude de Penn State | 🔵 | ✅ | — | #53 | acronyme public **PSWQ** ; id interne `qips` ; VF validée = QIPS (Gosselin 2001) |
 | AUDIT | Troubles liés à l'alcool | 🔵 | ✅ OMS | 🟢 A | #66 | ordre 2 de la file — fait |
 | SPIN | Inventaire de la phobie sociale | 🔵 | ✅ | — | Bientôt · 31 v. | **Melya devant Mentaal** |
 | HSPS | Hypersensibilité (Aron) | 🔵 | ⚠️ | 🟢 A | #19 | auto-test du livre (23 items OUI/NON, seuil 12) — droits trad. Éditions de l'Homme à instruire avant sortie de beta |

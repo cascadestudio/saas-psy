@@ -1,8 +1,13 @@
-# Test spec — QIPS (PSWQ)
+# Test spec — PSWQ
 
 <!--
 Voir _TEMPLATE.md pour les règles projet (sourcing, copyright, FR-only,
 hiérarchie versions, comparaison Mentaal).
+
+Acronyme : PSWQ partout (app, landing, docs, code), aligné concurrent Mentaal
+et littérature. « QIPS » n'est conservé que pour désigner spécifiquement la
+traduction française validée (Gosselin et al., 2001). Id technique interne :
+`qips` (clé DB/Sanity, non migrée).
 -->
 
 ---
@@ -11,7 +16,9 @@ hiérarchie versions, comparaison Mentaal).
 
 | Champ | Valeur |
 |-------|--------|
-| **Nom court** | QIPS |
+| **Nom court (acronyme public)** | PSWQ |
+| **Id technique interne** | `qips` (clé DB + Sanity ; historique, non migrée) |
+| **Version française validée** | QIPS (Gosselin et al., 2001) |
 | **Nom complet (FR)** | Questionnaire sur les inquiétudes du Penn State |
 | **Nom complet (langue originale)** | Penn State Worry Questionnaire (PSWQ) |
 | **Thème principal** | Anxiété généralisée |
@@ -45,6 +52,19 @@ hiérarchie versions, comparaison Mentaal).
 - **Échelle de réponse** : l'annexe 1 de Gosselin et al. (2001) — source primaire — donne *Pas du tout / Un peu / Assez / Très / Extrêmement **correspondant***. Le formulaire de cabinet (F. Ballet) initialement utilisé pour le portage disait « caractéristique » ; les vulgarisations en ligne raccourcissent en « Pas du tout … Extrêmement ». **Retenu : « correspondant »** (verbatim de la version validée). Corrigé le 16/07/2026 — la première version de cette spec affirmait à tort que « caractéristique » était le verbatim Gosselin.
 - **Items** : le formulaire Ballet divergeait de l'annexe 1 sur 5 items (1 : « je ne m'en inquiète pas » ; 11 : « je ne peux plus rien faire au sujet d'un souci » ; 12 : « un inquiet » ; 14 : « je ne peux plus m'arrêter » ; 16 : « terminés »). **Retenu : verbatim annexe 1** pour les items 1, 5, 11, 12 et 14. Seule exception : item 16, « complétés » (québécisme de la version validée) → « **terminés** », adaptation FR-France assumée (règle projet : versions FR-France privilégiées).
 - **Consigne** : annexe 1 = « …chacun des énoncés suivants **correspond à vous** » (retenu), formulaire Ballet = « …vous correspond ».
+
+### Arbitrage vs Mentaal (décidé le 16/07/2026)
+
+Comparaison avec l'implémentation du concurrent Mentaal, tranchée avec Adrien :
+
+| Élément | Mentaal | Melya (retenu) |
+| --- | --- | --- |
+| Ancres 1–5 | « caractéristique » (calque littéral de l'anglais *characteristic/typical*) | **« correspondant »** — ancre de la VF **validée** (Gosselin 2001), c'est ce libellé qui a été testé psychométriquement |
+| Consigne | réécrite, plus « chaleureuse », avec « ressenti global et **récent** » | **verbatim Gosselin (option a)** — cadre trait préservé |
+
+**Point clinique décisif** : le PSWQ est explicitement une **mesure de trait**, pas d'état — Gosselin le pose noir sur blanc (étude 2 : *« devrait être considéré comme une mesure de traits de personnalité et non comme une mesure d'état »*). La consigne Mentaal, en injectant « **récent** », requalifie une disposition durable en ressenti récent : **inexactitude clinique**, pas simple reformulation. Melya reste fidèle à l'instrument validé → argument de différenciation (fidélité à la VF validée, cf. positionnement projet).
+
+**Décision** : ne **pas** adopter « caractéristique » ni la consigne Mentaal. On garde « correspondant » + consigne Gosselin verbatim. Sujet clos.
 
 ### Version française retenue
 
@@ -147,7 +167,7 @@ Items **1, 3, 8, 10, 11** (formulés dans le sens « faible inquiétude »). For
 
 ### Note d'implémentation importante
 
-Le scorer RSES (échelle 1–4) utilise `5 − v`. Le QIPS est en 1–5 → formule **`6 − v`**. Scorer dédié `apps/api/src/scoring/scorers/qips.ts` (ne pas réutiliser le scorer RSES tel quel).
+Le scorer RSES (échelle 1–4) utilise `5 − v`. Le PSWQ est en 1–5 → formule **`6 − v`**. Scorer dédié `apps/api/src/scoring/scorers/pswq.ts` (ne pas réutiliser le scorer RSES tel quel).
 
 ### Gestion des réponses manquantes
 
@@ -233,7 +253,7 @@ Rappel : les items 1, 3, 8, 10, 11 sont inversés (`6 − v`).
 ### Signature de scoring
 
 ```typescript
-scoreQips(scale, responses) → {
+scorePswq(scale, responses) → {
   totalScore: number,        // 16–80
   maxScore: 80,
   interpretation: string,
@@ -246,8 +266,8 @@ scoreQips(scale, responses) → {
 
 - `formType: "single-scale"`, `reverseItems: [1, 3, 8, 10, 11]`, clés de réponse `intensity_0 … intensity_15`.
 - Inversion sur échelle 1–5 : `6 − v` (≠ RSES qui est `5 − v`).
-- Scorer `apps/api/src/scoring/scorers/qips.ts`, enregistré sous l'id `qips` dans `ScoringService`.
-- Icône : `apps/web/public/images/scales/qips.svg` — ⚠️ **placeholder** (copie de `gad-7.svg`, identique à la catégorie « Anxiété généralisée ») à remplacer par un doodle dédié.
+- Scorer `apps/api/src/scoring/scorers/pswq.ts` (fonction `scorePswq`), enregistré sous la clé `qips` (id historique de l'échelle) dans `ScoringService`.
+- Icône : `apps/web/public/images/scales/pswq.svg` — ⚠️ **placeholder** (copie de `gad-7.svg`, identique à la catégorie « Anxiété généralisée ») à remplacer par un doodle dédié.
 
 ---
 
@@ -256,4 +276,6 @@ scoreQips(scale, responses) → {
 | Date | Auteur | Modification |
 |------|--------|--------------|
 | 15/07/2026 | Adrien (avec Claude) | Création de l'échelle QIPS : entrée `Scale` dans `packages/core`, scorer `qips.ts` (inversion `6 − v`) + enregistrement, icône placeholder, spec. Items FR issus de la traduction validée Gosselin et al. (2001), portés verbatim depuis un formulaire QIPS. Inversés 1/3/8/10/11, échelle 1–5 « caractéristique », score 16–80. Grille de seuils contiguë en 3 niveaux construite par Melya à partir des repères Gosselin non contigus — à valider. |
+| 16/07/2026 | Adrien (avec Claude) | Arbitrage vs Mentaal tranché (§2) : on garde **« correspondant »** (ancre VF validée) et la **consigne Gosselin verbatim (option a)**. Mentaal utilise « caractéristique » (calque anglais) + une consigne réécrite qui injecte « récent » → requalifie à tort une mesure de trait en mesure d'état. Aucun changement de code (l'implémentation était déjà conforme). |
+| 16/07/2026 | Adrien (avec Claude) | Bascule de l'acronyme public **QIPS → PSWQ** partout (app, landing, docs, code, noms de fichiers : `pswq.ts`/`scorePswq`, `pswq.svg`, dossier `docs/scales/pswq/`). Id technique interne conservé à `qips` (clé DB/Sanity, non migrée). « QIPS » conservé uniquement pour désigner la VF validée (Gosselin 2001). |
 | 16/07/2026 | Adrien (avec Claude) | Recoche contre la source primaire (`gosselin-ea-2001.pdf`, annexe 1) : échelle de réponse corrigée « caractéristique » → « **correspondant** » (verbatim validé), items 1/5/11/12/14 alignés sur l'annexe 1, consigne alignée (« correspond à vous »), item 16 conservé en « terminés » (adaptation FR-France documentée). Mention de copyright enrichie (© Gosselin et al., Université Laval, tous droits réservés). Ajout des données normatives (non clinique ≈ 44,5 / TAG ≈ 62,6) + alerte sur le libellé de la bande 40–54. `psi-ii.pdf` (source WW-II, mal rangé ici) déplacé vers `docs/scales/ww-ii/`. |

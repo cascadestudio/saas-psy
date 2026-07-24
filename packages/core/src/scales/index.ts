@@ -415,20 +415,23 @@ export const scales: Scale[] = [
     },
   },
   {
+    // id historique/interne (clé DB + Sanity) — l'affichage et l'URL publique
+    // utilisent l'acronyme PSWQ (cf. scale-slug.ts). Ne pas migrer sans plan de
+    // reprise des sessions existantes et des landing pages Sanity.
     id: "qips",
-    acronym: "QIPS",
+    acronym: "PSWQ",
     label: "Questionnaire sur les inquiétudes du Penn State",
-    icon: "/images/scales/qips.svg",
+    icon: "/images/scales/pswq.svg",
     color: "#6A9BCC",
     colorLight: "#B4CDE5",
     formType: "single-scale",
-    title: "QIPS - Questionnaire sur les inquiétudes du Penn State",
+    title: "PSWQ - Questionnaire sur les inquiétudes du Penn State",
     description:
       "Une échelle de 16 items mesurant la tendance générale à s'inquiéter (inquiétude excessive du trouble anxieux généralisé)",
     category: "Anxiété généralisée",
     estimatedTime: "5-10 minutes",
     longDescription:
-      "Le QIPS (Questionnaire sur les inquiétudes du Penn State) est la traduction française du Penn State Worry Questionnaire (PSWQ, Meyer et al. 1990), validée par Gosselin et collaborateurs (2001). C'est un auto-questionnaire de 16 items évaluant la tendance générale, excessive et incontrôlable à s'inquiéter, symptôme central du trouble anxieux généralisé. Chaque item est coté de 1 (pas du tout correspondant) à 5 (extrêmement correspondant). Les items 1, 3, 8, 10 et 11, formulés à l'inverse, sont recodés avant sommation. Le score total varie de 16 à 80 ; un score plus élevé traduit une propension à s'inquiéter plus marquée.",
+      "Le PSWQ (Penn State Worry Questionnaire, Meyer et al. 1990) est un auto-questionnaire de 16 items évaluant la tendance générale, excessive et incontrôlable à s'inquiéter, symptôme central du trouble anxieux généralisé. Melya utilise sa version française validée, le QIPS (Gosselin et al., 2001). Chaque item est coté de 1 (pas du tout correspondant) à 5 (extrêmement correspondant). Les items 1, 3, 8, 10 et 11, formulés à l'inverse, sont recodés avant sommation. Le score total varie de 16 à 80 ; un score plus élevé traduit une propension à s'inquiéter plus marquée.",
     instructions:
       "Veuillez utiliser l'échelle ci-dessous pour exprimer jusqu'à quel point chacun des énoncés suivants correspond à vous.",
     persistentInstructions:

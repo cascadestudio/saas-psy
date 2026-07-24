@@ -7,7 +7,7 @@ import { scoreYbocs } from './scorers/ybocs';
 import { scoreRses } from './scorers/rses';
 import { scoreLsas } from './scorers/lsas';
 import { scoreSpin } from './scorers/spin';
-import { scoreQips } from './scorers/qips';
+import { scorePswq } from './scorers/pswq';
 import { scoreAudit } from './scorers/audit';
 import { scorePdeq } from './scorers/pdeq';
 import { scoreEii } from './scorers/eii';
@@ -25,7 +25,7 @@ const SCORERS: Record<string, Scorer> = {
   rses: scoreRses,
   'echelle-d-anxiete-sociale-de-liebowitz': scoreLsas,
   spin: scoreSpin,
-  qips: scoreQips,
+  qips: scorePswq, // clé = id historique de l'échelle ; acronyme public = PSWQ
   audit: scoreAudit,
   pdeq: scorePdeq,
   eii: scoreEii,
