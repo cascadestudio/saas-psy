@@ -20,7 +20,7 @@ hiérarchie versions, comparaison Mentaal).
 | **Durée estimée de passation** | 2–3 min |
 | **Public cible** | Adultes (≥ 18 ans). |
 | **Mode d'administration** | auto (à l'origine administrable en auto ou hétéro ; ici auto-passation patient) |
-| **Note sur le mode d'administration** | Période de référence = 12 derniers mois. Items 1-2 sans préfixe temporel (consommation habituelle) ; items 3-10 sur les 12 derniers mois. |
+| **Note sur le mode d'administration** | Période de référence = 12 derniers mois. Dans la source auditscreen.org, le préfixe « Dans les douze derniers mois, » figure **sur les items 4 à 8** (items 1-3, 9-10 sans préfixe ; 9-10 portent le temporel dans les options). ⚠️ Notre version a **retiré** ce préfixe des items 4-8 au profit de la consigne + en-tête persistant — cf. comparaison Mentaal (§2) et §10 pt 5. |
 | **Description praticien (bibliothèque)** | Questionnaire de 10 items de l'OMS repérant une consommation d'alcool à risque, nocive ou une dépendance sur les 12 derniers mois. |
 | **Description patient (portail)** | AUCUNE — règle projet : le portail patient ne comporte pas de description de l'échelle. Seule la consigne officielle (section 4) est affichée. |
 
@@ -58,6 +58,32 @@ hiérarchie versions, comparaison Mentaal).
 
 - **Traducteur(s) / validation** : version OMS francophone (auditscreen.org) ; validation psychométrique française Gache et al. (2005).
 - **Seuils** : Société Française d'Alcoologie (2015), via OFDT.
+
+### Comparaison navigateur avec Mentaal — recette du 24/07/2026 (Clément + Claude, INTERROMPUE)
+
+Parcours patient Mentaal déroulé **intégralement** (lien `mentaal.fr/a/…`, intro + 10 items + écran de fin), comparé item par item à notre version `packages/core` **et** à la source primaire `AUDIT_auditscreen_official.pdf`.
+
+**Constat central : Mentaal est une reprise quasi *verbatim* de la source auditscreen.org (imperfections comprises) ; notre version est la *même source, légèrement éditée*.** La plupart des « écarts » nous/Mentaal viennent donc de **nos retouches volontaires**, pas d'une divergence de source.
+
+| Élément | Nous | Mentaal | Source auditscreen.org | Verdict |
+|---|---|---|---|---|
+| Formulation items 1-3, 9 | idem source | idem source | — | ✅ identiques et conformes |
+| **Préfixe « Dans les douze derniers mois, » (items 4-8)** | **Absent** (porté en consigne + en-tête persistant) | **Présent** sur 4-8 | **Présent** sur 4-8 | ⚠️ **Nous dévions de notre propre source primaire** ; Mentaal est fidèle. → décision §10 pt 5 |
+| « verres standards » (items 2-3) | présent **+ définition** (~10 g) en consigne | présent, **sans définition** | présent, sans définition | ✅ Notre ajout est un plus produit (la source ne définit pas non plus) |
+| Item 5 « vous -a-t-il » / item 6 « du boire » | **corrigé** (« vous a-t-il » / « dû ») | tel quel | **tel quel** (imperfections DANS le PDF source) | ℹ️ PAS des fautes Mentaal : c'est la source. Nous avons nettoyé → amélioration mais déviation verbatim |
+| Dernière option (items 3-8) | « Chaque jour ou presque » (constant) | « Chaque jour » sauf Q5 « Tous les jours » | « chaque jour ou presque » | ✅ **Nous = source ET constant** ; Mentaal a une incohérence (Q5) |
+| Item 10 (formulation) | inversion « Un parent… s'est-il… vous a-t-il conseillé » | « Est-ce qu'un parent… s'est déjà préoccupé… et vous a conseillé » | idem Mentaal | ↩️ Mentaal = source ; nous avons reformulé. Cosmétique |
+| Items 9-10, option valeur 4 | « Oui, au cours de l'année **écoulée** » | « Oui, au cours de l'année » | « oui au cours de l'année **dernière** » | ⚠️ Les 3 diffèrent, aucun exact. Cosmétique, à normaliser (§10 pt 7) |
+| Item 2, option val. 3 | « Sept à neuf » (7-9 ✓) | « 7, 8 ou 9 » (7-9 ✓) | « sept à neuf » | ✅ Les deux corrects (l'erreur « 7 ou 8 » n'existe que dans le flyer Addict'AIDE, écarté) |
+| Intro / consigne | consigne dédiée (12 mois + verre standard) | intro générique « chaleureuse » (ni cadre 12 mois, ni verre standard) | note « 12 derniers mois » en tête ; pas de def. verre standard | ✅ Notre consigne est plus complète et plus fidèle au cadre temporel |
+| Score affiché au patient | non (écran « Merci ») | non (« Vous avez terminé ») | — | = équivalent. Interprétation Mentaal **non comparable** (réservée praticien, non visible côté patient) |
+
+**Rectification d'une lecture initiale** : à l'écran, les « fautes » Mentaal (« vous -a-t-il », « du boire ») et son item 10 « Est-ce qu'un… » ressemblaient à des défauts de leur côté. La lecture du PDF source a montré que **c'est la source qui est ainsi** — Mentaal l'a reprise fidèlement, et c'est **notre** version qui a édité la source.
+
+**Ce qui joue en notre faveur** : définition du verre standard (manque réel chez Mentaal, qui parle de « verres standards » sans les définir), dernière option constante ET conforme source, consigne temporelle explicite, français corrigé.
+**Ce qui joue en faveur de Mentaal** : fidélité au verbatim source, notamment le **préfixe temporel des items 4-8** que nous avons retiré.
+
+**Scoring** : nos seuils (0-5 / 6-12 / 13-40 ; mésusage ≥ 6, dépendance > 12) restent conformes SFA 2015 (OFDT). **Non comparés à Mentaal** : score masqué au patient des deux côtés. → si accès à un compte praticien Mentaal, comparer leurs bandes d'interprétation.
 
 ---
 
@@ -192,6 +218,12 @@ Aucune alerte item-niveau pour l'instant. (Piste à discuter : score ≥ 13 = or
 2. **Libellés de niveaux** — *Consommation à faible risque / Mésusage d'alcool probable / Dépendance à l'alcool probable*.
 3. **Consigne** — valider l'ajout de la définition du « verre standard » (~10 g), absente du PDF paysage mais nécessaire à l'item 2.
 4. **Copyright usage commercial** — confirmer que la licence OMS « usage non lucratif » couvre la diffusion via Melya (service payant).
+5. **Préfixe temporel des items 4-8 (décision de fond, issue de la comparaison Mentaal §2)** — la source primaire auditscreen.org préfixe les items **4 à 8** par « Dans les douze derniers mois, » (Mentaal le conserve). Notre version l'a **retiré** au profit de la consigne + en-tête persistant « Au cours des douze derniers mois : ». Trancher :
+   - (a) **Restaurer le préfixe par item** → fidélité verbatim à notre source, aligné Mentaal ; ou
+   - (b) **Garder notre approche** (consigne + en-tête) — **MAIS d'abord vérifier en recette que l'en-tête persistant s'affiche réellement sur chaque item 4-8** ; sinon ces items perdent leur ancre temporelle, seul vrai manque de notre côté.
+6. **Retouches vs verbatim source** — décider si l'on conserve nos corrections (item 5 « vous a-t-il » au lieu de « vous -a-t-il » ; item 6 « dû » au lieu de « du » ; item 10 reformulé en inversion) qui améliorent le français mais dévient du verbatim OMS, ou si l'on revient au verbatim source.
+7. **Option items 9-10 (valeur 4)** — normaliser le libellé : nous « Oui, au cours de l'année écoulée » vs source « oui au cours de l'année dernière » vs Mentaal « Oui, au cours de l'année ». Cosmétique, mais à figer.
+8. **Interprétation Mentaal** — si accès à un compte praticien Mentaal, comparer leurs bandes de score aux nôtres (SFA 2015). Non fait (score masqué au patient).
 
 ---
 
@@ -224,3 +256,4 @@ scoreAudit(scale, responses) → {
 | Date | Auteur | Modification |
 |------|--------|--------------|
 | 15/07/2026 | Adrien (avec Claude) | Création de l'échelle AUDIT : entrée `Scale` dans `packages/core` (`formType: "options"`, 10 items), scorer `audit.ts` (somme 0-40) + enregistrement, icône placeholder, spec. Items FR issus de la version OMS officielle (auditscreen.org), cross-checkés OFDT/SFA. Seuils SFA 2015 rendus en 3 bandes sexe-neutres (onset ≥ 6) — sexe-spécificité à valider. Flyer Addict'AIDE écarté (erreurs de libellés). Nouvelle catégorie « Addictions ». |
+| 24/07/2026 | Clément (avec Claude) | **Recette comparative navigateur vs Mentaal (INTERROMPUE, à reprendre).** Parcours patient Mentaal déroulé en entier, comparé item par item à notre version + à la source auditscreen.org. Constat : Mentaal ≈ reprise verbatim de auditscreen.org (imperfections comprises) ; notre version = même source éditée. Ajout du tableau de comparaison en §2. Principal écart à trancher : **préfixe « Dans les douze derniers mois » sur items 4-8** (présent source + Mentaal, retiré chez nous → §10 pt 5). Nos libellés d'items **confirmés conformes** à la source primaire (le doute sur l'attribution est levé). Nouveaux points 5-8 en §10. Scoring non comparé (score masqué au patient des deux côtés). |

@@ -7,7 +7,7 @@
 
 ## Tableau de bord
 
-**✅ 6 validées · 🔵 8 implémentées · 🚧 0 en cours · 📋 9 prévues · 🔍 22 à instruire · ⬜ 26 non planifiées · 🚫 12 écartées**
+**✅ 7 validées · 🔵 7 implémentées · 🚧 0 en cours · 📋 9 prévues · 🔍 22 à instruire · ⬜ 26 non planifiées · 🚫 12 écartées**
 
 **Rattrapage Mentaal : 13/42.** Le plafond n'est pas 74 : sur leur catalogue
 disponible, 12 sont écartées d'office (payantes, outils maison Mentaal, ou
@@ -44,7 +44,7 @@ source primaire avant intégration**), ⚠️ = incertain, 💰 = payant.
 | PHQ-9 | Questionnaire santé patient (dépression) | ✅ | ✅ | — | #18 | alerte item 9 |
 | PCL-5 | TSPT (DSM-5) | ✅ | ✅ | — | #20 | |
 | Y-BOCS | TOC de Yale-Brown | ✅ | ✅ | — | #44 | |
-| PSWQ | Inquiétude de Penn State | 🔵 | ✅ | — | #53 | acronyme public **PSWQ** ; id interne `qips` ; VF validée = QIPS (Gosselin 2001) |
+| PSWQ | Inquiétude de Penn State | ✅ | ✅ | — | #53 | acronyme public **PSWQ** ; id interne `qips` ; VF validée = QIPS (Gosselin 2001) ; recette OK (Clément, PDF source) — bandes de seuils à confirmer avec Renata |
 | AUDIT | Troubles liés à l'alcool | 🔵 | ✅ OMS | 🟢 A | #66 | ordre 2 de la file — fait |
 | SPIN | Inventaire de la phobie sociale | 🔵 | ✅ | — | Bientôt · 31 v. | **Melya devant Mentaal** |
 | HSPS | Hypersensibilité (Aron) | 🔵 | ⚠️ | 🟢 A | #19 | auto-test du livre (23 items OUI/NON, seuil 12) — droits trad. Éditions de l'Homme à instruire avant sortie de beta |
