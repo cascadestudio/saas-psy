@@ -7,7 +7,7 @@
 
 ## Tableau de bord
 
-**✅ 7 validées · 🔵 7 implémentées · 🚧 0 en cours · 📋 9 prévues · 🔍 22 à instruire · ⬜ 26 non planifiées · 🚫 12 écartées**
+**✅ 7 validées · 🔵 7 implémentées · 🚧 0 en cours · 📋 10 prévues · 🔍 22 à instruire · ⬜ 26 non planifiées · 🚫 12 écartées**
 
 **Rattrapage Mentaal : 13/42.** Le plafond n'est pas 74 : sur leur catalogue
 disponible, 12 sont écartées d'office (payantes, outils maison Mentaal, ou
@@ -61,6 +61,7 @@ source primaire avant intégration**), ⚠️ = incertain, 💰 = payant.
 | DERS | Régulation émotionnelle | 📋 (8) | ✅ | 🟡 B | #14 | reverse + subscores |
 | FTND | Dépendance à la nicotine (Fagerström) | 📋 (9) | ✅ | — | Bientôt · 29 v. | complète le motif addictions |
 | TAS-20 | Alexithymie de Toronto | 📋 (10) | ✅ | 🟡 B | #37 | reverse + 3 subscores |
+| LEC-5 | Liste des événements de vie (DSM-5) | 📋 (11) | ✅ NCPTSD | 🟠 C | Absent | couplée à la PCL-5 en clinique (identification de l'événement de référence) — cf. `pcl-5/pcl-5.md` §13 ; pas de score : 17 événements × 6 modalités (vécu / témoin / appris / cadre pro / pas sûr / sans objet) → widget multi-choix par item à créer ; VF Cn2r à sourcer ; priorité à rediscuter avec Renata |
 | ASQ-SF | Styles d'attachement | 🔍 | ⚠️ | — | #10 | |
 | SCT | Test de confiance en soi | 🔍 | ⚠️ | — | #15 | |
 | ADHD-RS | Évaluation du TDAH | 🔍 | ⚠️ | — | #16 | DuPaul/Guilford — alternative libre : ASRS |
