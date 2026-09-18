@@ -4,6 +4,7 @@ import { useState, useMemo } from "react";
 import { Input } from "@/components/ui/input";
 import { ScaleCard } from "@/components/ScaleCard";
 import { scales } from "@/app/scalesData";
+import { getScaleAppearance } from "@/lib/scale-appearance";
 import { Interfaces } from "doodle-icons";
 
 export default function EchellesPage() {
@@ -48,20 +49,30 @@ export default function EchellesPage() {
 
       <div className="mb-6 flex flex-wrap gap-2">
         <button
-          className={`px-3 py-1 text-sm rounded-full transition-colors ${selectedCategory === null ? "bg-foreground text-background" : "bg-muted text-muted-foreground"}`}
+          aria-pressed={selectedCategory === null}
+          className={`inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-sm font-medium transition-colors ${selectedCategory === null ? "border-foreground bg-foreground text-background" : "border-border bg-background text-muted-foreground hover:border-foreground hover:text-foreground"}`}
           onClick={() => setSelectedCategory(null)}
         >
           Toutes
         </button>
-        {categories.map((category) => (
-          <button
-            key={category}
-            className={`px-3 py-1 text-sm rounded-full transition-colors ${selectedCategory === category ? "bg-foreground text-background" : "bg-muted text-muted-foreground"}`}
-            onClick={() => setSelectedCategory(category)}
-          >
-            {category}
-          </button>
-        ))}
+        {categories.map((category) => {
+          const { bg } = getScaleAppearance(category);
+          const active = selectedCategory === category;
+          return (
+            <button
+              key={category}
+              aria-pressed={active}
+              className={`inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-sm font-medium transition-colors ${active ? "border-foreground bg-foreground text-background" : "border-border bg-background text-muted-foreground hover:border-foreground hover:text-foreground"}`}
+              onClick={() => setSelectedCategory(category)}
+            >
+              <span
+                className="h-2.5 w-2.5 rounded-[4px]"
+                style={{ backgroundColor: bg }}
+              />
+              {category}
+            </button>
+          );
+        })}
       </div>
 
       {filteredScales.length === 0 ? (
@@ -73,7 +84,7 @@ export default function EchellesPage() {
           </p>
         </div>
       ) : (
-        <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
           {filteredScales.map((scale) => (
             <ScaleCard key={scale.id} scale={scale} />
           ))}
