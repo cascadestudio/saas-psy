@@ -39,9 +39,10 @@ inventer ; demander à l'utilisateur si une formulation prête à interprétatio
 On réutilise les autres échelles pour la **mécanique** (`formType`, patron de
 scorer, icône et couleur de la catégorie), jamais pour le **contenu** : pas
 d'intitulé court au-dessus des questions (`prompt` + `title`), pas de consigne,
-pas de sous-titre si la source n'en a pas. Les eyebrows de l'AUDIT et du
-CUDIT-R sont des ajouts Melya antérieurs à cette règle, pas un précédent. Sans
-intitulé court dans la source, l'item n'a qu'un `title` = la question verbatim.
+pas de sous-titre si la source n'en a pas. Sans intitulé court dans la
+source, l'item n'a qu'un `title` = la question verbatim (AUDIT, CUDIT-R et FTND
+alignés le 24/09/2026 ; Y-BOCS et QIA portent encore des intitulés courts, à
+vérifier contre leur source).
 
 ## 2. Champs à renseigner dans `Scale`
 

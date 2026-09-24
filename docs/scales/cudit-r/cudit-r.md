@@ -92,6 +92,8 @@ Rappel persistant : « Votre consommation au cours des 6 derniers mois : »
 
 8 items portés depuis le flyer RESPADD (adaptations listées en §2).
 
+Aucun intitulé court (eyebrow) : la source RESPADD n'en a pas. L'app affiche la question seule (arbitrage du 24/09/2026).
+
 ---
 
 ## 6. Algorithme de scoring
@@ -144,6 +146,7 @@ Vérifiés dans le script de recette (40/40 PASS, 16/07/2026).
 ## 11. Contrat technique
 
 - `formType: "options"`, clés `option_0 … option_7`.
+- Chaque item n'a qu'un `title` = la question, sans `prompt` (pas d'eyebrow).
 - Scorer `apps/api/src/scoring/scorers/cudit.ts`, id `cudit-r` dans `ScoringService`.
 - Icône : `cudit-r.svg` — ⚠️ placeholder (copie de `audit.svg`, catégorie Addictions).
 
@@ -154,3 +157,4 @@ Vérifiés dans le script de recette (40/40 PASS, 16/07/2026).
 | Date | Auteur | Modification |
 |------|--------|--------------|
 | 16/07/2026 | Adrien (avec Claude) | Création : entrée `Scale` (`options`, 8 items), scorer somme 0-32 (seuils 8/11), icône placeholder, spec. Items flyer RESPADD, question-porte portée en consigne (décision produit). |
+| 24/09/2026 | Clément (avec Claude) | Intitulés courts (eyebrows) retirés des 8 items : absents de la source RESPADD. Chaque item n'a plus qu'un `title` = la question ; texte des questions inchangé. |

@@ -904,8 +904,7 @@ export const scales: Scale[] = [
     higherIsBetter: false,
     questions: [
       {
-        title: "Fréquence de consommation",
-        prompt: "Combien de fois vous arrive-t-il de consommer de l'alcool ?",
+        title: "Combien de fois vous arrive-t-il de consommer de l'alcool ?",
         options: [
           { value: 0, text: "Jamais" },
           { value: 1, text: "Une fois par mois ou moins" },
@@ -915,8 +914,7 @@ export const scales: Scale[] = [
         ],
       },
       {
-        title: "Quantité par occasion",
-        prompt:
+        title:
           "Combien de verres standards buvez-vous au cours d'une journée ordinaire où vous buvez de l'alcool ?",
         options: [
           { value: 0, text: "Un ou deux" },
@@ -927,8 +925,7 @@ export const scales: Scale[] = [
         ],
       },
       {
-        title: "Consommations importantes",
-        prompt:
+        title:
           "Au cours d'une même occasion, combien de fois vous arrive-t-il de boire six verres standards ou plus ?",
         options: [
           { value: 0, text: "Jamais" },
@@ -939,8 +936,7 @@ export const scales: Scale[] = [
         ],
       },
       {
-        title: "Perte de contrôle",
-        prompt:
+        title:
           "Combien de fois avez-vous observé que vous n'étiez plus capable de vous arrêter de boire après avoir commencé ?",
         options: [
           { value: 0, text: "Jamais" },
@@ -951,8 +947,7 @@ export const scales: Scale[] = [
         ],
       },
       {
-        title: "Obligations non remplies",
-        prompt:
+        title:
           "Combien de fois le fait d'avoir bu de l'alcool vous a-t-il empêché de faire ce qu'on attendait normalement de vous ?",
         options: [
           { value: 0, text: "Jamais" },
@@ -963,8 +958,7 @@ export const scales: Scale[] = [
         ],
       },
       {
-        title: "Consommation matinale",
-        prompt:
+        title:
           "Combien de fois, après une période de forte consommation, avez-vous dû boire de l'alcool dès le matin pour vous remettre en forme ?",
         options: [
           { value: 0, text: "Jamais" },
@@ -975,8 +969,7 @@ export const scales: Scale[] = [
         ],
       },
       {
-        title: "Culpabilité",
-        prompt:
+        title:
           "Combien de fois avez-vous eu un sentiment de culpabilité ou de regret après avoir bu ?",
         options: [
           { value: 0, text: "Jamais" },
@@ -987,8 +980,7 @@ export const scales: Scale[] = [
         ],
       },
       {
-        title: "Trous de mémoire",
-        prompt:
+        title:
           "Combien de fois avez-vous été incapable de vous souvenir de ce qui s'était passé la nuit précédente parce que vous aviez bu ?",
         options: [
           { value: 0, text: "Jamais" },
@@ -999,8 +991,7 @@ export const scales: Scale[] = [
         ],
       },
       {
-        title: "Blessures",
-        prompt:
+        title:
           "Vous êtes-vous blessé ou avez-vous blessé quelqu'un parce que vous aviez bu ?",
         options: [
           { value: 0, text: "Non" },
@@ -1009,8 +1000,7 @@ export const scales: Scale[] = [
         ],
       },
       {
-        title: "Inquiétude de l'entourage",
-        prompt:
+        title:
           "Un parent, un ami, un médecin ou un autre professionnel de santé s'est-il déjà préoccupé de votre consommation d'alcool et vous a-t-il conseillé de la diminuer ?",
         options: [
           { value: 0, text: "Non" },
@@ -1198,8 +1188,7 @@ export const scales: Scale[] = [
     higherIsBetter: false,
     questions: [
       {
-        title: "Fréquence de consommation",
-        prompt: "À quelle fréquence consommez-vous du cannabis ?",
+        title: "À quelle fréquence consommez-vous du cannabis ?",
         options: [
           { value: 0, text: "Jamais" },
           { value: 1, text: "Une fois par mois ou moins" },
@@ -1209,8 +1198,7 @@ export const scales: Scale[] = [
         ],
       },
       {
-        title: "Durée des effets",
-        prompt:
+        title:
           "Combien d'heures êtes-vous « défoncé(e) » un jour typique où vous consommez du cannabis ?",
         options: [
           { value: 0, text: "Moins d'une heure" },
@@ -1221,8 +1209,7 @@ export const scales: Scale[] = [
         ],
       },
       {
-        title: "Perte de contrôle",
-        prompt:
+        title:
           "Au cours des 6 derniers mois, à quelle fréquence avez-vous constaté que vous n'étiez plus capable de vous arrêter de fumer du cannabis une fois que vous aviez commencé ?",
         options: [
           { value: 0, text: "Jamais" },
@@ -1233,8 +1220,7 @@ export const scales: Scale[] = [
         ],
       },
       {
-        title: "Obligations non remplies",
-        prompt:
+        title:
           "Au cours des 6 derniers mois, combien de fois votre consommation de cannabis vous a-t-elle empêché de faire ce qui était normalement attendu de vous ?",
         options: [
           { value: 0, text: "Jamais" },
@@ -1245,8 +1231,7 @@ export const scales: Scale[] = [
         ],
       },
       {
-        title: "Temps consacré",
-        prompt:
+        title:
           "Au cours des 6 derniers mois, combien de fois avez-vous passé une grande partie de votre temps à chercher à vous procurer ou à consommer du cannabis, ou à vous remettre des effets du cannabis ?",
         options: [
           { value: 0, text: "Jamais" },
@@ -1257,8 +1242,7 @@ export const scales: Scale[] = [
         ],
       },
       {
-        title: "Mémoire et concentration",
-        prompt:
+        title:
           "Au cours des 6 derniers mois, combien de fois avez-vous éprouvé des problèmes de mémoire ou de concentration après avoir fumé du cannabis ?",
         options: [
           { value: 0, text: "Jamais" },
@@ -1269,8 +1253,7 @@ export const scales: Scale[] = [
         ],
       },
       {
-        title: "Situations à risque",
-        prompt:
+        title:
           "À quelle fréquence consommez-vous du cannabis dans des situations qui pourraient entraîner un danger, par exemple conduire un véhicule, utiliser une machine, ou s'occuper d'enfants ?",
         options: [
           { value: 0, text: "Jamais" },
@@ -1281,8 +1264,7 @@ export const scales: Scale[] = [
         ],
       },
       {
-        title: "Envie de réduire ou d'arrêter",
-        prompt:
+        title:
           "Avez-vous déjà envisagé de réduire ou d'arrêter votre consommation de cannabis ?",
         options: [
           { value: 0, text: "Jamais" },

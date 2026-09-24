@@ -131,18 +131,20 @@ Réponses **hétérogènes par item** (comme Y-BOCS) → chaque item porte ses p
 
 ## 5. Items
 
-| # | Intitulé court (eyebrow) | Question | Modalités |
-|---|--------------------------|----------|-----------|
-| 1 | Fréquence de consommation | Combien de fois vous arrive-t-il de consommer de l'alcool ? | 0-4 (fréquence conso) |
-| 2 | Quantité par occasion | Combien de verres standards buvez-vous au cours d'une journée ordinaire où vous buvez de l'alcool ? | 0-4 (quantité) |
-| 3 | Consommations importantes | Au cours d'une même occasion, combien de fois vous arrive-t-il de boire six verres standards ou plus ? | 0-4 (fréquence) |
-| 4 | Perte de contrôle | Combien de fois avez-vous observé que vous n'étiez plus capable de vous arrêter de boire après avoir commencé ? | 0-4 (fréquence) |
-| 5 | Obligations non remplies | Combien de fois le fait d'avoir bu de l'alcool vous a-t-il empêché de faire ce qu'on attendait normalement de vous ? | 0-4 (fréquence) |
-| 6 | Consommation matinale | Combien de fois, après une période de forte consommation, avez-vous dû boire de l'alcool dès le matin pour vous remettre en forme ? | 0-4 (fréquence) |
-| 7 | Culpabilité | Combien de fois avez-vous eu un sentiment de culpabilité ou de regret après avoir bu ? | 0-4 (fréquence) |
-| 8 | Trous de mémoire | Combien de fois avez-vous été incapable de vous souvenir de ce qui s'était passé la nuit précédente parce que vous aviez bu ? | 0-4 (fréquence) |
-| 9 | Blessures | Vous êtes-vous blessé ou avez-vous blessé quelqu'un parce que vous aviez bu ? | 0 / 2 / 4 |
-| 10 | Inquiétude de l'entourage | Un parent, un ami, un médecin ou un autre professionnel de santé s'est-il déjà préoccupé de votre consommation d'alcool et vous a-t-il conseillé de la diminuer ? | 0 / 2 / 4 |
+*Aucun intitulé court (eyebrow) : la source primaire n'en a pas. L'app affiche la question seule (arbitrage du 24/09/2026).*
+
+| # | Question | Modalités |
+|---|----------|-----------|
+| 1 | Combien de fois vous arrive-t-il de consommer de l'alcool ? | 0-4 (fréquence conso) |
+| 2 | Combien de verres standards buvez-vous au cours d'une journée ordinaire où vous buvez de l'alcool ? | 0-4 (quantité) |
+| 3 | Au cours d'une même occasion, combien de fois vous arrive-t-il de boire six verres standards ou plus ? | 0-4 (fréquence) |
+| 4 | Combien de fois avez-vous observé que vous n'étiez plus capable de vous arrêter de boire après avoir commencé ? | 0-4 (fréquence) |
+| 5 | Combien de fois le fait d'avoir bu de l'alcool vous a-t-il empêché de faire ce qu'on attendait normalement de vous ? | 0-4 (fréquence) |
+| 6 | Combien de fois, après une période de forte consommation, avez-vous dû boire de l'alcool dès le matin pour vous remettre en forme ? | 0-4 (fréquence) |
+| 7 | Combien de fois avez-vous eu un sentiment de culpabilité ou de regret après avoir bu ? | 0-4 (fréquence) |
+| 8 | Combien de fois avez-vous été incapable de vous souvenir de ce qui s'était passé la nuit précédente parce que vous aviez bu ? | 0-4 (fréquence) |
+| 9 | Vous êtes-vous blessé ou avez-vous blessé quelqu'un parce que vous aviez bu ? | 0 / 2 / 4 |
+| 10 | Un parent, un ami, un médecin ou un autre professionnel de santé s'est-il déjà préoccupé de votre consommation d'alcool et vous a-t-il conseillé de la diminuer ? | 0 / 2 / 4 |
 
 ---
 
@@ -257,3 +259,4 @@ scoreAudit(scale, responses) → {
 |------|--------|--------------|
 | 15/07/2026 | Adrien (avec Claude) | Création de l'échelle AUDIT : entrée `Scale` dans `packages/core` (`formType: "options"`, 10 items), scorer `audit.ts` (somme 0-40) + enregistrement, icône placeholder, spec. Items FR issus de la version OMS officielle (auditscreen.org), cross-checkés OFDT/SFA. Seuils SFA 2015 rendus en 3 bandes sexe-neutres (onset ≥ 6) — sexe-spécificité à valider. Flyer Addict'AIDE écarté (erreurs de libellés). Nouvelle catégorie « Addictions ». |
 | 24/07/2026 | Clément (avec Claude) | **Recette comparative navigateur vs Mentaal (INTERROMPUE, à reprendre).** Parcours patient Mentaal déroulé en entier, comparé item par item à notre version + à la source auditscreen.org. Constat : Mentaal ≈ reprise verbatim de auditscreen.org (imperfections comprises) ; notre version = même source éditée. Ajout du tableau de comparaison en §2. Principal écart à trancher : **préfixe « Dans les douze derniers mois » sur items 4-8** (présent source + Mentaal, retiré chez nous → §10 pt 5). Nos libellés d'items **confirmés conformes** à la source primaire (le doute sur l'attribution est levé). Nouveaux points 5-8 en §10. Scoring non comparé (score masqué au patient des deux côtés). |
+| 24/09/2026 | Clément (avec Claude) | Intitulés courts (eyebrows) retirés des 10 items : absents de la source primaire auditscreen.org. Chaque item n'a plus qu'un `title` = la question ; texte des questions inchangé. |
