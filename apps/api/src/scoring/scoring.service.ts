@@ -12,6 +12,7 @@ import { scoreAudit } from './scorers/audit';
 import { scorePdeq } from './scorers/pdeq';
 import { scoreEii } from './scorers/eii';
 import { scoreCuditR } from './scorers/cudit';
+import { scoreFtnd } from './scorers/ftnd';
 import { scoreHsps } from './scorers/hsps';
 import { scoreQia } from './scorers/qia';
 
@@ -30,6 +31,7 @@ const SCORERS: Record<string, Scorer> = {
   pdeq: scorePdeq,
   eii: scoreEii,
   'cudit-r': scoreCuditR,
+  ftnd: scoreFtnd,
   hsps: scoreHsps,
   qia: scoreQia,
 };

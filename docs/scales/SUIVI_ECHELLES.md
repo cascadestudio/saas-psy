@@ -4,10 +4,14 @@
 > disponible de Mentaal** sur le périmètre libre de droits, et rester devant sur
 > les échelles qu'ils n'ont pas. La partie 2 conserve le benchmark Mentaal figé
 > (extraction 2026-07-15) qui a servi à prioriser.
+>
+> **Miroir Linear** : ce tableau est répliqué dans Linear (projet *Catalogue
+> d'échelles*, une issue par échelle) pour l'équipe non-dev. Tout changement de
+> statut se reporte des deux côtés — correspondance dans `RECETTE_PLAYBOOK.md` §6 bis.
 
 ## Tableau de bord
 
-**✅ 7 validées · 🔵 7 implémentées · 🚧 0 en cours · 📋 10 prévues · 🔍 22 à instruire · ⬜ 26 non planifiées · 🚫 12 écartées**
+**✅ 7 validées · 🔵 8 implémentées · 🚧 0 en cours · 📋 9 prévues · 🔍 22 à instruire · ⬜ 26 non planifiées · 🚫 12 écartées**
 
 **Rattrapage Mentaal : 13/42.** Le plafond n'est pas 74 : sur leur catalogue
 disponible, 12 sont écartées d'office (payantes, outils maison Mentaal, ou
@@ -52,6 +56,7 @@ source primaire avant intégration**), ⚠️ = incertain, 💰 = payant.
 | IUS | Intolérance à l'incertitude | 🔵 | ✅ | 🟢 A | #26 | porté sous l'id **EII** — score brut 27-135 sans bandes (aucun cutoff établi) + sous-scores bifactoriels |
 | PDEQ | Dissociation péritraumatique | 🔵 | ✅ | 🟢 A | #59 | seuil ≥ 15 (fiche Cn2r) |
 | CUDIT-R | Troubles liés au cannabis | 🔵 | ✅ | 🟢 A | #70 | question-porte « 6 derniers mois » portée en consigne ; seuils 8-10 / > 10 (RESPADD) |
+| FTND | Dépendance à la nicotine (Fagerström) | 🔵 | ✅ | 🟢 A | Bientôt · 29 v. | **Melya devant Mentaal** ; seuils HAS 2014, options dans l'ordre du PDF HAS, sans intitulés courts ni consigne (absents de la source) ; implémenté en réutilisation (patron CUDIT-R) le 24/09/2026 |
 | ASRS | TDAH adulte | 📋 (1) | ✅ OMS | 🟡 B | #3 | `criteriaCheck` façon PCL-5 ; motif le + demandé |
 | DES | Expériences dissociatives | 📋 (3) | ✅ | 🟠 C | Bientôt · 130 v. | #1 des votes ; widget de réponse 0–100 à créer |
 | EPDS | Dépression périnatale (Édimbourg) | 📋 (4) | ✅ | 🟢 A | Bientôt · 96 v. | alerte item 10 (idéation) façon PHQ-9 |
@@ -59,7 +64,6 @@ source primaire avant intégration**), ⚠️ = incertain, 💰 = payant.
 | ATQ | Pensées automatiques | 📋 (6) | ✅ | 🟢 A | Bientôt · 77 v. | |
 | PDSS | Sévérité du trouble panique | 📋 (7) | ✅ | 🟢 A | Bientôt · 62 v. | |
 | DERS | Régulation émotionnelle | 📋 (8) | ✅ | 🟡 B | #14 | reverse + subscores |
-| FTND | Dépendance à la nicotine (Fagerström) | 📋 (9) | ✅ | — | Bientôt · 29 v. | complète le motif addictions |
 | TAS-20 | Alexithymie de Toronto | 📋 (10) | ✅ | 🟡 B | #37 | reverse + 3 subscores |
 | LEC-5 | Liste des événements de vie (DSM-5) | 📋 (11) | ✅ NCPTSD | 🟠 C | Absent | couplée à la PCL-5 en clinique (identification de l'événement de référence) — cf. `pcl-5/pcl-5.md` §13 ; pas de score : 17 événements × 6 modalités (vécu / témoin / appris / cadre pro / pas sûr / sans objet) → widget multi-choix par item à créer ; VF Cn2r à sourcer ; priorité à rediscuter avec Renata |
 | ASQ-SF | Styles d'attachement | 🔍 | ⚠️ | — | #10 | |

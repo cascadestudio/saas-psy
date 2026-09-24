@@ -1315,6 +1315,91 @@ export const scales: Scale[] = [
     },
   },
   {
+    id: "ftnd",
+    acronym: "FTND",
+    label: "Test de Fagerström en six questions",
+    icon: "/images/scales/ftnd.svg",
+    color: "#A97BA5",
+    colorLight: "#D6BDD3",
+    formType: "options",
+    title: "FTND - Test de Fagerström en six questions",
+    description:
+      "Un questionnaire de 6 items évaluant le degré de dépendance physique à la nicotine chez les fumeurs de cigarettes",
+    category: "Addictions",
+    estimatedTime: "2 minutes",
+    longDescription:
+      "Le test de Fagerström (Fagerström Test for Nicotine Dependence, Heatherton et al., 1991) est un auto-questionnaire de 6 items évaluant le degré de dépendance physique à la nicotine. Il est notamment utilisé pour orienter le choix et le dosage des substituts nicotiniques. Les items 1 et 4 sont cotés de 0 à 3, les items 2, 3, 5 et 6 de 0 à 1 ; le score total varie de 0 à 10. Interprétation selon la Haute Autorité de Santé (2014) : 0 à 2, pas de dépendance ; 3 à 4, dépendance faible ; 5 à 6, dépendance moyenne ; 7 à 10, dépendance forte ou très forte. Ce questionnaire s'adresse aux fumeurs de cigarettes.",
+    copyrightAttribution:
+      "Heatherton TF, Kozlowski LT, Frecker RC, Fagerström KO, 1991 — version française : Haute Autorité de Santé, 2014",
+    higherIsBetter: false,
+    // Pas de `prompt` : la source HAS n'a pas d'intitulé court par item, la
+    // question s'affiche seule. Options dans l'ordre du PDF HAS (a, b, c, d),
+    // qui n'est pas l'ordre des valeurs — ne pas trier.
+    questions: [
+      {
+        title:
+          "Le matin, combien de temps après être réveillé(e), fumez-vous votre première cigarette ?",
+        options: [
+          { value: 3, text: "Dans les 5 minutes" },
+          { value: 2, text: "6 - 30 minutes" },
+          { value: 1, text: "31 - 60 minutes" },
+          { value: 0, text: "Plus de 60 minutes" },
+        ],
+      },
+      {
+        title:
+          "Trouvez-vous qu'il est difficile de vous abstenir de fumer dans les endroits où c'est interdit ? (ex. : cinémas, bibliothèques)",
+        options: [
+          { value: 1, text: "Oui" },
+          { value: 0, text: "Non" },
+        ],
+      },
+      {
+        title: "À quelle cigarette renonceriez-vous le plus difficilement ?",
+        options: [
+          { value: 1, text: "À la première de la journée" },
+          { value: 0, text: "À une autre" },
+        ],
+      },
+      {
+        title: "Combien de cigarettes fumez-vous par jour, en moyenne ?",
+        options: [
+          { value: 0, text: "10 ou moins" },
+          { value: 1, text: "11 à 20" },
+          { value: 2, text: "21 à 30" },
+          { value: 3, text: "31 ou plus" },
+        ],
+      },
+      {
+        title:
+          "Fumez-vous à intervalles plus rapprochés durant les premières heures de la matinée que durant le reste de la journée ?",
+        options: [
+          { value: 1, text: "Oui" },
+          { value: 0, text: "Non" },
+        ],
+      },
+      {
+        title:
+          "Fumez-vous lorsque vous êtes malade au point de devoir rester au lit presque toute la journée ?",
+        options: [
+          { value: 1, text: "Oui" },
+          { value: 0, text: "Non" },
+        ],
+      },
+    ],
+    scoring: {
+      ranges: [
+        { min: 0, max: 2, interpretation: "Pas de dépendance" },
+        { min: 3, max: 4, interpretation: "Dépendance faible" },
+        { min: 5, max: 6, interpretation: "Dépendance moyenne" },
+        { min: 7, max: 10, interpretation: "Dépendance forte ou très forte" },
+      ],
+      maxScore: 10,
+      method:
+        "Additionnez les scores des 6 items (items 1 et 4 : 0-3 ; items 2, 3, 5 et 6 : 0-1). Le score total varie de 0 à 10. Seuils HAS (2014) : 0-2 pas de dépendance ; 3-4 dépendance faible ; 5-6 dépendance moyenne ; 7-10 dépendance forte ou très forte.",
+    },
+  },
+  {
     id: "hsps",
     acronym: "HSPS",
     label: "Questionnaire d'hypersensibilité d'Elaine Aron",
