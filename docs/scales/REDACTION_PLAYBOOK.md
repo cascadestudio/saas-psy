@@ -49,9 +49,9 @@ référence.
 
 | Rôle | Personne | Périmètre | Support de travail |
 | --- | --- | --- | --- |
-| **Pilote / relecteur unique** | Clément | Choisit les échelles, relit **toutes** les fiches, vérifie les sources, arbitre les divergences, fait la recette staging, passe les statuts dans `SUIVI_ECHELLES.md` | repo |
+| **Pilote / relecteur unique** | Clément | Choisit les échelles, relit **toutes** les fiches, vérifie les sources, arbitre les divergences, **implémente (avec Claude) les échelles en réutilisation pure** (cf. `RECETTE_PLAYBOOK.md` §0), fait la recette staging, passe les statuts dans `SUIVI_ECHELLES.md` **et Linear** | repo + Linear |
 | **Rédacteur hors repo** | James | Instruction des droits + fiche complète §1→§9 | Google Docs + dossier Drive (cf. §9) |
-| **Rédacteur repo + implémentation** | Adrien | Fiche complète §1→§9 **puis** implémentation `packages/core` + scorer une fois la fiche relue | repo (`docs/scales/{id}/`) |
+| **Rédacteur repo + implémentation** | Adrien | Fiche complète §1→§9 **puis** implémentation `packages/core` + scorer une fois la fiche relue — pour les échelles **net-new** (nouveau composant ou comportement) | repo (`docs/scales/{id}/`) |
 | **Validation clinique** | Renata (référente) | Tranche les points de §10 en session groupée | — |
 
 **Règle de séparation** : le rédacteur ne valide jamais sa propre fiche. Un
@@ -74,7 +74,8 @@ E1  Instruction droits Rédacteur → Note de droits (§3)          → GO / STO
 E2  Dossier de sources Rédacteur → PDF archivés + §2 remplie    → GO / STOP
 E3  Rédaction fiche    Rédacteur → §1 à §9 + §10 (questions)
 E4  Relecture          Clément   → corrections, arbitrages, § validés
-E5  Implémentation     Adrien    → packages/core + scorer (RECETTE_PLAYBOOK.md)
+E5  Implémentation     Clément (réutilisation pure) ou Adrien (net-new)
+                                 → packages/core + scorer (RECETTE_PLAYBOOK.md)
 E6  Recette            Clément   → parcours patient complet → statut ✅
 ```
 
@@ -85,6 +86,12 @@ la même échelle découverte payante en E5 coûte une implémentation entière.
 **Statuts dans `SUIVI_ECHELLES.md`** : le rédacteur passe la ligne en
 `🚧 (E2 · James)` / `🚧 (E3 · Adrien)` dès qu'il commence, pour éviter que deux
 personnes instruisent la même échelle. Clément passe en 🔵 puis ✅.
+
+**Linear** : le tableau est répliqué dans Linear (projet *Catalogue d'échelles*,
+une issue par échelle) pour l'équipe non-dev. Tout changement de statut se
+reporte **aussi** sur l'issue Linear, dans la même session — correspondance des
+statuts dans `RECETTE_PLAYBOOK.md` §6 bis. James, qui ne touche pas au repo,
+met à jour l'issue Linear et Clément reporte dans le markdown.
 
 ---
 
@@ -427,14 +434,18 @@ Même playbook, avec trois différences.
   type (le cas DASS-21 : `Subscore` ne porte pas de `ranges`) fait partie de
   la recherche, pas de l'implémentation.
 
-**Ton lot** : les échelles à net-new technique, pour que la fiche et
-l'anticipation de la brique soient faites par la même personne — **ASRS**
+**Ton lot** : les échelles à net-new technique (les échelles en réutilisation
+pure sont implémentées par Clément, cf. `RECETTE_PLAYBOOK.md` §0), pour que la
+fiche et l'anticipation de la brique soient faites par la même personne — **ASRS**
 (`criteriaCheck` façon PCL-5), **DES** (widget de réponse 0–100 à créer),
 **DASS-21** (sévérité par sous-échelle), **DERS**, **TAS-20**.
 
-**Piste outillage, hors fiches** : il n'existe aujourd'hui aucun test
-automatisé sur les 15 scorers de `apps/api/src/scoring/scorers/`, alors que
-chaque fiche porte déjà en §9 un jeu de cas de test écrit à la main. Câbler la
+**Piste outillage, hors fiches** : seul le scorer FTND a un test automatisé
+(`ftnd.spec.ts`, cas §9 rejoués) ; les 15 autres scorers de
+`apps/api/src/scoring/scorers/` n'en ont pas, alors que chaque fiche porte déjà
+en §9 un jeu de cas de test écrit à la main. Même chose pour la validation
+serveur des réponses : aucun scorer ne rejette une entrée invalide (une valeur
+manquante compte pour 0) — chantier transverse, à arbitrer avec Clément. Câbler la
 §9 en tests exécutés en CI transformerait une vérification manuelle répétée de
 Clément en garde-fou permanent, et attraperait toute régression de seuil. À
 arbitrer avec lui — ça ne passe pas avant les fiches.
@@ -446,3 +457,4 @@ arbitrer avec lui — ça ne passe pas avant les fiches.
 | Date | Auteur | Modification |
 | --- | --- | --- |
 | 28/08/2026 | Clément (avec Claude) | Création. Formalise le passage d'un rédacteur unique (Clément) à trois rédacteurs (Clément relecteur, James hors repo, Adrien en repo) : pipeline E0→E6, règles d'or, instruction des droits, dossier de sources, 4 déviations autorisées, points STOP, grille de relecture, lots initiaux. |
+| 24/09/2026 | Clément (avec Claude) | Implémentation partagée : Clément implémente les échelles en réutilisation pure, Adrien le net-new (`RECETTE_PLAYBOOK.md` §0). Statuts reportés aussi dans Linear. |
