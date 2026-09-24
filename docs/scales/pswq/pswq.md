@@ -267,7 +267,7 @@ scorePswq(scale, responses) → {
 - `formType: "single-scale"`, `reverseItems: [1, 3, 8, 10, 11]`, clés de réponse `intensity_0 … intensity_15`.
 - Inversion sur échelle 1–5 : `6 − v` (≠ RSES qui est `5 − v`).
 - Scorer `apps/api/src/scoring/scorers/pswq.ts` (fonction `scorePswq`), enregistré sous la clé `qips` (id historique de l'échelle) dans `ScoringService`.
-- Icône : `apps/web/public/images/scales/pswq.svg` — ⚠️ **placeholder** (copie de `gad-7.svg`, identique à la catégorie « Anxiété généralisée ») à remplacer par un doodle dédié.
+- Domaine : `anxiete` (la couleur de la tuile en dérive, cf. `apps/web/lib/scale-appearance.ts`).
 
 ---
 

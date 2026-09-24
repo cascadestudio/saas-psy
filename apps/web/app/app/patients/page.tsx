@@ -1,6 +1,5 @@
 "use client";
 
-import { Card, CardContent } from "@/components/ui/card";
 import { useUser } from "@/app/context/UserContext";
 import { useEffect, useState } from "react";
 import {
@@ -124,38 +123,34 @@ export default function PatientsPage() {
         ))}
       </div>
 
-      <Card className="border-0 bg-muted-foreground/5 shadow-none hover:shadow-none">
-        <CardContent className="p-4">
-          {displayPatients.length === 0 ? (
-            <p className="text-sm text-muted-foreground text-center py-8">
-              {filter === "active"
-                ? "Aucune passation en cours"
-                : filter === "archived"
-                  ? "Aucun·e patient·e archivé·e"
-                  : "Aucun·e patient·e dans votre liste"}
-            </p>
-          ) : (
-            <div className="rounded-lg overflow-hidden">
-              {displayPatients.map((patient) => (
-                <PatientRow
-                  key={patient.id}
-                  patient={patient}
-                  href={`/app/patients/${patient.id}`}
-                  onSendClick={(e) => {
-                    e.preventDefault();
-                    if (!user) {
-                      openAuthGate();
-                      return;
-                    }
-                    setSendScalePatientId(patient.id);
-                    setSendScaleOpen(true);
-                  }}
-                />
-              ))}
-            </div>
-          )}
-        </CardContent>
-      </Card>
+      {displayPatients.length === 0 ? (
+        <p className="text-sm text-muted-foreground text-center py-8">
+          {filter === "active"
+            ? "Aucune passation en cours"
+            : filter === "archived"
+              ? "Aucun·e patient·e archivé·e"
+              : "Aucun·e patient·e dans votre liste"}
+        </p>
+      ) : (
+        <div className="space-y-1.5">
+          {displayPatients.map((patient) => (
+            <PatientRow
+              key={patient.id}
+              patient={patient}
+              href={`/app/patients/${patient.id}`}
+              onSendClick={(e) => {
+                e.preventDefault();
+                if (!user) {
+                  openAuthGate();
+                  return;
+                }
+                setSendScalePatientId(patient.id);
+                setSendScaleOpen(true);
+              }}
+            />
+          ))}
+        </div>
+      )}
 
       <SendScaleSheet
         open={sendScaleOpen}

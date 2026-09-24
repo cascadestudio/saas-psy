@@ -187,7 +187,8 @@ function AppShell({ children }: { children: React.ReactNode }) {
           </DropdownMenu>
         </div>
 
-        {user && !pathname.startsWith("/app/settings") && (
+        {/* Masquée sur le catalogue d'échelles, qui a sa propre recherche (filtre de grille). */}
+        {user && !pathname.startsWith("/app/settings") && pathname !== "/app/echelles" && (
           <div className="container mx-auto px-4 pt-6 print:hidden">
             <GlobalSearchBar />
           </div>

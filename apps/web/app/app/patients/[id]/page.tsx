@@ -3,7 +3,6 @@
 import { useParams, useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Card, CardContent } from "@/components/ui/card";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -266,26 +265,20 @@ export default function PatientDetailPage() {
               )}
             </div>
           ) : (
-            <Card className="border-0 bg-muted-foreground/5 shadow-none hover:shadow-none">
-              <CardContent className="p-4">
-                <div className="rounded-lg overflow-hidden">
-                  {sessions.map((session) => (
-                    <SessionRow
-                      key={session.id}
-                      session={session}
-                      secondaryText={relativeDayLabel(session.createdAt)}
-                      rightLabel={
-                        session.status === "COMPLETED"
-                          ? typeof session.interpretation === "string"
-                            ? session.interpretation
-                            : undefined
-                          : relativeDayLabel(session.sentAt ?? session.createdAt)
-                      }
-                    />
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
+            <div className="space-y-1.5">
+              {sessions.map((session) => (
+                <SessionRow
+                  key={session.id}
+                  session={session}
+                  secondaryText={relativeDayLabel(session.createdAt)}
+                  rightLabel={
+                    typeof session.interpretation === "string"
+                      ? session.interpretation
+                      : undefined
+                  }
+                />
+              ))}
+            </div>
           )}
         </div>
       </div>

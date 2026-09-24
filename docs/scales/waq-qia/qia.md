@@ -162,7 +162,7 @@ Vérifiés dans le script de recette (40/40 PASS, 16/07/2026).
 - `formType: "options"`, clés `option_0 … option_9` + `worry_themes` (string).
 - `Scale.openingTextItem` (nouveau champ core) relayé par `sessions.service.ts` et `session/[sessionId]/page.tsx` ; composant `OpeningTextQuestion.tsx` ; phase `opening-text` dans `SessionRunner` (progress bar masquée, back intro↔texte↔items) ; affichage praticien dans `ItemResponsesList`.
 - Scorer `apps/api/src/scoring/scorers/qia.ts` (somme + criteriaCheck), id `qia` dans `ScoringService`.
-- Icône : `qia.svg` — ⚠️ placeholder (copie de `gad-7.svg`).
+- Domaine : `anxiete` (la couleur de la tuile en dérive, cf. `apps/web/lib/scale-appearance.ts`).
 
 ---
 

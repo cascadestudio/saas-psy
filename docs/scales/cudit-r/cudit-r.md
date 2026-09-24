@@ -148,7 +148,7 @@ Vérifiés dans le script de recette (40/40 PASS, 16/07/2026).
 - `formType: "options"`, clés `option_0 … option_7`.
 - Chaque item n'a qu'un `title` = la question, sans `prompt` (pas d'eyebrow).
 - Scorer `apps/api/src/scoring/scorers/cudit.ts`, id `cudit-r` dans `ScoringService`.
-- Icône : `cudit-r.svg` — ⚠️ placeholder (copie de `audit.svg`, catégorie Addictions).
+- Domaine : `addictions` (la couleur de la tuile en dérive, cf. `apps/web/lib/scale-appearance.ts`).
 
 ---
 

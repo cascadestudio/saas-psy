@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { notFound } from "next/navigation";
 import { PortableText } from "@portabletext/react";
 
@@ -9,6 +8,7 @@ import { CtaButton } from "@/components/landing/cta-button";
 import { questionCount } from "@/app/utils/utils";
 import { allScaleSlugs, getScaleBySlug } from "@/lib/scale-slug";
 import { getScaleLandingPage } from "@/sanity/lib/queries";
+import { DomainDot } from "@/components/scale/ScaleTag";
 
 export const revalidate = 60;
 
@@ -82,23 +82,10 @@ export default async function ScaleLandingPage({
       <main>
         <section className="px-4 pt-16 pb-12">
           <div className="mx-auto max-w-3xl">
-            <div className="flex items-center gap-4">
-              <div
-                className="flex aspect-square h-16 items-center justify-center rounded-2xl"
-                style={{ backgroundColor: scale.color }}
-              >
-                <Image
-                  src={scale.icon}
-                  alt=""
-                  width={40}
-                  height={40}
-                  className="h-9 w-9 object-contain"
-                />
-              </div>
-              <span className="text-sm font-medium text-muted-foreground">
-                {scale.category}
-              </span>
-            </div>
+            <span className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground">
+              <DomainDot domain={scale.domain} />
+              {scale.category}
+            </span>
 
             <h1 className="mt-8 font-title text-4xl md:text-5xl">{heading}</h1>
             <p className="mt-6 whitespace-pre-line text-lg text-muted-foreground">

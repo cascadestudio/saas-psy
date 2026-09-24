@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { scales } from "@melya/core";
 
@@ -7,6 +6,7 @@ import { Navbar } from "@/components/landing/navbar";
 import { Footer } from "@/components/landing/footer";
 import { questionCount } from "@/app/utils/utils";
 import { scaleSlug } from "@/lib/scale-slug";
+import { ScaleTag } from "@/components/scale/ScaleTag";
 
 export const revalidate = 60;
 
@@ -37,23 +37,11 @@ export default function ScalesIndexPage() {
               <li key={scale.id}>
                 <Link
                   href={`/echelles/${scaleSlug(scale)}`}
-                  className="flex h-full gap-4 rounded-2xl border p-5 transition-colors hover:bg-surface-brand-bg"
+                  className="block h-full rounded-2xl border p-5 transition-colors hover:bg-surface-brand-bg"
                 >
-                  <div
-                    className="flex aspect-square h-12 shrink-0 items-center justify-center rounded-xl"
-                    style={{ backgroundColor: scale.color }}
-                  >
-                    <Image
-                      src={scale.icon}
-                      alt=""
-                      width={28}
-                      height={28}
-                      className="h-7 w-7 object-contain"
-                    />
-                  </div>
                   <div className="min-w-0">
                     <h2 className="font-medium">
-                      {scale.acronym}
+                      <ScaleTag domain={scale.domain} acronym={scale.acronym} />
                       <span className="ml-2 text-sm text-muted-foreground">
                         {scale.category}
                       </span>

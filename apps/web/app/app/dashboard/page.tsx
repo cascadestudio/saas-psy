@@ -13,7 +13,6 @@ import {
 } from "@/lib/api-client";
 import { Interfaces, Arrow } from "doodle-icons";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import { CreatePatientSheet } from "@/components/CreatePatientSheet";
 import { SendScaleSheet } from "@/components/SendScaleSheet";
 import { MOCK_PATIENTS, MOCK_SESSIONS } from "@/lib/mock-data";
@@ -178,26 +177,21 @@ export default function DashboardPage() {
               Vos passations en cours apparaîtront ici.
             </p>
           ) : (
-            <Card className="border-0 bg-muted-foreground/5 shadow-none hover:shadow-none">
-              <CardContent className="p-4">
-                <div className="rounded-lg overflow-hidden">
-                  {inProgress.map((s) => (
-                    <SessionRow
-                      key={s.id}
-                      session={s}
-                      primaryText={
-                        s.patient
-                          ? `${s.patient.firstName} ${s.patient.lastName}`
-                          : "Patient"
-                      }
-                      secondaryText={relativeDayLabel(s.createdAt)}
-                      rightLabel={relativeDayLabel(s.sentAt ?? s.createdAt)}
-                      relaunch={isToRelaunch(s)}
-                    />
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
+            <div className="space-y-1.5">
+              {inProgress.map((s) => (
+                <SessionRow
+                  key={s.id}
+                  session={s}
+                  primaryText={
+                    s.patient
+                      ? `${s.patient.firstName} ${s.patient.lastName}`
+                      : "Patient"
+                  }
+                  secondaryText={relativeDayLabel(s.createdAt)}
+                  relaunch={isToRelaunch(s)}
+                />
+              ))}
+            </div>
           )}
         </section>
 
@@ -213,25 +207,21 @@ export default function DashboardPage() {
               Aucun résultat récent.
             </p>
           ) : (
-            <Card className="border-0 bg-muted-foreground/5 shadow-none hover:shadow-none">
-              <CardContent className="p-4">
-                <div className="rounded-lg overflow-hidden">
-                  {recentResults.map((s) => (
-                    <SessionRow
-                      key={s.id}
-                      session={s}
-                      primaryText={
-                        s.patient
-                          ? `${s.patient.firstName} ${s.patient.lastName}`
-                          : "Patient"
-                      }
-                      secondaryText={relativeDayLabel(s.completedAt ?? s.createdAt)}
-                      rightLabel={typeof s.interpretation === "string" ? s.interpretation : undefined}
-                    />
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
+            <div className="space-y-1.5">
+              {recentResults.map((s) => (
+                <SessionRow
+                  key={s.id}
+                  session={s}
+                  primaryText={
+                    s.patient
+                      ? `${s.patient.firstName} ${s.patient.lastName}`
+                      : "Patient"
+                  }
+                  secondaryText={relativeDayLabel(s.completedAt ?? s.createdAt)}
+                  rightLabel={typeof s.interpretation === "string" ? s.interpretation : undefined}
+                />
+              ))}
+            </div>
           )}
         </section>
 

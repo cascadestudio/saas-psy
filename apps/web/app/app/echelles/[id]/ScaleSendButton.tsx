@@ -14,7 +14,6 @@ export function ScaleSendButton({ scaleId }: ScaleSendButtonProps) {
   return (
     <>
       <Button
-        
         className="flex-shrink-0 ml-4 rounded-full text-base px-8"
         onClick={() => setOpen(true)}
       >

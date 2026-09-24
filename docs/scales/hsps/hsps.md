@@ -125,7 +125,7 @@ Vérifiés dans le script de recette (40/40 PASS, 16/07/2026).
 
 - `formType: "single-scale"`, clés `intensity_0 … intensity_22`, modalités Oui (1) / Non (0).
 - Scorer `apps/api/src/scoring/scorers/hsps.ts`, id `hsps` dans `ScoringService`.
-- Icône : `hsps.svg` — ⚠️ placeholder (copie de `rses.svg`). Couleur catégorie « Hypersensibilité » : `#7FA99B` / `#C2D6CE` (nouvelle).
+- Domaine : `hypersensibilite` (la couleur de la tuile en dérive, cf. `apps/web/lib/scale-appearance.ts`).
 
 ---
 

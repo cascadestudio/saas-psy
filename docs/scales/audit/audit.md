@@ -248,8 +248,7 @@ scoreAudit(scale, responses) → {
 - `formType: "options"`, clés de réponse `option_0 … option_9`.
 - Somme simple, aucune inversion. Scorer `apps/api/src/scoring/scorers/audit.ts`, enregistré sous l'id `audit` dans `ScoringService`.
 - Items 9-10 : modalités 0/2/4 (non contiguës) — portées dans les `options` de l'item.
-- Icône : `apps/web/public/images/scales/audit.svg` — ⚠️ **placeholder** (copie de `gad-7.svg`) à remplacer par un doodle « Addictions » dédié.
-- Couleur catégorie « Addictions » : `#A97BA5` / `#D6BDD3` (nouvelle catégorie, non présente auparavant).
+- Domaine : `addictions` (la couleur de la tuile en dérive, cf. `apps/web/lib/scale-appearance.ts`).
 
 ---
 

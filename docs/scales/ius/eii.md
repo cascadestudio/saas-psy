@@ -142,7 +142,7 @@ Vérifiés dans le script de recette (40/40 PASS, 16/07/2026).
 
 - `formType: "single-scale"`, clés `intensity_0 … intensity_26`, échelle 1-5.
 - Scorer `apps/api/src/scoring/scorers/eii.ts` (somme + 2 subscores), id `eii` dans `ScoringService`.
-- Icône : `eii.svg` — ⚠️ placeholder (copie de `gad-7.svg`).
+- Domaine : `anxiete` (la couleur de la tuile en dérive, cf. `apps/web/lib/scale-appearance.ts`).
 
 ---
 

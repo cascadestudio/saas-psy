@@ -30,13 +30,22 @@ export interface SectionIntro {
   description?: string;
 }
 
+/** Domaines cliniques (enum fermé). Plusieurs `category` peuvent partager un domaine. */
+export type ScaleDomain =
+  | "anxiete"
+  | "humeur"
+  | "trauma"
+  | "toc"
+  | "estime"
+  | "addictions"
+  | "hypersensibilite";
+
 export interface Scale {
   id: string;
   acronym: string;
   label: string;
-  icon: string;
-  color: string;
-  colorLight: string;
+  /** Domaine clinique : pilote la couleur de l'échelle dans l'UI (cf. apps/web/lib/scale-appearance). */
+  domain: ScaleDomain;
   formType: ScaleFormType;
   title: string;
   description: string;
@@ -116,9 +125,7 @@ export const scales: Scale[] = [
     id: "echelle-d-anxiete-sociale-de-liebowitz",
     acronym: "LSAS",
     label: "Échelle d'anxiété sociale de Liebowitz",
-    icon: "/images/scales/lsas.svg",
-    color: "#6A9BCC",
-    colorLight: "#B4CDE5",
+    domain: "anxiete",
     formType: "dual-scale",
     title: "LSAS - Échelle d'anxiété sociale de Liebowitz",
     description:
@@ -243,9 +250,7 @@ export const scales: Scale[] = [
     acronym: "SPIN",
     label: "Inventaire de phobie sociale",
     patientIntroSubtitle: null,
-    icon: "/images/scales/spin.svg",
-    color: "#6A9BCC",
-    colorLight: "#B4CDE5",
+    domain: "anxiete",
     formType: "single-scale",
     title: "SPIN - Inventaire de phobie sociale",
     description:
@@ -305,9 +310,7 @@ export const scales: Scale[] = [
     acronym: "PHQ-9",
     label: "Questionnaire sur la santé du patient",
     patientIntroSubtitle: "Questionnaire sur la santé du patient – 9",
-    icon: "/images/scales/phq-9.svg",
-    color: "#CBCADB",
-    colorLight: "#E5E4ED",
+    domain: "humeur",
     formType: "single-scale",
     title: "PHQ-9 - Questionnaire sur la santé du patient",
     description:
@@ -369,9 +372,7 @@ export const scales: Scale[] = [
     acronym: "GAD-7",
     label: "Trouble anxieux généralisé",
     patientIntroSubtitle: null,
-    icon: "/images/scales/gad-7.svg",
-    color: "#6A9BCC",
-    colorLight: "#B4CDE5",
+    domain: "anxiete",
     formType: "single-scale",
     title: "GAD-7 - Trouble anxieux généralisé",
     description:
@@ -421,9 +422,7 @@ export const scales: Scale[] = [
     id: "qips",
     acronym: "PSWQ",
     label: "Questionnaire sur les inquiétudes du Penn State",
-    icon: "/images/scales/pswq.svg",
-    color: "#6A9BCC",
-    colorLight: "#B4CDE5",
+    domain: "anxiete",
     formType: "single-scale",
     title: "PSWQ - Questionnaire sur les inquiétudes du Penn State",
     description:
@@ -487,9 +486,7 @@ export const scales: Scale[] = [
     acronym: "PCL-5",
     label: "Liste de vérification du TSPT",
     patientIntroSubtitle: null,
-    icon: "/images/scales/pcl-5.svg",
-    color: "#C46686",
-    colorLight: "#E1B2C2",
+    domain: "trauma",
     formType: "single-scale",
     title: "PCL-5 - Liste de vérification du TSPT",
     description:
@@ -558,9 +555,7 @@ export const scales: Scale[] = [
     id: "index-symptomes-ybocs",
     acronym: "Y-BOCS",
     label: "Échelle d'obsession-compulsion de Yale-Brown",
-    icon: "/images/scales/y-bocs.svg",
-    color: "#BCD1CA",
-    colorLight: "#DDE8E4",
+    domain: "toc",
     formType: "options",
     title: "Y-BOCS - Échelle d'obsession-compulsion de Yale-Brown",
     description:
@@ -826,9 +821,7 @@ export const scales: Scale[] = [
     id: "rses",
     acronym: "RSES",
     label: "Échelle d'estime de soi de Rosenberg",
-    icon: "/images/scales/rses.svg",
-    color: "#E7BC92",
-    colorLight: "#F5DFC5",
+    domain: "estime",
     formType: "single-scale",
     title: "RSES - Échelle d'estime de soi de Rosenberg",
     description:
@@ -884,9 +877,7 @@ export const scales: Scale[] = [
     acronym: "AUDIT",
     label: "Test de repérage des troubles liés à l'usage de l'alcool",
     patientIntroSubtitle: null,
-    icon: "/images/scales/audit.svg",
-    color: "#A97BA5",
-    colorLight: "#D6BDD3",
+    domain: "addictions",
     formType: "options",
     title: "AUDIT - Test de repérage des troubles liés à l'usage de l'alcool",
     description:
@@ -1033,9 +1024,7 @@ export const scales: Scale[] = [
     id: "pdeq",
     acronym: "PDEQ",
     label: "Questionnaire sur les expériences de dissociation péritraumatique",
-    icon: "/images/scales/pdeq.svg",
-    color: "#C46686",
-    colorLight: "#E1B2C2",
+    domain: "trauma",
     formType: "single-scale",
     title: "PDEQ - Questionnaire sur les expériences de dissociation péritraumatique",
     description:
@@ -1093,9 +1082,7 @@ export const scales: Scale[] = [
     id: "eii",
     acronym: "ÉII",
     label: "Échelle d'intolérance à l'incertitude",
-    icon: "/images/scales/eii.svg",
-    color: "#6A9BCC",
-    colorLight: "#B4CDE5",
+    domain: "anxiete",
     formType: "single-scale",
     title: "ÉII - Échelle d'intolérance à l'incertitude",
     description:
@@ -1168,9 +1155,7 @@ export const scales: Scale[] = [
     acronym: "CUDIT-R",
     label: "Test de repérage des troubles liés à l'usage du cannabis",
     patientIntroSubtitle: "Cannabis Use Disorder Identification Test - Revised (CUDIT-R-Fr)",
-    icon: "/images/scales/cudit-r.svg",
-    color: "#A97BA5",
-    colorLight: "#D6BDD3",
+    domain: "addictions",
     formType: "options",
     title: "CUDIT-R - Test de repérage des troubles liés à l'usage du cannabis",
     description:
@@ -1300,9 +1285,7 @@ export const scales: Scale[] = [
     id: "ftnd",
     acronym: "FTND",
     label: "Test de Fagerström en six questions",
-    icon: "/images/scales/ftnd.svg",
-    color: "#A97BA5",
-    colorLight: "#D6BDD3",
+    domain: "addictions",
     formType: "options",
     title: "FTND - Test de Fagerström en six questions",
     description:
@@ -1386,9 +1369,7 @@ export const scales: Scale[] = [
     acronym: "HSPS",
     label: "Questionnaire d'hypersensibilité d'Elaine Aron",
     patientIntroSubtitle: null,
-    icon: "/images/scales/hsps.svg",
-    color: "#7FA99B",
-    colorLight: "#C2D6CE",
+    domain: "hypersensibilite",
     formType: "single-scale",
     title: "HSPS - Questionnaire d'hypersensibilité d'Elaine Aron",
     description:
@@ -1455,9 +1436,7 @@ export const scales: Scale[] = [
     id: "qia",
     acronym: "QIA",
     label: "Questionnaire sur l'inquiétude et l'anxiété",
-    icon: "/images/scales/qia.svg",
-    color: "#6A9BCC",
-    colorLight: "#B4CDE5",
+    domain: "anxiete",
     formType: "options",
     title: "QIA - Questionnaire sur l'inquiétude et l'anxiété",
     description:

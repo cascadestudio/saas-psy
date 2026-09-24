@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Image from "next/image";
+import { ScaleTag } from "@/components/scale/ScaleTag";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import { scales } from "@/app/scalesData";
@@ -18,6 +18,19 @@ export function relativeDayLabel(dateStr: string) {
   return `il y a ${d} j`;
 }
 
+// Statut d'une passation non complétée, en texte (pas de badge : on réserve les
+// badges à ce qui demande une action, cf. « À relancer » et les alertes).
+function pendingStatusText(session: Session) {
+  switch (session.status) {
+    case "SENT":
+      return `Envoyée ${relativeDayLabel(session.sentAt ?? session.createdAt)}`;
+    case "STARTED":
+      return `Commencée ${relativeDayLabel(session.startedAt ?? session.sentAt ?? session.createdAt)}`;
+    default:
+      return SESSION_STATUS_CONFIG[session.status]?.label ?? session.status;
+  }
+}
+
 export function SessionRow({
   session,
   primaryText,
@@ -28,47 +41,47 @@ export function SessionRow({
   session: Session;
   primaryText?: string;
   secondaryText: string;
+  /** Texte à droite pour une passation complétée sans score numérique. */
   rightLabel?: string;
   relaunch?: boolean;
 }) {
   const scale = scales.find((s) => s.id === session.scaleId);
-  const config = SESSION_STATUS_CONFIG[session.status as keyof typeof SESSION_STATUS_CONFIG];
   const alerts = session.score?.alerts ?? [];
   const criticalCount = alerts.filter((a) => a.severity === "critical").length;
   const warningCount = alerts.filter((a) => a.severity === "warning").length;
   const score = typeof session.score === "number" ? session.score : null;
   const unread = session.status === "COMPLETED" && !session.viewedAt;
+  const titleWeight = unread ? "font-bold" : "font-medium";
 
   return (
     <Link
       href={`/app/passation/${session.id}`}
-      className="flex items-center gap-3 px-3 py-2.5 border-t border-border/50 first:border-t-0 hover:bg-background/50 transition-colors"
+      className="relative flex items-center gap-3 overflow-hidden rounded-xl bg-muted-foreground/5 px-4 py-2.5 transition-colors hover:bg-muted-foreground/10"
     >
-      <div
-        className="flex items-center justify-center flex-shrink-0 rounded-md"
-        style={{
-          backgroundColor: scale?.color ?? "#e5e7eb",
-          width: 40,
-          height: 40,
-        }}
-      >
-        {scale?.icon && (
-          <Image
-            src={scale.icon}
-            alt={scale.acronym}
-            width={24}
-            height={24}
-            className="w-3/5 h-3/5 object-contain"
-          />
-        )}
-      </div>
+      {/* Non lu : liseré orange à gauche (forme distincte des points de domaine). */}
+      {unread && (
+        <span aria-label="Non lu" className="absolute inset-y-0 left-0 w-[3px] bg-primary" />
+      )}
       <div className="flex-1 min-w-0">
-        <p className="font-sans font-bold text-black leading-tight text-base">
-          {primaryText ?? scale?.acronym ?? session.scaleId}
-        </p>
-        <p className="text-xs text-muted-foreground leading-snug truncate">
-          {primaryText ? scale?.acronym ?? session.scaleId : secondaryText}
-        </p>
+        {primaryText ? (
+          <>
+            <p className={cn("font-sans text-black leading-tight text-base truncate", titleWeight)}>
+              {primaryText}
+            </p>
+            <p className="text-xs text-muted-foreground leading-snug mt-0.5">
+              <ScaleTag domain={scale?.domain} acronym={scale?.acronym ?? session.scaleId} />
+            </p>
+          </>
+        ) : (
+          <>
+            <p className={cn("font-sans text-black leading-tight text-base", titleWeight)}>
+              <ScaleTag domain={scale?.domain} acronym={scale?.acronym ?? session.scaleId} />
+            </p>
+            <p className="text-xs text-muted-foreground leading-snug truncate">
+              {secondaryText}
+            </p>
+          </>
+        )}
       </div>
       <div className="flex-shrink-0 flex items-center gap-3">
         {relaunch && (
@@ -77,14 +90,6 @@ export function SessionRow({
             className="pointer-events-none bg-fuchsia-100 text-fuchsia-700 ring-1 ring-fuchsia-500/30"
           >
             À relancer
-          </Badge>
-        )}
-        {unread && (
-          <Badge
-            variant="secondary"
-            className="pointer-events-none bg-violet-100 text-violet-700"
-          >
-            Non lu
           </Badge>
         )}
         {criticalCount > 0 && (
@@ -119,17 +124,9 @@ export function SessionRow({
             <p className="text-xs text-muted-foreground whitespace-nowrap">{rightLabel}</p>
           ) : null
         ) : (
-          <>
-            <Badge
-              className={cn("pointer-events-none", config?.className)}
-              variant="secondary"
-            >
-              {config?.label ?? session.status}
-            </Badge>
-            {rightLabel && (
-              <p className="text-xs text-muted-foreground whitespace-nowrap">{rightLabel}</p>
-            )}
-          </>
+          <p className="text-xs text-muted-foreground whitespace-nowrap">
+            {pendingStatusText(session)}
+          </p>
         )}
       </div>
     </Link>

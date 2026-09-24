@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import { ScaleTile } from "@/components/scale/ScaleTile";
 import { Button } from "@/components/ui/button";
 import { Interfaces } from "doodle-icons";
 import { scales as localScales } from "@/app/scalesData";
@@ -31,40 +31,12 @@ export default function IntroScreen({
   return (
     <div className="flex flex-col gap-8">
       {localScale ? (
-        <div
-          className="flex overflow-hidden"
-          style={{ borderRadius: 20, height: 120 }}
-        >
-          <div
-            className="flex items-center justify-center flex-shrink-0 p-5"
-            style={{
-              backgroundColor: localScale.color,
-              aspectRatio: "1 / 1",
-              height: "100%",
-            }}
-          >
-            <Image
-              src={localScale.icon}
-              alt={localScale.acronym}
-              width={56}
-              height={56}
-              className="w-3/5 h-3/5 object-contain"
-            />
-          </div>
-          <div
-            className="flex flex-col justify-center px-4 flex-1 min-w-0"
-            style={{ backgroundColor: localScale.colorLight }}
-          >
-            <p className="font-heading font-bold text-black leading-tight text-2xl">
-              {localScale.acronym}
-            </p>
-            {introSubtitle && (
-              <p className="font-body text-black/80 leading-snug mt-0.5 text-sm">
-                {introSubtitle}
-              </p>
-            )}
-          </div>
-        </div>
+        <ScaleTile
+          domain={localScale.domain}
+          acronym={localScale.acronym}
+          subtitle={introSubtitle}
+          className="min-h-[120px] rounded-[20px]"
+        />
       ) : (
         <div className="rounded-3xl bg-surface-brand-bg border border-brand-orange/20 p-8 flex items-center justify-center min-h-[120px]">
           <h1 className="text-2xl sm:text-3xl font-semibold text-gray-900 text-center leading-tight">

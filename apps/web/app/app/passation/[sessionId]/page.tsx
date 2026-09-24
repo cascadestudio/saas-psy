@@ -3,12 +3,6 @@
 import { useParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
 import Link from "next/link";
 import Image from "next/image";
 import { useUser } from "@/app/context/UserContext";
@@ -20,6 +14,7 @@ import {
   type Patient,
 } from "@/lib/api-client";
 import { scales } from "@/app/scalesData";
+import { ScaleTag } from "@/components/scale/ScaleTag";
 import {
   getMockPatient,
   getMockSession,
@@ -166,30 +161,13 @@ export default function ResultsPage() {
 
   const scale = scales.find((q) => q.id === session.scaleId);
   const statusConfig = SESSION_STATUS_CONFIG[session.status];
-  const headerTitle = scale?.acronym ?? "Passation";
+  const headerTitle = patient
+    ? `${patient.firstName} ${patient.lastName}`
+    : "Passation";
 
   const scaleTitle = scale
     ? scale.title.replace(new RegExp(`^${scale.acronym}\\s*[-—:]\\s*`, "i"), "")
     : "";
-
-  const ScaleLogo = scale ? (
-    <div
-      className="scale-logo-bg flex items-center justify-center flex-shrink-0 rounded-md w-14 h-14 sm:w-[72px] sm:h-[72px]"
-      style={{
-        backgroundColor: scale.color ?? "#e5e7eb",
-      }}
-    >
-      {scale.icon && (
-        <Image
-          src={scale.icon}
-          alt={scale.acronym}
-          width={44}
-          height={44}
-          className="w-3/5 h-3/5 object-contain"
-        />
-      )}
-    </div>
-  ) : null;
 
   const sentDate = session.sentAt
     ? new Date(session.sentAt).toLocaleDateString("fr-FR", {
@@ -209,44 +187,34 @@ export default function ResultsPage() {
 
   const Header = (
     <div className="flex items-start justify-between gap-3 mb-6">
-      <div className="flex items-center gap-3">
-        {ScaleLogo}
-        <div>
-          <div className="flex items-center gap-3">
-            {scaleTitle ? (
-              <TooltipProvider delayDuration={200}>
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <h1 className="font-gelica font-normal text-3xl leading-tight border-b border-dotted border-muted-foreground/40 inline-block cursor-help">
-                      {headerTitle}
-                    </h1>
-                  </TooltipTrigger>
-                  <TooltipContent className="bg-foreground text-background">
-                    {scaleTitle}
-                  </TooltipContent>
-                </Tooltip>
-              </TooltipProvider>
-            ) : (
-              <h1 className="font-gelica font-normal text-3xl leading-tight">
-                {headerTitle}
-              </h1>
-            )}
-            {session.status !== "COMPLETED" && (
-              <Badge className={statusConfig?.className} variant="secondary">
-                {statusConfig?.label ?? session.status}
-              </Badge>
-            )}
-          </div>
-          {session.status === "COMPLETED" && completedDate ? (
-            <p className="text-sm text-muted-foreground mt-1">
-              Complété le {completedDate}
-            </p>
-          ) : sentDate ? (
-            <p className="text-sm text-muted-foreground mt-1">
-              Envoyée le {sentDate}
-            </p>
-          ) : null}
+      <div>
+        <div className="flex items-center gap-3">
+          <h1 className="font-gelica font-normal text-3xl leading-tight">
+            {headerTitle}
+          </h1>
+          {session.status !== "COMPLETED" && (
+            <Badge className={statusConfig?.className} variant="secondary">
+              {statusConfig?.label ?? session.status}
+            </Badge>
+          )}
         </div>
+        <p className="text-sm text-muted-foreground mt-1.5">
+          <ScaleTag
+            domain={scale?.domain}
+            acronym={scale?.acronym ?? session.scaleId}
+            className="font-semibold text-foreground"
+          />
+          {scaleTitle && <> · {scaleTitle}</>}
+        </p>
+        {session.status === "COMPLETED" && completedDate ? (
+          <p className="text-sm text-muted-foreground mt-0.5">
+            Complété le {completedDate}
+          </p>
+        ) : sentDate ? (
+          <p className="text-sm text-muted-foreground mt-0.5">
+            Envoyée le {sentDate}
+          </p>
+        ) : null}
       </div>
       {session.status === "COMPLETED" ? (
         <Button
@@ -286,9 +254,7 @@ export default function ResultsPage() {
   );
 
   const backHref = patient ? `/app/patients/${patient.id}` : "/app/patients";
-  const backLabel = patient
-    ? `${patient.firstName} ${patient.lastName}`
-    : "Mes patient·es";
+  const backLabel = patient ? "Fiche patient·e" : "Mes patient·es";
 
   const Breadcrumb = (
     <Link

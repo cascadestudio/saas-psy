@@ -1,11 +1,11 @@
 "use client";
 
 import { useRef, useCallback } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { useScrollAnimation } from "./use-scroll-animation";
 import { scales as scalesData } from "@/app/scalesData";
 import { scaleSlug } from "@/lib/scale-slug";
+import { ScaleTile } from "@/components/scale/ScaleTile";
 import { Arrow } from "doodle-icons";
 
 const badgeScales = scalesData.map((s) => ({
@@ -13,9 +13,7 @@ const badgeScales = scalesData.map((s) => ({
   slug: scaleSlug(s),
   acronym: s.acronym,
   label: s.label,
-  icon: s.icon,
-  color: s.color,
-  colorLight: s.colorLight,
+  domain: s.domain,
 }));
 
 type BadgeScale = (typeof badgeScales)[number];
@@ -24,40 +22,20 @@ function ScaleBadge({ scale }: { scale: BadgeScale }) {
   return (
     <Link
       href={`/echelles/${scale.slug}`}
-      className="flex-shrink-0 flex overflow-hidden text-left cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange"
+      className="flex-shrink-0 text-left cursor-pointer rounded-[20px] focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange"
       style={{
-        borderRadius: 20,
         aspectRatio: "340 / 120",
         width: "clamp(280px, 22vw, 340px)",
       }}
     >
-      <div
-        className="flex items-center justify-center flex-shrink-0 p-5"
-        style={{
-          backgroundColor: scale.color,
-          aspectRatio: "1 / 1",
-          height: "100%",
-        }}
-      >
-        <Image
-          src={scale.icon}
-          alt={scale.label}
-          width={56}
-          height={56}
-          className="w-3/5 h-3/5 object-contain"
-        />
-      </div>
-      <div
-        className="flex flex-col justify-center px-4 flex-1 min-w-0"
-        style={{ backgroundColor: scale.colorLight }}
-      >
-        <p className="font-heading font-bold text-black leading-tight text-[clamp(1.25rem,1.8vw,1.75rem)]">
-          {scale.acronym}
-        </p>
-        <p className="font-body text-black/80 leading-snug mt-0.5 text-[clamp(0.65rem,0.85vw,0.8rem)]">
-          {scale.label}
-        </p>
-      </div>
+      <ScaleTile
+        domain={scale.domain}
+        acronym={scale.acronym}
+        subtitle={scale.label}
+        className="h-full rounded-[20px]"
+        acronymClassName="text-[clamp(1.25rem,1.8vw,1.75rem)]"
+        subtitleClassName="text-[clamp(0.65rem,0.85vw,0.8rem)] line-clamp-2"
+      />
     </Link>
   );
 }

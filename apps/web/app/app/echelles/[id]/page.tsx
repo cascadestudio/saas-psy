@@ -1,9 +1,9 @@
-import Image from "next/image";
 import { Interfaces, Files } from "doodle-icons";
 import { scales } from "@/app/scalesData";
 import { questionCount } from "@/app/utils/utils";
 import ScalePreview from "./ScalePreview";
 import { ScaleSendButton } from "./ScaleSendButton";
+import { ScaleTile } from "@/components/scale/ScaleTile";
 
 export default async function ScaleDescriptionPage({
   params,
@@ -21,35 +21,19 @@ export default async function ScaleDescriptionPage({
 
   return (
     <div>
-      {/* Header fullwidth 2 couleurs + CTA */}
-      <div className="sticky top-14 md:top-0 z-10 px-4 pt-2">
-        <div className="flex h-[80px]">
-          <div
-            className="flex items-center justify-center flex-shrink-0 aspect-square h-full rounded-l-2xl"
-            style={{ backgroundColor: scale.color }}
-          >
-            <Image
-              src={scale.icon}
-              alt={scale.acronym}
-              width={48}
-              height={48}
-              className="w-10 h-10 object-contain"
-            />
-          </div>
-          <div
-            className="flex items-center justify-between px-6 flex-1 min-w-0 rounded-r-2xl"
-            style={{ backgroundColor: scale.colorLight }}
-          >
-            <div className="min-w-0">
-              <h1 className="font-heading font-bold text-black leading-tight text-2xl">
-                {scale.acronym}
-              </h1>
-              <p className="font-body text-black/80 leading-snug mt-0.5 text-base truncate">
-                {scale.label}
-              </p>
-            </div>
-            <ScaleSendButton scaleId={id} />
-          </div>
+      {/* Header : tuile de l'échelle + CTA */}
+      <div className="sticky top-14 md:top-0 z-10 bg-background pt-2">
+        {/* Même largeur que le contenu (container) pour aligner le CTA à droite. */}
+        <div className="container mx-auto px-4">
+          <ScaleTile
+            domain={scale.domain}
+            acronym={scale.acronym}
+            acronymAs="h1"
+            subtitle={scale.label}
+            className="h-[80px] rounded-2xl px-6 py-0"
+            subtitleClassName="mt-1.5 truncate text-base"
+            aside={<ScaleSendButton scaleId={id} />}
+          />
         </div>
       </div>
 

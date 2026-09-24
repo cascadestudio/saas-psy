@@ -1,38 +1,32 @@
 "use client";
 
 import Link from "next/link";
-import { getScaleAppearance } from "@/lib/scale-appearance";
+import type { ScaleDomain } from "@melya/core";
+import { ScaleTile } from "@/components/scale/ScaleTile";
 
 interface ScaleCardProps {
   scale: {
     id: string;
     acronym: string;
     label: string;
-    category: string;
+    domain: ScaleDomain;
   };
 }
 
 export function ScaleCard({ scale }: ScaleCardProps) {
-  const { bg, darkInk } = getScaleAppearance(scale.category);
-
   return (
     <Link
       href={`/app/echelles/${scale.id}`}
-      className="group flex flex-col justify-start rounded-[18px] p-[18px] min-h-[158px] transition-transform hover:-translate-y-[3px] hover:shadow-lg"
-      style={{ backgroundColor: bg }}
+      className="group block rounded-[18px]"
     >
-      <span
-        className="font-gelica not-italic font-semibold text-[26px] leading-none tracking-tight tabular-nums"
-        style={{ color: darkInk ? "#FCF9F3" : "#23201C" }}
-      >
-        {scale.acronym}
-      </span>
-      <span
-        className="mt-2.5 text-[13.5px] leading-snug line-clamp-4"
-        style={{ color: darkInk ? "rgba(255,255,255,0.80)" : "rgba(0,0,0,0.66)" }}
-      >
-        {scale.label}
-      </span>
+      <ScaleTile
+        domain={scale.domain}
+        acronym={scale.acronym}
+        subtitle={scale.label}
+        size="lg"
+        className="h-full min-h-[140px] items-start px-[18px] pb-[18px] pt-3 transition-colors group-hover:bg-muted-foreground/10"
+        subtitleClassName="mt-2.5 line-clamp-4"
+      />
     </Link>
   );
 }

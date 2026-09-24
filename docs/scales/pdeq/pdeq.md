@@ -143,7 +143,7 @@ Vérifiés dans le script de recette (40/40 PASS, 16/07/2026).
 
 - `formType: "single-scale"`, clés `intensity_0 … intensity_9`, échelle 1-5.
 - Scorer `apps/api/src/scoring/scorers/pdeq.ts`, id `pdeq` dans `ScoringService`.
-- Icône : `pdeq.svg` — ⚠️ placeholder (copie de `pcl-5.svg`, catégorie Traumatismes).
+- Domaine : `trauma` (la couleur de la tuile en dérive, cf. `apps/web/lib/scale-appearance.ts`).
 
 ---
 

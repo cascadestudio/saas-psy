@@ -316,7 +316,7 @@ Aucun point ouvert. Arbitrages rendus par Clément le 24/09/2026 :
 - Données : `packages/core/src/scales/index.ts`, entrée `id: "ftnd"` (`formType: "options"`, catégorie « Addictions »).
 - Scorer : `apps/api/src/scoring/scorers/ftnd.ts` (`scoreFtnd`, somme + lookup des `ranges`), inscrit dans `scoring.service.ts` sous la clé `ftnd`.
 - Tests : `apps/api/src/scoring/scorers/ftnd.spec.ts` (cas §9 T1–T11 + ordre d'affichage des options).
-- Icône : `apps/web/public/images/scales/ftnd.svg` (même doodle que AUDIT et CUDIT-R).
+- Domaine : `addictions` (la couleur du point en dérive, cf. `apps/web/lib/scale-appearance.ts`).
 
 ### Signature de la fonction de scoring
 

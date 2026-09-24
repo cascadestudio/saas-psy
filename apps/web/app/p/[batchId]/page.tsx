@@ -8,6 +8,7 @@ import { Interfaces } from "doodle-icons";
 import Link from "next/link";
 import Image from "next/image";
 import { scales } from "@/app/scalesData";
+import { ScaleTile } from "@/components/scale/ScaleTile";
 
 interface PortalSession {
   id: string;
@@ -168,66 +169,35 @@ export default function PatientPortalPage() {
                 : scaleData.patientIntroSubtitle;
             return (
               <div key={session.id} className="flex items-center gap-4">
-                {/* Card */}
-                <div
-                  className={`flex flex-col sm:flex-row overflow-hidden flex-1 ${session.isCompleted ? "opacity-60" : ""}`}
-                  style={{ borderRadius: 20 }}
-                >
-                {/* Icon block */}
-                <div
-                  className="flex items-center justify-center flex-shrink-0 h-16 w-full sm:h-auto sm:w-20 sm:self-stretch"
-                  style={{ backgroundColor: scaleData?.color ?? "#D6591F" }}
-                >
-                  {scaleData?.icon ? (
-                    <Image
-                      src={scaleData.icon}
-                      alt={session.scaleTitle}
-                      width={48}
-                      height={48}
-                      className="w-3/5 h-3/5 object-contain"
-                    />
-                  ) : (
-                    <span className="text-white font-bold text-lg">
-                      {session.scaleTitle.slice(0, 2).toUpperCase()}
-                    </span>
-                  )}
-                </div>
-
-                {/* Content block */}
-                <div
-                  className="flex flex-col sm:flex-row sm:items-center sm:justify-between px-5 py-4 flex-1 min-w-0 gap-3"
-                  style={{ backgroundColor: scaleData?.colorLight ?? "#F5DDD4" }}
-                >
-                  <div className="flex-1 min-w-0 overflow-hidden">
-                    <p className="font-heading font-bold text-black leading-tight text-xl">
-                      {scaleData?.acronym ?? session.scaleTitle}
-                    </p>
-                    {cardSubtitle && (
-                      <p className="font-body text-black/70 text-sm leading-snug mt-0.5 truncate">
-                        {cardSubtitle}
-                      </p>
-                    )}
-                    {session.estimatedTime && !session.isCompleted && (
-                      <div className="flex items-center gap-1 text-xs text-black/50 mt-1">
-                        <Interfaces.Clock className="h-3 w-3" />
+                <ScaleTile
+                  domain={scaleData?.domain}
+                  acronym={scaleData?.acronym ?? session.scaleTitle}
+                  subtitle={cardSubtitle}
+                  subtitleClassName="truncate"
+                  className={`flex-1 min-w-0 flex-col items-stretch gap-3 rounded-[20px] sm:flex-row sm:items-center ${session.isCompleted ? "opacity-60" : ""}`}
+                  meta={
+                    session.estimatedTime && !session.isCompleted && (
+                      <div className="flex items-center gap-1 text-xs mt-1.5">
+                        <Interfaces.Clock className="h-3 w-3" fill="currentColor" />
                         <span>{session.estimatedTime}</span>
                       </div>
-                    )}
-                  </div>
-                  <div className="flex-shrink-0 flex sm:block justify-center sm:justify-end">
-                    {session.isCompleted ? (
-                      <Button variant="success" disabled className="disabled:opacity-100">
-                        <Interfaces.Tick2 className="fill-white" />
-                        Complété
-                      </Button>
-                    ) : (
-                      <Button asChild>
-                        <Link href={`/session/${session.id}`}>Commencer</Link>
-                      </Button>
-                    )}
-                  </div>
-                </div>
-                </div>
+                    )
+                  }
+                  aside={
+                    <div className="flex-shrink-0 flex sm:block justify-center sm:justify-end">
+                      {session.isCompleted ? (
+                        <Button variant="success" disabled className="disabled:opacity-100">
+                          <Interfaces.Tick2 className="fill-white" />
+                          Complété
+                        </Button>
+                      ) : (
+                        <Button asChild>
+                          <Link href={`/session/${session.id}`}>Commencer</Link>
+                        </Button>
+                      )}
+                    </div>
+                  }
+                />
               </div>
             );
           })}

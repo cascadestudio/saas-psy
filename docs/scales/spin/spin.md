@@ -244,7 +244,7 @@ scoreSpin(scale, responses) → {
 
 - `formType: "single-scale"`, clés de réponse `intensity_0 … intensity_16`.
 - Scorer `apps/api/src/scoring/scorers/spin.ts` (somme des `intensity_`), enregistré sous l'id `spin` dans `ScoringService`. Logique identique au GAD-7 (aucune inversion, aucune alerte).
-- Icône : `apps/web/public/images/scales/spin.svg` — ⚠️ **placeholder** (copie de `lsas.svg`) à remplacer par un doodle dédié.
+- Domaine : `anxiete` (la couleur de la tuile en dérive, cf. `apps/web/lib/scale-appearance.ts`).
 
 ---
 
