@@ -73,7 +73,8 @@ Une fois la donnée correcte, la passation hérite automatiquement de :
 - **Progress bar + compteur "Question X/Y"** sur toutes les échelles
   (`SessionRunner.tsx` → `ProgressBar.tsx`). Pas d'option pour cacher.
 - **Écran d'intro** (`IntroScreen.tsx`) : icône, label, instructions paragraphées,
-  nombre d'items, durée estimée.
+  nombre d'items, durée estimée. Sans `instructions`, aucun texte : `longDescription`
+  est réservée au praticien et n'est jamais envoyée au patient.
 - **Écran de transition de section** (`SectionTransitionScreen.tsx`) : déclenché
   par toute `SectionIntro` avec `description` non vide et `startIndex > 0`.
 - **Gauge résultat** (`ScoreArcGauge.tsx`) : ticks numériques aux seuils sur

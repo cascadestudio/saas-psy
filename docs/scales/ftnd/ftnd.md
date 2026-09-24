@@ -100,7 +100,7 @@ Aucune. Les sources HAS et Unicancer n'ont pas de consigne : elles passent direc
 | **Persistance** | Sans objet — pas de consigne (`instructions` et `persistentInstructions` absents). |
 | **Emplacement** | Sans objet. |
 | **Justification** | Aucune consigne dans la source primaire. |
-| **Cas particuliers** | Sans objet. |
+| **Cas particuliers** | L'écran d'intro patient n'affiche aucun texte : ni consigne, ni description. La description longue (`longDescription`) est réservée à la fiche praticien ; le fallback API qui l'envoyait au patient à défaut de consigne a été retiré le 24/09/2026. |
 
 ### Affichage du titre côté portail patient
 
@@ -362,3 +362,4 @@ Pas de validation spécifique (cf. §9.5) : comportement commun à toutes les é
 | 17/09/2026 | James (via Claude) | Création initiale du spec à partir des sources HAS (primaire, oct. 2014) et Unicancer (cross-check, 2024). Divergences de seuils et de formulation d'items identifiées et documentées ; plusieurs champs marqués [À SOURCER] faute d'information dans les deux sources consultées. |
 | 24/09/2026 | Clément (avec Claude) | Relecture E4. Source primaire basculée sur le PDF officiel has-sante.fr (identique à la copie SPLF) ; PDF archivés dans `docs/scales/ftnd/` ; RESPADD ajouté comme source complémentaire pour les seuils. **Correction** : l'ordre d'affichage des réponses en §5 avait été trié par valeur croissante sans le déclarer — remis dans l'ordre de la source HAS. Divergences ajoutées (item 1 « - » vs « à », parenthèse de l'item 2). Arbitrages §10 rendus : seuils HAS, acronyme FTND, pas de consigne, droits « go sous réserve », public fumeurs de cigarettes. §9 : vecteurs de réponses ajoutés aux transitions de seuil + 2 cas spécifiques. Fiche validée E4, prête pour implémentation. |
 | 24/09/2026 | Clément (avec Claude) | Implémentation E5 par réutilisation (données `packages/core`, scorer patron CUDIT-R, icône addictions, tests §9 automatisés avec Jest, hors CI). Arbitrages : aucun intitulé court par item (absent de la source HAS) — titres d'items retirés de §5 ; §9.5 et §11 alignés sur le comportement existant (pas de validation serveur spécifique). |
+| 24/09/2026 | Clément (avec Claude) | Correctif : la description longue praticien s'affichait sur l'écran d'intro patient (fallback API `instructions ?? longDescription`, le FTND étant la seule échelle sans consigne). Fallback retiré : le patient ne voit aucun texte avant les items, conformément à la source HAS. |

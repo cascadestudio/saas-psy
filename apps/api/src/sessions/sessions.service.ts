@@ -516,7 +516,9 @@ export class SessionsService {
               id: scale.id,
               title: scale.title,
               description: scale.description,
-              instructions: scale.instructions ?? scale.longDescription,
+              // Pas de fallback sur `longDescription` (texte praticien) : une
+              // échelle sans consigne source n'affiche rien au patient (FTND).
+              instructions: scale.instructions,
               persistentInstructions: scale.persistentInstructions,
               sectionIntros: scale.sectionIntros,
               copyrightAttribution: scale.copyrightAttribution,
