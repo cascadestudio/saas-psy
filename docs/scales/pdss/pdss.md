@@ -66,17 +66,7 @@ Aucune deuxième source indépendante reproduisant les items en français n'a é
 
 ### Écarts de portage (PDF → app)
 
-Rattachés aux quatre déviations autorisées (`REDACTION_PLAYBOOK.md` §5.3) :
-
-| # | Écart | Type |
-| --- | --- | --- |
-| 1 | Consigne : « en cochant la case qui correspond le mieux » → « en choisissant la réponse qui correspond le mieux » (précédent PDEQ). | 1 — adaptation du support |
-| 2 | Liste des 13 symptômes : les cases à cocher du PDF (non cotées) sont retirées ; la liste est affichée en liste à puces, un symptôme par puce, dans l'ordre de lecture du PDF (colonne gauche puis colonne droite). | 1 — adaptation du support |
-| 3 | Mises en gras du PDF (définitions dans la consigne, début de l'item 1) non reproduites : l'écran d'intro n'affiche que du texte brut. | 1 — adaptation du support |
-| 4 | Préfixes numériques des réponses (« 0 », « 1 »…) non affichés : la valeur est portée par le bouton. | 1 — adaptation du support |
-| 5 | Item 6, réponse 1 : « mes responsabilités **la** maison » → « mes responsabilités **à la** maison » (préposition manquante ; la même expression est complète dans les réponses 0, 2, 3 et 4). | 2 — coquille manifeste |
-
-**Conservé tel quel** (fidélité à la source, pas de normalisation typographique — principe acté sur la RSES le 30/04/2026) : typographie québécoise sans espace avant « ? » et « ; » (« semaine? », « maison; »), masculin générique (« inquiété », « seul », « adonné »), « au cours de la semaine » (item 1) vs « au cours de la dernière semaine » (autres items). Seule normalisation : apostrophes typographiques (’) saisies en apostrophes droites, comme dans le reste du catalogue.
+Consignés en §10 (« Écarts à la source primaire »).
 
 ### Version française retenue
 
@@ -136,7 +126,7 @@ Au 29/09/2026, la PDSS est « Bientôt disponible » chez Mentaal ([page](https:
 > _1. Utilisez les échelles décrites à chaque item._
 > _2. Répondez à chacun des items en choisissant la réponse qui correspond le mieux à votre situation. »_
 
-**Source de la consigne** : PDF MSSS, page 1, bloc précédant l'item 1 (écarts 1 à 3 de §2).
+**Source de la consigne** : PDF MSSS, page 1, bloc précédant l'item 1 (écarts consignés en §10).
 
 ### Comportement UX de la consigne
 
@@ -236,7 +226,7 @@ Au 29/09/2026, la PDSS est « Bientôt disponible » chez Mentaal ([page](https:
 | Valeur | Libellé |
 | :---- | :---- |
 | 0 | Aucune : Les symptômes n'ont pas nui à mon travail ou à mes responsabilités à la maison. |
-| 1 | Légère : Les symptômes ont légèrement nui à mon travail ou à mes responsabilités à la maison, mais j'ai pu accomplir presque toutes les tâches que j'aurais accomplies si je n'avais pas eu ces problèmes. *(« à » ajouté, coquille — §2 écart 5)* |
+| 1 | Légère : Les symptômes ont légèrement nui à mon travail ou à mes responsabilités à la maison, mais j'ai pu accomplir presque toutes les tâches que j'aurais accomplies si je n'avais pas eu ces problèmes. *(« à » ajouté, coquille — §10)* |
 | 2 | Modérée : Les symptômes ont nui de façon notable à mon travail ou à mes responsabilités à la maison, mais j'ai réussi à accomplir les tâches nécessaires. |
 | 3 | Grave : Les symptômes ont nui de façon importante à mon travail ou à mes responsabilités à la maison; j'ai été incapable d'accomplir plusieurs tâches importantes à cause de ces problèmes. |
 | 4 | Extrême : Les symptômes ont été extrêmement invalidants, si bien que je n'ai été en mesure d'accomplir pratiquement aucune tâche relative à mon travail ou à mes responsabilités à la maison. |
@@ -359,16 +349,36 @@ Les cas T1 à T8 sont automatisés dans `apps/api/src/scoring/scorers/pdss.spec.
 
 ---
 
-## 10. Points à valider avec Renata
+## 10. Choix et arbitrages méthodologiques
 
-| # | Question | Statut |
-| :---- | :---- | :---- |
-| 1 | Seuil : ≥ 9 (article complet 2022) ou ≥ 10 (résumé de congrès) ? | Tranché le 29/09/2026 (Adrien) : **9**. |
-| 2 | Libellés des bandes : garder « En dessous du seuil de dépistage » / « Trouble panique probable », ou autre formulation ? | Proposés par Adrien le 29/09/2026 — **à confirmer Clément / Renata**. |
-| 3 | Source des items : garder la version MSSS 2019, ou basculer sur la version validée de Roberge 2022 si elle diffère, une fois obtenue ? | Tranché le 29/09/2026 : **MSSS en source unique** (exception autorité institutionnelle, §2) ; version Roberge demandée pour cross-check a posteriori. À rouvrir si elle diffère. |
-| 4 | Droits : go sous réserve avec flag ✉️ (contact Shear plus tard) ? | Tranché le 29/09/2026 : **go sous réserve**. |
-| 5 | Liste des symptômes : l'afficher en simple liste (sans cases à cocher, non cotée) ? | Tranché le 29/09/2026 (Adrien) : **liste à puces**. |
-| 6 | Masculin générique de la source (« inquiété », « seul », « adonné ») : garder verbatim, ou ajouter « (e) » comme dans d'autres échelles ? | **Ouvert** — verbatim par défaut. |
+### Écarts à la source primaire
+
+| Élément | Source primaire | Texte retenu | Origine du texte retenu | Justification |
+| --- | --- | --- | --- | --- |
+| Consigne | « en cochant la case qui correspond le mieux à votre situation » | « en choisissant la réponse qui correspond le mieux à votre situation » | Adaptation Melya | Adaptation du support : on répond en touchant un bouton, pas en cochant une case (même choix que pour la PDEQ). |
+| Consigne, liste des symptômes | 13 symptômes précédés de cases à cocher, sur deux colonnes | Liste à puces, un symptôme par ligne, dans l'ordre de lecture du formulaire (colonne de gauche puis de droite) | Adaptation Melya | Adaptation du support : ces cases ne sont pas cotées, elles servent de repère. Les libellés sont repris mot pour mot. |
+| Consigne et item 1 | Passages en gras (définitions de l'attaque de panique et des attaques subcliniques, début de l'item 1) | Texte sans gras | Adaptation Melya | Adaptation du support : l'écran n'affiche pas de mise en forme. |
+| Réponses | Chaque réponse précédée de sa cotation (« 0 », « 1 »…) | Réponse sans sa cotation | Adaptation Melya | Adaptation du support : la cotation est portée par le bouton, comme pour toutes les échelles du catalogue. |
+| Item 6, réponse 1 | « à mon travail ou à mes responsabilités la maison » | « à mon travail ou à mes responsabilités à la maison » | Correction | Coquille : préposition manquante. L'expression est complète dans les quatre autres réponses de l'item. Pas de source secondaire publiée pour reprendre le passage. |
+
+Conservé tel quel, par fidélité à la source : la typographie québécoise (pas d'espace avant « ? » et « ; »), le masculin générique (« inquiété », « seul », « adonné »), et « au cours de la semaine » à l'item 1, là où les autres items disent « au cours de la dernière semaine ».
+
+### Autres arbitrages
+
+| Sujet | Choix retenu | Justification |
+| --- | --- | --- |
+| Version de l'échelle | Version auto-questionnaire (PDSS-SR) | La PDSS d'origine est un entretien coté par le clinicien ; seule la version auto-questionnaire convient à une passation en ligne par le patient. |
+| Version française | Formulaire du ministère de la Santé et des Services sociaux du Québec (2019), source unique | Aucune version de France n'existe. Le formulaire du ministère est l'outil officiel du programme québécois pour les troubles mentaux ; la seule autre version française (Roberge et al., 2022) n'est pas publiée. Elle a été demandée pour vérification. |
+| Seuil | ≥ 9 | Validation de la version française (Roberge et al., 2022, article complet) : seuil optimal de diagnostic probable, sensibilité 78,8 %, spécificité 70,4 %. Le résumé de congrès antérieur de la même équipe indiquait 10 ; l'article complet le remplace. Les bandes de sévérité publiées pour la version clinicien (Furukawa et al., 2009) ne sont pas transposées. |
+| Libellés des bandes | « Trouble panique probable » (9 à 28) / « En dessous du seuil de dépistage » (0 à 8) | Bande haute : traduction du terme de la source (« probable diagnosis »). Bande basse : formulation Melya, aucune source ne libellant cette bande. Il s'agit d'un seuil de dépistage, pas d'une gradation de sévérité. |
+| Réponses manquantes | Passation incomplète refusée, pas d'imputation | Règle commune à toutes les échelles, conforme au formulaire source (« lorsqu'une réponse ou plus sont manquantes, le score du questionnaire ne peut pas être utilisé »). |
+| Droits | Mise en ligne sous réserve | La Dre Shear autorise l'usage par les cliniciens dans leur pratique ; l'usage au sein d'un service payant reste à lui demander (§3). |
+| Taille des questions | Taille de texte réduite pour toute l'échelle | Les questions vont jusqu'à 814 caractères, quatre fois plus que le reste du catalogue ; la taille habituelle obligeait à faire défiler chaque question. |
+
+### Questions ouvertes
+
+1. Libellé de la bande basse : garder « En dessous du seuil de dépistage » (recommandé : dit exactement ce que mesure le seuil), ou suivre le précédent de la PDEQ, où la bande basse est la négation du terme de la source (« Trouble panique non probable ») ?
+2. Si la version validée de Roberge et al. diffère du formulaire du ministère : basculer sur la version validée (recommandé), ou garder le formulaire du ministère ?
 
 ---
 
@@ -420,6 +430,7 @@ Pas de validation spécifique (cf. §9.5) : comportement commun à toutes les é
 | 29/09/2026 | Adrien (avec Claude) | Création. Instruction des droits (© Shear, usage commercial non couvert → go sous réserve, flag ✉️). Choix de la PDSS-SR (auto-questionnaire). Source primaire : formulaire MSSS/PQPTM 2019 (seule VF complète accessible, aucune version de France). Seuil ≥ 9 (Roberge 2022), deux bandes. |
 | 29/09/2026 | Adrien (avec Claude) | Cross-check : la thèse de Bordeaux 2017 ne reproduit pas les items → écartée. Source MSSS retenue seule (exception autorité institutionnelle) ; version Roberge 2022 demandée à Sherbrooke pour cross-check a posteriori. |
 | 29/09/2026 | Adrien (avec Claude) | Implémentation E5 : données `packages/core`, scorer patron FTND, tests §9 automatisés (Jest, hors CI). Évolutions UI associées : composant `ScaleInstructions` (retours à la ligne et puces dans les consignes), taille de question réduite au-delà de 250 caractères, retour instantané en haut de page à chaque question. Recette à confirmer. |
+| 29/09/2026 | Adrien (avec Claude) | Alignement sur le nouveau template (règles 5 à 7, §10 « Choix et arbitrages méthodologiques ») : écarts déplacés de §2 vers §10, arbitrages consignés, deux questions ouvertes (libellé de la bande basse, bascule éventuelle sur la version Roberge). Plus de validation clinique externe : questions tranchées par Clément. |
 
 ---
 
