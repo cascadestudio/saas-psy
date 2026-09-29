@@ -57,6 +57,7 @@ Aucune deuxième source indépendante reproduisant les items en français n'a é
 - **Référence complète** : Roberge P, Marx P, Couture J, Carrier N, Benoît A, Provencher MD, Antony MM, Norton PJ. French adaptation and validation of the Panic Disorder Severity Scale—self-report. *BMC Psychiatry*. 2022;22:434. doi:10.1186/s12888-022-03989-x
 - **URL** : [https://pmc.ncbi.nlm.nih.gov/articles/PMC9235095/](https://pmc.ncbi.nlm.nih.gov/articles/PMC9235095/)
 - **Date de consultation** : 29/09/2026
+- **Fichier de portage** : `docs/scales/pdss/PDSS_Roberge-2022_BMC.pdf` (article en accès libre, licence CC BY 4.0)
 - **Contenu utile** : période de référence « la dernière semaine », items cotés 0 à 4, seuil optimal de diagnostic probable **9** (sensibilité 78,8 %, spécificité 70,4 %). Les items français ne sont **pas** reproduits (« The French-version of the questionnaire is available on request »).
 
 ### Divergences constatées entre sources
@@ -255,7 +256,7 @@ Somme des valeurs des 7 items.
 
 ### Subscores calculés
 
-Sans objet (pas de subscores). Roberge et al. (2022) rapportent une structure à deux facteurs, sans proposer de sous-scores cliniques.
+Sans objet (pas de subscores). Roberge et al. (2022) trouvent une structure à un facteur (analyse exploratoire, 64,9 % de variance expliquée, confirmée par l'analyse confirmatoire), ce qui justifie un score total unique. *(Le résumé de congrès de la même équipe évoquait un modèle à deux facteurs ; l'article complet ne le retient pas.)*
 
 ### Inversions d'items
 
@@ -287,7 +288,8 @@ Passation incomplète refusée : les 7 items sont obligatoires, aucune imputatio
 
 **Remarques sur les seuils** :
 
-- C'est un seuil de **dépistage** (« optimal threshold for probable diagnosis », sensibilité 78,8 %, spécificité 70,4 %), pas une gradation de sévérité. Aucune source ne propose de bandes léger / modéré / sévère pour la PDSS-SR en français.
+- C'est un seuil de **dépistage** (« optimal threshold for probable diagnosis »), pas une gradation de sévérité. Chiffres de l'article : aire sous la courbe 0,82 ; au seuil 9, sensibilité 78,8 %, spécificité 70,4 %, valeur prédictive positive 64,6 %, valeur prédictive négative 82,9 % (indice de Youden).
+- **Population de référence** : 256 adultes à l'inclusion d'un essai de TCC transdiagnostique pour troubles anxieux mixtes, diagnostic posé à l'ADIS-5. Le seuil distingue donc le trouble panique **parmi des patients anxieux**, pas dans la population générale. Même seuil que Forsell et al. ; Liu et al. retiennent 4 (sensibilité 96 %, spécificité 61,3 %) sur un échantillon incluant des sujets sains. Les auteurs notent que le choix du seuil dépend de l'usage (coût d'un faux positif ou d'un faux négatif). Aucune source ne propose de bandes léger / modéré / sévère pour la PDSS-SR en français.
 - Les bandes de Furukawa et al. (2009) portent sur la PDSS **hétéro-évaluée** en anglais : non transposées (les seuils voyagent mal d'une version et d'une langue à l'autre).
 - Le résumé de congrès de la même équipe donnait 10 (§2, divergence 1) ; l'article complet le remplace.
 - Les libellés sont une formulation Melya : aucune source française ne libelle les bandes.
@@ -432,6 +434,7 @@ Pas de validation spécifique (cf. §9.5) : comportement commun à toutes les é
 | 29/09/2026 | Adrien (avec Claude) | Implémentation E5 : données `packages/core`, scorer patron FTND, tests §9 automatisés (Jest, hors CI). Évolutions UI associées : composant `ScaleInstructions` (retours à la ligne et puces dans les consignes), taille de question réduite au-delà de 250 caractères, retour instantané en haut de page à chaque question. Recette faite le jour même (ligne suivante). |
 | 29/09/2026 | Adrien (avec Claude) | Alignement sur le nouveau template (règles 5 à 7, §10 « Choix et arbitrages méthodologiques ») : écarts déplacés de §2 vers §10, arbitrages consignés, deux questions ouvertes (libellé de la bande basse, bascule éventuelle sur la version Roberge). Plus de validation clinique externe : questions tranchées par Clément. |
 | 29/09/2026 | Adrien | Recette E6 sur staging : parcours patient complet (intro avec liste à puces, 7 items, récapitulatif, résultats), seuil de la jauge à 9, mention de copyright. Échelle validée. |
+| 29/09/2026 | Adrien (avec Claude) | Relecture de §6-§7 sur le texte intégral de Roberge et al. 2022, PDF archivé (`PDSS_Roberge-2022_BMC.pdf`). **Correction** : structure à un facteur, et non deux (confusion avec le résumé de congrès). Ajout en §7 des valeurs prédictives, de l'aire sous la courbe, de la population de référence et des seuils concurrents (Liu et al. : 4). Seuil et calcul inchangés. |
 
 ---
 
