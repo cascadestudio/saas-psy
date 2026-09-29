@@ -55,6 +55,11 @@ hiérarchie versions, comparaison Mentaal).
 - **Original anglais — manuel OMS** : Babor, T. F., Higgins-Biddle, J. C., Saunders, J. B., & Monteiro, M. G. (2001). *AUDIT — The Alcohol Use Disorders Identification Test: Guidelines for Use in Primary Care* (2e éd.). OMS, WHO/MSD/MSB/01.6a. URL : https://www.paho.org/sites/default/files/Auditmanual_ENG.pdf — fichier `docs/scales/audit/AUDIT_manuel_OMS_Babor_2001.pdf` — consulté le 29/09/2026.
 - **Version suisse** : grille AUDIT publiée dans la *Revue Médicale Suisse* (capture d'écran fournie par Clément le 29/09/2026). Référence complète de l'article [À SOURCER]. Consultée comme troisième avis uniquement : version suisse (hiérarchie France > Suisse) et plusieurs défauts (cf. ci-dessous).
 
+- **Version française de Michaud & Lécallier (2003)** : Michaud, P., & Lécallier, D. (2003). *Risque alcool chez les plus âgés. Difficultés liées au repérage.* Gérontologie et société, 26(105), 89-99. DOI : 10.3917/gs.105.0089. URL : https://shs.cairn.info/revue-gerontologie-et-societe1-2003-2-page-89?lang=fr — tableau 3 « L'audit » — consulté le 29/09/2026. Philippe Michaud est co-auteur de la validation française (Gache et al., 2005). PDF conservé hors du dépôt public (article diffusé par Cairn sous conditions d'utilisation).
+  - Même lignée de traduction que la version OMS FR (« cette unité de temps », « culpabilité ou de regret », « la nuit précédente »), retravaillée : « à quelle fréquence » au lieu de « combien de fois », coquilles des items 5 et 6 corrigées, réponses des items 9-10 en « douze derniers mois ».
+  - La consigne reprend celle de l'OMS FR et ajoute : « Ce questionnaire cherche à évaluer le risque attaché à la consommation d'alcool. », « Si vous ne prenez jamais d'alcool, ne répondez qu'à la première question. » et « Un verre standard = 10 g d'alcool pur. »
+  - ⚠️ Item 10 : « un parent » a disparu (« Est-ce qu'un ami ou un médecin… ») et le « et » erroné de l'OMS FR est conservé.
+
 ### Divergences constatées entre sources
 
 Les cotations sont identiques partout (items 1-8 : 0-4 ; items 9-10 : 0/2/4). Les libellés diffèrent sur presque tous les items.
@@ -131,9 +136,9 @@ Parcours patient Mentaal déroulé **intégralement** (lien `mentaal.fr/a/…`, 
 
 ### Consigne officielle (affichée au patient avant les items)
 
-> *« Ce questionnaire interroge votre consommation d'alcool des douze derniers mois. Attention à ce que vos réponses reflètent cette unité de temps et pas seulement les dernières semaines. »*
+> *« Ce questionnaire interroge votre consommation d'alcool des douze derniers mois. Attention à ce que vos réponses reflètent cette unité de temps et pas seulement les dernières semaines. Un verre standard = 10 g d'alcool pur. »*
 
-**Source de la consigne** : auditscreen.org, version française, en-tête du PDF — mot pour mot. Pas de définition du « verre standard » : aucune des deux sources françaises n'en donne (cf. §10).
+**Source de la consigne** : auditscreen.org, version française, en-tête du PDF — mot pour mot. Dernière phrase (définition du verre standard) : Michaud & Lécallier (2003), tableau 3, mot pour mot — cf. §10.
 
 ### Comportement UX de la consigne
 
@@ -243,7 +248,7 @@ Aucune alerte item-niveau pour l'instant. (Piste à discuter : score ≥ 13 = or
 
 ## 10. Choix et arbitrages méthodologiques
 
-Règle suivie : les textes affichés au patient reprennent mot pour mot la version française de l'OMS (auditscreen.org). On ne s'en écarte qu'en cas d'erreur de sens, de faute ou d'ambiguïté avérée, et le texte de remplacement est alors celui de l'OFDT, jamais une formulation propre à Melya.
+Règle suivie : les textes affichés au patient reprennent mot pour mot la version française de l'OMS (auditscreen.org). On ne s'en écarte qu'en cas d'erreur de sens, de faute ou d'ambiguïté avérée, et le texte de remplacement est alors celui de l'OFDT, jamais une formulation propre à Melya. Seule exception : la définition du verre standard, recommandée par le manuel OMS et reprise d'une version française publiée (Michaud & Lécallier, 2003), faute de texte dans l'OFDT.
 
 ### Écarts à la source primaire
 
@@ -254,6 +259,7 @@ Règle suivie : les textes affichés au patient reprennent mot pour mot la versi
 | Items 9-10, réponse cotée 2 | « oui mais pas dans l'année passée » | « Oui, mais pas au cours de l'année écoulée » | OFDT | Cohérence avec la réponse cotée 4 : les deux réponses viennent du même texte. |
 | Item 5 | « …le fait d'avoir bu de l'alcool, vous -a-t-il empêché… de vous? » | « …le fait d'avoir bu de l'alcool vous a-t-il empêché… de vous ? » | OFDT (passage identique) | Coquilles du PDF source. Seul le passage fautif est corrigé : le reste de l'item suit la source primaire. |
 | Item 6 | « avez-vous du boire » | « avez-vous dû boire » | OFDT (passage identique) | Faute d'orthographe du PDF source. |
+| Consigne, dernière phrase | Aucune définition du verre standard | « Un verre standard = 10 g d'alcool pur. » | Michaud & Lécallier (2003), tableau 3 | Le manuel OMS demande de définir le verre standard pour le patient (« Patient instructions should also clarify the meaning of a standard drink ») ; indispensable pour répondre aux items 2 et 3. Ni l'OMS FR ni l'OFDT n'en donnent de texte ; celui-ci vient d'une version française publiée par un co-auteur de la validation française. 10 g = verre standard français ; six verres = 60 g, le seuil visé par l'item 3. |
 | Libellés de réponse | En minuscules, sans virgule (« jamais », « oui mais pas… ») | Majuscule initiale, virgule (« Jamais », « Oui, mais pas… ») | OFDT | Typographie seule, sens inchangé. |
 
 ### Autres arbitrages
@@ -262,7 +268,7 @@ Règle suivie : les textes affichés au patient reprennent mot pour mot la versi
 | --- | --- | --- |
 | Préfixe « Dans les douze derniers mois, » (items 4-8) | Conservé, comme dans la source | Présent dans la source primaire, l'OFDT, la version suisse et l'original anglais. Il avait été retiré dans une première version au profit d'un rappel affiché au-dessus des items ; ce rappel, absent de la source, est supprimé. |
 | Consigne | Consigne OMS mot pour mot | La première version reformulait la consigne sans raison ; retour au texte source. |
-| Définition du « verre standard » | Non affichée | Le manuel OMS recommande de définir le verre standard pour le patient, mais aucune des deux sources françaises n'en propose de formulation. Règle « on n'invente rien » : pas de texte Melya. |
+| Version Michaud & Lécallier (2003) | Retenue uniquement pour la définition du verre standard | Item 10 incomplet (« un parent » absent) et « et » erroné ; règle de saut (« ne répondez qu'à la première question ») contraire au manuel OMS, qui renvoie aux items 9-10 ; phrase d'objectif sans apport pour la mesure. Confirme par ailleurs nos corrections des items 5 et 6. |
 | Seuils d'interprétation | SFA 2015 via OFDT : mésusage ≥ 7 chez l'homme, ≥ 6 chez la femme ; dépendance > 12 | Référence institutionnelle française. Les seuils internationaux de l'OMS (≥ 8 ; dépendance ≥ 13 F / ≥ 15 H) ne sont pas retenus : version FR-France privilégiée. |
 | Seuil sexe-spécifique | Bande dédiée au score de 6, libellée « chez la femme (seuil chez l'homme : 7) » | L'app ne connaît pas le sexe du patient. Cette bande applique exactement les seuils OFDT sans supposer le sexe : aucun score n'est mal classé, le praticien lit l'interprétation au regard de son patient. |
 | Libellés des niveaux | « Évocateur d'un mésusage actuel d'alcool » ; « En faveur d'une dépendance à l'alcool » | Termes de l'OFDT. |
@@ -311,3 +317,4 @@ scoreAudit(scale, responses) → {
 | 24/07/2026 | Clément (avec Claude) | **Recette comparative navigateur vs Mentaal (INTERROMPUE, à reprendre).** Parcours patient Mentaal déroulé en entier, comparé item par item à notre version + à la source auditscreen.org. Constat : Mentaal ≈ reprise verbatim de auditscreen.org (imperfections comprises) ; notre version = même source éditée. Ajout du tableau de comparaison en §2. Principal écart à trancher : **préfixe « Dans les douze derniers mois » sur items 4-8** (présent source + Mentaal, retiré chez nous → §10 pt 5). Nos libellés d'items **confirmés conformes** à la source primaire (le doute sur l'attribution est levé). Nouveaux points 5-8 en §10. Scoring non comparé (score masqué au patient des deux côtés). |
 | 24/09/2026 | Clément (avec Claude) | Intitulés courts (eyebrows) retirés des 10 items : absents de la source primaire auditscreen.org. Chaque item n'a plus qu'un `title` = la question ; texte des questions inchangé. |
 | 29/09/2026 | Clément (avec Claude) | **Alignement sur les sources.** Comparaison OMS FR / OFDT / RevMed / original anglais (§2). Règle : OMS FR mot pour mot, écarts repris de l'OFDT uniquement (§10). Préfixe « Dans les douze derniers mois, » rétabli sur les items 4-8 ; rappel persistant supprimé ; consigne OMS mot pour mot ; définition du verre standard retirée ; item 10 remplacé par la version OFDT (« ou » de l'original anglais) ; réponses des items 9-10 alignées sur l'OFDT. Seuils SFA/OFDT appliqués exactement, avec bande dédiée au score de 6 (femme) ; libellés de niveaux OFDT. §10 réécrite en choix et arbitrages méthodologiques. Sources anglaises archivées. |
+| 29/09/2026 | Clément (avec Claude) | Ajout de la définition du verre standard en fin de consigne (« Un verre standard = 10 g d'alcool pur. »), reprise mot pour mot de Michaud & Lécallier (2003), version française publiée par un co-auteur de la validation française. Source ajoutée en §2, exception consignée en §10. |
