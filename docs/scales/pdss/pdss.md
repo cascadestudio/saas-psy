@@ -429,8 +429,9 @@ Pas de validation spécifique (cf. §9.5) : comportement commun à toutes les é
 | :---- | :---- | :---- |
 | 29/09/2026 | Adrien (avec Claude) | Création. Instruction des droits (© Shear, usage commercial non couvert → go sous réserve, flag ✉️). Choix de la PDSS-SR (auto-questionnaire). Source primaire : formulaire MSSS/PQPTM 2019 (seule VF complète accessible, aucune version de France). Seuil ≥ 9 (Roberge 2022), deux bandes. |
 | 29/09/2026 | Adrien (avec Claude) | Cross-check : la thèse de Bordeaux 2017 ne reproduit pas les items → écartée. Source MSSS retenue seule (exception autorité institutionnelle) ; version Roberge 2022 demandée à Sherbrooke pour cross-check a posteriori. |
-| 29/09/2026 | Adrien (avec Claude) | Implémentation E5 : données `packages/core`, scorer patron FTND, tests §9 automatisés (Jest, hors CI). Évolutions UI associées : composant `ScaleInstructions` (retours à la ligne et puces dans les consignes), taille de question réduite au-delà de 250 caractères, retour instantané en haut de page à chaque question. Recette à confirmer. |
+| 29/09/2026 | Adrien (avec Claude) | Implémentation E5 : données `packages/core`, scorer patron FTND, tests §9 automatisés (Jest, hors CI). Évolutions UI associées : composant `ScaleInstructions` (retours à la ligne et puces dans les consignes), taille de question réduite au-delà de 250 caractères, retour instantané en haut de page à chaque question. Recette faite le jour même (ligne suivante). |
 | 29/09/2026 | Adrien (avec Claude) | Alignement sur le nouveau template (règles 5 à 7, §10 « Choix et arbitrages méthodologiques ») : écarts déplacés de §2 vers §10, arbitrages consignés, deux questions ouvertes (libellé de la bande basse, bascule éventuelle sur la version Roberge). Plus de validation clinique externe : questions tranchées par Clément. |
+| 29/09/2026 | Adrien | Recette E6 sur staging : parcours patient complet (intro avec liste à puces, 7 items, récapitulatif, résultats), seuil de la jauge à 9, mention de copyright. Échelle validée. |
 
 ---
 
