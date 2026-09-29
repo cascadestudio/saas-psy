@@ -1051,11 +1051,11 @@ export const scales: Scale[] = [
       "Veuillez répondre aux énoncés suivants en choisissant la réponse qui décrit le mieux vos expériences et réactions durant l'événement et immédiatement après.\n\nSi une question ne s'applique pas à votre expérience, répondez « pas du tout vrai ».",
     persistentInstructions: "Durant l'événement et immédiatement après :",
     copyrightAttribution:
-      "PDEQ — Marmar, Weiss & Metzler (1997) ©1997. Traduction française et validation : Birmes et al. (2005), European Psychiatry. Mise en page : Centre national de ressources et de résilience (Cn2r).",
+      "PDEQ — Marmar, Weiss & Metzler (1997) ©1997. Traduction française : Brunet & Routhier (1999), avec l'autorisation des auteurs. Validation française : Birmes et al. (2005), European Psychiatry. Mise en page : Centre national de ressources et de résilience (Cn2r).",
     higherIsBetter: false,
     questions: [
       "Il y a eu des moments où j'ai perdu le fil de ce qui se passait – j'étais complètement déconnecté(e) ou, d'une certaine façon, j'ai senti que je ne faisais pas partie de ce qui se passait.",
-      "Je me suis retrouvé(e) sur le « pilote automatique » – je me suis mis(e) à faire des choses que, je l'ai réalisé plus tard, je n'avais pas activement décidé de faire.",
+      "Je me suis retrouvé(e) sur le “pilote automatique” – je me suis mis(e) à faire des choses que, je l'ai réalisé plus tard, je n'avais pas activement décidé de faire.",
       "Ma perception du temps a changé – les choses avaient l'air de se dérouler au ralenti.",
       "Ce qui se passait me semblait irréel, comme si j'étais dans un rêve ou au cinéma, ou en train de jouer un rôle.",
       "C'est comme si j'étais le (ou la) spectateur(trice) de ce qui m'arrivait, comme si je flottais au-dessus de la scène et l'observais de l'extérieur.",

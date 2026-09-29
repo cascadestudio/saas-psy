@@ -36,12 +36,21 @@ hiérarchie versions, comparaison Mentaal).
 - **Fichier de portage** : `docs/scales/pdeq/PDEQ_Cn2r.pdf`
 - **Date de consultation** : 16/07/2026
 
-### Exception de sourcing — autorité unique justifiée
+### Source secondaire
 
-Le Cn2r est le centre national de référence français sur le psychotraumatisme ;
-sa fiche reproduit le questionnaire validé (items Birmes et al. 2005) **et** la
-cotation/étalonnage. Une source institutionnelle unique faisant autorité suffit
-(même logique que Pfizer pour PHQ-9/GAD-7).
+- **Type** : version française diffusée par une institution française — URPS Médecins Libéraux Provence-Alpes-Côte d'Azur.
+- **Référence** : *Réactions Dissociatives Péritraumatiques (PDEQ)* — « Traduit et adapté par Alain Brunet et Christiane Routhier (1999) avec l'autorisation des auteurs ». Alain Brunet est co-auteur de la validation française (Birmes et al., 2005).
+- **URL** : https://www.urps-ml-paca.org/wp-content/uploads/2021/11/PDEQ-Fr.pdf
+- **Fichier de portage** : `docs/scales/pdeq/PDEQ_URPS-ML-PACA_Brunet-Routhier-1999.pdf`
+- **Date de consultation** : 29/09/2026
+
+Même traduction que la fiche Cn2r, sans ses coquilles. Pas de seuil (le seuil ≥ 15 vient de la fiche descriptive Cn2r).
+
+### Sources consultées, non retenues
+
+- **INSPQ** (Québec), *Boîte à outils pour la surveillance post-sinistre* : variante québécoise retravaillée (« comme en « pilotage automatique » », « était changée », « en regardant un film », « déformée »). Hiérarchie France d'abord ; « comme en » atténue l'item 2 par rapport à l'original (« I found myself on "automatic pilot" »). Texte relu via un outil de lecture, à confirmer à l'œil avant citation publique.
+- **TCC Montréal** : nombreuses coquilles (« retrouvée(e) », « avaientt », « monde propre corps », « la spectatrice »).
+- **Birmes et al. (2005)**, article de validation : non accessible (Cambridge Core, accès restreint).
 
 ### Instrument original
 
@@ -50,9 +59,15 @@ cotation/étalonnage. Une source institutionnelle unique faisant autorité suffi
 
 ### Divergences constatées entre sources
 
-- PDF Cn2r, consigne : artefact de mise en page « après.bSi » lu comme « après. Si ».
-- PDF Cn2r, item 5 : « je flottais au dessus de la scène et l'**observait** » — coquille de conjugaison corrigée en « l'**observais** » (1ʳᵉ personne, cohérente avec le reste de l'item) ; « au dessus » normalisé en « au-dessus ».
-- « en cochant le choix de réponse » adapté en « en choisissant la réponse » (passation numérique, boutons).
+| Élément | Cn2r (primaire) | URPS, Brunet & Routhier 1999 (secondaire) |
+|---|---|---|
+| Consigne | « en cochant… », « après.bSi… cochez « pas du tout vrai » » | « en entourant… », « après. Si… encerclez "Pas du tout vrai" » |
+| Item 2 | “pilote automatique” – | "pilote automatique" - |
+| Item 4 | « dans un rêve ou au cinéma » | « dans un rêve, ou au cinéma » |
+| Item 5 | « au dessus… l'observait » (coquilles) | « au-dessus… l'observais » |
+| Items 9-10 | « confus(e); », « désorienté(e); » | « confus(e) ; », « désorienté(e) ; » |
+
+Items 1, 3, 6, 7, 8 et libellés de réponse identiques (aux tirets près).
 
 ---
 
@@ -61,8 +76,8 @@ cotation/étalonnage. Une source institutionnelle unique faisant autorité suffi
 | Champ | Valeur |
 |-------|--------|
 | **Statut** | libre pour usage clinique avec attribution (instrument de recherche diffusé publiquement par le Cn2r) |
-| **Détenteur des droits** | Marmar, Weiss & Metzler ©1997 ; traduction Birmes et al. (2005). |
-| **Mention obligatoire à afficher** | *« PDEQ — Marmar, Weiss & Metzler (1997) ©1997. Traduction française et validation : Birmes et al. (2005), European Psychiatry. Mise en page : Centre national de ressources et de résilience (Cn2r). »* |
+| **Détenteur des droits** | Marmar, Weiss & Metzler ©1997 ; traduction Brunet & Routhier (1999), avec l'autorisation des auteurs ; validation Birmes et al. (2005). |
+| **Mention obligatoire à afficher** | *« PDEQ — Marmar, Weiss & Metzler (1997) ©1997. Traduction française : Brunet & Routhier (1999), avec l'autorisation des auteurs. Validation française : Birmes et al. (2005), European Psychiatry. Mise en page : Centre national de ressources et de résilience (Cn2r). »* |
 | **Restrictions d'usage** | Le copyright ©1997 est affiché sur le document Cn2r lui-même, qui le diffuse librement à visée clinique. ⚠️ À recocher pour l'usage commercial (plateforme payante). |
 | **Décision Melya** | go (sous réserve recoche usage commercial) |
 
@@ -79,7 +94,7 @@ cotation/étalonnage. Une source institutionnelle unique faisant autorité suffi
 | Champ | Valeur |
 | --- | --- |
 | **Persistance** | persistante — rappel court : « Durant l'événement et immédiatement après : » |
-| **Justification** | Ancre le référentiel temporel péritraumatique, spécifique à cette échelle. |
+| **Justification** | Extrait mot pour mot de la consigne source. Sur le papier, la consigne reste visible au-dessus des 10 items (une seule page) ; à l'écran, un item à la fois, elle disparaît dès le premier. Le rappel reproduit cette présence (cf. §10). |
 
 ### Dimensions de cotation
 
@@ -91,7 +106,20 @@ Likert unique 1-5 : Pas du tout vrai / Un peu vrai / Plutôt vrai / Très vrai /
 
 ## 5. Items
 
-10 items portés verbatim depuis le PDF Cn2r (corrections listées en §2). Pas d'items inversés, pas de sous-scores.
+Items de la fiche Cn2r, mot pour mot, sauf les corrections consignées en §10 (items 5, 9, 10). Pas d'items inversés, pas de sous-scores. Réponses : 1 Pas du tout vrai · 2 Un peu vrai · 3 Plutôt vrai · 4 Très vrai · 5 Extrêmement vrai.
+
+| # | Item |
+|---|------|
+| 1 | Il y a eu des moments où j'ai perdu le fil de ce qui se passait – j'étais complètement déconnecté(e) ou, d'une certaine façon, j'ai senti que je ne faisais pas partie de ce qui se passait. |
+| 2 | Je me suis retrouvé(e) sur le “pilote automatique” – je me suis mis(e) à faire des choses que, je l'ai réalisé plus tard, je n'avais pas activement décidé de faire. |
+| 3 | Ma perception du temps a changé – les choses avaient l'air de se dérouler au ralenti. |
+| 4 | Ce qui se passait me semblait irréel, comme si j'étais dans un rêve ou au cinéma, ou en train de jouer un rôle. |
+| 5 | C'est comme si j'étais le (ou la) spectateur(trice) de ce qui m'arrivait, comme si je flottais au-dessus de la scène et l'observais de l'extérieur. |
+| 6 | Il y a eu des moments où la perception que j'avais de mon corps était distordue ou changée. Je me sentais déconnecté(e) de mon propre corps, ou bien il me semblait plus grand ou plus petit que d'habitude. |
+| 7 | J'avais l'impression que les choses qui arrivaient aux autres m'arrivaient à moi aussi – comme par exemple être en danger alors que je ne l'étais pas. |
+| 8 | J'ai été surpris(e) de constater après coup que plusieurs choses s'étaient produites sans que je m'en rende compte, des choses que j'aurais habituellement remarquées. |
+| 9 | J'étais confus(e) ; c'est-à-dire que par moment j'avais de la difficulté à comprendre ce qui se passait vraiment. |
+| 10 | J'étais désorienté(e) ; c'est-à-dire que par moment j'étais incertain(e) de l'endroit où je me trouvais, ou de l'heure qu'il était. |
 
 ---
 
@@ -127,32 +155,38 @@ Aucune.
 | T3 | 15 (ex. 2,2,2,2,2,1,1,1,1,1) | 15 | Significative |
 | T4 | Tous = 5 | 50 | Significative |
 
-Vérifiés dans le script de recette (40/40 PASS, 16/07/2026).
+Vérifiés dans le script de recette (40/40 PASS, 16/07/2026). Rejoués par `apps/api/src/scoring/scorers/pdeq.spec.ts` (5/5, 29/09/2026).
 
 ---
 
 ## 10. Choix et arbitrages méthodologiques
 
+Règle suivie : les textes affichés au patient reprennent mot pour mot la fiche du Cn2r. On ne s'en écarte qu'en cas de faute ou pour adapter le support papier à l'écran ; le texte corrigé est alors celui de la version URPS-ML PACA (Brunet & Routhier, 1999), jamais une formulation propre à Melya.
+
 ### Écarts à la source primaire
 
-| Élément | Source primaire | Texte retenu | Origine du texte retenu | Justification |
+| Élément | Source primaire (Cn2r) | Texte retenu | Origine du texte retenu | Justification |
 | --- | --- | --- | --- | --- |
-| Consigne | « après.bSi » (artefact de mise en page) | « après. Si » | Correction | Coquille du PDF Cn2r. |
-| Consigne | « en cochant le choix de réponse » | « en choisissant la réponse » | Adaptation Melya | Adaptation du support (boutons). |
-| Item 5 | « je flottais au dessus de la scène et l'observait » | « …au-dessus de la scène et l'observais » | Correction | Coquille de conjugaison (1re personne, cohérente avec le reste de l'item) et trait d'union. |
+| Consigne, coupure | « …immédiatement après.bSi une question… » | Deux phrases : « …immédiatement après. » / « Si une question… » | URPS-ML PACA | Artefact de mise en page du PDF Cn2r. |
+| Consigne, verbes | « en cochant le choix de réponse », « cochez « pas du tout vrai » » | « en choisissant la réponse », « répondez « pas du tout vrai » » | Adaptation Melya | Adaptation du support : toutes les sources parlent du papier (cocher, entourer, encercler) ; à l'écran, on choisit une réponse. Seul écart sans source, et sans effet sur le sens. |
+| Item 5 | « au dessus de la scène et l'observait » | « au-dessus de la scène et l'observais » | URPS-ML PACA | Coquilles (trait d'union, conjugaison à la 1re personne). |
+| Items 9, 10 | « confus(e); », « désorienté(e); » | « confus(e) ; », « désorienté(e) ; » | URPS-ML PACA | Typographie française. |
 
 ### Autres arbitrages
 
 | Sujet | Choix retenu | Justification |
 | --- | --- | --- |
+| Rappel au-dessus des items | « Durant l'événement et immédiatement après : » | Extrait mot pour mot de la consigne source ; reproduit la présence de la consigne au-dessus des items sur la page papier (cf. §4). Validé par Clément le 29/09/2026. |
+| Item 2, guillemets | “pilote automatique”, comme le Cn2r | Guillemets français « » écartés : aucune source ne les utilise. |
+| Variante INSPQ (Québec) | Non retenue | Hiérarchie France d'abord ; « comme en « pilotage automatique » » atténue l'item par rapport à l'original ; autres écarts (items 3, 4, 6) sans justification. |
 | Seuil | ≥ 15 | Fiche descriptive Cn2r : « Un score total ≥ 15 permet le dépistage de dissociation péritraumatique significative ». |
 | Libellés des bandes | « Dissociation péritraumatique significative » / « non significative » | Terme de la source ; la bande basse en est la négation. |
+| Mention de la traduction | Brunet & Routhier (1999) pour la traduction, Birmes et al. (2005) pour la validation | La version URPS crédite les traducteurs d'origine ; le Cn2r n'indique que la validation. |
 | Réponses manquantes | Passation incomplète refusée, pas d'imputation | Règle projet commune à toutes les échelles. |
 
 ### Questions ouvertes
 
-1. Rappel affiché au-dessus des items « Durant l'événement et immédiatement après : » : formulation Melya, absente de la source. Règle « on n'invente rien » : le supprimer, comme pour l'AUDIT le 29/09/2026 (recommandé), ou retrouver ce texte dans une source.
-2. **Usage commercial du ©1997 Marmar** — recocher les droits.
+1. **Usage commercial du ©1997 Marmar** — recocher les droits.
 
 ---
 
@@ -170,3 +204,4 @@ Vérifiés dans le script de recette (40/40 PASS, 16/07/2026).
 |------|--------|--------------|
 | 16/07/2026 | Adrien (avec Claude) | Création : entrée `Scale`, scorer somme 10-50 (seuil ≥ 15), icône placeholder, spec. Items verbatim fiche Cn2r (2 coquilles source corrigées, documentées §2). |
 | 29/09/2026 | Clément (avec Claude) | §10 réécrite en « Choix et arbitrages méthodologiques » : fin de la validation clinique externe, les arbitrages sont tranchés par l'équipe. Points ouverts reformulés en décisions d'équipe, avec la règle « on n'invente rien » (écarts à la source repris de la source secondaire). |
+| 29/09/2026 | Clément (avec Claude) | **Recette.** Source secondaire ajoutée (URPS-ML PACA, Brunet & Routhier 1999) : elle confirme les corrections de l'item 5, de la consigne et des items 9-10. Item 2 aligné sur le Cn2r (guillemets “ ”). Rappel au-dessus des items conservé (extrait de la consigne). Mention copyright complétée (Brunet & Routhier 1999). Items listés en §5, tests automatisés (5/5). Recette manuelle passée par Clément : échelle validée (✅). |

@@ -11,7 +11,7 @@
 
 ## Tableau de bord
 
-**✅ 8 validées · 🔵 8 implémentées · 🚧 0 en cours · 📋 8 prévues · 🔍 22 à instruire · ⬜ 26 non planifiées · 🚫 12 écartées**
+**✅ 10 validées · 🔵 6 implémentées · 🚧 0 en cours · 📋 8 prévues · 🔍 22 à instruire · ⬜ 26 non planifiées · 🚫 12 écartées**
 
 **Rattrapage Mentaal : 13/42.** Le plafond n'est pas 74 : sur leur catalogue
 disponible, 12 sont écartées d'office (payantes, outils maison Mentaal, ou
@@ -52,12 +52,12 @@ sortie ; les auteurs flaggés seront contactés en une fois, plus tard.
 | PCL-5 | TSPT (DSM-5) | ✅ | ✅ | — | #20 | |
 | Y-BOCS | TOC de Yale-Brown | ✅ | ✅ | — | #44 | |
 | PSWQ | Inquiétude de Penn State | ✅ | ✅ | — | #53 | acronyme public **PSWQ** ; id interne `qips` ; VF validée = QIPS (Gosselin 2001) ; recette OK (Clément, PDF source) — bandes de seuils à trancher (équipe, §10) |
-| AUDIT | Troubles liés à l'alcool | 🔵 | ✅ OMS | 🟢 A | #66 | aligné sur les sources le 29/09/2026 (OMS FR mot pour mot, écarts repris de l'OFDT, seuils SFA/OFDT exacts) — recette à faire |
+| AUDIT | Troubles liés à l'alcool | ✅ | ✅ OMS | 🟢 A | #66 | aligné sur les sources le 29/09/2026 (OMS FR mot pour mot, écarts repris de l'OFDT, verre standard Michaud 2003, seuils SFA/OFDT « 6 F / 7 H ») ; recette OK (Clément, 29/09/2026) |
 | SPIN | Inventaire de la phobie sociale | 🔵 | ✅ | — | Bientôt · 31 v. | **Melya devant Mentaal** |
 | HSPS | Hypersensibilité (Aron) | 🔵 | ⚠️ | 🟢 A | #19 | auto-test du livre (23 items OUI/NON, seuil 12) — droits trad. Éditions de l'Homme à instruire avant sortie de beta |
 | WAQ | Inquiétude et anxiété (Dugas) | 🔵 | ✅ | 🟡 B | #25 | porté sous l'id **QIA** — criteriaCheck TAG (pas une simple somme) + item thèmes en texte libre (nouvelle brique `openingTextItem`) |
 | IUS | Intolérance à l'incertitude | 🔵 | ✅ | 🟢 A | #26 | porté sous l'id **EII** — score brut 27-135 sans bandes (aucun cutoff établi) + sous-scores bifactoriels |
-| PDEQ | Dissociation péritraumatique | 🔵 | ✅ | 🟢 A | #59 | seuil ≥ 15 (fiche Cn2r) |
+| PDEQ | Dissociation péritraumatique | ✅ | ✅ | 🟢 A | #59 | seuil ≥ 15 (fiche Cn2r) ; source secondaire URPS-ML PACA (Brunet & Routhier 1999) ; recette OK (Clément, 29/09/2026) |
 | CUDIT-R | Troubles liés au cannabis | 🔵 | ✅ | 🟢 A | #70 | question-porte « 6 derniers mois » portée en consigne ; seuils 8-10 / > 10 (RESPADD) |
 | FTND | Dépendance à la nicotine (Fagerström) | 🔵 | ✅ | 🟢 A | Bientôt · 29 v. | **Melya devant Mentaal** ; seuils HAS 2014, options dans l'ordre du PDF HAS, sans intitulés courts ni consigne (absents de la source) ; implémenté en réutilisation (patron CUDIT-R) le 24/09/2026 |
 | ASRS | TDAH adulte | 📋 (1) | ✅ OMS | 🟡 B | #3 | `criteriaCheck` façon PCL-5 ; motif le + demandé |

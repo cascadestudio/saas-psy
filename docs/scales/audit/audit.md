@@ -319,3 +319,4 @@ scoreAudit(scale, responses) → {
 | 29/09/2026 | Clément (avec Claude) | Ajout de la définition du verre standard en fin de consigne (« Un verre standard = 10 g d'alcool pur. »), reprise mot pour mot de Michaud & Lécallier (2003), version française publiée par un co-auteur de la validation française. Source ajoutée en §2, exception consignée en §10. |
 | 29/09/2026 | Clément (avec Claude) | Infographie de résultat simplifiée : 3 tranches OFDT (0-5 / 6-12 / 13-40) au lieu de 4 ; la tranche d'un point (score 6, « chez la femme ») est supprimée. Note en petit sous la jauge : seuils OFDT complets (6 femme, 7 homme, dépendance > 12). |
 | 29/09/2026 | Clément (avec Claude) | Infographie : le repère du mésusage affiche les deux seuils OFDT (« 6 F / 7 H ») ; note des seuils déplacée sous le libellé d'interprétation (elle le chevauchait). |
+| 29/09/2026 | Clément | Recette manuelle passée : échelle validée (✅). |
