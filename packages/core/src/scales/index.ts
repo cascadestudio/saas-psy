@@ -1168,7 +1168,7 @@ export const scales: Scale[] = [
     id: "cudit-r",
     acronym: "CUDIT-R",
     label: "Test de repérage des troubles liés à l'usage du cannabis",
-    patientIntroSubtitle: "Cannabis Use Disorder Identification Test - Revised (CUDIT-R-Fr)",
+    patientIntroSubtitle: "Cannabis Use Disorder Identification Test - Revised - version française (CUDIT-R-Fr)",
     domain: "addictions",
     formType: "options",
     title: "CUDIT-R - Test de repérage des troubles liés à l'usage du cannabis",
@@ -1177,7 +1177,7 @@ export const scales: Scale[] = [
     category: "Addictions",
     estimatedTime: "2-3 minutes",
     longDescription:
-      "Le CUDIT-R (Cannabis Use Disorder Identification Test – Revised) est un auto-questionnaire de 8 items développé par Adamson et al. (2010) pour repérer les consommations de cannabis problématiques et les troubles de l'usage du cannabis, sur les 6 derniers mois. Les items 1 à 7 sont cotés de 0 à 4 et l'item 8 est coté 0, 2 ou 4 ; le score total varie de 0 à 32. Un score de 8 à 10 évoque une consommation possiblement problématique ; au-delà de 10, un trouble de l'usage du cannabis est possible. La version française (CUDIT-R-Fr) a été validée par Luquiens et al. (2021). Ce questionnaire s'adresse aux personnes ayant consommé du cannabis au cours des 6 derniers mois.",
+      "Le CUDIT-R (Cannabis Use Disorder Identification Test – Revised) est un auto-questionnaire de 8 items développé par Adamson et al. (2010) pour repérer les consommations de cannabis problématiques et les troubles de l'usage du cannabis, sur les 6 derniers mois. Les items 1 à 7 sont cotés de 0 à 4 et l'item 8 est coté 0, 2 ou 4 ; le score total varie de 0 à 32. Un score de 8 à 10 évoque une consommation pouvant être problématique ; au-delà de 10, un trouble important de l'usage de cannabis est possible. La version française (CUDIT-R-Fr) a été validée par Luquiens et al. (2021). Ce questionnaire s'adresse aux personnes ayant consommé du cannabis au cours des 6 derniers mois.",
     instructions:
       "Ce questionnaire s'adresse aux personnes ayant consommé du cannabis au cours des 6 derniers mois.\n\nRépondez aux questions suivantes en choisissant la réponse qui correspond le plus à votre consommation de cannabis au cours des 6 derniers mois. Veuillez répondre à toutes les questions.",
     persistentInstructions:
@@ -1277,22 +1277,22 @@ export const scales: Scale[] = [
         {
           min: 0,
           max: 7,
-          interpretation: "Pas de trouble de l'usage repéré",
+          interpretation: "Consommation pouvant être à faible risque",
         },
         {
           min: 8,
           max: 10,
-          interpretation: "Consommation de cannabis possiblement problématique",
+          interpretation: "Consommation de cannabis pouvant être problématique",
         },
         {
           min: 11,
           max: 32,
-          interpretation: "Trouble de l'usage du cannabis possible",
+          interpretation: "Trouble important de l'usage de cannabis possible",
         },
       ],
       maxScore: 32,
       method:
-        "Additionnez les scores de chaque item (items 1-7 : 0-4 ; item 8 : 0, 2 ou 4). Le score total varie de 0 à 32. De 8 à 10 : consommation possiblement problématique ; au-delà de 10 : trouble de l'usage possible.",
+        "Additionnez les scores de chaque item (items 1-7 : 0-4 ; item 8 : 0, 2 ou 4). Le score total varie de 0 à 32. De 8 à 10 : consommation pouvant être problématique ; au-delà de 10 : trouble important de l'usage possible.",
     },
   },
   {
