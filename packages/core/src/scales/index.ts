@@ -1055,7 +1055,7 @@ export const scales: Scale[] = [
     higherIsBetter: false,
     questions: [
       "Il y a eu des moments où j'ai perdu le fil de ce qui se passait – j'étais complètement déconnecté(e) ou, d'une certaine façon, j'ai senti que je ne faisais pas partie de ce qui se passait.",
-      "Je me suis retrouvé(e) sur le “pilote automatique” – je me suis mis(e) à faire des choses que, je l'ai réalisé plus tard, je n'avais pas activement décidé de faire.",
+      "Je me suis retrouvé(e) sur le « pilote automatique » – je me suis mis(e) à faire des choses que, je l'ai réalisé plus tard, je n'avais pas activement décidé de faire.",
       "Ma perception du temps a changé – les choses avaient l'air de se dérouler au ralenti.",
       "Ce qui se passait me semblait irréel, comme si j'étais dans un rêve ou au cinéma, ou en train de jouer un rôle.",
       "C'est comme si j'étais le (ou la) spectateur(trice) de ce qui m'arrivait, comme si je flottais au-dessus de la scène et l'observais de l'extérieur.",

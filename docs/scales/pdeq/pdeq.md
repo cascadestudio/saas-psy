@@ -106,12 +106,12 @@ Likert unique 1-5 : Pas du tout vrai / Un peu vrai / Plutôt vrai / Très vrai /
 
 ## 5. Items
 
-Items de la fiche Cn2r, mot pour mot, sauf les corrections consignées en §10 (items 5, 9, 10). Pas d'items inversés, pas de sous-scores. Réponses : 1 Pas du tout vrai · 2 Un peu vrai · 3 Plutôt vrai · 4 Très vrai · 5 Extrêmement vrai.
+Items de la fiche Cn2r, mot pour mot, sauf les corrections consignées en §10 (items 2, 5, 9, 10). Pas d'items inversés, pas de sous-scores. Réponses : 1 Pas du tout vrai · 2 Un peu vrai · 3 Plutôt vrai · 4 Très vrai · 5 Extrêmement vrai.
 
 | # | Item |
 |---|------|
 | 1 | Il y a eu des moments où j'ai perdu le fil de ce qui se passait – j'étais complètement déconnecté(e) ou, d'une certaine façon, j'ai senti que je ne faisais pas partie de ce qui se passait. |
-| 2 | Je me suis retrouvé(e) sur le “pilote automatique” – je me suis mis(e) à faire des choses que, je l'ai réalisé plus tard, je n'avais pas activement décidé de faire. |
+| 2 | Je me suis retrouvé(e) sur le « pilote automatique » – je me suis mis(e) à faire des choses que, je l'ai réalisé plus tard, je n'avais pas activement décidé de faire. |
 | 3 | Ma perception du temps a changé – les choses avaient l'air de se dérouler au ralenti. |
 | 4 | Ce qui se passait me semblait irréel, comme si j'étais dans un rêve ou au cinéma, ou en train de jouer un rôle. |
 | 5 | C'est comme si j'étais le (ou la) spectateur(trice) de ce qui m'arrivait, comme si je flottais au-dessus de la scène et l'observais de l'extérieur. |
@@ -171,13 +171,13 @@ Règle suivie : les textes affichés au patient reprennent mot pour mot la fiche
 | Consigne, verbes | « en cochant le choix de réponse », « cochez « pas du tout vrai » » | « en choisissant la réponse », « répondez « pas du tout vrai » » | Adaptation Melya | Adaptation du support : toutes les sources parlent du papier (cocher, entourer, encercler) ; à l'écran, on choisit une réponse. Seul écart sans source, et sans effet sur le sens. |
 | Item 5 | « au dessus de la scène et l'observait » | « au-dessus de la scène et l'observais » | URPS-ML PACA | Coquilles (trait d'union, conjugaison à la 1re personne). |
 | Items 9, 10 | « confus(e); », « désorienté(e); » | « confus(e) ; », « désorienté(e) ; » | URPS-ML PACA | Typographie française. |
+| Item 2, guillemets | “pilote automatique” | « pilote automatique » | Typographie Melya | Guillemets français, sens inchangé (décision de Clément, 29/09/2026). Les deux sources utilisent des guillemets anglais (“ ” au Cn2r, " " à l'URPS). |
 
 ### Autres arbitrages
 
 | Sujet | Choix retenu | Justification |
 | --- | --- | --- |
 | Rappel au-dessus des items | « Durant l'événement et immédiatement après : » | Extrait mot pour mot de la consigne source ; reproduit la présence de la consigne au-dessus des items sur la page papier (cf. §4). Validé par Clément le 29/09/2026. |
-| Item 2, guillemets | “pilote automatique”, comme le Cn2r | Guillemets français « » écartés : aucune source ne les utilise. |
 | Variante INSPQ (Québec) | Non retenue | Hiérarchie France d'abord ; « comme en « pilotage automatique » » atténue l'item par rapport à l'original ; autres écarts (items 3, 4, 6) sans justification. |
 | Seuil | ≥ 15 | Fiche descriptive Cn2r : « Un score total ≥ 15 permet le dépistage de dissociation péritraumatique significative ». |
 | Libellés des bandes | « Dissociation péritraumatique significative » / « non significative » | Terme de la source ; la bande basse en est la négation. |
@@ -204,4 +204,4 @@ Règle suivie : les textes affichés au patient reprennent mot pour mot la fiche
 |------|--------|--------------|
 | 16/07/2026 | Adrien (avec Claude) | Création : entrée `Scale`, scorer somme 10-50 (seuil ≥ 15), icône placeholder, spec. Items verbatim fiche Cn2r (2 coquilles source corrigées, documentées §2). |
 | 29/09/2026 | Clément (avec Claude) | §10 réécrite en « Choix et arbitrages méthodologiques » : fin de la validation clinique externe, les arbitrages sont tranchés par l'équipe. Points ouverts reformulés en décisions d'équipe, avec la règle « on n'invente rien » (écarts à la source repris de la source secondaire). |
-| 29/09/2026 | Clément (avec Claude) | **Recette.** Source secondaire ajoutée (URPS-ML PACA, Brunet & Routhier 1999) : elle confirme les corrections de l'item 5, de la consigne et des items 9-10. Item 2 aligné sur le Cn2r (guillemets “ ”). Rappel au-dessus des items conservé (extrait de la consigne). Mention copyright complétée (Brunet & Routhier 1999). Items listés en §5, tests automatisés (5/5). Recette manuelle passée par Clément : échelle validée (✅). |
+| 29/09/2026 | Clément (avec Claude) | **Recette.** Source secondaire ajoutée (URPS-ML PACA, Brunet & Routhier 1999) : elle confirme les corrections de l'item 5, de la consigne et des items 9-10. Item 2 : guillemets français « » conservés (typographie, décision de Clément). Rappel au-dessus des items conservé (extrait de la consigne). Mention copyright complétée (Brunet & Routhier 1999). Items listés en §5, tests automatisés (5/5). Recette manuelle passée par Clément : échelle validée (✅). |
