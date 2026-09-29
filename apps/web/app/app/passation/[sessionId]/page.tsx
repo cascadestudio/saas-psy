@@ -478,7 +478,7 @@ export default function ResultsPage() {
               )}
             </div>
             <h2 className="text-lg font-sans font-semibold mb-3">
-              Réponses de patient·e
+              Réponses de votre patient·e
             </h2>
             <ItemResponsesList
               scale={scale}
