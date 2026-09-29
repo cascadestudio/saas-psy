@@ -142,7 +142,7 @@ de suivi.
 | Éditeur commercial identifié | 💰 payante | 🚫 Écartée. On note l'éditeur dans `SUIVI_ECHELLES.md` et on cherche une alternative libre. |
 | Mention explicite de libre reproduction / domaine public | ✅ libre | GO vers E2. Citer la phrase exacte + son URL. |
 | Diffusion institutionnelle ouverte, sans phrase de licence | ⚠️ zone grise | GO vers E2 **mais** la fiche porte la réserve, et §3 « Décision Melya » reste `go sous réserve`. |
-| « Free for research/clinical use » sans mention commerciale | ⚠️ zone grise | Idem — c'est le cas le plus fréquent. Melya étant payant, la question de l'usage commercial se pose systématiquement. |
+| « Free for research/clinical use » sans mention commerciale | ⚠️ zone grise | Idem — c'est le cas le plus fréquent. Melya étant payant, la question de l'usage commercial se pose systématiquement. On pose le flag ✉️ (contact auteur à faire) dans `SUIVI_ECHELLES.md` : ça ne bloque pas la sortie, les auteurs flaggés seront contactés en une fois. |
 | Rien de concluant après ~1 h | ⚠️ | STOP. On ne devine pas. Note de droits remise en l'état à Clément. |
 
 ⚠️ **La présence d'une échelle chez Mentaal ne prouve rien** : ils diffusent
