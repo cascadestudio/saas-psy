@@ -135,11 +135,30 @@ Vérifiés dans le script de recette (40/40 PASS, 16/07/2026).
 
 ---
 
-## 10. Points à valider avec le·la psychologue référent·e
+## 10. Choix et arbitrages méthodologiques
 
-1. **Question-porte en consigne** (décision produit) — valider que l'envoi ciblé par le praticien suffit.
-2. Libellés des trois bandes.
-3. « défoncé(e) » — terme du flyer officiel, à confirmer pour le portail patient.
+### Écarts à la source primaire
+
+| Élément | Source primaire | Texte retenu | Origine du texte retenu | Justification |
+| --- | --- | --- | --- | --- |
+| Libellés de réponse | Abréviations du flyer (« ≤ 1 fois/mois », « < 1 fois/mois », « < 1 heure ») | « Une fois par mois ou moins », « Moins d'une fois par mois », « Moins d'une heure » | Développement des abréviations | Adaptation du support : abréviations d'un flyer papier, sens inchangé. |
+| Item 2 | « défoncé » | « défoncé(e) » | Accord en genre | Cohérence avec le reste du catalogue, sens inchangé. |
+| Question-porte | « Avez-vous consommé du cannabis au cours des 6 derniers mois ? OUI/NON » (si NON, pas de passation) | Première phrase de la consigne : « Ce questionnaire s'adresse aux personnes ayant consommé du cannabis au cours des 6 derniers mois. » | Formulation Melya ⚠️ | L'app n'a pas de logique conditionnelle ; c'est le praticien qui décide de l'envoi (Adrien, 16/07/2026). Non conforme à la règle actuelle, cf. questions ouvertes. |
+
+### Autres arbitrages
+
+| Sujet | Choix retenu | Justification |
+| --- | --- | --- |
+| Seuils | Flyer RESPADD : 8-10 / > 10, plutôt que les seuils d'origine d'Adamson (≥ 8 / ≥ 12) | La version française fait foi (hiérarchie France d'abord). |
+| Terme « défoncé(e) » | Conservé | Terme du flyer officiel RESPADD. |
+| Intitulés courts des items | Aucun | Absents de la source RESPADD (retirés le 24/09/2026). |
+| Réponses manquantes | Passation incomplète refusée, pas d'imputation | Règle projet commune à toutes les échelles. |
+
+### Questions ouvertes
+
+1. **Question-porte** — la phrase ajoutée en tête de consigne est une formulation Melya. Choix : (a) la retirer et s'en remettre au choix d'envoi du praticien (recommandé, règle « on n'invente rien ») ; (b) reprendre la question-porte du flyer mot pour mot comme premier item non scoré.
+2. Rappel affiché au-dessus des items « Votre consommation au cours des 6 derniers mois : » : formulation Melya, absente de la source. Règle « on n'invente rien » : le supprimer, comme pour l'AUDIT le 29/09/2026 (recommandé), ou retrouver ce texte dans une source.
+3. **Libellés des bandes** — la source dit « De 8 à 10 points : consommation peut être problématique ; au-delà de 10 points : trouble important de l'usage possible ». Nos libellés s'en écartent (« possiblement problématique », « Trouble de l'usage du cannabis possible ») et la bande 0-7 n'est pas nommée par la source. Recommandé : reprendre les termes du flyer, et pour 0-7 une négation du texte source (méthode AUDIT).
 
 ---
 
@@ -158,3 +177,4 @@ Vérifiés dans le script de recette (40/40 PASS, 16/07/2026).
 |------|--------|--------------|
 | 16/07/2026 | Adrien (avec Claude) | Création : entrée `Scale` (`options`, 8 items), scorer somme 0-32 (seuils 8/11), icône placeholder, spec. Items flyer RESPADD, question-porte portée en consigne (décision produit). |
 | 24/09/2026 | Clément (avec Claude) | Intitulés courts (eyebrows) retirés des 8 items : absents de la source RESPADD. Chaque item n'a plus qu'un `title` = la question ; texte des questions inchangé. |
+| 29/09/2026 | Clément (avec Claude) | §10 réécrite en « Choix et arbitrages méthodologiques » : fin de la validation clinique externe, les arbitrages sont tranchés par l'équipe. Points ouverts reformulés en décisions d'équipe, avec la règle « on n'invente rien » (écarts à la source repris de la source secondaire). |

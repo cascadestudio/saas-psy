@@ -156,7 +156,7 @@ Sans objet (pas de subscores). La RSES est un instrument unidimensionnel — con
 
 ### Gestion des réponses manquantes
 
-Refus de la passation incomplète. Les 10 items sont requis. Pas d'imputation, pas de score partiel. Pattern cohérent avec PHQ-9 / GAD-7 / PCL-5. À confirmer Renata (point 10.3).
+Refus de la passation incomplète. Les 10 items sont requis. Pas d'imputation, pas de score partiel. Pattern cohérent avec PHQ-9 / GAD-7 / PCL-5.
 
 ---
 
@@ -255,13 +255,25 @@ Toute déviation à ces cas signale immédiatement un bug d'inversion.
 
 ---
 
-## 10. Points à valider avec Renata
+## 10. Choix et arbitrages méthodologiques
 
-1. **Libellés des 10 items** — confirmer que la formulation Vallières & Vallerand 1990 (canadienne-française, reprise verbatim section 5) convient à la pratique TCC en cabinet français. Pas de version France peer-reviewed équivalente identifiée. Choix binaire : (a) maintenir V&V verbatim — (b) signaler des reformulations spécifiques (lesquelles ?).
-2. **Adaptation digitale de la consigne** — V&V 1990 dit *« en encerclant le chiffre approprié »*. La spec V2 propose *« en cliquant sur le chiffre approprié »* pour cohérence avec le support digital. Choix binaire : (a) accepter l'adaptation V2 — (b) reformuler autrement.
-3. **Gestion des réponses manquantes** — confirmer le refus de passation incomplète (pattern PHQ-9 / GAD-7 / PCL-5). Choix binaire : (a) refus dur — (b) tolérance avec règle d'imputation à définir.
-4. **Usage clinique en TCC pour suivi longitudinal** — la RSES est-elle généralement re-passée pour suivi longitudinal d'une prise en charge ? Choix binaire : (a) oui, échelle pertinente pour suivi (afficher l'évolution du score dans l'app) — (b) usage typiquement one-shot (afficher uniquement la passation isolée).
-5. **Affichage du score brut sans seuils** — confirmer la décision V2 de ne pas afficher de seuils d'interprétation (cf. section 7, justification sourcée). Choix binaire : (a) accord, score brut uniquement — (b) demande d'ajouter des seuils (à sourcer alors).
+### Écarts à la source primaire
+
+| Élément | Source primaire | Texte retenu | Origine du texte retenu | Justification |
+| --- | --- | --- | --- | --- |
+| Consigne | « …en encerclant le chiffre approprié » | « …en cliquant sur le chiffre approprié » | Adaptation Melya | Adaptation du support. |
+
+### Autres arbitrages
+
+| Sujet | Choix retenu | Justification |
+| --- | --- | --- |
+| Version française | Vallières & Vallerand 1990, mot pour mot | Seule version avec validation psychométrique publiée ; Chambon 1992 a des libellés quasi identiques sans validation. |
+| Seuils | Aucun : score brut | Justification sourcée en §7. |
+| Réponses manquantes | Passation incomplète refusée, pas d'imputation | Règle projet commune à toutes les échelles. |
+
+### Questions ouvertes
+
+1. **Suivi longitudinal** — afficher l'évolution du score dans l'app, ou traiter la RSES comme une passation isolée ? (question produit)
 
 ---
 
@@ -307,6 +319,7 @@ La liste des items à inverser (`[3, 5, 8, 9, 10]` en 1-indexé, ou `[2, 4, 7, 8
 | 30/04/2026 (rev 2) | Cascade (avec Claude) | **Révision après retour Cascade.** Retour à la graphie inclusive avec tirets verbatim de V&V 1990 (`porté-e`, `fier-e`, `satisfait-e`, `un-e raté-e`, `un-e bon-ne à rien`) en remplacement des parenthèses initialement proposées. Principe acté : fidélité à la source, pas de normalisation typographique. Point 10.4 (orthographe inclusive) retiré, points 10.5 et 10.6 renumérotés en 10.4 et 10.5. |
 | 30/04/2026   | Cascade (avec Claude) | Migration vers le template canonique Melya. Application des 4 règles projet. Sourcing complet : V&V 1990 retenue comme version FR (seule validation peer-reviewed publiée), Chambon 1992 conservée en cross-check via Delbrouck & Ladouceur 2011 (Cairn). Cas similaire à PCL-5 où la version canadienne validée prime sur la version France non-validée. **Trois confirmations V2** par rapport à la spec V1 : (1) plage de cotation 1-4 confirmée par PDF source primaire, (2) items inversés confirmés à 3, 5, 8, 9, 10 (et non 2, 5, 6, 8, 9 comme évoqué dans une mémoire écartée), (3) absence de seuils confirmée par sourcing exhaustif — les bornes circulant en ligne (<25 / 25-31 / 31-34 / 34-39 / >39) sont des conventions non sourcées académiquement, écartées. Adaptation digitale unique de la consigne : « encerclant » → « en cliquant ». Cas de test enrichis : T9-T11 ajoutés (cas typiques réalistes), T12-T15 maintenus comme bloc critique de détection des erreurs d'inversion, diagnostic en cas d'échec explicité. Notes d'implémentation Adrien renforcées : localisation de l'inversion côté back uniquement, plage 1-4 paramétrable au schéma commun, items inversés en dur dans la définition statique. |
 | Pré-30/04/2026 | (origine V1 du code) | Spec V1 issue d'un travail antérieur (rses.md fourni). Déjà rigoureuse sur l'essentiel : V&V 1990 sourcée, plage 1-4, inversions 3-5-8-9-10, absence de seuils. V2 consolide la justification sourcée, étoffe les cas de test typiques et précise le contrat technique. |
+| 29/09/2026 | Clément (avec Claude) | §10 réécrite en « Choix et arbitrages méthodologiques » : fin de la validation clinique externe, les arbitrages sont tranchés par l'équipe. Points ouverts reformulés en décisions d'équipe, avec la règle « on n'invente rien » (écarts à la source repris de la source secondaire). |
 
 ---
 

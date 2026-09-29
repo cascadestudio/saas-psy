@@ -131,11 +131,28 @@ Vérifiés dans le script de recette (40/40 PASS, 16/07/2026).
 
 ---
 
-## 10. Points à valider avec le·la psychologue référent·e
+## 10. Choix et arbitrages méthodologiques
 
-1. Corrections de coquilles source (item 5 « l'observais », consigne).
-2. Libellés des deux bandes (« non significative » / « significative »).
-3. Usage commercial du ©1997 Marmar (recoche droits).
+### Écarts à la source primaire
+
+| Élément | Source primaire | Texte retenu | Origine du texte retenu | Justification |
+| --- | --- | --- | --- | --- |
+| Consigne | « après.bSi » (artefact de mise en page) | « après. Si » | Correction | Coquille du PDF Cn2r. |
+| Consigne | « en cochant le choix de réponse » | « en choisissant la réponse » | Adaptation Melya | Adaptation du support (boutons). |
+| Item 5 | « je flottais au dessus de la scène et l'observait » | « …au-dessus de la scène et l'observais » | Correction | Coquille de conjugaison (1re personne, cohérente avec le reste de l'item) et trait d'union. |
+
+### Autres arbitrages
+
+| Sujet | Choix retenu | Justification |
+| --- | --- | --- |
+| Seuil | ≥ 15 | Fiche descriptive Cn2r : « Un score total ≥ 15 permet le dépistage de dissociation péritraumatique significative ». |
+| Libellés des bandes | « Dissociation péritraumatique significative » / « non significative » | Terme de la source ; la bande basse en est la négation. |
+| Réponses manquantes | Passation incomplète refusée, pas d'imputation | Règle projet commune à toutes les échelles. |
+
+### Questions ouvertes
+
+1. Rappel affiché au-dessus des items « Durant l'événement et immédiatement après : » : formulation Melya, absente de la source. Règle « on n'invente rien » : le supprimer, comme pour l'AUDIT le 29/09/2026 (recommandé), ou retrouver ce texte dans une source.
+2. **Usage commercial du ©1997 Marmar** — recocher les droits.
 
 ---
 
@@ -152,3 +169,4 @@ Vérifiés dans le script de recette (40/40 PASS, 16/07/2026).
 | Date | Auteur | Modification |
 |------|--------|--------------|
 | 16/07/2026 | Adrien (avec Claude) | Création : entrée `Scale`, scorer somme 10-50 (seuil ≥ 15), icône placeholder, spec. Items verbatim fiche Cn2r (2 coquilles source corrigées, documentées §2). |
+| 29/09/2026 | Clément (avec Claude) | §10 réécrite en « Choix et arbitrages méthodologiques » : fin de la validation clinique externe, les arbitrages sont tranchés par l'équipe. Points ouverts reformulés en décisions d'équipe, avec la règle « on n'invente rien » (écarts à la source repris de la source secondaire). |

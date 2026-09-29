@@ -130,11 +130,28 @@ Vérifiés dans le script de recette (40/40 PASS, 16/07/2026).
 
 ---
 
-## 10. Points à valider avec le·la psychologue référent·e
+## 10. Choix et arbitrages méthodologiques
 
-1. **Absence de bandes de sévérité** (décision produit) — confirmer que le score brut + facteurs suffit, ou fournir des repères normatifs à afficher en texte.
-2. **Québécismes** portés verbatim (items 10, 12) — garder la version validée ou adapter (⚠️ adaptation = sortie de la version validée).
-3. Libellés des deux facteurs (raccourcis pour l'UI ?).
+### Écarts à la source primaire
+
+| Élément | Source primaire | Texte retenu | Origine du texte retenu | Justification |
+| --- | --- | --- | --- | --- |
+| Consigne | « Veuillez encercler le numéro (1 à 5) approprié pour exprimer… » | « Veuillez indiquer jusqu'à quel point… » | Adaptation Melya | Adaptation du support (passation numérique). |
+
+### Autres arbitrages
+
+| Sujet | Choix retenu | Justification |
+| --- | --- | --- |
+| Québécismes (items 10, 12 : « Lorsque c'est le temps d'agir », « On devrait tout prévenir… ») | Conservés mot pour mot | Version validée ; les adapter reviendrait à sortir de la version validée. |
+| Bandes de sévérité | Aucune : score brut + deux facteurs | Aucun seuil clinique établi pour l'ÉII-27 (fiche UQO). Précédent : RSES. |
+| Facteur 1, item 25 | Rattaché au facteur 1 | Liste tronquée sur le PDF UQO ; reconstitué par complémentarité avec le facteur 2, cohérent avec Sexton & Dugas 2009 et les fiches ORVIS/INLB. |
+| Réponses manquantes | Passation incomplète refusée, pas d'imputation | Règle projet commune à toutes les échelles. |
+
+### Questions ouvertes
+
+1. Rappel affiché au-dessus des items « Jusqu'à quel point cet énoncé correspond-il à vous ? » : formulation Melya, absente de la source. Règle « on n'invente rien » : le supprimer, comme pour l'AUDIT le 29/09/2026 (recommandé), ou retrouver ce texte dans une source.
+2. **Libellés des deux facteurs** — recommandé : reprendre ceux de la fiche UQO, sans raccourci Melya.
+3. **Cohérence avec le PSWQ** — le PSWQ adapte un québécisme (« complétés » → « terminés »), l'ÉII les conserve. Harmoniser la règle entre les deux échelles.
 
 ---
 
@@ -151,3 +168,4 @@ Vérifiés dans le script de recette (40/40 PASS, 16/07/2026).
 | Date | Auteur | Modification |
 |------|--------|--------------|
 | 16/07/2026 | Adrien (avec Claude) | Création : entrée `Scale` (id `eii`), scorer somme 27-135 + sous-scores bifactoriels, icône placeholder, spec. Items verbatim UQO. Décision : pas de bandes de sévérité (aucun cutoff établi). |
+| 29/09/2026 | Clément (avec Claude) | §10 réécrite en « Choix et arbitrages méthodologiques » : fin de la validation clinique externe, les arbitrages sont tranchés par l'équipe. Points ouverts reformulés en décisions d'équipe, avec la règle « on n'invente rien » (écarts à la source repris de la source secondaire). |

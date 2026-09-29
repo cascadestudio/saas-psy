@@ -48,8 +48,8 @@ source primaire avant intégration**), ⚠️ = incertain, 💰 = payant.
 | PHQ-9 | Questionnaire santé patient (dépression) | ✅ | ✅ | — | #18 | alerte item 9 |
 | PCL-5 | TSPT (DSM-5) | ✅ | ✅ | — | #20 | |
 | Y-BOCS | TOC de Yale-Brown | ✅ | ✅ | — | #44 | |
-| PSWQ | Inquiétude de Penn State | ✅ | ✅ | — | #53 | acronyme public **PSWQ** ; id interne `qips` ; VF validée = QIPS (Gosselin 2001) ; recette OK (Clément, PDF source) — bandes de seuils à confirmer avec Renata |
-| AUDIT | Troubles liés à l'alcool | 🔵 | ✅ OMS | 🟢 A | #66 | ordre 2 de la file — fait |
+| PSWQ | Inquiétude de Penn State | ✅ | ✅ | — | #53 | acronyme public **PSWQ** ; id interne `qips` ; VF validée = QIPS (Gosselin 2001) ; recette OK (Clément, PDF source) — bandes de seuils à trancher (équipe, §10) |
+| AUDIT | Troubles liés à l'alcool | 🔵 | ✅ OMS | 🟢 A | #66 | aligné sur les sources le 29/09/2026 (OMS FR mot pour mot, écarts repris de l'OFDT, seuils SFA/OFDT exacts) — recette à faire |
 | SPIN | Inventaire de la phobie sociale | 🔵 | ✅ | — | Bientôt · 31 v. | **Melya devant Mentaal** |
 | HSPS | Hypersensibilité (Aron) | 🔵 | ⚠️ | 🟢 A | #19 | auto-test du livre (23 items OUI/NON, seuil 12) — droits trad. Éditions de l'Homme à instruire avant sortie de beta |
 | WAQ | Inquiétude et anxiété (Dugas) | 🔵 | ✅ | 🟡 B | #25 | porté sous l'id **QIA** — criteriaCheck TAG (pas une simple somme) + item thèmes en texte libre (nouvelle brique `openingTextItem`) |
@@ -65,7 +65,7 @@ source primaire avant intégration**), ⚠️ = incertain, 💰 = payant.
 | PDSS | Sévérité du trouble panique | 📋 (7) | ✅ | 🟢 A | Bientôt · 62 v. | |
 | DERS | Régulation émotionnelle | 📋 (8) | ✅ | 🟡 B | #14 | reverse + subscores |
 | TAS-20 | Alexithymie de Toronto | 📋 (10) | ✅ | 🟡 B | #37 | reverse + 3 subscores |
-| LEC-5 | Liste des événements de vie (DSM-5) | 📋 (11) | ✅ NCPTSD | 🟠 C | Absent | couplée à la PCL-5 en clinique (identification de l'événement de référence) — cf. `pcl-5/pcl-5.md` §13 ; pas de score : 17 événements × 6 modalités (vécu / témoin / appris / cadre pro / pas sûr / sans objet) → widget multi-choix par item à créer ; VF Cn2r à sourcer ; priorité à rediscuter avec Renata |
+| LEC-5 | Liste des événements de vie (DSM-5) | 📋 (11) | ✅ NCPTSD | 🟠 C | Absent | couplée à la PCL-5 en clinique (identification de l'événement de référence) — cf. `pcl-5/pcl-5.md` §13 ; pas de score : 17 événements × 6 modalités (vécu / témoin / appris / cadre pro / pas sûr / sans objet) → widget multi-choix par item à créer ; VF Cn2r à sourcer ; priorité à rediscuter (équipe) |
 | ASQ-SF | Styles d'attachement | 🔍 | ⚠️ | — | #10 | |
 | SCT | Test de confiance en soi | 🔍 | ⚠️ | — | #15 | |
 | ADHD-RS | Évaluation du TDAH | 🔍 | ⚠️ | — | #16 | DuPaul/Guilford — alternative libre : ASRS |

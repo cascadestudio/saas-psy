@@ -20,7 +20,7 @@ hiérarchie versions, comparaison Mentaal).
 | **Durée estimée de passation** | 2–3 min |
 | **Public cible** | Adultes (≥ 18 ans). |
 | **Mode d'administration** | auto (à l'origine administrable en auto ou hétéro ; ici auto-passation patient) |
-| **Note sur le mode d'administration** | Période de référence = 12 derniers mois. Dans la source auditscreen.org, le préfixe « Dans les douze derniers mois, » figure **sur les items 4 à 8** (items 1-3, 9-10 sans préfixe ; 9-10 portent le temporel dans les options). ⚠️ Notre version a **retiré** ce préfixe des items 4-8 au profit de la consigne + en-tête persistant — cf. comparaison Mentaal (§2) et §10 pt 5. |
+| **Note sur le mode d'administration** | Période de référence = 12 derniers mois : annoncée dans la consigne et rappelée par le préfixe « Dans les douze derniers mois, » sur les items 4 à 8, comme dans la source primaire. |
 | **Description praticien (bibliothèque)** | Questionnaire de 10 items de l'OMS repérant une consommation d'alcool à risque, nocive ou une dépendance sur les 12 derniers mois. |
 | **Description patient (portail)** | AUCUNE — règle projet : le portail patient ne comporte pas de description de l'échelle. Seule la consigne officielle (section 4) est affichée. |
 
@@ -49,17 +49,44 @@ hiérarchie versions, comparaison Mentaal).
 - Saunders, J. B., Aasland, O. G., Babor, T. F., de la Fuente, J. R., & Grant, M. (1993). *Development of the Alcohol Use Disorders Identification Test (AUDIT): WHO Collaborative Project on Early Detection of Persons with Harmful Alcohol Consumption — II.* Addiction, 88(6), 791–804.
 - Validation française : Gache, P., Michaud, P., Landry, U., et al. (2005). *The AUDIT as a screening tool for excessive drinking in primary care: reliability and validity of a French version.* Alcohol Clin Exp Res, 29(11), 2001–2007.
 
+### Sources complémentaires (arbitrage des écarts)
+
+- **Original anglais — questionnaire** : *AUDIT questionnaire*, auditscreen.org. URL : https://auditscreen.org/~auditscreen/cmsb/uploads/audit-english-version-new_001.pdf — fichier `docs/scales/audit/AUDIT_auditscreen_english.pdf` — consulté le 29/09/2026.
+- **Original anglais — manuel OMS** : Babor, T. F., Higgins-Biddle, J. C., Saunders, J. B., & Monteiro, M. G. (2001). *AUDIT — The Alcohol Use Disorders Identification Test: Guidelines for Use in Primary Care* (2e éd.). OMS, WHO/MSD/MSB/01.6a. URL : https://www.paho.org/sites/default/files/Auditmanual_ENG.pdf — fichier `docs/scales/audit/AUDIT_manuel_OMS_Babor_2001.pdf` — consulté le 29/09/2026.
+- **Version suisse** : grille AUDIT publiée dans la *Revue Médicale Suisse* (capture d'écran fournie par Clément le 29/09/2026). Référence complète de l'article [À SOURCER]. Consultée comme troisième avis uniquement : version suisse (hiérarchie France > Suisse) et plusieurs défauts (cf. ci-dessous).
+
 ### Divergences constatées entre sources
 
-- **Libellés retenus = version OMS auditscreen.org** (source primaire). L'OFDT reformule légèrement (« À quelle fréquence consommez-vous de l'alcool ? ») ; sur le fond, items et cotations identiques.
-- ⚠️ **Le flyer Addict'AIDE** (`docs/scales/audit/AUDIT_addictaide.pdf`) **contient des erreurs** et a été **écarté** pour les libellés : item 2 saute la modalité « 9 » (« 7 ou 8 » au lieu de « 7 à 9 ») ; libellés de fréquence des items 3-8 incohérents (« Moins d'1 fois/semaine = 1 » puis « 1 fois/mois = 2 »). Conservé seulement comme repère de seuils (identiques à la SFA).
+Les cotations sont identiques partout (items 1-8 : 0-4 ; items 9-10 : 0/2/4). Les libellés diffèrent sur presque tous les items.
+
+| Élément | OMS FR (primaire) | OFDT (secondaire) | RevMed (Suisse) | Original anglais |
+|---|---|---|---|---|
+| Consigne | Au patient : « Ce questionnaire interroge votre consommation d'alcool des douze derniers mois… » | Au clinicien (hétéro-passation) : « Les dix questions qui suivent doivent être de préférence posées sans reformulation… » | — (non visible) | Manuel : consigne au patient à adapter localement |
+| Préfixe items 4-8 | « Dans les douze derniers mois, » | « Au cours de l'année écoulée, » | « Au cours de l'année écoulée, » | « During the past year, » |
+| Item 1 | « Combien de fois vous arrive-t-il de consommer de l'alcool ? » | « À quelle fréquence consommez-vous de l'alcool ? » | « Combien de boissons contenant de l'alcool consommez-vous ? » (⚠️ question en quantité, réponses en fréquence) | « How often do you have a drink containing alcohol? » |
+| Item 2 | « verres standards […] journée ordinaire » ; réponses en lettres | « verre d'alcool […] jour typique » ; réponses en chiffres | « verres contenant de l'alcool » ; ⚠️ « 7 ou 9 » | « standard drinks » ; « 7 to 9 » |
+| Item 5 | ⚠️ coquilles « l'alcool, vous -a-t-il » | « vous a-t-il empêché de faire ce qui était normalement attendu de vous » | « votre consommation d'alcool vous a-t-elle empêché » | « failed to do what was normally expected of you » |
+| Item 6 | ⚠️ « avez-vous du boire » ; « vous remettre en forme » | « dû » ; « vous sentir en forme » | « dû boire un verre » ; ⚠️ « d'une soirée bien arrosée » (sens restreint) | « after a heavy drinking session » |
+| Item 7 | « culpabilité ou de regret » | « culpabilité ou des remords » | « culpabilité ou des remords » | « guilt or remorse » |
+| Item 8 | « vous souvenir de […] la nuit précédente » | « vous rappeler […] la soirée précédente » | « la veille » ; ⚠️ « trop bu » | « the night before » |
+| Item 9 | Identique dans les trois versions FR | | | |
+| **Item 10** | « …s'est déjà préoccupé […] **et** vous a conseillé de la diminuer ? » | « …s'est-il inquiété […] **ou** a-t-il suggéré que vous la réduisiez ? » | « …**et** vous a conseillé de la diminuer ? » | « been concerned about your drinking **or** suggested you cut down? » |
+| Dernière réponse items 3-8 | « chaque jour ou presque » | « Tous les jours ou presque » | « Chaque jour ou presque » | « Daily or almost daily » |
+| Items 9-10, réponse 2 | « oui mais pas dans l'année passée » | « Oui, mais pas au cours de l'année écoulée » | « Oui, mais pas dans les douze derniers mois » | « Yes, but not in the past year » |
+| Items 9-10, réponse 4 | ⚠️ « oui au cours de l'année dernière » (ambigu : année civile précédente) | « Oui, au cours de l'année » | « Oui, au cours des douze derniers mois » | « Yes, during the past year » |
+| Seuils | Aucun | SFA 2015 : mésusage ≥ 7 H / ≥ 6 F ; dépendance > 12 | — (non visible) | ≥ 8 à risque ; dépendance ≥ 13 F / ≥ 15 H |
+
+- ⚠️ **Le flyer Addict'AIDE** (`docs/scales/audit/AUDIT_addictaide.pdf`) **contient des erreurs** et a été **écarté** : item 2 « 7 ou 8 » au lieu de « 7 à 9 » ; libellés de fréquence des items 3-8 incohérents.
+- Les écarts retenus, et leur justification, sont consignés en §10.
 
 ### Version française retenue
 
 - **Traducteur(s) / validation** : version OMS francophone (auditscreen.org) ; validation psychométrique française Gache et al. (2005).
 - **Seuils** : Société Française d'Alcoologie (2015), via OFDT.
 
-### Comparaison navigateur avec Mentaal — recette du 24/07/2026 (Clément + Claude, INTERROMPUE)
+### Comparaison navigateur avec Mentaal — recette du 24/07/2026 (Clément + Claude)
+
+*Constats d'origine conservés tels quels. Les décisions prises depuis (29/09/2026) sont en §10 ; elles tranchent notamment le préfixe des items 4-8 (rétabli) et les libellés des items 9-10.*
 
 Parcours patient Mentaal déroulé **intégralement** (lien `mentaal.fr/a/…`, intro + 10 items + écran de fin), comparé item par item à notre version `packages/core` **et** à la source primaire `AUDIT_auditscreen_official.pdf`.
 
@@ -95,7 +122,7 @@ Parcours patient Mentaal déroulé **intégralement** (lien `mentaal.fr/a/…`, 
 | **Détenteur des droits** | Organisation mondiale de la Santé (OMS). |
 | **Mention obligatoire à afficher** | *« AUDIT (Alcohol Use Disorders Identification Test) — Organisation mondiale de la Santé ; Saunders, Aasland, Babor, de la Fuente & Grant (1993). Version française validée : Gache et al. (2005). Seuils : Société Française d'Alcoologie (2015). »* |
 | **Emplacement de la mention (règle projet)** | Côté patient : écran de fin de passation (post-soumission), texte gris discret, une fois. Côté praticien : fiche du questionnaire en bibliothèque. |
-| **Restrictions d'usage** | Usage clinique / dépistage libre avec attribution OMS. ⚠️ **À recocher** : Melya étant un service payant, confirmer que l'usage OMS « non lucratif » couvre bien la diffusion via une plateforme commerciale (l'instrument reste gratuit pour l'utilisateur final). |
+| **Restrictions d'usage** | Usage clinique / dépistage libre avec attribution OMS. ⚠️ **À recocher** : Melya étant un service payant, confirmer que l'usage OMS « non lucratif » couvre bien la diffusion via une plateforme commerciale (l'instrument reste gratuit pour l'utilisateur final). Le manuel OMS (Babor 2001) exclut « use in conjunction with commercial purposes » pour le document lui-même. |
 | **Décision Melya** | go (sous réserve de la recoche « usage commercial » ci-dessus). |
 
 ---
@@ -104,17 +131,17 @@ Parcours patient Mentaal déroulé **intégralement** (lien `mentaal.fr/a/…`, 
 
 ### Consigne officielle (affichée au patient avant les items)
 
-> *« Ce questionnaire porte sur votre consommation d'alcool au cours des douze derniers mois. Veillez à ce que vos réponses reflètent bien cette période, et pas seulement les dernières semaines. Un « verre standard » correspond à la quantité d'alcool servie dans un bar (environ 10 g d'alcool pur) : un ballon de vin, un demi de bière, une dose de spiritueux. »*
+> *« Ce questionnaire interroge votre consommation d'alcool des douze derniers mois. Attention à ce que vos réponses reflètent cette unité de temps et pas seulement les dernières semaines. »*
 
-**Source de la consigne** : reformulation de la consigne auditscreen.org (« interroge votre consommation d'alcool des douze derniers mois… ») + définition du **verre standard** ajoutée (nécessaire à l'item 2, absente du PDF paysage mais standard OMS = 10 g). Le rappel « verre standard » est un **ajout produit Melya** — à valider.
+**Source de la consigne** : auditscreen.org, version française, en-tête du PDF — mot pour mot. Pas de définition du « verre standard » : aucune des deux sources françaises n'en donne (cf. §10).
 
 ### Comportement UX de la consigne
 
 | Champ | Valeur |
 | --- | --- |
-| **Persistance** | persistante — rappel court `persistentInstructions` : « Au cours des douze derniers mois : » |
-| **Emplacement** | en-tête au-dessus de l'item |
-| **Justification** | Ancre la période de référence (12 mois), point clé de cotation de l'AUDIT. |
+| **Persistance** | page_de_garde_seule — pas de rappel au-dessus des items |
+| **Emplacement** | écran d'introduction de la passation |
+| **Justification** | La source ne comporte pas de rappel persistant : le cadre temporel est porté par le préfixe « Dans les douze derniers mois, » des items 4 à 8, comme dans la source. |
 
 ### Dimensions de cotation (`formType: "options"`)
 
@@ -123,7 +150,7 @@ Réponses **hétérogènes par item** (comme Y-BOCS) → chaque item porte ses p
 - **Items 1** : fréquence de consommation (Jamais … 4 fois ou plus par semaine), 0-4.
 - **Item 2** : quantité par occasion (Un ou deux … Dix ou plus), 0-4.
 - **Items 3 à 8** : fréquence (Jamais / Moins d'une fois par mois / Une fois par mois / Une fois par semaine / Chaque jour ou presque), 0-4.
-- **Items 9 et 10** : Non (0) / Oui, mais pas au cours de l'année écoulée (2) / Oui, au cours de l'année écoulée (4).
+- **Items 9 et 10** : Non (0) / Oui, mais pas au cours de l'année écoulée (2) / Oui, au cours de l'année (4) — libellés OFDT, cf. §10.
 
 ⚠️ **Items 9-10 non linéaires** : cotés 0, 2, 4 (pas de 1 ni 3).
 
@@ -138,13 +165,15 @@ Réponses **hétérogènes par item** (comme Y-BOCS) → chaque item porte ses p
 | 1 | Combien de fois vous arrive-t-il de consommer de l'alcool ? | 0-4 (fréquence conso) |
 | 2 | Combien de verres standards buvez-vous au cours d'une journée ordinaire où vous buvez de l'alcool ? | 0-4 (quantité) |
 | 3 | Au cours d'une même occasion, combien de fois vous arrive-t-il de boire six verres standards ou plus ? | 0-4 (fréquence) |
-| 4 | Combien de fois avez-vous observé que vous n'étiez plus capable de vous arrêter de boire après avoir commencé ? | 0-4 (fréquence) |
-| 5 | Combien de fois le fait d'avoir bu de l'alcool vous a-t-il empêché de faire ce qu'on attendait normalement de vous ? | 0-4 (fréquence) |
-| 6 | Combien de fois, après une période de forte consommation, avez-vous dû boire de l'alcool dès le matin pour vous remettre en forme ? | 0-4 (fréquence) |
-| 7 | Combien de fois avez-vous eu un sentiment de culpabilité ou de regret après avoir bu ? | 0-4 (fréquence) |
-| 8 | Combien de fois avez-vous été incapable de vous souvenir de ce qui s'était passé la nuit précédente parce que vous aviez bu ? | 0-4 (fréquence) |
+| 4 | Dans les douze derniers mois, combien de fois avez-vous observé que vous n'étiez plus capable de vous arrêter de boire après avoir commencé ? | 0-4 (fréquence) |
+| 5 | Dans les douze derniers mois, combien de fois le fait d'avoir bu de l'alcool vous a-t-il empêché de faire ce qu'on attendait normalement de vous ? | 0-4 (fréquence) |
+| 6 | Dans les douze derniers mois, combien de fois, après une période de forte consommation, avez-vous dû boire de l'alcool dès le matin pour vous remettre en forme ? | 0-4 (fréquence) |
+| 7 | Dans les douze derniers mois, combien de fois avez-vous eu un sentiment de culpabilité ou de regret après avoir bu ? | 0-4 (fréquence) |
+| 8 | Dans les douze derniers mois, combien de fois avez-vous été incapable de vous souvenir de ce qui s'était passé la nuit précédente parce que vous aviez bu ? | 0-4 (fréquence) |
 | 9 | Vous êtes-vous blessé ou avez-vous blessé quelqu'un parce que vous aviez bu ? | 0 / 2 / 4 |
-| 10 | Un parent, un ami, un médecin ou un autre professionnel de santé s'est-il déjà préoccupé de votre consommation d'alcool et vous a-t-il conseillé de la diminuer ? | 0 / 2 / 4 |
+| 10 | Un parent, un ami, un médecin ou autre soignant s'est-il inquiété de votre consommation d'alcool ou a-t-il suggéré que vous la réduisiez ? | 0 / 2 / 4 |
+
+Items 1-9 : source primaire (OMS FR), corrections typographiques des items 5 et 6 exceptées. Item 10 : OFDT. Détail et justification en §10.
 
 ---
 
@@ -167,17 +196,14 @@ Refus de la passation incomplète. Les 10 items sont requis ; pas d'imputation.
 
 | Score | Interprétation |
 |-------|----------------|
-| 0–5 | Consommation à faible risque |
-| 6–12 | Mésusage d'alcool probable (seuil ≥ 6 femme / ≥ 7 homme) |
-| 13–40 | Dépendance à l'alcool probable |
+| 0–5 | Non évocateur d'un mésusage actuel d'alcool |
+| 6 | Évocateur d'un mésusage actuel d'alcool chez la femme (seuil chez l'homme : 7) |
+| 7–12 | Évocateur d'un mésusage actuel d'alcool |
+| 13–40 | En faveur d'une dépendance à l'alcool |
 
-**Source des seuils** : Société Française d'Alcoologie (2015), via OFDT — *mésusage* si score ≥ 7 (homme) ou ≥ 6 (femme) ; *dépendance probable* si score > 12.
+**Source des seuils** : Société Française d'Alcoologie (2015), via OFDT — « Un score supérieur ou égal à 7 chez l'homme et à 6 chez la femme est évocateur d'un mésusage actuel d'alcool » ; « Un score supérieur à 12 chez l'homme et chez la femme serait en faveur d'une dépendance à l'alcool ».
 
-⚠️ **Limite du modèle — seuils sexe-spécifiques.** Le modèle `ScaleRange` porte une **bande numérique unique** sans paramètre sexe, et l'app ne dispose pas du sexe du patient au moment du scoring. Décisions prises :
-
-- Onset du mésusage fixé au **seuil le plus sensible (≥ 6)** pour ne pas sous-détecter les femmes. Conséquence : un homme scorant 6 est étiqueté « mésusage » alors que le seuil SFA homme est 7 (sur-détection légère, jugée plus sûre qu'une sous-détection, et relue par le praticien).
-- Le libellé de la bande rappelle explicitement « ≥ 6 femme / ≥ 7 homme ».
-- **À valider** (section 10). Alternative : passer aux **zones OMS internationales** sexe-neutres (0-7 / 8-15 / 16-19 / 20-40 : faible risque / à risque / nocive / dépendance) si le·la référent·e préfère un découpage indépendant du sexe.
+**Seuil sexe-spécifique** : l'app ne connaît pas le sexe du patient. Plutôt que de choisir un seuil unique, le score de 6 — seul score où les seuils homme et femme divergent — a sa propre bande, libellée « chez la femme ». Le praticien, qui connaît son patient, lit l'interprétation directement. Aucun score n'est ainsi mal classé. Cf. §10.
 
 ---
 
@@ -191,41 +217,64 @@ Aucune alerte item-niveau pour l'instant. (Piste à discuter : score ≥ 13 = or
 
 | # | Réponses | Score | Niveau |
 |---|----------|-------|--------|
-| T1 | Tous les items = 0 | 0 | Consommation à faible risque |
-| T2 | Items 1-8 = 1, items 9-10 = 0 | 8 | Mésusage d'alcool probable |
-| T3 | Items 1-8 = 4, items 9-10 = 4 | 40 | Dépendance à l'alcool probable |
-| T4 | Item 1 = 4, item 2 = 1, reste = 0 | 5 | Consommation à faible risque |
+| T1 | Tous les items = 0 | 0 | Non évocateur d'un mésusage actuel d'alcool |
+| T2 | Items 1-8 = 1, items 9-10 = 0 | 8 | Évocateur d'un mésusage actuel d'alcool |
+| T3 | Items 1-8 = 4, items 9-10 = 4 | 40 | En faveur d'une dépendance à l'alcool |
+| T4 | Item 1 = 4, item 2 = 1, reste = 0 | 5 | Non évocateur d'un mésusage actuel d'alcool |
 
 ### Transitions de seuil
 
 | # | Score | Niveau attendu |
 |---|-------|----------------|
-| T5 | 5 | Consommation à faible risque |
-| T6 | 6 | Mésusage d'alcool probable |
-| T7 | 12 | Mésusage d'alcool probable |
-| T8 | 13 | Dépendance à l'alcool probable |
+| T5 | 5 | Non évocateur d'un mésusage actuel d'alcool |
+| T6 | 6 | Évocateur d'un mésusage actuel d'alcool chez la femme (seuil chez l'homme : 7) |
+| T7 | 7 | Évocateur d'un mésusage actuel d'alcool |
+| T8 | 12 | Évocateur d'un mésusage actuel d'alcool |
+| T9 | 13 | En faveur d'une dépendance à l'alcool |
 
 ### Entrées invalides
 
 | # | Cas | Comportement attendu |
 |---|-----|----------------------|
-| T9 | Valeur hors modalités (item 9 = 1 ou 3) | Erreur de validation |
-| T10 | Réponse manquante | Erreur de validation — 10 items requis |
+| T10 | Valeur hors modalités (item 9 = 1 ou 3) | Erreur de validation |
+| T11 | Réponse manquante | Erreur de validation — 10 items requis |
 
 ---
 
-## 10. Points à valider avec le·la psychologue référent·e
+## 10. Choix et arbitrages méthodologiques
 
-1. **Seuils sexe-spécifiques** — valider le rendu sexe-neutre (onset mésusage à ≥ 6) OU basculer vers les zones OMS internationales (8/16/20). Décision de fond.
-2. **Libellés de niveaux** — *Consommation à faible risque / Mésusage d'alcool probable / Dépendance à l'alcool probable*.
-3. **Consigne** — valider l'ajout de la définition du « verre standard » (~10 g), absente du PDF paysage mais nécessaire à l'item 2.
-4. **Copyright usage commercial** — confirmer que la licence OMS « usage non lucratif » couvre la diffusion via Melya (service payant).
-5. **Préfixe temporel des items 4-8 (décision de fond, issue de la comparaison Mentaal §2)** — la source primaire auditscreen.org préfixe les items **4 à 8** par « Dans les douze derniers mois, » (Mentaal le conserve). Notre version l'a **retiré** au profit de la consigne + en-tête persistant « Au cours des douze derniers mois : ». Trancher :
-   - (a) **Restaurer le préfixe par item** → fidélité verbatim à notre source, aligné Mentaal ; ou
-   - (b) **Garder notre approche** (consigne + en-tête) — **MAIS d'abord vérifier en recette que l'en-tête persistant s'affiche réellement sur chaque item 4-8** ; sinon ces items perdent leur ancre temporelle, seul vrai manque de notre côté.
-6. **Retouches vs verbatim source** — décider si l'on conserve nos corrections (item 5 « vous a-t-il » au lieu de « vous -a-t-il » ; item 6 « dû » au lieu de « du » ; item 10 reformulé en inversion) qui améliorent le français mais dévient du verbatim OMS, ou si l'on revient au verbatim source.
-7. **Option items 9-10 (valeur 4)** — normaliser le libellé : nous « Oui, au cours de l'année écoulée » vs source « oui au cours de l'année dernière » vs Mentaal « Oui, au cours de l'année ». Cosmétique, mais à figer.
-8. **Interprétation Mentaal** — si accès à un compte praticien Mentaal, comparer leurs bandes de score aux nôtres (SFA 2015). Non fait (score masqué au patient).
+Règle suivie : les textes affichés au patient reprennent mot pour mot la version française de l'OMS (auditscreen.org). On ne s'en écarte qu'en cas d'erreur de sens, de faute ou d'ambiguïté avérée, et le texte de remplacement est alors celui de l'OFDT, jamais une formulation propre à Melya.
+
+### Écarts à la source primaire
+
+| Élément | Source primaire (OMS FR) | Texte retenu | Origine du texte retenu | Justification |
+| --- | --- | --- | --- | --- |
+| Item 10 | « Est-ce qu'un parent, un ami, un médecin ou un autre professionnel de santé s'est déjà préoccupé de votre consommation d'alcool et vous a conseillé de la diminuer ? » | « Un parent, un ami, un médecin ou autre soignant s'est-il inquiété de votre consommation d'alcool ou a-t-il suggéré que vous la réduisiez ? » | OFDT, question entière | Erreur de traduction qui change le sens et le score : l'original anglais (questionnaire auditscreen.org et manuel OMS 2001) dit « concerned about your drinking **or** suggested you cut down ». Avec « et », un patient dont l'entourage s'est seulement inquiété répond « Non » et perd jusqu'à 4 points. La question OFDT est reprise en entier : remplacer le seul « et » produirait une phrase qui n'existe dans aucune source. |
+| Items 9-10, réponse cotée 4 | « oui au cours de l'année dernière » | « Oui, au cours de l'année » | OFDT | « L'année dernière » se lit couramment comme l'année civile précédente, alors que l'instrument vise les 12 derniers mois (« during the past year »). |
+| Items 9-10, réponse cotée 2 | « oui mais pas dans l'année passée » | « Oui, mais pas au cours de l'année écoulée » | OFDT | Cohérence avec la réponse cotée 4 : les deux réponses viennent du même texte. |
+| Item 5 | « …le fait d'avoir bu de l'alcool, vous -a-t-il empêché… de vous? » | « …le fait d'avoir bu de l'alcool vous a-t-il empêché… de vous ? » | OFDT (passage identique) | Coquilles du PDF source. Seul le passage fautif est corrigé : le reste de l'item suit la source primaire. |
+| Item 6 | « avez-vous du boire » | « avez-vous dû boire » | OFDT (passage identique) | Faute d'orthographe du PDF source. |
+| Libellés de réponse | En minuscules, sans virgule (« jamais », « oui mais pas… ») | Majuscule initiale, virgule (« Jamais », « Oui, mais pas… ») | OFDT | Typographie seule, sens inchangé. |
+
+### Autres arbitrages
+
+| Sujet | Choix retenu | Justification |
+| --- | --- | --- |
+| Préfixe « Dans les douze derniers mois, » (items 4-8) | Conservé, comme dans la source | Présent dans la source primaire, l'OFDT, la version suisse et l'original anglais. Il avait été retiré dans une première version au profit d'un rappel affiché au-dessus des items ; ce rappel, absent de la source, est supprimé. |
+| Consigne | Consigne OMS mot pour mot | La première version reformulait la consigne sans raison ; retour au texte source. |
+| Définition du « verre standard » | Non affichée | Le manuel OMS recommande de définir le verre standard pour le patient, mais aucune des deux sources françaises n'en propose de formulation. Règle « on n'invente rien » : pas de texte Melya. |
+| Seuils d'interprétation | SFA 2015 via OFDT : mésusage ≥ 7 chez l'homme, ≥ 6 chez la femme ; dépendance > 12 | Référence institutionnelle française. Les seuils internationaux de l'OMS (≥ 8 ; dépendance ≥ 13 F / ≥ 15 H) ne sont pas retenus : version FR-France privilégiée. |
+| Seuil sexe-spécifique | Bande dédiée au score de 6, libellée « chez la femme (seuil chez l'homme : 7) » | L'app ne connaît pas le sexe du patient. Cette bande applique exactement les seuils OFDT sans supposer le sexe : aucun score n'est mal classé, le praticien lit l'interprétation au regard de son patient. |
+| Libellés des niveaux | « Évocateur d'un mésusage actuel d'alcool » ; « En faveur d'une dépendance à l'alcool » | Termes de l'OFDT. |
+| Libellé sous le seuil | « Non évocateur d'un mésusage actuel d'alcool » | L'OFDT ne nomme pas cette tranche. Libellé construit par négation du texte OFDT, sans terme ajouté ; l'ancien « Consommation à faible risque » est abandonné (non sourcé). |
+| Questions sautées | Aucune : les 10 items sont toujours posés | La source française ne prévoit pas de saut. Le manuel OMS permet, en passation informatisée, de passer directement aux items 9-10 si l'item 1 = « Jamais » ; non retenu à ce stade. |
+| Réponses manquantes | Passation incomplète refusée, pas d'imputation | Règle projet commune à toutes les échelles. |
+| Version suisse (RevMed) | Consultée, non retenue comme source | Version suisse (hiérarchie France > Suisse) et défauts relevés : item 1 incohérent, « 7 ou 9 » à l'item 2, sens restreint à l'item 6, jugement ajouté à l'item 8. |
+
+### Questions ouvertes
+
+1. **Copyright usage commercial** — confirmer auprès de l'OMS que la diffusion via un service payant est couverte (cf. §3).
+2. **Référence de la version RevMed** — compléter la référence de l'article (auteurs, année, URL) et archiver le PDF.
 
 ---
 
@@ -248,6 +297,8 @@ scoreAudit(scale, responses) → {
 - `formType: "options"`, clés de réponse `option_0 … option_9`.
 - Somme simple, aucune inversion. Scorer `apps/api/src/scoring/scorers/audit.ts`, enregistré sous l'id `audit` dans `ScoringService`.
 - Items 9-10 : modalités 0/2/4 (non contiguës) — portées dans les `options` de l'item.
+- Pas de `persistentInstructions` (rappel au-dessus des items) : retiré le 29/09/2026, absent de la source.
+- 4 bandes dans `scoring.ranges`, dont une bande d'un seul point (score 6) pour le seuil sexe-spécifique.
 - Domaine : `addictions` (la couleur de la tuile en dérive, cf. `apps/web/lib/scale-appearance.ts`).
 
 ---
@@ -259,3 +310,4 @@ scoreAudit(scale, responses) → {
 | 15/07/2026 | Adrien (avec Claude) | Création de l'échelle AUDIT : entrée `Scale` dans `packages/core` (`formType: "options"`, 10 items), scorer `audit.ts` (somme 0-40) + enregistrement, icône placeholder, spec. Items FR issus de la version OMS officielle (auditscreen.org), cross-checkés OFDT/SFA. Seuils SFA 2015 rendus en 3 bandes sexe-neutres (onset ≥ 6) — sexe-spécificité à valider. Flyer Addict'AIDE écarté (erreurs de libellés). Nouvelle catégorie « Addictions ». |
 | 24/07/2026 | Clément (avec Claude) | **Recette comparative navigateur vs Mentaal (INTERROMPUE, à reprendre).** Parcours patient Mentaal déroulé en entier, comparé item par item à notre version + à la source auditscreen.org. Constat : Mentaal ≈ reprise verbatim de auditscreen.org (imperfections comprises) ; notre version = même source éditée. Ajout du tableau de comparaison en §2. Principal écart à trancher : **préfixe « Dans les douze derniers mois » sur items 4-8** (présent source + Mentaal, retiré chez nous → §10 pt 5). Nos libellés d'items **confirmés conformes** à la source primaire (le doute sur l'attribution est levé). Nouveaux points 5-8 en §10. Scoring non comparé (score masqué au patient des deux côtés). |
 | 24/09/2026 | Clément (avec Claude) | Intitulés courts (eyebrows) retirés des 10 items : absents de la source primaire auditscreen.org. Chaque item n'a plus qu'un `title` = la question ; texte des questions inchangé. |
+| 29/09/2026 | Clément (avec Claude) | **Alignement sur les sources.** Comparaison OMS FR / OFDT / RevMed / original anglais (§2). Règle : OMS FR mot pour mot, écarts repris de l'OFDT uniquement (§10). Préfixe « Dans les douze derniers mois, » rétabli sur les items 4-8 ; rappel persistant supprimé ; consigne OMS mot pour mot ; définition du verre standard retirée ; item 10 remplacé par la version OFDT (« ou » de l'original anglais) ; réponses des items 9-10 alignées sur l'OFDT. Seuils SFA/OFDT appliqués exactement, avec bande dédiée au score de 6 (femme) ; libellés de niveaux OFDT. §10 réécrite en choix et arbitrages méthodologiques. Sources anglaises archivées. |

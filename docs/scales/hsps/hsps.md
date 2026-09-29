@@ -113,11 +113,28 @@ Vérifiés dans le script de recette (40/40 PASS, 16/07/2026).
 
 ---
 
-## 10. Points à valider avec le·la psychologue référent·e
+## 10. Choix et arbitrages méthodologiques
 
-1. **Statut de l'outil** — auto-test grand public, non diagnostique : valider son positionnement dans le catalogue (badge ? mention ?).
-2. **Droits de la traduction** (Éditions de l'Homme) — à instruire avant sortie de beta.
-3. Libellés des deux bandes.
+### Écarts à la source primaire
+
+| Élément | Source primaire | Texte retenu | Origine du texte retenu | Justification |
+| --- | --- | --- | --- | --- |
+| Item 13 | Point final | Point final retiré | Typographie | Uniformisation : aucun autre item n'en porte. |
+
+### Autres arbitrages
+
+| Sujet | Choix retenu | Justification |
+| --- | --- | --- |
+| Version | Auto-test du livre (23 items), traduction Éditions de l'Homme | Décision explicite d'Adrien (16/07/2026), malgré des droits de traduction fragiles (§3). |
+| Seuil | 12 OUI ou plus | Notation du test : « Si vous avez répondu OUI à 12 questions ou plus, vous êtes probablement hypersensible ». |
+| Droits de traduction | Risque assumé pendant la bêta | Retrait facile si nécessaire (§3). |
+| Réponses manquantes | Passation incomplète refusée, pas d'imputation | Règle projet commune à toutes les échelles. |
+
+### Questions ouvertes
+
+1. **Statut de l'outil** — auto-test grand public, non diagnostique : comment le signaler dans le catalogue (badge, mention) ?
+2. **Droits de la traduction** (Éditions de l'Homme) — à instruire avant la sortie de bêta.
+3. **Libellé de la bande basse** — « Hypersensibilité peu probable » n'est pas dans la source (seul « probablement hypersensible » l'est). Recommandé : négation du texte source (méthode AUDIT).
 
 ---
 
@@ -134,3 +151,4 @@ Vérifiés dans le script de recette (40/40 PASS, 16/07/2026).
 | Date | Auteur | Modification |
 |------|--------|--------------|
 | 16/07/2026 | Adrien (avec Claude) | Création : entrée `Scale` (single-scale OUI/NON), scorer somme 0-23 (seuil 12), icône placeholder, spec. Version = auto-test du livre (23 items), décision explicite d'Adrien malgré droits de traduction fragiles (documenté §3). |
+| 29/09/2026 | Clément (avec Claude) | §10 réécrite en « Choix et arbitrages méthodologiques » : fin de la validation clinique externe, les arbitrages sont tranchés par l'équipe. Points ouverts reformulés en décisions d'équipe, avec la règle « on n'invente rien » (écarts à la source repris de la source secondaire). |

@@ -132,7 +132,7 @@ Le PHQ-9 officiel comporte une **question finale** qui n'est pas intégrée au s
   - Très difficile(s)
   - Extrêmement difficile(s)
 
-**Traitement dans Melya** : à valider avec Renata (cf. section 10). Option par défaut recommandée : inclure cette question dans la passation (pour cohérence avec le formulaire officiel et valeur clinique qualitative), mais la flagger comme *non scorée* dans le code et ne pas l'afficher comme score dans le résultat.
+**Traitement dans Melya** (cf. §10) : inclure cette question dans la passation (pour cohérence avec le formulaire officiel et valeur clinique qualitative), mais la flagger comme *non scorée* dans le code et ne pas l'afficher comme score dans le résultat.
 
 ---
 
@@ -192,7 +192,7 @@ Aucune. Tous les items sont cotés dans le même sens (score élevé = symptôme
 | Champ | Valeur |
 | --- | --- |
 | **Référence** | Choix Melya basé sur pratique clinique courante. Le seuil ≥ 1 est aligné avec la pratique générale en outils numériques de dépistage de la dépression. |
-| **URL** | Sans objet (choix interne Melya, à confirmer avec Renata) |
+| **URL** | Sans objet (choix interne Melya, cf. §10) |
 | **Date de consultation** | Sans objet |
 | **Justification du seuil exact** | Un score ≥ 1 sur l'item 9 indique la présence d'idéation suicidaire (pas seulement sa fréquence). Toute idéation, même rare, justifie une attention clinique. Le seuil ≥ 2 manquerait des cas où le patient a coté "Plusieurs jours" — déjà cliniquement significatif. |
 
@@ -257,17 +257,25 @@ Vérification que l'alerte se déclenche dès item 9 ≥ 1, indépendamment du s
 
 ---
 
-## 10. Points à valider avec Renata
+## 10. Choix et arbitrages méthodologiques
 
-1. **Libellés des 9 items** — confirmer que la formulation Pfizer "French for France" convient à sa pratique clinique française. Les libellés sont repris verbatim de la source officielle.
-2. **Libellés de sévérité** — valider les 5 libellés *Minimale / Légère / Modérée / Modérément sévère / Sévère*. Ce sont les termes standards de la littérature française, mais une confirmation est utile.
-3. **Item d'impact fonctionnel** — décision produit à trancher :
-   - Option A : inclure dans la passation, non scoré, visible dans le résultat côté praticien à titre d'information qualitative
-   - Option B : exclure totalement, ne pas afficher au patient
-   - Recommandation Melya : Option A, par cohérence avec le formulaire officiel Pfizer.
-4. **Règle d'alerte item 9** — valider que l'alerte se déclenche dès item 9 ≥ 1, pas à un seuil plus élevé (ex. ≥ 2). Position Melya : seuil à 1 conformément à la pratique clinique courante.
-5. **Gestion des réponses manquantes** — confirmer qu'une passation incomplète doit être refusée (pas d'imputation de valeur par défaut).
-6. **Affichage de l'alerte côté praticien** — forme visuelle à définir (badge rouge, icône, libellé). Discussion UX à avoir.
+### Écarts à la source primaire
+
+Aucun écart : libellés Pfizer « French for France » repris mot pour mot.
+
+### Autres arbitrages
+
+| Sujet | Choix retenu | Justification |
+| --- | --- | --- |
+| Source | Pfizer « French for France », autorité unique | Exception de sourcing justifiée en §2. |
+| Question d'impact fonctionnel | Posée au patient, non scorée, visible côté praticien | Présente sur le formulaire officiel Pfizer. |
+| Alerte item 9 | Dès item 9 ≥ 1 | Pratique clinique courante : toute idéation suicidaire rapportée est signalée (§8). |
+| Réponses manquantes | Passation incomplète refusée, pas d'imputation | Règle projet commune à toutes les échelles. |
+
+### Questions ouvertes
+
+1. **Libellés de sévérité** (*Minimale / Légère / Modérée / Modérément sévère / Sévère*) — vérifier qu'ils figurent dans une source française ; sinon, reprendre ceux de la source.
+2. **Forme visuelle de l'alerte** côté praticien (badge, icône, libellé) — question d'interface.
 
 ---
 
@@ -306,3 +314,4 @@ Entrée : tableau de 9 nombres (un par item scoré, dans l'ordre des items 1 à 
 |------|--------|--------------|
 | 25/04/2026 | Clément (avec Claude) | Ajout des trois champs structurés "Source liée" pour traçabilité directe : subscores (sans objet), seuils (Kroenke 2001 avec URL PubMed Central), alerte item 9 (choix Melya documenté avec justification du seuil ≥ 1). |
 | 24/04/2026 | Clément (avec Claude) | Création initiale du spec selon le template canonique Melya. Alignement des libellés d'items sur la version officielle Pfizer "French for France" (ajout virgule item 7). Clarification du statut de l'item d'impact fonctionnel (non scoré, à valider avec Renata). Documentation de l'exception de sourcing (autorité unique Pfizer). |
+| 29/09/2026 | Clément (avec Claude) | §10 réécrite en « Choix et arbitrages méthodologiques » : fin de la validation clinique externe, les arbitrages sont tranchés par l'équipe. Points ouverts reformulés en décisions d'équipe, avec la règle « on n'invente rien » (écarts à la source repris de la source secondaire). |

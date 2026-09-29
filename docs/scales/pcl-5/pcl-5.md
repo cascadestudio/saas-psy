@@ -109,9 +109,9 @@ hiérarchie versions, comparaison Mentaal).
 
 **Source de la consigne** : version officielle Cn2r / Ashbaugh 2016 (source primaire, section 2).
 
-**Note d'adaptation Melya** : la PCL-5 standard suppose qu'un événement traumatique de référence ait été identifié au préalable (le PCL-5 *with Criterion A* du PDF Cn2r inclut une page d'identification de l'événement "pire" avec LEC abrégée). Pour le MVP Melya, l'identification de l'événement de référence est laissée à la discrétion du praticien (en consultation préalable à l'envoi de l'échelle). La consigne ci-dessus présuppose donc que le patient ait été briefé en amont sur l'événement à garder à l'esprit. Si Renata juge nécessaire d'ajouter une étape patient d'identification de l'événement avant les 20 items, cf. point 6 de la section 10.
+**Note d'adaptation Melya** : la PCL-5 standard suppose qu'un événement traumatique de référence ait été identifié au préalable (le PCL-5 *with Criterion A* du PDF Cn2r inclut une page d'identification de l'événement "pire" avec LEC abrégée). Pour le MVP Melya, l'identification de l'événement de référence est laissée à la discrétion du praticien (en consultation préalable à l'envoi de l'échelle). La consigne ci-dessus présuppose donc que le patient ait été briefé en amont sur l'événement à garder à l'esprit. S'il s'avère nécessaire d'ajouter une étape patient d'identification de l'événement avant les 20 items, cf. point 6 de la section 10.
 
-> **🚩 Phase 2 — à valider avec Renata avant de programmer.** Pour coller entièrement au PDF source Cn2r, il faudra à terme implémenter une étape patient d'identification du pire événement (page 1 du PDF : description libre, durée, type d'exposition, cause si décès). Décision MVP = **non implémenté** ; à reposer après validation clinique avec Renata, idéalement couplé à l'implémentation de la **LEC-5** (cf. §13 « Échelles connexes à prioriser »). Aucune action côté code tant que cette validation n'est pas obtenue.
+> **🚩 Phase 2 — à trancher par l'équipe avant de programmer (§10, question 3).** Pour coller entièrement au PDF source Cn2r, il faudra à terme implémenter une étape patient d'identification du pire événement (page 1 du PDF : description libre, durée, type d'exposition, cause si décès). Décision MVP = **non implémenté** ; à trancher par l'équipe (§10), idéalement couplé à l'implémentation de la **LEC-5** (cf. §13 « Échelles connexes à prioriser »). Aucune action côté code tant que cette validation n'est pas obtenue.
 
 ### Comportement UX de la consigne
 
@@ -181,7 +181,7 @@ La V1 du code utilisait *« Des souvenirs répétés, pénibles et involontaires
 
 ### Subscores calculés
 
-La PCL-5 est structurée autour des 4 clusters de symptômes du DSM-5. Les subscores par cluster sont **définis par l'instrument lui-même** (pas un ajout Melya) et constituent une part importante de l'interprétation clinique. Mentaal les affiche, Renata les utilise probablement, le National Center for PTSD les recommande explicitement.
+La PCL-5 est structurée autour des 4 clusters de symptômes du DSM-5. Les subscores par cluster sont **définis par l'instrument lui-même** (pas un ajout Melya) et constituent une part importante de l'interprétation clinique. Mentaal les affiche, le National Center for PTSD les recommande explicitement.
 
 | Subscore | Items | Plage | Affiché dans l'UI |
 |----------|-------|-------|--------------------|
@@ -232,7 +232,7 @@ Aucune. Tous les items sont cotés dans le même sens (score élevé = symptôme
 
 ### Gestion des réponses manquantes
 
-Refus de la passation incomplète. Les 20 items sont tous requis. Pas d'imputation par défaut. Cohérent avec PHQ-9 et GAD-7. À confirmer avec Renata (section 10).
+Refus de la passation incomplète. Les 20 items sont tous requis. Pas d'imputation par défaut. Cohérent avec PHQ-9 et GAD-7.
 
 ---
 
@@ -360,23 +360,29 @@ Cas où les deux indicateurs donnent des résultats opposés — comportement at
 
 ---
 
-## 10. Points à valider avec Renata
+## 10. Choix et arbitrages méthodologiques
 
-1. **Libellés des 20 items** — confirmer que la formulation Cn2r / Ashbaugh 2016 (reprise verbatim ci-dessus) convient à sa pratique clinique TCC en cabinet français. Point d'attention : item 1 — il existe au moins deux traductions françaises plausibles en circulation : version Cn2r/Ashbaugh *« Des souvenirs indésirables, perturbants et répétitifs »* (retenue, validation psychométrique publiée) et version IFEMDR/Desbiendras *« Des souvenirs répétés, pénibles et involontaires »* (écartée, pas de validation publiée mais largement diffusée dans la sphère EMDR). La V1 du code Melya utilisait la version IFEMDR. La V2 propose la bascule vers la version Cn2r. Choix binaire : (a) bascule vers Cn2r/Ashbaugh (V2 proposée) — (b) maintenir la version IFEMDR/Desbiendras connue de la pratique EMDR.
-2. **Bascule du seuil 33 → 32** — confirmer le passage du seuil V1 (33, seuil anglophone) au seuil 32 (Ashbaugh 2016, version FR validée, repris par la fiche Cn2r). Position Melya : aligner sur le seuil de la version française validée. Choix binaire : (a) seuil 32 (V2 proposée) — (b) maintenir 33.
-3. **Libellé d'interprétation aux deux niveaux** — valider les libellés actuels :
-   - *« Pas de TSPT au seuil de dépistage »* (score 0–31)
-   - *« Présence de TSPT au seuil de dépistage »* (score 32–80)
-   - Choix ternaire : (a) garder ces libellés — (b) raccourcir en *« Dépistage négatif » / « Dépistage positif »* — (c) autre formulation à proposer.
-4. **2 niveaux vs catégorisation plus fine** — l'implémentation V1 et V2 utilisent 2 niveaux (binaire dépistage). Opter pour :
-   - (a) Conserver 2 niveaux (recommandation Melya — c'est l'usage standard en littérature de référence pour la PCL-5)
-   - (b) Enrichir en 4 niveaux (ex. minimal 0–10 / léger 11–31 / modéré 32–47 / sévère 48–80) — non standardisé en littérature, mais utile en suivi longitudinal.
-5. **Formulation du libellé d'affichage du diagnostic provisoire DSM-5** — la règle est implémentée dans la V2 (cf. section 6, décision tranchée comme aide à la décision documentée — pas transfert de diagnostic). Reste à valider la formulation côté praticien :
-   - Cas positif : *« Selon les critères DSM-5, ce profil correspond à un diagnostic provisoire de TSPT (à confirmer par évaluation clinique structurée) »* — autre formulation ?
-   - Cas négatif : *« Selon les critères DSM-5, ce profil ne correspond pas à un diagnostic provisoire de TSPT »* — autre formulation ?
-   - Mention systématique de la limite : *« La PCL-5 évalue les critères B/C/D/E du DSM-5. Le critère A (exposition) doit être évalué cliniquement. »*
-6. **Identification de l'événement traumatique de référence** — le PCL-5 *with Criterion A* officiel inclut une page d'identification de l'événement "pire" via une LEC abrégée. Pour le MVP, l'identification est laissée au praticien (en consultation préalable). Confirmer ce choix : (a) consigne actuelle (présupposant briefing préalable) — (b) ajouter une page d'identification d'événement avant les 20 items côté patient — (c) ajouter un champ libre côté patient ("Pensez à l'événement le plus stressant que vous avez vécu") sans identification structurée.
-7. **Gestion des réponses manquantes** — confirmer le refus de passation incomplète (pas d'imputation), à l'identique du PHQ-9 et du GAD-7.
+### Écarts à la source primaire
+
+Aucun écart : items et consigne repris mot pour mot de la version Cn2r / Ashbaugh 2016. L'erreur de la fiche descriptive Cn2r (« Somme des items comprise entre 0 et 52 ») n'est pas reproduite.
+
+### Autres arbitrages
+
+| Sujet | Choix retenu | Justification |
+| --- | --- | --- |
+| Version française | Cn2r / Ashbaugh 2016 | Seule traduction avec validation psychométrique publiée ; autorité institutionnelle du Cn2r ; cohérente avec le seuil de 32 (§2). |
+| Seuil | 32 | Version française validée (Ashbaugh 2016), repris par la fiche Cn2r ; remplace le seuil anglophone de 33. |
+| Niveaux d'interprétation | 2 (dépistage négatif / positif) | Usage standard de la littérature pour la PCL-5. |
+| Sous-scores | Par cluster DSM-5 (B, C, D, E) | Définis par l'instrument ; recommandés par le National Center for PTSD. |
+| Diagnostic provisoire DSM-5 | Calculé et affiché au praticien comme aide à la décision | §6. |
+| Événement traumatique de référence | Identifié par le praticien avant l'envoi (MVP) | La page d'identification du PCL-5 *with Criterion A* n'est pas implémentée (§4). |
+| Réponses manquantes | Passation incomplète refusée, pas d'imputation | Règle projet commune à toutes les échelles. |
+
+### Questions ouvertes
+
+1. **Libellés d'interprétation** (« Pas de TSPT au seuil de dépistage » / « Présence de TSPT au seuil de dépistage ») — vérifier leur source ; sinon, reprendre les termes de la fiche Cn2r.
+2. **Formulation du diagnostic provisoire** côté praticien (cas positif, cas négatif, mention du critère A) — à figer.
+3. **Page d'identification de l'événement** (phase 2) — la programmer, idéalement avec la LEC-5 ?
 
 ---
 
@@ -443,6 +449,7 @@ Entrée : tableau de 20 nombres (un par item, dans l'ordre des items 1 à 20), c
 | 28/04/2026 (rev 2) | Cascade (avec Claude) | **Révision V2.1 après retours Cascade.** Quatre changements : (1) intégration de la version IFEMDR/Desbiendras dans le tableau de divergences (suite à signalement Cascade) — la formulation V1 du code n'était pas "non sourcée" mais correspondait à cette version, écartée au profit de Cn2r/Ashbaugh sur des critères méthodologiques (validation peer-reviewed publiée, autorité institutionnelle Cn2r > IFEMDR, cohérence avec le seuil 32). (2) Implémentation du **diagnostic provisoire DSM-5 par symptom-count** comme aide à la décision documentée — décision Cascade : c'est de la restitution de recommandation officielle (NCPTSD / DSM-5), pas du transfert de diagnostic. Ajout du booléen `diagnosticProvisoireDSM5` au contrat technique, ajout de cas de test dédiés (5.1 borne inférieure, 5.2 insuffisances par cluster, 5.3 borne du symptom-count, 5.4 cas de divergence avec l'interprétation par seuil). (3) Acte de la décision "subscores affichés par défaut côté praticien" (point 7 de la section 10 retiré). (4) Recherche d'une source recommandant une alerte sur l'item 16 (conduites à risque) — aucune source officielle trouvée, pas d'alerte ajoutée conformément à la règle "ne rien inventer". Section 8 reformulée en conséquence, point 8 de la section 10 retiré. Ajout de la section 13 (échelles connexes à prioriser) avec flag sur la LEC-5. |
 | 28/04/2026 | Cascade (avec Claude) | Migration vers le template canonique Melya. Application des 4 règles projet. Sourcing complet : bascule vers la version Cn2r / Ashbaugh 2016 (version française validée, distribuée par institution française de référence sur le psychotrauma) avec Ashbaugh 2016 en cross-check peer-reviewed. **Trois corrections V2** par rapport à la spec V1 du code : (1) **seuil 33 → 32**, conforme à la version française validée (Ashbaugh 2016) et à la fiche Cn2r ; (2) **libellé item 1** modifié vers la version Cn2r/Ashbaugh ("Des souvenirs indésirables, perturbants et répétitifs") ; (3) **ajout des 4 subscores par cluster DSM-5 (B/C/D/E)** — structurels à l'instrument, recommandés par le National Center for PTSD, affichés par Mentaal, absents de la V1. Documentation explicite des divergences entre la version Cn2r/Ashbaugh et la version Center-TBI FR. Documentation de l'erreur typographique de la fiche descriptive Cn2r ("Somme des items comprise entre 0 et 52" au lieu de 80) — non reproduite dans Melya. Public cible élargi à "Adolescents et adultes" conformément à la fiche descriptive Cn2r. |
 | Pré-28/04/2026 | (origine V1 du code) | Spec V1 issue du code existant (`apps/api/src/scoring/calculators/single-scale.ts`) — version française correspondant à la traduction IFEMDR/Desbiendras (identifiée a posteriori), seuil 33, pas de subscores par cluster. À considérer comme période pré-template, à corriger par la V2 ci-dessus. |
+| 29/09/2026 | Clément (avec Claude) | §10 réécrite en « Choix et arbitrages méthodologiques » : fin de la validation clinique externe, les arbitrages sont tranchés par l'équipe. Points ouverts reformulés en décisions d'équipe, avec la règle « on n'invente rien » (écarts à la source repris de la source secondaire). |
 
 ---
 

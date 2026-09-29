@@ -49,10 +49,9 @@ référence.
 
 | Rôle | Personne | Périmètre | Support de travail |
 | --- | --- | --- | --- |
-| **Pilote / relecteur unique** | Clément | Choisit les échelles, relit **toutes** les fiches, vérifie les sources, arbitre les divergences, **implémente (avec Claude) les échelles en réutilisation pure** (cf. `RECETTE_PLAYBOOK.md` §0), fait la recette staging, passe les statuts dans `SUIVI_ECHELLES.md` **et Linear** | repo + Linear |
+| **Pilote / relecteur unique** | Clément | Choisit les échelles, relit **toutes** les fiches, vérifie les sources, arbitre les divergences, **implémente (avec Claude) les échelles en réutilisation pure** (cf. `RECETTE_PLAYBOOK.md` §0), fait la recette staging, **tranche les questions de §10** (pas de validation clinique externe), passe les statuts dans `SUIVI_ECHELLES.md` **et Linear** | repo + Linear |
 | **Rédacteur hors repo** | James | Instruction des droits + fiche complète §1→§9 | Google Docs + dossier Drive (cf. §9) |
 | **Rédacteur repo + implémentation** | Adrien | Fiche complète §1→§9 **puis** implémentation `packages/core` + scorer une fois la fiche relue — pour les échelles **net-new** (nouveau composant ou comportement) | repo (`docs/scales/{id}/`) |
-| **Validation clinique** | Renata (référente) | Tranche les points de §10 en session groupée | — |
 
 **Règle de séparation** : le rédacteur ne valide jamais sa propre fiche. Un
 rédacteur peut se tromper — c'est prévu. Ce qu'il ne doit **jamais** faire,
@@ -254,19 +253,24 @@ Chaque bande de score pointe vers une source explicite. Trois pièges :
 - **Les libellés de sévérité sont du texte clinique affiché au praticien.**
   On reprend ceux de la source française. S'il faut les reformuler → §10.
 
-### 5.3 Portage PDF → app : les quatre déviations autorisées
+### 5.3 Portage PDF → app : les écarts autorisés
 
 Une échelle validée sur papier n'est pas mécaniquement transposable à un écran.
-Quatre types d'écart sont acceptables. **Tout autre écart est un point STOP.**
+La règle : **le texte vu par le patient reprend mot pour mot la source
+primaire.** Quand il faut s'en écarter, **le texte de remplacement vient de la
+source secondaire** (cross-check), jamais d'une formulation Melya. Chaque écart
+est consigné dans le tableau « Écarts à la source primaire » de la **§10**,
+avec l'origine du texte retenu et sa justification. **Tout autre écart est un
+point STOP.**
 
 | # | Type | Exemple réel | Comment le traiter |
 | --- | --- | --- | --- |
-| 1 | **Adaptation du support** | « en cochant la case » → « en choisissant la réponse » (PDEQ) | Autorisé, à lister en §2 « Divergences ». |
-| 2 | **Coquille manifeste de la source** | PDEQ item 5 « je l'observait » → « l'observais » | Autorisé **si** la correction est indiscutable (accord, conjugaison, typo). À lister item par item en §2. |
-| 3 | **Déplacement d'une consigne répétée** | AUDIT : préfixe « Dans les douze derniers mois » retiré des items 4-8 et porté en en-tête persistant | ⚠️ **Ne pas décider seul.** Documenter les deux options et remonter en §10. C'est un vrai arbitrage. |
-| 4 | **Ajout d'une précision nécessaire** | AUDIT : définition du « verre standard » (~10 g) ajoutée en consigne | Autorisé mais **signalé comme ajout produit Melya**, jamais présenté comme du texte source. Va en §10. |
+| 1 | **Adaptation du support** | « en cochant la case » → « en choisissant la réponse » (PDEQ) | Autorisé, consigné en §10. |
+| 2 | **Coquille manifeste de la source** | AUDIT item 6 « avez-vous du boire » → « dû » | Autorisé **si** la correction est indiscutable (accord, conjugaison, typo). On corrige le seul passage fautif, en reprenant le passage identique de la source secondaire quand il existe. Consigné en §10. |
+| 3 | **Erreur de sens ou ambiguïté de la source** | AUDIT item 10 : « et » dans la VF OMS, « or » dans l'original anglais → question OFDT reprise en entier | Prouver l'erreur (original, autre source), puis reprendre le texte de la source secondaire. Si le passage corrigé n'existe pas tel quel dans la source secondaire, reprendre l'item entier. Consigné en §10. |
+| 4 | **Ajout ou déplacement de texte** | AUDIT : définition du « verre standard » ajoutée, préfixe « Dans les douze derniers mois » déplacé en en-tête — **abandonnés le 29/09/2026** | ⛔ **Interdit.** Si la source n'a pas le texte, l'app ne l'affiche pas. Si ça semble nécessaire, question ouverte en §10. |
 
-Reformuler un item pour qu'il « sonne mieux » n'est aucun de ces quatre cas.
+Reformuler un item pour qu'il « sonne mieux » n'est aucun de ces cas.
 
 ### 5.4 La comparaison Mentaal (obligatoire sur chaque fiche)
 
@@ -317,7 +321,7 @@ dispositif tenable à trois.
 - [ ] Chaque source de §2 a : type, référence complète, URL, **date de consultation**, fichier archivé.
 - [ ] Les seuils de §7 pointent vers une source nommée, avec URL vérifiable.
 - [ ] Zéro anglais dans les champs vus par le patient ou le praticien.
-- [ ] Chaque écart au PDF source est listé en §2 et rattaché à l'un des 4 types de §5.3.
+- [ ] Chaque écart au PDF source est consigné en §10 (« Écarts à la source primaire »), avec l'origine du texte retenu, et rattaché à l'un des types de §5.3.
 - [ ] La §3 permet de répondre à : qui détient les droits, sur quelle phrase on s'appuie, et l'usage commercial est-il couvert.
 - [ ] §9 : chaque borne de seuil est testée des deux côtés.
 - [ ] §10 est une liste de **questions fermées** (« garder A ou B ? »), pas de sujets de réflexion.
@@ -368,7 +372,7 @@ Ordre conçu pour tomber tôt sur les problèmes coûteux.
 5. **Déviations (§5.3)** — les 4 types sont-ils respectés, les arbitrages du
    type 3 sont-ils bien remontés en §10 plutôt que tranchés ?
 6. **§9** — les bornes sont-elles bien testées des deux côtés ?
-7. **§10** — questions fermées, prêtes pour la session Renata.
+7. **§10** — chaque écart et arbitrage est justifié et sourcé ; les questions ouvertes sont fermées, et c'est toi qui les tranches.
 
 Verdict : `validée E4` (→ E5 implémentation) ou renvoi au rédacteur avec les
 points. Les corrections que tu fais toi-même se journalisent en §12 pour que
@@ -413,7 +417,7 @@ Adrien) — le Doc reste ta version de travail jusqu'à validation E4, après qu
 **Ton premier lot** (les 🟢 A pures, sans implication technique, du plus simple
 au plus riche) : **PDSS** (7 items, somme simple — la fiche d'entraînement),
 puis **ATQ** (30 items, somme simple), **FTND**, puis **EPDS** (10 items, avec
-un item d'alerte — tu documentes, Clément et Renata tranchent). En parallèle,
+un item d'alerte — tu documentes, Clément tranche). En parallèle,
 et c'est là que tu débloques le plus : **l'instruction des droits des lignes 🔍**
 de `SUIVI_ECHELLES.md`, à commencer par celles qui ouvrent un motif absent du
 catalogue (**ISI** et **PSQI**, le trou « sommeil » de Mentaal).

@@ -187,7 +187,7 @@ Refus de la passation incomplète. Les 16 items sont requis ; pas d'imputation.
 
 - L'article de validation (Gosselin et al., 2001) ne définit **aucun seuil clinique**. Le formulaire de cabinet consulté au portage donne deux « scores théoriques » **non contigus** : *25–40 = normal* et *55–75 = TAG*, laissant des zones sans étiquette (16–24, 41–54, 76–80).
 - Melya a construit une grille **contiguë en 3 niveaux** couvrant tout l'intervalle 16–80, ancrée sur ces repères : borne haute du « normal » ≈ 40, borne basse du « TAG » = 55. La bande intermédiaire 40–54 (« modérée ») est un **choix produit Melya** pour combler le vide et permettre l'affichage de la gauge.
-- **À faire valider par le·la psychologue référent·e** (voir section 10). Alternative possible : n'afficher que deux zones (normal / évocateur de TAG) sans bande intermédiaire, si la·le référent·e préfère coller strictement aux repères.
+- **Question ouverte** (§10, question 1) : grille construite par Melya, à remplacer de préférence par le score brut et les moyennes de référence.
 
 ### Données normatives (Gosselin et al., 2001)
 
@@ -240,11 +240,30 @@ Rappel : les items 1, 3, 8, 10, 11 sont inversés (`6 − v`).
 
 ---
 
-## 10. Points à valider avec le·la psychologue référent·e
+## 10. Choix et arbitrages méthodologiques
 
-1. **Seuils / bandes de sévérité** — valider la grille contiguë en 3 niveaux (16–39 / 40–54 / 55–80) construite par Melya à partir des repères non contigus du formulaire de cabinet (25–40 normal, 55–75 TAG). Notamment la bande intermédiaire 40–54 (« modérée ») qui est un choix produit. Alternative : affichage en 2 zones seulement.
-2. **Libellés de niveaux** — valider *Inquiétude faible / modérée / élevée*, sachant que la moyenne non clinique (≈ 44,5, Gosselin 2001) tombe dans la bande « modérée » : envisager « dans la moyenne » ou l'affichage des moyennes de référence (non clinique ≈ 45 / TAG ≈ 62) en complément.
-3. **Item 16** — valider l'adaptation FR-France « terminés » (annexe 1 : « complétés », québécisme). Seul écart au verbatim de la version validée.
+### Écarts à la source primaire
+
+| Élément | Source primaire | Texte retenu | Origine du texte retenu | Justification |
+| --- | --- | --- | --- | --- |
+| Consigne | « …correspond à vous (écrivez le numéro vous représentant, à l'avant de chacun des énoncés) » | Parenthèse retirée | Adaptation Melya | Adaptation du support : instruction propre au papier. |
+| Item 16 | « complétés » (québécisme) | « terminés » | Formulaire de cabinet (F. Ballet) | Adaptation FR-France (versions FR-France privilégiées). Seul écart au texte de la version validée. |
+
+### Autres arbitrages
+
+| Sujet | Choix retenu | Justification |
+| --- | --- | --- |
+| Ancres de réponse | « correspondant » (Pas du tout … Extrêmement correspondant) | Ancre de la VF validée (Gosselin 2001). « caractéristique » (formulaire Ballet, Mentaal) est un calque de l'anglais. |
+| Consigne | Gosselin 2001 mot pour mot | Le PSWQ mesure un trait ; la consigne Mentaal (« ressenti récent ») en change la nature. Décidé le 16/07/2026. |
+| Items 1, 5, 11, 12, 14 | Annexe 1 de Gosselin 2001, mot pour mot | Le formulaire Ballet s'en écartait. |
+| Titre | Nom complet français (fallback sur le libellé) | Reproduit le formulaire source. |
+| Réponses manquantes | Passation incomplète refusée, pas d'imputation | Règle projet commune à toutes les échelles. |
+
+### Questions ouvertes
+
+1. **Bandes de sévérité** — Gosselin 2001 ne donne aucun seuil ; la grille contiguë actuelle (16-39 / 40-54 / 55-80) est une construction Melya à partir des repères non contigus du formulaire de cabinet (25-40 normal, 55-75 TAG), et la moyenne non clinique (≈ 44,5) tombe dans « modérée ». Choix : (a) score brut sans bandes, avec les moyennes de référence de Gosselin 2001 (non clinique ≈ 45, TAG ≈ 62) (recommandé, règle « on n'invente rien », précédents ÉII et RSES) ; (b) deux zones reprises telles quelles du formulaire (25-40, 55-75), avec des scores hors zones.
+2. Rappel affiché au-dessus des items « Jusqu'à quel point cet énoncé vous correspond-il ? » : formulation Melya, absente de la source. Règle « on n'invente rien » : le supprimer, comme pour l'AUDIT le 29/09/2026 (recommandé), ou retrouver ce texte dans une source.
+3. **Cohérence avec l'ÉII** — cf. question 3 de la fiche ÉII (traitement des québécismes).
 
 ---
 
@@ -279,3 +298,4 @@ scorePswq(scale, responses) → {
 | 16/07/2026 | Adrien (avec Claude) | Arbitrage vs Mentaal tranché (§2) : on garde **« correspondant »** (ancre VF validée) et la **consigne Gosselin verbatim (option a)**. Mentaal utilise « caractéristique » (calque anglais) + une consigne réécrite qui injecte « récent » → requalifie à tort une mesure de trait en mesure d'état. Aucun changement de code (l'implémentation était déjà conforme). |
 | 16/07/2026 | Adrien (avec Claude) | Bascule de l'acronyme public **QIPS → PSWQ** partout (app, landing, docs, code, noms de fichiers : `pswq.ts`/`scorePswq`, `pswq.svg`, dossier `docs/scales/pswq/`). Id technique interne conservé à `qips` (clé DB/Sanity, non migrée). « QIPS » conservé uniquement pour désigner la VF validée (Gosselin 2001). |
 | 16/07/2026 | Adrien (avec Claude) | Recoche contre la source primaire (`gosselin-ea-2001.pdf`, annexe 1) : échelle de réponse corrigée « caractéristique » → « **correspondant** » (verbatim validé), items 1/5/11/12/14 alignés sur l'annexe 1, consigne alignée (« correspond à vous »), item 16 conservé en « terminés » (adaptation FR-France documentée). Mention de copyright enrichie (© Gosselin et al., Université Laval, tous droits réservés). Ajout des données normatives (non clinique ≈ 44,5 / TAG ≈ 62,6) + alerte sur le libellé de la bande 40–54. `psi-ii.pdf` (source WW-II, mal rangé ici) déplacé vers `docs/scales/ww-ii/`. |
+| 29/09/2026 | Clément (avec Claude) | §10 réécrite en « Choix et arbitrages méthodologiques » : fin de la validation clinique externe, les arbitrages sont tranchés par l'équipe. Points ouverts reformulés en décisions d'équipe, avec la règle « on n'invente rien » (écarts à la source repris de la source secondaire). |

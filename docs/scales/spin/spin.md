@@ -40,7 +40,7 @@ hiérarchie versions, comparaison Mentaal).
 - **Type** : ⚠️ **traduction Melya (non validée cliniquement)**. Aucune version française officielle/validée n'a pu être sourcée à ce jour.
 - **Méthode** : traduction calée au plus près de l'anglais original des PDF, en repartant d'une paraphrase FR circulant en ligne (chmpsy.com / Wikipédia FR) mais en **corrigeant les divergences** relevées (notamment items 11, 13, 17 qui déformaient le sens de l'original).
 - **URL de cross-check** : https://fr.wikipedia.org/wiki/Inventaire_de_phobie_sociale · https://chmpsy.com/2022/07/18/spin-un-test-pour-evaluer-la-phobie-sociale/
-- **Statut** : **à faire valider par un·e psychologue référent·e avant usage clinique réel.** Voir section 10.
+- **Statut** : **traduction Melya non validée** — cf. §10, question 1.
 
 ### Divergences constatées entre sources
 
@@ -214,15 +214,28 @@ Aucune. Le score total seul détermine la sévérité ; aucun item ne déclenche
 
 ---
 
-## 10. Points à valider avec le·la psychologue référent·e
+## 10. Choix et arbitrages méthodologiques
 
-1. **Traduction des 17 items** — la version FR ci-dessus est une **traduction Melya, non validée**. Faire relire chaque item, en particulier :
-   - item 6 (formulation longue restructurée depuis « Fear of embarrassment causes me to avoid… »),
-   - item 13 (« quand je suis entouré de gens » — bien vérifier que « around people » n'est pas rendu par « inconnus »),
-   - item 17 (« Trembler devant les autres me perturbe » — sans l'ajout « hésiter/rougir » de la paraphrase en ligne).
-2. **Libellés de sévérité** — valider *Pas d'anxiété sociale / légère / modérée / sévère / très sévère*.
-3. **Seuil 20** — confirmer le rattachement de la valeur 20 à « Pas d'anxiété sociale ».
-4. **Copyright** — statuer sur la régularisation auprès de `mail@cd-risc.com` avant diffusion réelle.
+### Écarts à la source primaire
+
+| Élément | Source primaire | Texte retenu | Origine du texte retenu | Justification |
+| --- | --- | --- | --- | --- |
+| Items, consigne, libellés de réponse | Version anglaise (Connor et al., 2000) | Traduction Melya | Formulation Melya ⚠️ | Aucune version française publiée n'a été identifiée ; la paraphrase en ligne (chmpsy.com) est écartée pour contresens (items 13, 17). Non conforme à la règle actuelle, cf. questions ouvertes. |
+
+### Autres arbitrages
+
+| Sujet | Choix retenu | Justification |
+| --- | --- | --- |
+| Seuils | Grille standard en 5 niveaux (Connor et al., 2000) | Présente sur les formulaires Davidson et reprise par la littérature. |
+| Score de 20 | Rattaché à « Pas d'anxiété sociale » (0-20) | Un PDF écrit « None = Less than 20 », ce qui laisse 20 sans bande ; rattachement cohérent avec la grille standard. |
+| Seuil de dépistage ≥ 19 | Non utilisé comme alerte | Seule la grille de sévérité est utilisée. |
+| Sous-titre patient | Aucun | Titre source en anglais, et pas d'étiquette « phobie sociale » sur l'écran d'intro (précédent GAD-7). |
+| Réponses manquantes | Passation incomplète refusée, pas d'imputation | Règle projet commune à toutes les échelles. |
+
+### Questions ouvertes
+
+1. **Traduction Melya** — toute l'échelle est traduite par Melya, ce qui va contre la règle « on n'invente rien ». Choix : (a) rechercher une version française publiée et la reprendre (recommandé) ; (b) à défaut, retirer le SPIN du catalogue ; (c) l'assumer explicitement comme traduction non validée, signalée au praticien.
+2. **Copyright** — régulariser auprès de `mail@cd-risc.com` avant diffusion réelle.
 
 ---
 
@@ -253,3 +266,4 @@ scoreSpin(scale, responses) → {
 | Date | Auteur | Modification |
 |------|--------|--------------|
 | 15/07/2026 | Adrien (avec Claude) | Création de l'échelle SPIN : entrée `Scale` dans `packages/core`, scorer `spin.ts` + enregistrement, icône placeholder, spec. Items anglais issus des 3 PDF fournis (concordants). Version FR = traduction Melya non validée, corrigeant les divergences d'une paraphrase en ligne (items 11/13/17). Seuils standard 5 niveaux (0–20 / 21–30 / 31–40 / 41–50 / 51–68). Copyright propriétaire (Davidson) : intégration décidée par Adrien malgré la restriction, à régulariser avant diffusion réelle. |
+| 29/09/2026 | Clément (avec Claude) | §10 réécrite en « Choix et arbitrages méthodologiques » : fin de la validation clinique externe, les arbitrages sont tranchés par l'équipe. Points ouverts reformulés en décisions d'équipe, avec la règle « on n'invente rien » (écarts à la source repris de la source secondaire). |

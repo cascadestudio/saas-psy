@@ -148,12 +148,29 @@ Vérifiés dans le script de recette (40/40 PASS, 16/07/2026).
 
 ---
 
-## 10. Points à valider avec le·la psychologue référent·e
+## 10. Choix et arbitrages méthodologiques
 
-1. **Texte libre unique** vs 6 champs séparés (papier) pour les thèmes.
-2. Formulation des 4 rangées de critères dans le `CriteriaCheckBlock`.
-3. UI 9 boutons (0-8, ancres 0/4/8) — confort de passation à confirmer en recette.
-4. Absence de bandes de sévérité sur le score total.
+### Écarts à la source primaire
+
+| Élément | Source primaire | Texte retenu | Origine du texte retenu | Justification |
+| --- | --- | --- | --- | --- |
+| Item 1 | Six champs de texte (a-f) | Un champ de texte libre unique | Adaptation Melya | Adaptation du support (Adrien, 16/07/2026). |
+| Échelles 0-8 | Ancrées aux points 0 / 4 / 8 | 9 boutons ; valeurs intermédiaires affichées en chiffre seul, ancres en chiffre + libellé | Adaptation Melya | Adaptation du support. |
+| Consigne | « Pour les numéros suivants, encerclez le chiffre correspondant (0 à 8) » | « Ce questionnaire porte sur vos inquiétudes et votre anxiété au cours des six derniers mois. Vous listerez d'abord… (0 à 8). » | Formulation Melya ⚠️ | Cf. questions ouvertes. |
+
+### Autres arbitrages
+
+| Sujet | Choix retenu | Justification |
+| --- | --- | --- |
+| Cotation | Critères (type PCL-5) en plus de la somme | Fiche de cotation UQO (le benchmark Mentaal la classait à tort en simple somme). |
+| Bandes de sévérité | Aucune sur le score total | La fiche UQO ne fournit aucun seuil sur le score total ; l'interprétation passe par les critères. Précédents : RSES, ÉII. |
+| Consigne de la section « Sensations physiques » | Consigne de l'item 5, mot pour mot | Source. |
+
+### Questions ouvertes
+
+1. **Consigne d'introduction** — elle semble rédigée par Melya au-delà de l'adaptation « encerclez → choisissez ». À vérifier contre le PDF UQO : ne garder que le texte source adapté au support.
+2. **Formulation des 4 rangées de critères** affichées au praticien — vérifier qu'elle reprend la fiche de cotation UQO.
+3. **Boutons 0-8** — confort de passation à vérifier en recette (question d'interface, pas de méthode).
 
 ---
 
@@ -171,3 +188,4 @@ Vérifiés dans le script de recette (40/40 PASS, 16/07/2026).
 | Date | Auteur | Modification |
 |------|--------|--------------|
 | 16/07/2026 | Adrien (avec Claude) | Création : entrée `Scale` (id `qia`, `options` 0-8 + `openingTextItem`), scorer somme 0-80 + criteriaCheck TAG, nouvelle brique texte libre (core + API relay + runner + résultats), icône placeholder, spec. Correction du classement benchmark (criteria, pas simple somme). |
+| 29/09/2026 | Clément (avec Claude) | §10 réécrite en « Choix et arbitrages méthodologiques » : fin de la validation clinique externe, les arbitrages sont tranchés par l'équipe. Points ouverts reformulés en décisions d'équipe, avec la règle « on n'invente rien » (écarts à la source repris de la source secondaire). |

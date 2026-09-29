@@ -5,17 +5,18 @@ Template canonique Melya — fiche d'échelle psychométrique.
 
 Règle générale : ce fichier est la SOURCE DE VÉRITÉ interne pour tout ce qui
 concerne l'échelle dans l'app Melya. Ce qui est ici doit matcher 1:1 ce qui
-est implémenté dans le code, affiché dans l'UI, et validé par un.e practicien.ne.
+est implémenté dans le code et affiché dans l'UI. Les choix méthodologiques
+sont tranchés par l'équipe Melya et consignés en §10.
 
 Public visé : Clément (relecteur primaire), Adrien (implémentation),
-équipe Melya en interne. Pas de relecture directe par les praticiens —
-la validation clinique se fait sur staging.
+équipe Melya en interne. La §10 (choix et arbitrages méthodologiques) est
+rédigée pour être publiée à terme dans le catalogue d'échelles de l'app.
 
 Règle de remplissage :
 - `[À REMPLIR]` → champ obligatoire non renseigné
 - `[OPTIONNEL]` → section à supprimer si non applicable
 - `[À SOURCER]` → info présente mais sans référence confirmée, à lever avant prod
-- `[À VALIDER PRACTICIEN]` → à trancher en session clinique
+- `[À TRANCHER]` → décision méthodologique à prendre par l'équipe, puis à consigner en §10
 
 Règle de sourcing (rappel projet) :
 2 sources indépendantes minimum, SAUF si une source faisant autorité
@@ -32,6 +33,16 @@ Règles projet (s'appliquent à toutes les specs) :
    - Côté patient : écran de fin de passation, gris discret, une fois.
    - Côté praticien : fiche du questionnaire (bibliothèque).
 4. Comparaison Mentaal systématique sur chaque spec : version FR, seuils, divergences visibles.
+5. On n'invente rien : tout ce que voit le patient (consigne, items, libellés,
+   intitulés courts) provient mot pour mot de la source primaire. Pas d'ajout
+   par défaut d'un texte absent de la source.
+6. Écart à la source primaire : seulement pour une erreur de sens, une faute
+   ou une ambiguïté avérée. Le texte de remplacement est repris de la source
+   secondaire (cross-check), jamais une formulation Melya. Si la source
+   secondaire n'a pas de texte, on n'affiche rien. Chaque écart est consigné
+   en §10 avec sa justification.
+7. Pas de validation clinique externe : les arbitrages sont tranchés par
+   l'équipe Melya, en s'appuyant sur les sources (§2), et consignés en §10.
 -->
 
 ---
@@ -155,7 +166,8 @@ directement dans la fiche, sans document parallèle.
 Cette consigne DOIT provenir d'une des sources référencées ci-dessus.
 Si plusieurs formulations existent dans la littérature, retenir celle de la
 version française validée. Si aucune consigne n'est présente dans les sources,
-l'indiquer explicitement et soumettre à Renata pour formulation.
+l'indiquer explicitement : aucune consigne n'est affichée (règle 5), et
+le choix est consigné en §10.
 -->
 
 > _« [À REMPLIR — consigne exacte] »_
@@ -297,7 +309,7 @@ Préciser la règle de transformation.
 
 ### Gestion des réponses manquantes
 
-[À REMPLIR — règle explicite. Recommandation projet : refuser la passation incomplète plutôt qu'imputer une valeur par défaut. À confirmer cas par cas avec Renata.]
+[À REMPLIR — règle explicite. Recommandation projet : refuser la passation incomplète plutôt qu'imputer une valeur par défaut. Tout autre choix est consigné en §10.]
 
 ---
 
@@ -410,17 +422,41 @@ Flexibilité de numérotation autorisée :
 
 ---
 
-## 10. Points à valider avec Renata
+## 10. Choix et arbitrages méthodologiques
 
 <!--
-Liste actionnable, à agréger pour la session de validation clinique
-groupée. Chaque point doit être formulé comme une question fermée ou
-un choix binaire/ternaire, pas en "réfléchir à X".
+Journal des décisions méthodologiques prises par l'équipe Melya pour cette
+échelle. Rédigé pour être lu par un·e praticien·ne : cette section sera
+publiée à terme dans le catalogue d'échelles de l'app. Pas de jargon interne
+(noms de champs, fichiers), des phrases complètes, chaque choix sourcé.
+
+Trois blocs :
+1. Écarts à la source primaire : tout ce que le patient voit et qui diffère
+   du PDF source primaire (règle 6). Si aucun : écrire « Aucun écart : les
+   textes affichés reprennent mot pour mot la source primaire. »
+2. Autres arbitrages : seuils retenus quand les sources divergent, gestion
+   des réponses manquantes, choix d'affichage, adaptation au format en
+   ligne, etc.
+3. Questions ouvertes : points pas encore tranchés par l'équipe. Question
+   fermée ou choix explicite, avec une recommandation. Une fois tranchée,
+   la question passe dans le bloc 1 ou 2.
 -->
 
-1. [À REMPLIR]
-2. [À REMPLIR]
-3. ...
+### Écarts à la source primaire
+
+| Élément | Source primaire | Texte retenu | Origine du texte retenu | Justification |
+| --- | --- | --- | --- | --- |
+| [À REMPLIR] | [texte exact de la source primaire] | [texte affiché dans l'app] | [source secondaire, §2] | [erreur de sens / faute / ambiguïté, preuve] |
+
+### Autres arbitrages
+
+| Sujet | Choix retenu | Justification |
+| --- | --- | --- |
+| [À REMPLIR] | [À REMPLIR] | [À REMPLIR — source à l'appui] |
+
+### Questions ouvertes
+
+1. [À TRANCHER — ou « Aucune. »]
 
 ---
 
@@ -474,7 +510,7 @@ chronologique (du plus récent au plus ancien).
 
 Types d'entrées recommandés :
 - Création initiale du spec
-- Validation clinique Renata (avec date et périmètre validé)
+- Arbitrage méthodologique (renvoyer vers la ligne correspondante de §10)
 - Modification d'un item / seuil / source suite à feedback
 - Changement de version (ex. passage LSAS → LSAS-SR)
 
@@ -484,7 +520,7 @@ retracer pourquoi un libellé est celui-ci et pas un autre.
 
 | Date         | Auteur               | Modification |
 | ------------ | -------------------- | ------------ |
-| [JJ/MM/AAAA] | [Clément/Renata/...] | [À REMPLIR]  |
+| [JJ/MM/AAAA] | [Clément/Adrien/...] | [À REMPLIR]  |
 
 ---
 

@@ -291,19 +291,29 @@ Les cas T1 à T11 sont automatisés dans `apps/api/src/scoring/scorers/ftnd.spec
 
 ---
 
-## 10. Points à valider avec Renata
+## 10. Choix et arbitrages méthodologiques
 
-Aucun point ouvert. Arbitrages rendus par Clément le 24/09/2026 :
+### Écarts à la source primaire
 
-| # | Question | Décision |
-| :---- | :---- | :---- |
-| 1 | Seuils : HAS (4 catégories) ou Unicancer/RESPADD (5 catégories) ? | HAS (§7). |
-| 2 | Acronyme affiché : FTND ou FTCD ? | FTND, sous-titre = libellé HAS (§4). |
-| 3 | Consigne patient ? | Aucune (§4). |
-| 4 | Formulation de l'item 6 ? | HAS (§5) ; « malades » chez Unicancer est une faute d'accord. |
-| 5 | Statut des droits ? | Reproduction libre, usage commercial non mentionné → go sous réserve (§3). |
-| 6 | Public cible ? | Adultes fumeurs de cigarettes (§1). |
-| 7 | Ordre d'affichage des réponses ? | Ordre de la source HAS (§5). |
+Aucun écart : les textes affichés reprennent mot pour mot la source primaire (HAS). Les divergences entre sources (§2) ont toutes été tranchées en faveur du texte HAS.
+
+### Autres arbitrages
+
+| Sujet | Choix retenu | Justification |
+| --- | --- | --- |
+| Seuils | HAS, 4 catégories, plutôt qu'Unicancer/RESPADD (5 catégories) | Source primaire institutionnelle française (§7). |
+| Acronyme affiché | FTND, sous-titre = libellé HAS | FTCD (renommage Fagerström 2012) absent des sources françaises (§4). |
+| Consigne patient | Aucune | Aucune consigne dans la source (§4). |
+| Item 6 | Formulation HAS | « malades » chez Unicancer est une faute d'accord (§5). |
+| Droits | Reproduction libre, usage commercial non mentionné → go sous réserve | §3. |
+| Public cible | Adultes fumeurs de cigarettes | §1. |
+| Ordre d'affichage des réponses | Ordre de la source HAS | Identique dans HAS et Unicancer, même s'il n'est pas croissant (§5). |
+
+Arbitrages rendus par Clément le 24/09/2026.
+
+### Questions ouvertes
+
+Aucune.
 
 ---
 
@@ -363,3 +373,4 @@ Pas de validation spécifique (cf. §9.5) : comportement commun à toutes les é
 | 24/09/2026 | Clément (avec Claude) | Relecture E4. Source primaire basculée sur le PDF officiel has-sante.fr (identique à la copie SPLF) ; PDF archivés dans `docs/scales/ftnd/` ; RESPADD ajouté comme source complémentaire pour les seuils. **Correction** : l'ordre d'affichage des réponses en §5 avait été trié par valeur croissante sans le déclarer — remis dans l'ordre de la source HAS. Divergences ajoutées (item 1 « - » vs « à », parenthèse de l'item 2). Arbitrages §10 rendus : seuils HAS, acronyme FTND, pas de consigne, droits « go sous réserve », public fumeurs de cigarettes. §9 : vecteurs de réponses ajoutés aux transitions de seuil + 2 cas spécifiques. Fiche validée E4, prête pour implémentation. |
 | 24/09/2026 | Clément (avec Claude) | Implémentation E5 par réutilisation (données `packages/core`, scorer patron CUDIT-R, icône addictions, tests §9 automatisés avec Jest, hors CI). Arbitrages : aucun intitulé court par item (absent de la source HAS) — titres d'items retirés de §5 ; §9.5 et §11 alignés sur le comportement existant (pas de validation serveur spécifique). |
 | 24/09/2026 | Clément (avec Claude) | Correctif : la description longue praticien s'affichait sur l'écran d'intro patient (fallback API `instructions ?? longDescription`, le FTND étant la seule échelle sans consigne). Fallback retiré : le patient ne voit aucun texte avant les items, conformément à la source HAS. |
+| 29/09/2026 | Clément (avec Claude) | §10 réécrite en « Choix et arbitrages méthodologiques » : fin de la validation clinique externe, les arbitrages sont tranchés par l'équipe. Points ouverts reformulés en décisions d'équipe, avec la règle « on n'invente rien » (écarts à la source repris de la source secondaire). |

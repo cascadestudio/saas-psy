@@ -256,13 +256,24 @@ Sans objet — pas d'inversion, pas d'alerte, pas de subscore, pas de cotation m
 
 ---
 
-## 10. Points à valider avec Renata
+## 10. Choix et arbitrages méthodologiques
 
-1. **Libellés des 7 items** — confirmer que les libellés "French for France" repris verbatim ci-dessus conviennent à sa pratique clinique en cabinet français. Point d'attention particulier sur l'item 3 *"Une inquiétude excessive à propos de différentes choses"* (vs. "tout et de rien" de la version canadienne) : la formulation "French for France" est plus neutre cliniquement. La bascule vers "French for France" elle-même n'est pas en débat — c'est une règle projet (cible primaire France).
-2. **Libellés de sévérité** — valider les 4 libellés *Minimale / Légère / Modérée / Sévère*. Termes standards de la littérature française, mais une confirmation est utile.
-3. **Absence de question d'impact fonctionnel** — confirmer l'analyse : le GAD-7 standalone Pfizer ne contient pas la question d'impact présente sur le PHQ-9. Cela rectifie une affirmation incorrecte de la spec précédente. Confirmer qu'aucune question d'impact spécifique au GAD-7 ne doit être ajoutée par Melya.
-4. **Seuils Spitzer 2006 vs. seuil Micoulaud-Franchi 2016** — confirmer le choix des seuils standards Spitzer (5 / 10 / 15) plutôt que le seuil de 7 proposé par la validation française en population épileptique. Position Melya : seuils standards Spitzer, plus largement diffusés et alignés sur la pratique courante.
-5. **Gestion des réponses manquantes** — confirmer le refus de passation incomplète (pas d'imputation), à l'identique du PHQ-9.
+### Écarts à la source primaire
+
+Aucun écart déclaré : libellés Pfizer « French for France » repris mot pour mot.
+
+### Autres arbitrages
+
+| Sujet | Choix retenu | Justification |
+| --- | --- | --- |
+| Version française | « French for France » (Pfizer), plutôt que la version canadienne | Cohérence avec le PHQ-9 déjà retenu (même éditeur, même période « 2 dernières semaines », même consigne) ; cible France. |
+| Question d'impact fonctionnel | Aucune | Absente du GAD-7 Pfizer standalone (contrairement au PHQ-9). Règle « on n'invente rien ». |
+| Seuils | Spitzer 2006 : 5 / 10 / 15 | Seuils standards, largement diffusés. Le seuil de 7 de Micoulaud-Franchi 2016 est établi en population épileptique, non généralisable. |
+| Réponses manquantes | Passation incomplète refusée, pas d'imputation | Règle projet commune à toutes les échelles. |
+
+### Questions ouvertes
+
+1. **Libellés de sévérité** (*Minimale / Légère / Modérée / Sévère*) — vérifier qu'ils figurent dans une source française (§2) ; sinon, reprendre ceux de la source.
 
 ---
 
@@ -302,3 +313,4 @@ Entrée : tableau de 7 nombres (un par item, dans l'ordre des items 1 à 7), cha
 |------|--------|--------------|
 | 28/04/2026 | Cascade (avec Claude) | Migration vers le template canonique Melya. Application de trois règles projet actées ce jour : (1) nom complet (FR) = libellé exact du PDF source primaire (ici "GAD-7", pas de traduction inventée) ; (2) hiérarchie des versions FR retenues : France > Suisse > Belgique > Canada ; (3) emplacement standard de la mention copyright obligatoire — côté patient sur l'écran de fin de passation (post-soumission), côté praticien dans la fiche du questionnaire en bibliothèque (traçabilité). Le pied de page persistant a été écarté au profit d'une mention unique en fin de passation, jugée plus adaptée à un format mobile-first où le pied n'est pas regardé. Bascule de la version "française canadienne" (UMontréal) vers la version "French for France" Pfizer (Center-TBI), conforme à la règle 2 et cohérente avec le PHQ-9 Melya. Ajout de Micoulaud-Franchi 2016 comme source de validation française. Correction d'une affirmation incorrecte de la spec précédente concernant l'existence d'une question d'impact fonctionnel sur le GAD-7 (le GAD-7 standalone Pfizer n'en contient pas). Documentation explicite des divergences entre les deux versions FR distribuées par Pfizer. Ajout des cas de test T9-T10 (sanity check), suppression de la mention d'alerte clinique non applicable. |
 | 21/04/2026 | Cascade | Création initiale de la spec GAD-7 (version pré-template, ancrée sur Spitzer 2006 + version française canadienne UMontréal). |
+| 29/09/2026 | Clément (avec Claude) | §10 réécrite en « Choix et arbitrages méthodologiques » : fin de la validation clinique externe, les arbitrages sont tranchés par l'équipe. Points ouverts reformulés en décisions d'équipe, avec la règle « on n'invente rien » (écarts à la source repris de la source secondaire). |

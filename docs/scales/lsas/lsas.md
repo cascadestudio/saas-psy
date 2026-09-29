@@ -255,7 +255,7 @@ Sans objet (aucun item inversé).
 
 ### Gestion des réponses manquantes
 
-**Refus de la passation incomplète.** Les 48 cotations (24 anxiété + 24 évitement) sont toutes requises. Si une cotation manque, la fonction de scoring lève une erreur de validation explicite — pas de score à 0 silencieux, pas d'imputation. Cohérent avec la pratique TCC clinique (un score partiel n'est pas interprétable cliniquement). À confirmer avec Renata (cf. section 10).
+**Refus de la passation incomplète.** Les 48 cotations (24 anxiété + 24 évitement) sont toutes requises. Si une cotation manque, la fonction de scoring lève une erreur de validation explicite — pas de score à 0 silencieux, pas d'imputation. Cohérent avec la pratique TCC clinique (un score partiel n'est pas interprétable cliniquement).
 
 ---
 
@@ -281,7 +281,7 @@ Sans objet (aucun item inversé).
 
 **Remarques sur les seuils** : Psychiaclic (Boulenger) précise qu'« il n'existe pas de valeur-seuil démontrée par les recherches psychométriques », mais cette affirmation est antérieure à la validation Mennin 2002 / Rytwinski 2009. Les seuils retenus sont à utiliser à titre indicatif pour le repère clinique et le suivi d'évolution, **pas pour poser un diagnostic** (qui relève toujours de l'entretien clinique). Le DSM-5 ne définit pas de seuil quantitatif sur la LSAS pour le diagnostic du trouble d'anxiété sociale.
 
-**Bascule par rapport à la spec V1 du code et à la grille Mentaal** : la grille V2 retenue (Heimberg & Becker 2002) diffère de Mentaal (qui démarre à 56) et de Bouvard-Cottraux/Retz (qui démarre à 56). Conséquence pratique : un patient avec score 50 sera classé « Anxiété sociale modérée » dans Melya (cohérent avec Heimberg/NSAC), alors qu'il aurait été classé « Pas de phobie sociale » selon Mentaal. **Ce point sera particulièrement important à valider avec Renata** (cf. section 10) — la grille FR usuelle est plus restrictive ; la grille canonique anglophone est plus discriminante en début de prise en charge.
+**Bascule par rapport à la spec V1 du code et à la grille Mentaal** : la grille V2 retenue (Heimberg & Becker 2002) diffère de Mentaal (qui démarre à 56) et de Bouvard-Cottraux/Retz (qui démarre à 56). Conséquence pratique : un patient avec score 50 sera classé « Anxiété sociale modérée » dans Melya (cohérent avec Heimberg/NSAC), alors qu'il aurait été classé « Pas de phobie sociale » selon Mentaal. **Arbitrage consigné en §10** — la grille FR usuelle est plus restrictive ; la grille canonique anglophone est plus discriminante en début de prise en charge.
 
 ---
 
@@ -350,21 +350,30 @@ Construction : on remplit progressivement les items de la valeur 6 (anxiété 3 
 
 ---
 
-## 10. Points à valider avec Renata
+## 10. Choix et arbitrages méthodologiques
 
-1. **Bascule grille de seuils Mentaal/Retz → Heimberg & Becker 2002** : la grille V2 retenue (0-29 / 30-49 / 50-64 / 65-79 / 80-94 / ≥95) est plus discriminante en début de prise en charge que la grille FR usuelle (qui démarre à 56). Un patient à 50 est « modéré » sur Heimberg, « pas de phobie sociale » sur Mentaal/Retz. Validation clinique : la grille canonique anglophone est-elle préférable, ou faut-il privilégier la cohérence avec la pratique TCC francophone (Bouvard-Cottraux) ?
+### Écarts à la source primaire
 
-2. **Bascule terminologie « phobie sociale » → « anxiété sociale »** : la V2 utilise « anxiété sociale » (canon Heimberg & Becker 2002, terminologie DSM-5, cohérence avec la consigne SR adoptée). Validation clinique : préférable à « phobie sociale » (terminologie DSM-IV, usage francophone TCC) ?
+| Élément | Source primaire | Texte retenu | Origine du texte retenu | Justification |
+| --- | --- | --- | --- | --- |
+| Consigne | Aucune consigne LSAS-SR en français dans les sources | Traduction Melya de la consigne Heimberg & Becker 2002 (3 paragraphes, fenêtre « semaine écoulée ») | Formulation Melya ⚠️ | Cf. questions ouvertes. |
 
-3. **Consigne LSAS-SR FR** : la traduction fidèle de Heimberg & Becker 2002 (3 paragraphes) est-elle cliniquement acceptable pour un patient en auto-évaluation à distance ? Aucune source FR ne donne cette consigne traduite — Melya est première à le faire.
+### Autres arbitrages
 
-4. **UX double cotation patient** : présentation côte-à-côte sur le même écran (anxiété + évitement par item, dans cet ordre) — équivalent à la version papier. Cliniquement intelligible ?
+| Sujet | Choix retenu | Justification |
+| --- | --- | --- |
+| Item 21 « Essayer de "draguer" quelqu'un » | Catégorie S (interaction sociale), libellé exact de la version validée | Yao et al. 1999 corrige explicitement l'erreur de la version américaine (P). Donne 12 items P + 12 items S. |
+| Bornes d'évitement | 0-33 % / 34-66 % / 67-100 % (Psychiaclic) | Le chevauchement à 33 % du Retz 2011 est une coquille probable. |
+| Item 6 | « …devant un public » (Psychiaclic) | Troncature probable du Retz pour la mise en page. |
+| Seuils | Heimberg & Becker 2002 / NSAC : 0-29 / 30-49 / 50-64 / 65-79 / 80-94 / ≥ 95 | Grille validée empiriquement (Mennin 2002, Rytwinski 2009) ; la grille française Bouvard-Cottraux/Retz est citée « à partir des études anglophones » sans validation propre. |
+| Terminologie | « anxiété sociale » plutôt que « phobie sociale » | Canon Heimberg & Becker 2002, DSM-5, cohérent avec la consigne LSAS-SR. |
+| Double cotation | Anxiété et évitement côte à côte, par item | Équivalent de la version papier. |
+| Réponses manquantes | Passation incomplète refusée, pas d'imputation | Règle projet commune à toutes les échelles. |
 
-5. **Affichage des 8 subscores côté praticien** : tous affichés ou présentation hiérarchisée (4 principaux mis en avant, 4 croisés en bloc secondaire) ?
+### Questions ouvertes
 
-6. **Gestion des réponses manquantes** : confirmer que la passation est refusée si une seule des 48 cotations manque (pas d'imputation, pas de score partiel) ?
-
-7. **Choix item 21 (P→S) et libellé « draguer »** : valider la bascule vers la classification Yao 1999 (item 21 en S), et le libellé exact « Essayer de "draguer" quelqu'un » avec les guillemets ? Le mot « draguer » peut être perçu comme connoté, mais c'est le libellé exact de la version validée (la V1 utilisait « séduire » sans source).
+1. **Consigne LSAS-SR** — traduite par Melya, aucune source française ne la donne. Choix : (a) reprendre une consigne française publiée (Psychiaclic, Retz), même si elle vise l'hétéro-évaluation (recommandé, règle « on n'invente rien ») ; (b) l'assumer explicitement comme traduction Melya.
+2. **Affichage des 8 sous-scores côté praticien** — tous au même niveau, ou 4 principaux mis en avant et 4 croisés en bloc secondaire (question d'interface).
 
 ---
 
@@ -429,6 +438,7 @@ Format d'entrée non-trivial (à la différence des échelles unidimensionnelles
 | 29/04/2026   | Cascade (avec Claude)   | **Consolidation V2 après revue documentaire approfondie sur la consigne et les seuils LSAS-SR.** Bascule vers le canon **Heimberg & Becker 2002 / NSAC** pour : (a) la consigne LSAS-SR (traduction fidèle FR de la formulation diffusée par NSAC, Columbia Department of Psychiatry, Psychology Tools, etc., avec fenêtre temporelle « semaine écoulée » — confirmée canonique par le manuel d'utilisation officiel de Liebowitz lui-même, contredisant l'hypothèse initiale « LSAS = trait, pas d'état ») ; (b) la grille de seuils en 6 niveaux (0-29 / 30-49 / 50-64 / 65-79 / 80-94 / ≥95), validée empiriquement par Mennin 2002 (LSAS clinicien) et Rytwinski 2009 (LSAS-SR), au lieu de la grille Mentaal / Bouvard-Cottraux/Retz (qui démarre à 56). Bascule terminologique « phobie sociale » → « **anxiété sociale** » (canon Heimberg, terminologie DSM-5, cohérence avec la consigne adoptée). Ajout du libellé explicite « Pas d'anxiété sociale » pour le niveau 0-29 (canon NSAC, 1/5e de la plage). UX double cotation : présentation côte-à-côte sur le même écran. Tous les 8 subscores affichés côté praticien (cohérence avec le caractère multi-dimensionnel de l'instrument et avec Mentaal). Tous les cas de test recalculés et vérifiés arithmétiquement sous Python avec la nouvelle grille. À valider en session clinique groupée avec Renata — particulièrement sur la bascule grille FR → grille anglophone. |
 | 28/04/2026   | Cascade (avec Claude)   | Migration initiale vers le template canonique Melya. Application des 4 règles projet. Sourcing : version française Yao et al. 1999 (peer-reviewed FR France) en source primaire pour les libellés des items ; cross-checks Psychiaclic (Boulenger) et Bouvard & Cottraux (Retz 2011) ; Heeren et al. 2012 (validation FR Belgique de la LSAS-SR) en cross-check secondaire. **Première spec Melya à exploiter la structure « plusieurs dimensions de cotation par item »** (anxiété + évitement, indépendantes, chacune 0-3).<br><br>**Six corrections par rapport à la spec V1 du code** : (1) catégorisation item 21 : P → S (Yao 1999, correction de l'erreur version américaine) ; (2) libellé item 21 : « Essayer de "draguer" quelqu'un » (Lépine-Cardot 1990) au lieu de « Essayer de séduire » (V1 non sourcée) ; (3) libellés items 2, 5, 6, 10, 11, 13, 18, 19, 20 alignés exactement sur Lépine-Cardot 1990 ; (4) libellés modalités d'évitement conformes à Psychiaclic ; (5) bascule grille de seuils 4 niveaux V1 → grille initiale 5 niveaux Mentaal (révisée le 29/04/2026 vers Heimberg & Becker 2002, cf. ligne supérieure) ; (6) libellés sévérité harmonisés (révisés le 29/04/2026 vers « anxiété sociale »). |
 | Pré-28/04/2026 | (origine V1 du code)  | Spec V1 issue du code existant (`apps/api/src/scoring/calculators/liebowitz.ts`) — version française non sourcée explicitement, item 21 catégorisé P (héritage erreur version américaine), libellés items 2/5/6/10/11/13/18/19/20/21 modernisés sans source, seuils 4 niveaux non documentés, libellés sévérité « anxiété sociale légère/modérée/marquée/sévère ». À considérer comme période pré-template, à corriger par la V2 ci-dessus. |
+| 29/09/2026 | Clément (avec Claude) | §10 réécrite en « Choix et arbitrages méthodologiques » : fin de la validation clinique externe, les arbitrages sont tranchés par l'équipe. Points ouverts reformulés en décisions d'équipe, avec la règle « on n'invente rien » (écarts à la source repris de la source secondaire). |
 
 ---
 

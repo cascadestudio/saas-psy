@@ -885,11 +885,9 @@ export const scales: Scale[] = [
     category: "Addictions",
     estimatedTime: "2-3 minutes",
     longDescription:
-      "L'AUDIT (Alcohol Use Disorders Identification Test) est un auto-questionnaire de 10 items développé par l'Organisation mondiale de la Santé (Saunders et al., 1993) pour repérer les consommations d'alcool problématiques. Les items 1 à 3 portent sur la consommation (fréquence, quantité, ivresses), les items 4 à 6 sur les signes de dépendance et les items 7 à 10 sur les conséquences. Chaque item est coté de 0 à 4 (items 9 et 10 : 0, 2 ou 4), pour un score total de 0 à 40 portant sur les 12 derniers mois. Selon la Société Française d'Alcoologie (2015), un score ≥ 7 chez l'homme et ≥ 6 chez la femme évoque un mésusage actuel, et un score > 12 (quel que soit le sexe) est en faveur d'une dépendance. Ce seuil de repérage est sexe-spécifique : l'interprétation affichée retient le seuil le plus sensible (≥ 6) et doit être lue en tenant compte du sexe de la personne.",
+      "L'AUDIT (Alcohol Use Disorders Identification Test) est un auto-questionnaire de 10 items développé par l'Organisation mondiale de la Santé (Saunders et al., 1993) pour repérer les consommations d'alcool problématiques. Les items 1 à 3 portent sur la consommation (fréquence, quantité, ivresses), les items 4 à 6 sur les signes de dépendance et les items 7 à 10 sur les conséquences. Chaque item est coté de 0 à 4 (items 9 et 10 : 0, 2 ou 4), pour un score total de 0 à 40 portant sur les 12 derniers mois. Selon la Société Française d'Alcoologie (2015), un score ≥ 7 chez l'homme et ≥ 6 chez la femme évoque un mésusage actuel, et un score > 12 (quel que soit le sexe) est en faveur d'une dépendance. Le seuil de mésusage étant sexe-spécifique, un score de 6 est interprété comme évocateur d'un mésusage chez la femme uniquement.",
     instructions:
-      "Ce questionnaire porte sur votre consommation d'alcool au cours des douze derniers mois. Veillez à ce que vos réponses reflètent bien cette période, et pas seulement les dernières semaines.\n\nUn « verre standard » correspond à la quantité d'alcool servie dans un bar (environ 10 g d'alcool pur) : un ballon de vin, un demi de bière, une dose de spiritueux.",
-    persistentInstructions:
-      "Au cours des douze derniers mois :",
+      "Ce questionnaire interroge votre consommation d'alcool des douze derniers mois. Attention à ce que vos réponses reflètent cette unité de temps et pas seulement les dernières semaines.",
     copyrightAttribution:
       "AUDIT (Alcohol Use Disorders Identification Test) — Organisation mondiale de la Santé ; Saunders, Aasland, Babor, de la Fuente & Grant (1993). Version française validée : Gache et al. (2005). Seuils : Société Française d'Alcoologie (2015).",
     higherIsBetter: false,
@@ -928,7 +926,7 @@ export const scales: Scale[] = [
       },
       {
         title:
-          "Combien de fois avez-vous observé que vous n'étiez plus capable de vous arrêter de boire après avoir commencé ?",
+          "Dans les douze derniers mois, combien de fois avez-vous observé que vous n'étiez plus capable de vous arrêter de boire après avoir commencé ?",
         options: [
           { value: 0, text: "Jamais" },
           { value: 1, text: "Moins d'une fois par mois" },
@@ -939,7 +937,7 @@ export const scales: Scale[] = [
       },
       {
         title:
-          "Combien de fois le fait d'avoir bu de l'alcool vous a-t-il empêché de faire ce qu'on attendait normalement de vous ?",
+          "Dans les douze derniers mois, combien de fois le fait d'avoir bu de l'alcool vous a-t-il empêché de faire ce qu'on attendait normalement de vous ?",
         options: [
           { value: 0, text: "Jamais" },
           { value: 1, text: "Moins d'une fois par mois" },
@@ -950,7 +948,7 @@ export const scales: Scale[] = [
       },
       {
         title:
-          "Combien de fois, après une période de forte consommation, avez-vous dû boire de l'alcool dès le matin pour vous remettre en forme ?",
+          "Dans les douze derniers mois, combien de fois, après une période de forte consommation, avez-vous dû boire de l'alcool dès le matin pour vous remettre en forme ?",
         options: [
           { value: 0, text: "Jamais" },
           { value: 1, text: "Moins d'une fois par mois" },
@@ -961,7 +959,7 @@ export const scales: Scale[] = [
       },
       {
         title:
-          "Combien de fois avez-vous eu un sentiment de culpabilité ou de regret après avoir bu ?",
+          "Dans les douze derniers mois, combien de fois avez-vous eu un sentiment de culpabilité ou de regret après avoir bu ?",
         options: [
           { value: 0, text: "Jamais" },
           { value: 1, text: "Moins d'une fois par mois" },
@@ -972,7 +970,7 @@ export const scales: Scale[] = [
       },
       {
         title:
-          "Combien de fois avez-vous été incapable de vous souvenir de ce qui s'était passé la nuit précédente parce que vous aviez bu ?",
+          "Dans les douze derniers mois, combien de fois avez-vous été incapable de vous souvenir de ce qui s'était passé la nuit précédente parce que vous aviez bu ?",
         options: [
           { value: 0, text: "Jamais" },
           { value: 1, text: "Moins d'une fois par mois" },
@@ -987,32 +985,41 @@ export const scales: Scale[] = [
         options: [
           { value: 0, text: "Non" },
           { value: 2, text: "Oui, mais pas au cours de l'année écoulée" },
-          { value: 4, text: "Oui, au cours de l'année écoulée" },
+          { value: 4, text: "Oui, au cours de l'année" },
         ],
       },
       {
         title:
-          "Un parent, un ami, un médecin ou un autre professionnel de santé s'est-il déjà préoccupé de votre consommation d'alcool et vous a-t-il conseillé de la diminuer ?",
+          "Un parent, un ami, un médecin ou autre soignant s'est-il inquiété de votre consommation d'alcool ou a-t-il suggéré que vous la réduisiez ?",
         options: [
           { value: 0, text: "Non" },
           { value: 2, text: "Oui, mais pas au cours de l'année écoulée" },
-          { value: 4, text: "Oui, au cours de l'année écoulée" },
+          { value: 4, text: "Oui, au cours de l'année" },
         ],
       },
     ],
     scoring: {
       ranges: [
-        { min: 0, max: 5, interpretation: "Consommation à faible risque" },
+        {
+          min: 0,
+          max: 5,
+          interpretation: "Non évocateur d'un mésusage actuel d'alcool",
+        },
         {
           min: 6,
-          max: 12,
+          max: 6,
           interpretation:
-            "Mésusage d'alcool probable (seuil ≥ 6 femme / ≥ 7 homme)",
+            "Évocateur d'un mésusage actuel d'alcool chez la femme (seuil chez l'homme : 7)",
+        },
+        {
+          min: 7,
+          max: 12,
+          interpretation: "Évocateur d'un mésusage actuel d'alcool",
         },
         {
           min: 13,
           max: 40,
-          interpretation: "Dépendance à l'alcool probable",
+          interpretation: "En faveur d'une dépendance à l'alcool",
         },
       ],
       maxScore: 40,
