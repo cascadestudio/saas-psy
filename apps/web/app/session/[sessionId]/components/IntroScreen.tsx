@@ -1,5 +1,6 @@
 "use client";
 
+import { ScaleInstructions } from "@/components/scale/ScaleInstructions";
 import { ScaleTile } from "@/components/scale/ScaleTile";
 import { Button } from "@/components/ui/button";
 import { Interfaces } from "doodle-icons";
@@ -61,11 +62,10 @@ export default function IntroScreen({
       </div>
 
       {instructions && (
-        <div className="flex flex-col gap-4 text-base text-gray-600 leading-relaxed">
-          {instructions.split(/\n\n+/).map((para, i) => (
-            <p key={i}>{para}</p>
-          ))}
-        </div>
+        <ScaleInstructions
+          text={instructions}
+          className="text-base text-gray-600 leading-relaxed"
+        />
       )}
 
       <Button className="w-full h-12 text-base" onClick={onStart}>

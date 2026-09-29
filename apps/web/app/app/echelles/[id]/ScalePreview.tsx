@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import { ScaleInstructions } from "@/components/scale/ScaleInstructions";
 import {
   Dialog,
   DialogContent,
@@ -23,9 +24,10 @@ export default function ScalePreview({ scale }: ScalePreviewProps) {
   return (
     <div className="space-y-4">
       {scale.instructions && (
-        <p className="text-sm text-muted-foreground">
-          {scale.instructions}
-        </p>
+        <ScaleInstructions
+          text={scale.instructions}
+          className="text-sm text-muted-foreground"
+        />
       )}
       <div className="space-y-3">
         {previewQuestions.map((question, index) => (
@@ -52,9 +54,10 @@ export default function ScalePreview({ scale }: ScalePreviewProps) {
           </DialogHeader>
           <div className="space-y-3 py-4">
             {scale.instructions && (
-              <p className="text-sm text-muted-foreground">
-                {scale.instructions}
-              </p>
+              <ScaleInstructions
+                text={scale.instructions}
+                className="text-sm text-muted-foreground"
+              />
             )}
             {scale.questions.map((question, index) => (
               <QuestionItem key={index} question={question} index={index} scale={scale} />

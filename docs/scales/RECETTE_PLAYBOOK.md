@@ -53,7 +53,9 @@ Voir `packages/core/src/scales/index.ts` (interface `Scale`). Points sensibles :
   - `single-scale` : items texte simple + une échelle de Likert commune (PHQ-9, GAD-7, PCL-5, RSES)
   - `options` : chaque item a son propre jeu de réponses (Y-BOCS)
   - `dual-scale` : chaque item répondu deux fois — anxiété + évitement (LSAS)
-- `instructions` : consigne d'écran d'intro (paragraphes séparés par `\n\n`)
+- `instructions` : consigne d'écran d'intro (paragraphes séparés par `\n\n`,
+  retour à la ligne simple `\n`, liste à puces avec des lignes `- …` — cf. PDSS ;
+  rendu par `ScaleInstructions`)
 - `persistentInstructions` (optionnel) : consigne courte rappelée au-dessus de
   chaque item pendant la passation (PCL-5 par ex.)
 - `sectionIntros` (optionnel) : sections internes. Format
@@ -75,6 +77,9 @@ Une fois la donnée correcte, la passation hérite automatiquement de :
 - **Écran d'intro** (`IntroScreen.tsx`) : tuile (acronyme + point de domaine), label, instructions paragraphées,
   nombre d'items, durée estimée. Sans `instructions`, aucun texte : `longDescription`
   est réservée au praticien et n'est jamais envoyée au patient.
+- **Taille des questions** : réduite pour toute l'échelle dès qu'une de ses
+  questions dépasse 250 caractères (`LONG_QUESTION_THRESHOLD` dans
+  `SessionRunner.tsx`). Seule la PDSS est concernée au 29/09/2026.
 - **Écran de transition de section** (`SectionTransitionScreen.tsx`) : déclenché
   par toute `SectionIntro` avec `description` non vide et `startIndex > 0`.
 - **Gauge résultat** (`ScoreArcGauge.tsx`) : ticks numériques aux seuils sur

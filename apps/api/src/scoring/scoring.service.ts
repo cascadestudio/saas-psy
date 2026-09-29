@@ -13,6 +13,7 @@ import { scorePdeq } from './scorers/pdeq';
 import { scoreEii } from './scorers/eii';
 import { scoreCuditR } from './scorers/cudit';
 import { scoreFtnd } from './scorers/ftnd';
+import { scorePdss } from './scorers/pdss';
 import { scoreHsps } from './scorers/hsps';
 import { scoreQia } from './scorers/qia';
 
@@ -32,6 +33,7 @@ const SCORERS: Record<string, Scorer> = {
   eii: scoreEii,
   'cudit-r': scoreCuditR,
   ftnd: scoreFtnd,
+  pdss: scorePdss,
   hsps: scoreHsps,
   qia: scoreQia,
 };

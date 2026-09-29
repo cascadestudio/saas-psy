@@ -374,7 +374,7 @@ Les cas T1 à T8 sont automatisés dans `apps/api/src/scoring/scorers/pdss.spec.
 
 ## 11. Contrat technique pour Adrien
 
-*Réutilisation des briques existantes (patron FTND), plus une petite évolution d'affichage de la consigne (§4).*
+*Implémenté le 29/09/2026 : réutilisation des briques existantes (patron FTND), plus deux évolutions d'affichage — consigne en liste à puces (§4) et taille de question réduite pour les questions longues.*
 
 ### Fichiers
 
@@ -419,6 +419,7 @@ Pas de validation spécifique (cf. §9.5) : comportement commun à toutes les é
 | :---- | :---- | :---- |
 | 29/09/2026 | Adrien (avec Claude) | Création. Instruction des droits (© Shear, usage commercial non couvert → go sous réserve, flag ✉️). Choix de la PDSS-SR (auto-questionnaire). Source primaire : formulaire MSSS/PQPTM 2019 (seule VF complète accessible, aucune version de France). Seuil ≥ 9 (Roberge 2022), deux bandes. |
 | 29/09/2026 | Adrien (avec Claude) | Cross-check : la thèse de Bordeaux 2017 ne reproduit pas les items → écartée. Source MSSS retenue seule (exception autorité institutionnelle) ; version Roberge 2022 demandée à Sherbrooke pour cross-check a posteriori. |
+| 29/09/2026 | Adrien (avec Claude) | Implémentation E5 : données `packages/core`, scorer patron FTND, tests §9 automatisés (Jest, hors CI). Évolutions UI associées : composant `ScaleInstructions` (retours à la ligne et puces dans les consignes), taille de question réduite au-delà de 250 caractères, retour instantané en haut de page à chaque question. Recette à confirmer. |
 
 ---
 

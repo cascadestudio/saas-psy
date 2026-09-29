@@ -11,7 +11,7 @@
 
 ## Tableau de bord
 
-**✅ 7 validées · 🔵 8 implémentées · 🚧 1 en cours · 📋 8 prévues · 🔍 22 à instruire · ⬜ 26 non planifiées · 🚫 12 écartées**
+**✅ 7 validées · 🔵 9 implémentées · 🚧 0 en cours · 📋 8 prévues · 🔍 22 à instruire · ⬜ 26 non planifiées · 🚫 12 écartées**
 
 **Rattrapage Mentaal : 13/42.** Le plafond n'est pas 74 : sur leur catalogue
 disponible, 12 sont écartées d'office (payantes, outils maison Mentaal, ou
@@ -65,7 +65,7 @@ sortie ; les auteurs flaggés seront contactés en une fois, plus tard.
 | EPDS | Dépression périnatale (Édimbourg) | 📋 (4) | ✅ | 🟢 A | Bientôt · 96 v. | alerte item 10 (idéation) façon PHQ-9 |
 | DASS-21 | Dépression, anxiété et stress | 📋 (5) | ✅ | 🟠 C | #2 | sévérité par sous-échelle → étendre `Subscore` |
 | ATQ | Pensées automatiques | 📋 (6) | ✅ | 🟢 A | Bientôt · 77 v. | |
-| PDSS | Sévérité du trouble panique | 🚧 (E5 · Adrien) | ⚠️ ✉️ | 🟢 A | Bientôt · 62 v. | PDSS-SR, VF MSSS Québec 2019 (aucune VF France) ; seuil ≥ 9 (Roberge 2022). Fiche `pdss/pdss.md` + implémentation faites ; reste recette ; cross-check a posteriori sur la version Roberge (demandée). © Shear : usage commercial à demander (✉️) — cf. MEL-324 |
+| PDSS | Sévérité du trouble panique | 🔵 | ⚠️ ✉️ | 🟢 A | Bientôt · 62 v. | PDSS-SR, VF MSSS Québec 2019 (aucune VF France) ; seuil ≥ 9 (Roberge 2022). Recette à confirmer ; cross-check a posteriori sur la version Roberge (demandée, MEL-339). © Shear : usage commercial à demander (✉️) — cf. MEL-324 |
 | DERS | Régulation émotionnelle | 📋 (8) | ✅ | 🟡 B | #14 | reverse + subscores |
 | TAS-20 | Alexithymie de Toronto | 📋 (10) | ✅ | 🟡 B | #37 | reverse + 3 subscores |
 | LEC-5 | Liste des événements de vie (DSM-5) | 📋 (11) | ✅ NCPTSD | 🟠 C | Absent | couplée à la PCL-5 en clinique (identification de l'événement de référence) — cf. `pcl-5/pcl-5.md` §13 ; pas de score : 17 événements × 6 modalités (vécu / témoin / appris / cadre pro / pas sûr / sans objet) → widget multi-choix par item à créer ; VF Cn2r à sourcer ; priorité à rediscuter (équipe) |

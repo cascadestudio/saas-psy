@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Arrow } from "doodle-icons";
 import ProgressBar from "./ProgressBar";
 import IntroScreen from "./IntroScreen";
@@ -41,6 +41,13 @@ interface SectionTransition {
 }
 
 const AUTO_ADVANCE_DELAY_MS = 250;
+/**
+ * Au-delà de cette longueur (caractères), toute l'échelle passe en taille de
+ * question réduite. Décidé par échelle, pas par question, pour garder une
+ * taille homogène pendant la passation. Aujourd'hui seule la PDSS dépasse
+ * (jusqu'à 814 car.) ; le reste du catalogue plafonne vers 200.
+ */
+const LONG_QUESTION_THRESHOLD = 250;
 const SUPPORTED_FORM_TYPES = new Set([
   "single-scale",
   "options",
@@ -175,6 +182,13 @@ function Runner({ scale, onSubmit }: RunnerProps) {
   const [comments, setComments] = useState("");
   const [submitting, setSubmitting] = useState(false);
 
+  // Chaque nouvel écran (question, transition, récap) repart du haut : sans ça,
+  // après une question longue le patient arrive au milieu de la suivante.
+  // "instant" : passe outre le `scroll-behavior: smooth` global.
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "instant" });
+  }, [phase, currentIndex]);
+
   const handleStart = () => {
     if (openingTextItem) {
       setPhase("opening-text");
@@ -291,6 +305,9 @@ function Runner({ scale, onSubmit }: RunnerProps) {
     (k) => !unscoredKeys.has(k),
   ).length;
   const currentStep = steps[currentIndex];
+  const compactQuestions = steps.some(
+    (s) => s.questionText.length > LONG_QUESTION_THRESHOLD,
+  );
 
   return (
     <div className="min-h-[100dvh] bg-gray-50">
@@ -360,6 +377,7 @@ function Runner({ scale, onSubmit }: RunnerProps) {
             options={currentStep.options}
             selectedValue={responses[currentStep.key] as number | undefined}
             onSelect={handleSelect}
+            compact={compactQuestions}
           />
         )}
 
@@ -370,6 +388,7 @@ function Runner({ scale, onSubmit }: RunnerProps) {
             selectedValue={responses[followUpStep.key] as number | undefined}
             onSelect={handleFollowUpSelect}
             onSkip={handleFollowUpSkip}
+            compact={compactQuestions}
           />
         )}
 

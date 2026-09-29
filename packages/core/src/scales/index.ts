@@ -1373,6 +1373,205 @@ export const scales: Scale[] = [
     },
   },
   {
+    id: "pdss",
+    acronym: "PDSS",
+    label: "Questionnaire d'appréciation des symptômes du trouble panique",
+    domain: "anxiete",
+    formType: "options",
+    title: "PDSS - Questionnaire d'appréciation des symptômes du trouble panique",
+    description:
+      "Un questionnaire de 7 items évaluant la sévérité du trouble panique au cours de la dernière semaine",
+    category: "Trouble panique",
+    estimatedTime: "5 minutes",
+    longDescription:
+      "La PDSS (Panic Disorder Severity Scale, Shear et al., 1997) est portée ici dans sa version auto-questionnaire (PDSS-SR, Houck et al., 2002). Ses 7 items évaluent, sur la dernière semaine, la fréquence des attaques de panique, la détresse qu'elles provoquent, l'anxiété anticipatoire, l'évitement des situations et des sensations physiques, et le retentissement professionnel et social. Chaque item est coté de 0 à 4 ; le score total varie de 0 à 28. Un score ≥ 9 correspond au seuil de diagnostic probable de trouble panique de la validation française (Roberge et al., 2022 ; sensibilité 78,8 %, spécificité 70,4 %). C'est un seuil de dépistage, pas une gradation de sévérité.",
+    // Consigne du formulaire MSSS verbatim, sauf « en cochant la case » →
+    // « en choisissant la réponse ». Les `\n\n` séparent les paragraphes, les
+    // lignes en "- " forment la liste à puces des symptômes (cases à cocher
+    // non cotées dans le PDF), les autres `\n` passent à la ligne.
+    instructions:
+      "Plusieurs des questions qui suivent font référence à des attaques de panique et à des attaques subcliniques. Dans le présent questionnaire, l'attaque de panique correspond à un accès soudain de peur ou de malaise s'accompagnant d'au moins quatre symptômes de la liste ci-dessous. Pour répondre au critère de l'accès soudain, les symptômes doivent atteindre leur point culminant en dix minutes ou moins. Les épisodes qui ressemblent à une attaque de panique, mais comportent moins de quatre symptômes de la liste ci-dessous sont appelés des attaques subcliniques.\n\n" +
+      "Voici la liste dans laquelle doivent figurer les symptômes :\n" +
+      "- Battements de cœur rapides ou forts\n" +
+      "- Transpiration\n" +
+      "- Tremblements\n" +
+      "- Essoufflement\n" +
+      "- Sensation d'étranglement\n" +
+      "- Douleur ou gêne thoraciques\n" +
+      "- Nausée\n" +
+      "- Étourdissement ou vertige\n" +
+      "- Sentiment d'irréalité\n" +
+      "- Engourdissement ou fourmillement\n" +
+      "- Frissons ou bouffées de chaleur\n" +
+      "- Peur de perdre le contrôle de soi ou de devenir fou\n" +
+      "- Peur de mourir\n\n" +
+      "1. Utilisez les échelles décrites à chaque item.\n" +
+      "2. Répondez à chacun des items en choisissant la réponse qui correspond le mieux à votre situation.",
+    copyrightAttribution:
+      "Panic Disorder Severity Scale – PDSS © 1997 Katherine Shear — version française : ministère de la Santé et des Services sociaux du Québec, 2019",
+    higherIsBetter: false,
+    // Pas de `prompt` : la source n'a pas d'intitulé court par item.
+    // Typographie québécoise de la source conservée (pas d'espace avant « ? »).
+    questions: [
+      {
+        title:
+          "Combien d'attaques de panique et d'attaques subcliniques avez-vous eues au cours de la semaine?",
+        options: [
+          { value: 0, text: "Aucune attaque de panique ou attaque subclinique" },
+          {
+            value: 1,
+            text: "Léger : Aucune attaque de panique complète et pas plus d'une attaque subclinique par jour",
+          },
+          {
+            value: 2,
+            text: "Modéré : Une ou deux attaques de panique complètes et/ou plusieurs attaques subcliniques par jour",
+          },
+          {
+            value: 3,
+            text: "Grave : Plus de deux attaques de panique complètes, mais pas plus d'une par jour en moyenne",
+          },
+          {
+            value: 4,
+            text: "Extrême : Attaques de panique complètes plus d'une fois par jour, la plupart des jours",
+          },
+        ],
+      },
+      {
+        title:
+          "Si vous avez eu des attaques de panique au cours de la dernière semaine, quelle est l'intensité de la détresse (état de malaise et de peur) que vous avez ressentie pendant qu'elles se produisaient? (Si vous avez eu plus d'une attaque de panique, veuillez indiquer leur intensité moyenne. Si vous n'avez eu aucune attaque de panique, mais avez eu des attaques subcliniques, veuillez fournir une réponse au sujet de vos attaques subcliniques.)",
+        options: [
+          {
+            value: 0,
+            text: "Aucune détresse, ou encore aucune attaque de panique ou attaque subclinique au cours de la dernière semaine",
+          },
+          { value: 1, text: "Légère détresse (pas trop intense)" },
+          { value: 2, text: "Détresse modérée (intense, mais gérable)" },
+          { value: 3, text: "Détresse grave (très intense)" },
+          { value: 4, text: "Détresse extrême (pendant toutes les attaques)" },
+        ],
+      },
+      {
+        title:
+          "Au cours de la dernière semaine, à quel point vous êtes-vous inquiété au sujet du moment où surviendrait votre prochaine attaque de panique ou de vos craintes liées aux attaques (par exemple, les attaques pourraient signifier que vous avez un problème de santé physique ou mentale ou vous causer une humiliation sur le plan social)?",
+        options: [
+          { value: 0, text: "Pas du tout" },
+          { value: 1, text: "Parfois ou seulement un peu" },
+          { value: 2, text: "Souvent ou modérément" },
+          { value: 3, text: "Très souvent ou de façon très perturbante" },
+          { value: 4, text: "Presque continuellement et de façon invalidante" },
+        ],
+      },
+      {
+        title:
+          "Au cours de la dernière semaine, avez-vous évité ou craint (vous vous sentiez mal à l'aise ou aviez envie d'éviter une situation ou de partir) certains endroits ou certaines situations (par exemple, les transports en commun, les salles de cinéma, les foules, les tunnels ou les ponts, les centres commerciaux, vous retrouver seul) parce que vous aviez peur d'avoir une attaque de panique? Y a-t-il d'autres situations que vous auriez évitées ou craintes, pour la même raison, si elles étaient survenues au cours de la semaine? Si vous répondez oui à l'une de ces questions, veuillez indiquer l'intensité de vos craintes et de vos évitements au cours de la dernière semaine.",
+        options: [
+          { value: 0, text: "Aucune crainte ou évitement." },
+          {
+            value: 1,
+            text: "Léger : Crainte et/ou évitement occasionnels, mais j'ai généralement pu faire face à la situation ou la supporter. Je n'ai eu à apporter aucun ou seulement peu de changements à mon mode de vie pour cette raison.",
+          },
+          {
+            value: 2,
+            text: "Modéré : Crainte et/ou évitement notables, mais gérables. J'ai évité certaines situations, mais je pouvais y faire face en compagnie d'une autre personne. J'ai dû apporter certains changements à mon mode de vie pour cette raison, mais cela n'a pas nui à mon fonctionnement en général.",
+          },
+          {
+            value: 3,
+            text: "Grave : Évitement important. J'ai dû apporter des changements importants à mon mode de vie pour éviter des situations. Par conséquent, j'ai eu de la difficulté à accomplir mes activités quotidiennes.",
+          },
+          {
+            value: 4,
+            text: "Extrême : Volonté d'éviter des situations et/ou crainte envahissantes et invalidantes. J'ai dû modifier mon mode de vie en profondeur, si bien que j'ai été incapable d'accomplir des tâches importantes.",
+          },
+        ],
+      },
+      {
+        title:
+          "Au cours de la dernière semaine, avez-vous évité ou craint (vous vous sentiez mal à l'aise, aviez envie d'éviter la situation ou d'y mettre fin) des activités (par exemple, faire de l'exercice physique, avoir des relations sexuelles, prendre une douche ou un bain chaud, boire du café, regarder un film d'action ou d'horreur) parce qu'elles causent des sensations physiques semblables à celles que vous ressentez lors d'une attaque de panique ou parce que vous aviez peur qu'elles déclenchent une attaque de panique? Y a-t-il d'autres activités que vous auriez évitées ou craintes pour la même raison si l'occasion s'était présentée au cours de la semaine? Si vous répondez oui à l'une de ces questions, veuillez indiquer l'intensité des craintes et de l'évitement de ces activités au cours de la dernière semaine.",
+        options: [
+          {
+            value: 0,
+            text: "Aucune crainte ou évitement des activités en raison de sensations physiques perturbantes.",
+          },
+          {
+            value: 1,
+            text: "Léger : Crainte et/ou évitement occasionnels, mais j'ai généralement pu faire face à la situation ou supporter les activités provoquant des sensations physiques en ne ressentant qu'une légère détresse. Je n'ai eu à apporter que peu de changements à mon mode de vie pour cette raison.",
+          },
+          {
+            value: 2,
+            text: "Modéré : Évitement notable, mais gérable. J'ai dû apporter quelques changements à mon mode de vie, mais cela n'a pas nui à mon fonctionnement en général.",
+          },
+          {
+            value: 3,
+            text: "Grave : Évitement important. J'ai dû apporter des changements importants à mon mode de vie, ou ceci a nui à mon fonctionnement en général.",
+          },
+          {
+            value: 4,
+            text: "Extrême : Évitement envahissant et invalidant. J'ai dû modifier mon mode de vie en profondeur, si bien que j'ai été incapable d'accomplir des tâches ou des activités importantes.",
+          },
+        ],
+      },
+      {
+        title:
+          "Au cours de la dernière semaine, dans quelle mesure les symptômes mentionnés précédemment, dans leur ensemble (attaques de panique et attaques subcliniques, inquiétude au sujet des attaques, crainte de situations et d'activités en lien avec les attaques), ont-ils nui à votre capacité de travailler ou de vous acquitter de vos responsabilités à la maison? (Si vos responsabilités au travail ou à la maison ont été moins importantes que d'habitude au cours de la dernière semaine, veuillez estimer dans quelle mesure les symptômes vous auraient nui si vous aviez dû assumer vos responsabilités habituelles.)",
+        options: [
+          {
+            value: 0,
+            text: "Aucune : Les symptômes n'ont pas nui à mon travail ou à mes responsabilités à la maison.",
+          },
+          {
+            // Source : « responsabilités la maison » — « à » ajouté (coquille).
+            value: 1,
+            text: "Légère : Les symptômes ont légèrement nui à mon travail ou à mes responsabilités à la maison, mais j'ai pu accomplir presque toutes les tâches que j'aurais accomplies si je n'avais pas eu ces problèmes.",
+          },
+          {
+            value: 2,
+            text: "Modérée : Les symptômes ont nui de façon notable à mon travail ou à mes responsabilités à la maison, mais j'ai réussi à accomplir les tâches nécessaires.",
+          },
+          {
+            value: 3,
+            text: "Grave : Les symptômes ont nui de façon importante à mon travail ou à mes responsabilités à la maison; j'ai été incapable d'accomplir plusieurs tâches importantes à cause de ces problèmes.",
+          },
+          {
+            value: 4,
+            text: "Extrême : Les symptômes ont été extrêmement invalidants, si bien que je n'ai été en mesure d'accomplir pratiquement aucune tâche relative à mon travail ou à mes responsabilités à la maison.",
+          },
+        ],
+      },
+      {
+        title:
+          "Au cours de la dernière semaine, dans quelle mesure les attaques de panique, les attaques subcliniques, l'inquiétude au sujet des attaques et la crainte de situations et d'activités ont-elles perturbé votre vie sociale? (Si vous n'avez pas eu beaucoup d'occasions de socialiser au cours de la dernière semaine, veuillez estimer dans quelle mesure votre vie sociale aurait été perturbée si les occasions s'étaient présentées.)",
+        options: [
+          { value: 0, text: "Aucune : Pas de perturbation." },
+          {
+            value: 1,
+            text: "Légère : Les symptômes ont occasionné une légère perturbation de mes activités sociales, mais j'ai pu faire presque toutes les activités auxquelles je me serais adonné si je n'avais pas eu ces problèmes.",
+          },
+          {
+            value: 2,
+            text: "Modérée : Les symptômes ont occasionné une perturbation notable de mes activités sociales, mais j'ai pu faire la plupart de mes activités en faisant un effort.",
+          },
+          {
+            value: 3,
+            text: "Grave : Les symptômes ont occasionné une perturbation importante de mes activités sociales; j'ai été incapable de faire de nombreuses activités comportant des interactions sociales à cause de ces problèmes.",
+          },
+          {
+            value: 4,
+            text: "Extrême : Les symptômes ont été extrêmement invalidants, si bien que je n'ai été en mesure de m'adonner à presque aucune activité sociale.",
+          },
+        ],
+      },
+    ],
+    scoring: {
+      ranges: [
+        { min: 0, max: 8, interpretation: "En dessous du seuil de dépistage" },
+        { min: 9, max: 28, interpretation: "Trouble panique probable" },
+      ],
+      maxScore: 28,
+      method:
+        "Additionnez les scores des 7 items (0-4). Le score total varie de 0 à 28. Un score ≥ 9 correspond au seuil de diagnostic probable de trouble panique (Roberge et al., 2022).",
+    },
+  },
+  {
     id: "hsps",
     acronym: "HSPS",
     label: "Questionnaire d'hypersensibilité d'Elaine Aron",
