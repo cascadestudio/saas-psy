@@ -340,11 +340,6 @@ export default function ResultsPage() {
                     severityIndex={score?.severityIndex ?? -1}
                     interpretation={badgeInterpretation}
                   />
-                  {scale.scoring.thresholdsSource && (
-                    <p className="mt-2 max-w-[300px] mx-auto text-center text-[11px] leading-snug text-muted-foreground">
-                      {scale.scoring.thresholdsSource}
-                    </p>
-                  )}
                 </div>
               )}
 

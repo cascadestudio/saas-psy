@@ -94,7 +94,7 @@ export function ScoreArcGauge({
   return (
     <div className="max-w-[200px] sm:max-w-[300px] mx-auto w-full">
       <div className="flex flex-col items-center">
-        <div className="relative w-full pb-10 sm:pb-4">
+        <div className="relative w-full">
           <svg
             width="100%"
             height="auto"
@@ -181,6 +181,19 @@ export function ScoreArcGauge({
                     radius + STROKE / 2 + 18,
                     boundaryAngle,
                   );
+                  const custom = ranges[i + 1].thresholdLabel;
+                  const lines = custom
+                    ? custom.split("\n")
+                    : [String(ranges[i + 1].min)];
+                  // Multi-character labels are anchored away from the arc so
+                  // they never overlap the stroke.
+                  const anchor = !custom
+                    ? "middle"
+                    : labelPos.x < cx - 20
+                      ? "end"
+                      : labelPos.x > cx + 20
+                        ? "start"
+                        : "middle";
                   return (
                     <g key={i} pointerEvents="none">
                       <line
@@ -193,13 +206,17 @@ export function ScoreArcGauge({
                       />
                       <text
                         x={labelPos.x}
-                        y={labelPos.y}
-                        textAnchor="middle"
+                        y={labelPos.y - ((lines.length - 1) * 13) / 2}
+                        textAnchor={anchor}
                         dominantBaseline="middle"
                         className="fill-muted-foreground tabular-nums"
                         fontSize="12"
                       >
-                        {ranges[i + 1].min}
+                        {lines.map((line, li) => (
+                          <tspan key={li} x={labelPos.x} dy={li === 0 ? 0 : 13}>
+                            {line}
+                          </tspan>
+                        ))}
                       </text>
                     </g>
                   );
@@ -226,10 +243,8 @@ export function ScoreArcGauge({
                 </TooltipProvider>
               ))}
           </svg>
-          <div
-            className="absolute inset-x-0 flex flex-col items-center pointer-events-none"
-            style={{ top: "40%" }}
-          >
+          {/* Score sits on the arc's baseline (sm+) or just below it (mobile). */}
+          <div className="absolute inset-x-0 bottom-0 sm:bottom-[16.7%] flex justify-center pointer-events-none">
             <div className="flex items-baseline gap-1.5">
               <span
                 className={"text-7xl font-semibold tabular-nums leading-none"}
@@ -242,13 +257,18 @@ export function ScoreArcGauge({
                 </span>
               )}
             </div>
-            {interpretation && (
-              <span className="mt-4 text-base font-medium text-foreground text-center max-w-[140px] sm:max-w-[200px]">
-                {interpretation}
-              </span>
-            )}
           </div>
         </div>
+        {interpretation && (
+          <span className="mt-4 sm:-mt-3.5 text-base font-medium text-foreground text-center max-w-[140px] sm:max-w-[200px]">
+            {interpretation}
+          </span>
+        )}
+        {scale.scoring.thresholdsSource && (
+          <p className="mt-4 text-center text-[11px] leading-snug text-muted-foreground">
+            {scale.scoring.thresholdsSource}
+          </p>
+        )}
       </div>
     </div>
   );

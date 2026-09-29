@@ -9,6 +9,11 @@ export interface ScaleRange {
   min: number;
   max: number;
   interpretation: string;
+  /**
+   * Custom label for the gauge tick at the start of this range (defaults to
+   * `min`). Use "\n" for a two-line label, e.g. sex-specific thresholds.
+   */
+  thresholdLabel?: string;
 }
 
 export interface ScaleScoring {
@@ -1014,6 +1019,7 @@ export const scales: Scale[] = [
           min: 6,
           max: 12,
           interpretation: "Évocateur d'un mésusage actuel d'alcool",
+          thresholdLabel: "6 F\n7 H",
         },
         {
           min: 13,
@@ -1023,7 +1029,7 @@ export const scales: Scale[] = [
       ],
       maxScore: 40,
       thresholdsSource:
-        "Seuils OFDT (Société Française d'Alcoologie, 2015) : mésusage dès 6 chez la femme et dès 7 chez l'homme, dépendance au-delà de 12.",
+        "Seuils OFDT (Société Française d'Alcoologie, 2015) : mésusage dès 6 chez la femme (F) et dès 7 chez l'homme (H), dépendance au-delà de 12.",
       method:
         "Additionnez les scores de chaque item (items 1-8 : 0-4 ; items 9-10 : 0, 2 ou 4). Le score total varie de 0 à 40. Seuils Société Française d'Alcoologie (2015) : mésusage ≥ 7 chez l'homme / ≥ 6 chez la femme ; dépendance probable > 12.",
     },
