@@ -46,3 +46,6 @@ apps/api/prisma/migrations/*.sql
 # Turbo
 .turbo
 tmp/
+
+# Sources sous conditions d'utilisation (Cairn) : conservées hors du dépôt public
+docs/scales/audit/michaud-2003-risque-alcool-chez-les-plus-ages.pdf

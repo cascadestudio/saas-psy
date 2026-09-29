@@ -202,13 +202,12 @@ Refus de la passation incomplète. Les 10 items sont requis ; pas d'imputation.
 | Score | Interprétation |
 |-------|----------------|
 | 0–5 | Non évocateur d'un mésusage actuel d'alcool |
-| 6 | Évocateur d'un mésusage actuel d'alcool chez la femme (seuil chez l'homme : 7) |
-| 7–12 | Évocateur d'un mésusage actuel d'alcool |
+| 6–12 | Évocateur d'un mésusage actuel d'alcool |
 | 13–40 | En faveur d'une dépendance à l'alcool |
 
 **Source des seuils** : Société Française d'Alcoologie (2015), via OFDT — « Un score supérieur ou égal à 7 chez l'homme et à 6 chez la femme est évocateur d'un mésusage actuel d'alcool » ; « Un score supérieur à 12 chez l'homme et chez la femme serait en faveur d'une dépendance à l'alcool ».
 
-**Seuil sexe-spécifique** : l'app ne connaît pas le sexe du patient. Plutôt que de choisir un seuil unique, le score de 6 — seul score où les seuils homme et femme divergent — a sa propre bande, libellée « chez la femme ». Le praticien, qui connaît son patient, lit l'interprétation directement. Aucun score n'est ainsi mal classé. Cf. §10.
+**Seuil sexe-spécifique** : l'app ne connaît pas le sexe du patient. La jauge retient le seuil de mésusage de 6 (seuil femme OFDT) ; la note affichée en petit sous la jauge rappelle les seuils OFDT complets : « Seuils OFDT (Société Française d'Alcoologie, 2015) : mésusage dès 6 chez la femme et dès 7 chez l'homme, dépendance au-delà de 12. » Chez un homme, un score de 6 reste donc sous le seuil. Cf. §10.
 
 ---
 
@@ -232,7 +231,7 @@ Aucune alerte item-niveau pour l'instant. (Piste à discuter : score ≥ 13 = or
 | # | Score | Niveau attendu |
 |---|-------|----------------|
 | T5 | 5 | Non évocateur d'un mésusage actuel d'alcool |
-| T6 | 6 | Évocateur d'un mésusage actuel d'alcool chez la femme (seuil chez l'homme : 7) |
+| T6 | 6 | Évocateur d'un mésusage actuel d'alcool |
 | T7 | 7 | Évocateur d'un mésusage actuel d'alcool |
 | T8 | 12 | Évocateur d'un mésusage actuel d'alcool |
 | T9 | 13 | En faveur d'une dépendance à l'alcool |
@@ -270,7 +269,7 @@ Règle suivie : les textes affichés au patient reprennent mot pour mot la versi
 | Consigne | Consigne OMS mot pour mot | La première version reformulait la consigne sans raison ; retour au texte source. |
 | Version Michaud & Lécallier (2003) | Retenue uniquement pour la définition du verre standard | Item 10 incomplet (« un parent » absent) et « et » erroné ; règle de saut (« ne répondez qu'à la première question ») contraire au manuel OMS, qui renvoie aux items 9-10 ; phrase d'objectif sans apport pour la mesure. Confirme par ailleurs nos corrections des items 5 et 6. |
 | Seuils d'interprétation | SFA 2015 via OFDT : mésusage ≥ 7 chez l'homme, ≥ 6 chez la femme ; dépendance > 12 | Référence institutionnelle française. Les seuils internationaux de l'OMS (≥ 8 ; dépendance ≥ 13 F / ≥ 15 H) ne sont pas retenus : version FR-France privilégiée. |
-| Seuil sexe-spécifique | Bande dédiée au score de 6, libellée « chez la femme (seuil chez l'homme : 7) » | L'app ne connaît pas le sexe du patient. Cette bande applique exactement les seuils OFDT sans supposer le sexe : aucun score n'est mal classé, le praticien lit l'interprétation au regard de son patient. |
+| Seuil sexe-spécifique | Trois tranches OFDT (0-5 / 6-12 / 13-40), mésusage dès 6 ; note sous la jauge : seuils OFDT complets (6 femme, 7 homme, dépendance > 12) | L'app ne connaît pas le sexe du patient. Une première version isolait le score de 6 dans une tranche dédiée (« chez la femme »), mais l'infographie devenait illisible (repères 6 et 7 superposés). On retient donc le seuil femme, le plus sensible, et la note rappelle au praticien que chez l'homme le seuil est 7. |
 | Libellés des niveaux | « Évocateur d'un mésusage actuel d'alcool » ; « En faveur d'une dépendance à l'alcool » | Termes de l'OFDT. |
 | Libellé sous le seuil | « Non évocateur d'un mésusage actuel d'alcool » | L'OFDT ne nomme pas cette tranche. Libellé construit par négation du texte OFDT, sans terme ajouté ; l'ancien « Consommation à faible risque » est abandonné (non sourcé). |
 | Questions sautées | Aucune : les 10 items sont toujours posés | La source française ne prévoit pas de saut. Le manuel OMS permet, en passation informatisée, de passer directement aux items 9-10 si l'item 1 = « Jamais » ; non retenu à ce stade. |
@@ -304,7 +303,7 @@ scoreAudit(scale, responses) → {
 - Somme simple, aucune inversion. Scorer `apps/api/src/scoring/scorers/audit.ts`, enregistré sous l'id `audit` dans `ScoringService`.
 - Items 9-10 : modalités 0/2/4 (non contiguës) — portées dans les `options` de l'item.
 - Pas de `persistentInstructions` (rappel au-dessus des items) : retiré le 29/09/2026, absent de la source.
-- 4 bandes dans `scoring.ranges`, dont une bande d'un seul point (score 6) pour le seuil sexe-spécifique.
+- 3 bandes dans `scoring.ranges` (0-5 / 6-12 / 13-40) ; `scoring.thresholdsSource` porte la note des seuils OFDT affichée sous la jauge de résultat praticien.
 - Domaine : `addictions` (la couleur de la tuile en dérive, cf. `apps/web/lib/scale-appearance.ts`).
 
 ---
@@ -318,3 +317,4 @@ scoreAudit(scale, responses) → {
 | 24/09/2026 | Clément (avec Claude) | Intitulés courts (eyebrows) retirés des 10 items : absents de la source primaire auditscreen.org. Chaque item n'a plus qu'un `title` = la question ; texte des questions inchangé. |
 | 29/09/2026 | Clément (avec Claude) | **Alignement sur les sources.** Comparaison OMS FR / OFDT / RevMed / original anglais (§2). Règle : OMS FR mot pour mot, écarts repris de l'OFDT uniquement (§10). Préfixe « Dans les douze derniers mois, » rétabli sur les items 4-8 ; rappel persistant supprimé ; consigne OMS mot pour mot ; définition du verre standard retirée ; item 10 remplacé par la version OFDT (« ou » de l'original anglais) ; réponses des items 9-10 alignées sur l'OFDT. Seuils SFA/OFDT appliqués exactement, avec bande dédiée au score de 6 (femme) ; libellés de niveaux OFDT. §10 réécrite en choix et arbitrages méthodologiques. Sources anglaises archivées. |
 | 29/09/2026 | Clément (avec Claude) | Ajout de la définition du verre standard en fin de consigne (« Un verre standard = 10 g d'alcool pur. »), reprise mot pour mot de Michaud & Lécallier (2003), version française publiée par un co-auteur de la validation française. Source ajoutée en §2, exception consignée en §10. |
+| 29/09/2026 | Clément (avec Claude) | Infographie de résultat simplifiée : 3 tranches OFDT (0-5 / 6-12 / 13-40) au lieu de 4 ; la tranche d'un point (score 6, « chez la femme ») est supprimée. Note en petit sous la jauge : seuils OFDT complets (6 femme, 7 homme, dépendance > 12). |

@@ -17,6 +17,11 @@ export interface ScaleScoring {
   maxScore: number;
   /** Human description of how the score is computed (shown on the scale page). */
   method: string;
+  /**
+   * Short source of the interpretation thresholds, shown in small print under
+   * the practitioner result gauge (e.g. "Seuils OFDT…").
+   */
+  thresholdsSource?: string;
 }
 
 export interface SectionIntro {
@@ -885,7 +890,7 @@ export const scales: Scale[] = [
     category: "Addictions",
     estimatedTime: "2-3 minutes",
     longDescription:
-      "L'AUDIT (Alcohol Use Disorders Identification Test) est un auto-questionnaire de 10 items développé par l'Organisation mondiale de la Santé (Saunders et al., 1993) pour repérer les consommations d'alcool problématiques. Les items 1 à 3 portent sur la consommation (fréquence, quantité, ivresses), les items 4 à 6 sur les signes de dépendance et les items 7 à 10 sur les conséquences. Chaque item est coté de 0 à 4 (items 9 et 10 : 0, 2 ou 4), pour un score total de 0 à 40 portant sur les 12 derniers mois. Selon la Société Française d'Alcoologie (2015), un score ≥ 7 chez l'homme et ≥ 6 chez la femme évoque un mésusage actuel, et un score > 12 (quel que soit le sexe) est en faveur d'une dépendance. Le seuil de mésusage étant sexe-spécifique, un score de 6 est interprété comme évocateur d'un mésusage chez la femme uniquement.",
+      "L'AUDIT (Alcohol Use Disorders Identification Test) est un auto-questionnaire de 10 items développé par l'Organisation mondiale de la Santé (Saunders et al., 1993) pour repérer les consommations d'alcool problématiques. Les items 1 à 3 portent sur la consommation (fréquence, quantité, ivresses), les items 4 à 6 sur les signes de dépendance et les items 7 à 10 sur les conséquences. Chaque item est coté de 0 à 4 (items 9 et 10 : 0, 2 ou 4), pour un score total de 0 à 40 portant sur les 12 derniers mois. Selon la Société Française d'Alcoologie (2015), un score ≥ 7 chez l'homme et ≥ 6 chez la femme évoque un mésusage actuel, et un score > 12 (quel que soit le sexe) est en faveur d'une dépendance. L'interprétation affichée retient le seuil de 6 ; chez l'homme, un score de 6 reste sous le seuil de mésusage (7).",
     instructions:
       "Ce questionnaire interroge votre consommation d'alcool des douze derniers mois. Attention à ce que vos réponses reflètent cette unité de temps et pas seulement les dernières semaines. Un verre standard = 10 g d'alcool pur.",
     copyrightAttribution:
@@ -1007,12 +1012,6 @@ export const scales: Scale[] = [
         },
         {
           min: 6,
-          max: 6,
-          interpretation:
-            "Évocateur d'un mésusage actuel d'alcool chez la femme (seuil chez l'homme : 7)",
-        },
-        {
-          min: 7,
           max: 12,
           interpretation: "Évocateur d'un mésusage actuel d'alcool",
         },
@@ -1023,6 +1022,8 @@ export const scales: Scale[] = [
         },
       ],
       maxScore: 40,
+      thresholdsSource:
+        "Seuils OFDT (Société Française d'Alcoologie, 2015) : mésusage dès 6 chez la femme et dès 7 chez l'homme, dépendance au-delà de 12.",
       method:
         "Additionnez les scores de chaque item (items 1-8 : 0-4 ; items 9-10 : 0, 2 ou 4). Le score total varie de 0 à 40. Seuils Société Française d'Alcoologie (2015) : mésusage ≥ 7 chez l'homme / ≥ 6 chez la femme ; dépendance probable > 12.",
     },

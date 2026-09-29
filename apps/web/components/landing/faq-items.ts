@@ -15,6 +15,11 @@ export const faqItems = [
       "Vos patient·e·s reçoivent un lien par email. Il·elle·s répondent directement depuis leur smartphone, tablette ou ordinateur, sans créer de compte.",
   },
   {
+    question: "Pourquoi les réponses ne sont-elles pas envoyées par e-mail ?",
+    answer:
+      "Parce que l'e-mail n'est pas un canal sûr pour des données de santé. Un e-mail transite par plusieurs serveurs, reste stocké indéfiniment dans les boîtes de réception, et peut être transféré ou lu si une boîte est compromise. Les réponses et les scores de vos patient·e·s restent donc chiffrés sur notre hébergement certifié HDS. Vous les consultez dans votre espace Melya, après connexion, avec l'interprétation et l'historique du patient. Par e-mail, vous recevez seulement une notification, sans les réponses ni le score.",
+  },
+  {
     question: "Respectez-vous le droit d'auteur des échelles ?",
     answer:
       "Oui. Les échelles proposées au lancement sont dans le domaine public ou utilisées avec les autorisations appropriées. Nous travaillons avec les éditeurs pour élargir progressivement le catalogue dans le respect des droits d'auteur.",
