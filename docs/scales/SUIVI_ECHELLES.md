@@ -11,7 +11,7 @@
 
 ## Tableau de bord
 
-**✅ 12 validées · 🔵 4 implémentées · 🚧 6 en cours · 📋 2 prévues · 🔍 22 à instruire · ⬜ 26 non planifiées · 🚫 12 écartées**
+**✅ 12 validées · 🔵 4 implémentées · 🚧 7 en cours · 📋 2 prévues · 🔍 22 à instruire · ⬜ 25 non planifiées · 🚫 12 écartées**
 
 **Rattrapage Mentaal : 13/42.** Le plafond n'est pas 74 : sur leur catalogue
 disponible, 12 sont écartées d'office (payantes, outils maison Mentaal, ou
@@ -98,25 +98,25 @@ sortie ; les auteurs flaggés seront contactés en une fois, plus tard.
 | PID-5 | Personnalité DSM-5 | ⬜ | ✅ APA | — | #17 | 220 items (ou brève 25) — volume énorme |
 | RAS | Affirmation de soi de Rathus | ⬜ | ✅ | 🟡 B | #21 | reverse + offset |
 | SNAP-IV | TDAH enfant | ⬜ | ✅ | 🟡 B | #23 | public enfant |
-| MDQ | Troubles de l'humeur | ⬜ | ✅ | 🟡 B | #30 | criteriaCheck + oui/non |
+| MDQ | Troubles de l'humeur | ⬜ | ⚠️ | 🟡 B | #30 | criteriaCheck + oui/non ; droits UTMB, usage sur permission de l'auteur (tri du 10/10/2026) |
 | SCARED | Troubles anxieux enfant | ⬜ | ✅ | 🟡 B | #34 | public enfant |
-| PCL-S | État de stress post-traumatique | ⬜ | ✅ | — | #36 | redondant avec PCL-5 |
+| PCL-S | État de stress post-traumatique | ⬜ | ✅ | — | #36 | redondant avec PCL-5 ; VF Yao et al. 2003 sur abonnement : bloquée (tri du 10/10/2026) |
 | ASSQ | Dépistage TSA enfant | ⬜ | ✅ | 🟡 B | #38 | public enfant |
 | FMPS | Perfectionnisme de Frost | ⬜ | ✅ | 🟡 B | #45 | subscores |
 | BAT-G | Burnout (version générale) | ⬜ | ✅ | 🟡 B | #48 | alternative libre au MBI |
-| IES-R | Impact des événements | ⬜ | ✅ | 🟡 B | #49 | 3 subscores |
+| IES-R | Impact des événements | ⬜ | ⚠️ | 🟡 B | #49 | 3 subscores ; statut de droits contradictoire (Weiss & Marmar), tri du 10/10/2026 |
 | SVS | Valeurs de Schwartz | ⬜ | ✅ | — | #50 | centrage ipsatif = calcul spécifique |
 | EAT-26 | Attitudes alimentaires | ⬜ | ✅ | 🟡 B | #52 | recode asymétrique + seuil |
 | ADRS | Dépression pour adolescents | ⬜ | ✅ | — | #57 | public ado |
-| WW-II | Pourquoi s'inquiéter ? | ⬜ | ✅ | 🟡 B | #58 | subscores |
+| WW-II | Pourquoi s'inquiéter ? | 🚧 | ✅ | 🟡 B | #58 | porté sous l'id **PSI-II** (original francophone, Gosselin et al. 2003, formulaire et cotation du laboratoire Dugas, UQO) ; 5 sous-scores, pas de seuil ; Claude, lot autonome du 10/10/2026 |
 | BAT-W | Burnout (version travail) | ⬜ | ✅ | 🟡 B | #61 | |
-| BSQ | Sensations corporelles | ⬜ | ✅ | 🟢 A | #65 | Likert + somme |
-| FQ | Peurs de Marks & Mathews | ⬜ | ✅ | 🟡 B | #67 | subscores |
+| BSQ | Sensations corporelles | ⬜ | ✅ | 🟢 A | #65 | Likert + somme ; aucune VF validée trouvée : bloquée (tri du 10/10/2026) |
+| FQ | Peurs de Marks & Mathews | ⬜ | ⚠️ | 🟡 B | #67 | subscores ; VF Cottraux 1987 publiée seulement dans Guelfi (1997), droits non établis : bloquée (tri du 10/10/2026) |
 | PVQ-RR | Valeurs par portraits | ⬜ | ✅ | — | #68 | ipsatif, usage niche |
 | CRIES-13 | Stress post-traumatique enfant | ⬜ | ✅ | 🟡 B | #69 | public enfant |
-| EDS-R | Dépendance à l'exercice | ⬜ | ✅ | 🟡 B | #73 | criteria + subscores |
+| EDS-R | Dépendance à l'exercice | ⬜ | ⚠️ | 🟡 B | #73 | criteria + subscores ; usage sur autorisation des auteurs (tri du 10/10/2026) |
 | THI | Handicap pour acouphènes | ⬜ | ✅ | 🟢 A | #74 | hors psycho (ORL) |
-| WHO-5 | Bien-être (OMS) | ⬜ | ✅ | — | Absent | idéal suivi longitudinal — angle différenciation |
+| WHO-5 | Bien-être (OMS) | ⬜ | ⚠️ ✉️ | — | Absent | idéal suivi longitudinal — angle différenciation ; copyright OMS depuis 2024, licence CC BY-NC-SA (non commercial) : autorisation à demander à WHO-5@who.int (tri du 10/10/2026) |
 | CDI | Distorsions cognitives | 🚫 | ⚠️ | — | #1 | outil maison Mentaal (≠ CDI Pearson) |
 | YSQ-L3 | Schémas de Young (long) | 🚫 | 💰 | — | #5 | payant |
 | YSQ-S3 | Schémas de Young (court) | 🚫 | 💰 | — | #12 | payant |
@@ -134,6 +134,46 @@ _Maintenance : à chaque échelle mergée → 🔵 ; recette manuelle passée �
 mettre à jour le tableau de bord. Les candidates hors catalogue Mentaal
 (cluster enfant/ado, réserve votée…) sont dans la partie 2 — les remonter ici
 quand elles entrent en file._
+
+### Tri du lot autonome (Claude, 10/10/2026)
+
+Mission confiée par Clément : implémenter, sans arbitrage de sa part, toutes les échelles non implémentées qui remplissent **trois critères** : (1) droits libres pour l'original et la VF (✉️ accepté, comme la PDSS ; éditeur ou statut douteux = exclue) ; (2) aucun mécanisme nouveau dans le code ; (3) VF publiée et validée, consultable en texte intégral (sinon : bloquée). Arbitrages consignés en §10 de chaque fiche, relus ensuite par Clément.
+
+**Lecture du critère 2 retenue** : réutilisation des briques existantes (`formType`, scorer somme / sous-scores / inversions / `criteriaCheck`), auto-questionnaire adulte, **et domaine clinique existant**. Le domaine est un enum fermé de 7 valeurs avec une couleur chacune (`ScaleDomain`, `apps/web/lib/scale-appearance.ts`) : en créer un (autisme, TCA, burnout…) est un choix produit et visuel, donc un mécanisme nouveau. Confiance : moyenne — à re-trancher par Clément.
+
+**Retenues après le tri, puis vérifiées aux sources** (droits + VF en texte intégral) :
+
+| # | Échelle | Domaine | Résultat de la vérification |
+|---|---------|---------|-----------------------------|
+| 1 | WHO-5 | humeur | ⛔ **Bloquée — droits.** Copyright transféré à l'OMS en 2024, diffusion sous licence CC BY-NC-SA 3.0 IGO (usage **non commercial** explicite) ; usage dans un service payant = autorisation à demander à WHO-5@who.int. VF officielle (Psychiatric Research Unit, 1999) et seuil < 50 (INRS, fiche FRPS 43) trouvés : prête à reprendre si l'OMS accorde l'usage. |
+| 2 | IES-R | trauma | ⛔ **Exclue — droits douteux.** Statut contradictoire (domaine public selon certains, copyright Weiss & Marmar selon d'autres ; autorisation de reproduction refusée par D. Weiss en 2015). VF Brunet et al. (2003) accessible (McGill). |
+| 3 | MDQ | humeur | ⛔ **Exclue — droits.** Copyright University of Texas Medical Branch, utilisation « avec la permission de l'auteur » (Hirschfeld) : pas de libre usage. |
+| 4 | WW-II (PSI-II) | anxiété | ✅ **Retenue — implémentée par Claude** (cf. ligne du tableau). Original francophone (Gosselin et al., 2003), formulaire et fiche de cotation du laboratoire Dugas (UQO), même statut que l'ÉII. |
+| 5 | BSQ | anxiété | ⛔ **Bloquée — pas de VF validée trouvée** (aucune validation française du Body Sensations Questionnaire de Chambless). |
+| 6 | FQ | anxiété | ⛔ **Bloquée — VF inaccessible et droits non établis.** VF Cottraux, Bouvard & Messy (1987, L'Encéphale) ; texte publié seulement dans Guelfi (1997), ouvrage non accessible en ligne. |
+| 7 | EDS-R | addictions | ⛔ **Exclue — droits.** Usage sur autorisation des auteurs (Hausenblas, détentrice du manuel). |
+| 8 | PCL-S | trauma | ⛔ **Bloquée — VF inaccessible.** Domaine public (NCPTSD) mais validation française (Yao et al., 2003, L'Encéphale) sur abonnement, texte des items introuvable ailleurs. |
+
+**Exclues, avec motif** :
+
+| Échelle(s) | Motif |
+|---|---|
+| DERS, ATQ (James), ASRS, LEC-5 (Adrien) | Attribuées dans Linear à un autre membre de l'équipe |
+| EPDS | Fiche en relecture chez Clément (exclue à sa demande) |
+| TAS-20 | Lot d'Adrien (`REDACTION_PLAYBOOK.md` §10) |
+| DASS-21 | Sévérité par sous-échelle : `Subscore` à étendre (mécanisme nouveau) |
+| DES | Widget de réponse 0–100 à créer |
+| SVS, PVQ-RR | Centrage ipsatif : calcul nouveau |
+| AQ, RAADS-R, CAT-Q, EQ | Domaine « autisme » inexistant |
+| EAT-26 | Domaine « TCA » inexistant |
+| BAT-G, BAT-W | Domaine « burnout » inexistant |
+| FMPS | Domaine « perfectionnisme » inexistant |
+| RAS | Domaine « affirmation de soi » inexistant ; MEL-344 « à confirmer » par Clément |
+| PID-5 | Domaine « personnalité » inexistant ; 220 items |
+| THI | Domaine ORL inexistant, hors psychologie |
+| SNAP-IV, SCARED, ASSQ, CRIES-13, ADRS | Public enfant/ado ou hétéro-évaluation (hors périmètre fixé par Clément) |
+| Toutes les 🔍 (dont ISI, PSQI) | Droits ⚠️ non instruits : statut douteux |
+| 🚫 | Déjà écartées |
 
 ---
 
