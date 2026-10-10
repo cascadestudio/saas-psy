@@ -1919,6 +1919,53 @@ export const scales: Scale[] = [
         "Additionnez les 25 items (1-5) : le score total varie de 25 à 125. Les cinq sous-échelles de la fiche de cotation des auteurs (5 items chacune, de 5 à 25) sont fournies en sous-scores. Pas de seuil clinique fourni par les auteurs.",
     },
   },
+  {
+    id: "adrs",
+    acronym: "ADRS",
+    label: "Échelle de repérage de la dépression de l'adolescent",
+    domain: "humeur",
+    formType: "single-scale",
+    title: "ADRS - Échelle de repérage de la dépression de l'adolescent",
+    description:
+      "Un auto-questionnaire de 10 items (vrai / faux) pour repérer un risque de dépression chez l'adolescent",
+    category: "Dépression — adolescents",
+    estimatedTime: "5 minutes",
+    longDescription:
+      "L'ADRS (Adolescent Depression Rating Scale) est un instrument développé en français par Revah-Lévy, Birmaher, Gasquet et Falissard (2007) pour évaluer la dépression de l'adolescent, validé auprès de 402 adolescents francophones (France, Belgique, Suisse). La version auto-questionnaire compte 10 items cotés vrai (1) ou faux (0) ; le score varie de 0 à 10. Les enquêtes nationales françaises (OFDT, Santé publique France) distinguent un niveau de risque faible (0 à 3), modéré (4 à 6) et un risque important de dépression (7 à 10). Il s'agit d'un outil de repérage, pas d'un diagnostic.",
+    copyrightAttribution:
+      "ADRS (Adolescent Depression Rating Scale), version auto-questionnaire — Revah-Lévy, Birmaher, Gasquet & Falissard (2007), BMC Psychiatry, 7:2 (article sous licence CC BY 2.0). Instrument original francophone.",
+    patientIntroSubtitle: null,
+    higherIsBetter: false,
+    questions: [
+      "Je n'ai pas d'énergie pour l'école, pour le travail",
+      "J'ai du mal à réfléchir",
+      "Je sens que la tristesse, le cafard me débordent en ce moment",
+      "Il n'y a rien qui m'intéresse, plus rien qui m'amuse",
+      "Ce que je fais ne sert à rien",
+      "Au fond, quand c'est comme ça, j'ai envie de mourir",
+      "Je ne supporte pas grand-chose",
+      "Je me sens découragé(e)",
+      "Je dors très mal",
+      "À l'école, au boulot, j'y arrive pas",
+    ],
+    answerScales: {
+      intensity: [
+        { value: 1, label: "Vrai" },
+        { value: 0, label: "Faux" },
+      ],
+    },
+    scoring: {
+      ranges: [
+        { min: 0, max: 3, interpretation: "Niveau de risque faible" },
+        { min: 4, max: 6, interpretation: "Niveau de risque modéré" },
+        { min: 7, max: 10, interpretation: "Risque important de dépression" },
+      ],
+      maxScore: 10,
+      method:
+        "Comptez les réponses « Vrai » (1 point chacune) : le score varie de 0 à 10. Tranches des enquêtes nationales (OFDT, Santé publique France) : 0-3 niveau de risque faible, 4-6 niveau de risque modéré, 7-10 risque important de dépression. Une réponse « Vrai » à l'item 6 (envie de mourir) déclenche une alerte.",
+      thresholdsSource: "Tranches OFDT / Santé publique France (enquête EnCLASS)",
+    },
+  },
 ];
 
 export function getScaleById(id: string): Scale | undefined {
