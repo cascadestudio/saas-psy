@@ -11,7 +11,7 @@
 
 ## Tableau de bord
 
-**✅ 10 validées · 🔵 6 implémentées · 🚧 0 en cours · 📋 8 prévues · 🔍 22 à instruire · ⬜ 26 non planifiées · 🚫 12 écartées**
+**✅ 12 validées · 🔵 4 implémentées · 🚧 6 en cours · 📋 2 prévues · 🔍 22 à instruire · ⬜ 26 non planifiées · 🚫 12 écartées**
 
 **Rattrapage Mentaal : 13/42.** Le plafond n'est pas 74 : sur leur catalogue
 disponible, 12 sont écartées d'office (payantes, outils maison Mentaal, ou
@@ -58,17 +58,17 @@ sortie ; les auteurs flaggés seront contactés en une fois, plus tard.
 | WAQ | Inquiétude et anxiété (Dugas) | 🔵 | ✅ | 🟡 B | #25 | porté sous l'id **QIA** — criteriaCheck TAG (pas une simple somme) + item thèmes en texte libre (nouvelle brique `openingTextItem`) |
 | IUS | Intolérance à l'incertitude | 🔵 | ✅ | 🟢 A | #26 | porté sous l'id **EII** — score brut 27-135 sans bandes (aucun cutoff établi) + sous-scores bifactoriels |
 | PDEQ | Dissociation péritraumatique | ✅ | ✅ | 🟢 A | #59 | seuil ≥ 15 (fiche Cn2r) ; source secondaire URPS-ML PACA (Brunet & Routhier 1999) ; recette OK (Clément, 29/09/2026) |
-| CUDIT-R | Troubles liés au cannabis | 🔵 | ✅ | 🟢 A | #70 | question-porte « 6 derniers mois » portée en consigne ; seuils 8-10 / > 10 (RESPADD) |
-| FTND | Dépendance à la nicotine (Fagerström) | 🔵 | ✅ | 🟢 A | Bientôt · 29 v. | **Melya devant Mentaal** ; seuils HAS 2014, options dans l'ordre du PDF HAS, sans intitulés courts ni consigne (absents de la source) ; implémenté en réutilisation (patron CUDIT-R) le 24/09/2026 |
-| ASRS | TDAH adulte | 📋 (1) | ✅ OMS | 🟡 B | #3 | `criteriaCheck` façon PCL-5 ; motif le + demandé |
-| DES | Expériences dissociatives | 📋 (3) | ✅ | 🟠 C | Bientôt · 130 v. | #1 des votes ; widget de réponse 0–100 à créer |
-| EPDS | Dépression périnatale (Édimbourg) | 📋 (4) | ✅ | 🟢 A | Bientôt · 96 v. | alerte item 10 (idéation) façon PHQ-9 |
-| DASS-21 | Dépression, anxiété et stress | 📋 (5) | ✅ | 🟠 C | #2 | sévérité par sous-échelle → étendre `Subscore` |
+| CUDIT-R | Troubles liés au cannabis | ✅ | ✅ | 🟢 A | #70 | question-porte « 6 derniers mois » portée en consigne ; seuils 8-10 / > 10 (RESPADD) ; recette OK (Clément, 29/09/2026) |
+| FTND | Dépendance à la nicotine (Fagerström) | ✅ | ✅ | 🟢 A | Bientôt · 29 v. | **Melya devant Mentaal** ; seuils HAS 2014, options dans l'ordre du PDF HAS, sans intitulés courts ni consigne (absents de la source) ; implémenté en réutilisation (patron CUDIT-R) le 24/09/2026 ; recette OK (Clément, 24/09/2026) |
+| ASRS | TDAH adulte | 🚧 | ✅ OMS | 🟡 B | #3 | `criteriaCheck` façon PCL-5 ; motif le + demandé |
+| DES | Expériences dissociatives | 🚧 | ✅ | 🟠 C | Bientôt · 130 v. | #1 des votes ; widget de réponse 0–100 à créer |
+| EPDS | Dépression périnatale (Édimbourg) | 🚧 | ✅ | 🟢 A | Bientôt · 96 v. | alerte item 10 (idéation) façon PHQ-9 |
+| DASS-21 | Dépression, anxiété et stress | 🚧 | ✅ | 🟠 C | #2 | sévérité par sous-échelle → étendre `Subscore` |
 | ATQ | Pensées automatiques | 📋 (6) | ✅ | 🟢 A | Bientôt · 77 v. | |
 | PDSS | Sévérité du trouble panique | ✅ | ⚠️ ✉️ | 🟢 A | Bientôt · 62 v. | PDSS-SR, VF MSSS Québec 2019 (aucune VF France) ; seuil ≥ 9 (Roberge 2022). Recette OK (Adrien, 29/09/2026) ; cross-check a posteriori sur la version Roberge (demandée, MEL-339). © Shear : usage commercial à demander (✉️) — cf. MEL-324 |
-| DERS | Régulation émotionnelle | 📋 (8) | ✅ | 🟡 B | #14 | reverse + subscores |
+| DERS | Régulation émotionnelle | 🚧 | ✅ | 🟡 B | #14 | reverse + subscores |
 | TAS-20 | Alexithymie de Toronto | 📋 (10) | ✅ | 🟡 B | #37 | reverse + 3 subscores |
-| LEC-5 | Liste des événements de vie (DSM-5) | 📋 (11) | ✅ NCPTSD | 🟠 C | Absent | couplée à la PCL-5 en clinique (identification de l'événement de référence) — cf. `pcl-5/pcl-5.md` §13 ; pas de score : 17 événements × 6 modalités (vécu / témoin / appris / cadre pro / pas sûr / sans objet) → widget multi-choix par item à créer ; VF Cn2r à sourcer ; priorité à rediscuter (équipe) |
+| LEC-5 | Liste des événements de vie (DSM-5) | 🚧 | ✅ NCPTSD | 🟠 C | Absent | couplée à la PCL-5 en clinique (identification de l'événement de référence) — cf. `pcl-5/pcl-5.md` §13 ; pas de score : 17 événements × 6 modalités (vécu / témoin / appris / cadre pro / pas sûr / sans objet) → widget multi-choix par item à créer ; VF Cn2r à sourcer ; priorité à rediscuter (équipe) |
 | ASQ-SF | Styles d'attachement | 🔍 | ⚠️ | — | #10 | |
 | SCT | Test de confiance en soi | 🔍 | ⚠️ | — | #15 | |
 | ADHD-RS | Évaluation du TDAH | 🔍 | ⚠️ | — | #16 | DuPaul/Guilford — alternative libre : ASRS |
