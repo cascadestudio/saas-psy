@@ -62,7 +62,20 @@ Instrument original francophone (validation multicentrique France, Belgique, Sui
 
 ### Comparaison Mentaal
 
-Voir §10, « Recette » (parcours patient complet sur [mentaal.fr/send/adrs](https://mentaal.fr/send/adrs), catégorie Mentaal « Dépression », public « Adolescents »).
+Parcours praticien → patient complet sur [mentaal.fr/send/adrs](https://mentaal.fr/send/adrs) le 10/10/2026 (catégories Mentaal « Dépression, Enfance », public « Adolescents »), patient fictif, jeu R7 (7 réponses « Vrai », item 6 = Faux). La publication tranche.
+
+| Point | Publication (source primaire) | Melya | Mentaal |
+| --- | --- | --- | --- |
+| Consigne | Aucune | Aucune (§10) | « Pour chaque question cochez « vrai » si cela correspond à ce que vous vivez en ce moment, « faux » si cela ne correspond pas » (adaptée de la fiche SFD, absente de la publication) |
+| Item 4 | « …plus rien qui m'amuse » | Verbatim | « …plus rien ne m'amuse » (texte SFD) |
+| Item 8 | « Je me sens découragé » | « découragé(e) » | « découragé(e) » |
+| Item 10 | « A l'école, au boulot, j'y arrive pas » | « À l'école… j'y arrive pas » | « A l'école, au boulot, je n'y arrive pas » (texte SFD) |
+| Tranches | Seuils ROC 3 et 4, sans bandes | 0-3 / 4-6 / 7-10 (OFDT, Santé publique France) | 0-3 « faible » / 4-8 « modéré » / 9-10 « important » (proches de la fiche SFD, source non indiquée) |
+| Score du jeu R7 | 7 | 7/10, « Risque important de dépression » | 7/10, « Risque de dépression modéré » |
+| Alerte item 6 | — | Oui (alerte critique) | Non vérifiée (item 6 = Faux dans le jeu) |
+| Durée annoncée | — | 5 minutes | 2 minutes |
+
+**Lecture** : Mentaal porte le texte de la fiche SFD (une source secondaire) plutôt que celui de la publication, et des tranches 4-8 / 9-10 qui contredisent les enquêtes nationales : un adolescent à 7 ou 8 est classé « modéré » chez eux, « risque important » chez nous et chez Santé publique France.
 
 ---
 
@@ -257,7 +270,19 @@ Les autres reformulations des sources secondaires (« je n'y arrive pas », « p
 
 ### Recette
 
-À compléter après déploiement sur staging.
+Recette Claude du 10/10/2026 sur staging (commit 7fb339e, déploiements API et web verts), patient de test « Patient Test » :
+
+| Jeu | Réponses « Vrai » | Attendu | Staging |
+| --- | --- | --- | --- |
+| Min (T1) | aucune | 0, risque faible, pas d'alerte | 0/10, « Niveau de risque faible », pas d'alerte ✓ |
+| Début tranche 2 (T3) | items 1-4 | 4, risque modéré | 4/10, « Niveau de risque modéré » ✓ |
+| Début tranche 3 (T5) | items 1-5, 7, 8 | 7, risque important | 7/10, « Risque important de dépression » ✓ |
+| Alerte (T8) | item 6 seul | 1, risque faible, alerte | 1/10, « Niveau de risque faible », bandeau « Alerte critique » sur l'item 6 ✓ |
+| Max (T7) | tous | 10, risque important, alerte | 10/10, « Risque important de dépression », « Alerte critique » ✓ |
+
+Contrôles : écran d'intro patient sans consigne ni sous-titre (« ADRS · 10 questions · 5 minutes ») ; boutons Vrai puis Faux ; aucun score côté patient ; source des tranches affichée sous la jauge.
+
+**Point à regarder** : faute de consigne, le résultat praticien affiche un intitulé « Consigne » vide (comportement existant de la page résultats ; signalé dans le ticket design).
 
 ---
 
@@ -274,3 +299,4 @@ Les autres reformulations des sources secondaires (« je n'y arrive pas », « p
 | Date | Auteur | Modification |
 | --- | --- | --- |
 | 10/10/2026 | Claude (lot autonome, validé sur le principe par Clément) | Création de la fiche et implémentation : publication BMC Psychiatry 2007 (CC BY) en source primaire, items verbatim, tranches OFDT / Santé publique France, alerte item 6. Tests 9/9. |
+| 10/10/2026 | Claude (lot autonome) | Recette staging conforme (0, 4, 7, alerte item 6, 10). Parcours Mentaal : texte SFD et tranches 4-8 / 9-10 chez eux (jeu R7 classé « modéré » chez Mentaal, « important » chez nous). |
