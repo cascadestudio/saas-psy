@@ -11,7 +11,7 @@
 
 ## Tableau de bord
 
-**✅ 12 validées · 🔵 7 implémentées · 🚧 6 en cours · 📋 2 prévues · 🔍 88 à instruire · ⬜ 24 non planifiées · 🚫 28 écartées** (167 échelles, dont 83 ajoutées depuis le catalogue « Apprendre la psychologie » le 10/10/2026)
+**✅ 12 validées · 🔵 8 implémentées · 🚧 6 en cours · 📋 2 prévues · 🔍 87 à instruire · ⬜ 24 non planifiées · 🚫 28 écartées** (167 échelles, dont 83 ajoutées depuis le catalogue « Apprendre la psychologie » le 10/10/2026)
 
 **Rattrapage Mentaal : 13/42.** Le plafond n'est pas 74 : sur leur catalogue
 disponible, 12 sont écartées d'office (payantes, outils maison Mentaal, ou
@@ -75,7 +75,7 @@ sortie ; les auteurs flaggés seront contactés en une fois, plus tard.
 | ADHD-RS | Évaluation du TDAH | 🔍 | 💰 | — | #16 | DuPaul/Guilford — alternative libre : ASRS |
 | PDQ-4 | Diagnostic des personnalités | 🔍 | ❓ | — | #24 | |
 | BPQ | Personnalité borderline | 🔍 | ❓ | — | #28 | |
-| CAQ | Évitements cognitifs | 🔍 | ✉️ | — | #32 | |
+| CAQ | Évitements cognitifs | 🔵 | ✉️ | 🟡 B | #32 | porté sous l'id **QEC** ; fiche `qec/qec.md` ; original francophone (Gosselin et al. 2002), laboratoire Dugas (UQO) ; 25 items, total + 5 sous-scores, sans seuil ; implémentée par Claude (11/10/2026), recette staging à confirmer |
 | BIG-5 | Cinq grands facteurs | 🔍 | ✅ (si version IPIP) | — | #33 | items IPIP libres — version exacte à confirmer |
 | PPAG | Phobie, panique, anxiété généralisée | 🔍 | ❓ | — | #35 | |
 | SCQ | Cognitions sociales | 🔍 | ❓ | — | #39 | |

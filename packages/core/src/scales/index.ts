@@ -2023,6 +2023,76 @@ export const scales: Scale[] = [
         "Additionnez les 12 items (1-5) : mesure unifactorielle sans item inversé, le score total varie de 12 à 60. Pas de seuil clinique fourni par les auteurs.",
     },
   },
+  {
+    id: "qec",
+    acronym: "QEC",
+    label: "Questionnaire d'évitement cognitif",
+    domain: "anxiete",
+    formType: "single-scale",
+    title: "QEC - Questionnaire d'évitement cognitif",
+    description:
+      "Un questionnaire de 25 items évaluant cinq stratégies d'évitement cognitif",
+    category: "Anxiété généralisée",
+    estimatedTime: "5-10 minutes",
+    longDescription:
+      "Le Questionnaire d'évitement cognitif (QEC, connu en anglais sous le sigle CAQ — Cognitive Avoidance Questionnaire) est un auto-questionnaire de 25 items développé en français par Gosselin, Langlois, Freeston, Ladouceur, Dugas et Pelletier (2002), validé auprès d'adultes et d'adolescents. Chaque item est coté de 1 (pas du tout correspondant) à 5 (tout à fait correspondant) ; le score total varie de 25 à 125. La fiche de cotation des auteurs définit cinq sous-échelles de 5 items : substitution de pensées ; transformation des images en pensées ; distraction ; évitement des stimuli menaçants ; suppression de pensées. Pas de seuil clinique fourni par les auteurs.",
+    instructions:
+      "Les gens réagissent de différentes façons à certains types de pensées. Veuillez utiliser l'échelle ci-dessous pour exprimer jusqu'à quel point chacun des énoncés suivants correspond à votre façon de réagir à certaines pensées.",
+    persistentInstructions:
+      "Veuillez utiliser l'échelle ci-dessous pour exprimer jusqu'à quel point chacun des énoncés suivants correspond à votre façon de réagir à certaines pensées.",
+    copyrightAttribution:
+      "Questionnaire d'évitement cognitif (QEC) — Gosselin, Langlois, Freeston, Ladouceur, Dugas & Pelletier (2002), Journal de thérapie comportementale et cognitive, 12, 24-37. Instrument original francophone.",
+    patientIntroSubtitle: null,
+    higherIsBetter: false,
+    questions: [
+      "Il y a des choses auxquelles je préfère ne pas penser.",
+      "J'évite certaines situations qui m'amènent à porter attention à des choses auxquelles je ne veux pas penser.",
+      "Je remplace les images menaçantes que j'ai en tête par un discours intérieur.",
+      "Je pense à des choses qui me concernent comme si cela arrivait à quelqu'un d'autre que moi.",
+      "J'ai des pensées que j'essaie d'éviter.",
+      "J'essaie de ne pas penser aux aspects les plus dérangeants de certaines situations pour ne pas avoir trop peur.",
+      "J'évite parfois des objets qui peuvent déclencher des idées dérangeantes.",
+      "Je me distrais pour éviter de penser à certains sujets troublants.",
+      "J'évite des gens qui me font penser à des choses auxquelles je ne veux pas réfléchir.",
+      "Je fais souvent des choses pour me distraire de mes pensées.",
+      "Je pense à des détails inutiles pour ne pas penser aux sujets importants qui m'inquiètent.",
+      "Parfois, je me plonge dans une activité pour ne pas penser à certaines choses.",
+      "Pour éviter de penser aux sujets qui me dérangent, je m'efforce de penser à autre chose.",
+      "Il y a des choses auxquelles j'essaie de ne pas penser.",
+      "Je maintiens un discours intérieur pour éviter de voir des scénarios (une suite d'images) qui me font peur.",
+      "Parfois, j'évite des endroits qui me font réfléchir à des choses auxquelles je préfèrerais ne pas penser.",
+      "Je pense aux événements passés pour ne pas penser aux événements futurs insécurisants.",
+      "J'évite de poser des gestes qui me rappellent des choses auxquelles je ne veux pas penser.",
+      "Lorsque je vois des images dans ma tête qui sont trop dérangeantes, je les remplace par des pensées verbales (monologue interne).",
+      "Je m'inquiète de beaucoup de petites affaires pour ne pas penser aux choses plus importantes.",
+      "Parfois, je me garde occupé(e) seulement pour empêcher les pensées de surgir dans mon esprit.",
+      "J'évite des situations avec d'autres personnes qui me font penser à des choses désagréables.",
+      "J'essaie de décrire intérieurement des événements dérangeants plutôt que d'en former une image dans ma tête.",
+      "Je mets de côté les images associées à une situation menaçante en tentant plutôt de me la décrire intérieurement.",
+      "Je pense à ce qui inquiète les autres plutôt que de penser à mes propres inquiétudes.",
+    ],
+    answerScales: {
+      intensity: [
+        { value: 1, label: "Pas du tout correspondant" },
+        { value: 2, label: "Un peu correspondant" },
+        { value: 3, label: "Assez correspondant" },
+        { value: 4, label: "Très correspondant" },
+        { value: 5, label: "Tout à fait correspondant" },
+      ],
+    },
+    scoring: {
+      ranges: [
+        {
+          min: 25,
+          max: 125,
+          interpretation: "Pas de seuil clinique fourni par les auteurs.",
+        },
+      ],
+      maxScore: 125,
+      method:
+        "Additionnez les 25 items (1-5) : le score total varie de 25 à 125 (usage unifactoriel). Les cinq sous-échelles de la fiche de cotation des auteurs (5 items chacune, de 5 à 25) sont fournies en sous-scores. Pas de seuil clinique fourni par les auteurs.",
+    },
+  },
 ];
 
 export function getScaleById(id: string): Scale | undefined {
