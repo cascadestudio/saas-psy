@@ -58,6 +58,24 @@ hiérarchie versions, comparaison Mentaal).
 - Item 2 : « défoncé » porté en « défoncé(e) » (accord en genre, cohérent avec le reste du catalogue).
 - Seuils d'origine Adamson (≥ 8 hazardous ; ≥ 12 possible CUD) : le flyer FR retient **8-10 / > 10** — la version FR fait foi (hiérarchie France d'abord).
 
+### Comparaison Mentaal
+
+Parcours praticien puis patient déroulé le 10/10/2026 sur [mentaal.fr/send/cudit](https://mentaal.fr/send/cudit) (n°70 de leur catalogue), avec un patient fictif et le même jeu de réponses que la recette staging (items 1 à 8 : 4, 4, 3, 0, 0, 0, 0, 0). Comparaison à trois, la source RESPADD tranche :
+
+| Point | Source RESPADD | Melya | Mentaal |
+| --- | --- | --- | --- |
+| Nom | CUDIT-R-Fr | CUDIT-R | « CUDIT » (sans « -R ») |
+| Consigne | Question-porte + « …au cours des 6 derniers mois. Veuillez répondre à toutes les questions. » | Reformulée par Melya (« en choisissant la réponse… », question-porte en phrase d'information), dernière phrase de la source conservée ; choix de Clément consignés en §10 | Reformulée, absente de la source : « Répondez à chaque question en considérant votre consommation de cannabis au cours des six derniers mois. Soyez aussi honnête et précis que possible dans vos réponses. » |
+| Items | 8 items | Verbatim, « défoncé(e) » (§10) | Verbatim, « défoncé » |
+| Réponses | Abréviations (« ≤ 1 fois/mois »…) | Développées en toutes lettres (§10) | Abréviations du flyer (« ≤ 1 fois/mois », « ≥ 4 fois/semaine », « Environ 1 fois/semaine ») : plus proche de la typographie source |
+| Seuils | 8-10 / > 10 | 0-7 / 8-10 / 11-32 | 0-7 / 8-10 / 11-32 (identiques) |
+| Libellés des tranches | « peut être problématique » / « trouble important de l'usage de cannabis » | Repris des sources (§7) | Reformulés, absents de la source : « Consommation faible, peu de risque », « Risque modéré, possibilité d'usage problématique », « Risque élevé de dépendance au cannabis, nécessite une évaluation plus approfondie » |
+| Score du jeu de test | 11 → tranche haute | 11/32, « Trouble important de l'usage de cannabis possible » | 11/32, tranche haute |
+| Côté patient | — | Aucun score affiché | Aucun score affiché |
+| Ajouts praticien | — | Aucun | Synthèse rédigée automatiquement + items 1-2 marqués « réponses importantes » (absent de la source) |
+
+**Lecture** : même cotation et mêmes seuils ; Mentaal s'écarte de la source sur la consigne, le nom et les libellés des tranches, Melya sur la typographie des réponses (développement des abréviations, consigné en §10).
+
 ---
 
 ## 3. Statut copyright et licence
@@ -192,3 +210,4 @@ Aucune.
 | 29/09/2026 | Clément (avec Claude) | §10 réécrite en « Choix et arbitrages méthodologiques » : fin de la validation clinique externe, les arbitrages sont tranchés par l'équipe. Points ouverts reformulés en décisions d'équipe, avec la règle « on n'invente rien » (écarts à la source repris de la source secondaire). |
 | 29/09/2026 | Clément (avec Claude) | **Recette (partie documentaire).** Source secondaire ajoutée (CCSA 2022). Consigne reformulée et question-porte conservées (choix de Clément). Libellés des tranches repris des sources (« important » rétabli, tranche 0-7 d'après le CCSA). Sous-titre patient aligné sur la source (« version française »). Rappel, abréviations développées, « défoncé(e) » et nom au catalogue conservés et consignés en §10. Tests automatisés 7/7. Recette manuelle à passer. |
 | 10/10/2026 | Clément (avec Claude) | Recette manuelle confirmée : passée par Clément le 29/09/2026 (Linear MEL-334 Done). Passage en ✅ dans `SUIVI_ECHELLES.md`. |
+| 10/10/2026 | Clément (avec Claude) | Répétition à blanc du process autonome. Recette staging : jeu 4-4-3-0-0-0-0-0 → 11/32, « Trouble important de l'usage de cannabis possible » (= T5), aucun score côté patient, consigne et items conformes. Sources re-téléchargées : identiques aux PDF archivés. Tests jest 32/32, cas §9 recalculés en Python. Comparaison Mentaal ajoutée en §2 (même score, écarts à la source côté Mentaal sur consigne, nom et libellés des tranches). |
