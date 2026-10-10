@@ -11,7 +11,7 @@
 
 ## Tableau de bord
 
-**✅ 12 validées · 🔵 5 implémentées · 🚧 6 en cours · 📋 2 prévues · 🔍 22 à instruire · ⬜ 25 non planifiées · 🚫 12 écartées**
+**✅ 12 validées · 🔵 5 implémentées · 🚧 6 en cours · 📋 2 prévues · 🔍 89 à instruire · ⬜ 25 non planifiées · 🚫 28 écartées** (167 échelles, dont 83 ajoutées depuis le catalogue « Apprendre la psychologie » le 10/10/2026)
 
 **Rattrapage Mentaal : 13/42.** Le plafond n'est pas 74 : sur leur catalogue
 disponible, 12 sont écartées d'office (payantes, outils maison Mentaal, ou
@@ -40,6 +40,8 @@ sortie ; les auteurs flaggés seront contactés en une fois, plus tard.
 **Mentaal** : `#n` = position dans leur catalogue disponible (74 outils — la
 75ᵉ entrée est la fonctionnalité « créez votre questionnaire ») ; `Bientôt · x v.`
 = dans leur file d'attente avec x votes ; `Absent` = pas à leur catalogue.
+`Catalogue` = présent au catalogue Mentaal relevé le 10/10/2026 (480 outils, disponibles ou à venir, sans distinction).
+**[ALP]** = ajoutée depuis le catalogue « Apprendre la psychologie » et sa liste issue du rapport Inserm 2004 (cf. section dédiée sous le tableau). Les hétéro-évaluations (🔴 D) sont conservées en vue d'une future passation en séance.
 
 ## Tableau de suivi
 
@@ -91,31 +93,31 @@ sortie ; les auteurs flaggés seront contactés en une fois, plus tard.
 | IAT | Addiction à Internet | 🔍 | ⚠️ | — | #71 | Young/Stoelting — licence à vérifier |
 | ISI | Sévérité de l'insomnie | 🔍 | ⚠️ | — | Non dispo | motif sommeil = trou Mentaal → opportunité |
 | PSQI | Qualité de sommeil de Pittsburgh | 🔍 | ⚠️ | — | Non dispo | idem ISI |
-| AQ | Quotient du spectre de l'autisme | ⬜ | ✅ | 🟡 B | #4 | 50 items, recode binaire + 5 subscores |
-| RAADS-R | Autisme / Asperger de Ritvo | ⬜ | ✅ | 🟡 B | #6 | 80 items — lourd |
-| CAT-Q | Camouflage autistique | ⬜ | ✅ | 🟡 B | #9 | |
-| EQ | Quotient empathique | ⬜ | ✅ | 🟡 B | #11 | recode + reverse |
-| PID-5 | Personnalité DSM-5 | ⬜ | ✅ APA | — | #17 | 220 items (ou brève 25) — volume énorme |
-| RAS | Affirmation de soi de Rathus | ⬜ | ✅ | 🟡 B | #21 | reverse + offset |
-| SNAP-IV | TDAH enfant | ⬜ | ✅ | 🟡 B | #23 | public enfant |
+| AQ | Quotient du spectre de l'autisme | ⬜ | ✅ | 🟡 B | #4 | 50 items, recode binaire + 5 subscores ; 2e passe (10/10/2026) : ⛔ usage commercial interdit sans autorisation (Autism Research Centre, Cambridge Enterprise) |
+| RAADS-R | Autisme / Asperger de Ritvo | ⬜ | ✅ | 🟡 B | #6 | 80 items — lourd ; 2e passe : ⛔ licence non commerciale (CC BY-NC) |
+| CAT-Q | Camouflage autistique | ⬜ | ✅ | 🟡 B | #9 | 2e passe : ⛔ original CC BY, mais validation française (Bureau et al. 2024, JADD) sur abonnement |
+| EQ | Quotient empathique | ⬜ | ✅ | 🟡 B | #11 | recode + reverse ; 2e passe : ⛔ usage commercial interdit sans autorisation (ARC, Cambridge Enterprise) |
+| PID-5 | Personnalité DSM-5 | ⬜ | ✅ APA | — | #17 | 220 items (ou brève 25) — volume énorme ; 2e passe : ⛔ autorisation APA requise pour une application commerciale |
+| RAS | Affirmation de soi de Rathus | ⬜ | ✅ | 🟡 B | #21 | reverse + offset ; 2e passe : ⛔ aucune VF validée accessible ; droits non établis |
+| SNAP-IV | TDAH enfant | ⬜ | ✅ | 🟡 B | #23 | public enfant ; 2e passe : ⛔ seule VF trouvée marquée « non validée » |
 | MDQ | Troubles de l'humeur | ⬜ | ⚠️ | 🟡 B | #30 | criteriaCheck + oui/non ; droits UTMB, usage sur permission de l'auteur (tri du 10/10/2026) |
-| SCARED | Troubles anxieux enfant | ⬜ | ✅ | 🟡 B | #34 | public enfant |
+| SCARED | Troubles anxieux enfant | ⬜ | ✅ | 🟡 B | #34 | public enfant ; 2e passe : ⛔ VF validée = SCARED-R (Muris, autre instrument) ; VF du SCARED (fr-CA, Pittsburgh) sans validation retrouvée |
 | PCL-S | État de stress post-traumatique | ⬜ | ✅ | — | #36 | redondant avec PCL-5 ; VF Yao et al. 2003 sur abonnement : bloquée (tri du 10/10/2026) |
-| ASSQ | Dépistage TSA enfant | ⬜ | ✅ | 🟡 B | #38 | public enfant |
-| FMPS | Perfectionnisme de Frost | ⬜ | ✅ | 🟡 B | #45 | subscores |
-| BAT-G | Burnout (version générale) | ⬜ | ✅ | 🟡 B | #48 | alternative libre au MBI |
+| ASSQ | Dépistage TSA enfant | ⬜ | ✅ | 🟡 B | #38 | public enfant ; 2e passe : ⛔ aucune VF validée trouvée |
+| FMPS | Perfectionnisme de Frost | ⬜ | ✅ | 🟡 B | #45 | subscores ; 2e passe : ⛔ VF (Rhéaume et al.) non accessible ; droits non établis |
+| BAT-G | Burnout (version générale) | ⬜ | ✅ | 🟡 B | #48 | alternative libre au MBI ; 2e passe : ⛔ droits libres (« non-proprietary ») mais VF France officielle non validée ; VF validée = franco-canadienne 2025, items non publiés |
 | IES-R | Impact des événements | ⬜ | ⚠️ | 🟡 B | #49 | 3 subscores ; statut de droits contradictoire (Weiss & Marmar), tri du 10/10/2026 |
 | SVS | Valeurs de Schwartz | ⬜ | ✅ | — | #50 | centrage ipsatif = calcul spécifique |
-| EAT-26 | Attitudes alimentaires | ⬜ | ✅ | 🟡 B | #52 | recode asymétrique + seuil |
-| ADRS | Dépression pour adolescents | ⬜ | ✅ | — | #57 | public ado |
+| EAT-26 | Attitudes alimentaires | ⬜ | ✅ | 🟡 B | #52 | recode asymétrique + seuil ; 2e passe : ⛔ licence exigée pour les plateformes web payantes (Eating Attitudes LLC) |
+| ADRS | Dépression pour adolescents | ⬜ | ✅ | — | #57 | public ado ; 2e passe : ✅ **retenue** — original français (Revah-Lévy et al. 2007, BMC Psychiatry, CC BY), seuils OFDT / Santé publique France 0-3 / 4-6 / 7-10 ; domaine Humeur ; implémentation en attente de validation de Clément |
 | WW-II | Pourquoi s'inquiéter ? | 🔵 | ✅ | 🟡 B | #58 | porté sous l'id **PSI-II** (original francophone, Gosselin et al. 2003, formulaire et cotation du laboratoire Dugas, UQO) ; 5 sous-scores + total 25-125, pas de seuil ; fiche `ww-ii/psi-ii.md` ; implémentée par Claude (lot autonome du 10/10/2026) ; recette staging Claude OK (min, max, sous-scores) et parcours Mentaal comparé ; recette manuelle de Clément à faire → ✅ |
-| BAT-W | Burnout (version travail) | ⬜ | ✅ | 🟡 B | #61 | |
+| BAT-W | Burnout (version travail) | ⬜ | ✅ | 🟡 B | #61 | 2e passe : ⛔ idem BAT-G |
 | BSQ | Sensations corporelles | ⬜ | ✅ | 🟢 A | #65 | Likert + somme ; aucune VF validée trouvée : bloquée (tri du 10/10/2026) |
 | FQ | Peurs de Marks & Mathews | ⬜ | ⚠️ | 🟡 B | #67 | subscores ; VF Cottraux 1987 publiée seulement dans Guelfi (1997), droits non établis : bloquée (tri du 10/10/2026) |
 | PVQ-RR | Valeurs par portraits | ⬜ | ✅ | — | #68 | ipsatif, usage niche |
-| CRIES-13 | Stress post-traumatique enfant | ⬜ | ✅ | 🟡 B | #69 | public enfant |
+| CRIES-13 | Stress post-traumatique enfant | ⬜ | ✅ | 🟡 B | #69 | public enfant ; 2e passe : ⛔ VF Cn2r « non validée entièrement » |
 | EDS-R | Dépendance à l'exercice | ⬜ | ⚠️ | 🟡 B | #73 | criteria + subscores ; usage sur autorisation des auteurs (tri du 10/10/2026) |
-| THI | Handicap pour acouphènes | ⬜ | ✅ | 🟢 A | #74 | hors psycho (ORL) |
+| THI | Handicap pour acouphènes | ⬜ | ✅ | 🟢 A | #74 | hors psycho (ORL) ; 2e passe : exclue (outil ORL, hors champ psychologique ; utilisé en TCC des acouphènes, à trancher dans MEL-348) |
 | WHO-5 | Bien-être (OMS) | ⬜ | ⚠️ ✉️ | — | Absent | idéal suivi longitudinal — angle différenciation ; copyright OMS depuis 2024, licence CC BY-NC-SA (non commercial) : autorisation à demander à WHO-5@who.int (tri du 10/10/2026) |
 | CDI | Distorsions cognitives | 🚫 | ⚠️ | — | #1 | outil maison Mentaal (≠ CDI Pearson) |
 | YSQ-L3 | Schémas de Young (long) | 🚫 | 💰 | — | #5 | payant |
@@ -129,6 +131,89 @@ sortie ; les auteurs flaggés seront contactés en une fois, plus tard.
 | EDI-2 | Troubles alimentaires | 🚫 | 💰 | — | #47 | Pearson — alternative libre : EAT-26 |
 | QPC-L | Première consultation (long) | 🚫 | ⚠️ | — | #54 | outil maison Mentaal |
 | QPC-S | Première consultation (court) | 🚫 | ⚠️ | — | #72 | outil maison Mentaal |
+| BDI | Inventaire de dépression de Beck | 🚫 | 💰 | — | Catalogue | [ALP] éditeur : Pearson ; cf. MEL-346 (fiche de redirection BDI-II → PHQ-9) |
+| BAI | Inventaire d'anxiété de Beck | 🚫 | 💰 | — | Catalogue | [ALP] éditeur : Pearson |
+| BHS | Échelle de désespoir de Beck | 🚫 | 💰 | — | Catalogue | [ALP] éditeur : Pearson |
+| BSS | Échelle d'idéation suicidaire de Beck | 🚫 | 💰 | — | Absent | [ALP] éditeur : Pearson |
+| EAT-40 | Test des attitudes alimentaires (40 items) | 🚫 | 💰 | — | Absent | [ALP] licence exigée pour les plateformes payantes (Eating Attitudes LLC), comme l'EAT-26 |
+| CDRS-R | Échelle d'évaluation de la dépression chez l'enfant | 🚫 | 💰 | 🔴 D | Absent | [ALP] éditeur : WPS ; hétéro-évaluation ; enfant |
+| MASC | Échelle d'anxiété multidimensionnelle pour enfants | 🚫 | 💰 | — | Catalogue | [ALP] éditeur : MHS (MASC-2 chez Mentaal) ; enfant |
+| IASTA-Y | Inventaire d'anxiété état-trait, forme Y (STAI-Y) | 🚫 | 💰 | — | Catalogue | [ALP] éditeur : Mind Garden (VF : ECPA) |
+| CDI (enfant) | Inventaire de dépression de l'enfant (Kovacs) | 🚫 | 💰 | — | Catalogue | [ALP] éditeur : MHS ; enfant ; ≠ CDI « distorsions cognitives » de Mentaal (ligne 🚫 ci-dessus) |
+| HAD | Échelle HAD (anxiété et dépression en milieu hospitalier) | 🚫 | 💰 | — | Catalogue | [ALP] éditeur : GL Assessment |
+| Minimult | Inventaire multiphasique de personnalité du Minnesota, version abrégée | 🚫 | 💰 | — | Catalogue | [ALP] dérivé du MMPI, éditeur : University of Minnesota Press (MMPI-2 chez Mentaal) |
+| EPI | Inventaire de personnalité d'Eysenck | 🚫 | 💰 | — | Absent | [ALP] éditeur : EdITS / Hodder (EPQ-R chez Mentaal) |
+| NEO-PI-R | Inventaire de personnalité NEO révisé (cinq grands facteurs) | 🚫 | 💰 | — | Catalogue | [ALP] éditeur : PAR (VF : Hogrefe) ; NEO-PI-3 chez Mentaal |
+| SAS-SR | Échelle d'adaptation sociale (Weissman) | 🚫 | 💰 | — | Absent | [ALP] éditeur : MHS |
+| GHQ | Questionnaire de santé générale (Goldberg) | 🚫 | 💰 | — | Absent | [ALP] éditeur : GL Assessment |
+| SCL-90-R | Liste de symptômes (Derogatis) | 🚫 | 💰 | — | Catalogue | [ALP] éditeur : Pearson |
+| CAS (colère) | Échelle clinique de colère (Clinical Anger Scale) | 🔍 | ⚠️ | — | Absent | [ALP] |
+| ECAB | Échelle cognitive d'attachement aux benzodiazépines | 🔍 | ⚠️ | — | Absent | [ALP] domaine addictions |
+| ECAP | Échelle comportementale d'anxiété et phobie de Véra | 🔍 | ⚠️ | — | Catalogue | [ALP] |
+| DAS | Échelle d'attitudes dysfonctionnelles (Weissman et Beck) | 🔍 | ⚠️ | — | Catalogue | [ALP] |
+| MAAS | Échelle d'attention et de pleine conscience | 🔍 | ⚠️ | — | Catalogue | [ALP] domaine à définir (pleine conscience) |
+| FFMQ | Questionnaire des cinq facettes de la pleine conscience | 🔍 | ⚠️ | — | Absent | [ALP] domaine à définir (pleine conscience) |
+| Fusion pensée-forme | Échelle de fusion pensée-forme | 🔍 | ⚠️ | — | Absent | [ALP] domaine Troubles alimentaires (validé, pas encore créé) |
+| DBAS | Échelle des croyances et attitudes dysfonctionnelles à propos du sommeil | 🔍 | ⚠️ | — | Catalogue | [ALP] « CAS » chez Mentaal ; domaine à définir (sommeil) |
+| MEQ-SA | Questionnaire de chronotype révisé | 🔍 | ⚠️ | — | Absent | [ALP] domaine à définir (sommeil) |
+| Q-EDD | Questionnaire for Eating Disorder Diagnosis | 🔍 | ⚠️ | — | Absent | [ALP] domaine Troubles alimentaires (validé, pas encore créé) |
+| CAST | Cannabis Abuse Screening Test | 🔍 | ⚠️ | — | Absent | [ALP] outil français (OFDT) ; domaine addictions |
+| HONC | Test de Honc (Hooked on Nicotine Checklist) | 🔍 | ⚠️ | — | Absent | [ALP] domaine addictions |
+| LAO | Liste des activités obsessives-compulsives | 🔍 | ⚠️ | — | Absent | [ALP] domaine TOC |
+| CAC | Liste des obsessions-compulsions (Marks) | 🔍 | ⚠️ | — | Absent | [ALP] domaine TOC |
+| LPO | Liste de pensées obsédantes (Bouvard) | 🔍 | ⚠️ | — | Absent | [ALP] domaine TOC ; original français |
+| Quatre rituels cibles | Échelle des quatre rituels cibles (Marks) | 🔍 | ⚠️ | — | Absent | [ALP] domaine TOC |
+| QPII | Questionnaire des pensées intrusives et de leurs interprétations (Yao) | 🔍 | ⚠️ | — | Absent | [ALP] domaine TOC ; original français |
+| III | Inventaire des interprétations des pensées intrusives (OCCWG) | 🔍 | ⚠️ | — | Absent | [ALP] domaine TOC |
+| OBQ | Questionnaire des croyances obsessionnelles (ICRO / QCO-87) | 🔍 | ⚠️ | — | Catalogue | [ALP] OBQ-44 chez Mentaal ; domaine TOC |
+| MOCI | Inventaire des obsessions-compulsions de Maudsley | 🔍 | ⚠️ | — | Catalogue | [ALP] domaine TOC |
+| ACQ | Questionnaire des cognitions agoraphobiques (Chambless) | 🔍 | ⚠️ | — | Catalogue | [ALP] domaine anxiété |
+| MIA | Inventaire de mobilité pour l'agoraphobie (Chambless) | 🔍 | ⚠️ | — | Catalogue | [ALP] domaine anxiété |
+| TAPIS | Test des pensées en interaction sociale (Glass) | 🔍 | ⚠️ | — | Absent | [ALP] domaine anxiété |
+| Échelle d'infériorité | Échelle d'infériorité (Yao) | 🔍 | ⚠️ | — | Absent | [ALP] original français |
+| Sociotropie-autonomie | Échelle de sociotropie-autonomie (Beck) | 🔍 | ⚠️ | — | Absent | [ALP] domaine humeur |
+| PDI | Inventaire de détresse péritraumatique | 🔍 | ⚠️ | — | Catalogue | [ALP] domaine trauma |
+| CPTS-RI | Index de réaction au stress post-traumatique de l'enfant | 🔍 | ⚠️ | — | Catalogue | [ALP] domaine trauma ; enfant |
+| SCAS | Questionnaire d'anxiété pour enfants de Spence | 🔍 | ⚠️ | — | Catalogue | [ALP] enfant |
+| RCADS | Échelle d'anxiété et de dépression pour enfants révisée (Chorpita) | 🔍 | ⚠️ | — | Catalogue | [ALP] RCADS-47 chez Mentaal ; enfant |
+| SCARED-R | Grille d'évaluation des troubles anxieux (SCARED-R, 51 items) | 🔍 | ⚠️ | — | Absent | [ALP] ≠ SCARED (Birmaher) ; VF SCARED-R : Bouvard et al. 2013 ; enfant/ado |
+| BCIS | Échelle d'insight cognitif de Beck | 🔍 | ⚠️ | — | Absent | [ALP] domaine à définir (psychose) |
+| BIS (Birchwood) | Échelle d'insight de Birchwood | 🔍 | ⚠️ | — | Absent | [ALP] domaine à définir (psychose) |
+| BAVQ-R | Échelle révisée des croyances au sujet des voix | 🔍 | ⚠️ | — | Absent | [ALP] ≠ BVAQ (alexithymie) ; domaine à définir (psychose) |
+| STORI | Stages of Recovery Instrument | 🔍 | ⚠️ | — | Absent | [ALP] domaine à définir (psychose, rétablissement) |
+| QCI | Questionnaire des conduites interpersonnelles | 🔍 | ⚠️ | — | Absent | [ALP] |
+| BIS-11 | Échelle d'impulsivité de Barratt | 🔍 | ⚠️ | — | Catalogue | [ALP] |
+| TCI | Inventaire du tempérament et du caractère (Cloninger) | 🔍 | ⚠️ | — | Catalogue | [ALP] licence à vérifier (Washington University) |
+| SDS (Sheehan) | Échelle de handicap de Sheehan | 🔍 | ⚠️ | — | Catalogue | [ALP] |
+| QdV Marks | Échelle de qualité de vie de Marks | 🔍 | ⚠️ | — | Absent | [ALP] |
+| FSQ | Functional Status Questionnaire | 🔍 | ⚠️ | — | Absent | [ALP] |
+| HAq-II | Questionnaire d'alliance thérapeutique (Luborsky) | 🔍 | ⚠️ | — | Absent | [ALP] relation thérapeutique ; traduction Cottraux non publiée |
+| ERT | Échelle de relation thérapeutique (Cottraux) | 🔍 | ⚠️ | — | Absent | [ALP] relation thérapeutique |
+| Attentes thérapeutiques | Échelles d'attentes thérapeutiques thérapeute / patient (Cottraux) | 🔍 | ⚠️ | — | Absent | [ALP] relation thérapeutique |
+| ESS | Échelle de somnolence d'Epworth | 🔍 | ⚠️ | — | Catalogue | [ALP] licence à vérifier (Mapi Research Trust) ; domaine à définir (sommeil) |
+| CY-BOCS | Échelle d'obsession-compulsion de Yale-Brown pour enfants | 🔍 | ⚠️ | 🔴 D | Catalogue | [ALP] hétéro-évaluation ; enfant |
+| HDRS | Échelle de dépression de Hamilton | 🔍 | ⚠️ | 🔴 D | Catalogue | [ALP] hétéro-évaluation |
+| MADRS | Échelle de dépression de Montgomery et Åsberg | 🔍 | ⚠️ | 🔴 D | Catalogue | [ALP] hétéro-évaluation |
+| HAM-A | Échelle d'appréciation de l'anxiété de Hamilton | 🔍 | ⚠️ | 🔴 D | Catalogue | [ALP] hétéro-évaluation |
+| CDSS | Échelle de dépression de Calgary pour la schizophrénie | 🔍 | ⚠️ | 🔴 D | Absent | [ALP] hétéro-évaluation |
+| MES | Échelle de mélancolie de Bech et Rafaelsen | 🔍 | ⚠️ | 🔴 D | Absent | [ALP] hétéro-évaluation |
+| ERD | Échelle de ralentissement dépressif de Widlöcher | 🔍 | ⚠️ | 🔴 D | Absent | [ALP] hétéro-évaluation |
+| HARD | Diagramme HARD (Rufin et Ferreri) | 🔍 | ⚠️ | 🔴 D | Absent | [ALP] hétéro-évaluation |
+| Covi | Échelle d'anxiété de Covi | 🔍 | ⚠️ | 🔴 D | Absent | [ALP] hétéro-évaluation |
+| Test d'évitement | Test comportemental d'évitement (Marks) | 🔍 | ⚠️ | 🔴 D | Absent | [ALP] évaluation comportementale en séance |
+| SUMD | Scale to assess Unawareness of Mental Disorder | 🔍 | ⚠️ | 🔴 D | Absent | [ALP] hétéro-évaluation |
+| BPRS | Échelle abrégée d'évaluation psychiatrique | 🔍 | ⚠️ | 🔴 D | Absent | [ALP] hétéro-évaluation |
+| CPRS | Échelle d'évaluation psychopathologique générale (Åsberg) | 🔍 | ⚠️ | 🔴 D | Absent | [ALP] hétéro-évaluation |
+| NOSIE | Nurse Observation Scale for Inpatient Evaluation | 🔍 | ⚠️ | 🔴 D | Absent | [ALP] hétéro-évaluation (soignants) |
+| SANS / SAPS | Échelles des symptômes négatifs et positifs (Andreasen) | 🔍 | ⚠️ | 🔴 D | Catalogue | [ALP] hétéro-évaluation ; SANS chez Mentaal |
+| PAS | Personality Assessment Schedule (Tyrer) | 🔍 | ⚠️ | 🔴 D | Absent | [ALP] entretien |
+| IPDE | International Personality Disorder Examination | 🔍 | ⚠️ | 🔴 D | Absent | [ALP] entretien |
+| DIB-R | Entretien diagnostique pour la personnalité borderline | 🔍 | ⚠️ | 🔴 D | Absent | [ALP] entretien |
+| MINI | Mini International Neuropsychiatric Interview | 🔍 | ⚠️ | 🔴 D | Catalogue | [ALP] entretien ; licence commerciale à vérifier |
+| HSRS | Échelle santé-maladie (Luborsky) | 🔍 | ⚠️ | 🔴 D | Absent | [ALP] hétéro-évaluation |
+| GAS (Spitzer) | Échelle d'évaluation globale (Global Assessment Scale) | 🔍 | ⚠️ | 🔴 D | Absent | [ALP] hétéro-évaluation ; ≠ GAS « addiction aux jeux vidéo » de Mentaal |
+| EGF | Échelle d'évaluation globale du fonctionnement (axe V du DSM-IV) | 🔍 | ⚠️ | 🔴 D | Absent | [ALP] hétéro-évaluation |
+| CGI | Impression clinique globale | 🔍 | ⚠️ | 🔴 D | Absent | [ALP] hétéro-évaluation |
 
 _Maintenance : à chaque échelle mergée → 🔵 ; recette manuelle passée → ✅ ;
 mettre à jour le tableau de bord. Les candidates hors catalogue Mentaal
@@ -174,6 +259,22 @@ Mission confiée par Clément : implémenter, sans arbitrage de sa part, toutes 
 | SNAP-IV, SCARED, ASSQ, CRIES-13, ADRS | Public enfant/ado ou hétéro-évaluation (hors périmètre fixé par Clément) |
 | Toutes les 🔍 (dont ISI, PSQI) | Droits ⚠️ non instruits : statut douteux |
 | 🚫 | Déjà écartées |
+
+
+### Deuxième passe — domaines validés et cluster enfant/ado (Claude, 10/10/2026)
+
+Clément a validé l'architecture : domaine = grande famille DSM-5 / HAS (Neurodéveloppement, Troubles alimentaires, Burn-out, Personnalité ; « Estime de soi » → « Estime et affirmation de soi ») ; catégorie = trouble ou motif ; âge et répondant hors domaine ; échelles enfant/ado rangées par domaine clinique ; THI exclu. Ticket de fond : MEL-348. Les 15 échelles débloquées ont été vérifiées aux sources (motifs dans la colonne Notes) : **seule l'ADRS passe** (domaine Humeur, existant). Les nouveaux domaines ne sont donc **pas créés** tant qu'aucune échelle ne les utilise (pas de section vide au catalogue).
+
+### Apport du catalogue « Apprendre la psychologie » (10/10/2026)
+
+Source recommandée par Renata : [catalogue des tests](https://tcc.apprendre-la-psychologie.fr/catalogue/tests-psychologiques/) (57 fiches) et [Échelles en français](https://tcc.apprendre-la-psychologie.fr/echelles-en-francais.html) (liste classée par trouble d'après le rapport Inserm 2004, *Psychothérapie – Trois approches évaluées*). Les échelles absentes du tableau y ont été ajoutées (étiquette **[ALP]**), **sans instruction** (consigne de Clément) :
+
+- 🚫 quand un éditeur commercial est clairement identifié (Pearson, MHS, WPS, Mind Garden, GL Assessment, PAR, EdITS, University of Minnesota Press ; EAT-40 : licence plateformes payantes). Éditeurs notés d'après leur notoriété, non re-vérifiés pour cette mise à jour ;
+- 🔍 pour toutes les autres, droits ⚠️ à instruire ; classe 🔴 D pour les hétéro-évaluations et entretiens, conservés pour une future passation en séance.
+
+Déjà présentes dans le tableau avant cet ajout : EDI-2, ÉII (IUS), PCL-S, LSAS, RSES, Y-BOCS, IES-R, ISI, FQ, AUDIT, PDEQ, YSQ-L3, PSWQ (QIPS), FTND, MBI, ATQ, PPAG, FSS, PDSS, RAS, TAS-20, SCID-II-PQ, PDQ-4, YSQ.
+
+Plusieurs ajouts appellent des domaines encore inexistants (sommeil, psychose, pleine conscience, relation thérapeutique) : à traiter dans MEL-348 avant toute instruction.
 
 ---
 
