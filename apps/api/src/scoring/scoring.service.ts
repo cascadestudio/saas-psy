@@ -16,6 +16,7 @@ import { scoreFtnd } from './scorers/ftnd';
 import { scorePdss } from './scorers/pdss';
 import { scoreHsps } from './scorers/hsps';
 import { scoreQia } from './scorers/qia';
+import { scorePsiII } from './scorers/psi-ii';
 
 type Scorer = (scale: Scale, responses: Record<string, unknown>) => ScoreResult;
 
@@ -36,6 +37,7 @@ const SCORERS: Record<string, Scorer> = {
   pdss: scorePdss,
   hsps: scoreHsps,
   qia: scoreQia,
+  'psi-ii': scorePsiII,
 };
 
 @Injectable()

@@ -1849,6 +1849,76 @@ export const scales: Scale[] = [
         "Additionnez les 10 items cotés (0-8), l'item 1 (thèmes d'inquiétude) n'est pas coté. Le score total varie de 0 à 80. La cotation par critères repère un profil compatible avec le TAG : ≥ 1 thème d'inquiétude, score ≥ 4 aux items 2, 3, 4 et 6, et ≥ 4 sur au moins 3 des 6 sensations somatiques.",
     },
   },
+  {
+    id: "psi-ii",
+    acronym: "PSI-II",
+    label: "Questionnaire Pourquoi s'inquiéter-II",
+    domain: "anxiete",
+    formType: "single-scale",
+    title: "PSI-II - Questionnaire Pourquoi s'inquiéter-II",
+    description:
+      "Un questionnaire de 25 items évaluant les croyances erronées à l'égard des inquiétudes",
+    category: "Anxiété généralisée",
+    estimatedTime: "5-10 minutes",
+    longDescription:
+      "Le Questionnaire Pourquoi s'inquiéter-II (PSI-II, connu en anglais sous le sigle WW-II — Why Worry-II) est un auto-questionnaire de 25 items développé en français par Gosselin, Ladouceur, Langlois, Freeston, Dugas et Bertrand (2003). Il évalue les croyances erronées à l'égard des inquiétudes. Chaque item est coté de 1 (pas du tout vrai) à 5 (tout à fait) ; le score total varie de 25 à 125. La fiche de cotation des auteurs définit cinq sous-échelles de 5 items : s'inquiéter aide à résoudre les problèmes ; s'inquiéter aide à se motiver ; s'inquiéter aide l'individu à se prémunir de vivre des émotions difficiles si un événement s'avère négatif ; s'inquiéter en soi prévient les événements négatifs ; s'inquiéter est un trait de personnalité positif. Pas de seuil clinique fourni par les auteurs.",
+    instructions:
+      "Vous retrouvez ci-dessous une série d'énoncés qui peuvent se rapporter aux inquiétudes. En vous référant aux moments où vous vous inquiétez, veuillez indiquer jusqu'à quel point les énoncés suivants vous semblent vrais.",
+    persistentInstructions:
+      "En vous référant aux moments où vous vous inquiétez, veuillez indiquer jusqu'à quel point les énoncés suivants vous semblent vrais.",
+    copyrightAttribution:
+      "Questionnaire Pourquoi s'inquiéter-II (PSI-II) — Gosselin, Ladouceur, Langlois, Freeston, Dugas & Bertrand (2003), Revue européenne de psychologie appliquée, 53(3-4), 199-211. Instrument original francophone.",
+    patientIntroSubtitle: null,
+    higherIsBetter: false,
+    questions: [
+      "Si je ne m'inquiétais pas, je serais insouciant(e) et irresponsable.",
+      "Si je m'inquiète, je serai moins ébranlé(e) lorsque des événements imprévus se produiront.",
+      "Je m'inquiète dans le but de savoir quoi faire.",
+      "Si je m'inquiète à l'avance, je serai moins déçu(e) si quelque chose de grave se produit.",
+      "Le fait de m'inquiéter m'aide à planifier mes actions pour résoudre un problème.",
+      "Le simple fait de m'inquiéter peut empêcher les malheurs d'arriver.",
+      "Si je ne m'inquiétais pas, cela ferait de moi une personne négligente.",
+      "C'est en m'inquiétant que je finis par entreprendre le travail que j'ai à faire.",
+      "Je m'inquiète parce que je pense que cela peut m'aider à trouver une solution à mon problème.",
+      "Le fait de m'inquiéter prouve que je suis une personne qui voit à ses affaires.",
+      "Trop penser à des choses positives peut les empêcher de se produire.",
+      "Le fait de m'inquiéter confirme que je suis une personne prévoyante.",
+      "Si un malheur arrive, je me sentirai moins responsable si je m'en suis inquiété(e) auparavant.",
+      "En m'inquiétant, je peux trouver une meilleure façon de faire.",
+      "L'inquiétude me stimule et me rend plus efficace.",
+      "Le fait de m'inquiéter m'incite à passer à l'action.",
+      "Le simple fait de m'inquiéter diminue le risque que quelque chose de grave arrive.",
+      "En m'inquiétant, je fais certaines choses que je ne me déciderais pas à faire autrement.",
+      "Le fait de m'inquiéter me motive à faire les choses que je dois faire.",
+      "Mes inquiétudes à elles seules peuvent diminuer les risques de danger.",
+      "En m'inquiétant, j'augmente mes chances de trouver la meilleure solution.",
+      "Le fait de m'inquiéter me permettra de me sentir moins coupable si quelque chose de grave se produit.",
+      "Si je m'inquiète, je serai moins triste lorsqu'un événement négatif se produira.",
+      "En ne s'inquiétant pas, on peut attirer les malheurs.",
+      "Le fait de m'inquiéter démontre que je suis une bonne personne.",
+    ],
+    answerScales: {
+      intensity: [
+        { value: 1, label: "Pas du tout vrai" },
+        { value: 2, label: "Un peu vrai" },
+        { value: 3, label: "Assez vrai" },
+        { value: 4, label: "Très vrai" },
+        { value: 5, label: "Tout à fait" },
+      ],
+    },
+    scoring: {
+      ranges: [
+        {
+          min: 25,
+          max: 125,
+          interpretation: "Pas de seuil clinique fourni par les auteurs.",
+        },
+      ],
+      maxScore: 125,
+      method:
+        "Additionnez les 25 items (1-5) : le score total varie de 25 à 125. Les cinq sous-échelles de la fiche de cotation des auteurs (5 items chacune, de 5 à 25) sont fournies en sous-scores. Pas de seuil clinique fourni par les auteurs.",
+    },
+  },
 ];
 
 export function getScaleById(id: string): Scale | undefined {
