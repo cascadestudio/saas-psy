@@ -11,7 +11,7 @@
 
 ## Tableau de bord
 
-**✅ 12 validées · 🔵 6 implémentées · 🚧 6 en cours · 📋 2 prévues · 🔍 89 à instruire · ⬜ 24 non planifiées · 🚫 28 écartées** (167 échelles, dont 83 ajoutées depuis le catalogue « Apprendre la psychologie » le 10/10/2026)
+**✅ 12 validées · 🔵 7 implémentées · 🚧 6 en cours · 📋 2 prévues · 🔍 88 à instruire · ⬜ 24 non planifiées · 🚫 28 écartées** (167 échelles, dont 83 ajoutées depuis le catalogue « Apprendre la psychologie » le 10/10/2026)
 
 **Rattrapage Mentaal : 13/42.** Le plafond n'est pas 74 : sur leur catalogue
 disponible, 12 sont écartées d'office (payantes, outils maison Mentaal, ou
@@ -84,7 +84,7 @@ sortie ; les auteurs flaggés seront contactés en une fois, plus tard.
 | EDQ | Dépendance affective | 🔍 | ❓ | — | #42 | |
 | COPSOQ | Risques psychosociaux | 🔍 | ✉️ | — | #51 | libre non commercial — usage commercial à vérifier |
 | SPRS | Cotation de la phobie sociale | 🔍 | ❓ | — | #55 | |
-| QAP | Attitudes face aux problèmes | 🔍 | ✉️ | — | #56 | |
+| QAP | Attitudes face aux problèmes | 🔵 | ✉️ | 🟢 A | #56 | fiche `qap/qap.md` ; original francophone (Gosselin, Ladouceur & Pelletier 2005), formulaire et cotation du laboratoire Dugas (UQO) ; 12 items, total 12-60 sans seuil ; implémentée par Claude (11/10/2026), recette staging à confirmer |
 | CST | Stress de Cungi | 🔍 | ❓ | — | #60 | |
 | RIASEC | Intérêts professionnels | 🔍 | ✅ (si O*NET Interest Profiler) | — | #62 | modèle libre, version des items à vérifier |
 | ASA-27 | Anxiété de séparation adulte | 🔍 | ❓ | — | #63 | |

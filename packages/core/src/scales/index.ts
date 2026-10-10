@@ -1966,6 +1966,63 @@ export const scales: Scale[] = [
       thresholdsSource: "Tranches OFDT / Santé publique France (enquête EnCLASS)",
     },
   },
+  {
+    id: "qap",
+    acronym: "QAP",
+    label: "Questionnaire d'attitude face aux problèmes",
+    domain: "anxiete",
+    formType: "single-scale",
+    title: "QAP - Questionnaire d'attitude face aux problèmes",
+    description:
+      "Un questionnaire de 12 items évaluant l'attitude négative face aux problèmes de la vie quotidienne",
+    category: "Anxiété généralisée",
+    estimatedTime: "3-5 minutes",
+    longDescription:
+      "Le Questionnaire d'attitude face aux problèmes (QAP) est un auto-questionnaire de 12 items développé en français par Gosselin, Ladouceur et Pelletier (2005). Il évalue l'orientation négative face aux problèmes de la vie quotidienne (connu en anglais sous le nom de Negative Problem Orientation Questionnaire). Chaque item est coté de 1 (pas du tout correspondant) à 5 (extrêmement correspondant) ; mesure unifactorielle sans item inversé, le score total varie de 12 à 60. Pas de seuil clinique fourni par les auteurs.",
+    instructions:
+      "Les gens peuvent réagir de différentes façons lorsqu'ils font face à des problèmes de la vie quotidienne (ex : problèmes de santé, disputes, manques de temps, etc.). Veuillez utiliser l'échelle ci-dessous pour exprimer jusqu'à quel point chacun des énoncés suivants correspond à votre façon de réagir ou de penser lorsque vous êtes confronté(e) à un problème.",
+    persistentInstructions:
+      "Veuillez utiliser l'échelle ci-dessous pour exprimer jusqu'à quel point chacun des énoncés suivants correspond à votre façon de réagir ou de penser lorsque vous êtes confronté(e) à un problème.",
+    copyrightAttribution:
+      "Questionnaire d'attitude face aux problèmes (QAP) — Gosselin, Ladouceur & Pelletier (2005), Journal de thérapie comportementale et cognitive, 15(4), 141-153. Instrument original francophone.",
+    patientIntroSubtitle: null,
+    higherIsBetter: false,
+    questions: [
+      "Je perçois les problèmes comme étant menaçants pour mon bien-être.",
+      "Je doute souvent de mes capacités à résoudre les problèmes.",
+      "Souvent, avant même d'avoir essayé de trouver une solution, je me dis qu'il est difficile de résoudre un problème.",
+      "Les problèmes qui m'arrivent me semblent souvent insurmontables.",
+      "Lorsque je tente de résoudre un problème, je remets souvent en question mes habiletés.",
+      "Souvent, j'ai l'impression que les problèmes qui m'arrivent ne peuvent pas être résolus.",
+      "Même si j'arrive à voir certaines solutions à mes problèmes, je doute qu'ils pourront se régler facilement.",
+      "J'ai tendance à voir les problèmes comme un danger.",
+      "Ma première réaction devant un problème est de remettre en question mes habiletés.",
+      "Je perçois souvent mes problèmes comme étant plus gros qu'ils le sont en réalité.",
+      "Même si j'ai regardé un problème sous tous les angles possibles, je me demande encore si la solution que j'ai retenue va être efficace.",
+      "Je considère les problèmes comme des obstacles qui perturbent mon fonctionnement.",
+    ],
+    answerScales: {
+      intensity: [
+        { value: 1, label: "Pas du tout correspondant" },
+        { value: 2, label: "Un peu correspondant" },
+        { value: 3, label: "Assez correspondant" },
+        { value: 4, label: "Très correspondant" },
+        { value: 5, label: "Extrêmement correspondant" },
+      ],
+    },
+    scoring: {
+      ranges: [
+        {
+          min: 12,
+          max: 60,
+          interpretation: "Pas de seuil clinique fourni par les auteurs.",
+        },
+      ],
+      maxScore: 60,
+      method:
+        "Additionnez les 12 items (1-5) : mesure unifactorielle sans item inversé, le score total varie de 12 à 60. Pas de seuil clinique fourni par les auteurs.",
+    },
+  },
 ];
 
 export function getScaleById(id: string): Scale | undefined {
