@@ -59,16 +59,24 @@ Même situation que l'ÉII (`docs/scales/ius/eii.md`), validée par l'équipe : 
 
 ### Comparaison Mentaal
 
-Fiche publique [mentaal.fr/send/ww-ii](https://mentaal.fr/send/ww-ii) consultée le 10/10/2026 (n°58 de leur catalogue). Parcours patient : voir §10, « Recette ».
+Fiche publique [mentaal.fr/send/ww-ii](https://mentaal.fr/send/ww-ii) et parcours praticien → patient complet déroulés le 10/10/2026 (n°58 de leur catalogue ; patient fictif, même jeu de réponses que la recette staging, cf. §10 « Recette »). La source UQO tranche.
 
 | Point | Source UQO | Melya | Mentaal |
 | --- | --- | --- | --- |
 | Nom | « PSI-II » | PSI-II, « Questionnaire Pourquoi s'inquiéter-II » | « Pourquoi s'inquiéter ? (WW-II) » |
-| Consigne | « Vous retrouvez ci-dessous… en encerclant le numéro correspondant (1 à 5). » | Texte source sans la mention papier (§10) | Reformulée, absente de la source : « Indiquez dans quelle mesure cette affirmation vous semble juste : » |
+| Consigne | « Vous retrouvez ci-dessous… en encerclant le numéro correspondant (1 à 5). » | Texte source sans la mention papier (§10) | Paraphrasée, absente de la source : « Vous trouverez ci-après une série d'affirmations concernant l'inquiétude. En pensant aux moments où vous vous inquiétez, indiquez dans quelle mesure chaque affirmation vous semble vraie. » ; rappel par item : « Indiquez dans quelle mesure cette affirmation vous semble juste : » |
 | Item 2 | « …moins **ébranlé(e)** lorsque… » | Verbatim (« ébranlé(e) ») | « …moins **bouleversé(e)** lorsque… » |
+| Item 10 | « …une personne **qui voit à ses affaires**. » (québécisme) | Verbatim | « …une personne **responsable**. » |
+| Item 13 | « …si je m'en suis **inquiété** auparavant. » | « inquiété(e) » (accord, §10) | « inquiété » (comme la source) |
+| Item 24 | « …on peut attirer les **malheurs**. » | Verbatim | « …on peut attirer les **problèmes**. » |
+| Autres items (21) | — | Verbatim | Identiques à la source (comparaison automatique des 25 énoncés) |
 | Réponse 5 | « Tout à fait » | Verbatim | « Tout à fait vrai » |
-| Cotation | 5 sous-échelles de 5 items, pas de score total | 5 sous-scores **+ score total** 25-125 (§10) | 5 sous-scores sur 25, pas de score total |
+| Cotation | 5 sous-échelles de 5 items, pas de score total | 5 sous-scores **+ score total** 25-125 (§10), libellés de la fiche de cotation | 5 sous-scores sur 25, pas de score total, libellés reformulés (« facilite la résolution de problèmes », « renforce la motivation », « protège contre les émotions négatives », « prévient des événements négatifs », « reflète un trait de personnalité positif ») |
+| Score du jeu de recette R1 | — | 75/125 ; 25 / 20 / 15 / 10 / 5 | 25 / 20 / 15 / 10 / 5 (identiques) |
+| Côté patient | — | Aucun score affiché | Aucun score affiché |
 | Seuils | Aucun | Aucun | Aucun |
+
+**Lecture** : même cotation et mêmes sous-scores. Mentaal s'écarte de la source sur la consigne, trois items (2, 10, 24 : formulations « France » à la place du texte québécois ?) et les libellés des sous-échelles ; Melya s'en écarte sur l'accord de l'item 13 et l'ajout d'un score total. L'origine du texte de Mentaal (article 2003 ? adaptation maison ?) n'est pas vérifiable sans l'article (§10, question 1).
 
 ---
 
@@ -274,7 +282,7 @@ Détail T3 : résolution (3,5,9,14,21) = 4+4+4+4+4 = 20 ; motivation (8,15,16,18
 | Libellé de la bande unique | « Pas de seuil clinique fourni par les auteurs. » (texte praticien) | Aucun seuil dans la source ; l'app exige une bande. Formulation factuelle Melya, vue seulement par le praticien (précédent ÉII : « Plus le score est élevé… »). | moyenne |
 | Libellés des sous-scores | Repris mot pour mot de la fiche de cotation | Source primaire p. 4. | haute |
 | Réponse 5 « Tout à fait » | Verbatim, sans « vrai » | C'est le texte du PDF ; Mentaal affiche « Tout à fait vrai » (absent de la source). | moyenne (le PDF tronque peut-être l'en-tête ; à vérifier sur l'article 2003) |
-| Item 2 « ébranlé(e) » | Verbatim | Mentaal affiche « bouleversé(e) ». Leur texte vient peut-être de l'article 2003 : on ne peut pas trancher sans lui ; la source primaire disponible fait foi. | moyenne |
+| Items 2, 10 et 24 | Verbatim (« ébranlé(e) », « qui voit à ses affaires », « malheurs ») | Mentaal affiche « bouleversé(e) », « responsable », « problèmes ». Peut-être une adaptation France, peut-être le texte de l'article 2003 : impossible de trancher sans lui ; la source primaire disponible fait foi (règle « Mentaal ne fait pas foi »). Une adaptation France serait un écart à la version validée, précédent ÉII (québécismes conservés). | moyenne |
 | Nom au catalogue | « Questionnaire Pourquoi s'inquiéter-II » ; sous-titre patient : aucun (`null`) | Le PDF n'affiche que « PSI-II » (repris pour le patient) ; le nom développé suit l'usage de la littérature (questionnaire « Pourquoi s'inquiéter ? », Freeston et al., 1994 ; II = révision de 2003). | moyenne |
 | Rappel au-dessus des items | Extrait de la consigne source | Même logique que la CUDIT-R (validée par Clément). | haute |
 | Domaine | Anxiété (catégorie « Anxiété généralisée ») | Modèle cognitif du TAG de Dugas ; même domaine que l'ÉII et la QIA. | haute |
@@ -284,12 +292,31 @@ Détail T3 : résolution (3,5,9,14,21) = 4+4+4+4+4 = 20 ; motivation (8,15,16,18
 
 ### Questions ouvertes
 
-1. **Obtenir l'article de Gosselin et al. (2003)** pour recouper les items (notamment l'item 2 « ébranlé(e) » vs « bouleversé(e) » et la réponse 5 « Tout à fait » vs « Tout à fait vrai »), vérifier si l'article définit un score total, et voir pourquoi la fiche UQO parle de « version originale » des sous-échelles. Recommandation : demande de l'article à l'UQO ou à P. Gosselin (U. Sherbrooke), à grouper avec le contact ✉️ ÉII.
+1. **Obtenir l'article de Gosselin et al. (2003)** pour recouper les items (notamment les items 2, 10 et 24, où Mentaal diffère, et la réponse 5 « Tout à fait » vs « Tout à fait vrai »), vérifier si l'article définit un score total, et voir pourquoi la fiche UQO parle de « version originale » des sous-échelles. Recommandation : demande de l'article à l'UQO ou à P. Gosselin (U. Sherbrooke), à grouper avec le contact ✉️ ÉII.
 2. **Mettre en avant le score total ou seulement les sous-scores ?** Recommandation : garder le total pour l'instant (somme exacte des sous-échelles), à revoir si l'article ne le définit pas.
 
 ### Recette
 
-À compléter après déploiement sur staging (même jeu de réponses sur staging et sur Mentaal).
+Recette Claude du 10/10/2026 sur staging (commit 273c298, déploiement API vert), patient de test « Patient Test » :
+
+| Jeu | Réponses (items 1 à 25) | Attendu (Python) | Staging | Mentaal |
+| --- | --- | --- | --- | --- |
+| Min (= T1) | 25 × « Pas du tout vrai » | 25 ; 5 / 5 / 5 / 5 / 5 | 25/125 ; 5 / 5 / 5 / 5 / 5 ✓ | — |
+| Max (= T2) | 25 × « Tout à fait » | 125 ; 25 × 5 | 125/125 ; 25 / 25 / 25 / 25 / 25 ✓ | — |
+| R1 (une valeur par sous-échelle) | 1,3,5,3,5,2,1,4,5,1,2,1,3,5,4,4,2,4,4,2,5,3,3,2,1 | 75 ; 25 / 20 / 15 / 10 / 5 | 75/125 ; 25 / 20 / 15 / 10 / 5 ✓ | 25 / 20 / 15 / 10 / 5 (pas de total) ✓ |
+
+R1 donne une valeur différente à chaque sous-échelle (résolution = 5, motivation = 4, émotions = 3, prévention = 2, trait = 1) : un seul passage vérifie l'appartenance des 25 items. Pas de seuil ni d'item inversé à tester.
+
+Contrôles faits pendant la recette :
+- Écran d'intro patient : acronyme seul (pas de sous-titre), consigne de la §4, « 25 questions », « 5-10 minutes ».
+- Les 25 énoncés affichés au patient sont identiques au catalogue (empreinte calculée sur la page et sur `packages/core`).
+- Rappel de consigne affiché au-dessus de chaque item ; 5 réponses dans l'ordre de la source.
+- Écran de fin patient : aucun score, aucun libellé.
+- Résultat praticien : score, bande « Pas de seuil clinique fourni par les auteurs. », 5 sous-scores sur 25, consigne et modalités de réponse.
+
+**Points à regarder** :
+- Le libellé de la sous-échelle 3 (« S'inquiéter aide l'individu à se prémunir de vivre des émotions difficiles si un événement s'avère négatif ») est tronqué avec « … » dans la carte de sous-score du résultat praticien (texte complet en dessous). Affichage existant, non modifié.
+- La recette manuelle de Clément reste à faire avant de passer l'échelle en ✅.
 
 ---
 
@@ -307,3 +334,4 @@ Détail T3 : résolution (3,5,9,14,21) = 4+4+4+4+4 = 20 ; motivation (8,15,16,18
 | Date | Auteur | Modification |
 | --- | --- | --- |
 | 10/10/2026 | Claude (lot autonome demandé par Clément) | Création de la fiche et implémentation : source UQO (laboratoire Dugas) en autorité unique, 25 items verbatim, 5 sous-scores de la fiche de cotation, score total 25-125 sans seuil. Arbitrages et niveaux de confiance en §10. Comparaison Mentaal (fiche publique). Tests 10/10. |
+| 10/10/2026 | Claude (lot autonome) | Recette staging (min, max, jeu R1 couvrant les 5 sous-échelles) : conforme. Parcours Mentaal complet : mêmes sous-scores ; écarts de texte côté Mentaal sur la consigne, les items 2, 10, 24 et les libellés de sous-échelles ; comparaison et points à regarder ajoutés (§2, §10). |

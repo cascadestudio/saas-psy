@@ -108,7 +108,7 @@ sortie ; les auteurs flaggés seront contactés en une fois, plus tard.
 | SVS | Valeurs de Schwartz | ⬜ | ✅ | — | #50 | centrage ipsatif = calcul spécifique |
 | EAT-26 | Attitudes alimentaires | ⬜ | ✅ | 🟡 B | #52 | recode asymétrique + seuil |
 | ADRS | Dépression pour adolescents | ⬜ | ✅ | — | #57 | public ado |
-| WW-II | Pourquoi s'inquiéter ? | 🔵 | ✅ | 🟡 B | #58 | porté sous l'id **PSI-II** (original francophone, Gosselin et al. 2003, formulaire et cotation du laboratoire Dugas, UQO) ; 5 sous-scores + total 25-125, pas de seuil ; fiche `ww-ii/psi-ii.md` ; implémentée par Claude (lot autonome du 10/10/2026), recette staging à confirmer |
+| WW-II | Pourquoi s'inquiéter ? | 🔵 | ✅ | 🟡 B | #58 | porté sous l'id **PSI-II** (original francophone, Gosselin et al. 2003, formulaire et cotation du laboratoire Dugas, UQO) ; 5 sous-scores + total 25-125, pas de seuil ; fiche `ww-ii/psi-ii.md` ; implémentée par Claude (lot autonome du 10/10/2026) ; recette staging Claude OK (min, max, sous-scores) et parcours Mentaal comparé ; recette manuelle de Clément à faire → ✅ |
 | BAT-W | Burnout (version travail) | ⬜ | ✅ | 🟡 B | #61 | |
 | BSQ | Sensations corporelles | ⬜ | ✅ | 🟢 A | #65 | Likert + somme ; aucune VF validée trouvée : bloquée (tri du 10/10/2026) |
 | FQ | Peurs de Marks & Mathews | ⬜ | ⚠️ | 🟡 B | #67 | subscores ; VF Cottraux 1987 publiée seulement dans Guelfi (1997), droits non établis : bloquée (tri du 10/10/2026) |
