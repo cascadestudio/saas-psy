@@ -11,7 +11,7 @@ export interface DomainAppearance {
 }
 
 // Palette du color-picker de référence (cf. public/mockups/scale-cards.html).
-// Teintes encore libres pour de futurs domaines : salmon, sable, blush, bleu clair.
+// Teintes encore libres pour de futurs domaines : sable, blush, bleu clair.
 const PALETTE = {
   gold: "#F2C33E",
   terracotta: "#DB6A45",
@@ -20,6 +20,7 @@ const PALETTE = {
   navy: "#12213F",
   blue: "#2E62C3",
   sage: "#CBD8CE",
+  salmon: "#F0A883",
 } as const;
 
 /** Ordre d'affichage des domaines (sections du catalogue, filtres). */
@@ -31,6 +32,7 @@ export const DOMAIN_ORDER: ScaleDomain[] = [
   "estime",
   "addictions",
   "hypersensibilite",
+  "neurodeveloppement",
 ];
 
 const DOMAIN_APPEARANCE: Record<ScaleDomain, DomainAppearance> = {
@@ -41,6 +43,7 @@ const DOMAIN_APPEARANCE: Record<ScaleDomain, DomainAppearance> = {
   estime: { label: "Estime de soi", color: PALETTE.gold },
   addictions: { label: "Addictions", color: PALETTE.ochre },
   hypersensibilite: { label: "Hypersensibilité", color: PALETTE.green },
+  neurodeveloppement: { label: "Neurodéveloppement", color: PALETTE.salmon },
 };
 
 // Échelle inconnue (id absent du catalogue, données de session orphelines).

@@ -48,7 +48,8 @@ export type ScaleDomain =
   | "toc"
   | "estime"
   | "addictions"
-  | "hypersensibilite";
+  | "hypersensibilite"
+  | "neurodeveloppement";
 
 export interface Scale {
   id: string;
@@ -2206,6 +2207,63 @@ export const scales: Scale[] = [
       method:
         "Additionnez les 6 items (0-4) : le score total varie de 0 à 24. Moins de 3 : usage sans risque ; 3 à 6 : risque faible ; 7 ou plus : risque élevé d'usage problématique, voire de dépendance (seuils OFDT).",
       thresholdsSource: "Seuils OFDT (Note n°2013-02)",
+    },
+  },
+  {
+    id: "asrs",
+    acronym: "ASRS-V1.1",
+    label: "Test de dépistage et d'auto-évaluation des troubles déficitaires de l'attention avec hyperactivité de l'adulte",
+    patientIntroSubtitle: "Test de dépistage avec échelle d'auto-évaluation V1.1",
+    domain: "neurodeveloppement",
+    formType: "single-scale",
+    title: "ASRS-V1.1 - Test de dépistage du TDAH de l'adulte (6 questions)",
+    description:
+      "Un test de dépistage de 6 questions repérant des symptômes pouvant correspondre à un TDAH chez l'adulte, au cours des 6 derniers mois",
+    category: "TDAH de l'adulte",
+    estimatedTime: "2 minutes",
+    longDescription:
+      "Le test de dépistage ASRS-V1.1 (Adult ADHD Self-Report Scale, 6 questions) est la partie A de l'échelle d'auto-évaluation en 18 items conçue par Adler et Kessler avec l'Organisation mondiale de la santé. Destiné aux adultes de 18 ans et plus, il porte sur les 6 derniers mois. Chaque question se répond de « Jamais » à « Très souvent » ; une réponse compte si elle tombe dans la zone grisée du formulaire (à partir de « Quelquefois » pour les questions 1 à 3, à partir de « Souvent » pour les questions 4 à 6). Quatre réponses ou plus dans la zone grisée indiquent que les symptômes peuvent correspondre à ceux d'un TDAH de l'adulte et justifient une évaluation clinique. Ce n'est pas un outil diagnostique.",
+    instructions:
+      "Choisissez la réponse qui décrit le mieux ce que vous avez ressenti et comment vous vous êtes comporté au cours des 6 derniers mois.",
+    persistentInstructions: "Au cours des 6 derniers mois :",
+    copyrightAttribution:
+      "Le test de dépistage ASRS-V1.1 (6 questions) est un sous-ensemble de l'échelle d'auto-évaluation ASRS-V1.1 (18 questions). © New York University and the President and Fellows of Harvard College. Créé par Lenard Adler (NYU) et Ronald Kessler (Harvard), avec l'Organisation mondiale de la santé. Version française officielle.",
+    higherIsBetter: false,
+    questions: [
+      "A quelle fréquence vous arrive-t-il d'avoir des difficultés à finaliser les derniers détails d'un projet une fois que les parties les plus stimulantes ont été faites ?",
+      "A quelle fréquence vous arrive-t-il d'avoir des difficultés à mettre les choses en ordre lorsque vous devez faire quelque chose qui demande de l'organisation ?",
+      "A quelle fréquence vous arrive-t-il d'avoir des difficultés à vous rappeler vos rendez-vous ou vos obligations ?",
+      "Quand vous devez faire quelque chose qui demande beaucoup de réflexion, à quelle fréquence vous arrive-t-il d'éviter de le faire ou de le remettre à plus tard ?",
+      "A quelle fréquence vous arrive-t-il de remuer ou de tortiller les mains ou les pieds lorsque vous devez rester assis pendant une période prolongée ?",
+      "A quelle fréquence vous arrive-t-il de vous sentir excessivement actif et contraint de faire quelque chose, comme si vous étiez entraîné malgré vous par un moteur ?",
+    ],
+    answerScales: {
+      intensity: [
+        { value: 0, label: "Jamais" },
+        { value: 1, label: "Rarement" },
+        { value: 2, label: "Quelquefois" },
+        { value: 3, label: "Souvent" },
+        { value: 4, label: "Très souvent" },
+      ],
+    },
+    scoring: {
+      ranges: [
+        {
+          min: 0,
+          max: 3,
+          interpretation: "Dépistage négatif : moins de 4 réponses dans la zone grisée",
+        },
+        {
+          min: 4,
+          max: 6,
+          interpretation:
+            "Symptômes pouvant correspondre à ceux d'un TDAH de l'adulte : évaluation clinique recommandée",
+        },
+      ],
+      maxScore: 6,
+      method:
+        "Comptez les réponses dans la zone grisée : questions 1 à 3 à partir de « Quelquefois », questions 4 à 6 à partir de « Souvent ». Le score varie de 0 à 6 ; 4 ou plus indique que les symptômes peuvent correspondre à ceux d'un TDAH de l'adulte.",
+      thresholdsSource: "Règle de cotation du formulaire ASRS-V1.1 (NYU / Harvard / OMS)",
     },
   },
 ];

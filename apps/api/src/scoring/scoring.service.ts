@@ -22,6 +22,7 @@ import { scoreQap } from './scorers/qap';
 import { scoreQec } from './scorers/qec';
 import { scorePdi } from './scorers/pdi';
 import { scoreCast } from './scorers/cast';
+import { scoreAsrs } from './scorers/asrs';
 
 type Scorer = (scale: Scale, responses: Record<string, unknown>) => ScoreResult;
 
@@ -48,6 +49,7 @@ const SCORERS: Record<string, Scorer> = {
   qec: scoreQec,
   pdi: scorePdi,
   cast: scoreCast,
+  asrs: scoreAsrs,
 };
 
 @Injectable()

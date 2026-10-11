@@ -11,7 +11,7 @@
 
 ## Tableau de bord
 
-**✅ 12 validées · 🔵 10 implémentées · 🚧 6 en cours · 📋 2 prévues · 🔍 85 à instruire · ⬜ 24 non planifiées · 🚫 28 écartées** (167 échelles, dont 83 ajoutées depuis le catalogue « Apprendre la psychologie » le 10/10/2026)
+**✅ 12 validées · 🔵 11 implémentées · 🚧 5 en cours · 📋 2 prévues · 🔍 85 à instruire · ⬜ 24 non planifiées · 🚫 28 écartées** (167 échelles, dont 83 ajoutées depuis le catalogue « Apprendre la psychologie » le 10/10/2026)
 
 **Rattrapage Mentaal : 13/42.** Le plafond n'est pas 74 : sur leur catalogue
 disponible, 12 sont écartées d'office (payantes, outils maison Mentaal, ou
@@ -61,7 +61,7 @@ sortie ; les auteurs flaggés seront contactés en une fois, plus tard.
 | PDEQ | Dissociation péritraumatique | ✅ | ✉️ | 🟢 A | #59 | seuil ≥ 15 (fiche Cn2r) ; source secondaire URPS-ML PACA (Brunet & Routhier 1999) ; recette OK (Clément, 29/09/2026) |
 | CUDIT-R | Troubles liés au cannabis | ✅ | ✉️ | 🟢 A | #70 | question-porte « 6 derniers mois » portée en consigne ; seuils 8-10 / > 10 (RESPADD) ; recette OK (Clément, 29/09/2026) |
 | FTND | Dépendance à la nicotine (Fagerström) | ✅ | ✉️ | 🟢 A | Bientôt · 29 v. | **Melya devant Mentaal** ; seuils HAS 2014, options dans l'ordre du PDF HAS, sans intitulés courts ni consigne (absents de la source) ; implémenté en réutilisation (patron CUDIT-R) le 24/09/2026 ; recette OK (Clément, 24/09/2026) |
-| ASRS | TDAH adulte | 🚧 | ✅ (6 items) / 🔒 (18 items) | 🟡 B | #3 | `criteriaCheck` façon PCL-5 ; motif le + demandé |
+| ASRS | TDAH adulte | 🔵 | ✅ (6 items) / 🔒 (18 items) | 🟡 B | #3 | **dépistage 6 questions** porté (fiche `asrs/asrs.md`, VF officielle NYU, comptage des cases grisées ≥ 4) ; nouveau domaine Neurodéveloppement ; 18 items sous licence NYU ; implémentée par Claude (11/10/2026), recette staging à confirmer |
 | DES | Expériences dissociatives | 🚧 | ✉️ | 🟠 C | Bientôt · 130 v. | #1 des votes ; widget de réponse 0–100 à créer |
 | EPDS | Dépression périnatale (Édimbourg) | 🚧 | 🔒 | 🟢 A | Bientôt · 96 v. | alerte item 10 (idéation) façon PHQ-9 ; **droits 🔒** : republication en ligne soumise à autorisation écrite du RCPsych (11/10/2026, MEL-351) |
 | DASS-21 | Dépression, anxiété et stress | 🚧 | ✅ (avec conditions) | 🟠 C | #2 | sévérité par sous-échelle → étendre `Subscore` |
@@ -402,7 +402,7 @@ Statut de droits de **chacune des 167 échelles** du tableau, établi par recher
 | SCARED | ✉️ | B. Birmaher (University of Pittsburgh) | « free to use in clinical practice and research » ; commercial non mentionné | VF fr-CA (Pittsburgh) sans validation retrouvée ; VF validée = SCARED-R (autre instrument) | Bloquée (VF) |
 | WAQ | ✉️ | Dugas et al. 2001 (laboratoire Dugas, UQO) | Diffusé publiquement par le laboratoire, sans phrase de licence | Originale FR | Implémentée (QIA) ; contact groupé UQO |
 | ADRS | ✅ | Revah-Lévy et al. 2007 | Article BMC Psychiatry sous CC BY 2.0 (PMC1785378) | Originale FR, validée, accessible | Implémentée |
-| ASRS | ✅ (6 items) / 🔒 (18 items) | NYU et Harvard (Kessler) | « The screener is freely available for clinical and non-clinical use, including commercial use » (6 items) ; 18 items : licence via NYU (license.tov.med.nyu.edu) | À vérifier (VF OMS) | Écran 6 items implémentable ; 18 items : demande de licence NYU |
+| ASRS | ✅ (6 items) / 🔒 (18 items) | NYU et Harvard (Kessler) | « The screener is freely available for clinical and non-clinical use, including commercial use… no other modifications, other than creating electronic versions, are permitted » (6 items) ; 18 items : licence via NYU (license.tov.med.nyu.edu) | VF officielle NYU `6Q_French_final.pdf` (archivée) | Écran 6 items implémentable ; 18 items : demande de licence NYU |
 | BAT-G | ✅ | Schaufeli, De Witte & Desart (KU Leuven) | « non-proprietary and may be used free of charge without requesting permission » | VF France officielle non validée ; VF franco-canadienne validée (2025) non publiée | Bloquée (VF) |
 | BAT-W | ✅ | Schaufeli, De Witte & Desart (KU Leuven) | Idem BAT-G | Idem BAT-G | Bloquée (VF) |
 | BIG-5 | ✅ (si version IPIP) | International Personality Item Pool | « public domain… free for any use, commercial or academic, without permission » (ipip.ori.org) ; version Mentaal à confirmer | VF IPIP à identifier | Vérifier qu'une VF validée existe |
