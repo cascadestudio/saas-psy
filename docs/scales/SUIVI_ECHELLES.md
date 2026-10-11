@@ -63,7 +63,7 @@ sortie ; les auteurs flaggés seront contactés en une fois, plus tard.
 | FTND | Dépendance à la nicotine (Fagerström) | ✅ | ✉️ | 🟢 A | Bientôt · 29 v. | **Melya devant Mentaal** ; seuils HAS 2014, options dans l'ordre du PDF HAS, sans intitulés courts ni consigne (absents de la source) ; implémenté en réutilisation (patron CUDIT-R) le 24/09/2026 ; recette OK (Clément, 24/09/2026) |
 | ASRS | TDAH adulte | 🚧 | ✅ (6 items) / 🔒 (18 items) | 🟡 B | #3 | `criteriaCheck` façon PCL-5 ; motif le + demandé |
 | DES | Expériences dissociatives | 🚧 | ✉️ | 🟠 C | Bientôt · 130 v. | #1 des votes ; widget de réponse 0–100 à créer |
-| EPDS | Dépression périnatale (Édimbourg) | 🚧 | ✉️ | 🟢 A | Bientôt · 96 v. | alerte item 10 (idéation) façon PHQ-9 |
+| EPDS | Dépression périnatale (Édimbourg) | 🚧 | 🔒 | 🟢 A | Bientôt · 96 v. | alerte item 10 (idéation) façon PHQ-9 ; **droits 🔒** : republication en ligne soumise à autorisation écrite du RCPsych (11/10/2026, MEL-351) |
 | DASS-21 | Dépression, anxiété et stress | 🚧 | ✅ (avec conditions) | 🟠 C | #2 | sévérité par sous-échelle → étendre `Subscore` |
 | ATQ | Pensées automatiques | 📋 (6) | ❓ | 🟢 A | Bientôt · 77 v. | |
 | PDSS | Sévérité du trouble panique | ✅ | 🔒 | 🟢 A | Bientôt · 62 v. | PDSS-SR, VF MSSS Québec 2019 (aucune VF France) ; seuil ≥ 9 (Roberge 2022). Recette OK (Adrien, 29/09/2026) ; cross-check a posteriori sur la version Roberge (demandée, MEL-339). © Shear : usage commercial à demander (✉️) — cf. MEL-324 |
@@ -278,7 +278,7 @@ Plusieurs ajouts appellent des domaines encore inexistants (sommeil, psychose, p
 
 ### Registre des droits (Claude, 11/10/2026)
 
-Statut de droits de **chacune des 167 échelles** du tableau, établi par recherche documentaire (sites des auteurs et des diffuseurs, fiches institutionnelles, répertoires McGill MAPPRO, CamCOPS, Mapi, BiblioPRO), consultée le 10-11/10/2026. Grille : voir la légende « Droits » en tête de fichier. Répartition : ✅ 21 · ✉️ 17 · 🔒 28 · 💰 32 · ❓ 69.
+Statut de droits de **chacune des 167 échelles** du tableau, établi par recherche documentaire (sites des auteurs et des diffuseurs, fiches institutionnelles, répertoires McGill MAPPRO, CamCOPS, Mapi, BiblioPRO), consultée le 10-11/10/2026. Grille : voir la légende « Droits » en tête de fichier. Répartition : ✅ 21 · ✉️ 16 · 🔒 29 · 💰 32 · ❓ 69 (EPDS reclassée ✉️ → 🔒 le 11/10/2026).
 
 - Les **🔒** et les **❓** sont repris dans le ticket Linear des demandes de droits **MEL-351** (groupés par détenteur, avec les ✉️ à confirmer).
 - ⚠️ **Échelles déjà implémentées dont les droits ne couvrent pas un usage commercial** : Y-BOCS (licence payante OCD Scales, LLC pour tout usage numérique), AUDIT (document OMS « not for… commercial purposes »), SPIN (autorisation écrite de J. Davidson), PDSS (« other uses » à demander à M. K. Shear), HSPS (traduction © Éditions de l'Homme), LSAS (à confirmer auprès de M. R. Liebowitz). À traiter en priorité.
@@ -391,7 +391,7 @@ Statut de droits de **chacune des 167 échelles** du tableau, établi par recher
 | CRIES-13 | ✉️ | Children and War Foundation | Gratuit pour cliniciens et chercheurs, sans modification | VF Cn2r « non validée entièrement » | Bloquée (VF) |
 | CUDIT-R | ✉️ | Adamson et al. 2010 ; VF Luquiens et al. 2021 (RESPADD) | Publié en annexe d'articles ; CCSA : « réimprimé avec l'autorisation d'Elsevier » | VF validée (RESPADD) | Implémentée ; confirmation recommandée |
 | DES | ✉️ | Carlson & Putnam | Copie et reproduction autorisées « for research and clinical use » ; commercial non mentionné | VF à vérifier | Mécanisme à créer (réponse 0-100) |
-| EPDS | ✉️ | Royal College of Psychiatrists (Cox, Holden & Sagovsky 1987) | « may be photocopied by individual researchers or clinicians for their own use without seeking permission » ; plateforme non couverte explicitement | VF Guedeney & Fermanian 1998 à vérifier | Implémentable (✉️) ; confirmation RCPsych recommandée |
+| EPDS | 🔒 | Royal College of Psychiatrists (Cox, Holden & Sagovsky 1987) | « may be photocopied by individual researchers or clinicians for their own use without seeking permission… Written permission must be obtained from the Royal College of Psychiatrists for copying and distribution to others or for republication (in print, online or by any other medium) » (mention © 1987 citée par CamCOPS, 11/10/2026 ; reclassée ✉️ → 🔒) | VF Guedeney & Fermanian 1998 à vérifier | Demande RCPsych obligatoire (MEL-351, avec MADRS) |
 | FSQ | ✉️ | Jette et al. 1986 | Répertorié comme gratuit (Shirley Ryan AbilityLab) ; usage commercial non mentionné | VF Martin 1993 à vérifier | Implémentable si VF accessible |
 | FTND | ✉️ | Heatherton, Fagerström et al. 1991 ; mise en forme © HAS 2014 | Reproduction sans autorisation ; usage commercial non mentionné | VF HAS | Implémentée |
 | IUS | ✉️ | Freeston et al. 1994 (laboratoire Dugas, UQO) | Idem | Originale FR | Implémentée (ÉII) ; contact groupé UQO |
