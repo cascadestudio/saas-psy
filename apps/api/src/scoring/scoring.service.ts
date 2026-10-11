@@ -26,6 +26,7 @@ import { scoreAsrs } from './scorers/asrs';
 import { scoreQcsTag } from './scorers/qcs-tag';
 import { scoreCries13 } from './scorers/cries-13';
 import { scoreEcab } from './scorers/ecab';
+import { scoreHonc } from './scorers/honc';
 
 type Scorer = (scale: Scale, responses: Record<string, unknown>) => ScoreResult;
 
@@ -56,6 +57,7 @@ const SCORERS: Record<string, Scorer> = {
   'qcs-tag': scoreQcsTag,
   'cries-13': scoreCries13,
   ecab: scoreEcab,
+  honc: scoreHonc,
 };
 
 @Injectable()

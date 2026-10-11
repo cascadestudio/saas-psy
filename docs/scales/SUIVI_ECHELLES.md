@@ -11,7 +11,7 @@
 
 ## Tableau de bord
 
-**✅ 12 validées · 🔵 14 implémentées · 🚧 5 en cours · 📋 2 prévues · 🔍 83 à instruire · ⬜ 23 non planifiées · 🚫 28 écartées** (167 échelles, dont 83 ajoutées depuis le catalogue « Apprendre la psychologie » le 10/10/2026)
+**✅ 12 validées · 🔵 15 implémentées · 🚧 5 en cours · 📋 2 prévues · 🔍 82 à instruire · ⬜ 23 non planifiées · 🚫 28 écartées** (167 échelles, dont 83 ajoutées depuis le catalogue « Apprendre la psychologie » le 10/10/2026)
 
 **Rattrapage Mentaal : 13/42.** Le plafond n'est pas 74 : sur leur catalogue
 disponible, 12 sont écartées d'office (payantes, outils maison Mentaal, ou
@@ -158,7 +158,7 @@ sortie ; les auteurs flaggés seront contactés en une fois, plus tard.
 | MEQ-SA | Questionnaire de chronotype révisé | 🔍 | ✅ | ⏳ | — | Absent | [ALP] domaine à définir (sommeil) ; **bloquée VF (11/10/2026)** : validation française (Taillard et al. 2004, seuils propres aux travailleurs français) inaccessible ; deux traductions françaises divergentes (CHU de Besançon, avec les réponses de l'item 9 recopiées de l'item 5 ; Réseau Morphée) ; SFRMS : version courte 5 items sans cotation ; items 1, 2, 10 sur échelle horaire graduée à adapter en options |
 | Q-EDD | Questionnaire for Eating Disorder Diagnosis | 🔍 | ❓ | 🚫 | — | Absent | [ALP] domaine Troubles alimentaires (validé, pas encore créé) |
 | CAST | Cannabis Abuse Screening Test | 🔵 | ✉️ | 🔗 | 🟢 A | Absent | [ALP] fiche `cast/cast.md` ; version définitive OFDT (Note 2013-02, 12 mois, 0-4), seuils < 3 / 3-6 / ≥ 7 ; version HAS oui/non écartée ; implémentée par Claude (11/10/2026) ; recette Claude staging conforme, recette Clément à faire |
-| HONC | Test de Honc (Hooked on Nicotine Checklist) | 🔍 | ❓ | 🚫 | — | Absent | [ALP] domaine addictions |
+| HONC | Test de Honc (Hooked on Nicotine Checklist) | 🔵 | ❓ | 🔗 | 🟢 A | Absent | [ALP] fiche `honc/honc.md` ; VF La Revue du Praticien (« Tabac et adolescents ») ; 10 items oui/non, ≥1 perte d'autonomie, ≥7 forte dépendance ; implémentée par Claude (11/10/2026, mission 3), recette staging à confirmer |
 | LAO | Liste des activités obsessives-compulsives | 🔍 | ❓ | 🚫 | — | Absent | [ALP] domaine TOC |
 | CAC | Liste des obsessions-compulsions (Marks) | 🔍 | ❓ | 🚫 | — | Absent | [ALP] domaine TOC |
 | LPO | Liste de pensées obsédantes (Bouvard) | 🔍 | ❓ | 🚫 | — | Absent | [ALP] domaine TOC ; original français |
@@ -362,7 +362,7 @@ Statut de droits de **chacune des 167 échelles** du tableau, établi par recher
 | GAS (Spitzer) | ❓ | Endicott, Spitzer et al. 1976 | Aucune phrase de licence trouvée | VF à vérifier | À identifier ; hétéro-évaluation |
 | HAq-II | ❓ | Luborsky et al. 1996 (University of Pennsylvania) | Article et guide de cotation diffusés par l'UPenn, sans phrase de licence ; traduction Cottraux non publiée | Non publiée | À identifier |
 | HARD | ❓ | Rufin & Ferreri 1984 | Aucune source de licence en ligne | Originale FR, texte non trouvé | À identifier ; hétéro-évaluation |
-| HONC | ❓ | J. DiFranza (UMass) | Largement diffusé par des organismes publics (NCI, Alberta Health Services), sans phrase de licence trouvée | « Test HONC » (La Revue du Praticien), validation FR à vérifier | À identifier |
+| HONC | ❓ | J. DiFranza (UMass) | Largement diffusé par des organismes publics (NCI, Alberta Health Services), sans phrase de licence trouvée | La Revue du Praticien (traduction non attribuée) | Implémentée (mission 3, règle pragmatique) |
 | HSRS | ❓ | L. Luborsky | Aucune source de licence en ligne | VF à vérifier | À identifier ; hétéro-évaluation |
 | IES-R | ❓ | Weiss & Marmar 1997 | Statut contradictoire (domaine public selon certains, copyright selon d'autres ; autorisation refusée par D. Weiss en 2015) | VF Brunet et al. 2003 accessible (McGill) | À identifier / confirmer (D. Weiss) |
 | III | ❓ | Obsessive Compulsive Cognitions Working Group | Aucune phrase de licence trouvée | VF à vérifier | À identifier |

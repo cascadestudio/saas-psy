@@ -2427,6 +2427,52 @@ export const scales: Scale[] = [
       thresholdsSource: "Seuil de la fiche HAS (2007)",
     },
   },
+  {
+    id: "honc",
+    acronym: "HONC",
+    label: "Test HONC de mise en évidence de la dépendance tabagique",
+    domain: "addictions",
+    formType: "single-scale",
+    title: "HONC - Test de mise en évidence de la dépendance tabagique (Hooked on Nicotine Checklist)",
+    description:
+      "Un test de 10 questions oui/non repérant la perte d'autonomie vis-à-vis du tabac, notamment chez les jeunes fumeurs",
+    category: "Addictions",
+    estimatedTime: "2 minutes",
+    longDescription:
+      "Le test HONC (Hooked on Nicotine Checklist, DiFranza et al., 2002) comporte dix questions oui/non qui mettent en évidence la perte de contrôle vis-à-vis de la consommation de tabac chez les jeunes fumeurs. Chaque réponse positive vaut 1 point (score de 0 à 10). Une réponse positive à un seul item suffit à indiquer une perte d'autonomie liée à la consommation de tabac ; plus le score est élevé, plus il évoque une dépendance. Un score supérieur ou égal à 7 indique un niveau de forte dépendance à la nicotine.",
+    copyrightAttribution:
+      "HONC (Hooked on Nicotine Checklist) — d'après DiFranza JR, Savageau JA, Fletcher K, et al., Arch Pediatr Adolesc Med 2002;156(4):397-403. Version française : La Revue du Praticien (« Tabac et adolescents »).",
+    higherIsBetter: false,
+    questions: [
+      "Avez-vous déjà essayé d'arrêter de fumer sans y parvenir ?",
+      "Fumez-vous actuellement parce que c'est vraiment difficile d'arrêter ?",
+      "Pensez-vous être dépendant(e) du tabac ?",
+      "Avez-vous déjà eu des envies impérieuses de fumer ?",
+      "Avez-vous déjà eu un grand besoin d'une cigarette ?",
+      "Est-ce difficile de ne pas fumer aux endroits où c'est interdit, comme à l'école ?",
+      "Quand vous essayez d'arrêter ou quand vous n'avez pas fumé depuis un certain temps : Était-il difficile de vous concentrer ?",
+      "Avez-vous été plus irritable parce que vous ne pouviez pas fumer ?",
+      "Avez-vous senti un besoin urgent, une envie impérieuse de fumer ?",
+      "Vous êtes-vous senti(e) nerveux(se), incapable de rester tranquille ou angoissé(e) parce que vous ne pouviez pas fumer ?",
+    ],
+    answerScales: {
+      intensity: [
+        { value: 1, label: "Oui" },
+        { value: 0, label: "Non" },
+      ],
+    },
+    scoring: {
+      ranges: [
+        { min: 0, max: 0, interpretation: "Pas de perte d'autonomie mise en évidence (aucune réponse positive)" },
+        { min: 1, max: 6, interpretation: "Perte d'autonomie liée à la consommation de tabac" },
+        { min: 7, max: 10, interpretation: "Forte dépendance à la nicotine (score ≥ 7)" },
+      ],
+      maxScore: 10,
+      method:
+        "1 point par réponse « oui » : le score varie de 0 à 10. Une réponse positive à un seul item suffit à indiquer une perte d'autonomie liée à la consommation de tabac ; un score ≥ 7 indique un niveau de forte dépendance à la nicotine.",
+      thresholdsSource: "La Revue du Praticien, d'après DiFranza et al. (2002)",
+    },
+  },
 ];
 
 export function getScaleById(id: string): Scale | undefined {
