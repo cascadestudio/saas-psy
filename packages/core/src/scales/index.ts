@@ -3061,6 +3061,77 @@ export const scales: Scale[] = [
         "Inversez les items 1, 2, 6, 7, 8, 10, 17, 20, 22, 24 et 34 (1↔5, 2↔4), puis additionnez les 36 items : le score total varie de 36 à 180 ; plus il est élevé, plus les difficultés de régulation émotionnelle sont importantes. Six sous-scores (Gratz & Roemer, 2004) : non-acceptation (11, 12, 21, 23, 25, 29), buts (13, 18, 20, 26, 33), impulsions (3, 14, 19, 24, 27, 32), conscience (2, 6, 8, 10, 17, 34), stratégies (15, 16, 22, 28, 30, 31, 35, 36), clarté (1, 4, 5, 7, 9). Pas de seuil clinique publié.",
     },
   },
+  {
+    id: "atq",
+    acronym: "QPA-30",
+    label: "Questionnaire des pensées automatiques",
+    patientIntroSubtitle: "Automatic Thoughts Questionnaire (ATQ)",
+    domain: "humeur",
+    formType: "single-scale",
+    title: "QPA-30 - Questionnaire des pensées automatiques",
+    description:
+      "Un questionnaire de 30 pensées automatiques négatives évaluant leur fréquence au cours de la dernière semaine",
+    category: "Dépression",
+    estimatedTime: "15 minutes",
+    longDescription:
+      "Le questionnaire des pensées automatiques (QPA-30 ; Automatic Thoughts Questionnaire, Hollon & Kendall, 1980, traduction française de J. Cottraux) évalue le contenu négatif du monologue intérieur des personnes déprimées : 30 pensées automatiques dont la fréquence est cotée de 1 (pas du tout) à 5 (tout le temps) pour la dernière semaine. Le score varie de 30 à 150 ; plus il est élevé, plus les pensées automatiques négatives sont fréquentes. Repères de la version française : sujets déprimés 95,7 (écart-type 23), sujets contrôles 46,24 (écart-type 12).",
+    instructions:
+      "Vous trouverez ci-dessous une liste de 30 pensées qui peuvent émerger dans l’esprit des gens. Veuillez lire attentivement chaque pensée et indiquer avec quelle fréquence, si c’est le cas, cette pensée a été vôtre durant la dernière semaine. Lisez chacune des 30 pensées attentivement et choisissez la réponse correspondante.",
+    persistentInstructions:
+      "Durant la dernière semaine",
+    copyrightAttribution:
+      "Questionnaire des pensées automatiques (ATQ) — Hollon & Kendall (1980). Traduction française : J. Cottraux.",
+    higherIsBetter: false,
+    questions: [
+      "J’ai la plus grande difficulté à faire face au monde.",
+      "Je ne suis pas bon.",
+      "Pourquoi est-ce que je ne réussis jamais ?",
+      "Personne ne me comprend.",
+      "J’ai laissé tomber les autres.",
+      "Je ne pense pas pouvoir continuer.",
+      "J’aimerais être quelqu’un de mieux.",
+      "Je suis si faible.",
+      "Ma vie ne se déroule pas comme je le souhaite.",
+      "Je me déçois moi-même.",
+      "Rien n’est bon comme avant.",
+      "Je ne puis supporter cela plus longtemps.",
+      "Je n’arrive pas à commencer les choses.",
+      "Qu’y a-t-il de mauvais en moi ?",
+      "Je souhaite être quelqu’un d’autre.",
+      "Je ne puis faire marcher les choses.",
+      "Je me déteste.",
+      "Je suis sans valeur.",
+      "Je souhaite disparaître.",
+      "Qu’est-ce qui ne va pas en moi ?",
+      "Je suis un perdant.",
+      "Ma vie est un gâchis.",
+      "Je suis un raté.",
+      "Je n’y arriverai pas.",
+      "Je suis tellement sans espoir",
+      "Quelque chose doit changer.",
+      "Il doit y avoir quelque chose de mauvais en moi.",
+      "Mon avenir est lugubre.",
+      "Cela ne vaut pas la peine.",
+      "Je n’arrive pas à terminer les choses.",
+    ],
+    answerScales: {
+      intensity: [
+        { value: 1, label: "Pas du tout" },
+        { value: 2, label: "Parfois" },
+        { value: 3, label: "Assez souvent" },
+        { value: 4, label: "Souvent" },
+        { value: 5, label: "Tout le temps" },
+      ],
+    },
+    scoring: {
+      ranges: [
+        { min: 30, max: 150, interpretation: "Pas de seuil clinique fourni par les auteurs." },
+      ],
+      maxScore: 150,
+      method:
+        "Additionnez les 30 items (1 à 5) : le score varie de 30 à 150 ; plus il est élevé, plus les pensées automatiques négatives sont fréquentes. Pas de seuil clinique ; repères de la version française : sujets déprimés 95,7 (écart-type 23), sujets contrôles 46,24 (écart-type 12).",
+    },
+  },
 ];
 
 export function getScaleById(id: string): Scale | undefined {

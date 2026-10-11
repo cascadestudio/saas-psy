@@ -11,7 +11,7 @@
 
 ## Tableau de bord
 
-**✅ 12 validées · 🔵 23 implémentées · 🚧 4 en cours · 📋 2 prévues · 🔍 80 à instruire · ⬜ 17 non planifiées · 🚫 29 écartées** (167 échelles, dont 83 ajoutées depuis le catalogue « Apprendre la psychologie » le 10/10/2026)
+**✅ 12 validées · 🔵 24 implémentées · 🚧 4 en cours · 📋 1 prévues · 🔍 80 à instruire · ⬜ 17 non planifiées · 🚫 29 écartées** (167 échelles, dont 83 ajoutées depuis le catalogue « Apprendre la psychologie » le 10/10/2026)
 
 ### Potentiel publiable : où en sont les 167 échelles ? (11/10/2026, fin de mission n°3)
 
@@ -83,7 +83,7 @@ sortie ; les auteurs flaggés seront contactés en une fois, plus tard.
 | DES | Expériences dissociatives | 🚧 | ✉️ | ⏳ | 🟠 C | Bientôt · 130 v. | #1 des votes ; widget de réponse 0–100 à créer |
 | EPDS | Dépression périnatale (Édimbourg) | 🚧 | 🔒 | 🚫 | 🟢 A | Bientôt · 96 v. | alerte item 10 (idéation) façon PHQ-9 ; **droits 🔒** : republication en ligne soumise à autorisation écrite du RCPsych (11/10/2026, MEL-351) |
 | DASS-21 | Dépression, anxiété et stress | 🚧 | ✅ (avec conditions) | ⏳ | 🟠 C | #2 | sévérité par sous-échelle → étendre `Subscore` |
-| ATQ | Pensées automatiques | 📋 (6) | ❓ | 🚫 | 🟢 A | Bientôt · 77 v. | |
+| ATQ | Pensées automatiques | 🔵 | ❓ | 🚫 | 🟢 A | Bientôt · 77 v. | fiche `atq/atq.md` ; QPA-30 (trad. Cottraux), **classe B** : 2 PDF de psychologues concordants, à confronter au livre Bouvard & Cottraux ; pas de seuil (repères déprimés 95,7 / contrôles 46,24) ; implémentée par Claude (12/10/2026, mission 3), recette staging à confirmer ; MEL-323 (James) commentée |
 | PDSS | Sévérité du trouble panique | ✅ | 🔒 | 🔗 | 🟢 A | Bientôt · 62 v. | PDSS-SR, VF MSSS Québec 2019 (aucune VF France) ; seuil ≥ 9 (Roberge 2022). Recette OK (Adrien, 29/09/2026) ; cross-check a posteriori sur la version Roberge (demandée, MEL-339). © Shear : usage commercial à demander (✉️) — cf. MEL-324 |
 | DERS | Régulation émotionnelle | 🔵 | ❓ | 🔗 | 🟡 B | #14 | fiche `ders/ders.md` ; DERS-F (Dan-Glauser & Scherer 2013, PDF Université de Genève) trouvée par la recherche complémentaire ; clé Gratz & Roemer 2004 ; pas de seuil ; implémentée par Claude (11/10/2026, mission 3), recette staging à confirmer ; MEL-325 (James) commentée |
 | TAS-20 | Alexithymie de Toronto | 📋 (10) | 🔒 | 🚫 | 🟡 B | #37 | reverse + 3 subscores |
@@ -349,7 +349,7 @@ Statut de droits de **chacune des 167 échelles** du tableau, établi par recher
 | ASA-27 | ❓ | Manicavasagar et al. 2003 | Aucune phrase de licence trouvée | Non trouvée | À identifier |
 | ASQ-SF | ❓ | Alexander et al. 2001 ; Karantzas et al. 2010 | Aucune phrase de licence trouvée | À vérifier | À identifier |
 | ASSQ | 💰 | Ehlers, Gillberg & Wing 1999 — Gillberg Neuropsychiatry Centre (Université de Göteborg) | « no longer available for free use… chargeable » (gu.se, ESSENCE-IN) | Aucune VF validée trouvée | No-go (payant) |
-| ATQ | ❓ | Hollon & Kendall 1980 | Aucune phrase de licence trouvée (reproduction accordée aux acheteurs de manuels Guilford) | À vérifier | À identifier |
+| ATQ | ❓ | Hollon & Kendall 1980 | Aucune phrase de licence trouvée (reproduction accordée aux acheteurs de manuels Guilford) | QPA-30, trad. Cottraux (2 sources de praticiens) | Implémentée (mission 3, classe B) |
 | Attentes thérapeutiques | ❓ | J. Cottraux 1995 | Publiées dans un ouvrage de J. Cottraux ; éditeur et licence non établis | Non trouvée en accès libre | À identifier |
 | BAVQ-R | ❓ | Chadwick, Lees & Birchwood 2000 | Aucune phrase de licence trouvée | Trad. Favrod (seretablir.net) | Bloquée mécanisme (profil de sous-scores) |
 | BCIS | ❓ | Beck et al. 2004 | Aucune phrase de licence trouvée | Trad. Favrod & Pomini 2004 (seretablir.net) | Bloquée mécanisme (profil de sous-scores) |
