@@ -2376,6 +2376,57 @@ export const scales: Scale[] = [
       thresholdsSource: "Seuil de la fiche descriptive Cn2r",
     },
   },
+  {
+    id: "ecab",
+    acronym: "ECAB",
+    label: "Échelle cognitive d'attachement aux benzodiazépines",
+    patientIntroSubtitle: "Échelle cognitive d'attachement aux benzodiazépines",
+    domain: "addictions",
+    formType: "single-scale",
+    title: "ECAB - Échelle cognitive d'attachement aux benzodiazépines",
+    description:
+      "Un questionnaire de 10 items vrai/faux évaluant l'attachement du patient à son traitement par benzodiazépine ou médicament apparenté",
+    category: "Addictions",
+    estimatedTime: "2 minutes",
+    longDescription:
+      "L'Échelle cognitive d'attachement aux benzodiazépines (ECAB) est un auto-questionnaire français de 10 items (Pélissolo et Naja, 1996) qui évalue les idées du patient sur les tranquillisants et somnifères qu'il prend. Chaque réponse « vrai » vaut 1 point, sauf l'item 10 où c'est la réponse « faux » qui vaut 1 point ; le score total varie de 0 à 10. Un score ≥ 6 permet de différencier les patients dépendants des patients non dépendants (sensibilité 94 %, spécificité 81 %). Outil proposé par la HAS pour préparer l'arrêt des benzodiazépines.",
+    instructions:
+      "Les questions ci-dessous concernent certaines idées que vous pouvez avoir sur les médicaments tranquillisants et/ou somnifères que vous prenez.\n\nSi une proposition correspond à ce que vous pensez, choisissez « vrai » ; choisissez « faux » dans le cas contraire.\n\nIl est indispensable de répondre à toutes les propositions avec une seule réponse « vrai » ou « faux », même si vous n'êtes pas très sûr(e) de votre réponse.",
+    persistentInstructions:
+      "Les questions ci-dessous concernent certaines idées que vous pouvez avoir sur les médicaments tranquillisants et/ou somnifères que vous prenez.",
+    copyrightAttribution:
+      "ECAB — Pélissolo & Naja (1996), Synapse, 131, 37-40. Fiche « Modalités d'arrêt des benzodiazépines et médicaments apparentés chez le patient âgé », © Haute Autorité de santé – 2007.",
+    reverseItems: [10],
+    higherIsBetter: false,
+    questions: [
+      "Où que j'aille, j'ai besoin d'avoir ce médicament avec moi",
+      "Ce médicament est pour moi comme une drogue",
+      "Je pense souvent que je ne pourrai jamais arrêter ce médicament",
+      "J'évite de dire à mes proches que je prends ce médicament",
+      "J'ai l'impression de prendre beaucoup trop de ce médicament",
+      "J'ai parfois peur à l'idée de manquer de ce médicament",
+      "Lorsque j'arrête ce médicament, je me sens très malade",
+      "Je prends ce médicament parce que je ne peux plus m'en passer",
+      "Je prends ce médicament parce que je vais mal quand j'arrête",
+      "Je ne prends ce médicament que lorsque j'en ressens le besoin",
+    ],
+    answerScales: {
+      intensity: [
+        { value: 1, label: "Vrai" },
+        { value: 0, label: "Faux" },
+      ],
+    },
+    scoring: {
+      ranges: [
+        { min: 0, max: 5, interpretation: "Sous le seuil de dépendance (score < 6)" },
+        { min: 6, max: 10, interpretation: "Score en faveur d'une dépendance aux benzodiazépines (score ≥ 6)" },
+      ],
+      maxScore: 10,
+      method:
+        "1 point par réponse « vrai », sauf l'item 10 (1 point pour « faux ») : le score total varie de 0 à 10. Un score ≥ 6 permet de différencier les patients dépendants des patients non dépendants (sensibilité 94 %, spécificité 81 %).",
+      thresholdsSource: "Seuil de la fiche HAS (2007)",
+    },
+  },
 ];
 
 export function getScaleById(id: string): Scale | undefined {

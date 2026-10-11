@@ -11,7 +11,7 @@
 
 ## Tableau de bord
 
-**✅ 12 validées · 🔵 13 implémentées · 🚧 5 en cours · 📋 2 prévues · 🔍 84 à instruire · ⬜ 23 non planifiées · 🚫 28 écartées** (167 échelles, dont 83 ajoutées depuis le catalogue « Apprendre la psychologie » le 10/10/2026)
+**✅ 12 validées · 🔵 14 implémentées · 🚧 5 en cours · 📋 2 prévues · 🔍 83 à instruire · ⬜ 23 non planifiées · 🚫 28 écartées** (167 échelles, dont 83 ajoutées depuis le catalogue « Apprendre la psychologie » le 10/10/2026)
 
 **Rattrapage Mentaal : 13/42.** Le plafond n'est pas 74 : sur leur catalogue
 disponible, 12 sont écartées d'office (payantes, outils maison Mentaal, ou
@@ -148,7 +148,7 @@ sortie ; les auteurs flaggés seront contactés en une fois, plus tard.
 | GHQ | Questionnaire de santé générale (Goldberg) | 🚫 | 💰 | 🚫 | — | Absent | [ALP] éditeur : GL Assessment |
 | SCL-90-R | Liste de symptômes (Derogatis) | 🚫 | 💰 | 🚫 | — | Catalogue | [ALP] éditeur : Pearson |
 | CAS (colère) | Échelle clinique de colère (Clinical Anger Scale) | 🔍 | ❓ | 🚫 | — | Absent | [ALP] |
-| ECAB | Échelle cognitive d'attachement aux benzodiazépines | 🔍 | ❓ | 🚫 | — | Absent | [ALP] domaine addictions |
+| ECAB | Échelle cognitive d'attachement aux benzodiazépines | 🔵 | ✉️ | 🔗 | 🟢 A | Absent | [ALP] fiche `ecab/ecab.md` ; fiche HAS 2007 (via OMéDIT Grand Est) ; 10 items V/F, item 10 inversé, seuil ≥ 6 ; implémentée par Claude (11/10/2026, mission 3), recette staging à confirmer |
 | ECAP | Échelle comportementale d'anxiété et phobie de Véra | 🔍 | ❓ | 🚫 | — | Catalogue | [ALP] |
 | DAS | Échelle d'attitudes dysfonctionnelles (Weissman et Beck) | 🔍 | ❓ | 🚫 | — | Catalogue | [ALP] |
 | MAAS | Échelle d'attention et de pleine conscience | 🔍 | 🔒 | 🚫 | — | Catalogue | [ALP] domaine à définir (pleine conscience) |
@@ -350,7 +350,7 @@ Statut de droits de **chacune des 167 échelles** du tableau, établi par recher
 | DBAS | ❓ | C. M. Morin (Université Laval) | Aucune phrase de licence trouvée | VF probable (équipe francophone de Morin) à vérifier | À identifier |
 | DERS | ❓ | Gratz & Roemer 2004 | Aucune phrase de licence trouvée | À vérifier | À identifier |
 | DIB-R | ❓ | Zanarini et al. 1989 | Aucune phrase de licence trouvée | VF validée 2023 en accès libre (PMC10506241) | À identifier ; entretien |
-| ECAB | ❓ | Pélissolo et al. (original FR) | Citée par la HAS (arrêt des benzodiazépines), sans phrase de licence trouvée | Originale FR (texte à localiser) | À identifier |
+| ECAB | ✉️ | Pélissolo & Naja 1996 ; fiche © HAS 2007 | Fiche publique HAS, aucune phrase de licence sur l'instrument | Originale FR (fiche HAS 2007) | Implémentée (mission 3) |
 | ECAP | ❓ | L. Véra | Aucune source en ligne | Non trouvée | À identifier |
 | EDQ | ❓ | « Dépendance affective » (Mentaal) — auteur non identifié | Aucune source identifiée | Non trouvée | À identifier |
 | ERD | ❓ | D. Widlöcher 1981 | Aucune source de licence en ligne | Originale FR, texte non trouvé en accès libre | À identifier ; hétéro-évaluation |
