@@ -11,7 +11,7 @@
 
 ## Tableau de bord
 
-**✅ 12 validées · 🔵 19 implémentées · 🚧 5 en cours · 📋 2 prévues · 🔍 81 à instruire · ⬜ 20 non planifiées · 🚫 28 écartées** (167 échelles, dont 83 ajoutées depuis le catalogue « Apprendre la psychologie » le 10/10/2026)
+**✅ 12 validées · 🔵 20 implémentées · 🚧 5 en cours · 📋 2 prévues · 🔍 81 à instruire · ⬜ 19 non planifiées · 🚫 28 écartées** (167 échelles, dont 83 ajoutées depuis le catalogue « Apprendre la psychologie » le 10/10/2026)
 
 **Rattrapage Mentaal : 13/42.** Le plafond n'est pas 74 : sur leur catalogue
 disponible, 12 sont écartées d'office (payantes, outils maison Mentaal, ou
@@ -111,7 +111,7 @@ sortie ; les auteurs flaggés seront contactés en une fois, plus tard.
 | EAT-26 | Attitudes alimentaires | ⬜ | 🔒 | 🚫 | 🟡 B | #52 | recode asymétrique + seuil ; 2e passe : ⛔ licence exigée pour les plateformes web payantes (Eating Attitudes LLC) |
 | ADRS | Dépression pour adolescents | 🔵 | ✅ | 📥 | 🟢 A | #57 | fiche `adrs/adrs.md` ; original français (Revah-Lévy et al. 2007, BMC Psychiatry, CC BY) ; tranches OFDT / Santé publique France 0-3 / 4-6 / 7-10 ; alerte item 6 ; domaine Humeur, catégorie « Dépression — adolescents » ; implémentée par Claude (10/10/2026) ; recette staging Claude OK (0, 4, 7, alerte, 10) ; Mentaal : texte SFD et tranches 4-8 / 9-10 ; recette manuelle de Clément à faire → ✅ |
 | WW-II | Pourquoi s'inquiéter ? | 🔵 | ✉️ | 🔗 | 🟡 B | #58 | porté sous l'id **PSI-II** (original francophone, Gosselin et al. 2003, formulaire et cotation du laboratoire Dugas, UQO) ; 5 sous-scores + total 25-125, pas de seuil ; fiche `ww-ii/psi-ii.md` ; implémentée par Claude (lot autonome du 10/10/2026) ; recette staging Claude OK (min, max, sous-scores) et parcours Mentaal comparé ; recette manuelle de Clément à faire → ✅ |
-| BAT-W | Burnout (version travail) | ⬜ | ✅ | ⏳ | 🟡 B | #61 | 2e passe : ⛔ idem BAT-G |
+| BAT-W | Burnout (version travail) | 🔵 | ✅ | 📥 | 🟡 B | #61 | fiche `bat/bat.md` ; VF France officielle (burnoutassessmenttool.be, non validée en France) ; 23 items primaires + 10 secondaires ; zones vert/orange/rouge (seuils flamands, moyenne convertie en somme) ; nouveau domaine Burn-out ; implémentée par Claude (11/10/2026, mission 3), recette staging à confirmer |
 | BSQ | Sensations corporelles | ⬜ | ❓ | 🚫 | 🟢 A | #65 | Likert + somme ; aucune VF validée trouvée : bloquée (tri du 10/10/2026) |
 | FQ | Peurs de Marks & Mathews | ⬜ | ❓ | 🚫 | 🟡 B | #67 | subscores ; VF Cottraux 1987 publiée seulement dans Guelfi (1997), droits non établis : bloquée (tri du 10/10/2026) |
 | PVQ-RR | Valeurs par portraits | ⬜ | ❓ | 🚫 | — | #68 | ipsatif, usage niche |
@@ -417,7 +417,7 @@ Statut de droits de **chacune des 167 échelles** du tableau, établi par recher
 | ADRS | ✅ | Revah-Lévy et al. 2007 | Article BMC Psychiatry sous CC BY 2.0 (PMC1785378) | Originale FR, validée, accessible | Implémentée |
 | ASRS | ✅ (6 items) / 🔒 (18 items) | NYU et Harvard (Kessler) | « The screener is freely available for clinical and non-clinical use, including commercial use… no other modifications, other than creating electronic versions, are permitted » (6 items) ; 18 items : licence via NYU (license.tov.med.nyu.edu) | VF officielle NYU `6Q_French_final.pdf` (archivée) | Écran 6 items implémentable ; 18 items : demande de licence NYU |
 | BAT-G | ✅ | Schaufeli, De Witte & Desart (KU Leuven) | « non-proprietary and may be used free of charge without requesting permission » | VF France officielle non validée ; VF franco-canadienne validée (2025) non publiée | Bloquée (VF) |
-| BAT-W | ✅ | Schaufeli, De Witte & Desart (KU Leuven) | Idem BAT-G | Idem BAT-G | Bloquée (VF) |
+| BAT-W | ✅ | Schaufeli, De Witte & Desart (KU Leuven) | « The BAT is non-proprietary and may be used free of charge without requesting permission from the authors… should not be modified » (burnoutassessmenttool.be) | VF France officielle (site des auteurs), non validée | Implémentée (mission 3) |
 | BIG-5 | ✅ (si version IPIP) | International Personality Item Pool | « public domain… free for any use, commercial or academic, without permission » (ipip.ori.org) ; version Mentaal à confirmer | VF IPIP à identifier | Vérifier qu'une VF validée existe |
 | BPRS | ✅ | Overall & Gorham 1962 | Domaine public (financement VA / NIMH, œuvre du gouvernement fédéral américain) | VF à vérifier | Hétéro-évaluation |
 | CAT-Q | ✅ | Hull et al. 2019 | Page Embrace Autism « distribué sous les termes de la licence internationale Creative Commons Attribution 4.0 » ; original CC BY | Trad. Bessette (non validée) ; Bureau et al. 2024 (JADD, abonnement) | Implémentée (mission 3) ; confronter à Bureau 2024 |

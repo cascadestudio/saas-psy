@@ -49,7 +49,8 @@ export type ScaleDomain =
   | "estime"
   | "addictions"
   | "hypersensibilite"
-  | "neurodeveloppement";
+  | "neurodeveloppement"
+  | "burnout";
 
 export interface Scale {
   id: string;
@@ -2774,6 +2775,83 @@ export const scales: Scale[] = [
       method:
         "Inversez les items 3, 12, 19, 22 et 24 (1↔7, 2↔6, 3↔5), puis additionnez les 25 items : le score total varie de 25 à 175. Sous-scores : compensation (items 1, 4, 5, 8, 11, 14, 17, 20, 23), masquage (2, 6, 9, 12, 15, 18, 21, 24), assimilation (3, 7, 10, 13, 16, 19, 22, 25). Seuil de 100 indiqué par Embrace Autism.",
       thresholdsSource: "Seuil indiqué par Embrace Autism (non publié par les auteurs)",
+    },
+  },
+  {
+    id: "bat-w",
+    acronym: "BAT",
+    label: "Burnout Assessment Tool — version travail",
+    patientIntroSubtitle: null,
+    domain: "burnout",
+    formType: "single-scale",
+    title: "BAT - Burnout Assessment Tool (version travail)",
+    description:
+      "Un questionnaire de 33 items évaluant les symptômes de burn-out (au travail) : épuisement, distance mentale, déficiences cognitive et émotionnelle, plaintes secondaires",
+    category: "Burn-out",
+    estimatedTime: "5 minutes",
+    longDescription:
+      "Le Burnout Assessment Tool (BAT ; Schaufeli, De Witte et Desart, KU Leuven, 2019-2020) évalue les plaintes de burn-out. Version version travail : 23 items de symptômes primaires (épuisement, distance mentale, déficience cognitive, déficience émotionnelle) et 10 items de symptômes secondaires (plaintes psychiques et psychosomatiques), cotés de 1 (jamais) à 5 (toujours). Le score de référence est la moyenne des 23 items primaires (1 à 5), comparée aux seuils cliniques flamands : vert (pas de risque), orange (risque de burn-out), rouge (risque très élevé). Melya affiche la somme équivalente (23 à 115). Le BAT n'est pas un outil diagnostique. Seuils des sous-échelles (moyennes) : épuisement 3,06 / 3,31 ; distance mentale 2,50 / 3,10 ; déficience émotionnelle 2,10 / 2,90 ; déficience cognitive 2,70 / 3,10 ; symptômes secondaires 2,85 / 3,35 (début des zones orange / rouge).",
+    instructions:
+      "Les énoncés suivants sont liés à votre situation de travail et à la manière dont vous la vivez. Veuillez indiquer la fréquence à laquelle chaque déclaration s'applique à vous.",
+    persistentInstructions:
+      "Veuillez indiquer la fréquence à laquelle chaque déclaration s'applique à vous.",
+    copyrightAttribution:
+      "BAT — Schaufeli, W.B., De Witte, H. & Desart, S. (2020). Burnout Assessment Tool (BAT) – Development, validity and reliability. International Journal of Environmental Research and Public Health, 17, 9495. Version française (France), avec l'aide de Dr Ilona Boniwell (Positran). Outil non propriétaire (KU Leuven).",
+    higherIsBetter: false,
+    questions: [
+      "Au travail, je me sens épuisé/e mentalement",
+      "Tout ce que je fais au travail me demande beaucoup d'efforts",
+      "Après une journée au travail, il m'est difficile de retrouver mon énergie",
+      "Au travail, je me sens épuisé physiquement",
+      "Quand je me lève le matin, je manque d'énergie pour commencer une nouvelle journée de travail",
+      "Je veux être actif/ve au travail, mais il m'est impossible d'y arriver",
+      "Quand je fais beaucoup d'efforts au travail, je me fatigue plus que d'habitude",
+      "A la fin de ma journée de travail, je me sens épuisé et vidé mentalement",
+      "J'ai du mal à être enthousiaste à propos de mon travail",
+      "Au travail, je ne réfléchis pas à ce que je fais et je fonctionne en pilote automatique",
+      "Je ressens une profonde aversion pour mon travail",
+      "Je ressens de l'indifférence à propos de mon travail",
+      "Je ne pense pas que les autres accordent de l'importance à mon travail",
+      "Au travail, j'ai du mal à rester attentif/ve",
+      "Au travail, il m'est difficile de penser de manière claire",
+      "J'oublie des choses et je suis distrait/e au travail",
+      "Quand je travaille, j'ai du mal à me concentrer",
+      "Je fais des erreurs dans mon travail car mon esprit est ailleurs",
+      "Au travail, je me sens incapable de contrôler mes émotions",
+      "Je ne me reconnais pas dans mes réactions émotionnelles au travail",
+      "Quand je suis au travail, je deviens irritable quand les choses ne se passent pas comme je voudrais",
+      "Il m'arrive d'être en colère ou triste au travail sans vraiment savoir pourquoi",
+      "Au travail, il m'arrive de réagir avec excès sans en avoir l'intention",
+      "J'ai du mal à m'endormir ou je me réveille en pleine nuit",
+      "J'ai tendance à m'inquiéter",
+      "Je me sens tendu et stressé",
+      "Je me sens anxieux et/ou je souffre d'attaques de panique",
+      "Le bruit et la foule me dérangent",
+      "Je souffre de palpitations et de douleurs de poitrine",
+      "Je souffre de douleurs d'estomac et/ou intestinales",
+      "Je souffre de migraines",
+      "Je souffre de douleurs musculaires, par exemple dans le cou, l'épaule ou le dos",
+      "Je tombe souvent malade",
+    ],
+    answerScales: {
+      intensity: [
+        { value: 1, label: "Jamais" },
+        { value: 2, label: "Rarement" },
+        { value: 3, label: "Parfois" },
+        { value: 4, label: "Souvent" },
+        { value: 5, label: "Toujours" },
+      ],
+    },
+    scoring: {
+      ranges: [
+        { min: 23, max: 59, interpretation: "Zone verte : pas de risque de burn-out (moyenne ≤ 2,58)" },
+        { min: 60, max: 69, interpretation: "Zone orange : risque de burn-out (moyenne 2,59 à 3,01)" },
+        { min: 70, max: 115, interpretation: "Zone rouge : risque très élevé de burn-out (moyenne ≥ 3,02)" },
+      ],
+      maxScore: 115,
+      method:
+        "Le score total additionne les 23 items de symptômes primaires (1-5), soit 23 à 115. Il équivaut à la moyenne du manuel (somme ÷ 23, arrondie à 2 décimales) : moyenne ≤ 2,58 = zone verte, 2,59 à 3,01 = zone orange, ≥ 3,02 = zone rouge. Les 10 items de symptômes secondaires (plaintes psychiques et psychosomatiques) forment un sous-score à part, hors total. Seuils des sous-échelles (moyennes) : épuisement 3,06 / 3,31 ; distance mentale 2,50 / 3,10 ; déficience émotionnelle 2,10 / 2,90 ; déficience cognitive 2,70 / 3,10 ; symptômes secondaires 2,85 / 3,35 (début des zones orange / rouge).",
+      thresholdsSource: "Seuils cliniques flamands du manuel BAT 2.0 (moyennes converties en sommes)",
     },
   },
 ];
