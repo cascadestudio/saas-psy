@@ -11,7 +11,7 @@
 
 ## Tableau de bord
 
-**✅ 12 validées · 🔵 12 implémentées · 🚧 5 en cours · 📋 2 prévues · 🔍 84 à instruire · ⬜ 24 non planifiées · 🚫 28 écartées** (167 échelles, dont 83 ajoutées depuis le catalogue « Apprendre la psychologie » le 10/10/2026)
+**✅ 12 validées · 🔵 13 implémentées · 🚧 5 en cours · 📋 2 prévues · 🔍 84 à instruire · ⬜ 23 non planifiées · 🚫 28 écartées** (167 échelles, dont 83 ajoutées depuis le catalogue « Apprendre la psychologie » le 10/10/2026)
 
 **Rattrapage Mentaal : 13/42.** Le plafond n'est pas 74 : sur leur catalogue
 disponible, 12 sont écartées d'office (payantes, outils maison Mentaal, ou
@@ -115,7 +115,7 @@ sortie ; les auteurs flaggés seront contactés en une fois, plus tard.
 | BSQ | Sensations corporelles | ⬜ | ❓ | 🚫 | 🟢 A | #65 | Likert + somme ; aucune VF validée trouvée : bloquée (tri du 10/10/2026) |
 | FQ | Peurs de Marks & Mathews | ⬜ | ❓ | 🚫 | 🟡 B | #67 | subscores ; VF Cottraux 1987 publiée seulement dans Guelfi (1997), droits non établis : bloquée (tri du 10/10/2026) |
 | PVQ-RR | Valeurs par portraits | ⬜ | ❓ | 🚫 | — | #68 | ipsatif, usage niche |
-| CRIES-13 | Stress post-traumatique enfant | ⬜ | ✉️ | ⏳ | 🟡 B | #69 | public enfant ; 2e passe : ⛔ VF Cn2r « non validée entièrement » |
+| CRIES-13 | Stress post-traumatique enfant | 🔵 | ✉️ | 🔗 | 🟡 B | #69 | public enfant ; fiche `cries-13/cries-13.md` ; Cn2r (VF non validée entièrement, acceptée par la règle pragmatique) + Children and War Foundation ; 0/1/3/5, seuil ≥ 30, 3 sous-scores ; implémentée par Claude (11/10/2026, mission 3), recette staging à confirmer |
 | EDS-R | Dépendance à l'exercice | ⬜ | 🔒 | 🚫 | 🟡 B | #73 | criteria + subscores ; usage sur autorisation des auteurs (tri du 10/10/2026) |
 | THI | Handicap pour acouphènes | ⬜ | ❓ | 🚫 | 🟢 A | #74 | hors psycho (ORL) ; 2e passe : exclue (outil ORL, hors champ psychologique ; utilisé en TCC des acouphènes, à trancher dans MEL-348) |
 | WHO-5 | Bien-être (OMS) | ⬜ | 🔒 | 🚫 | — | Absent | idéal suivi longitudinal — angle différenciation ; copyright OMS depuis 2024, licence CC BY-NC-SA (non commercial) : autorisation à demander à WHO-5@who.int (tri du 10/10/2026) |
@@ -401,7 +401,7 @@ Statut de droits de **chacune des 167 échelles** du tableau, établi par recher
 | CAQ (QEC) | ✉️ | Gosselin et al. 2002 / laboratoire Dugas (UQO) | Formulaire et fiche de cotation diffusés publiquement par le laboratoire (uqo.ca/…/anxiete/qec.pdf), sans phrase de licence ; même statut que l'ÉII | Originale FR (UQO), 25 items, total + 5 sous-échelles | Implémentable |
 | CAST | ✉️ | OFDT (Legleye, Karila, Beck & Reynaud 2007) | Instrument public gratuit de l'OFDT (ofdt.fr), sans phrase de licence formelle | Originale FR, validée (OFDT, Santé publique France) | Implémentable |
 | COPSOQ | ✉️ | COPSOQ International Network | CC BY-NC-ND 4.0 ; usage commercial admis selon les guidelines, sans facturer le questionnaire en tant que tel (copsoq-network.org/guidelines) | VF via le membre français du réseau (à contacter) | Contact du réseau français requis avant usage |
-| CRIES-13 | ✉️ | Children and War Foundation | Gratuit pour cliniciens et chercheurs, sans modification | VF Cn2r « non validée entièrement » | Bloquée (VF) |
+| CRIES-13 | ✉️ | Children and War Foundation | « These instruments are provided free of costs » (childrenandwar.org) ; « do not charge for its use » vise les auteurs de nouvelles traductions | Cn2r (non validée entièrement) + version CW | Implémentée (mission 3) ; confirmation CW non bloquante |
 | CUDIT-R | ✉️ | Adamson et al. 2010 ; VF Luquiens et al. 2021 (RESPADD) | Publié en annexe d'articles ; CCSA : « réimprimé avec l'autorisation d'Elsevier » | VF validée (RESPADD) | Implémentée ; confirmation recommandée |
 | DES | ✉️ | Carlson & Putnam | Copie et reproduction autorisées « for research and clinical use » ; commercial non mentionné | VF à vérifier | Mécanisme à créer (réponse 0-100) |
 | EPDS | 🔒 | Royal College of Psychiatrists (Cox, Holden & Sagovsky 1987) | « may be photocopied by individual researchers or clinicians for their own use without seeking permission… Written permission must be obtained from the Royal College of Psychiatrists for copying and distribution to others or for republication (in print, online or by any other medium) » (mention © 1987 citée par CamCOPS, 11/10/2026 ; reclassée ✉️ → 🔒) | VF Guedeney & Fermanian 1998 à vérifier | Demande RCPsych obligatoire (MEL-351, avec MADRS) |

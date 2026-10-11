@@ -2321,6 +2321,61 @@ export const scales: Scale[] = [
         "Additionnez les 10 items (1-5) : le score total varie de 10 à 50. Plus il est élevé, plus le recours aux comportements sécurisants est important. Pas de seuil clinique fourni par les auteurs.",
     },
   },
+  {
+    id: "cries-13",
+    acronym: "CRIES-13",
+    label: "Échelle révisée pour mesurer l'impact des événements sur les enfants",
+    patientIntroSubtitle: "Children's Revised Impact of Event Scale",
+    domain: "trauma",
+    formType: "single-scale",
+    title: "CRIES-13 - Échelle révisée pour mesurer l'impact des événements sur les enfants",
+    description:
+      "Un questionnaire de 13 items mesurant l'impact d'un événement traumatique chez l'enfant à partir de 8 ans, au cours des sept derniers jours",
+    category: "Traumatismes",
+    estimatedTime: "5-10 minutes",
+    longDescription:
+      "La CRIES-13 (Children's Revised Impact of Event Scale) est un auto-questionnaire de 13 items adapté de l'Impact of Event Scale de Horowitz pour les enfants à partir de 8 ans (Smith, Perrin, Dyregrov & Yule, 2003 ; Children and War Foundation). Il mesure, sur les sept derniers jours, les reviviscences, l'évitement et l'hyperréactivité après un événement stressant. Les réponses valent 0 (pas du tout), 1 (rarement), 3 (quelques fois) et 5 (souvent) ; le score total varie de 0 à 65. Un score total ≥ 30 permet le dépistage d'un trouble de stress post-traumatique. La traduction française n'a pas été entièrement validée.",
+    instructions:
+      "Ci-dessous se trouvent des commentaires émis par des gens après avoir vécu des événements stressants. Veuillez répondre à chaque question en montrant la fréquence de ces réactions pendant ces sept derniers jours.",
+    persistentInstructions:
+      "Pendant ces sept derniers jours :",
+    copyrightAttribution:
+      "CRIES-13 — Smith, Perrin, Dyregrov & Yule (2003) © Children and War Foundation, 1998. Traduction française non validée entièrement. Mise en page : Centre national de ressources et de résilience (Cn2r).",
+    higherIsBetter: false,
+    questions: [
+      "Y penses-tu même quand tu ne le veux pas ?",
+      "Essaies-tu de chasser l'événement de ta mémoire ?",
+      "As-tu des difficultés à être attentif ou à te concentrer ?",
+      "Ressens-tu soudainement des vagues de sentiments intenses à ce sujet ?",
+      "T'effraies-tu plus souvent ou te sens-tu plus nerveux qu'avant l'incident ?",
+      "Essaies-tu de t'éloigner de ce qui peut te rappeler l'événement ? (p. ex. des endroits ou situations)",
+      "Essaies-tu de ne pas en parler ?",
+      "T'arrive-t-il d'avoir des images de l'événement à l'esprit ?",
+      "Est-ce qu'il y a d'autres choses qui t'y font penser ?",
+      "Essaies-tu de ne pas penser à l'événement ?",
+      "T'irrites-tu facilement ?",
+      "Es-tu alerte et vigilant même s'il n'y a apparemment pas lieu de l'être ?",
+      "As-tu des problèmes de sommeil ?",
+    ],
+    answerScales: {
+      intensity: [
+        { value: 0, label: "Pas du tout" },
+        { value: 1, label: "Rarement" },
+        { value: 3, label: "Quelques fois" },
+        { value: 5, label: "Souvent" },
+      ],
+    },
+    scoring: {
+      ranges: [
+        { min: 0, max: 29, interpretation: "Sous le seuil de dépistage du TSPT (score < 30)" },
+        { min: 30, max: 65, interpretation: "Dépistage positif de TSPT (score ≥ 30)" },
+      ],
+      maxScore: 65,
+      method:
+        "Additionnez les 13 items (0, 1, 3 ou 5 points) : le score total varie de 0 à 65. Un score total ≥ 30 permet le dépistage du TSPT. Trois sous-scores : intrusion (items 1, 4, 8, 9), évitement (2, 6, 7, 10), hyperréactivité (3, 5, 11, 12, 13).",
+      thresholdsSource: "Seuil de la fiche descriptive Cn2r",
+    },
+  },
 ];
 
 export function getScaleById(id: string): Scale | undefined {
