@@ -85,6 +85,7 @@ CAST absent du catalogue Mentaal (`/send/cast` : « Ce questionnaire n'existe pa
 | **Mention obligatoire à afficher** | « CAST (Cannabis Abuse Screening Test) — Observatoire français des drogues et des toxicomanies (OFDT) ; Legleye, Karila, Beck & Reynaud (2007), Journal of Substance Use. Questionnaire et cotation : Spilka, Janssen & Legleye, Note OFDT n°2013-02. » |
 | **Restrictions d'usage commercial** | Non mentionnées (contact OFDT groupé dans MEL-351, non bloquant) |
 | **Décision Melya** | go |
+| **PDF source en téléchargement (SEO, transparence)** | 🔗 lien seul — Note OFDT n°2013-02, outil public sans licence formelle. Renvoyer vers la page de l'OFDT. Statut tranché par Claude le 11/10/2026 (grille : 📥 hébergeable / 🔗 lien vers la source officielle / 🚫 non). |
 
 ---
 

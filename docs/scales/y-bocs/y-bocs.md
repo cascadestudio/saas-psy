@@ -99,6 +99,7 @@ Le PDF source primaire (7 pages, L'Encéphale 1989) a été récupéré et lu in
 | **Mention obligatoire à afficher**  | « Échelle Y-BOCS — Goodman et al. (1989). Traduction française : Mollard, Cottraux & Bouvard (1989), L'Encéphale, XV, 335-341. »                                                                                                |
 | **Restrictions d'usage commercial** | À clarifier. La Y-BOCS est largement reproduite en recherche académique sans mention de licence libre dans les sources consultées. Aucune publication consultée ne mentionne explicitement une autorisation d'usage commercial. |
 | **Décision Melya**                  | `go` — exposition autorisée pour la phase de tests beta restreinte (cercle de psys connus). Risque copyright à retraiter avant ouverture publique : démarche de clarification ayants-droit (University of Florida + Elsevier Masson) à mener avant lancement commercial.                                                                                                                                                           |
+| **PDF source en téléchargement (SEO, transparence)** | 🚫 non — Licence payante d'OCD Scales, LLC pour toute numérisation (🔒, MEL-351). Statut tranché par Claude le 11/10/2026 (grille : 📥 hébergeable / 🔗 lien vers la source officielle / 🚫 non). |
 
 ### Suivi des démarches externes
 

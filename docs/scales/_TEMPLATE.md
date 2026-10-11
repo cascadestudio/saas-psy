@@ -136,6 +136,7 @@ Si aucune divergence : écrire "Aucune divergence détectée."
 | **Mention obligatoire à afficher**  | [OPTIONNEL — ex. "© Pfizer Inc."]                                               |
 | **Restrictions d'usage commercial** | [À REMPLIR — ex. "Aucune" / "Licence Pro à acquérir"]                            |
 | **Décision Melya**                  | [À REMPLIR — `go` / `bloqué`]                                                    |
+| **PDF source en téléchargement (SEO, transparence)** | [À REMPLIR — 📥 hébergeable (licence autorisant la rediffusion sans modification : domaine public, CC BY, « freely available ») / 🔗 lien seul (PDF public chez son diffuseur, rediffusion non autorisée explicitement) / 🚫 non (droits restreints ou pas de source publique) ; préciser le fichier archivé ou l'URL] |
 
 ### Suivi des démarches externes [OPTIONNEL — à remplir si `bloqué`]
 

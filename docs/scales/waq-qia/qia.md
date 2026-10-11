@@ -58,6 +58,7 @@ Formulaire + cotation émanant du laboratoire des auteurs originaux ; instrument
 | **Détenteur des droits** | Dugas et al. (2001). |
 | **Mention obligatoire à afficher** | *« Questionnaire sur l'Inquiétude et l'Anxiété (QIA / WAQ) — Dugas, Freeston, Provencher, Lachance, Ladouceur & Gosselin (2001), Journal de Thérapie Comportementale et Cognitive, 11(1), 31-36. Instrument original francophone. »* |
 | **Décision Melya** | go |
+| **PDF source en téléchargement (SEO, transparence)** | 🔗 lien seul — Formulaire public du laboratoire Dugas (uqo.ca), sans phrase de licence : rediffusion non autorisée explicitement. Renvoyer vers uqo.ca. Statut tranché par Claude le 11/10/2026 (grille : 📥 hébergeable / 🔗 lien vers la source officielle / 🚫 non). |
 
 ---
 

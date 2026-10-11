@@ -89,6 +89,7 @@ Fiche publique [mentaal.fr/send/ww-ii](https://mentaal.fr/send/ww-ii) et parcour
 | **Mention obligatoire à afficher** | « Questionnaire Pourquoi s'inquiéter-II (PSI-II) — Gosselin, Ladouceur, Langlois, Freeston, Dugas & Bertrand (2003), Revue européenne de psychologie appliquée, 53(3-4), 199-211. Instrument original francophone. » |
 | **Restrictions d'usage commercial** | Non mentionnées : usage dans un service payant non explicitement couvert (✉️, contact auteurs à grouper avec l'ÉII) |
 | **Décision Melya** | go sous réserve (critère « ✉️ accepté » fixé par Clément pour le lot autonome) |
+| **PDF source en téléchargement (SEO, transparence)** | 🔗 lien seul — Formulaire public du laboratoire Dugas (uqo.ca), sans phrase de licence. Renvoyer vers uqo.ca. Statut tranché par Claude le 11/10/2026 (grille : 📥 hébergeable / 🔗 lien vers la source officielle / 🚫 non). |
 
 ---
 

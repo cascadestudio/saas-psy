@@ -77,6 +77,7 @@ Compte tenu de la convergence des libellés et de l'absence de validation publi�
 | **Mention obligatoire à afficher**  | « © Évelyne F. Vallières et Robert J. Vallerand, 1990. Traduction de la *Rosenberg Self-Esteem Scale* (Rosenberg, 1965). » |
 | **Restrictions d'usage commercial** | Aucune restriction explicite identifiée. L'échelle est largement reproduite par des plateformes cliniques francophones (IFEMDR, Outils Psy, tcc.apprendre-la-psychologie.fr, Mentaal) sans démarche d'autorisation publiquement visible. |
 | **Décision Melya**                  | go |
+| **PDF source en téléchargement (SEO, transparence)** | 🔗 lien seul — Original de Rosenberg dans le domaine public, mais la traduction de Vallières & Vallerand (1990) reste sous copyright des traducteurs et le PDF archivé est un article de revue. Renvoyer vers la publication. Statut tranché par Claude le 11/10/2026 (grille : 📥 hébergeable / 🔗 lien vers la source officielle / 🚫 non). |
 
 ---
 

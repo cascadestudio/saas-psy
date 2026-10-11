@@ -71,6 +71,7 @@ Aucune divergence structurelle. La version officielle Pfizer "French for France"
 | **Mention obligatoire à afficher** | *« Développé par les Dr Robert L. Spitzer, Janet B.W. Williams, Kurt Kroenke et leurs collègues grâce à une allocation d'études de Pfizer Inc. »* |
 | **Restrictions d'usage commercial** | Aucune — la mention Pfizer indique explicitement que *« La reproduction, la traduction, l'affichage ou la distribution de ce document sont autorisés »*. |
 | **Décision Melya** | go |
+| **PDF source en téléchargement (SEO, transparence)** | 📥 hébergeable — Même mention Pfizer que le GAD-7. Fichier `PHQ9_French-for-France.pdf`, proposé tel quel avec sa mention. Statut tranché par Claude le 11/10/2026 (grille : 📥 hébergeable / 🔗 lien vers la source officielle / 🚫 non). |
 
 ---
 

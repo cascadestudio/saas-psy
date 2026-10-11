@@ -56,6 +56,7 @@ hiérarchie versions, comparaison Mentaal).
 | **Mention obligatoire à afficher** | *« Questionnaire d'hypersensibilité — Elaine N. Aron, The Highly Sensitive Person (1996). Traduction française : « Ces gens qui ont peur d'avoir peur », Éditions de l'Homme. »* |
 | **Restrictions d'usage** | ⚠️ **Risque assumé** (décision Adrien 16/07/2026, question posée explicitement) : la reproduction commerciale de la traduction n'a pas de clearance. À instruire avant montée en charge ; retrait facile le cas échéant. |
 | **Décision Melya** | go **sous réserve** — décision de droits à confirmer avant sortie de beta. |
+| **PDF source en téléchargement (SEO, transparence)** | 🚫 non — Traduction extraite d'un livre des Éditions de l'Homme (🔒, MEL-351). Statut tranché par Claude le 11/10/2026 (grille : 📥 hébergeable / 🔗 lien vers la source officielle / 🚫 non). |
 
 ---
 

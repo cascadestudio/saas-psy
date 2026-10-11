@@ -129,6 +129,7 @@ Parcours patient Mentaal déroulé **intégralement** (lien `mentaal.fr/a/…`, 
 | **Emplacement de la mention (règle projet)** | Côté patient : écran de fin de passation (post-soumission), texte gris discret, une fois. Côté praticien : fiche du questionnaire en bibliothèque. |
 | **Restrictions d'usage** | Usage clinique / dépistage libre avec attribution OMS. ⚠️ **À recocher** : Melya étant un service payant, confirmer que l'usage OMS « non lucratif » couvre bien la diffusion via une plateforme commerciale (l'instrument reste gratuit pour l'utilisateur final). Le manuel OMS (Babor 2001) exclut « use in conjunction with commercial purposes » pour le document lui-même. |
 | **Décision Melya** | go (sous réserve de la recoche « usage commercial » ci-dessus). |
+| **PDF source en téléchargement (SEO, transparence)** | 🔗 lien seul — OMS : « not for sale or for use in conjunction with commercial purposes ». Pas d'hébergement sur une plateforme payante ; renvoyer vers le manuel OMS et la fiche OFDT. Statut tranché par Claude le 11/10/2026 (grille : 📥 hébergeable / 🔗 lien vers la source officielle / 🚫 non). |
 
 ---
 

@@ -133,6 +133,7 @@ prévue par le template (anxiété + évitement, chacune cotée 0-3 indépendamm
 | **Mention obligatoire à afficher**  | « Liebowitz Social Anxiety Scale (LSAS) — Liebowitz M.R., 1987. Traduction française : J.P. Lépine & H. Cardot, 1990. Validation française : Yao et al., L'Encéphale, 1999. » |
 | **Restrictions d'usage commercial** | Aucune licence payante connue. L'échelle est librement utilisée dans les essais cliniques randomisés et la pratique TCC depuis 1987. À cross-checker auprès de l'auteur si possible avant industrialisation. |
 | **Décision Melya**                  | `go` (sous réserve de la mention d'attribution ci-dessus)                        |
+| **PDF source en téléchargement (SEO, transparence)** | 🚫 non — Licence commerciale non documentée (❓, MEL-351). Statut tranché par Claude le 11/10/2026 (grille : 📥 hébergeable / 🔗 lien vers la source officielle / 🚫 non). |
 
 ---
 

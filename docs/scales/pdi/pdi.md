@@ -88,6 +88,7 @@ Version de Jehel et al. (2005), validée en France, telle que diffusée par le C
 | **Mention obligatoire à afficher** | « PDI — Brunet, Weiss, Metzler et al. (2001), American Journal of Psychiatry ©2001. Traduction française et validation : Jehel et al. (2005), Canadian Journal of Psychiatry. Domaine public (INSPQ). Mise en page : Centre national de ressources et de résilience (Cn2r). » |
 | **Restrictions d'usage commercial** | Aucune mentionnée ; citation des sources obligatoire |
 | **Décision Melya** | go |
+| **PDF source en téléchargement (SEO, transparence)** | 📥 hébergeable — Instrument dans le domaine public (INSPQ : « Il faut mentionner la source »). Fichier `PDI_Cn2r.pdf`, mise en page du Cn2r créditée. Confiance moyenne : la mise en page est une création du Cn2r ; à défaut, lien vers cn2r.fr. Statut tranché par Claude le 11/10/2026 (grille : 📥 hébergeable / 🔗 lien vers la source officielle / 🚫 non). |
 
 ---
 

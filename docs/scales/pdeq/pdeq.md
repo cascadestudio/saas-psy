@@ -80,6 +80,7 @@ Items 1, 3, 6, 7, 8 et libellés de réponse identiques (aux tirets près).
 | **Mention obligatoire à afficher** | *« PDEQ — Marmar, Weiss & Metzler (1997) ©1997. Traduction française : Brunet & Routhier (1999), avec l'autorisation des auteurs. Validation française : Birmes et al. (2005), European Psychiatry. Mise en page : Centre national de ressources et de résilience (Cn2r). »* |
 | **Restrictions d'usage** | Le copyright ©1997 est affiché sur le document Cn2r lui-même, qui le diffuse librement à visée clinique. ⚠️ À recocher pour l'usage commercial (plateforme payante). |
 | **Décision Melya** | go (sous réserve recoche usage commercial) |
+| **PDF source en téléchargement (SEO, transparence)** | 🔗 lien seul — © 1997 Marmar affiché sur la fiche ; diffusion libre du Cn2r à visée clinique, usage commercial non couvert. Renvoyer vers cn2r.fr. Statut tranché par Claude le 11/10/2026 (grille : 📥 hébergeable / 🔗 lien vers la source officielle / 🚫 non). |
 
 ---
 

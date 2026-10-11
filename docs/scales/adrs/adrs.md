@@ -89,6 +89,7 @@ Parcours praticien → patient complet sur [mentaal.fr/send/adrs](https://mentaa
 | **Mention obligatoire à afficher** | « ADRS (Adolescent Depression Rating Scale), version auto-questionnaire — Revah-Lévy, Birmaher, Gasquet & Falissard (2007), BMC Psychiatry, 7:2 (article sous licence CC BY 2.0). Instrument original francophone. » |
 | **Restrictions d'usage commercial** | Aucune (CC BY : citation obligatoire) |
 | **Décision Melya** | go |
+| **PDF source en téléchargement (SEO, transparence)** | 📥 hébergeable — Article de validation (Revah-Lévy et al., BMC Psychiatry 2007) sous licence CC BY 2.0. Fichier `ADRS_BMC-Psychiatry-2007.pdf` avec attribution. Les fiches SFD, medecin-ado, SPF et ORSaG : lien seulement. Statut tranché par Claude le 11/10/2026 (grille : 📥 hébergeable / 🔗 lien vers la source officielle / 🚫 non). |
 
 ---
 

@@ -93,6 +93,7 @@ Au 29/09/2026, la PDSS est « Bientôt disponible » chez Mentaal ([page](https:
 | **Mention obligatoire à afficher** | « Panic Disorder Severity Scale – PDSS © 1997 Katherine Shear — version française : ministère de la Santé et des Services sociaux du Québec, 2019 » (première partie verbatim du pied de page du PDF MSSS). |
 | **Restrictions d'usage commercial** | Non couvert : la permission vise les cliniciens dans leur pratique et la recherche hors industrie. Un SaaS payant relève des « other uses ». |
 | **Décision Melya** | go sous réserve — arbitrage du 29/09/2026 : on implémente et on lance sans attendre ; Shear sera contactée avec les autres auteurs flaggés ✉️ dans `SUIVI_ECHELLES.md`. |
+| **PDF source en téléchargement (SEO, transparence)** | 🔗 lien seul — Permission de M. K. Shear limitée aux cliniciens et à la recherche (MEL-351). Renvoyer vers la source publique (GMF-U de Lévis) sans héberger. Statut tranché par Claude le 11/10/2026 (grille : 📥 hébergeable / 🔗 lien vers la source officielle / 🚫 non). |
 
 ### Suivi des démarches externes
 

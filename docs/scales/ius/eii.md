@@ -61,6 +61,7 @@ n'existe pas de « traduction » à cross-checker.
 | **Détenteur des droits** | Freeston, Rhéaume, Letarte, Dugas & Ladouceur (1994). |
 | **Mention obligatoire à afficher** | *« Échelle d'intolérance à l'incertitude (ÉII / IUS) — Freeston, Rhéaume, Letarte, Dugas & Ladouceur (1994), Personality and Individual Differences, 17, 791-802. Instrument original francophone. »* |
 | **Décision Melya** | go |
+| **PDF source en téléchargement (SEO, transparence)** | 🔗 lien seul — Formulaire public du laboratoire Dugas (uqo.ca), sans phrase de licence. Renvoyer vers uqo.ca. Statut tranché par Claude le 11/10/2026 (grille : 📥 hébergeable / 🔗 lien vers la source officielle / 🚫 non). |
 
 ---
 

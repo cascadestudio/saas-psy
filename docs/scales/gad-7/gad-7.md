@@ -82,6 +82,7 @@ hiérarchie versions, comparaison Mentaal).
 | **Emplacement de la mention (règle projet)** | Côté patient : sur l'**écran de fin de passation** (écran de remerciement après soumission), en texte gris discret, une seule fois. Pas pendant les écrans d'items ni en pied persistant. — Côté praticien : visible dans la **fiche du questionnaire** (page de détail de l'échelle dans la bibliothèque), comme information de traçabilité de la source utilisée. |
 | **Restrictions d'usage commercial** | Aucune — la mention Pfizer indique explicitement que *« La reproduction, la traduction, l'affichage ou la distribution de ce document sont autorisés »*. Annonce publique Pfizer 2010 confirmant l'absence de toute restriction de copyright. |
 | **Décision Melya** | go |
+| **PDF source en téléchargement (SEO, transparence)** | 📥 hébergeable — « No permission required to reproduce, translate, display or distribute » (Pfizer, PHQ Screeners). Fichier `GAD7_French-for-France.pdf`, proposé tel quel avec sa mention. Statut tranché par Claude le 11/10/2026 (grille : 📥 hébergeable / 🔗 lien vers la source officielle / 🚫 non). |
 
 ---
 

@@ -63,6 +63,7 @@ Original francophone (Québec), seule version française.
 | **Mention obligatoire à afficher** | « Questionnaire d'attitude face aux problèmes (QAP) — Gosselin, Ladouceur & Pelletier (2005), Journal de thérapie comportementale et cognitive, 15(4), 141-153. Instrument original francophone. » |
 | **Restrictions d'usage commercial** | Non mentionnées (✉️, contact groupé laboratoire Dugas, cf. MEL-351) |
 | **Décision Melya** | go sous réserve |
+| **PDF source en téléchargement (SEO, transparence)** | 🔗 lien seul — Formulaire public du laboratoire Dugas (uqo.ca), sans phrase de licence. Renvoyer vers uqo.ca. Statut tranché par Claude le 11/10/2026 (grille : 📥 hébergeable / 🔗 lien vers la source officielle / 🚫 non). |
 
 ---
 

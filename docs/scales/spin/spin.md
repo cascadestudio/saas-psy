@@ -68,6 +68,7 @@ Les libellés de réponse de la paraphrase (Absent/Léger/…) sont également f
 | **Emplacement de la mention (règle projet)** | Côté patient : écran de fin de passation (post-soumission), texte gris discret, une fois. Côté praticien : fiche du questionnaire en bibliothèque. |
 | **Restrictions d'usage** | ⚠️ Les formulaires portent une mention explicite : *« Permission to use the SPIN must be obtained from the copyright holder at mail@cd-risc.com. The SPIN may not be reproduced or transmitted in any form… without permission in writing. »* La reproduction ET la transmission (envoi patient) nécessitent donc en principe une autorisation écrite. |
 | **Décision Melya** | **go** — arbitrage produit d'Adrien (15/07/2026) d'intégrer l'échelle malgré la restriction. À régulariser auprès du détenteur des droits (`mail@cd-risc.com`) si Melya passe en diffusion réelle. |
+| **PDF source en téléchargement (SEO, transparence)** | 🚫 non — Autorisation du détenteur requise (J. R. T. Davidson, 🔒, MEL-351). Statut tranché par Claude le 11/10/2026 (grille : 📥 hébergeable / 🔗 lien vers la source officielle / 🚫 non). |
 
 ---
 

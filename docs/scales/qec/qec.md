@@ -62,6 +62,7 @@ Original francophone (Québec), seule version française.
 | **Mention obligatoire à afficher** | « Questionnaire d'évitement cognitif (QEC) — Gosselin, Langlois, Freeston, Ladouceur, Dugas & Pelletier (2002), Journal de thérapie comportementale et cognitive, 12, 24-37. Instrument original francophone. » |
 | **Restrictions d'usage commercial** | Non mentionnées (✉️, contact groupé laboratoire Dugas, cf. MEL-351) |
 | **Décision Melya** | go sous réserve |
+| **PDF source en téléchargement (SEO, transparence)** | 🔗 lien seul — Formulaire public du laboratoire Dugas (uqo.ca), sans phrase de licence. Renvoyer vers uqo.ca. Statut tranché par Claude le 11/10/2026 (grille : 📥 hébergeable / 🔗 lien vers la source officielle / 🚫 non). |
 
 ---
 

@@ -86,6 +86,7 @@ Parcours praticien puis patient déroulé le 10/10/2026 sur [mentaal.fr/send/cud
 | **Détenteur des droits** | Adamson et al. (2010) ; version FR Luquiens et al. (2021). |
 | **Mention obligatoire à afficher** | *« CUDIT-R — Adamson, Kay-Lambkin, Baker, Lewin, Thornton, Kelly & Sellman (2010). Version française (CUDIT-R-Fr) : Luquiens et al. (2021), Drug and Alcohol Review. Diffusion : RESPADD. »* |
 | **Décision Melya** | go |
+| **PDF source en téléchargement (SEO, transparence)** | 🔗 lien seul — Texte publié en annexe d'articles (Elsevier) et diffusé par le RESPADD, sans licence de rediffusion. Renvoyer vers le RESPADD. Statut tranché par Claude le 11/10/2026 (grille : 📥 hébergeable / 🔗 lien vers la source officielle / 🚫 non). |
 
 ---
 

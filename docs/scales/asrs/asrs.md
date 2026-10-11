@@ -63,6 +63,7 @@ Mentaal (`/send/asrs`, n°3 de son catalogue, catégorie « TDAH ») propose **l
 | **Restrictions** | Aucune modification hors version électronique ; pas d'outil diagnostique autonome (« diagnosis or prescription should never been made solely on the basis of a score ») |
 | **Échelle en 18 questions** | 🔒 licence NYU (MEL-351) — non portée |
 | **Décision Melya** | go (6 questions) |
+| **PDF source en téléchargement (SEO, transparence)** | 📥 hébergeable — « Freely available for clinical and non-clinical use, including commercial use, but does require attribution… no other modifications » (NYU). Fichier `ASRS_6Q_French_NYU.pdf`, proposé sans modification avec la citation NYU. Statut tranché par Claude le 11/10/2026 (grille : 📥 hébergeable / 🔗 lien vers la source officielle / 🚫 non). |
 
 ---
 

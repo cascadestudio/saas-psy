@@ -83,6 +83,7 @@ Comparaison avec l'implémentation du concurrent Mentaal, tranchée avec Adrien 
 | **Emplacement de la mention (règle projet)** | Côté patient : écran de fin de passation (post-soumission), texte gris discret, une fois. Côté praticien : fiche du questionnaire en bibliothèque. |
 | **Restrictions d'usage** | Le PSWQ est largement diffusé en accès libre pour l'usage clinique et de recherche, avec attribution. ⚠️ Nuance : la traduction QIPS est publiée avec la mention « © Tous droits réservés » (Gosselin et al., Université Laval) — diffusée librement en pratique (annexe d'article), mais le statut n'est pas une licence explicite. |
 | **Décision Melya** | go |
+| **PDF source en téléchargement (SEO, transparence)** | 🔗 lien seul — Version française © Gosselin et al. ; le PDF archivé est un article de revue. Renvoyer vers la publication. Statut tranché par Claude le 11/10/2026 (grille : 📥 hébergeable / 🔗 lien vers la source officielle / 🚫 non). |
 
 ---
 

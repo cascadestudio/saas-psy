@@ -82,6 +82,7 @@
 | **Mention obligatoire à afficher** | « Heatherton TF, Kozlowski LT, Frecker RC, Fagerström KO, 1991 — version française : Haute Autorité de Santé, 2014 » |
 | **Restrictions d'usage commercial** | Non mentionnées. |
 | **Décision Melya** | go sous réserve (même position que l'AUDIT : usage commercial non explicitement couvert). |
+| **PDF source en téléchargement (SEO, transparence)** | 🔗 lien seul — Fiche HAS : reproduction sans autorisation, usage commercial non mentionné. Renvoyer vers la HAS plutôt qu'héberger. Statut tranché par Claude le 11/10/2026 (grille : 📥 hébergeable / 🔗 lien vers la source officielle / 🚫 non). |
 
 ---
 

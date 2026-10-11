@@ -96,6 +96,7 @@ hiérarchie versions, comparaison Mentaal).
 | **Emplacement de la mention (règle projet)** | Côté patient : sur l'**écran de fin de passation** (écran de remerciement après soumission), en texte gris discret, une seule fois. Pas pendant les écrans d'items ni en pied persistant. — Côté praticien : visible dans la **fiche du questionnaire** (page de détail de l'échelle dans la bibliothèque), comme information de traçabilité de la source utilisée. |
 | **Restrictions d'usage commercial** | Aucune — instrument du domaine public ; traduction sous licence CC-BY (réutilisation autorisée avec attribution). |
 | **Décision Melya** | go |
+| **PDF source en téléchargement (SEO, transparence)** | 📥 hébergeable — Instrument du National Center for PTSD (domaine public), traduction française sous CC BY. Fichier `PCL-5_Cn2r.pdf`, mise en page du Cn2r créditée. Statut tranché par Claude le 11/10/2026 (grille : 📥 hébergeable / 🔗 lien vers la source officielle / 🚫 non). |
 
 ---
 
