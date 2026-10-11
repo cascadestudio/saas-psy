@@ -186,7 +186,28 @@ La licence n'autorise « aucune modification, sauf la création de versions éle
 
 ### Recette
 
-À compléter après déploiement sur staging.
+**Staging (11/10/2026, Claude)** — patient « Patient Test », parcours patient complet puis page résultat praticien : **conforme**.
+
+| Jeu | Réponses (0-4, questions 1-6) | Attendu | Obtenu |
+| --- | --- | --- | --- |
+| Minimum | Jamais × 6 | 0, dépistage négatif | 0, « Dépistage négatif : moins de 4 réponses dans la zone grisée » |
+| Seuils propres aux questions | Quelquefois × 6 | 3 (questions 4-6 hors zone), négatif | 3, négatif |
+| Seuil | Quelquefois × 3, Souvent, Jamais × 2 | 4, positif | 4, « Symptômes pouvant correspondre à ceux d'un TDAH de l'adulte : évaluation clinique recommandée » |
+| Maximum | Très souvent × 6 | 6, positif | 6, idem |
+
+Écran d'intro (acronyme, sous-titre « Test de dépistage avec échelle d'auto-évaluation V1.1 », consigne), rappel « Au cours des 6 derniers mois : », 5 libellés, mention de la règle de cotation sous la jauge, copyright NYU/Harvard en pied : conformes. Le domaine « Neurodéveloppement » apparaît dans les filtres du catalogue (`/app/echelles`).
+
+**Comparaison Mentaal (11/10/2026)** — `/send/asrs` (18 questions), patient fictif, partie A = jeu « seuil » ci-dessus, questions 7-18 à « Jamais » : **partie A 4/6 chez Mentaal comme chez Melya** (« Symptômes présents »). Écarts :
+
+| Point | Source (VF NYU) | Melya | Mentaal |
+| --- | --- | --- | --- |
+| Périmètre | 6 questions (libre) ; 18 sous licence | 6 questions | 18 questions + 3 sous-échelles (licence NYU non documentée) |
+| Question 1 | « …à finaliser les derniers détails d'un projet une fois que les parties les plus stimulantes ont été faites ? » | Verbatim | « À quelle fréquence avez vous de la difficulté à finaliser un projet, une fois que le gros du travail a été effectué ? » |
+| Question 6 | « …entraîné malgré vous par un moteur ? » | Verbatim | « …à quelle fréquence vous sentez vous comme une dynamo ? » |
+| Réponse 3 | « Quelquefois » | Idem | « Parfois » |
+| Consigne | « Cochez la case… au cours des 6 derniers mois » | Adaptée, période conservée | « Complétez le questionnaire en sélectionnant les réponses… » (sans période de référence) |
+
+La traduction de Mentaal n'est pas la version française NYU (probablement une traduction québécoise ou maison) ; la licence interdit de modifier le texte.
 
 ---
 
@@ -203,3 +224,4 @@ La licence n'autorise « aucune modification, sauf la création de versions éle
 | Date | Auteur | Modification |
 | --- | --- | --- |
 | 11/10/2026 | Claude (lot autonome) | Création de la fiche et implémentation : version française NYU du dépistage en 6 questions, cotation par cases grisées (≥ 4), nouveau domaine Neurodéveloppement. Tests 7/7. |
+| 11/10/2026 | Claude (lot autonome) | Recette staging conforme (0, 3, 4, 6) ; Mentaal partie A identique (4/6), traduction et périmètre différents. |
