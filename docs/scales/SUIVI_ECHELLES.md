@@ -11,7 +11,7 @@
 
 ## Tableau de bord
 
-**✅ 12 validées · 🔵 9 implémentées · 🚧 6 en cours · 📋 2 prévues · 🔍 86 à instruire · ⬜ 24 non planifiées · 🚫 28 écartées** (167 échelles, dont 83 ajoutées depuis le catalogue « Apprendre la psychologie » le 10/10/2026)
+**✅ 12 validées · 🔵 10 implémentées · 🚧 6 en cours · 📋 2 prévues · 🔍 85 à instruire · ⬜ 24 non planifiées · 🚫 28 écartées** (167 échelles, dont 83 ajoutées depuis le catalogue « Apprendre la psychologie » le 10/10/2026)
 
 **Rattrapage Mentaal : 13/42.** Le plafond n'est pas 74 : sur leur catalogue
 disponible, 12 sont écartées d'office (payantes, outils maison Mentaal, ou
@@ -156,7 +156,7 @@ sortie ; les auteurs flaggés seront contactés en une fois, plus tard.
 | DBAS | Échelle des croyances et attitudes dysfonctionnelles à propos du sommeil | 🔍 | ❓ | — | Catalogue | [ALP] « CAS » chez Mentaal ; domaine à définir (sommeil) |
 | MEQ-SA | Questionnaire de chronotype révisé | 🔍 | ✅ | — | Absent | [ALP] domaine à définir (sommeil) |
 | Q-EDD | Questionnaire for Eating Disorder Diagnosis | 🔍 | ❓ | — | Absent | [ALP] domaine Troubles alimentaires (validé, pas encore créé) |
-| CAST | Cannabis Abuse Screening Test | 🔍 | ✉️ | — | Absent | [ALP] outil français (OFDT) ; domaine addictions |
+| CAST | Cannabis Abuse Screening Test | 🔵 | ✉️ | 🟢 A | Absent | [ALP] fiche `cast/cast.md` ; version définitive OFDT (Note 2013-02, 12 mois, 0-4), seuils < 3 / 3-6 / ≥ 7 ; version HAS oui/non écartée ; implémentée par Claude (11/10/2026), recette staging à confirmer |
 | HONC | Test de Honc (Hooked on Nicotine Checklist) | 🔍 | ❓ | — | Absent | [ALP] domaine addictions |
 | LAO | Liste des activités obsessives-compulsives | 🔍 | ❓ | — | Absent | [ALP] domaine TOC |
 | CAC | Liste des obsessions-compulsions (Marks) | 🔍 | ❓ | — | Absent | [ALP] domaine TOC |

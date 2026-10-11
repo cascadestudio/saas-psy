@@ -2156,6 +2156,58 @@ export const scales: Scale[] = [
       thresholdsSource: "Seuil de la fiche descriptive Cn2r",
     },
   },
+  {
+    id: "cast",
+    acronym: "CAST",
+    label: "Cannabis Abuse Screening Test",
+    patientIntroSubtitle: null,
+    domain: "addictions",
+    formType: "single-scale",
+    title: "CAST - Cannabis Abuse Screening Test",
+    description:
+      "Un questionnaire de 6 items repérant un usage problématique de cannabis au cours des 12 derniers mois",
+    category: "Addictions",
+    estimatedTime: "2 minutes",
+    longDescription:
+      "Le CAST (Cannabis Abuse Screening Test) est un auto-questionnaire de 6 items développé en français par l'Observatoire français des drogues et des toxicomanies (OFDT) à partir de 2002, dans sa version définitive depuis 2006 (Legleye et al., 2007). Il repère les usages problématiques de cannabis au cours des 12 derniers mois : usage le matin ou seul, troubles de la mémoire, remarques de l'entourage, échecs des tentatives de réduction ou d'arrêt, problèmes liés à la consommation. Chaque item est coté de 0 (jamais) à 4 (très souvent) ; le score total varie de 0 à 24. Selon l'OFDT, un score inférieur à 3 correspond à un usage sans risque, un score de 3 à 6 à un risque faible et un score ≥ 7 à un risque élevé d'usage problématique, voire de dépendance. Outil de repérage recommandé par la HAS ; il ne remplace pas un diagnostic clinique.",
+    instructions: "Au cours des 12 derniers mois…",
+    persistentInstructions: "Au cours des 12 derniers mois…",
+    copyrightAttribution:
+      "CAST (Cannabis Abuse Screening Test) — Observatoire français des drogues et des toxicomanies (OFDT) ; Legleye, Karila, Beck & Reynaud (2007), Journal of Substance Use. Questionnaire et cotation : Spilka, Janssen & Legleye, Note OFDT n°2013-02.",
+    higherIsBetter: false,
+    questions: [
+      "Avez-vous fumé du cannabis avant midi ?",
+      "Avez-vous fumé du cannabis lorsque vous étiez seul(e) ?",
+      "Avez-vous eu des problèmes de mémoire quand vous fumiez du cannabis ?",
+      "Des amis ou des membres de votre famille vous ont-ils dit que vous devriez réduire votre consommation de cannabis ?",
+      "Avez-vous essayé de réduire ou d'arrêter votre consommation de cannabis sans y arriver ?",
+      "Avez-vous eu des problèmes à cause de votre consommation de cannabis (dispute, bagarre, accident, mauvais résultats à l'école…) ?",
+    ],
+    answerScales: {
+      intensity: [
+        { value: 0, label: "Jamais" },
+        { value: 1, label: "Rarement" },
+        { value: 2, label: "De temps en temps" },
+        { value: 3, label: "Assez souvent" },
+        { value: 4, label: "Très souvent" },
+      ],
+    },
+    scoring: {
+      ranges: [
+        { min: 0, max: 2, interpretation: "Usage sans risque" },
+        { min: 3, max: 6, interpretation: "Risque faible" },
+        {
+          min: 7,
+          max: 24,
+          interpretation: "Risque élevé d'usage problématique, voire de dépendance",
+        },
+      ],
+      maxScore: 24,
+      method:
+        "Additionnez les 6 items (0-4) : le score total varie de 0 à 24. Moins de 3 : usage sans risque ; 3 à 6 : risque faible ; 7 ou plus : risque élevé d'usage problématique, voire de dépendance (seuils OFDT).",
+      thresholdsSource: "Seuils OFDT (Note n°2013-02)",
+    },
+  },
 ];
 
 export function getScaleById(id: string): Scale | undefined {
