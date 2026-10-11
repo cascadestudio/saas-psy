@@ -496,6 +496,61 @@ Statut de droits de **chacune des 167 échelles** du tableau, établi par recher
 > Relevé du catalogue de [mentaal.fr](https://mentaal.fr/outils) — concurrent direct
 > (même positionnement psys, HDS Scaleway, passation sans compte patient, ~10 €/mois illimité).
 
+## Actions documentaires — guide pour Clément (mission n°3, 11/10/2026)
+
+> **But** : récupérer le texte français des échelles qui n'existe qu'imprimé, pour que Claude les implémente. **Deux visites suffisent**, l'Alcazar d'abord (tu es inscrit : tu peux **emprunter** et photographier chez toi), puis la BU Santé de la Timone (consultation sur place). Budget prévu : 0 €, au pire quelques dizaines d'euros (§ « Plan B »).
+>
+> *État de la recherche* : une recherche en ligne complémentaire (2 agents, 11/10/2026) a déjà retiré de cette liste DERS (implémentée) ainsi que FFMQ, Insight de Birchwood, CPTS-RI, BPQ, PDQ-4+ et QSA (texte trouvé en ligne, implémentation à suivre). La liste ci-dessous est ce qui reste ; elle sera ajustée quand le 2e agent aura fini (échelles TOC, anxiété, humeur).
+
+### Avant de partir (5 min)
+
+1. Vérifie les horaires sur le site de chaque bibliothèque (bmvr.marseille.fr, bu.univ-amu.fr).
+2. Prends ta carte BMVR et une pièce d'identité (accueil des BU pour les lecteurs extérieurs).
+3. Téléphone chargé ; si possible une appli de scan (Scanner de l'iPhone dans Notes, Adobe Scan, Microsoft Lens) : une page = une photo, à plat, sans reflet, page entière lisible.
+
+### Visite 1 — Bibliothèque de l'Alcazar (BMVR), 58 cours Belsunce, 13001 Marseille
+
+Rayon **Sciences et Techniques, 2e étage**. Cherche le livre par sa **cote** (étiquette au dos) ; si tu ne trouves pas, donne la cote à l'accueil de l'étage. Ces livres s'empruntent avec ta carte.
+
+| Livre | Cote | État au 11/10 | Échelles à photographier |
+| --- | --- | --- | --- |
+| M. Bouvard & J. Cottraux, *Protocoles et échelles d'évaluation en psychiatrie et en psychologie*, Masson, 4e éd. 2005 | **616.88 BOUV** | Disponible | Regarde l'**index** et la table des matières : PPAG (peurs et phobies), FQ (questionnaire des peurs de Marks), ACQ, BSQ, RAS, TAPIS, échelle d'infériorité, LPO, CAC, quatre rituels cibles, QPII, III, OBQ, MOCI, LAO, DAS, ATQ, QCI, et toute échelle « relation thérapeutique / attentes / qualité de vie (Marks) » |
+| C. Cungi, *Savoir gérer son stress en toutes circonstances*, Retz, 2016 | **613 CUNG** | Disponible | Échelle brève d'évaluation du stress (11 items) **et** échelle brève des stresseurs (8 items) : consigne, items, cotation, interprétation |
+| H. Denis, *Traiter les troubles anxieux chez l'enfant et l'adolescent*, Dunod, 2024 | **616.891 DENI** | Prêté jusqu'au 28/10 (éditions 2019 et 2021 aussi au catalogue) | Annexe « Échelle comportementale d'anxiété phobique » (ECAP, Véra) : les 97 items, cotation, seuils |
+
+### Visite 2 — BU Santé de la Timone (Aix-Marseille Université), Faculté de médecine, 27 boulevard Jean Moulin, 13005 Marseille
+
+Salle **Toga, 2e étage** (libre accès). Les livres en **magasin** se demandent au guichet avec leur cote. Consultation sur place (l'emprunt demande une carte de lecteur extérieur, inutile ici).
+
+| Livre | Cote | Échelles à photographier |
+| --- | --- | --- |
+| Bouvard & Cottraux, *Protocoles et échelles…*, Elsevier Masson, **5e éd. 2010** | **WM 141 BOU** | Seulement ce que la 4e édition de l'Alcazar n'avait pas (la 5e ajoute 11 outils) |
+| M. Bouvard, *Questionnaires et échelles d'évaluation de la personnalité*, Elsevier Masson, 4e éd. 2024 | **WM 145 BOU** | FMPS (perfectionnisme, Rhéaume et al.), Sociotropie-autonomie (version 20 items), et vérifier PDQ-4+, BPQ, QSA/ASQ (pour confronter les versions trouvées en ligne) |
+| M. Bouvard (dir.), *Échelles et questionnaires d'évaluation chez l'enfant et l'adolescent*, 2e éd. | **WS 350 QUE** (prêté au 11/10) ; éd. 2008 en 2 volumes au **magasin : T254540 et T254541** | CPTS-RI (pour confronter), SCARED-R 66 items (France), ECAP si absente de Denis |
+| J. Cottraux, *Les thérapies comportementales et cognitives*, Masson, 4e éd. 2004 (ou *Les psychothérapies cognitives et comportementales*, 6e/7e éd.) | **WM 425.5 C6 COT** ; ancienne édition au **magasin T250303** | Échelle de qualité de vie de Marks, HAq-II (traduction Cottraux), échelle de relation thérapeutique (ERT), échelles d'attentes thérapeutiques (patient / thérapeute) |
+| H. Denis, *Traiter les troubles anxieux…* (éd. 2017, 2021 ou 2024) | à demander à l'accueil | ECAP, si pas obtenue à l'Alcazar |
+
+**Sur un poste informatique de la BU** (demande à l'accueil un accès « lecteur extérieur » aux ressources en ligne) : Cairn → J. Cottraux, *Les Visiteurs du soi* (Odile Jacob 2004), annexe du chapitre VII p. 294-298 (ERT : les 12 paires d'adjectifs) ; EM-consulte / ScienceDirect → Lefeuvre, Jean & Guihard (2020), *L'Encéphale* (Sociotropie-autonomie, 20 items) ; Bureau et al. (2024), *Journal of Autism and Developmental Disorders* (CAT-Q validé en français). Enregistre les PDF sur une clé USB ou envoie-les-toi par e-mail.
+
+### Quoi photographier, pour chaque échelle
+
+1. La **page de titre** du livre et la page avec l'édition (pour la référence).
+2. La **consigne** exacte.
+3. **Tous les items**, dans l'ordre, avec leur numéro.
+4. Les **modalités de réponse** (libellés et valeurs).
+5. La **cotation** : items inversés, sous-échelles, calcul du total.
+6. Les **seuils / normes** et leur source, et toute mention de **droits** (« reproduit avec l'autorisation de… », « © »).
+
+### Où déposer les photos
+
+Dans `docs/scales/{échelle}/` si le dossier existe, sinon en vrac dans `docs/scales/_scans/` (un sous-dossier par livre convient très bien). Préviens Claude : il transcrit, implémente et recette.
+
+### Plan B (si un livre manque ou est prêté)
+
+- **Réserver** le livre en ligne (bouton « Réserver » sur le catalogue BMVR).
+- **Prêt entre bibliothèques (PEB)** : au guichet de la BU, avec la référence Sudoc (quelques euros). Utile pour Guelfi, *L'évaluation clinique standardisée en psychiatrie* (1997), absent de Marseille.
+- **Achat** : *Protocoles et échelles…* 5e éd. (réimpression 2022) ≈ 33 € ; chapitre Cairn ≈ 5 € ; article EM-consulte ≈ 30-40 €.
+
 ## Chiffres clés
 
 - **~424 outils référencés** au catalogue total (dont beaucoup en « bientôt disponibles » / « non disponibles » — le formulaire « un outil vous manque ? » sert à capter la demande + SEO).
