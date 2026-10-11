@@ -11,7 +11,7 @@
 
 ## Tableau de bord
 
-**✅ 12 validées · 🔵 18 implémentées · 🚧 5 en cours · 📋 2 prévues · 🔍 81 à instruire · ⬜ 21 non planifiées · 🚫 28 écartées** (167 échelles, dont 83 ajoutées depuis le catalogue « Apprendre la psychologie » le 10/10/2026)
+**✅ 12 validées · 🔵 19 implémentées · 🚧 5 en cours · 📋 2 prévues · 🔍 81 à instruire · ⬜ 20 non planifiées · 🚫 28 écartées** (167 échelles, dont 83 ajoutées depuis le catalogue « Apprendre la psychologie » le 10/10/2026)
 
 **Rattrapage Mentaal : 13/42.** Le plafond n'est pas 74 : sur leur catalogue
 disponible, 12 sont écartées d'office (payantes, outils maison Mentaal, ou
@@ -95,7 +95,7 @@ sortie ; les auteurs flaggés seront contactés en une fois, plus tard.
 | PSQI | Qualité de sommeil de Pittsburgh | 🔍 | 🔒 | 🚫 | — | Non dispo | idem ISI |
 | AQ | Quotient du spectre de l'autisme | ⬜ | 🔒 | 🚫 | 🟡 B | #4 | 50 items, recode binaire + 5 subscores ; 2e passe (10/10/2026) : ⛔ usage commercial interdit sans autorisation (Autism Research Centre, Cambridge Enterprise) |
 | RAADS-R | Autisme / Asperger de Ritvo | ⬜ | 🔒 | 🚫 | 🟡 B | #6 | 80 items — lourd ; 2e passe : ⛔ licence non commerciale (CC BY-NC) |
-| CAT-Q | Camouflage autistique | ⬜ | ✅ | ⏳ | 🟡 B | #9 | 2e passe : ⛔ original CC BY, mais validation française (Bureau et al. 2024, JADD) sur abonnement |
+| CAT-Q | Camouflage autistique | 🔵 | ✅ | 🔗 | 🟡 B | #9 | fiche `cat-q/cat-q.md` ; trad. Bessette (Embrace Autism, CC BY 4.0), validée Bureau 2024 à confronter ; 25 items 1-7, 5 inversés, 3 sous-scores, seuil 100 (Embrace Autism) ; domaine Neurodéveloppement ; implémentée par Claude (11/10/2026, mission 3), recette staging à confirmer |
 | EQ | Quotient empathique | ⬜ | 🔒 | 🚫 | 🟡 B | #11 | recode + reverse ; 2e passe : ⛔ usage commercial interdit sans autorisation (ARC, Cambridge Enterprise) |
 | PID-5 | Personnalité DSM-5 | ⬜ | 🔒 | 🚫 | — | #17 | 220 items (ou brève 25) — volume énorme ; 2e passe : ⛔ autorisation APA requise pour une application commerciale |
 | RAS | Affirmation de soi de Rathus | ⬜ | ❓ | 🚫 | 🟡 B | #21 | reverse + offset ; 2e passe : ⛔ aucune VF validée accessible ; droits non établis |
@@ -420,7 +420,7 @@ Statut de droits de **chacune des 167 échelles** du tableau, établi par recher
 | BAT-W | ✅ | Schaufeli, De Witte & Desart (KU Leuven) | Idem BAT-G | Idem BAT-G | Bloquée (VF) |
 | BIG-5 | ✅ (si version IPIP) | International Personality Item Pool | « public domain… free for any use, commercial or academic, without permission » (ipip.ori.org) ; version Mentaal à confirmer | VF IPIP à identifier | Vérifier qu'une VF validée existe |
 | BPRS | ✅ | Overall & Gorham 1962 | Domaine public (financement VA / NIMH, œuvre du gouvernement fédéral américain) | VF à vérifier | Hétéro-évaluation |
-| CAT-Q | ✅ | Hull et al. 2019 | Article sous CC BY 4.0, questionnaire en annexe | VF Bureau et al. 2024 (JADD, sur abonnement) | Bloquée (VF inaccessible) |
+| CAT-Q | ✅ | Hull et al. 2019 | Page Embrace Autism « distribué sous les termes de la licence internationale Creative Commons Attribution 4.0 » ; original CC BY | Trad. Bessette (non validée) ; Bureau et al. 2024 (JADD, abonnement) | Implémentée (mission 3) ; confronter à Bureau 2024 |
 | CGI | ✅ | W. Guy 1976 (NIMH, ECDEU) | Œuvre du gouvernement fédéral américain (domaine public) | VF à vérifier | Hétéro-évaluation |
 | DASS-21 | ✅ (avec conditions) | Lovibond & Lovibond (UNSW) | « The DASS questionnaire is in the public domain, and so permission is not needed to use it » (FAQ 3) ; conditions : pas de score au répondant (FAQ 9) | VF Ottawa (Canada), validation 2018 non consultée | Mécanisme à créer (sévérité par sous-échelle) |
 | GAD-7 | ✅ | Pfizer / Spitzer, Kroenke et al. | « no permission required to reproduce, translate, display or distribute » | VF Pfizer | Implémentée |

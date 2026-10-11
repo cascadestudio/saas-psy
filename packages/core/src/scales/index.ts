@@ -2705,6 +2705,77 @@ export const scales: Scale[] = [
       thresholdsSource: "Seuil de la fiche INSPQ (population générale)",
     },
   },
+  {
+    id: "cat-q",
+    acronym: "CAT-Q",
+    label: "Questionnaire sur les traits autistiques de camouflage",
+    patientIntroSubtitle: null,
+    domain: "neurodeveloppement",
+    formType: "single-scale",
+    title: "CAT-Q - Questionnaire sur les traits autistiques de camouflage",
+    description:
+      "Un questionnaire de 25 items mesurant le recours aux stratégies de camouflage social des traits autistiques chez l'adulte",
+    category: "Autisme (TSA) de l'adulte",
+    estimatedTime: "5-10 minutes",
+    longDescription:
+      "Le CAT-Q (Camouflaging Autistic Traits Questionnaire, Hull et al., 2018) est un auto-questionnaire de 25 items qui mesure le degré d'utilisation des stratégies de camouflage social chez l'adulte (16 ans et plus) : compensation (9 items), masquage (8 items) et assimilation (8 items). Chaque énoncé est coté de 1 (totalement en désaccord) à 7 (tout à fait d'accord), avec 5 items inversés ; le score total varie de 25 à 175. Un score élevé reflète davantage de camouflage. Seuil de 100 indiqué par Embrace Autism (non fourni dans l'article original). Traduction française de Marika B. Bessette (non validée ; une validation française de Bureau et al. existe, 2024).",
+    instructions:
+      "Lisez les énoncés suivants et choisissez les réponses qui correspondent le plus fidèlement possible à vos expériences personnelles lors d'interactions sociales.",
+    persistentInstructions:
+      "Lisez les énoncés suivants et choisissez les réponses qui correspondent le plus fidèlement possible à vos expériences personnelles lors d'interactions sociales.",
+    copyrightAttribution:
+      "CAT-Q — Hull, Mandy, Lai, Baron-Cohen, Allison, Smith & Petrides (2018), licence CC BY 4.0. Traduction française : Marika B. Bessette (Embrace Autism).",
+    reverseItems: [3, 12, 19, 22, 24],
+    higherIsBetter: false,
+    questions: [
+      "Lorsque j'interagis avec quelqu'un, je copie délibérément son langage corporel ou ses expressions faciales.",
+      "Je surveille mon langage corporel ou mes expressions faciales afin de paraître détendu.",
+      "Je ressens rarement le besoin de jouer la comédie pour m'en sortir dans une situation sociale.",
+      "J'ai développé un script à suivre dans les situations sociales.",
+      "Je répète des phrases que j'ai entendues dire par d'autres personnes, exactement de la même manière que je les ai entendues.",
+      "J'adapte mon langage corporel ou mes expressions faciales de manière à paraître intéressé par la personne avec laquelle j'interagis.",
+      "Dans les situations sociales, j'ai l'impression de « performer » plutôt que d'être moi-même.",
+      "Dans mes propres interactions sociales, j'utilise des comportements que j'ai appris en regardant d'autres personnes interagir.",
+      "Je pense toujours à l'impression que je donne aux autres.",
+      "J'ai besoin du soutien d'autres personnes pour m'aider à socialiser.",
+      "Je pratique mes expressions faciales et mon langage corporel pour m'assurer qu'ils ont l'air naturels.",
+      "Je ne ressens pas le besoin d'établir un contact visuel avec d'autres personnes si je n'en ai pas envie.",
+      "Je dois me forcer à interagir avec les gens lorsque je suis dans des situations sociales.",
+      "J'ai essayé d'améliorer ma compréhension des compétences sociales en observant d'autres personnes.",
+      "Je surveille mon langage corporel ou mes expressions faciales afin de paraître intéressé par la personne avec laquelle j'interagis.",
+      "Dans les situations sociales, j'essaie de trouver des moyens d'éviter d'interagir avec les autres.",
+      "J'ai fait des recherches sur « les règles des interactions sociales » pour améliorer mes propres compétences sociales.",
+      "Je suis toujours conscient de l'impression que je donne aux autres.",
+      "Je me sens libre d'être moi-même lorsque je suis avec d'autres personnes.",
+      "J'apprends comment les gens utilisent leur corps et leur visage pour interagir en regardant la télévision ou des films, ou en lisant des ouvrages de fiction.",
+      "J'adapte mon langage corporel ou mes expressions faciales de manière à paraître détendu.",
+      "Lorsque je parle à d'autres personnes, j'ai l'impression que la conversation se déroule naturellement.",
+      "J'ai passé du temps à apprendre les compétences sociales à partir d'émissions de télévision et de films, et j'essaie de les utiliser dans mes interactions.",
+      "Dans les interactions sociales, je ne fais pas attention à ce que font mon visage ou mon corps.",
+      "Dans les situations sociales, j'ai l'impression de faire semblant d'être « normal ».",
+    ],
+    answerScales: {
+      intensity: [
+        { value: 1, label: "Totalement en désaccord" },
+        { value: 2, label: "Pas d'accord" },
+        { value: 3, label: "Un peu en désaccord" },
+        { value: 4, label: "Ni d'accord ni en désaccord" },
+        { value: 5, label: "Plutôt d'accord" },
+        { value: 6, label: "D'accord" },
+        { value: 7, label: "Tout à fait d'accord" },
+      ],
+    },
+    scoring: {
+      ranges: [
+        { min: 25, max: 99, interpretation: "Sous le seuil de 100 indiqué par Embrace Autism" },
+        { min: 100, max: 175, interpretation: "Score ≥ 100 : camouflage de traits autistiques (seuil indiqué par Embrace Autism)" },
+      ],
+      maxScore: 175,
+      method:
+        "Inversez les items 3, 12, 19, 22 et 24 (1↔7, 2↔6, 3↔5), puis additionnez les 25 items : le score total varie de 25 à 175. Sous-scores : compensation (items 1, 4, 5, 8, 11, 14, 17, 20, 23), masquage (2, 6, 9, 12, 15, 18, 21, 24), assimilation (3, 7, 10, 13, 16, 19, 22, 25). Seuil de 100 indiqué par Embrace Autism.",
+      thresholdsSource: "Seuil indiqué par Embrace Autism (non publié par les auteurs)",
+    },
+  },
 ];
 
 export function getScaleById(id: string): Scale | undefined {
