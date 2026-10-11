@@ -34,6 +34,7 @@ import { scoreCatQ } from './scorers/cat-q';
 import { scoreBatW } from './scorers/bat-w';
 import { scoreBatG } from './scorers/bat-g';
 import { scoreCst } from './scorers/cst';
+import { scoreDers } from './scorers/ders';
 
 type Scorer = (scale: Scale, responses: Record<string, unknown>) => ScoreResult;
 
@@ -72,6 +73,7 @@ const SCORERS: Record<string, Scorer> = {
   'bat-w': scoreBatW,
   'bat-g': scoreBatG,
   cst: scoreCst,
+  ders: scoreDers,
 };
 
 @Injectable()

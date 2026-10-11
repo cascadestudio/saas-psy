@@ -18,6 +18,7 @@
 ## 2. Sources et traçabilité
 
 - **Source (classe B, secondaire)** : Lefebvre Dalloz Compétences (organisme de formation), « Test : échelle brève d'évaluation du stress » — texte archivé `CST_Lefebvre-Dalloz_2026-10-11.txt` (page Cloudflare, lue via Chrome), 11/10/2026.
+- **Seconde source (trouvée par la recherche complémentaire du 11/10/2026)** : Centre neuchâtelois de psychiatrie (CNP, établissement public suisse), PDF « Échelle brève d'évaluation du stress - Cungi 1997 » — archivé `CST_CNP-Neuchatel_Cungi1997.pdf`. Texte identique à Lefebvre Dalloz, mêmes bornes chevauchantes, sauf : 1re modalité « Non pas du tout » ; item 10 « un problème de tension artérielle » au lieu de « un problème de cholestérol » ; écriture inclusive (émotif·ve, fatigué·e). L'item 8 a la même virgule manquante.
 - **Référence papier à confronter** : Charly Cungi, *Savoir gérer son stress* (Retz) — édition et pages à vérifier (action documentaire).
 - **Écart avec Mentaal** : Mentaal (`/send/cungi-stress`, n°60) propose 19 questions → probablement une autre version (complète) de l'échelle de Cungi.
 - **Journal de recherche** : « échelle de stress de Cungi questionnaire texte items » → Lefebvre Dalloz ; pages INRS (autres outils) ; aucun PDF institutionnel de l'échelle trouvé.
@@ -59,6 +60,8 @@ Aucune.
 | --- | --- | --- | --- |
 | Source | Lefebvre Dalloz (secondaire) | Seule version en ligne ; classe B, à confronter au livre de Cungi | basse |
 | Bornes des bandes | 19 → « bas », 30 → « élevé », 45 → « élevé » | La source chevauche (« entre 11 et 19 », « entre 19 et 30 ») ; lecture en intervalles semi-ouverts, « au-dessus de 45 » strict | basse |
+| Item 10 | « problème de cholestérol » (Lefebvre Dalloz) conservé | Les deux sources divergent (CNP : « tension artérielle », redondant avec « hypertension artérielle » qui suit) ; la leçon Lefebvre Dalloz évite la redondance ; à trancher sur le livre | basse |
+| 1re modalité | « Pas du tout » (Lefebvre Dalloz) | CNP : « Non pas du tout » ; différence mineure, à trancher sur le livre | moyenne |
 | Item 8 | « des allergies de l'eczéma » → « des allergies, de l'eczéma » | Type 2 : virgule manquante évidente | moyenne |
 | Consigne | « faites une croix dans la case appropriée » → « choisissez la réponse appropriée » | Type 1 | moyenne |
 | Domaine | Anxiété, catégorie « Stress » | Stress général (pas spécifiquement professionnel) | moyenne |
@@ -89,5 +92,7 @@ Entrée `cst` (1-6, 4 bandes), scorer `cst.ts` (somme), tests `cst.spec.ts`. 11/
 ## 13. Reste à faire avant prod
 
 - [ ] **Action documentaire** : Cungi, *Savoir gérer son stress* (Retz) — photographier l'échelle (consigne, 11 items, cotation, bornes) ; vérifier s'il s'agit de la version courte et repérer la version à 19 items (Mentaal).
-- [ ] **Arbitrage à valider** : bornes des bandes (chevauchement de la source).
+- [ ] **Arbitrage à valider** : bornes des bandes (chevauchement présent dans les deux sources).
+- [ ] **Arbitrage à valider** : item 10 (« cholestérol » ou « tension artérielle ») et 1re modalité (« Pas du tout » ou « Non pas du tout ») — à trancher avec le livre.
+- [ ] **Décision produit** : ajouter l'« Échelle brève d'évaluation des stresseurs » (8 items, Cungi 1997) qui, avec ces 11 items, forme la version à 19 items de Mentaal (texte en ligne, pas de seuil sourcé).
 - [ ] **Vigilance** : source non clinique (organisme de formation).

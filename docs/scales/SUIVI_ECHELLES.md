@@ -11,7 +11,7 @@
 
 ## Tableau de bord
 
-**✅ 12 validées · 🔵 22 implémentées · 🚧 5 en cours · 📋 2 prévues · 🔍 80 à instruire · ⬜ 17 non planifiées · 🚫 29 écartées** (167 échelles, dont 83 ajoutées depuis le catalogue « Apprendre la psychologie » le 10/10/2026)
+**✅ 12 validées · 🔵 23 implémentées · 🚧 4 en cours · 📋 2 prévues · 🔍 80 à instruire · ⬜ 17 non planifiées · 🚫 29 écartées** (167 échelles, dont 83 ajoutées depuis le catalogue « Apprendre la psychologie » le 10/10/2026)
 
 ### Potentiel publiable : où en sont les 167 échelles ? (11/10/2026, fin de mission n°3)
 
@@ -85,7 +85,7 @@ sortie ; les auteurs flaggés seront contactés en une fois, plus tard.
 | DASS-21 | Dépression, anxiété et stress | 🚧 | ✅ (avec conditions) | ⏳ | 🟠 C | #2 | sévérité par sous-échelle → étendre `Subscore` |
 | ATQ | Pensées automatiques | 📋 (6) | ❓ | 🚫 | 🟢 A | Bientôt · 77 v. | |
 | PDSS | Sévérité du trouble panique | ✅ | 🔒 | 🔗 | 🟢 A | Bientôt · 62 v. | PDSS-SR, VF MSSS Québec 2019 (aucune VF France) ; seuil ≥ 9 (Roberge 2022). Recette OK (Adrien, 29/09/2026) ; cross-check a posteriori sur la version Roberge (demandée, MEL-339). © Shear : usage commercial à demander (✉️) — cf. MEL-324 |
-| DERS | Régulation émotionnelle | 🚧 | ❓ | 🚫 | 🟡 B | #14 | reverse + subscores |
+| DERS | Régulation émotionnelle | 🔵 | ❓ | 🔗 | 🟡 B | #14 | fiche `ders/ders.md` ; DERS-F (Dan-Glauser & Scherer 2013, PDF Université de Genève) trouvée par la recherche complémentaire ; clé Gratz & Roemer 2004 ; pas de seuil ; implémentée par Claude (11/10/2026, mission 3), recette staging à confirmer ; MEL-325 (James) commentée |
 | TAS-20 | Alexithymie de Toronto | 📋 (10) | 🔒 | 🚫 | 🟡 B | #37 | reverse + 3 subscores |
 | LEC-5 | Liste des événements de vie (DSM-5) | 🚧 | ✅ | ⏳ | 🟠 C | Absent | couplée à la PCL-5 en clinique (identification de l'événement de référence) — cf. `pcl-5/pcl-5.md` §13 ; pas de score : 17 événements × 6 modalités (vécu / témoin / appris / cadre pro / pas sûr / sans objet) → widget multi-choix par item à créer ; VF Cn2r à sourcer ; priorité à rediscuter (équipe) |
 | ASQ-SF | Styles d'attachement | 🔍 | ❓ | 🚫 | — | #10 | |
@@ -365,7 +365,7 @@ Statut de droits de **chacune des 167 échelles** du tableau, établi par recher
 | CY-BOCS | ❓ | Goodman et al. 1997 (Y-BOCS : OCD Scales, LLC ?) | Détenteur formel inconnu ; la Y-BOCS adulte serait sous licence d'OCD Scales, LLC | VF à vérifier | À identifier ; hétéro-évaluation |
 | DAS | ❓ | Weissman & Beck 1978 | Aucune phrase de licence trouvée | VF à vérifier | À identifier |
 | DBAS | 🔒 | C. M. Morin (Université Laval) | ePROVIDE (Mapi) : « distributed by Mapi Research Trust » ; « Commercial users & IT companies: Fees may apply… license agreement » | VF probable (équipe francophone de Morin) à vérifier | Demande de licence Mapi (MEL-351) avant toute implémentation |
-| DERS | ❓ | Gratz & Roemer 2004 | Aucune phrase de licence trouvée | À vérifier | À identifier |
+| DERS | ❓ | Gratz & Roemer 2004 | Aucune phrase de licence trouvée | DERS-F validée (UNIGE, PDF public) | Implémentée (mission 3) |
 | DIB-R | ❓ | Zanarini et al. 1989 | Aucune phrase de licence trouvée | VF validée 2023 en accès libre (PMC10506241) | À identifier ; entretien |
 | ECAB | ✉️ | Pélissolo & Naja 1996 ; fiche © HAS 2007 | Fiche publique HAS, aucune phrase de licence sur l'instrument | Originale FR (fiche HAS 2007) | Implémentée (mission 3) |
 | ECAP | ❓ | L. Véra | Aucune source en ligne | Non trouvée | À identifier |
