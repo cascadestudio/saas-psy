@@ -11,7 +11,24 @@
 
 ## Tableau de bord
 
-**✅ 12 validées · 🔵 22 implémentées · 🚧 5 en cours · 📋 2 prévues · 🔍 78 à instruire · ⬜ 17 non planifiées · 🚫 31 écartées** (167 échelles, dont 83 ajoutées depuis le catalogue « Apprendre la psychologie » le 10/10/2026)
+**✅ 12 validées · 🔵 22 implémentées · 🚧 5 en cours · 📋 2 prévues · 🔍 80 à instruire · ⬜ 17 non planifiées · 🚫 29 écartées** (167 échelles, dont 83 ajoutées depuis le catalogue « Apprendre la psychologie » le 10/10/2026)
+
+### Potentiel publiable : où en sont les 167 échelles ? (11/10/2026, fin de mission n°3)
+
+Les statuts (🔍 « à instruire », ⬜…) disent où en est le **travail** ; ce tableau dit ce qui est **publiable** et ce qui débloque chaque groupe. Somme = 167.
+
+| Groupe | Nb | Ce qui débloque | Échelles |
+| --- | --- | --- | --- |
+| **Dans l'app** (✅ validées + 🔵 implémentées) | **34** | Recette de Clément (🔵 → ✅) | voir tableau ci-dessous |
+| **Publiables après une action documentaire** (droits sans protection explicite, texte FR introuvable en ligne) | **32** | Clément photographie le texte en bibliothèque (section « Actions documentaires »), puis Claude implémente | PPAG, FQ, ACQ, BSQ, RAS, TAPIS, Échelle d'infériorité, LPO, CAC, Quatre rituels cibles, QPII, III, OBQ, MOCI, LAO, DAS, ATQ, ECAP, QCI, QdV Marks, HAq-II, ERT, Attentes thérapeutiques, PDQ-4, BPQ, ASQ-SF, DERS, BIS (Birchwood), FFMQ, CPTS-RI, Sociotropie-autonomie, FMPS |
+| **Publiables après une évolution technique** (texte et droits OK, mécanisme absent de l'app) | **11** | Adrien (profil de sous-scores, curseur 0-100, cotation double, ipsatif…) — MEL-356 | DES, DASS-21, LEC-5, MIA, BCIS, BAVQ-R, STORI, SNAP-IV, Q-EDD, SVS, PVQ-RR |
+| **Publiables après accord des détenteurs de droits** (🔒 : autorisation ou licence obligatoire) | **21** | Demandes groupées — MEL-351 | ISI, PSQI, MAAS, Fusion pensée-forme, SCAS, RCADS, SDS (Sheehan), ESS, AQ, EQ, RAADS-R, PID-5, MDQ, EAT-26, EDS-R, WHO-5, EPDS, TAS-20, COPSOQ, DBAS, MEQ-SA |
+| Version française introuvable | 9 | Aucune VF trouvée (ou VF non commerciale) ; à rouvrir si une VF apparaît | SCT, SCQ, EDQ, SPRS, ASA-27, CAS (colère), BIG-5, BIS-11, FSQ |
+| Hétéro-évaluations et entretiens | 23 | Un mode « passation en séance » (décision produit) | CY-BOCS, HDRS, MADRS, HAM-A, CDSS, MES, ERD, HARD, Covi, Test d'évitement, SUMD, BPRS, CPRS, NOSIE, SANS / SAPS, PAS, IPDE, DIB-R, MINI, HSRS, GAS (Spitzer), EGF, CGI |
+| Non publiables (💰 payantes, refus, hors champ) | 8 | — | ADHD-RS, CAT, FSS, IAT, TCI, RIASEC, THI, IES-R |
+| 🚫 Écartées (💰, outil maison, licence incompatible) | 29 | — | ASSQ, CDI, YSQ-L3, YSQ-S3, SCID-II-PQ, ASTA-20, SDQ, MBI, TOMQ-36, MSQ, EDI-2, QPC-L, QPC-S, BDI, BAI, BHS, BSS, EAT-40, CDRS-R, MASC, IASTA-Y, CDI (enfant), HAD, Minimult, EPI, NEO-PI-R, SAS-SR, GHQ, SCL-90-R |
+
+**Potentiel publiable à terme : 98 échelles** = 34 dans l'app + 32 après bibliothèque + 11 après évolution technique + 21 après accord de droits (sans compter les 23 hétéro-évaluations). **Potentiel sans dépendre de tiers : 66** (app + bibliothèque). Une recherche complémentaire (agents) est en cours sur les 32 échelles « bibliothèque » : celles dont le texte serait trouvé en ligne passeront directement en implémentation.
 
 **Rattrapage Mentaal : 13/42.** Le plafond n'est pas 74 : sur leur catalogue
 disponible, 12 sont écartées d'office (payantes, outils maison Mentaal, ou
@@ -154,8 +171,8 @@ sortie ; les auteurs flaggés seront contactés en une fois, plus tard.
 | MAAS | Échelle d'attention et de pleine conscience | 🔍 | 🔒 | 🚫 | — | Catalogue | [ALP] domaine à définir (pleine conscience) |
 | FFMQ | Questionnaire des cinq facettes de la pleine conscience | 🔍 | ❓ | 🚫 | — | Absent | [ALP] domaine à définir (pleine conscience) |
 | Fusion pensée-forme | Échelle de fusion pensée-forme | 🔍 | 🔒 | 🚫 | — | Absent | [ALP] domaine Troubles alimentaires (validé, pas encore créé) |
-| DBAS | Échelle des croyances et attitudes dysfonctionnelles à propos du sommeil | 🚫 | 🔒 | 🚫 | — | Catalogue | [ALP] « CAS » chez Mentaal ; **🔒 explicite (mission 3, 11/10/2026)** : distribuée par Mapi Research Trust (ePROVIDE), « commercial users & IT companies: Fees may apply… license agreement » ; VF CIRRIS « © Morin 1993, reproduit avec permission » → MEL-351 |
-| MEQ-SA | Questionnaire de chronotype révisé | 🚫 | 🔒 | 🚫 | — | Absent | [ALP] **🔒 (mission 3, 11/10/2026)** : la fiche ATS indique « Freely available for non-profit use » (contact : J. Horne) → usage commercial non couvert, MEL-351 ; de plus VF bloquée : validation Taillard et al. 2004 inaccessible, deux traductions divergentes (CHU Besançon avec erreur à l'item 9 ; Réseau Morphée) |
+| DBAS | Échelle des croyances et attitudes dysfonctionnelles à propos du sommeil | 🔍 | 🔒 | 🚫 | — | Catalogue | [ALP] « CAS » chez Mentaal ; **🔒 explicite (mission 3, 11/10/2026)** : distribuée par Mapi Research Trust (ePROVIDE), « commercial users & IT companies: Fees may apply… license agreement » ; VF CIRRIS « © Morin 1993, reproduit avec permission » → MEL-351 |
+| MEQ-SA | Questionnaire de chronotype révisé | 🔍 | 🔒 | 🚫 | — | Absent | [ALP] **🔒 (mission 3, 11/10/2026)** : la fiche ATS indique « Freely available for non-profit use » (contact : J. Horne) → usage commercial non couvert, MEL-351 ; de plus VF bloquée : validation Taillard et al. 2004 inaccessible, deux traductions divergentes (CHU Besançon avec erreur à l'item 9 ; Réseau Morphée) |
 | Q-EDD | Questionnaire for Eating Disorder Diagnosis | 🔍 | ❓ | 🚫 | — | Absent | [ALP] domaine Troubles alimentaires ; ⛔ **mécanisme (mission 3)** : algorithme diagnostique multi-troubles (pas un score) ; VF sur EM-consulte (abonnement) |
 | CAST | Cannabis Abuse Screening Test | 🔵 | ✉️ | 🔗 | 🟢 A | Absent | [ALP] fiche `cast/cast.md` ; version définitive OFDT (Note 2013-02, 12 mois, 0-4), seuils < 3 / 3-6 / ≥ 7 ; version HAS oui/non écartée ; implémentée par Claude (11/10/2026) ; recette Claude staging conforme, recette Clément à faire |
 | HONC | Test de Honc (Hooked on Nicotine Checklist) | 🔵 | ❓ | 🔗 | 🟢 A | Absent | [ALP] fiche `honc/honc.md` ; VF La Revue du Praticien (« Tabac et adolescents ») ; 10 items oui/non, ≥1 perte d'autonomie, ≥7 forte dépendance ; implémentée par Claude (11/10/2026, mission 3), recette staging Claude conforme (11/10/2026), recette Clément à faire |
