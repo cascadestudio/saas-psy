@@ -2093,6 +2093,69 @@ export const scales: Scale[] = [
         "Additionnez les 25 items (1-5) : le score total varie de 25 à 125 (usage unifactoriel). Les cinq sous-échelles de la fiche de cotation des auteurs (5 items chacune, de 5 à 25) sont fournies en sous-scores. Pas de seuil clinique fourni par les auteurs.",
     },
   },
+  {
+    id: "pdi",
+    acronym: "PDI",
+    label: "Inventaire de détresse péritraumatique",
+    domain: "trauma",
+    formType: "single-scale",
+    title: "PDI - Inventaire de détresse péritraumatique",
+    description:
+      "Un questionnaire de 13 items évaluant la détresse émotionnelle et physique ressentie pendant un événement traumatogène et immédiatement après",
+    category: "Traumatismes",
+    estimatedTime: "5 minutes",
+    longDescription:
+      "L'Inventaire de détresse péritraumatique (PDI, Peritraumatic Distress Inventory) est un auto-questionnaire de 13 items développé par Brunet et al. (2001) pour évaluer les réactions de détresse émotionnelle et physique au moment d'un événement traumatique et dans les minutes et les heures qui suivent. Une détresse péritraumatique élevée est un facteur de risque de développer un trouble de stress post-traumatique. Chaque item est coté de 0 (pas du tout vrai) à 4 (extrêmement vrai) ; le score total varie de 0 à 52. Un score total ≥ 15 indique une détresse péritraumatique significative. Traduction française et validation par Jehel et al. (2005).",
+    instructions:
+      "Complétez s'il vous plaît les énoncés qui suivent en choisissant la réponse qui correspond au mieux à ce que vous avez ressenti pendant et immédiatement après l'événement critique.\n\nSi une proposition ne s'applique pas à votre expérience de l'événement, alors choisissez la réponse « Pas du tout vrai ».",
+    persistentInstructions:
+      "Pendant et immédiatement après l'événement critique :",
+    copyrightAttribution:
+      "PDI — Brunet, Weiss, Metzler et al. (2001), American Journal of Psychiatry ©2001. Traduction française et validation : Jehel et al. (2005), Canadian Journal of Psychiatry. Domaine public (INSPQ). Mise en page : Centre national de ressources et de résilience (Cn2r).",
+    higherIsBetter: false,
+    questions: [
+      "Je me sentais totalement incapable de faire quoi que ce soit.",
+      "Je ressentais de la tristesse et du chagrin.",
+      "Je me sentais frustré(e) et en colère car je ne pouvais rien faire de plus.",
+      "J'avais peur pour ma propre sécurité.",
+      "Je me sentais coupable.",
+      "J'avais honte de mes réactions émotionnelles.",
+      "J'étais inquiet pour la sécurité des autres.",
+      "J'avais l'impression de perdre le contrôle de mes émotions.",
+      "J'avais envie d'uriner et d'aller à la selle.",
+      "J'étais horrifié(e) par ce que j'avais vu.",
+      "J'avais des réactions physiques comme des sueurs, des tremblements et des palpitations.",
+      "J'étais sur le point de m'évanouir.",
+      "Je pensais que j'allais mourir.",
+    ],
+    answerScales: {
+      intensity: [
+        { value: 0, label: "Pas du tout vrai" },
+        { value: 1, label: "Un peu vrai" },
+        { value: 2, label: "Plutôt vrai" },
+        { value: 3, label: "Très vrai" },
+        { value: 4, label: "Extrêmement vrai" },
+      ],
+    },
+    scoring: {
+      ranges: [
+        {
+          min: 0,
+          max: 14,
+          interpretation: "Détresse péritraumatique non significative",
+        },
+        {
+          min: 15,
+          max: 52,
+          interpretation: "Détresse péritraumatique significative",
+        },
+      ],
+      maxScore: 52,
+      method:
+        "Additionnez les scores de chaque item (0-4). Le score total varie de 0 à 52. Un score ≥ 15 indique une détresse péritraumatique significative.",
+      thresholdsSource: "Seuil de la fiche descriptive Cn2r",
+    },
+  },
 ];
 
 export function getScaleById(id: string): Scale | undefined {

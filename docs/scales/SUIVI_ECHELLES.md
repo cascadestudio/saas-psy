@@ -11,7 +11,7 @@
 
 ## Tableau de bord
 
-**✅ 12 validées · 🔵 8 implémentées · 🚧 6 en cours · 📋 2 prévues · 🔍 87 à instruire · ⬜ 24 non planifiées · 🚫 28 écartées** (167 échelles, dont 83 ajoutées depuis le catalogue « Apprendre la psychologie » le 10/10/2026)
+**✅ 12 validées · 🔵 9 implémentées · 🚧 6 en cours · 📋 2 prévues · 🔍 86 à instruire · ⬜ 24 non planifiées · 🚫 28 écartées** (167 échelles, dont 83 ajoutées depuis le catalogue « Apprendre la psychologie » le 10/10/2026)
 
 **Rattrapage Mentaal : 13/42.** Le plafond n'est pas 74 : sur leur catalogue
 disponible, 12 sont écartées d'office (payantes, outils maison Mentaal, ou
@@ -171,7 +171,7 @@ sortie ; les auteurs flaggés seront contactés en une fois, plus tard.
 | TAPIS | Test des pensées en interaction sociale (Glass) | 🔍 | ❓ | — | Absent | [ALP] domaine anxiété |
 | Échelle d'infériorité | Échelle d'infériorité (Yao) | 🔍 | ❓ | — | Absent | [ALP] original français |
 | Sociotropie-autonomie | Échelle de sociotropie-autonomie (Beck) | 🔍 | ❓ | — | Absent | [ALP] domaine humeur |
-| PDI | Inventaire de détresse péritraumatique | 🔍 | ✅ | — | Catalogue | [ALP] domaine trauma |
+| PDI | Inventaire de détresse péritraumatique | 🔵 | ✅ | 🟢 A | Catalogue | [ALP] fiche `pdi/pdi.md` ; fiche Cn2r (version Jehel 2005), 13 items 0-4, seuil ≥ 15 ; implémentée par Claude (11/10/2026), recette staging à confirmer |
 | CPTS-RI | Index de réaction au stress post-traumatique de l'enfant | 🔍 | ❓ | — | Catalogue | [ALP] domaine trauma ; enfant |
 | SCAS | Questionnaire d'anxiété pour enfants de Spence | 🔍 | 🔒 | — | Catalogue | [ALP] enfant |
 | RCADS | Échelle d'anxiété et de dépression pour enfants révisée (Chorpita) | 🔍 | 🔒 | — | Catalogue | [ALP] RCADS-47 chez Mentaal ; enfant |
@@ -417,7 +417,7 @@ Statut de droits de **chacune des 167 échelles** du tableau, établi par recher
 | MEQ-SA | ✅ | Horne & Östberg 1976 | « freely available, so it can be used without permission » (ATS, sleep questionnaires) | VF Taillard et al. (travailleurs français) à vérifier | Domaine à créer (sommeil) |
 | PCL-5 | ✅ | National Center for PTSD ; VF Ashbaugh et al. 2016 (CC BY) | Domaine public ; traduction CC BY | VF validée | Implémentée |
 | PCL-S | ✅ | National Center for PTSD | Domaine public (NCPTSD) | VF Yao et al. 2003 sur abonnement | Bloquée (VF inaccessible) |
-| PDI | ✅ | A. Brunet et al. 2001 (VF originale) | « in the public domain, and the source must be mentioned » (INSPQ) ; VF diffusée par le Cn2r (cn2r.fr/…/PDI_Cn2r.pdf) | Originale FR (Brunet 2001), Cn2r | Implémentable |
+| PDI | ✅ | A. Brunet et al. 2001 (VF originale) | « in the public domain, and the source must be mentioned » (INSPQ) ; VF diffusée par le Cn2r (cn2r.fr/…/PDI_Cn2r.pdf) | VF Jehel 2005 (Cn2r) ; variante québécoise INSPQ distincte | Implémentable |
 | PHQ-9 | ✅ | Pfizer / Spitzer, Kroenke et al. | Idem GAD-7 | VF Pfizer | Implémentée |
 | RIASEC | ✅ (si O*NET Interest Profiler) | US Department of Labor (O*NET) | Interest Profiler Short Form sous CC BY 4.0 (onetcenter.org) ; le Self-Directed Search de Holland est chez PAR (💰) | VF à identifier | Hors champ clinique ; vérifier la version |
 | RSES | ✅ | M. Rosenberg (University of Maryland) ; VF © Vallières & Vallerand 1990 | « now in the public domain, meaning you may use it without charge » (socy.umd.edu) ; VF sous copyright des traducteurs | VF validée | Implémentée ; confirmation traducteurs recommandée |
