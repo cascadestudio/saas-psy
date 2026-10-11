@@ -11,7 +11,7 @@
 
 ## Tableau de bord
 
-**✅ 12 validées · 🔵 16 implémentées · 🚧 5 en cours · 📋 2 prévues · 🔍 82 à instruire · ⬜ 22 non planifiées · 🚫 28 écartées** (167 échelles, dont 83 ajoutées depuis le catalogue « Apprendre la psychologie » le 10/10/2026)
+**✅ 12 validées · 🔵 17 implémentées · 🚧 5 en cours · 📋 2 prévues · 🔍 81 à instruire · ⬜ 22 non planifiées · 🚫 28 écartées** (167 échelles, dont 83 ajoutées depuis le catalogue « Apprendre la psychologie » le 10/10/2026)
 
 **Rattrapage Mentaal : 13/42.** Le plafond n'est pas 74 : sur leur catalogue
 disponible, 12 sont écartées d'office (payantes, outils maison Mentaal, ou
@@ -176,7 +176,7 @@ sortie ; les auteurs flaggés seront contactés en une fois, plus tard.
 | CPTS-RI | Index de réaction au stress post-traumatique de l'enfant | 🔍 | ❓ | 🚫 | — | Catalogue | [ALP] domaine trauma ; enfant |
 | SCAS | Questionnaire d'anxiété pour enfants de Spence | 🔍 | 🔒 | 🚫 | — | Catalogue | [ALP] enfant |
 | RCADS | Échelle d'anxiété et de dépression pour enfants révisée (Chorpita) | 🔍 | 🔒 | 🚫 | — | Catalogue | [ALP] RCADS-47 chez Mentaal ; enfant |
-| SCARED-R | Grille d'évaluation des troubles anxieux (SCARED-R, 51 items) | 🔍 | ❓ | 🚫 | — | Absent | [ALP] ≠ SCARED (Birmaher) ; VF SCARED-R : Bouvard et al. 2013 ; enfant/ado |
+| SCARED-R | Grille d'évaluation des troubles anxieux (SCARED-R, 51 items) | 🔵 | ❓ | 🔗 | 🟡 B | Absent | [ALP] porté en **SCARED-R-51** (© Martin & Gosselin 2011, fr-CA, hébergé par Pittsburgh) ; fiche `scared-r/scared-r.md` ; 51 items 0-2, 10 sous-scores, sans seuil ; VF Bouvard 2013 (66 items) non accessible ; implémentée par Claude (11/10/2026, mission 3), recette staging à confirmer |
 | BCIS | Échelle d'insight cognitif de Beck | 🔍 | ❓ | 🚫 | — | Absent | [ALP] domaine à définir (psychose) |
 | BIS (Birchwood) | Échelle d'insight de Birchwood | 🔍 | ❓ | 🚫 | — | Absent | [ALP] domaine à définir (psychose) |
 | BAVQ-R | Échelle révisée des croyances au sujet des voix | 🔍 | ❓ | 🚫 | — | Absent | [ALP] ≠ BVAQ (alexithymie) ; domaine à définir (psychose) |
@@ -385,7 +385,7 @@ Statut de droits de **chacune des 167 échelles** du tableau, établi par recher
 | Quatre rituels cibles | ❓ | I. Marks 1980 | Aucune source en ligne | Non trouvée | À identifier |
 | RAS | ❓ | S. A. Rathus 1973 | Droits non établis | VF non trouvée en accès libre | À identifier |
 | SANS / SAPS | ❓ | N. C. Andreasen (University of Iowa) | « No information found » sur le coût / la licence (McGill MAPPRO) | VF à vérifier | À identifier ; hétéro-évaluation |
-| SCARED-R | ❓ | P. Muris et al. | Aucune phrase de licence trouvée | VF Bouvard, Roulin & Denis 2013 (Psychologica Belgica, accès libre) — items non reproduits dans l’article | À identifier |
+| SCARED-R | ❓ | P. Muris et al. | « © Martin, A. et Gosselin, P. (2011) », aucune phrase de licence | SCARED-R-51 fr-CA (Martin & Gosselin) ; Bouvard 2013 = 66 items, items non publiés | Implémentée (mission 3, version 51 items) |
 | SCQ | ❓ | Wells et al. 1993 (Social Cognitions Questionnaire) | Aucune phrase de licence trouvée | Non trouvée | À identifier |
 | SCT | ❓ | « Test de confiance en soi » (Mentaal) — auteur non identifié | Aucune source identifiée | Non trouvée | À identifier |
 | Sociotropie-autonomie | ❓ | Beck et al. 1983 (Beck Institute) | Document complet diffusé par le Beck Institute, sans phrase de licence trouvée | VF à vérifier | À identifier |
