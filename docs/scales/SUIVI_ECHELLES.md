@@ -11,7 +11,7 @@
 
 ## Tableau de bord
 
-**✅ 12 validées · 🔵 11 implémentées · 🚧 5 en cours · 📋 2 prévues · 🔍 85 à instruire · ⬜ 24 non planifiées · 🚫 28 écartées** (167 échelles, dont 83 ajoutées depuis le catalogue « Apprendre la psychologie » le 10/10/2026)
+**✅ 12 validées · 🔵 12 implémentées · 🚧 5 en cours · 📋 2 prévues · 🔍 84 à instruire · ⬜ 24 non planifiées · 🚫 28 écartées** (167 échelles, dont 83 ajoutées depuis le catalogue « Apprendre la psychologie » le 10/10/2026)
 
 **Rattrapage Mentaal : 13/42.** Le plafond n'est pas 74 : sur leur catalogue
 disponible, 12 sont écartées d'office (payantes, outils maison Mentaal, ou
@@ -80,7 +80,7 @@ sortie ; les auteurs flaggés seront contactés en une fois, plus tard.
 | BIG-5 | Cinq grands facteurs | 🔍 | ✅ (si version IPIP) | ⏳ | — | #33 | items IPIP libres — version exacte à confirmer ; **bloquée VF (11/10/2026)** : aucune version française validée de l'IPIP (50 items ou Mini-IPIP) trouvée avec son texte ; le BFI-Fr (Plaisant et al.) n'est pas IPIP (droits à instruire) |
 | PPAG | Phobie, panique, anxiété généralisée | 🔍 | ❓ | 🚫 | — | #35 | |
 | SCQ | Cognitions sociales | 🔍 | ❓ | 🚫 | — | #39 | |
-| GAD-SBQ | Comportements sécurisants du TAG | 🔍 | ❓ | 🚫 | — | #40 | |
+| GAD-SBQ | Comportements sécurisants du TAG | 🔵 | ✅ | 🔗 | 🟢 A | #40 | porté sous l'id **qcs-tag** (QCS-TAG, version FR abrégée validée) ; fiche `qcs-tag/qcs-tag.md` ; formulaire du labo Dugas (UQO) ; 10 items 1-5 avec exemples, somme 10-50 sans seuil ; implémentée par Claude (11/10/2026, mission 3), recette staging à confirmer |
 | CAT | Assertivité de Chalvin | 🔍 | 💰 | 🚫 | — | #41 | |
 | EDQ | Dépendance affective | 🔍 | ❓ | 🚫 | — | #42 | |
 | COPSOQ | Risques psychosociaux | 🔍 | ✉️ | ⏳ | — | #51 | libre non commercial — usage commercial à vérifier |
@@ -358,7 +358,7 @@ Statut de droits de **chacune des 167 échelles** du tableau, établi par recher
 | FFMQ | ❓ | Baer et al. 2006 | Aucune phrase de licence trouvée ; VF hébergée par l'ACBS (contextualscience.org) | VF Heeren et al. 2011 (contextualscience.org) | À identifier |
 | FMPS | ❓ | R. O. Frost 1990 | Droits non établis | VF Rhéaume et al. non accessible | À identifier |
 | FQ | ❓ | Marks & Mathews 1979 | Droits non établis | VF Cottraux 1987, publiée seulement dans Guelfi (1997) | Bloquée (VF) ; à identifier |
-| GAD-SBQ | ❓ | Auteur à confirmer (questionnaire des comportements de sécurité du TAG) | Aucune phrase de licence trouvée | Non trouvée | À identifier |
+| GAD-SBQ | ✅ | Marcotte-Beaumier, Hébert & Dugas 2020 / laboratoire Dugas (UQO) | « peuvent être téléchargés et utilisés gratuitement » (uqo.ca/anxiete/outils, 11/10/2026) | Originale FR (QCS-TAG, UQO) | Implémentée (mission 3) |
 | GAS (Spitzer) | ❓ | Endicott, Spitzer et al. 1976 | Aucune phrase de licence trouvée | VF à vérifier | À identifier ; hétéro-évaluation |
 | HAq-II | ❓ | Luborsky et al. 1996 (University of Pennsylvania) | Article et guide de cotation diffusés par l'UPenn, sans phrase de licence ; traduction Cottraux non publiée | Non publiée | À identifier |
 | HARD | ❓ | Rufin & Ferreri 1984 | Aucune source de licence en ligne | Originale FR, texte non trouvé | À identifier ; hétéro-évaluation |

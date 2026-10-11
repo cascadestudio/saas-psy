@@ -2266,6 +2266,61 @@ export const scales: Scale[] = [
       thresholdsSource: "Règle de cotation du formulaire ASRS-V1.1 (NYU / Harvard / OMS)",
     },
   },
+  {
+    id: "qcs-tag",
+    acronym: "QCS-TAG",
+    label: "Questionnaire sur les comportements sécurisants du trouble d'anxiété généralisée",
+    patientIntroSubtitle: null,
+    domain: "anxiete",
+    formType: "single-scale",
+    title: "QCS-TAG - Questionnaire sur les comportements sécurisants du trouble d'anxiété généralisée",
+    description:
+      "Un questionnaire de 10 items évaluant les comportements sécurisants associés au trouble d'anxiété généralisée au cours du dernier mois",
+    category: "Anxiété généralisée",
+    estimatedTime: "3-5 minutes",
+    longDescription:
+      "Le Questionnaire sur les comportements sécurisants du trouble d'anxiété généralisée (QCS-TAG) est la version abrégée en 10 items, validée auprès d'un échantillon clinique par Marcotte-Beaumier, Hébert et Dugas (2020), du questionnaire de Hebert et Dugas (2019). Il évalue les comportements sécurisants (évitement, recherche de réassurance, vérification, procrastination, surpréparation) au cours du dernier mois. Chaque item, accompagné d'un exemple, est coté de 1 (pas du tout typique de moi) à 5 (extrêmement typique de moi) ; le score total varie de 10 à 50. Pas de seuil clinique fourni par les auteurs.",
+    instructions:
+      "Les énoncés suivants présentent des comportements sécurisants rapportés par des personnes ayant un trouble d'anxiété généralisée. Veuillez indiquer jusqu'à quel point chacun de ces comportements est typique de vous au cours du dernier mois en choisissant la réponse appropriée. Il n'y a pas de bonne ou mauvaise réponse.",
+    persistentInstructions:
+      "Veuillez indiquer jusqu'à quel point chacun de ces comportements est typique de vous au cours du dernier mois.",
+    copyrightAttribution:
+      "QCS-TAG — Marcotte-Beaumier, Hébert & Dugas (2020), Revue canadienne des sciences du comportement, 52, 324-330 ; version originale : Hebert & Dugas (2019), Cognitive and Behavioral Practice. Laboratoire des troubles d'anxiété (UQO).",
+    higherIsBetter: false,
+    questions: [
+      "J'évite fréquemment des situations dont l'issue pourrait être négative. Ex : Éviter d'aller manger dans un nouveau restaurant",
+      "À répétition, je refais ou change des choses à des tâches que j'ai déjà terminées. Ex : Reprendre un projet que j'ai déjà fini et y apporter des changements.",
+      "Je cherche beaucoup d'information afin de me sentir rassuré(e). Ex : Vérifier les rapports de circulation afin de savoir s'il y a eu un accident sur la route qu'emprunte mon conjoint(e).",
+      "J'évite de m'engager totalement dans un emploi, un projet ou une relation parce que je ne suis pas certain(e) de comment ça va se passer. Ex : Refuser de m'impliquer dans un projet ambitieux au travail.",
+      "Je cherche constamment de la rassurance à cause de mes inquiétudes. Ex : Demander à mon (ma) conjoint(e) de me rassurer à propos de mes inquiétudes face à notre relation.",
+      "Je vérifie constamment pour m'assurer que j'ai bien fait une tâche ou un projet correctement. Ex : Vérifier un courriel plusieurs fois pour m'assurer que j'y ai joint le bon document.",
+      "Je remets souvent une prise de décision ou un comportement à cause de mes inquiétudes. Ex : Retarder un appel téléphonique à cause de mes inquiétudes.",
+      "J'évite constamment des situations dans lesquelles je me sens incertain(e). Ex : Éviter des fêtes où des gens que je ne connais pas sont présents.",
+      "Je recherche souvent des gens en particulier, des objets ou des routines dans le but de me sentir plus « certain(e) ». Ex : Me rendre seulement à une fête si un(e) tel(le) ami(e) s'y rend avec moi.",
+      "Je prends beaucoup de temps et d'effort pour me préparer à des situations pour lesquelles un résultat négatif peut arriver. Ex : Avant un rendez-vous chez le médecin, passer des heures à faire des recherches sur internet à propos de symptômes.",
+    ],
+    answerScales: {
+      intensity: [
+        { value: 1, label: "Pas du tout typique de moi" },
+        { value: 2, label: "Un peu typique de moi" },
+        { value: 3, label: "Modérément typique de moi" },
+        { value: 4, label: "Plutôt typique de moi" },
+        { value: 5, label: "Extrêmement typique de moi" },
+      ],
+    },
+    scoring: {
+      ranges: [
+        {
+          min: 10,
+          max: 50,
+          interpretation: "Pas de seuil clinique fourni par les auteurs.",
+        },
+      ],
+      maxScore: 50,
+      method:
+        "Additionnez les 10 items (1-5) : le score total varie de 10 à 50. Plus il est élevé, plus le recours aux comportements sécurisants est important. Pas de seuil clinique fourni par les auteurs.",
+    },
+  },
 ];
 
 export function getScaleById(id: string): Scale | undefined {
