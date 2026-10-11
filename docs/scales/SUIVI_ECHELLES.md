@@ -11,7 +11,7 @@
 
 ## Tableau de bord
 
-**✅ 12 validées · 🔵 22 implémentées · 🚧 5 en cours · 📋 2 prévues · 🔍 80 à instruire · ⬜ 18 non planifiées · 🚫 28 écartées** (167 échelles, dont 83 ajoutées depuis le catalogue « Apprendre la psychologie » le 10/10/2026)
+**✅ 12 validées · 🔵 22 implémentées · 🚧 5 en cours · 📋 2 prévues · 🔍 78 à instruire · ⬜ 17 non planifiées · 🚫 31 écartées** (167 échelles, dont 83 ajoutées depuis le catalogue « Apprendre la psychologie » le 10/10/2026)
 
 **Rattrapage Mentaal : 13/42.** Le plafond n'est pas 74 : sur leur catalogue
 disponible, 12 sont écartées d'office (payantes, outils maison Mentaal, ou
@@ -72,23 +72,23 @@ sortie ; les auteurs flaggés seront contactés en une fois, plus tard.
 | TAS-20 | Alexithymie de Toronto | 📋 (10) | 🔒 | 🚫 | 🟡 B | #37 | reverse + 3 subscores |
 | LEC-5 | Liste des événements de vie (DSM-5) | 🚧 | ✅ | ⏳ | 🟠 C | Absent | couplée à la PCL-5 en clinique (identification de l'événement de référence) — cf. `pcl-5/pcl-5.md` §13 ; pas de score : 17 événements × 6 modalités (vécu / témoin / appris / cadre pro / pas sûr / sans objet) → widget multi-choix par item à créer ; VF Cn2r à sourcer ; priorité à rediscuter (équipe) |
 | ASQ-SF | Styles d'attachement | 🔍 | ❓ | 🚫 | — | #10 | |
-| SCT | Test de confiance en soi | 🔍 | ❓ | 🚫 | — | #15 | |
+| SCT | Test de confiance en soi | 🔍 | ❓ | 🚫 | — | #15 | ⛔ **source introuvable (mission 3)** : « Self-Confidence Test » de Mentaal, auteur non identifié |
 | ADHD-RS | Évaluation du TDAH | 🔍 | 💰 | 🚫 | — | #16 | DuPaul/Guilford — alternative libre : ASRS |
 | PDQ-4 | Diagnostic des personnalités | 🔍 | ❓ | 🚫 | — | #24 | |
 | BPQ | Personnalité borderline | 🔍 | ❓ | 🚫 | — | #28 | |
 | CAQ | Évitements cognitifs | 🔵 | ✉️ | 🔗 | 🟡 B | #32 | porté sous l'id **QEC** ; fiche `qec/qec.md` ; original francophone (Gosselin et al. 2002), laboratoire Dugas (UQO) ; 25 items, total + 5 sous-scores, sans seuil ; implémentée par Claude (11/10/2026) ; recette Claude staging + Mentaal conforme (75 et sous-scores identiques), recette Clément à faire |
 | BIG-5 | Cinq grands facteurs | 🔍 | ✅ (si version IPIP) | ⏳ | — | #33 | items IPIP libres — version exacte à confirmer ; **bloquée VF (11/10/2026)** : aucune version française validée de l'IPIP (50 items ou Mini-IPIP) trouvée avec son texte ; le BFI-Fr (Plaisant et al.) n'est pas IPIP (droits à instruire) |
 | PPAG | Phobie, panique, anxiété généralisée | 🔍 | ❓ | 🚫 | — | #35 | |
-| SCQ | Cognitions sociales | 🔍 | ❓ | 🚫 | — | #39 | |
+| SCQ | Cognitions sociales | 🔍 | ❓ | 🚫 | — | #39 | ⛔ **VF introuvable (mission 3)** : Wells et al. 1993 |
 | GAD-SBQ | Comportements sécurisants du TAG | 🔵 | ✅ | 🔗 | 🟢 A | #40 | porté sous l'id **qcs-tag** (QCS-TAG, version FR abrégée validée) ; fiche `qcs-tag/qcs-tag.md` ; formulaire du labo Dugas (UQO) ; 10 items 1-5 avec exemples, somme 10-50 sans seuil ; implémentée par Claude (11/10/2026, mission 3), recette staging à confirmer |
 | CAT | Assertivité de Chalvin | 🔍 | 💰 | 🚫 | — | #41 | |
-| EDQ | Dépendance affective | 🔍 | ❓ | 🚫 | — | #42 | |
+| EDQ | Dépendance affective | 🔍 | ❓ | 🚫 | — | #42 | ⛔ **VF introuvable (mission 3)** : original espagnol (Lemos & Londoño 2006), aucune VF hors Mentaal |
 | COPSOQ | Risques psychosociaux | 🔍 | ✉️ | ⏳ | — | #51 | libre non commercial — usage commercial à vérifier |
-| SPRS | Cotation de la phobie sociale | 🔍 | ❓ | 🚫 | — | #55 | |
+| SPRS | Cotation de la phobie sociale | 🔍 | ❓ | 🚫 | — | #55 | ⛔ **VF introuvable (mission 3)** : Wells 1997 |
 | QAP | Attitudes face aux problèmes | 🔵 | ✉️ | 🔗 | 🟢 A | #56 | fiche `qap/qap.md` ; original francophone (Gosselin, Ladouceur & Pelletier 2005), formulaire et cotation du laboratoire Dugas (UQO) ; 12 items, total 12-60 sans seuil ; implémentée par Claude (11/10/2026) ; recette Claude staging + Mentaal conforme (Mentaal ajoute un seuil 48 non sourcé), recette Clément à faire |
 | CST | Stress de Cungi | 🔵 | ❓ | 🚫 | 🟢 A | #60 | fiche `cst/cst.md` ; **classe B** : version brève 11 items (Lefebvre Dalloz, d'après Cungi) à confronter au livre (Retz) ; Mentaal a 19 items ; bornes chevauchantes tranchées ; implémentée par Claude (11/10/2026, mission 3), recette staging à confirmer |
 | RIASEC | Intérêts professionnels | 🔍 | ✅ (si O*NET Interest Profiler) | ⏳ | — | #62 | modèle libre, version des items à vérifier |
-| ASA-27 | Anxiété de séparation adulte | 🔍 | ❓ | 🚫 | — | #63 | |
+| ASA-27 | Anxiété de séparation adulte | 🔍 | ❓ | 🚫 | — | #63 | ⛔ **VF introuvable (mission 3)** : versions DE/PT/ES/FA seulement |
 | FSS | Échelle des peurs | 🔍 | 💰 | 🚫 | — | #64 | |
 | IAT | Addiction à Internet | 🔍 | 💰 | 🚫 | — | #71 | Young/Stoelting — licence à vérifier |
 | ISI | Sévérité de l'insomnie | 🔍 | 🔒 | 🚫 | — | Non dispo | motif sommeil = trou Mentaal → opportunité |
@@ -99,11 +99,11 @@ sortie ; les auteurs flaggés seront contactés en une fois, plus tard.
 | EQ | Quotient empathique | ⬜ | 🔒 | 🚫 | 🟡 B | #11 | recode + reverse ; 2e passe : ⛔ usage commercial interdit sans autorisation (ARC, Cambridge Enterprise) |
 | PID-5 | Personnalité DSM-5 | ⬜ | 🔒 | 🚫 | — | #17 | 220 items (ou brève 25) — volume énorme ; 2e passe : ⛔ autorisation APA requise pour une application commerciale |
 | RAS | Affirmation de soi de Rathus | ⬜ | ❓ | 🚫 | 🟡 B | #21 | reverse + offset ; 2e passe : ⛔ aucune VF validée accessible ; droits non établis |
-| SNAP-IV | TDAH enfant | ⬜ | ✅ | ⏳ | 🟡 B | #23 | public enfant ; 2e passe : ⛔ seule VF trouvée marquée « non validée » |
+| SNAP-IV | TDAH enfant | ⬜ | ✅ | ⏳ | 🟡 B | #23 | public enfant ; ⛔ **mécanisme (mission 3)** : sévérité par sous-échelle sans score total (profil de sous-scores, à arbitrer avec Adrien, MEL-356) ; seule VF : formulaire CADDRA 2013 (ebmfrance) marqué « non validée » |
 | MDQ | Troubles de l'humeur | ⬜ | 🔒 | 🚫 | 🟡 B | #30 | criteriaCheck + oui/non ; droits UTMB, usage sur permission de l'auteur (tri du 10/10/2026) |
 | SCARED | Troubles anxieux enfant | 🔵 | ✉️ | 🔗 | 🟡 B | #34 | public enfant ; fiche `scared/scared.md` ; VF fr-CA University of Pittsburgh (version enfant ; parent archivée) ; 41 items 0-2, seuil ≥ 25 (> 30 plus spécifique), 5 sous-scores (seuils dans les libellés) ; implémentée par Claude (11/10/2026, mission 3), recette staging à confirmer |
 | PCL-S | État de stress post-traumatique | 🔵 | ✅ | 🔗 | 🟡 B | #36 | fiche `pcl-s/pcl-s.md` ; VF Yao, Cottraux et al. 2003 via INSPQ (domaine public) ; 17 items 1-5, seuil ≥ 44, sous-scores B/C/D ; méthode par critères non calculée (bloc criteriaCheck spécifique PCL-5) ; implémentée par Claude (11/10/2026, mission 3), recette staging à confirmer |
-| ASSQ | Dépistage TSA enfant | ⬜ | ❓ | 🚫 | 🟡 B | #38 | public enfant ; 2e passe : ⛔ aucune VF validée trouvée |
+| ASSQ | Dépistage TSA enfant | 🚫 | 💰 | 🚫 | 🟡 B | #38 | public enfant ; **💰 explicite (mission 3, 11/10/2026)** : Gillberg Neuropsychiatry Centre (gu.se) : « no longer available for free use… chargeable » via ESSENCE-IN ; aucune VF validée trouvée |
 | FMPS | Perfectionnisme de Frost | ⬜ | ❓ | 🚫 | 🟡 B | #45 | subscores ; 2e passe : ⛔ VF (Rhéaume et al.) non accessible ; droits non établis |
 | BAT-G | Burnout (version générale) | 🔵 | ✅ | 📥 | 🟡 B | #48 | fiche `bat/bat.md` (commune) ; version générale (personnes sans emploi) ; 22 items primaires + 10 secondaires ; seuils flamands non-travailleurs convertis en somme ; domaine Burn-out ; implémentée par Claude (11/10/2026, mission 3), recette staging à confirmer |
 | IES-R | Impact des événements | ⬜ | ❓ | 🚫 | 🟡 B | #49 | 3 subscores ; statut de droits contradictoire (Weiss & Marmar), tri du 10/10/2026 |
@@ -147,16 +147,16 @@ sortie ; les auteurs flaggés seront contactés en une fois, plus tard.
 | SAS-SR | Échelle d'adaptation sociale (Weissman) | 🚫 | 💰 | 🚫 | — | Absent | [ALP] éditeur : MHS |
 | GHQ | Questionnaire de santé générale (Goldberg) | 🚫 | 💰 | 🚫 | — | Absent | [ALP] éditeur : GL Assessment |
 | SCL-90-R | Liste de symptômes (Derogatis) | 🚫 | 💰 | 🚫 | — | Catalogue | [ALP] éditeur : Pearson |
-| CAS (colère) | Échelle clinique de colère (Clinical Anger Scale) | 🔍 | ❓ | 🚫 | — | Absent | [ALP] |
+| CAS (colère) | Échelle clinique de colère (Clinical Anger Scale) | 🔍 | ❓ | 🚫 | — | Absent | [ALP] ⛔ **VF introuvable (mission 3)** : Snell et al. 1995 |
 | ECAB | Échelle cognitive d'attachement aux benzodiazépines | 🔵 | ✉️ | 🔗 | 🟢 A | Absent | [ALP] fiche `ecab/ecab.md` ; fiche HAS 2007 (via OMéDIT Grand Est) ; 10 items V/F, item 10 inversé, seuil ≥ 6 ; implémentée par Claude (11/10/2026, mission 3), recette staging à confirmer |
 | ECAP | Échelle comportementale d'anxiété et phobie de Véra | 🔍 | ❓ | 🚫 | — | Catalogue | [ALP] |
 | DAS | Échelle d'attitudes dysfonctionnelles (Weissman et Beck) | 🔍 | ❓ | 🚫 | — | Catalogue | [ALP] |
 | MAAS | Échelle d'attention et de pleine conscience | 🔍 | 🔒 | 🚫 | — | Catalogue | [ALP] domaine à définir (pleine conscience) |
 | FFMQ | Questionnaire des cinq facettes de la pleine conscience | 🔍 | ❓ | 🚫 | — | Absent | [ALP] domaine à définir (pleine conscience) |
 | Fusion pensée-forme | Échelle de fusion pensée-forme | 🔍 | 🔒 | 🚫 | — | Absent | [ALP] domaine Troubles alimentaires (validé, pas encore créé) |
-| DBAS | Échelle des croyances et attitudes dysfonctionnelles à propos du sommeil | 🔍 | ❓ | 🚫 | — | Catalogue | [ALP] « CAS » chez Mentaal ; domaine à définir (sommeil) |
-| MEQ-SA | Questionnaire de chronotype révisé | 🔍 | ✅ | ⏳ | — | Absent | [ALP] domaine à définir (sommeil) ; **bloquée VF (11/10/2026)** : validation française (Taillard et al. 2004, seuils propres aux travailleurs français) inaccessible ; deux traductions françaises divergentes (CHU de Besançon, avec les réponses de l'item 9 recopiées de l'item 5 ; Réseau Morphée) ; SFRMS : version courte 5 items sans cotation ; items 1, 2, 10 sur échelle horaire graduée à adapter en options |
-| Q-EDD | Questionnaire for Eating Disorder Diagnosis | 🔍 | ❓ | 🚫 | — | Absent | [ALP] domaine Troubles alimentaires (validé, pas encore créé) |
+| DBAS | Échelle des croyances et attitudes dysfonctionnelles à propos du sommeil | 🚫 | 🔒 | 🚫 | — | Catalogue | [ALP] « CAS » chez Mentaal ; **🔒 explicite (mission 3, 11/10/2026)** : distribuée par Mapi Research Trust (ePROVIDE), « commercial users & IT companies: Fees may apply… license agreement » ; VF CIRRIS « © Morin 1993, reproduit avec permission » → MEL-351 |
+| MEQ-SA | Questionnaire de chronotype révisé | 🚫 | 🔒 | 🚫 | — | Absent | [ALP] **🔒 (mission 3, 11/10/2026)** : la fiche ATS indique « Freely available for non-profit use » (contact : J. Horne) → usage commercial non couvert, MEL-351 ; de plus VF bloquée : validation Taillard et al. 2004 inaccessible, deux traductions divergentes (CHU Besançon avec erreur à l'item 9 ; Réseau Morphée) |
+| Q-EDD | Questionnaire for Eating Disorder Diagnosis | 🔍 | ❓ | 🚫 | — | Absent | [ALP] domaine Troubles alimentaires ; ⛔ **mécanisme (mission 3)** : algorithme diagnostique multi-troubles (pas un score) ; VF sur EM-consulte (abonnement) |
 | CAST | Cannabis Abuse Screening Test | 🔵 | ✉️ | 🔗 | 🟢 A | Absent | [ALP] fiche `cast/cast.md` ; version définitive OFDT (Note 2013-02, 12 mois, 0-4), seuils < 3 / 3-6 / ≥ 7 ; version HAS oui/non écartée ; implémentée par Claude (11/10/2026) ; recette Claude staging conforme, recette Clément à faire |
 | HONC | Test de Honc (Hooked on Nicotine Checklist) | 🔵 | ❓ | 🔗 | 🟢 A | Absent | [ALP] fiche `honc/honc.md` ; VF La Revue du Praticien (« Tabac et adolescents ») ; 10 items oui/non, ≥1 perte d'autonomie, ≥7 forte dépendance ; implémentée par Claude (11/10/2026, mission 3), recette staging à confirmer |
 | LAO | Liste des activités obsessives-compulsives | 🔍 | ❓ | 🚫 | — | Absent | [ALP] domaine TOC |
@@ -168,7 +168,7 @@ sortie ; les auteurs flaggés seront contactés en une fois, plus tard.
 | OBQ | Questionnaire des croyances obsessionnelles (ICRO / QCO-87) | 🔍 | ❓ | 🚫 | — | Catalogue | [ALP] OBQ-44 chez Mentaal ; domaine TOC |
 | MOCI | Inventaire des obsessions-compulsions de Maudsley | 🔍 | ❓ | 🚫 | — | Catalogue | [ALP] domaine TOC |
 | ACQ | Questionnaire des cognitions agoraphobiques (Chambless) | 🔍 | ❓ | 🚫 | — | Catalogue | [ALP] domaine anxiété |
-| MIA | Inventaire de mobilité pour l'agoraphobie (Chambless) | 🔍 | ❓ | 🚫 | — | Catalogue | [ALP] domaine anxiété |
+| MIA | Inventaire de mobilité pour l'agoraphobie (Chambless) | 🔍 | ❓ | 🚫 | — | Catalogue | [ALP] domaine anxiété ; ⛔ **mécanisme (mission 3)** : double cotation « accompagné / seul » (libellés dual-scale figés sur la LSAS), demi-points, items « non applicable », score = moyenne sur ≥ 23 items → évolution Adrien (MEL-356) ; texte trouvé (gmfulevis) |
 | TAPIS | Test des pensées en interaction sociale (Glass) | 🔍 | ❓ | 🚫 | — | Absent | [ALP] domaine anxiété |
 | Échelle d'infériorité | Échelle d'infériorité (Yao) | 🔍 | ❓ | 🚫 | — | Absent | [ALP] original français |
 | Sociotropie-autonomie | Échelle de sociotropie-autonomie (Beck) | 🔍 | ❓ | 🚫 | — | Absent | [ALP] domaine humeur |
@@ -177,12 +177,12 @@ sortie ; les auteurs flaggés seront contactés en une fois, plus tard.
 | SCAS | Questionnaire d'anxiété pour enfants de Spence | 🔍 | 🔒 | 🚫 | — | Catalogue | [ALP] enfant |
 | RCADS | Échelle d'anxiété et de dépression pour enfants révisée (Chorpita) | 🔍 | 🔒 | 🚫 | — | Catalogue | [ALP] RCADS-47 chez Mentaal ; enfant |
 | SCARED-R | Grille d'évaluation des troubles anxieux (SCARED-R, 51 items) | 🔵 | ❓ | 🔗 | 🟡 B | Absent | [ALP] porté en **SCARED-R-51** (© Martin & Gosselin 2011, fr-CA, hébergé par Pittsburgh) ; fiche `scared-r/scared-r.md` ; 51 items 0-2, 10 sous-scores, sans seuil ; VF Bouvard 2013 (66 items) non accessible ; implémentée par Claude (11/10/2026, mission 3), recette staging à confirmer |
-| BCIS | Échelle d'insight cognitif de Beck | 🔍 | ❓ | 🚫 | — | Absent | [ALP] domaine à définir (psychose) |
+| BCIS | Échelle d'insight cognitif de Beck | 🔍 | ❓ | 🚫 | — | Absent | [ALP] domaine à définir (psychose) ; ⛔ **mécanisme (mission 3)** : deux composantes (réflexivité, certitude) sans score total dans la source ; composite négatif possible → profil de sous-scores (Adrien, MEL-356) ; VF Favrod & Pomini 2004 trouvée (seretablir.net) |
 | BIS (Birchwood) | Échelle d'insight de Birchwood | 🔍 | ❓ | 🚫 | — | Absent | [ALP] domaine à définir (psychose) |
-| BAVQ-R | Échelle révisée des croyances au sujet des voix | 🔍 | ❓ | 🚫 | — | Absent | [ALP] ≠ BVAQ (alexithymie) ; domaine à définir (psychose) |
-| STORI | Stages of Recovery Instrument | 🔍 | ❓ | 🚫 | — | Absent | [ALP] domaine à définir (psychose, rétablissement) |
+| BAVQ-R | Échelle révisée des croyances au sujet des voix | 🔍 | ❓ | 🚫 | — | Absent | [ALP] ≠ BVAQ (alexithymie) ; domaine à définir (psychose) ; ⛔ **mécanisme (mission 3)** : « L'échelle donne 5 scores », pas de total → profil de sous-scores (Adrien, MEL-356) ; VF Favrod trouvée (seretablir.net) |
+| STORI | Stages of Recovery Instrument | 🔍 | ❓ | 🚫 | — | Absent | [ALP] domaine à définir (psychose, rétablissement) ; ⛔ **mécanisme (mission 3)** : « Il n'y a pas de score Total », l'étape = sous-score le plus élevé → profil de sous-scores (Adrien, MEL-356) ; VF trouvée (seretablir.net) |
 | QCI | Questionnaire des conduites interpersonnelles | 🔍 | ❓ | 🚫 | — | Absent | [ALP] |
-| BIS-11 | Échelle d'impulsivité de Barratt | 🔍 | ✉️ | ⏳ | — | Catalogue | [ALP] ; **bloquée VF (11/10/2026)** : la validation française de Bayle et al. (2000) porte sur la BIS-10 (texte non accessible) ; seule traduction BIS-11 trouvée : Gélinas et al. 2015 (Québec, CC BY-NC, non commercial) |
+| BIS-11 | Échelle d'impulsivité de Barratt | 🔍 | ✉️ | ⏳ | — | Catalogue | [ALP] ; **bloquée VF (11/10/2026, confirmé mission 3)** : la validation française de Bayle et al. (2000) porte sur la BIS-10 (texte non accessible) ; seule traduction BIS-11 trouvée : Gélinas et al. 2015 (Québec, CC BY-NC, non commercial explicite) |
 | TCI | Inventaire du tempérament et du caractère (Cloninger) | 🔍 | 💰 | 🚫 | — | Catalogue | [ALP] licence à vérifier (Washington University) |
 | SDS (Sheehan) | Échelle de handicap de Sheehan | 🔍 | 🔒 | 🚫 | — | Catalogue | [ALP] |
 | QdV Marks | Échelle de qualité de vie de Marks | 🔍 | ❓ | 🚫 | — | Absent | [ALP] |
@@ -331,11 +331,11 @@ Statut de droits de **chacune des 167 échelles** du tableau, établi par recher
 | ACQ | ❓ | Chambless et al. 1984 | Aucune phrase de licence trouvée (instructions diffusées sur le site de D. Chambless, UPenn) | VF à vérifier | À identifier |
 | ASA-27 | ❓ | Manicavasagar et al. 2003 | Aucune phrase de licence trouvée | Non trouvée | À identifier |
 | ASQ-SF | ❓ | Alexander et al. 2001 ; Karantzas et al. 2010 | Aucune phrase de licence trouvée | À vérifier | À identifier |
-| ASSQ | ❓ | Ehlers, Gillberg & Wing 1999 | Droits non établis | Aucune VF validée trouvée | Bloquée (VF) ; à identifier |
+| ASSQ | 💰 | Ehlers, Gillberg & Wing 1999 — Gillberg Neuropsychiatry Centre (Université de Göteborg) | « no longer available for free use… chargeable » (gu.se, ESSENCE-IN) | Aucune VF validée trouvée | No-go (payant) |
 | ATQ | ❓ | Hollon & Kendall 1980 | Aucune phrase de licence trouvée (reproduction accordée aux acheteurs de manuels Guilford) | À vérifier | À identifier |
 | Attentes thérapeutiques | ❓ | J. Cottraux 1995 | Publiées dans un ouvrage de J. Cottraux ; éditeur et licence non établis | Non trouvée en accès libre | À identifier |
-| BAVQ-R | ❓ | Chadwick, Lees & Birchwood 2000 | Aucune phrase de licence trouvée | VF à vérifier | À identifier |
-| BCIS | ❓ | Beck et al. 2004 | Aucune phrase de licence trouvée | VF à vérifier | À identifier |
+| BAVQ-R | ❓ | Chadwick, Lees & Birchwood 2000 | Aucune phrase de licence trouvée | Trad. Favrod (seretablir.net) | Bloquée mécanisme (profil de sous-scores) |
+| BCIS | ❓ | Beck et al. 2004 | Aucune phrase de licence trouvée | Trad. Favrod & Pomini 2004 (seretablir.net) | Bloquée mécanisme (profil de sous-scores) |
 | BIS (Birchwood) | ❓ | Birchwood et al. 1994 | « No information found » (McGill MAPPRO) | VF à vérifier | À identifier |
 | BPQ | ❓ | Poreh et al. 2006 (J Personal Disord, Guilford) | Aucune phrase de licence trouvée | À vérifier | À identifier |
 | BSQ | ❓ | Chambless et al. 1984 | Aucune phrase de licence trouvée | Aucune VF validée trouvée | Bloquée (VF) |
@@ -347,7 +347,7 @@ Statut de droits de **chacune des 167 échelles** du tableau, établi par recher
 | CST | ❓ | C. Cungi | Échelle publiée dans des ouvrages de C. Cungi ; éditeur et licence non établis | Version brève reprise par Lefebvre Dalloz (source secondaire) | Implémentée (mission 3, classe B) ; action documentaire : livre de Cungi |
 | CY-BOCS | ❓ | Goodman et al. 1997 (Y-BOCS : OCD Scales, LLC ?) | Détenteur formel inconnu ; la Y-BOCS adulte serait sous licence d'OCD Scales, LLC | VF à vérifier | À identifier ; hétéro-évaluation |
 | DAS | ❓ | Weissman & Beck 1978 | Aucune phrase de licence trouvée | VF à vérifier | À identifier |
-| DBAS | ❓ | C. M. Morin (Université Laval) | Aucune phrase de licence trouvée | VF probable (équipe francophone de Morin) à vérifier | À identifier |
+| DBAS | 🔒 | C. M. Morin (Université Laval) | ePROVIDE (Mapi) : « distributed by Mapi Research Trust » ; « Commercial users & IT companies: Fees may apply… license agreement » | VF probable (équipe francophone de Morin) à vérifier | Demande de licence Mapi (MEL-351) avant toute implémentation |
 | DERS | ❓ | Gratz & Roemer 2004 | Aucune phrase de licence trouvée | À vérifier | À identifier |
 | DIB-R | ❓ | Zanarini et al. 1989 | Aucune phrase de licence trouvée | VF validée 2023 en accès libre (PMC10506241) | À identifier ; entretien |
 | ECAB | ✉️ | Pélissolo & Naja 1996 ; fiche © HAS 2007 | Fiche publique HAS, aucune phrase de licence sur l'instrument | Originale FR (fiche HAS 2007) | Implémentée (mission 3) |
@@ -370,7 +370,7 @@ Statut de droits de **chacune des 167 échelles** du tableau, établi par recher
 | LPO | ❓ | M. Bouvard | Aucune source en ligne | Non trouvée | À identifier |
 | LSAS | ❓ | M. R. Liebowitz | Licence commerciale non documentée : autorisation à confirmer avant usage commercial | VF Yao et al. 1999 | Implémentée ; ⚠️ à confirmer auprès de l'auteur |
 | MES | ❓ | Bech & Rafaelsen 1980 | Aucune source de licence en ligne | VF à vérifier | À identifier ; hétéro-évaluation |
-| MIA | ❓ | Chambless et al. 1985 | Aucune phrase de licence trouvée | VF à vérifier | À identifier |
+| MIA | ❓ | Chambless et al. 1985 | Aucune phrase de licence trouvée | Texte trouvé (gmfulevis), non implémenté (mécanisme) | Bloquée mécanisme (Adrien) |
 | MOCI | ❓ | Hodgson & Rachman 1977 | Aucune phrase de licence trouvée | VF à vérifier | À identifier |
 | NOSIE | ❓ | Honigfeld 1966 | Aucune source de licence en ligne | VF à vérifier | À identifier ; hétéro-évaluation (soignants) |
 | OBQ | ❓ | Obsessive Compulsive Cognitions Working Group | Diffusé par l'IOCDF sans phrase de licence trouvée | VF à vérifier | À identifier |
@@ -390,7 +390,7 @@ Statut de droits de **chacune des 167 échelles** du tableau, établi par recher
 | SCT | ❓ | « Test de confiance en soi » (Mentaal) — auteur non identifié | Aucune source identifiée | Non trouvée | À identifier |
 | Sociotropie-autonomie | ❓ | Beck et al. 1983 (Beck Institute) | Document complet diffusé par le Beck Institute, sans phrase de licence trouvée | VF à vérifier | À identifier |
 | SPRS | ❓ | Échelle d'appréciation de la phobie sociale (auteur à confirmer) | Aucune source identifiée | Non trouvée | À identifier |
-| STORI | ❓ | Andresen, Caputi & Oades (University of Wollongong) | Aucune phrase de licence trouvée | VF à vérifier | À identifier |
+| STORI | ❓ | Andresen, Caputi & Oades (University of Wollongong) | Aucune phrase de licence trouvée | VF trouvée (seretablir.net) | Bloquée mécanisme (profil de sous-scores) |
 | SUMD | ❓ | X. F. Amador | Aucune phrase de licence trouvée (traduction FR validée par l'auteur) | VF validée (EM-consulte, sur abonnement) | À identifier ; hétéro-évaluation |
 | SVS | ❓ | S. H. Schwartz | Droits non recherchés en détail | — | Mécanisme à créer (centrage ipsatif) |
 | TAPIS | ❓ | Glass & Larsen 1982 (SISST) ; VF Yao et al. 1998 | Aucune phrase de licence trouvée | VF Yao et al. 1998 (Behav Cogn Psychother, sur abonnement) | À identifier |
@@ -427,7 +427,7 @@ Statut de droits de **chacune des 167 échelles** du tableau, établi par recher
 | HAM-A | ✅ | M. Hamilton 1959 | « The Hamilton Anxiety Rating Scale is in the public domain » | VF à vérifier | Hétéro-évaluation |
 | HDRS | ✅ | M. Hamilton 1960 | « The HAM-D is in the public domain » | VF à vérifier | Hétéro-évaluation (future passation en séance) |
 | LEC-5 | ✅ | National Center for PTSD | Diffusé en accès libre par le NCPTSD (ptsd.va.gov) | VF Cn2r à vérifier | Mécanisme à créer (multi-choix par item) |
-| MEQ-SA | ✅ | Horne & Östberg 1976 | « freely available, so it can be used without permission » (ATS, sleep questionnaires) | VF Taillard et al. (travailleurs français) à vérifier | Domaine à créer (sommeil) |
+| MEQ-SA | 🔒 | Horne & Östberg 1976 | Fiche MEQ de l'ATS : « Freely available for non-profit use » (relevé 11/10/2026 en mission 3 ; restreint la mention générale « freely available » relevée plus tôt) | VF Taillard et al. (travailleurs français) à vérifier | Demande à J. Horne (MEL-351) ; VF à établir |
 | PCL-5 | ✅ | National Center for PTSD ; VF Ashbaugh et al. 2016 (CC BY) | Domaine public ; traduction CC BY | VF validée | Implémentée |
 | PCL-S | ✅ | National Center for PTSD | « Domaine public. Il faut mentionner la source (Weathers et al., 1994). » (fiche INSPQ) | Yao, Cottraux et al. 2003, reproduite par l'INSPQ | Implémentée (mission 3) |
 | PDI | ✅ | A. Brunet et al. 2001 (VF originale) | « in the public domain, and the source must be mentioned » (INSPQ) ; VF diffusée par le Cn2r (cn2r.fr/…/PDI_Cn2r.pdf) | VF Jehel 2005 (Cn2r) ; variante québécoise INSPQ distincte | Implémentable |
