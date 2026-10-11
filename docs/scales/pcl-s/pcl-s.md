@@ -71,7 +71,19 @@ Variantes Salmona (non retenues) : item 9 « Perte d'intérêt pour des activit�
 
 ### Recette
 
-À compléter après déploiement sur staging.
+**Staging (11/10/2026, Claude)** — patient « Patient Test » : **conforme** (5 jeux sur 5). Le dernier jeu a été saisi par le parcours patient complet dans l'interface ; les autres ont été soumis par l'endpoint du portail patient (`POST /sessions/patient/:id/submit`, le même que l'interface), puis tous relus côté praticien (total, interprétation, sous-scores).
+
+| Jeu | Réponses | Attendu | Obtenu |
+| --- | --- | --- | --- |
+| T1 min | 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1 | 17 ; sous-scores 5 / 7 / 5 | 17, « Sous le seuil de dépistage du TSPT (score < 44) » ; sous-scores 5 / 7 / 5 |
+| T2 sous le seuil (43) | 3,3,3,3,3,3,3,3,3,3,2,2,2,2,2,2,1 | 43 ; sous-scores 15 / 19 / 9 | 43, « Sous le seuil de dépistage du TSPT (score < 44) » ; sous-scores 15 / 19 / 9 |
+| T3 seuil (44) | 3,3,3,3,3,3,3,3,3,3,2,2,2,2,2,2,2 | 44 ; sous-scores 15 / 19 / 10 | 44, « Dépistage positif de TSPT (score ≥ 44) » ; sous-scores 15 / 19 / 10 |
+| T4 max | 5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5 | 85 ; sous-scores 25 / 35 / 25 | 85, « Dépistage positif de TSPT (score ≥ 44) » ; sous-scores 25 / 35 / 25 |
+| T5 sous-échelles distinctes (parcours patient) | 5,5,5,5,5,1,1,1,1,1,1,1,3,3,3,3,3 | 47 ; sous-scores 25 / 7 / 15 | 47, « Dépistage positif de TSPT (score ≥ 44) » ; sous-scores 25 / 7 / 15 |
+
+Consigne, rappel « Dans le mois précédent : », 5 libellés, graduation 44, mention « Seuil de la fiche INSPQ (population générale) », 3 sous-scores (critères B, C, D), 17 items et copyright : conformes.
+
+**Mentaal** (même jeu T5) : 47/85 et sous-scores 25 / 7 / 15 identiques. **Écart Mentaal** : tranches « 17-44 ESPT classique / 45-85 ESPT étendu », sans rapport avec le seuil de dépistage ≥ 44 de l'INSPQ que suit Melya.
 
 ## 11-12. Contrat technique et historique
 

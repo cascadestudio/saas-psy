@@ -69,7 +69,21 @@ Aucune.
 
 ### Recette
 
-À compléter après déploiement sur staging.
+**Staging (11/10/2026, Claude)** — patient « Patient Test » : **conforme** (7 jeux sur 7). Le dernier jeu a été saisi par le parcours patient complet dans l'interface ; les autres ont été soumis par l'endpoint du portail patient (`POST /sessions/patient/:id/submit`, le même que l'interface), puis tous relus côté praticien (total, interprétation, sous-scores).
+
+| Jeu | Réponses | Attendu | Obtenu |
+| --- | --- | --- | --- |
+| T1 min | 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 | 0 ; sous-scores 0 / 0 / 0 / 0 / 0 | 0, « Sous le seuil de dépistage (score < 25) » ; sous-scores 0 / 0 / 0 / 0 / 0 |
+| T2 24 | 2,0,0,0,0,2,0,0,2,0,0,2,0,0,2,0,0,2,2,0,0,2,0,2,0,0,2,0,0,2,0,0,0,2,0,0,0,0,0,0,0 | 24 ; sous-scores 24 / 0 / 0 / 0 / 0 | 24, « Sous le seuil de dépistage (score < 25) » ; sous-scores 24 / 0 / 0 / 0 / 0 |
+| T3 seuil 25 | 2,0,0,0,1,2,0,0,2,0,0,2,0,0,2,0,0,2,2,0,0,2,0,2,0,0,2,0,0,2,0,0,0,2,0,0,0,0,0,0,0 | 25 ; sous-scores 24 / 1 / 0 / 0 / 0 | 25, « Peut indiquer la présence d'un trouble anxieux (score ≥ 25) » ; sous-scores 24 / 1 / 0 / 0 / 0 |
+| T4 30 | 2,0,0,0,2,2,2,0,2,0,0,2,0,0,2,0,0,2,2,0,0,2,0,2,0,0,2,0,0,2,0,0,0,2,0,0,0,2,0,0,0 | 30 ; sous-scores 26 / 4 / 0 / 0 / 0 | 30, « Peut indiquer la présence d'un trouble anxieux (score ≥ 25) » ; sous-scores 26 / 4 / 0 / 0 / 0 |
+| T5 31 | 2,0,0,0,2,2,2,0,2,0,0,2,0,1,2,0,0,2,2,0,0,2,0,2,0,0,2,0,0,2,0,0,0,2,0,0,0,2,0,0,0 | 31 ; sous-scores 26 / 5 / 0 / 0 / 0 | 31, « Peut indiquer la présence d'un trouble anxieux (score > 30, plus spécifique) » ; sous-scores 26 / 5 / 0 / 0 / 0 |
+| T6 max | 2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2 | 82 ; sous-scores 26 / 18 / 16 / 14 / 8 | 82, « Peut indiquer la présence d'un trouble anxieux (score > 30, plus spécifique) » ; sous-scores 26 / 18 / 16 / 14 / 8 |
+| T7 sous-échelles distinctes (parcours patient) | 1,1,2,1,1,1,1,1,1,2,1,1,1,1,1,1,1,1,1,1,1,0,1,0,0,2,0,1,0,0,0,2,1,0,1,0,1,0,0,0,0 | 32 ; sous-scores 7 / 9 / 5 / 8 / 3 | 32, « Peut indiquer la présence d'un trouble anxieux (score > 30, plus spécifique) » ; sous-scores 7 / 9 / 5 / 8 / 3 |
+
+Consigne enfant complète, 3 libellés, graduations 25 et 31, mention « Seuils de la version française de l'University of Pittsburgh », 5 sous-scores avec leur seuil, 41 items et copyright : conformes.
+
+**Mentaal** (même jeu T7, version parent chez Mentaal) : total 32/82 et 5 sous-scores (7, 9, 5, 8, 3) identiques. **Écart Mentaal** : tranches 0-24 / 25-29 / 30-82, alors que la source donne « ≥ 25 » et « > 30 » ; Melya garde 25-30 / 31-82 (un score de 30 reste dans la tranche ≥ 25).
 
 ## 11. Contrat technique
 

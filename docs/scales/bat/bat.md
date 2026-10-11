@@ -76,7 +76,37 @@ Aucune.
 
 ### Recette
 
-À compléter après déploiement sur staging.
+#### BAT-W (version travail)
+
+**Staging (11/10/2026, Claude)** : **conforme** (6 jeux sur 6), même protocole que les autres échelles du lot (dernier jeu par le parcours patient, autres par l'endpoint du portail, relecture côté praticien).
+
+| Jeu | Réponses | Attendu | Obtenu |
+| --- | --- | --- | --- |
+| T1 min | 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1 | 23 ; sous-scores 8 / 5 / 5 / 5 / 10 | 23, « Zone verte : pas de risque de burn-out (moyenne ≤ 2,58) » ; sous-scores 8 / 5 / 5 / 5 / 10 |
+| T2 max | 5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5 | 115 ; sous-scores 40 / 25 / 25 / 25 / 50 | 115, « Zone rouge : risque très élevé de burn-out (moyenne ≥ 3,02) » ; sous-scores 40 / 25 / 25 / 25 / 50 |
+| T3 haut de la zone verte | 5,5,5,5,5,5,5,5,5,1,1,1,1,1,1,1,1,1,1,1,1,1,1,3,3,3,3,3,3,3,3,3,3 | 59 ; sous-scores 40 / 9 / 5 / 5 / 30 | 59, « Zone verte : pas de risque de burn-out (moyenne ≤ 2,58) » ; sous-scores 40 / 9 / 5 / 5 / 30 |
+| T4 bas de la zone orange | 5,5,5,5,5,5,5,5,5,2,1,1,1,1,1,1,1,1,1,1,1,1,1,3,3,3,3,3,3,3,3,3,3 | 60 ; sous-scores 40 / 10 / 5 / 5 / 30 | 60, « Zone orange : risque de burn-out (moyenne 2,59 à 3,01) » ; sous-scores 40 / 10 / 5 / 5 / 30 |
+| T5 haut de la zone orange | 5,5,5,5,5,5,5,5,5,5,5,3,1,1,1,1,1,1,1,1,1,1,1,3,3,3,3,3,3,3,3,3,3 | 69 ; sous-scores 40 / 19 / 5 / 5 / 30 | 69, « Zone orange : risque de burn-out (moyenne 2,59 à 3,01) » ; sous-scores 40 / 19 / 5 / 5 / 30 |
+| T6 bas de la zone rouge (parcours patient) | 5,5,5,5,5,5,5,5,5,5,5,4,1,1,1,1,1,1,1,1,1,1,1,3,3,3,3,3,3,3,3,3,3 | 70 ; sous-scores 40 / 20 / 5 / 5 / 30 | 70, « Zone rouge : risque très élevé de burn-out (moyenne ≥ 3,02) » ; sous-scores 40 / 20 / 5 / 5 / 30 |
+
+**Mentaal** (même jeu T6) : moyenne 3,04 (= 70 / 23), zone rouge ≥ 3,02 : identique. Mentaal affiche en plus des seuils par dimension, que Melya n'a pas (pas d'interprétation par sous-échelle, limite connue, MEL-356).
+
+#### BAT-G (version générale)
+
+**Staging (11/10/2026, Claude)** : **conforme** (6 jeux sur 6), même protocole que les autres échelles du lot (dernier jeu par le parcours patient, autres par l'endpoint du portail, relecture côté praticien).
+
+| Jeu | Réponses | Attendu | Obtenu |
+| --- | --- | --- | --- |
+| T1 min | 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1 | 22 ; sous-scores 8 / 4 / 5 / 5 / 10 | 22, « Zone verte : pas de risque de burn-out (moyenne ≤ 2,58) » ; sous-scores 8 / 4 / 5 / 5 / 10 |
+| T2 max | 5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5 | 110 ; sous-scores 40 / 20 / 25 / 25 / 50 | 110, « Zone rouge : risque très élevé de burn-out (moyenne ≥ 3,02) » ; sous-scores 40 / 20 / 25 / 25 / 50 |
+| T3 haut de la zone verte | 5,5,5,5,5,5,5,5,3,1,1,1,1,1,1,1,1,1,1,1,1,1,3,3,3,3,3,3,3,3,3,3 | 56 ; sous-scores 40 / 6 / 5 / 5 / 30 | 56, « Zone verte : pas de risque de burn-out (moyenne ≤ 2,58) » ; sous-scores 40 / 6 / 5 / 5 / 30 |
+| T4 bas de la zone orange | 5,5,5,5,5,5,5,5,4,1,1,1,1,1,1,1,1,1,1,1,1,1,3,3,3,3,3,3,3,3,3,3 | 57 ; sous-scores 40 / 7 / 5 / 5 / 30 | 57, « Zone orange : risque de burn-out (moyenne 2,59 à 3,01) » ; sous-scores 40 / 7 / 5 / 5 / 30 |
+| T5 haut de la zone orange | 5,5,5,5,5,5,5,5,5,5,5,1,1,1,1,1,1,1,1,1,1,1,3,3,3,3,3,3,3,3,3,3 | 66 ; sous-scores 40 / 16 / 5 / 5 / 30 | 66, « Zone orange : risque de burn-out (moyenne 2,59 à 3,01) » ; sous-scores 40 / 16 / 5 / 5 / 30 |
+| T6 bas de la zone rouge (parcours patient) | 5,5,5,5,5,5,5,5,5,5,5,2,1,1,1,1,1,1,1,1,1,1,3,3,3,3,3,3,3,3,3,3 | 67 ; sous-scores 40 / 17 / 5 / 5 / 30 | 67, « Zone rouge : risque très élevé de burn-out (moyenne ≥ 3,02) » ; sous-scores 40 / 17 / 5 / 5 / 30 |
+
+**Mentaal** (même jeu T6) : moyenne 3,05 (= 67 / 22), zone rouge : identique.
+
+Affichage (les deux versions) : consigne, 5 libellés, graduations des zones (60 et 70 pour BAT-W, 57 et 67 pour BAT-G), mention « Seuils cliniques flamands du manuel BAT 2.0 (moyennes converties en sommes) », 5 sous-scores (dont symptômes secondaires hors total), 33 et 32 items et copyright : conformes.
 
 ## 11-12. Contrat technique et historique
 

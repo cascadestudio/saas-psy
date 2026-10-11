@@ -88,7 +88,19 @@ Aucune.
 
 ### Recette
 
-À compléter après déploiement sur staging.
+**Staging (11/10/2026, Claude)** — patient « Patient Test » : **conforme** (5 jeux sur 5). Le dernier jeu a été saisi par le parcours patient complet dans l'interface ; les autres ont été soumis par l'endpoint du portail patient (`POST /sessions/patient/:id/submit`, le même que l'interface), puis tous relus côté praticien (total, interprétation, sous-scores).
+
+| Jeu | Réponses | Attendu | Obtenu |
+| --- | --- | --- | --- |
+| T1 min | 0,0,0,0,0,0,0,0,0,0 | 0 | 0, « Pas de perte d'autonomie mise en évidence (aucune réponse positive) » |
+| T2 une réponse positive | 0,0,0,0,0,0,0,0,0,1 | 1 | 1, « Perte d'autonomie liée à la consommation de tabac » |
+| T3 six | 1,1,1,1,1,1,0,0,0,0 | 6 | 6, « Perte d'autonomie liée à la consommation de tabac » |
+| T4 seuil 7 | 1,1,1,1,1,1,1,0,0,0 | 7 | 7, « Forte dépendance à la nicotine (score ≥ 7) » |
+| T5 max (parcours patient) | 1,1,1,1,1,1,1,1,1,1 | 10 | 10, « Forte dépendance à la nicotine (score ≥ 7) » |
+
+Pas de consigne (aucune dans la source) : l'écran d'intro n'affiche que le titre et « Commencer », la page praticien n'a pas de bloc « Consigne » (vigilance UX déjà en §13). Graduations 1 et 7, mention La Revue du Praticien, 10 items : conformes.
+
+**Mentaal** : HONC absent de leur catalogue.
 
 ## 11. Contrat technique
 

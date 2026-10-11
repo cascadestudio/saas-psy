@@ -148,7 +148,19 @@ Aucune.
 
 ### Recette
 
-À compléter après déploiement sur staging.
+**Staging (11/10/2026, Claude)** — patient « Patient Test » : **conforme** (5 jeux sur 5). Le dernier jeu a été saisi par le parcours patient complet dans l'interface ; les autres ont été soumis par l'endpoint du portail patient (`POST /sessions/patient/:id/submit`, le même que l'interface), puis tous relus côté praticien (total, interprétation, sous-scores).
+
+| Jeu | Réponses | Attendu | Obtenu |
+| --- | --- | --- | --- |
+| T1 min | 0,0,0,0,0,0,0,0,0,0,0,0,0 | 0 ; sous-scores 0 / 0 / 0 | 0, « Sous le seuil de dépistage du TSPT (score < 30) » ; sous-scores 0 / 0 / 0 |
+| T2 juste sous le seuil | 5,5,5,5,5,3,1,0,0,0,0,0,0 | 29 ; sous-scores 10 / 9 / 10 | 29, « Sous le seuil de dépistage du TSPT (score < 30) » ; sous-scores 10 / 9 / 10 |
+| T3 seuil | 5,5,5,5,5,3,1,1,0,0,0,0,0 | 30 ; sous-scores 11 / 9 / 10 | 30, « Dépistage positif de TSPT (score ≥ 30) » ; sous-scores 11 / 9 / 10 |
+| T4 max | 5,5,5,5,5,5,5,5,5,5,5,5,5 | 65 ; sous-scores 20 / 20 / 25 | 65, « Dépistage positif de TSPT (score ≥ 30) » ; sous-scores 20 / 20 / 25 |
+| T5 une valeur par sous-échelle (parcours patient) | 5,1,0,5,0,1,1,5,5,1,0,0,0 | 24 ; sous-scores 20 / 4 / 0 | 24, « Sous le seuil de dépistage du TSPT (score < 30) » ; sous-scores 20 / 4 / 0 |
+
+Consigne et rappel « Pendant ces sept derniers jours : », libellés 0/1/3/5, graduation 30, mention « Seuil de la fiche descriptive Cn2r », 3 sous-scores (/20, /20, /25), 13 items et copyright Children and War / Cn2r : conformes.
+
+**Mentaal** (même jeu T5) : total 24/65 identique. **Écarts Mentaal** : libellés « Pas du tout / Rarement / Parfois / Très souvent » (source Cn2r : « Quelques fois / Souvent ») ; sous-scores 11 / 7 / 6 contre 20 / 4 / 0 chez Melya. Melya applique le découpage de la fiche Cn2r archivée (intrusion 1, 4, 8, 9 ; évitement 2, 6, 7, 10 ; hyperréactivité 3, 5, 11, 12, 13) ; Mentaal ne fait pas autorité, et son découpage n'a pas pu être rattaché à une source.
 
 ---
 

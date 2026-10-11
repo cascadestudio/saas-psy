@@ -65,7 +65,18 @@ Aucune.
 
 ### Recette
 
-À compléter après déploiement sur staging.
+**Staging (11/10/2026, Claude)** — patient « Patient Test » : **conforme** (4 jeux sur 4). Le dernier jeu a été saisi par le parcours patient complet dans l'interface ; les autres ont été soumis par l'endpoint du portail patient (`POST /sessions/patient/:id/submit`, le même que l'interface), puis tous relus côté praticien (total, interprétation, sous-scores).
+
+| Jeu | Réponses | Attendu | Obtenu |
+| --- | --- | --- | --- |
+| T1 min | 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 | 0 ; sous-scores 0 / 0 / 0 / 0 / 0 / 0 / 0 / 0 / 0 / 0 | 0, « Pas de seuil clinique fourni par les auteurs. » ; sous-scores 0 / 0 / 0 / 0 / 0 / 0 / 0 / 0 / 0 / 0 |
+| T2 max | 2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2 | 102 ; sous-scores 14 / 14 / 14 / 8 / 10 / 8 / 8 / 6 / 10 / 10 | 102, « Pas de seuil clinique fourni par les auteurs. » ; sous-scores 14 / 14 / 14 / 8 / 10 / 8 / 8 / 6 / 10 / 10 |
+| T3 un item par sous-échelle | 1,1,1,2,2,1,1,2,0,0,0,0,0,0,0,0,0,2,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 | 15 ; sous-scores 1 / 2 / 1 / 2 / 1 / 2 / 1 / 2 / 1 / 2 | 15, « Pas de seuil clinique fourni par les auteurs. » ; sous-scores 1 / 2 / 1 / 2 / 1 / 2 / 1 / 2 / 1 / 2 |
+| T4 typique (parcours patient) | 0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2 | 51 ; sous-scores 10 / 8 / 6 / 3 / 4 / 4 / 3 / 3 / 4 / 6 | 51, « Pas de seuil clinique fourni par les auteurs. » ; sous-scores 10 / 8 / 6 / 3 / 4 / 4 / 3 / 3 / 4 / 6 |
+
+Consigne, 3 libellés, jauge sans graduation, 10 sous-scores, 51 items et mention Martin & Gosselin (2011) : conformes.
+
+**Mentaal** : SCARED-R-51 absente de leur catalogue.
 
 ## 11-12. Contrat technique et historique
 

@@ -65,7 +65,22 @@ Aucune.
 
 ### Recette
 
-À compléter après déploiement sur staging.
+**Staging (11/10/2026, Claude)** — patient « Patient Test » : **conforme** (8 jeux sur 8). Le dernier jeu a été saisi par le parcours patient complet dans l'interface ; les autres ont été soumis par l'endpoint du portail patient (`POST /sessions/patient/:id/submit`, le même que l'interface), puis tous relus côté praticien (total, interprétation, sous-scores).
+
+| Jeu | Réponses | Attendu | Obtenu |
+| --- | --- | --- | --- |
+| T1 min | 1,1,1,1,1,1,1,1,1,1,1 | 11 | 11, « Niveau de stress très bas » |
+| T2 18 | 2,2,2,2,2,2,2,1,1,1,1 | 18 | 18, « Niveau de stress très bas » |
+| T3 19 | 2,2,2,2,2,2,2,2,1,1,1 | 19 | 19, « Niveau de stress bas » |
+| T4 29 | 3,3,3,3,3,3,3,2,2,2,2 | 29 | 29, « Niveau de stress bas » |
+| T5 30 | 3,3,3,3,3,3,3,3,2,2,2 | 30 | 30, « Niveau de stress élevé » |
+| T6 45 | 4,5,4,4,4,4,4,4,4,4,4 | 45 | 45, « Niveau de stress élevé » |
+| T7 46 | 4,5,5,4,4,4,4,4,4,4,4 | 46 | 46, « Niveau de stress très élevé » |
+| T8 max (parcours patient) | 6,6,6,6,6,6,6,6,6,6,6 | 66 | 66, « Niveau de stress très élevé » |
+
+Consigne adaptée, 6 libellés, graduations 19, 30 et 46, mention « Bornes de la source (Lefebvre Dalloz, d'après Cungi), chevauchements tranchés par Melya », 11 items et mention : conformes.
+
+**Mentaal** : leur « Stress de Cungi » compte 19 questions (autre version) ; pas de comparaison possible.
 
 ## 11-12. Contrat technique et historique
 

@@ -102,7 +102,19 @@ Aucune.
 
 ### Recette
 
-À compléter après déploiement sur staging.
+**Staging (11/10/2026, Claude)** — patient « Patient Test » : **conforme** (5 jeux sur 5). Le dernier jeu a été saisi par le parcours patient complet dans l'interface ; les autres ont été soumis par l'endpoint du portail patient (`POST /sessions/patient/:id/submit`, le même que l'interface), puis tous relus côté praticien (total, interprétation, sous-scores).
+
+| Jeu | Réponses | Attendu | Obtenu |
+| --- | --- | --- | --- |
+| T1 min (tout faux sauf item 10 vrai) | 0,0,0,0,0,0,0,0,0,1 | 0 | 0, « Sous le seuil de dépendance (score < 6) » |
+| T2 tout faux | 0,0,0,0,0,0,0,0,0,0 | 1 | 1, « Sous le seuil de dépendance (score < 6) » |
+| T3 juste sous le seuil | 1,1,1,1,1,0,0,0,0,1 | 5 | 5, « Sous le seuil de dépendance (score < 6) » |
+| T4 seuil | 1,1,1,1,1,0,0,0,0,0 | 6 | 6, « Score en faveur d'une dépendance aux benzodiazépines (score ≥ 6) » |
+| T5 max (tout vrai sauf item 10 faux) (parcours patient) | 1,1,1,1,1,1,1,1,1,0 | 10 | 10, « Score en faveur d'une dépendance aux benzodiazépines (score ≥ 6) » |
+
+Consigne en 3 paragraphes, Vrai/Faux, graduation 6, mention « Seuil de la fiche HAS (2007) », 10 items, item 10 inversé (T1 et T5) et copyright HAS : conformes.
+
+**Mentaal** : ECAB absente de leur catalogue.
 
 ---
 

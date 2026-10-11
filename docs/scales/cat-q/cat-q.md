@@ -67,7 +67,19 @@ Aucune.
 
 ### Recette
 
-À compléter après déploiement sur staging.
+**Staging (11/10/2026, Claude)** — patient « Patient Test » : **conforme** (5 jeux sur 5). Le dernier jeu a été saisi par le parcours patient complet dans l'interface ; les autres ont été soumis par l'endpoint du portail patient (`POST /sessions/patient/:id/submit`, le même que l'interface), puis tous relus côté praticien (total, interprétation, sous-scores).
+
+| Jeu | Réponses | Attendu | Obtenu |
+| --- | --- | --- | --- |
+| T1 min (inversés à 7) | 1,1,7,1,1,1,1,1,1,1,1,7,1,1,1,1,1,1,7,1,1,7,1,7,1 | 25 ; sous-scores 9 / 8 / 8 | 25, « Sous le seuil de 100 indiqué par Embrace Autism » ; sous-scores 9 / 8 / 8 |
+| T2 max (inversés à 1) | 7,7,1,7,7,7,7,7,7,7,7,1,7,7,7,7,7,7,1,7,7,1,7,1,7 | 175 ; sous-scores 63 / 56 / 56 | 175, « Score ≥ 100 : camouflage de traits autistiques (seuil indiqué par Embrace Autism) » ; sous-scores 63 / 56 / 56 |
+| T3 tout à 4 | 4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4 | 100 ; sous-scores 36 / 32 / 32 | 100, « Score ≥ 100 : camouflage de traits autistiques (seuil indiqué par Embrace Autism) » ; sous-scores 36 / 32 / 32 |
+| T4 juste sous le seuil (99) | 3,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4 | 99 ; sous-scores 35 / 32 / 32 | 99, « Sous le seuil de 100 indiqué par Embrace Autism » ; sous-scores 35 / 32 / 32 |
+| T5 seuil (100) (parcours patient) | 4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4 | 100 ; sous-scores 36 / 32 / 32 | 100, « Score ≥ 100 : camouflage de traits autistiques (seuil indiqué par Embrace Autism) » ; sous-scores 36 / 32 / 32 |
+
+Consigne, 7 libellés, graduation 100, mention « Seuil indiqué par Embrace Autism (non publié par les auteurs) », 3 sous-scores, 25 items, items inversés (T1, T2) et mention CC BY 4.0 : conformes.
+
+**Mentaal** (même jeu T5) : 100/175 et sous-scores 36 / 32 / 32 identiques. Mentaal n'affiche pas de seuil mais des moyennes de référence par genre.
 
 ## 11-12. Contrat technique et historique
 

@@ -165,7 +165,17 @@ Mentaal (`/send/gad-sbq`) : 10 items, mêmes libellés de réponse (page 1) ; it
 
 ### Recette
 
-À compléter après déploiement sur staging.
+**Staging (11/10/2026, Claude)** — patient « Patient Test » : **conforme** (3 jeux sur 3). Le dernier jeu a été saisi par le parcours patient complet dans l'interface ; les autres ont été soumis par l'endpoint du portail patient (`POST /sessions/patient/:id/submit`, le même que l'interface), puis tous relus côté praticien (total, interprétation, sous-scores).
+
+| Jeu | Réponses | Attendu | Obtenu |
+| --- | --- | --- | --- |
+| T1 min | 1,1,1,1,1,1,1,1,1,1 | 10 | 10, « Pas de seuil clinique fourni par les auteurs. » |
+| T2 max | 5,5,5,5,5,5,5,5,5,5 | 50 | 50, « Pas de seuil clinique fourni par les auteurs. » |
+| T3 typique (parcours patient) | 2,3,4,1,5,2,3,4,2,3 | 29 | 29, « Pas de seuil clinique fourni par les auteurs. » |
+
+Écran d'intro (consigne complète), 5 libellés, jauge sans graduation (« Pas de seuil clinique fourni par les auteurs. »), 10 items et mention Marcotte-Beaumier, Hébert & Dugas (2020) : conformes.
+
+**Mentaal** (GAD-SBQ, même jeu T3) : 29/50, sans interprétation. Identique.
 
 ---
 
