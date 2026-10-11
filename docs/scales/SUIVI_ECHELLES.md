@@ -11,7 +11,7 @@
 
 ## Tableau de bord
 
-**✅ 12 validées · 🔵 15 implémentées · 🚧 5 en cours · 📋 2 prévues · 🔍 82 à instruire · ⬜ 23 non planifiées · 🚫 28 écartées** (167 échelles, dont 83 ajoutées depuis le catalogue « Apprendre la psychologie » le 10/10/2026)
+**✅ 12 validées · 🔵 16 implémentées · 🚧 5 en cours · 📋 2 prévues · 🔍 82 à instruire · ⬜ 22 non planifiées · 🚫 28 écartées** (167 échelles, dont 83 ajoutées depuis le catalogue « Apprendre la psychologie » le 10/10/2026)
 
 **Rattrapage Mentaal : 13/42.** Le plafond n'est pas 74 : sur leur catalogue
 disponible, 12 sont écartées d'office (payantes, outils maison Mentaal, ou
@@ -101,7 +101,7 @@ sortie ; les auteurs flaggés seront contactés en une fois, plus tard.
 | RAS | Affirmation de soi de Rathus | ⬜ | ❓ | 🚫 | 🟡 B | #21 | reverse + offset ; 2e passe : ⛔ aucune VF validée accessible ; droits non établis |
 | SNAP-IV | TDAH enfant | ⬜ | ✅ | ⏳ | 🟡 B | #23 | public enfant ; 2e passe : ⛔ seule VF trouvée marquée « non validée » |
 | MDQ | Troubles de l'humeur | ⬜ | 🔒 | 🚫 | 🟡 B | #30 | criteriaCheck + oui/non ; droits UTMB, usage sur permission de l'auteur (tri du 10/10/2026) |
-| SCARED | Troubles anxieux enfant | ⬜ | ✉️ | ⏳ | 🟡 B | #34 | public enfant ; 2e passe : ⛔ VF validée = SCARED-R (Muris, autre instrument) ; VF du SCARED (fr-CA, Pittsburgh) sans validation retrouvée |
+| SCARED | Troubles anxieux enfant | 🔵 | ✉️ | 🔗 | 🟡 B | #34 | public enfant ; fiche `scared/scared.md` ; VF fr-CA University of Pittsburgh (version enfant ; parent archivée) ; 41 items 0-2, seuil ≥ 25 (> 30 plus spécifique), 5 sous-scores (seuils dans les libellés) ; implémentée par Claude (11/10/2026, mission 3), recette staging à confirmer |
 | PCL-S | État de stress post-traumatique | ⬜ | ✅ | ⏳ | — | #36 | redondant avec PCL-5 ; VF Yao et al. 2003 sur abonnement : bloquée (tri du 10/10/2026) |
 | ASSQ | Dépistage TSA enfant | ⬜ | ❓ | 🚫 | 🟡 B | #38 | public enfant ; 2e passe : ⛔ aucune VF validée trouvée |
 | FMPS | Perfectionnisme de Frost | ⬜ | ❓ | 🚫 | 🟡 B | #45 | subscores ; 2e passe : ⛔ VF (Rhéaume et al.) non accessible ; droits non établis |
@@ -412,7 +412,7 @@ Statut de droits de **chacune des 167 échelles** du tableau, établi par recher
 | PSI-II | ✉️ | Gosselin et al. 2003 / laboratoire Dugas (UQO) | Formulaire diffusé publiquement par le laboratoire des auteurs, sans phrase de licence | Originale FR (UQO), article 2003 sur abonnement | Implémentée ; contact groupé |
 | PSWQ | ✉️ | Meyer et al. 1990 ; VF « © Tous droits réservés » Gosselin et al. (Université Laval) | Libre pour la clinique et la recherche ; VF sous copyright des traducteurs | VF QIPS validée | Implémentée ; confirmation traducteurs |
 | QAP | ✉️ | Gosselin, Ladouceur & Pelletier 2005 / laboratoire Dugas (UQO) | Formulaire et fiche de cotation diffusés par le laboratoire (uqo.ca/…/anxiete/qap.pdf), sans phrase de licence | Originale FR (UQO), 12 items, score total | Implémentable |
-| SCARED | ✉️ | B. Birmaher (University of Pittsburgh) | « free to use in clinical practice and research » ; commercial non mentionné | VF fr-CA (Pittsburgh) sans validation retrouvée ; VF validée = SCARED-R (autre instrument) | Bloquée (VF) |
+| SCARED | ✉️ | B. Birmaher (University of Pittsburgh) | « L'étude SCARED est offerte gratuitement » (PDF fr-CA, Pittsburgh) | VF fr-CA Pittsburgh (enfant et parent), non validée | Implémentée (mission 3, version enfant) |
 | WAQ | ✉️ | Dugas et al. 2001 (laboratoire Dugas, UQO) | Diffusé publiquement par le laboratoire, sans phrase de licence | Originale FR | Implémentée (QIA) ; contact groupé UQO |
 | ADRS | ✅ | Revah-Lévy et al. 2007 | Article BMC Psychiatry sous CC BY 2.0 (PMC1785378) | Originale FR, validée, accessible | Implémentée |
 | ASRS | ✅ (6 items) / 🔒 (18 items) | NYU et Harvard (Kessler) | « The screener is freely available for clinical and non-clinical use, including commercial use… no other modifications, other than creating electronic versions, are permitted » (6 items) ; 18 items : licence via NYU (license.tov.med.nyu.edu) | VF officielle NYU `6Q_French_final.pdf` (archivée) | Écran 6 items implémentable ; 18 items : demande de licence NYU |
