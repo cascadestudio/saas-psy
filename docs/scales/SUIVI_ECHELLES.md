@@ -11,7 +11,7 @@
 
 ## Tableau de bord
 
-**✅ 12 validées · 🔵 20 implémentées · 🚧 5 en cours · 📋 2 prévues · 🔍 81 à instruire · ⬜ 19 non planifiées · 🚫 28 écartées** (167 échelles, dont 83 ajoutées depuis le catalogue « Apprendre la psychologie » le 10/10/2026)
+**✅ 12 validées · 🔵 21 implémentées · 🚧 5 en cours · 📋 2 prévues · 🔍 81 à instruire · ⬜ 18 non planifiées · 🚫 28 écartées** (167 échelles, dont 83 ajoutées depuis le catalogue « Apprendre la psychologie » le 10/10/2026)
 
 **Rattrapage Mentaal : 13/42.** Le plafond n'est pas 74 : sur leur catalogue
 disponible, 12 sont écartées d'office (payantes, outils maison Mentaal, ou
@@ -105,7 +105,7 @@ sortie ; les auteurs flaggés seront contactés en une fois, plus tard.
 | PCL-S | État de stress post-traumatique | 🔵 | ✅ | 🔗 | 🟡 B | #36 | fiche `pcl-s/pcl-s.md` ; VF Yao, Cottraux et al. 2003 via INSPQ (domaine public) ; 17 items 1-5, seuil ≥ 44, sous-scores B/C/D ; méthode par critères non calculée (bloc criteriaCheck spécifique PCL-5) ; implémentée par Claude (11/10/2026, mission 3), recette staging à confirmer |
 | ASSQ | Dépistage TSA enfant | ⬜ | ❓ | 🚫 | 🟡 B | #38 | public enfant ; 2e passe : ⛔ aucune VF validée trouvée |
 | FMPS | Perfectionnisme de Frost | ⬜ | ❓ | 🚫 | 🟡 B | #45 | subscores ; 2e passe : ⛔ VF (Rhéaume et al.) non accessible ; droits non établis |
-| BAT-G | Burnout (version générale) | ⬜ | ✅ | ⏳ | 🟡 B | #48 | alternative libre au MBI ; 2e passe : ⛔ droits libres (« non-proprietary ») mais VF France officielle non validée ; VF validée = franco-canadienne 2025, items non publiés |
+| BAT-G | Burnout (version générale) | 🔵 | ✅ | 📥 | 🟡 B | #48 | fiche `bat/bat.md` (commune) ; version générale (personnes sans emploi) ; 22 items primaires + 10 secondaires ; seuils flamands non-travailleurs convertis en somme ; domaine Burn-out ; implémentée par Claude (11/10/2026, mission 3), recette staging à confirmer |
 | IES-R | Impact des événements | ⬜ | ❓ | 🚫 | 🟡 B | #49 | 3 subscores ; statut de droits contradictoire (Weiss & Marmar), tri du 10/10/2026 |
 | SVS | Valeurs de Schwartz | ⬜ | ❓ | 🚫 | — | #50 | centrage ipsatif = calcul spécifique |
 | EAT-26 | Attitudes alimentaires | ⬜ | 🔒 | 🚫 | 🟡 B | #52 | recode asymétrique + seuil ; 2e passe : ⛔ licence exigée pour les plateformes web payantes (Eating Attitudes LLC) |
@@ -416,7 +416,7 @@ Statut de droits de **chacune des 167 échelles** du tableau, établi par recher
 | WAQ | ✉️ | Dugas et al. 2001 (laboratoire Dugas, UQO) | Diffusé publiquement par le laboratoire, sans phrase de licence | Originale FR | Implémentée (QIA) ; contact groupé UQO |
 | ADRS | ✅ | Revah-Lévy et al. 2007 | Article BMC Psychiatry sous CC BY 2.0 (PMC1785378) | Originale FR, validée, accessible | Implémentée |
 | ASRS | ✅ (6 items) / 🔒 (18 items) | NYU et Harvard (Kessler) | « The screener is freely available for clinical and non-clinical use, including commercial use… no other modifications, other than creating electronic versions, are permitted » (6 items) ; 18 items : licence via NYU (license.tov.med.nyu.edu) | VF officielle NYU `6Q_French_final.pdf` (archivée) | Écran 6 items implémentable ; 18 items : demande de licence NYU |
-| BAT-G | ✅ | Schaufeli, De Witte & Desart (KU Leuven) | « non-proprietary and may be used free of charge without requesting permission » | VF France officielle non validée ; VF franco-canadienne validée (2025) non publiée | Bloquée (VF) |
+| BAT-G | ✅ | Schaufeli, De Witte & Desart (KU Leuven) | Idem BAT-W (non-proprietary, sans modification) | VF France officielle (site des auteurs), non validée | Implémentée (mission 3) |
 | BAT-W | ✅ | Schaufeli, De Witte & Desart (KU Leuven) | « The BAT is non-proprietary and may be used free of charge without requesting permission from the authors… should not be modified » (burnoutassessmenttool.be) | VF France officielle (site des auteurs), non validée | Implémentée (mission 3) |
 | BIG-5 | ✅ (si version IPIP) | International Personality Item Pool | « public domain… free for any use, commercial or academic, without permission » (ipip.ori.org) ; version Mentaal à confirmer | VF IPIP à identifier | Vérifier qu'une VF validée existe |
 | BPRS | ✅ | Overall & Gorham 1962 | Domaine public (financement VA / NIMH, œuvre du gouvernement fédéral américain) | VF à vérifier | Hétéro-évaluation |

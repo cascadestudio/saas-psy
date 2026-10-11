@@ -2854,6 +2854,82 @@ export const scales: Scale[] = [
       thresholdsSource: "Seuils cliniques flamands du manuel BAT 2.0 (moyennes converties en sommes)",
     },
   },
+  {
+    id: "bat-g",
+    acronym: "BAT",
+    label: "Burnout Assessment Tool — version générale",
+    patientIntroSubtitle: null,
+    domain: "burnout",
+    formType: "single-scale",
+    title: "BAT - Burnout Assessment Tool (version générale)",
+    description:
+      "Un questionnaire de 32 items évaluant les symptômes de burn-out (hors travail) : épuisement, distance mentale, déficiences cognitive et émotionnelle, plaintes secondaires",
+    category: "Burn-out",
+    estimatedTime: "5 minutes",
+    longDescription:
+      "Le Burnout Assessment Tool (BAT ; Schaufeli, De Witte et Desart, KU Leuven, 2019-2020) évalue les plaintes de burn-out. Version version générale : 22 items de symptômes primaires (épuisement, distance mentale, déficience cognitive, déficience émotionnelle) et 10 items de symptômes secondaires (plaintes psychiques et psychosomatiques), cotés de 1 (jamais) à 5 (toujours). Le score de référence est la moyenne des 22 items primaires (1 à 5), comparée aux seuils cliniques flamands : vert (pas de risque), orange (risque de burn-out), rouge (risque très élevé). Melya affiche la somme équivalente (22 à 110). Le BAT n'est pas un outil diagnostique. Version destinée aux personnes qui ne travaillent pas actuellement ; seuils pour les personnes flamandes sans emploi. Seuils des sous-échelles (moyennes) : épuisement 3,31 / 3,81 ; distance mentale 2,50 / 3,10 ; déficience émotionnelle 2,10 / 3,50 ; déficience cognitive 2,70 / 3,50 (début des zones orange / rouge).",
+    instructions:
+      "Les énoncés suivants sont liés à ce que vous ressentez et à la manière dont vous la vivez. Veuillez indiquer la fréquence à laquelle chaque déclaration s'applique à vous.",
+    persistentInstructions:
+      "Veuillez indiquer la fréquence à laquelle chaque déclaration s'applique à vous.",
+    copyrightAttribution:
+      "BAT — Schaufeli, W.B., De Witte, H. & Desart, S. (2020). Burnout Assessment Tool (BAT) – Development, validity and reliability. International Journal of Environmental Research and Public Health, 17, 9495. Version française (France), avec l'aide de Dr Ilona Boniwell (Positran). Outil non propriétaire (KU Leuven).",
+    higherIsBetter: false,
+    questions: [
+      "Je me sens épuisé/e mentalement",
+      "Tout ce que je fais me demande beaucoup d'efforts",
+      "Après une journée, il m'est difficile de retrouver mon énergie",
+      "Je me sens épuisé physiquement",
+      "Quand je me lève le matin, je manque d'énergie pour commencer une nouvelle journée",
+      "Je veux être actif/ve, mais il m'est impossible d'y arriver",
+      "Quand je fais beaucoup d'efforts, je me fatigue plus que d'habitude",
+      "A la fin de ma journée, je me sens épuisé et vidé mentalement",
+      "J'ai du mal à être enthousiaste à propos de mon travail",
+      "Je ressens une profonde aversion pour mon travail",
+      "Je ressens de l'indifférence à propos de mon travail",
+      "Je ne pense pas que les autres accordent de l'importance à mon travail",
+      "J'ai du mal à rester attentif/ve",
+      "Il m'est difficile de penser de manière claire",
+      "J'oublie des choses et je suis distrait/e",
+      "J'ai du mal à me concentrer",
+      "Je fais des erreurs car mon esprit est ailleurs",
+      "Je me sens incapable de contrôler mes émotions",
+      "Je ne me reconnais pas dans mes réactions émotionnelles",
+      "Je deviens irritable quand les choses ne se passent pas comme je voudrais",
+      "Il m'arrive d'être en colère ou triste sans vraiment savoir pourquoi",
+      "Il m'arrive de réagir avec excès sans en avoir l'intention",
+      "J'ai du mal à m'endormir ou je me réveille en pleine nuit",
+      "J'ai tendance à m'inquiéter",
+      "Je me sens tendu et stressé",
+      "Je me sens anxieux et/ou je souffre d'attaques de panique",
+      "Le bruit et la foule me dérangent",
+      "Je souffre de palpitations et de douleurs de poitrine",
+      "Je souffre de douleurs d'estomac et/ou intestinales",
+      "Je souffre de migraines",
+      "Je souffre de douleurs musculaires, par exemple dans le cou, l'épaule ou le dos",
+      "Je tombe souvent malade",
+    ],
+    answerScales: {
+      intensity: [
+        { value: 1, label: "Jamais" },
+        { value: 2, label: "Rarement" },
+        { value: 3, label: "Parfois" },
+        { value: 4, label: "Souvent" },
+        { value: 5, label: "Toujours" },
+      ],
+    },
+    scoring: {
+      ranges: [
+        { min: 22, max: 56, interpretation: "Zone verte : pas de risque de burn-out (moyenne ≤ 2,58)" },
+        { min: 57, max: 66, interpretation: "Zone orange : risque de burn-out (moyenne 2,59 à 3,01)" },
+        { min: 67, max: 110, interpretation: "Zone rouge : risque très élevé de burn-out (moyenne ≥ 3,02)" },
+      ],
+      maxScore: 110,
+      method:
+        "Le score total additionne les 22 items de symptômes primaires (1-5), soit 22 à 110. Il équivaut à la moyenne du manuel (somme ÷ 22, arrondie à 2 décimales) : moyenne ≤ 2,58 = zone verte, 2,59 à 3,01 = zone orange, ≥ 3,02 = zone rouge. Les 10 items de symptômes secondaires (plaintes psychiques et psychosomatiques) forment un sous-score à part, hors total. Version destinée aux personnes qui ne travaillent pas actuellement ; seuils pour les personnes flamandes sans emploi. Seuils des sous-échelles (moyennes) : épuisement 3,31 / 3,81 ; distance mentale 2,50 / 3,10 ; déficience émotionnelle 2,10 / 3,50 ; déficience cognitive 2,70 / 3,50 (début des zones orange / rouge).",
+      thresholdsSource: "Seuils cliniques flamands du manuel BAT 2.0 (moyennes converties en sommes)",
+    },
+  },
 ];
 
 export function getScaleById(id: string): Scale | undefined {
