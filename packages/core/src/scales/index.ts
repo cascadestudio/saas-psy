@@ -2930,6 +2930,61 @@ export const scales: Scale[] = [
       thresholdsSource: "Seuils cliniques flamands du manuel BAT 2.0 (moyennes converties en sommes)",
     },
   },
+  {
+    id: "cst",
+    acronym: "CST",
+    label: "Échelle brève d'évaluation du stress (Cungi)",
+    patientIntroSubtitle: null,
+    domain: "anxiete",
+    formType: "single-scale",
+    title: "CST - Échelle brève d'évaluation du stress (Cungi)",
+    description:
+      "Une échelle brève de 11 questions issue des travaux de Charly Cungi pour évaluer son niveau de stress",
+    category: "Stress",
+    estimatedTime: "3 minutes",
+    longDescription:
+      "L'échelle brève d'évaluation du stress, issue des travaux du psychiatre Charly Cungi, comporte 11 questions sur les manifestations émotionnelles, comportementales et physiques du stress. Chaque question est cotée de 1 (pas du tout) à 6 (extrêmement) ; le score total varie de 11 à 66 : niveau de stress très bas, bas, élevé ou très élevé. Texte repris d'une source secondaire, à confronter à l'ouvrage de référence (Cungi, Savoir gérer son stress).",
+    instructions:
+      "Pour chacune des questions, choisissez la réponse appropriée selon l'échelle suivante : 1 - Pas du tout, 2 - Faiblement, 3 - Un peu, 4 - Assez, 5 - Beaucoup, 6 - Extrêmement.",
+    copyrightAttribution:
+      "Échelle brève d'évaluation du stress — issue des travaux de Charly Cungi (Savoir gérer son stress, Retz). Version reprise de Lefebvre Dalloz Compétences.",
+    higherIsBetter: false,
+    questions: [
+      "Suis-je émotif, sensible aux remarques, aux critiques d'autrui ?",
+      "Suis-je colérique ou rapidement irritable ?",
+      "Suis-je perfectionniste, ai-je tendance à ne pas être satisfait de ce que j'ai fait ou de ce que les autres ont fait ?",
+      "Ai-je le cœur qui bat vite, de la transpiration, des tremblements, des secousses musculaires, par exemple au niveau du visage, des paupières ?",
+      "Est-ce que je me sens tendu au niveau des muscles, ai-je une sensation de crispation au niveau des mâchoires, du visage, du corps en général ?",
+      "Ai-je des problèmes de sommeil ?",
+      "Suis-je anxieux, est-ce que je me fais souvent du souci ?",
+      "Ai-je des manifestations corporelles comme un trouble digestif, des douleurs, des maux de tête, des allergies, de l'eczéma ?",
+      "Est-ce que je suis fatigué ?",
+      "Ai-je des problèmes de santé plus importants comme un ulcère d'estomac, une maladie de peau, un problème de cholestérol, de l'hypertension artérielle, un trouble cardio-vasculaire ?",
+      "Est-ce que je fume ou bois de l'alcool pour me stimuler ou me calmer ? Est-ce que j'utilise d'autres produits ou des médicaments dans ce but ?",
+    ],
+    answerScales: {
+      intensity: [
+        { value: 1, label: "Pas du tout" },
+        { value: 2, label: "Faiblement" },
+        { value: 3, label: "Un peu" },
+        { value: 4, label: "Assez" },
+        { value: 5, label: "Beaucoup" },
+        { value: 6, label: "Extrêmement" },
+      ],
+    },
+    scoring: {
+      ranges: [
+        { min: 11, max: 18, interpretation: "Niveau de stress très bas" },
+        { min: 19, max: 29, interpretation: "Niveau de stress bas" },
+        { min: 30, max: 45, interpretation: "Niveau de stress élevé" },
+        { min: 46, max: 66, interpretation: "Niveau de stress très élevé" },
+      ],
+      maxScore: 66,
+      method:
+        "Additionnez les 11 réponses (1-6) : le score total varie de 11 à 66. Entre 11 et 19 : stress très bas ; entre 19 et 30 : bas ; entre 30 et 45 : élevé ; au-dessus de 45 : très élevé (bornes de la source ; Melya retient 11-18, 19-29, 30-45, 46-66).",
+      thresholdsSource: "Bornes de la source (Lefebvre Dalloz, d'après Cungi), chevauchements tranchés par Melya",
+    },
+  },
 ];
 
 export function getScaleById(id: string): Scale | undefined {

@@ -1,0 +1,78 @@
+# Test spec — CST (Échelle brève d'évaluation du stress, Cungi)
+
+<!-- Fiche rédigée et implémentée par Claude (mission n°3, 11/10/2026). Source de classe B (« à confronter »). Arbitrages en §10, reste à faire en §13. -->
+
+## 1. Métadonnées produit
+
+| Champ | Valeur |
+| --- | --- |
+| **Nom court** | CST (id `cst`) — « Stress de Cungi » dans le benchmark Mentaal |
+| **Libellé** | Échelle brève d'évaluation du stress (Cungi) |
+| **Thème** | Stress (domaine Anxiété, catégorie « Stress ») |
+| **Items** | 11 (1-6) |
+| **Durée** | 3 min (estimation Melya) |
+| **Public** | Adultes |
+| **Mode** | auto |
+| **Description praticien** | Échelle brève de 11 questions issue des travaux de Charly Cungi pour évaluer son niveau de stress. |
+
+## 2. Sources et traçabilité
+
+- **Source (classe B, secondaire)** : Lefebvre Dalloz Compétences (organisme de formation), « Test : échelle brève d'évaluation du stress » — texte archivé `CST_Lefebvre-Dalloz_2026-10-11.txt` (page Cloudflare, lue via Chrome), 11/10/2026.
+- **Référence papier à confronter** : Charly Cungi, *Savoir gérer son stress* (Retz) — édition et pages à vérifier (action documentaire).
+- **Écart avec Mentaal** : Mentaal (`/send/cungi-stress`, n°60) propose 19 questions → probablement une autre version (complète) de l'échelle de Cungi.
+- **Journal de recherche** : « échelle de stress de Cungi questionnaire texte items » → Lefebvre Dalloz ; pages INRS (autres outils) ; aucun PDF institutionnel de l'échelle trouvé.
+
+## 3. Statut copyright et licence
+
+| Champ | Valeur |
+| --- | --- |
+| **Statut** | ❓ — aucune phrase de licence ; texte tiré d'un livre grand public (Retz) reproduit par un tiers (règle pragmatique : implémentable) |
+| **Mention obligatoire** | « Échelle brève d'évaluation du stress — issue des travaux de Charly Cungi (Savoir gérer son stress, Retz). Version reprise de Lefebvre Dalloz Compétences. » |
+| **Décision Melya** | go, sous réserve de confrontation au livre |
+| **PDF source en téléchargement** | 🚫 (pas de source officielle publique) |
+
+## 4. Structure
+
+- **Consigne** (adaptée) : « Pour chacune des questions, choisissez la réponse appropriée selon l'échelle suivante : 1 - Pas du tout, 2 - Faiblement, 3 - Un peu, 4 - Assez, 5 - Beaucoup, 6 - Extrêmement. »
+- **Titre patient** : acronyme seul.
+- **Réponses** : 1 Pas du tout · 2 Faiblement · 3 Un peu · 4 Assez · 5 Beaucoup · 6 Extrêmement.
+
+## 5. Items
+
+11 questions (texte : entrée `cst` et fichier archivé), verbatim sauf l'item 8 (§10).
+
+## 6-7. Scoring et seuils
+
+Somme 11-66. Source : « Entre 11 et 19 : très bas ; entre 19 et 30 : bas ; entre 30 et 45 : élevé ; au-dessus de 45 : très élevé ». Bandes Melya : 11-18 très bas · 19-29 bas · 30-45 élevé · 46-66 très élevé.
+
+## 8. Alertes
+
+Aucune.
+
+## 9. Cas de test (`cst.spec.ts`, 9/9)
+
+11, 18, 19, 29, 30, 45, 46, 66 (chaque bord de bande).
+
+## 10. Choix et arbitrages méthodologiques
+
+| Sujet | Choix | Justification | Confiance |
+| --- | --- | --- | --- |
+| Source | Lefebvre Dalloz (secondaire) | Seule version en ligne ; classe B, à confronter au livre de Cungi | basse |
+| Bornes des bandes | 19 → « bas », 30 → « élevé », 45 → « élevé » | La source chevauche (« entre 11 et 19 », « entre 19 et 30 ») ; lecture en intervalles semi-ouverts, « au-dessus de 45 » strict | basse |
+| Item 8 | « des allergies de l'eczéma » → « des allergies, de l'eczéma » | Type 2 : virgule manquante évidente | moyenne |
+| Consigne | « faites une croix dans la case appropriée » → « choisissez la réponse appropriée » | Type 1 | moyenne |
+| Domaine | Anxiété, catégorie « Stress » | Stress général (pas spécifiquement professionnel) | moyenne |
+
+### Recette
+
+À compléter après déploiement sur staging.
+
+## 11-12. Contrat technique et historique
+
+Entrée `cst` (1-6, 4 bandes), scorer `cst.ts` (somme), tests `cst.spec.ts`. 11/10/2026 — Claude (mission n°3) : création et implémentation (classe B).
+
+## 13. Reste à faire avant prod
+
+- [ ] **Action documentaire** : Cungi, *Savoir gérer son stress* (Retz) — photographier l'échelle (consigne, 11 items, cotation, bornes) ; vérifier s'il s'agit de la version courte et repérer la version à 19 items (Mentaal).
+- [ ] **Arbitrage à valider** : bornes des bandes (chevauchement de la source).
+- [ ] **Vigilance** : source non clinique (organisme de formation).

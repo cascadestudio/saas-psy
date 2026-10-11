@@ -11,7 +11,7 @@
 
 ## Tableau de bord
 
-**✅ 12 validées · 🔵 21 implémentées · 🚧 5 en cours · 📋 2 prévues · 🔍 81 à instruire · ⬜ 18 non planifiées · 🚫 28 écartées** (167 échelles, dont 83 ajoutées depuis le catalogue « Apprendre la psychologie » le 10/10/2026)
+**✅ 12 validées · 🔵 22 implémentées · 🚧 5 en cours · 📋 2 prévues · 🔍 80 à instruire · ⬜ 18 non planifiées · 🚫 28 écartées** (167 échelles, dont 83 ajoutées depuis le catalogue « Apprendre la psychologie » le 10/10/2026)
 
 **Rattrapage Mentaal : 13/42.** Le plafond n'est pas 74 : sur leur catalogue
 disponible, 12 sont écartées d'office (payantes, outils maison Mentaal, ou
@@ -86,7 +86,7 @@ sortie ; les auteurs flaggés seront contactés en une fois, plus tard.
 | COPSOQ | Risques psychosociaux | 🔍 | ✉️ | ⏳ | — | #51 | libre non commercial — usage commercial à vérifier |
 | SPRS | Cotation de la phobie sociale | 🔍 | ❓ | 🚫 | — | #55 | |
 | QAP | Attitudes face aux problèmes | 🔵 | ✉️ | 🔗 | 🟢 A | #56 | fiche `qap/qap.md` ; original francophone (Gosselin, Ladouceur & Pelletier 2005), formulaire et cotation du laboratoire Dugas (UQO) ; 12 items, total 12-60 sans seuil ; implémentée par Claude (11/10/2026) ; recette Claude staging + Mentaal conforme (Mentaal ajoute un seuil 48 non sourcé), recette Clément à faire |
-| CST | Stress de Cungi | 🔍 | ❓ | 🚫 | — | #60 | |
+| CST | Stress de Cungi | 🔵 | ❓ | 🚫 | 🟢 A | #60 | fiche `cst/cst.md` ; **classe B** : version brève 11 items (Lefebvre Dalloz, d'après Cungi) à confronter au livre (Retz) ; Mentaal a 19 items ; bornes chevauchantes tranchées ; implémentée par Claude (11/10/2026, mission 3), recette staging à confirmer |
 | RIASEC | Intérêts professionnels | 🔍 | ✅ (si O*NET Interest Profiler) | ⏳ | — | #62 | modèle libre, version des items à vérifier |
 | ASA-27 | Anxiété de séparation adulte | 🔍 | ❓ | 🚫 | — | #63 | |
 | FSS | Échelle des peurs | 🔍 | 💰 | 🚫 | — | #64 | |
@@ -344,7 +344,7 @@ Statut de droits de **chacune des 167 échelles** du tableau, établi par recher
 | Covi | ❓ | L. Covi 1984 | Aucune source de licence en ligne | VF à vérifier | À identifier ; hétéro-évaluation |
 | CPRS | ❓ | Åsberg, Montgomery et al. 1978 | Aucune phrase de licence trouvée | VF à vérifier | À identifier ; hétéro-évaluation |
 | CPTS-RI | ❓ | Pynoos et al. (UCLA) | Aucune phrase de licence trouvée (UCLA PTSD-RI : copyright des auteurs) | VF à vérifier | À identifier |
-| CST | ❓ | C. Cungi | Échelle publiée dans des ouvrages de C. Cungi ; éditeur et licence non établis | Non trouvée en accès libre | À identifier |
+| CST | ❓ | C. Cungi | Échelle publiée dans des ouvrages de C. Cungi ; éditeur et licence non établis | Version brève reprise par Lefebvre Dalloz (source secondaire) | Implémentée (mission 3, classe B) ; action documentaire : livre de Cungi |
 | CY-BOCS | ❓ | Goodman et al. 1997 (Y-BOCS : OCD Scales, LLC ?) | Détenteur formel inconnu ; la Y-BOCS adulte serait sous licence d'OCD Scales, LLC | VF à vérifier | À identifier ; hétéro-évaluation |
 | DAS | ❓ | Weissman & Beck 1978 | Aucune phrase de licence trouvée | VF à vérifier | À identifier |
 | DBAS | ❓ | C. M. Morin (Université Laval) | Aucune phrase de licence trouvée | VF probable (équipe francophone de Morin) à vérifier | À identifier |
