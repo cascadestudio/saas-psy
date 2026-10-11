@@ -75,7 +75,7 @@ sortie ; les auteurs flaggés seront contactés en une fois, plus tard.
 | ADHD-RS | Évaluation du TDAH | 🔍 | 💰 | — | #16 | DuPaul/Guilford — alternative libre : ASRS |
 | PDQ-4 | Diagnostic des personnalités | 🔍 | ❓ | — | #24 | |
 | BPQ | Personnalité borderline | 🔍 | ❓ | — | #28 | |
-| CAQ | Évitements cognitifs | 🔵 | ✉️ | 🟡 B | #32 | porté sous l'id **QEC** ; fiche `qec/qec.md` ; original francophone (Gosselin et al. 2002), laboratoire Dugas (UQO) ; 25 items, total + 5 sous-scores, sans seuil ; implémentée par Claude (11/10/2026), recette staging à confirmer |
+| CAQ | Évitements cognitifs | 🔵 | ✉️ | 🟡 B | #32 | porté sous l'id **QEC** ; fiche `qec/qec.md` ; original francophone (Gosselin et al. 2002), laboratoire Dugas (UQO) ; 25 items, total + 5 sous-scores, sans seuil ; implémentée par Claude (11/10/2026) ; recette Claude staging + Mentaal conforme (75 et sous-scores identiques), recette Clément à faire |
 | BIG-5 | Cinq grands facteurs | 🔍 | ✅ (si version IPIP) | — | #33 | items IPIP libres — version exacte à confirmer |
 | PPAG | Phobie, panique, anxiété généralisée | 🔍 | ❓ | — | #35 | |
 | SCQ | Cognitions sociales | 🔍 | ❓ | — | #39 | |
@@ -84,7 +84,7 @@ sortie ; les auteurs flaggés seront contactés en une fois, plus tard.
 | EDQ | Dépendance affective | 🔍 | ❓ | — | #42 | |
 | COPSOQ | Risques psychosociaux | 🔍 | ✉️ | — | #51 | libre non commercial — usage commercial à vérifier |
 | SPRS | Cotation de la phobie sociale | 🔍 | ❓ | — | #55 | |
-| QAP | Attitudes face aux problèmes | 🔵 | ✉️ | 🟢 A | #56 | fiche `qap/qap.md` ; original francophone (Gosselin, Ladouceur & Pelletier 2005), formulaire et cotation du laboratoire Dugas (UQO) ; 12 items, total 12-60 sans seuil ; implémentée par Claude (11/10/2026), recette staging à confirmer |
+| QAP | Attitudes face aux problèmes | 🔵 | ✉️ | 🟢 A | #56 | fiche `qap/qap.md` ; original francophone (Gosselin, Ladouceur & Pelletier 2005), formulaire et cotation du laboratoire Dugas (UQO) ; 12 items, total 12-60 sans seuil ; implémentée par Claude (11/10/2026) ; recette Claude staging + Mentaal conforme (Mentaal ajoute un seuil 48 non sourcé), recette Clément à faire |
 | CST | Stress de Cungi | 🔍 | ❓ | — | #60 | |
 | RIASEC | Intérêts professionnels | 🔍 | ✅ (si O*NET Interest Profiler) | — | #62 | modèle libre, version des items à vérifier |
 | ASA-27 | Anxiété de séparation adulte | 🔍 | ❓ | — | #63 | |

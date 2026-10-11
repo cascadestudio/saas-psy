@@ -203,7 +203,29 @@ Détail T3 : substitution 1+1+2+2+2 = 8 ; transformation 4+3+3+3+4 = 17 ; distra
 
 ### Recette
 
-À compléter après déploiement sur staging.
+**Staging (11/10/2026, Claude)** — patient « Patient Test », parcours patient complet puis page résultat praticien : **conforme**.
+
+| Jeu | Réponses (items 1-25) | Attendu | Obtenu |
+| --- | --- | --- | --- |
+| Minimum | 25 × 1 | 25 / 125 ; sous-scores 5 × 5/25 | 25 / 125 |
+| Maximum | 25 × 5 | 125 / 125 ; sous-scores 5 × 25/25 | 125 / 125 |
+| R1 (une valeur par sous-échelle) | 1,1,4,5,1,1,2,3,2,3,5,3,3,1,4,2,5,2,4,5,3,2,4,4,5 | 75 ; substitution 25, transformation 20, distraction 15, évitement 10, suppression 5 | 75 / 125 ; 25/25, 20/25, 15/25, 10/25, 5/25 |
+
+Le jeu R1 vérifie à lui seul le rattachement de chaque item à sa sous-échelle (chaque sous-échelle reçoit une valeur distincte). Libellé « Pas de seuil clinique fourni par les auteurs. », consigne, 5 libellés de réponse et mention de copyright : conformes.
+
+**Comparaison Mentaal (11/10/2026)** — fiche « CAQ » ([mentaal.fr/send/caq](https://mentaal.fr/send/caq)), patient fictif, jeu R1 : **75/125 et sous-scores 25/20/15/10/5 chez Mentaal comme chez Melya**, mêmes regroupements d'items. La source primaire tranche.
+
+| Point | Source primaire (UQO) | Melya | Mentaal |
+| --- | --- | --- | --- |
+| Consigne d'intro | Texte du formulaire | Texte du formulaire, sans « Encerclez… » | Texte réécrit (« Veuillez répondre à chaque question aussi honnêtement que possible… ») |
+| Rappel au-dessus des items | — (en-tête papier) | Phrase de la consigne, mot pour mot | « À quel point l'énoncé suivant vous correspond ? » (formulation Mentaal) |
+| Item 9 | « …auxquelles je ne veux pas réfléchir » | Verbatim | « auxquelle » (coquille Mentaal) |
+| Items 8 et 21 | Sans point final | Point ajouté (§10) | Point présent |
+| Ancres de réponse | « Pas du tout correspondant » … « Tout à fait correspondant » | Idem | Idem sur les boutons ; le texte d'aide praticien parle de « 1 = jamais, 5 = toujours » (inexact) |
+| Interprétation | Aucun seuil | Bande unique sans seuil | Aucun seuil ; une description par sous-échelle |
+| Nom | « QEC » | « Questionnaire d'évitement cognitif » | « Questionnaire des évitements cognitifs (CAQ) » |
+
+Aucun écart de cotation.
 
 ---
 
@@ -219,3 +241,4 @@ Détail T3 : substitution 1+1+2+2+2 = 8 ; transformation 4+3+3+3+4 = 17 ; distra
 | Date | Auteur | Modification |
 | --- | --- | --- |
 | 11/10/2026 | Claude (lot autonome) | Création de la fiche et implémentation : formulaire UQO en autorité unique, 25 items verbatim, total 25-125 et 5 sous-scores, sans seuil. Tests 5/5. |
+| 11/10/2026 | Claude (lot autonome) | Recette staging (min, max, R1) conforme ; comparaison Mentaal (75 et sous-scores identiques). |

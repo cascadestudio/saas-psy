@@ -183,7 +183,28 @@ L'item 10 (« plus gros qu'ils le sont », sans « ne » explétif) est conserv�
 
 ### Recette
 
-À compléter après déploiement sur staging.
+**Staging (11/10/2026, Claude)** — patient « Patient Test », parcours patient complet puis page résultat praticien : **conforme**.
+
+| Jeu | Réponses | Attendu | Obtenu |
+| --- | --- | --- | --- |
+| Minimum | 12 × 1 | 12 / 60, « Pas de seuil clinique fourni par les auteurs. » | 12 / 60, idem |
+| Maximum | 12 × 5 | 60 / 60, même libellé | 60 / 60, idem (historique longitudinal : +48) |
+
+Consigne complète à l'écran d'intro, rappel au-dessus de chaque item, 5 libellés dans l'ordre de la source, mention de copyright en pied de résultat : conformes.
+
+**Comparaison Mentaal (11/10/2026)** — [mentaal.fr/send/qap](https://mentaal.fr/send/qap), patient fictif, jeu T3 (attendu 35) : **35/60 chez Mentaal comme chez Melya**. La source primaire tranche.
+
+| Point | Source primaire (UQO) | Melya | Mentaal |
+| --- | --- | --- | --- |
+| Consigne d'intro | Texte du formulaire | Texte du formulaire, sans « Encerclez… » | Texte réécrit (« Ce questionnaire vise à mieux comprendre comment vous réagissez face aux difficultés… ») |
+| Rappel au-dessus des items | — (en-tête papier) | 2e phrase de la consigne, mot pour mot | « Indiquez dans quelle mesure cet énoncé correspond à votre façon habituelle de réagir : » (formulation Mentaal) |
+| Items 1 et 12 | « menaçant », « fontionnement » | « menaçants », « fonctionnement » (§10) | Coquilles du PDF conservées |
+| Libellé de réponse 5 | « Extrêmement correspondant » | Idem | Idem sur les boutons ; « Entièrement correspondant » dans le texte d'aide praticien |
+| Interprétation | Aucun seuil | Bande unique « Pas de seuil clinique fourni par les auteurs. » | 12-47 « Aucun seuil publié » / **48-60 « Attitude très négative »** (seuil non sourcé) |
+| Synthèse narrative | — | — | Paragraphe généré (« Le patient semble rapporter une appréhension marquée… ») |
+| Nom | « QAP » ; titre de publication « Questionnaire d'attitude face aux problèmes » | Titre de publication | « Questionnaire des attitudes face aux problèmes » ; nom original annoncé « Problem Attitude Questionnaire » (l'original est francophone) |
+
+À regarder par Clément : le seuil 48 de Mentaal n'apparaît pas dans la fiche de cotation UQO ; ne pas le reprendre sans l'article de 2005 (question ouverte 1).
 
 ---
 
@@ -199,3 +220,4 @@ L'item 10 (« plus gros qu'ils le sont », sans « ne » explétif) est conserv�
 | Date | Auteur | Modification |
 | --- | --- | --- |
 | 11/10/2026 | Claude (lot autonome) | Création de la fiche et implémentation : formulaire UQO en autorité unique, 12 items (3 corrections typographiques ou d'accord), score total 12-60 sans seuil. Tests 4/4. |
+| 11/10/2026 | Claude (lot autonome) | Recette staging (min, max) conforme ; comparaison Mentaal (35/60 identique, seuil 48 non sourcé chez Mentaal). |
