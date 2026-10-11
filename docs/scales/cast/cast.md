@@ -206,7 +206,17 @@ Aucune.
 
 ### Recette
 
-À compléter après déploiement sur staging.
+**Staging (11/10/2026, Claude)** — patient « Patient Test », parcours patient complet puis page résultat praticien : **conforme**.
+
+| Jeu | Réponses (items 1-6) | Attendu | Obtenu |
+| --- | --- | --- | --- |
+| Minimum | 0,0,0,0,0,0 | 0, usage sans risque | 0, « Usage sans risque » |
+| Tranche 2 | 1,1,1,1,0,0 | 4, risque faible | 4, « Risque faible » |
+| Maximum | 4,4,4,4,4,4 | 24, risque élevé | 24, « Risque élevé d'usage problématique, voire de dépendance » |
+
+Consigne et rappel « Au cours des 12 derniers mois… », 5 libellés, graduations 3 et 7 sur la jauge, mention « Seuils OFDT (Note n°2013-02) » et copyright : conformes. L'écran d'intro ne porte que la consigne (une ligne), fidèle à la source mais sobre.
+
+**Mentaal** : CAST absent de leur catalogue.
 
 ---
 
@@ -222,3 +232,4 @@ Aucune.
 | Date | Auteur | Modification |
 | --- | --- | --- |
 | 11/10/2026 | Claude (lot autonome) | Création de la fiche et implémentation : Note OFDT 2013-02 en autorité unique (version définitive 12 mois, 0-4), seuils < 3 / 3-6 / ≥ 7 ; version HAS oui/non documentée et écartée. Tests 7/7. |
+| 11/10/2026 | Claude (lot autonome) | Recette staging conforme (0, 4, 24). |

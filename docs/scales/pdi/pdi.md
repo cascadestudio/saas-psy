@@ -217,7 +217,17 @@ L'item 7 « J'étais inquiet pour la sécurité des autres. » est conservé san
 
 ### Recette
 
-À compléter après déploiement sur staging.
+**Staging (11/10/2026, Claude)** — patient « Patient Test », parcours patient complet puis page résultat praticien : **conforme**.
+
+| Jeu | Réponses (items 1-13) | Attendu | Obtenu |
+| --- | --- | --- | --- |
+| Minimum | 13 × 0 | 0 / 52, non significative | 0, « Détresse péritraumatique non significative » |
+| Seuil | 2,2,2,2,2,2,1,1,1,0,0,0,0 | 15, significative | 15, « Détresse péritraumatique significative » |
+| Maximum | 13 × 4 | 52, significative | 52, idem |
+
+Écran d'intro (deux paragraphes de consigne), rappel « Pendant et immédiatement après l'événement critique : », 5 libellés, mention « Seuil de la fiche descriptive Cn2r » sous la jauge et copyright en pied : conformes.
+
+**Mentaal** : PDI affiché « Bientôt disponible » (82 votes) le 11/10/2026 ; pas de passation de comparaison possible.
 
 ---
 
@@ -234,3 +244,4 @@ L'item 7 « J'étais inquiet pour la sécurité des autres. » est conservé san
 | Date | Auteur | Modification |
 | --- | --- | --- |
 | 11/10/2026 | Claude (lot autonome) | Création de la fiche et implémentation : fiche Cn2r (version Jehel 2005) en source primaire, INSPQ pour la ponctuation, 13 items 0-4, seuil ≥ 15. Tests 5/5. |
+| 11/10/2026 | Claude (lot autonome) | Recette staging conforme (0, 15, 52) ; Mentaal : « bientôt disponible ». |
