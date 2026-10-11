@@ -76,7 +76,7 @@ sortie ; les auteurs flaggés seront contactés en une fois, plus tard.
 | PDQ-4 | Diagnostic des personnalités | 🔍 | ❓ | — | #24 | |
 | BPQ | Personnalité borderline | 🔍 | ❓ | — | #28 | |
 | CAQ | Évitements cognitifs | 🔵 | ✉️ | 🟡 B | #32 | porté sous l'id **QEC** ; fiche `qec/qec.md` ; original francophone (Gosselin et al. 2002), laboratoire Dugas (UQO) ; 25 items, total + 5 sous-scores, sans seuil ; implémentée par Claude (11/10/2026) ; recette Claude staging + Mentaal conforme (75 et sous-scores identiques), recette Clément à faire |
-| BIG-5 | Cinq grands facteurs | 🔍 | ✅ (si version IPIP) | — | #33 | items IPIP libres — version exacte à confirmer |
+| BIG-5 | Cinq grands facteurs | 🔍 | ✅ (si version IPIP) | — | #33 | items IPIP libres — version exacte à confirmer ; **bloquée VF (11/10/2026)** : aucune version française validée de l'IPIP (50 items ou Mini-IPIP) trouvée avec son texte ; le BFI-Fr (Plaisant et al.) n'est pas IPIP (droits à instruire) |
 | PPAG | Phobie, panique, anxiété généralisée | 🔍 | ❓ | — | #35 | |
 | SCQ | Cognitions sociales | 🔍 | ❓ | — | #39 | |
 | GAD-SBQ | Comportements sécurisants du TAG | 🔍 | ❓ | — | #40 | |
@@ -154,7 +154,7 @@ sortie ; les auteurs flaggés seront contactés en une fois, plus tard.
 | FFMQ | Questionnaire des cinq facettes de la pleine conscience | 🔍 | ❓ | — | Absent | [ALP] domaine à définir (pleine conscience) |
 | Fusion pensée-forme | Échelle de fusion pensée-forme | 🔍 | 🔒 | — | Absent | [ALP] domaine Troubles alimentaires (validé, pas encore créé) |
 | DBAS | Échelle des croyances et attitudes dysfonctionnelles à propos du sommeil | 🔍 | ❓ | — | Catalogue | [ALP] « CAS » chez Mentaal ; domaine à définir (sommeil) |
-| MEQ-SA | Questionnaire de chronotype révisé | 🔍 | ✅ | — | Absent | [ALP] domaine à définir (sommeil) |
+| MEQ-SA | Questionnaire de chronotype révisé | 🔍 | ✅ | — | Absent | [ALP] domaine à définir (sommeil) ; **bloquée VF (11/10/2026)** : validation française (Taillard et al. 2004, seuils propres aux travailleurs français) inaccessible ; deux traductions françaises divergentes (CHU de Besançon, avec les réponses de l'item 9 recopiées de l'item 5 ; Réseau Morphée) ; SFRMS : version courte 5 items sans cotation ; items 1, 2, 10 sur échelle horaire graduée à adapter en options |
 | Q-EDD | Questionnaire for Eating Disorder Diagnosis | 🔍 | ❓ | — | Absent | [ALP] domaine Troubles alimentaires (validé, pas encore créé) |
 | CAST | Cannabis Abuse Screening Test | 🔵 | ✉️ | 🟢 A | Absent | [ALP] fiche `cast/cast.md` ; version définitive OFDT (Note 2013-02, 12 mois, 0-4), seuils < 3 / 3-6 / ≥ 7 ; version HAS oui/non écartée ; implémentée par Claude (11/10/2026) ; recette Claude staging conforme, recette Clément à faire |
 | HONC | Test de Honc (Hooked on Nicotine Checklist) | 🔍 | ❓ | — | Absent | [ALP] domaine addictions |
@@ -181,7 +181,7 @@ sortie ; les auteurs flaggés seront contactés en une fois, plus tard.
 | BAVQ-R | Échelle révisée des croyances au sujet des voix | 🔍 | ❓ | — | Absent | [ALP] ≠ BVAQ (alexithymie) ; domaine à définir (psychose) |
 | STORI | Stages of Recovery Instrument | 🔍 | ❓ | — | Absent | [ALP] domaine à définir (psychose, rétablissement) |
 | QCI | Questionnaire des conduites interpersonnelles | 🔍 | ❓ | — | Absent | [ALP] |
-| BIS-11 | Échelle d'impulsivité de Barratt | 🔍 | ✉️ | — | Catalogue | [ALP] |
+| BIS-11 | Échelle d'impulsivité de Barratt | 🔍 | ✉️ | — | Catalogue | [ALP] ; **bloquée VF (11/10/2026)** : la validation française de Bayle et al. (2000) porte sur la BIS-10 (texte non accessible) ; seule traduction BIS-11 trouvée : Gélinas et al. 2015 (Québec, CC BY-NC, non commercial) |
 | TCI | Inventaire du tempérament et du caractère (Cloninger) | 🔍 | 💰 | — | Catalogue | [ALP] licence à vérifier (Washington University) |
 | SDS (Sheehan) | Échelle de handicap de Sheehan | 🔍 | 🔒 | — | Catalogue | [ALP] |
 | QdV Marks | Échelle de qualité de vie de Marks | 🔍 | ❓ | — | Absent | [ALP] |
