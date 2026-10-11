@@ -185,7 +185,7 @@ sortie ; les auteurs flaggés seront contactés en une fois, plus tard.
 | TCI | Inventaire du tempérament et du caractère (Cloninger) | 🔍 | 💰 | — | Catalogue | [ALP] licence à vérifier (Washington University) |
 | SDS (Sheehan) | Échelle de handicap de Sheehan | 🔍 | 🔒 | — | Catalogue | [ALP] |
 | QdV Marks | Échelle de qualité de vie de Marks | 🔍 | ❓ | — | Absent | [ALP] |
-| FSQ | Functional Status Questionnaire | 🔍 | ✉️ | — | Absent | [ALP] |
+| FSQ | Functional Status Questionnaire | 🔍 | ✉️ | — | Absent | [ALP] ; **bloquée VF (11/10/2026)** : aucune version française (« Martin 1993 ») retrouvée ; versions portugaise, suédoise, hongroise seulement ; outil de statut fonctionnel physique, à la marge du champ psychologique |
 | HAq-II | Questionnaire d'alliance thérapeutique (Luborsky) | 🔍 | ❓ | — | Absent | [ALP] relation thérapeutique ; traduction Cottraux non publiée |
 | ERT | Échelle de relation thérapeutique (Cottraux) | 🔍 | ❓ | — | Absent | [ALP] relation thérapeutique |
 | Attentes thérapeutiques | Échelles d'attentes thérapeutiques thérapeute / patient (Cottraux) | 🔍 | ❓ | — | Absent | [ALP] relation thérapeutique |
