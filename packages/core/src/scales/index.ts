@@ -2645,6 +2645,66 @@ export const scales: Scale[] = [
         "Additionnez les 51 items (0-2) : le score total varie de 0 à 102. Dix sous-scores (symptômes de trouble panique, d'anxiété généralisée, d'anxiété de séparation, de phobie sociale, de TOC, de TSPT, de phobie scolaire, de phobie des animaux, de phobie situationnelle, de phobie des soins médicaux). Pas de seuil clinique fourni par les auteurs.",
     },
   },
+  {
+    id: "pcl-s",
+    acronym: "PCL-S",
+    label: "Échelle de l'état de stress post-traumatique, version spécifique",
+    patientIntroSubtitle: "Posttraumatic Stress Disorder Checklist for DSM-IV",
+    domain: "trauma",
+    formType: "single-scale",
+    title: "PCL-S - Échelle de l'état de stress post-traumatique (version spécifique, DSM-IV)",
+    description:
+      "Un questionnaire de 17 items évaluant les symptômes de stress post-traumatique liés à un événement précis, dans le mois précédent (critères DSM-IV)",
+    category: "Traumatismes",
+    estimatedTime: "5 minutes",
+    longDescription:
+      "La PCL-S (Posttraumatic Stress Disorder Checklist, version spécifique ; Weathers et al., 1993-1994) est un auto-questionnaire de 17 items construit sur les critères DSM-IV de l'état de stress post-traumatique, en lien avec un épisode stressant précis. Version française validée par Yao, Cottraux et al. (2003). Chaque item est coté de 1 (pas du tout) à 5 (très souvent) ; le score total varie de 17 à 85. Un seuil de 44 est recommandé pour dépister un TSPT en population générale (il varie de 30 à 50 dans la littérature ; 50 chez les militaires). Une seconde méthode de dépistage repose sur les critères : au moins 1 item du critère B (items 1 à 5), 3 items du critère C (6 à 12) et 2 items du critère D (13 à 17) cotés 3 ou plus. Le DSM-5 l'a remplacée par la PCL-5.",
+    instructions:
+      "Veuillez trouver ci-dessous une liste de problèmes et de symptômes fréquents à la suite d'un épisode de vie stressant. Veuillez lire chaque problème avec soin puis veuillez choisir la réponse qui indique à quel point vous avez été perturbé par ce problème dans le mois précédent.",
+    persistentInstructions:
+      "Dans le mois précédent :",
+    copyrightAttribution:
+      "PCL-S — Weathers, Litz, Herman, Huska & Keane (1994), National Center for PTSD (domaine public). Version française : Yao, Cottraux, Note, De Mey-Guillard, Mollard & Ventureyra (2003), L'Encéphale, 29(3), 232-238. Diffusion : INSPQ.",
+    higherIsBetter: false,
+    questions: [
+      "Être perturbé(e) par des souvenirs, des pensées ou des images en relation avec cet épisode stressant.",
+      "Être perturbé(e) par des rêves répétés en relation avec cet événement.",
+      "Brusquement agir ou sentir comme si l'épisode stressant se reproduisait (comme si vous étiez en train de le revivre).",
+      "Se sentir très bouleversé(e) lorsque quelque chose vous rappelle l'épisode stressant.",
+      "Avoir des réactions physiques, par exemple battements de cœur, difficultés à respirer, sueurs lorsque quelque chose vous a rappelé l'épisode stressant.",
+      "Éviter de penser ou de parler de votre épisode stressant ou éviter des sentiments qui sont en relation avec lui.",
+      "Éviter des activités ou des situations parce qu'elles vous rappellent votre épisode stressant.",
+      "Avoir des difficultés à se souvenir de parties importantes de l'expérience stressante.",
+      "Perte d'intérêt dans des activités qui habituellement vous faisaient plaisir.",
+      "Se sentir distant ou coupé(e) des autres personnes.",
+      "Se sentir émotionnellement anesthésié(e) ou être incapable d'avoir des sentiments d'amour pour ceux qui sont proches de vous.",
+      "Se sentir comme si votre avenir était en quelque sorte raccourci.",
+      "Avoir des difficultés pour vous endormir ou rester endormi(e).",
+      "Se sentir irritable ou avoir des bouffées de colère.",
+      "Avoir des difficultés à vous concentrer.",
+      "Être en état de super-alarme, sur la défensive, ou sur vos gardes.",
+      "Se sentir énervé(e) ou sursauter facilement.",
+    ],
+    answerScales: {
+      intensity: [
+        { value: 1, label: "Pas du tout" },
+        { value: 2, label: "Un peu" },
+        { value: 3, label: "Parfois" },
+        { value: 4, label: "Souvent" },
+        { value: 5, label: "Très souvent" },
+      ],
+    },
+    scoring: {
+      ranges: [
+        { min: 17, max: 43, interpretation: "Sous le seuil de dépistage du TSPT (score < 44)" },
+        { min: 44, max: 85, interpretation: "Dépistage positif de TSPT (score ≥ 44)" },
+      ],
+      maxScore: 85,
+      method:
+        "Additionnez les 17 items (1-5) : le score total varie de 17 à 85. Seuil de 44 recommandé pour le dépistage du TSPT en population générale (30 à 50 selon les études ; 50 chez les militaires). Méthode par critères : diagnostic provisoire si au moins 1 item du critère B (1 à 5), 3 items du critère C (6 à 12) et 2 items du critère D (13 à 17) sont cotés 3 ou plus.",
+      thresholdsSource: "Seuil de la fiche INSPQ (population générale)",
+    },
+  },
 ];
 
 export function getScaleById(id: string): Scale | undefined {

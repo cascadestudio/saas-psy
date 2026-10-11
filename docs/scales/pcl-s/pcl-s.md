@@ -1,0 +1,84 @@
+# Test spec — PCL-S (Échelle de l'état de stress post-traumatique, version spécifique)
+
+<!-- Fiche rédigée et implémentée par Claude (mission n°3, 11/10/2026). Arbitrages en §10, reste à faire en §13. -->
+
+## 1. Métadonnées produit
+
+| Champ | Valeur |
+| --- | --- |
+| **Nom court** | PCL-S (id `pcl-s`) |
+| **Nom complet (FR)** | Échelle de l'état de stress post-traumatique, version spécifique (libellé ALP / Cottraux ; l'INSPQ titre en anglais) |
+| **Langue originale** | Posttraumatic Stress Disorder Checklist for DSM-IV, Specific version (Weathers et al., 1993-1994) |
+| **Thème** | Traumatismes |
+| **Items** | 17 (1-5) |
+| **Durée** | 5 min (estimation Melya) |
+| **Public** | Adolescents, adultes (fiche INSPQ) |
+| **Mode** | auto |
+| **Description praticien** | Questionnaire de 17 items évaluant les symptômes de stress post-traumatique liés à un événement précis, dans le mois précédent (critères DSM-IV). |
+
+## 2. Sources et traçabilité
+
+- **Source primaire** : INSPQ, « Questionnaire 6 – PCL-S » (bilingue), qui reproduit la version française validée de Yao, Cottraux et al. (2003) ; fiche descriptive associée (conditions d'utilisation, seuils). Texte archivé : `PCL-S_INSPQ_2026-10-11.txt` (page Cloudflare, lue via Chrome) — 11/10/2026.
+- **Source secondaire** : version de M. Salmona (diffusée par le barreau de Paris), mêmes items avec variantes et consigne réécrite : `PCL-S_Salmona_avocatparis.pdf`.
+- **Validation française** : Yao S. N., Cottraux J. et al. (2003), *L'Encéphale*, 29(3), 232-238 (non consultée en texte intégral).
+- **Journal de recherche** : phrase exacte d'item → INSPQ, avocatparis (Salmona), Cn2r (PCL-5 seulement) ; fiche ALP « PCLS » (consigne identique à l'INSPQ, lien ResearchGate vers l'article de validation). Mentaal : `/send/pcl-s` (17 items, n°36).
+
+## 3. Statut copyright et licence
+
+| Champ | Valeur |
+| --- | --- |
+| **Statut** | ✅ — « Domaine public. Il faut mentionner la source (Weathers et al., 1994). » (INSPQ) |
+| **Mention obligatoire** | « PCL-S — Weathers, Litz, Herman, Huska & Keane (1994), National Center for PTSD (domaine public). Version française : Yao, Cottraux, Note, De Mey-Guillard, Mollard & Ventureyra (2003), L'Encéphale, 29(3), 232-238. Diffusion : INSPQ. » |
+| **Décision Melya** | go |
+| **PDF source en téléchargement** | 📥 hébergeable pour l'instrument (domaine public) ; pas de PDF français officiel téléchargeable trouvé (page web INSPQ) → 🔗 vers l'INSPQ en pratique. |
+
+## 4. Structure
+
+- **Consigne** (adaptée) : « Veuillez trouver ci-dessous une liste de problèmes et de symptômes fréquents à la suite d'un épisode de vie stressant. Veuillez lire chaque problème avec soin puis veuillez choisir la réponse qui indique à quel point vous avez été perturbé par ce problème dans le mois précédent. »
+- **Rappel** : « Dans le mois précédent : » (extrait mot pour mot).
+- **Titre patient** : « Posttraumatic Stress Disorder Checklist for DSM-IV » (titre de la source INSPQ).
+- **Réponses** : `1` Pas du tout · `2` Un peu · `3` Parfois · `4` Souvent · `5` Très souvent.
+
+## 5. Items
+
+17 items de l'INSPQ (texte : entrée `pcl-s` et fichier archivé). Critères DSM-IV : B 1-5, C 6-12, D 13-17.
+
+## 6-7. Scoring et seuils
+
+Somme 17-85 ; sous-scores B (5-25), C (7-35), D (5-25). Bandes : 17-43 « Sous le seuil de dépistage du TSPT (score < 44) » ; 44-85 « Dépistage positif de TSPT (score ≥ 44) ». La méthode par critères (≥ 1 B, ≥ 3 C, ≥ 2 D cotés ≥ 3) est décrite dans `scoring.method`, pas calculée (§10).
+
+## 8. Alertes
+
+Aucune.
+
+## 9. Cas de test (`pcl-s.spec.ts`, 6/6, vérifiés en Python)
+
+17 ; 43 (sous le seuil) ; 44 (seuil) ; 85 ; jeu distinct 47 (B 25, C 7, D 15).
+
+## 10. Choix et arbitrages méthodologiques
+
+| Sujet | Choix | Justification | Confiance |
+| --- | --- | --- | --- |
+| Source | INSPQ (version Yao/Cottraux) | Institutionnelle, conforme à la consigne Cottraux citée par ALP ; Salmona modifie la consigne | haute |
+| Consigne | « veuillez entourer un chiffre à droite pour indiquer » → « veuillez choisir la réponse qui indique » | Type 1, support papier | moyenne |
+| Champ « événement stressant / date » | Non repris | Réponse libre = mécanisme nouveau ; l'événement est identifié avec le praticien (comme pour la PCL-5) | moyenne |
+| Item 17 | Point final ajouté | Type 2 : harmonisation (16 autres items) | haute |
+| Seuil | 44 (population générale) | Fiche INSPQ ; 50 chez les militaires mentionné dans la méthode | moyenne |
+| Méthode par critères | Non calculée | Le bloc `criteriaCheck` de l'interface est écrit pour la PCL-5 (titre « Critères DSM-5 », règle B/C/D/E) : l'utiliser afficherait des règles fausses ; le rendre générique = évolution d'interface (Adrien, MEL-356) | haute |
+| Redondance avec la PCL-5 | Échelle ajoutée quand même | Demandée par les praticiens (Mentaal n°36) ; DSM-IV, mention dans la description longue | moyenne |
+
+Variantes Salmona (non retenues) : item 9 « Perte d'intérêt pour des activités », item 12 « l'avenir était raccourci ou bouché », item 16 « sur la défensive en permanence ».
+
+### Recette
+
+À compléter après déploiement sur staging.
+
+## 11-12. Contrat technique et historique
+
+Entrée `pcl-s` (1-5, `persistentInstructions`, `patientIntroSubtitle`, 2 bandes, `thresholdsSource`), scorer `pcl-s.ts` (somme + 3 sous-scores), tests `pcl-s.spec.ts`. 11/10/2026 — Claude (mission n°3) : création et implémentation, tests 6/6.
+
+## 13. Reste à faire avant prod
+
+- [ ] **Arbitrage à valider** : seuil 44 (population générale) par défaut.
+- [ ] **Évolution (Adrien)** : rendre `CriteriaCheckBlock` générique pour afficher la méthode par critères DSM-IV (MEL-356).
+- [ ] **Vigilance** : champ « événement stressant » non repris (version « spécifique ») — l'identifier en séance.

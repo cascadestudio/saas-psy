@@ -11,7 +11,7 @@
 
 ## Tableau de bord
 
-**✅ 12 validées · 🔵 17 implémentées · 🚧 5 en cours · 📋 2 prévues · 🔍 81 à instruire · ⬜ 22 non planifiées · 🚫 28 écartées** (167 échelles, dont 83 ajoutées depuis le catalogue « Apprendre la psychologie » le 10/10/2026)
+**✅ 12 validées · 🔵 18 implémentées · 🚧 5 en cours · 📋 2 prévues · 🔍 81 à instruire · ⬜ 21 non planifiées · 🚫 28 écartées** (167 échelles, dont 83 ajoutées depuis le catalogue « Apprendre la psychologie » le 10/10/2026)
 
 **Rattrapage Mentaal : 13/42.** Le plafond n'est pas 74 : sur leur catalogue
 disponible, 12 sont écartées d'office (payantes, outils maison Mentaal, ou
@@ -102,7 +102,7 @@ sortie ; les auteurs flaggés seront contactés en une fois, plus tard.
 | SNAP-IV | TDAH enfant | ⬜ | ✅ | ⏳ | 🟡 B | #23 | public enfant ; 2e passe : ⛔ seule VF trouvée marquée « non validée » |
 | MDQ | Troubles de l'humeur | ⬜ | 🔒 | 🚫 | 🟡 B | #30 | criteriaCheck + oui/non ; droits UTMB, usage sur permission de l'auteur (tri du 10/10/2026) |
 | SCARED | Troubles anxieux enfant | 🔵 | ✉️ | 🔗 | 🟡 B | #34 | public enfant ; fiche `scared/scared.md` ; VF fr-CA University of Pittsburgh (version enfant ; parent archivée) ; 41 items 0-2, seuil ≥ 25 (> 30 plus spécifique), 5 sous-scores (seuils dans les libellés) ; implémentée par Claude (11/10/2026, mission 3), recette staging à confirmer |
-| PCL-S | État de stress post-traumatique | ⬜ | ✅ | ⏳ | — | #36 | redondant avec PCL-5 ; VF Yao et al. 2003 sur abonnement : bloquée (tri du 10/10/2026) |
+| PCL-S | État de stress post-traumatique | 🔵 | ✅ | 🔗 | 🟡 B | #36 | fiche `pcl-s/pcl-s.md` ; VF Yao, Cottraux et al. 2003 via INSPQ (domaine public) ; 17 items 1-5, seuil ≥ 44, sous-scores B/C/D ; méthode par critères non calculée (bloc criteriaCheck spécifique PCL-5) ; implémentée par Claude (11/10/2026, mission 3), recette staging à confirmer |
 | ASSQ | Dépistage TSA enfant | ⬜ | ❓ | 🚫 | 🟡 B | #38 | public enfant ; 2e passe : ⛔ aucune VF validée trouvée |
 | FMPS | Perfectionnisme de Frost | ⬜ | ❓ | 🚫 | 🟡 B | #45 | subscores ; 2e passe : ⛔ VF (Rhéaume et al.) non accessible ; droits non établis |
 | BAT-G | Burnout (version générale) | ⬜ | ✅ | ⏳ | 🟡 B | #48 | alternative libre au MBI ; 2e passe : ⛔ droits libres (« non-proprietary ») mais VF France officielle non validée ; VF validée = franco-canadienne 2025, items non publiés |
@@ -429,7 +429,7 @@ Statut de droits de **chacune des 167 échelles** du tableau, établi par recher
 | LEC-5 | ✅ | National Center for PTSD | Diffusé en accès libre par le NCPTSD (ptsd.va.gov) | VF Cn2r à vérifier | Mécanisme à créer (multi-choix par item) |
 | MEQ-SA | ✅ | Horne & Östberg 1976 | « freely available, so it can be used without permission » (ATS, sleep questionnaires) | VF Taillard et al. (travailleurs français) à vérifier | Domaine à créer (sommeil) |
 | PCL-5 | ✅ | National Center for PTSD ; VF Ashbaugh et al. 2016 (CC BY) | Domaine public ; traduction CC BY | VF validée | Implémentée |
-| PCL-S | ✅ | National Center for PTSD | Domaine public (NCPTSD) | VF Yao et al. 2003 sur abonnement | Bloquée (VF inaccessible) |
+| PCL-S | ✅ | National Center for PTSD | « Domaine public. Il faut mentionner la source (Weathers et al., 1994). » (fiche INSPQ) | Yao, Cottraux et al. 2003, reproduite par l'INSPQ | Implémentée (mission 3) |
 | PDI | ✅ | A. Brunet et al. 2001 (VF originale) | « in the public domain, and the source must be mentioned » (INSPQ) ; VF diffusée par le Cn2r (cn2r.fr/…/PDI_Cn2r.pdf) | VF Jehel 2005 (Cn2r) ; variante québécoise INSPQ distincte | Implémentable |
 | PHQ-9 | ✅ | Pfizer / Spitzer, Kroenke et al. | Idem GAD-7 | VF Pfizer | Implémentée |
 | RIASEC | ✅ (si O*NET Interest Profiler) | US Department of Labor (O*NET) | Interest Profiler Short Form sous CC BY 4.0 (onetcenter.org) ; le Self-Directed Search de Holland est chez PAR (💰) | VF à identifier | Hors champ clinique ; vérifier la version |
