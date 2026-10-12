@@ -42,3 +42,15 @@ Les points majeurs sur les échelles ✅ (**à revalider**) :
 - **PCL-5** : consigne fusionnée.
 
 Règles communes issues de la repasse : `REDACTION_PLAYBOOK.md` §10 bis (matrice de cohérence).
+
+## Recette ciblée des corrections (staging, 12/10/2026, Claude)
+
+| Échelle | Jeu | Attendu | Obtenu |
+| --- | --- | --- | --- |
+| CST | total 19 | Niveau de stress très bas | conforme |
+| CST | total 20 | Niveau de stress bas | conforme |
+| CST | total 30 | Niveau de stress bas | conforme |
+| CST | total 31 | Niveau de stress élevé | conforme |
+| CAT-Q | total 100 | Pas de seuil clinique fourni par les auteurs. | conforme |
+
+Affichage vérifié sur les pages résultat praticien : CST « 1 — Non pas du tout » et graduations 20 / 31 / 46 ; ASRS, citation NYU verbatim en tête de la mention ; PDI, mention sans « Domaine public ». DERS et QPA (ajoutées en mission 3) : 9 jeux sur 9 conformes, parcours patient complet, page résultat conforme ; Mentaal DERS identique.
