@@ -15,11 +15,11 @@ describe('CAT-Q scorer', () => {
     service.calculateScore('cat-q', toResponses(values));
 
   it.each([
-    ["T1 min (inversés à 7)", [1, 1, 7, 1, 1, 1, 1, 1, 1, 1, 1, 7, 1, 1, 1, 1, 1, 1, 7, 1, 1, 7, 1, 7, 1], 25, "Sous le seuil de 100 indiqué par Embrace Autism", [9, 8, 8]],
-    ["T2 max (inversés à 1)", [7, 7, 1, 7, 7, 7, 7, 7, 7, 7, 7, 1, 7, 7, 7, 7, 7, 7, 1, 7, 7, 1, 7, 1, 7], 175, "Score ≥ 100 : camouflage de traits autistiques (seuil indiqué par Embrace Autism)", [63, 56, 56]],
-    ["T3 tout à 4", [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], 100, "Score ≥ 100 : camouflage de traits autistiques (seuil indiqué par Embrace Autism)", [36, 32, 32]],
-    ["T4 juste sous le seuil (99)", [3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], 99, "Sous le seuil de 100 indiqué par Embrace Autism", [35, 32, 32]],
-    ["T5 seuil (100)", [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], 100, "Score ≥ 100 : camouflage de traits autistiques (seuil indiqué par Embrace Autism)", [36, 32, 32]],
+    ["T1 min (inversés à 7)", [1, 1, 7, 1, 1, 1, 1, 1, 1, 1, 1, 7, 1, 1, 1, 1, 1, 1, 7, 1, 1, 7, 1, 7, 1], 25, "Pas de seuil clinique fourni par les auteurs.", [9, 8, 8]],
+    ["T2 max (inversés à 1)", [7, 7, 1, 7, 7, 7, 7, 7, 7, 7, 7, 1, 7, 7, 7, 7, 7, 7, 1, 7, 7, 1, 7, 1, 7], 175, "Pas de seuil clinique fourni par les auteurs.", [63, 56, 56]],
+    ["T3 tout à 4", [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], 100, "Pas de seuil clinique fourni par les auteurs.", [36, 32, 32]],
+    ["T4 juste sous le seuil (99)", [3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], 99, "Pas de seuil clinique fourni par les auteurs.", [35, 32, 32]],
+    ["T5 seuil (100)", [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], 100, "Pas de seuil clinique fourni par les auteurs.", [36, 32, 32]],
   ])('%s', (_label, values, total, interpretation, subscores) => {
     const result = score(values as number[]);
     expect(result.totalScore).toBe(total);

@@ -1,0 +1,126 @@
+{
+ "source_used": "docs/scales/qec/QEC_UQO.pdf, pages 1-4",
+ "title": "QEC",
+ "instructions": "Les gens réagissent de différentes façons à certains types de pensées. Veuillez utiliser l'échelle ci-dessous pour exprimer jusqu'à quel point chacun des énoncés suivants correspond à votre façon de réagir à certaines pensées. Encerclez le numéro (1 à 5) approprié.",
+ "reminder": null,
+ "items": [
+  "Il y a des choses auxquelles je préfère ne pas penser.",
+  "J'évite certaines situations qui m'amènent à porter attention à des choses auxquelles je ne veux pas penser.",
+  "Je remplace les images menaçantes que j'ai en tête par un discours intérieur.",
+  "Je pense à des choses qui me concernent comme si cela arrivait à quelqu'un d'autre que moi.",
+  "J'ai des pensées que j'essaie d'éviter.",
+  "J'essaie de ne pas penser aux aspects les plus dérangeants de certaines situations pour ne pas avoir trop peur.",
+  "J'évite parfois des objets qui peuvent déclencher des idées dérangeantes.",
+  "Je me distrais pour éviter de penser à certains sujets troublants",
+  "J'évite des gens qui me font penser à des choses auxquelles je ne veux pas réfléchir.",
+  "Je fais souvent des choses pour me distraire de mes pensées.",
+  "Je pense à des détails inutiles pour ne pas penser aux sujets importants qui m'inquiètent.",
+  "Parfois, je me plonge dans une activité pour ne pas penser à certaines choses.",
+  "Pour éviter de penser aux sujets qui me dérangent, je m'efforce de penser à autre chose.",
+  "Il y a des choses auxquelles j'essaie de ne pas penser.",
+  "Je maintiens un discours intérieur pour éviter de voir des scénarios (une suite d'images) qui me font peur.",
+  "Parfois, j'évite des endroits qui me font réfléchir à des choses auxquelles je préfèrerais ne pas penser.",
+  "Je pense aux événements passés pour ne pas penser aux événements futurs insécurisants.",
+  "J'évite de poser des gestes qui me rappellent des choses auxquelles je ne veux pas penser.",
+  "Lorsque je vois des images dans ma tête qui sont trop dérangeantes, je les remplace par des pensées verbales (monologue interne).",
+  "Je m'inquiète de beaucoup de petites affaires pour ne pas penser aux choses plus importantes.",
+  "Parfois, je me garde occupé(e) seulement pour empêcher les pensées de surgir dans mon esprit",
+  "J'évite des situations avec d'autres personnes qui me font penser à des choses désagréables.",
+  "J'essaie de décrire intérieurement des événements dérangeants plutôt que d'en former une image dans ma tête.",
+  "Je mets de côté les images associées à une situation menaçante en tentant plutôt de me la décrire intérieurement.",
+  "Je pense à ce qui inquiète les autres plutôt que de penser à mes propres inquiétudes."
+ ],
+ "answers": [
+  [
+   1,
+   "Pas du tout correspondant"
+  ],
+  [
+   2,
+   "Un peu correspondant"
+  ],
+  [
+   3,
+   "Assez correspondant"
+  ],
+  [
+   4,
+   "Très correspondant"
+  ],
+  [
+   5,
+   "Tout à fait correspondant"
+  ]
+ ],
+ "answers_note": "Mêmes modalités pour tous les items. En-tête de colonne extrait : « Pas du tout / Un peu / Assez / Très / Tout à fait » sur une ligne, puis « correspondant » sous chaque.",
+ "reverse_items": [],
+ "subscales": [
+  [
+   "Substitution de pensées",
+   [
+    4,
+    11,
+    17,
+    20,
+    25
+   ]
+  ],
+  [
+   "Transformation des images en pensées",
+   [
+    3,
+    15,
+    19,
+    23,
+    24
+   ]
+  ],
+  [
+   "Distraction",
+   [
+    8,
+    10,
+    12,
+    13,
+    21
+   ]
+  ],
+  [
+   "Évitement des stimuli menaçants",
+   [
+    7,
+    9,
+    16,
+    18,
+    22
+   ]
+  ],
+  [
+   "Suppression de pensées",
+   [
+    1,
+    2,
+    5,
+    6,
+    14
+   ]
+  ]
+ ],
+ "total_method": "Pour utiliser le QÉC comme instrument unifactoriel, calculez la somme des réponses de tous les items. Le QÉC peut aussi être utilisé comme instrument multifactoriel comprenant 5 sous-échelles (somme des réponses aux items listés).",
+ "score_range": [
+  25,
+  125
+ ],
+ "thresholds": [],
+ "thresholds_source": "Aucun seuil dans la source.",
+ "alerts": null,
+ "copyright_text": "Gosselin, P., Langlois, F., Freeston, M. H., Ladouceur, R., Dugas, M. J., & Pelletier, O. (2002). Journal de Thérapie Comportementale et Cognitive, 12 (1), 24-37. (pas de mention de copyright)",
+ "doubts": [
+  "Items 8 et 21 sans ponctuation finale dans la source ; item 16 « préfèrerais » (accent, coquille probable) conservé.",
+  "Titre « QEC » en en-tête, « QÉC » dans la cotation.",
+  "Dernière ancre : « Tout à fait correspondant ».",
+  "score_range [25,125] déduit ; pas de seuils.",
+  "Mise en page des chiffres de réponse brouillée dans l'extraction (sans conséquence)."
+ ],
+ "id": "qec"
+}

@@ -473,6 +473,14 @@ sont calculés indépendamment et non simplement la moitié du total.
 
 ---
 
+
+### Repasse « regard neuf » (12/10/2026)
+
+⚠️ **Échelle ✅ — à revalider par Clément.**
+- **Corrigé (erreur avérée)** : item 1, niveau 2 : « survenue **très** fréquente » → « survenue **fréquente** » (Mollard 1989 p. 337 et Cottraux : « fréquente » ; « très fréquente » est le niveau 3 — doublon supprimé).
+- **À revalider** : le §10 annonce l'incohérence « rituels / compulsions » « conservée telle quelle », alors que l'app emploie « compulsions » aux items 6, 7, 8 et 10 (la source : « rituels »). Rétablir « rituels » ou consigner l'écart.
+- **À revalider** : les tranches 0-7 / 8-15 / 16-23 / 24-31 / 32-40 ne figurent ni dans Mollard ni dans Cottraux (seuil d'inclusion 16 seulement) : source à préciser.
+
 ## 11. Contrat technique pour Adrien
 
 ### Signature de la fonction de scoring

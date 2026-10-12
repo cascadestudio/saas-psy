@@ -1,0 +1,167 @@
+{
+ "id": "ders",
+ "source_used": "docs/scales/ders/DERS-F_UNIGE_Dan-Glauser-Scherer.pdf (texte, items, modalités, 2 pages) ; docs/scales/ders/DERS_cotation_UCoimbra_2026-10-11.txt (clé de cotation de l'original Gratz & Roemer 2004, sous-échelles et items inversés)",
+ "title": "DERS-F: Echelle de régulation émotionnelle",
+ "instructions": "Le DERS est une échelle permettant d'évaluer à quel point vous êtes attentifs à vos émotions dans la vie de tous les jours, à quel point vous utilisez les informations que vos émotions vous donnent et comment vous réagissez de manière générale.\n\nRépondez à toutes les questions en cochant à chaque fois une seule case par énoncé selon si celui-ci vous correspond:",
+ "reminder": null,
+ "items": [
+  "Je comprends bien mes sentiments",
+  "Je fais attention à ce que je ressens",
+  "Les expériences émotionnelles me submergent et sont incontrolables",
+  "Je n'ai aucune idée concernant comment je me sens",
+  "J'ai des difficultés à donner un sens à mes sentiments",
+  "Je fais attention à mes sentiments",
+  "Je sais exactement comment je me sens",
+  "Je prends garde à ce que je ressens",
+  "Je suis déconcerté(e) par ce que je ressens",
+  "Quand je suis contrarié(e), je prends en compte cette émotion",
+  "Quand je suis contrarié(e), le fait de ressentir une telle émotion me met en colère contre moi-même",
+  "Quand je suis contrarié(e), je suis embarrassé(e) de ressentir une telle émotion",
+  "Quand je suis contrarié(e), j'ai de la difficulté à terminer un travail",
+  "Quand je suis contrarié(e), je devient incontrôlable",
+  "Quand je suis contrarié(e), je crois que je vais rester comme ça très longtemps",
+  "Quand je suis contrarié(e), je crois que je vais bientôt me sentir très déprimé(e)",
+  "Quand je suis contrarié(e), je crois que mes sentiments sont valables et importants",
+  "Quand je suis contrarié(e), j'ai des difficultés à me concentrer sur d'autres choses",
+  "Quand je suis contrarié(e), je me sens incontrôlable",
+  "Quand je suis contrarié(e), je peux continuer à faire des choses",
+  "Quand je suis contrarié(e), j'ai honte de ressentir une telle émotion",
+  "Quand je suis contrarié(e), je sais que je peux trouver un moyen pour enfin aller mieux",
+  "Quand je suis contrarié(e), je me sens désarmé(e)",
+  "Quand je suis contrarié(e), je sens que je peux garder le contrôle de mes comportements",
+  "Quand je suis contrarié(e), je me sens coupable de ressentir une telle émotion",
+  "Quand je suis contrarié(e), j'ai des difficultés à me concentrer",
+  "Quand je suis contrarié(e), j'ai des difficultés à contrôler mon comportement",
+  "Quand je suis contrarié(e), je crois qu'il n'y a rien que je puisse faire pour me sentir mieux",
+  "Quand je suis contrarié(e), je m'en veux de ressentir une telle émotion",
+  "Quand je suis contrarié(e), je me sens vraiment mal",
+  "Quand je suis contrarié(e), je pense que me complaire dans ces contrariétés est la seule chose à faire",
+  "Quand je suis contrarié(e), je perds le contrôle de mes comportements",
+  "Quand je suis contrarié(e), j'ai des difficultés à penser à autre chose",
+  "Quand je suis contrarié(e), je prends le temps de découvrir ce que je ressens vraiment",
+  "Quand je suis contrarié(e), cela prend du temps avant que je ne me sente mieux",
+  "Quand je suis contrarié(e), mes émotions prennent le dessus"
+ ],
+ "answers": [
+  [
+   1,
+   "presque jamais"
+  ],
+  [
+   2,
+   "quelques fois"
+  ],
+  [
+   3,
+   "la moitié du temps"
+  ],
+  [
+   4,
+   "la plupart du temps"
+  ],
+  [
+   5,
+   "presque toujours"
+  ]
+ ],
+ "answers_note": "Mêmes 5 modalités pour tous les items ; la liste de la consigne les numérote (1) à (5) en minuscules ; les en-têtes de colonnes répètent les libellés. Coche d'une seule case par énoncé.",
+ "reverse_items": [
+  1,
+  2,
+  6,
+  7,
+  8,
+  10,
+  17,
+  20,
+  22,
+  24,
+  34
+ ],
+ "subscales": [
+  [
+   "Nonacceptance of emotional responses",
+   [
+    11,
+    12,
+    21,
+    23,
+    25,
+    29
+   ]
+  ],
+  [
+   "Difficulty engaging in Goal-directed behaviour",
+   [
+    13,
+    18,
+    20,
+    26,
+    33
+   ]
+  ],
+  [
+   "Impulse control difficulties",
+   [
+    3,
+    14,
+    19,
+    24,
+    27,
+    32
+   ]
+  ],
+  [
+   "Lack of emotional awareness",
+   [
+    2,
+    6,
+    8,
+    10,
+    17,
+    34
+   ]
+  ],
+  [
+   "Limited access to emotion regulation strategies",
+   [
+    15,
+    16,
+    22,
+    28,
+    30,
+    31,
+    35,
+    36
+   ]
+  ],
+  [
+   "Lack of emotional clarity",
+   [
+    1,
+    4,
+    5,
+    7,
+    9
+   ]
+  ]
+ ],
+ "total_method": "« After recoding the inverse items it is possible to obtain a total score (adding all the 36 items) or a score for each subscale. Higher scores indicated greater difficulties in emotion regulation. »",
+ "score_range": [
+  36,
+  180
+ ],
+ "thresholds": [],
+ "thresholds_source": "Aucun seuil dans les deux sources.",
+ "alerts": null,
+ "copyright_text": "Version française validée:\nDan-Glauser, E. S., & Scherer, K. R. (2013). The Difficulties in Emotion Regulation Scale (DERS): Factor Structure and Consistency of a French Translation. Swiss Journal of Psychology, 72(1), in press.\n(en-tête : SECTION DE PSYCHOLOGIE, 40, boulevard du Pont d’Arve ¦ 1205 Genève)",
+ "doubts": [
+  "Coquilles de la source DERS-F conservées : item 3 « incontrolables » ; item 14 « je devient incontrôlable » (« devient » au lieu de « deviens »).",
+  "Variations d'écriture dans la source : « contrarié(e) » partout, mais « déconcerté(e) », « embarrassé(e) », « désarmé(e) » ; apostrophes droites ('). Le PDF imprime aussi « Avez vous répondu à tous les énoncés? Merci! » et une ligne « Code:…… ».",
+  "Items inversés et sous-échelles viennent du fichier Coimbra (original anglais Gratz & Roemer 2004), appliqués à la numérotation DERS-F, qui est identique à 36 items : le PDF UNIGE ne donne ni inversions, ni sous-échelles, ni cotation. Les 11 items inversés (marqués R dans la clé) sont 1, 2, 6, 7, 8, 10, 17, 20, 22, 24, 34.",
+  "Le fichier de cotation Coimbra ne donne pas d'étendue de score : 36-180 déduit (36 items x 1 à 5). Aucun seuil, aucun cut-off. Les libellés de sous-échelles sont en anglais (clé de l'original) ; aucun libellé français dans les sources.",
+  "Consigne : « Répondez à toutes les questions en cochant à chaque fois une seule case par énoncé selon si celui-ci vous correspond: » (« selon si », sans correction). Le texte d'introduction décrit une attention aux émotions au quotidien, sans cadre temporel précis.",
+  "Chaque item est précédé de son numéro à deux chiffres « 01) » dans le PDF.",
+  "Aucun item à risque signalé par la source (item 16 « très déprimé(e) » et items de perte de contrôle non désignés comme alerte)."
+ ]
+}

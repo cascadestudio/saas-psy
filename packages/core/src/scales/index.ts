@@ -606,7 +606,7 @@ export const scales: Scale[] = [
           },
           {
             value: 2,
-            text: "1 à 3 heures par jour, ou survenue très fréquente (plus de 8 fois par jour, mais la majorité de ma journée se passe sans)",
+            text: "1 à 3 heures par jour, ou survenue fréquente (plus de 8 fois par jour, mais la majorité de ma journée se passe sans)",
           },
           {
             value: 3,
@@ -2113,7 +2113,7 @@ export const scales: Scale[] = [
     persistentInstructions:
       "Pendant et immédiatement après l'événement critique :",
     copyrightAttribution:
-      "PDI — Brunet, Weiss, Metzler et al. (2001), American Journal of Psychiatry ©2001. Traduction française et validation : Jehel et al. (2005), Canadian Journal of Psychiatry. Domaine public (INSPQ). Mise en page : Centre national de ressources et de résilience (Cn2r).",
+      "PDI — Brunet, Weiss, Metzler et al. (2001), American Journal of Psychiatry ©2001. Traduction française et validation : Jehel et al. (2005), Canadian Journal of Psychiatry. Mise en page : Centre national de ressources et de résilience (Cn2r).",
     higherIsBetter: false,
     questions: [
       "Je me sentais totalement incapable de faire quoi que ce soit.",
@@ -2171,7 +2171,7 @@ export const scales: Scale[] = [
     category: "Addictions",
     estimatedTime: "2 minutes",
     longDescription:
-      "Le CAST (Cannabis Abuse Screening Test) est un auto-questionnaire de 6 items développé en français par l'Observatoire français des drogues et des toxicomanies (OFDT) à partir de 2002, dans sa version définitive depuis 2006 (Legleye et al., 2007). Il repère les usages problématiques de cannabis au cours des 12 derniers mois : usage le matin ou seul, troubles de la mémoire, remarques de l'entourage, échecs des tentatives de réduction ou d'arrêt, problèmes liés à la consommation. Chaque item est coté de 0 (jamais) à 4 (très souvent) ; le score total varie de 0 à 24. Selon l'OFDT, un score inférieur à 3 correspond à un usage sans risque, un score de 3 à 6 à un risque faible et un score ≥ 7 à un risque élevé d'usage problématique, voire de dépendance. Outil de repérage recommandé par la HAS ; il ne remplace pas un diagnostic clinique.",
+      "Le CAST (Cannabis Abuse Screening Test) est un auto-questionnaire de 6 items développé en français par l'Observatoire français des drogues et des toxicomanies (OFDT) à partir de 2002, dans sa version définitive depuis 2006 (Legleye et al., 2007). Il repère les usages problématiques de cannabis au cours des 12 derniers mois : usage le matin ou seul, troubles de la mémoire, remarques de l'entourage, échecs des tentatives de réduction ou d'arrêt, problèmes liés à la consommation. Chaque item est coté de 0 (jamais) à 4 (très souvent) ; le score total varie de 0 à 24. Selon l'OFDT, un score inférieur à 3 correspond à un usage sans risque, un score de 3 à 6 à un risque faible et un score ≥ 7 à un risque élevé d'usage problématique, voire de dépendance. Outil de repérage ; il ne remplace pas un diagnostic clinique.",
     instructions: "Au cours des 12 derniers mois…",
     persistentInstructions: "Au cours des 12 derniers mois…",
     copyrightAttribution:
@@ -2228,7 +2228,7 @@ export const scales: Scale[] = [
       "Choisissez la réponse qui décrit le mieux ce que vous avez ressenti et comment vous vous êtes comporté au cours des 6 derniers mois.",
     persistentInstructions: "Au cours des 6 derniers mois :",
     copyrightAttribution:
-      "Le test de dépistage ASRS-V1.1 (6 questions) est un sous-ensemble de l'échelle d'auto-évaluation ASRS-V1.1 (18 questions). © New York University and the President and Fellows of Harvard College. Créé par Lenard Adler (NYU) et Ronald Kessler (Harvard), avec l'Organisation mondiale de la santé. Version française officielle.",
+      "The 6-question Adult Self-Report Scale-Version1.1 (ASRS-V1.1) Screener is a subset of the 18-question Adult ADHD Self-Report Scale-Version1.1 (Adult ASRSV1.1) Symptom Checklist. © New York University and the President and Fellows of Harvard College. Créé par Lenard Adler (NYU) et Ronald Kessler (Harvard), avec l'Organisation mondiale de la santé. Version française officielle.",
     higherIsBetter: false,
     questions: [
       "A quelle fréquence vous arrive-t-il d'avoir des difficultés à finaliser les derniers détails d'un projet une fois que les parties les plus stimulantes ont été faites ?",
@@ -2520,7 +2520,7 @@ export const scales: Scale[] = [
       "Je m'inquiète.",
       "J'ai vraiment peur sans aucune raison.",
       "J'ai peur d'être seul dans la maison.",
-      "C'est difficile pour moi de parler avec des gens que je connais peu.",
+      "C'est difficile pour moi de parler avec des gens que je ne connais pas bien.",
       "Quand j'ai peur, je me sens comme si j'étouffais.",
       "Les gens me disent que je m'inquiète trop.",
       "Je n'aime pas être loin de ma famille.",
@@ -2719,13 +2719,13 @@ export const scales: Scale[] = [
     category: "Autisme (TSA) de l'adulte",
     estimatedTime: "5-10 minutes",
     longDescription:
-      "Le CAT-Q (Camouflaging Autistic Traits Questionnaire, Hull et al., 2018) est un auto-questionnaire de 25 items qui mesure le degré d'utilisation des stratégies de camouflage social chez l'adulte (16 ans et plus) : compensation (9 items), masquage (8 items) et assimilation (8 items). Chaque énoncé est coté de 1 (totalement en désaccord) à 7 (tout à fait d'accord), avec 5 items inversés ; le score total varie de 25 à 175. Un score élevé reflète davantage de camouflage. Seuil de 100 indiqué par Embrace Autism (non fourni dans l'article original). Traduction française de Marika B. Bessette (non validée ; une validation française de Bureau et al. existe, 2024).",
+      "Le CAT-Q (Camouflaging Autistic Traits Questionnaire, Hull et al., 2018) est un auto-questionnaire de 25 items qui mesure le degré d'utilisation des stratégies de camouflage social chez l'adulte (16 ans et plus) : compensation (9 items), masquage (8 items) et assimilation (8 items). Chaque énoncé est coté de 1 (totalement en désaccord) à 7 (tout à fait d'accord), avec 5 items inversés ; le score total varie de 25 à 175. Un score élevé reflète davantage de camouflage. Pas de seuil : les auteurs précisent qu'il n'existe pas de score seuil et qu'il ne faut pas en appliquer (Hannon, Hull, Lai, Magiati & Mandy, 2026) ; le CAT-Q n'est pas un outil de dépistage de l'autisme. Traduction française de Marika B. Bessette (non validée ; une validation française de Bureau et al. existe, 2024).",
     instructions:
       "Lisez les énoncés suivants et choisissez les réponses qui correspondent le plus fidèlement possible à vos expériences personnelles lors d'interactions sociales.",
     persistentInstructions:
       "Lisez les énoncés suivants et choisissez les réponses qui correspondent le plus fidèlement possible à vos expériences personnelles lors d'interactions sociales.",
     copyrightAttribution:
-      "CAT-Q — Hull, Mandy, Lai, Baron-Cohen, Allison, Smith & Petrides (2018), licence CC BY 4.0. Traduction française : Marika B. Bessette (Embrace Autism).",
+      "CAT-Q — Hull, Mandy, Lai, Baron-Cohen, Allison, Smith & Petrides (2018), article original sous licence CC BY 4.0. Traduction française : Marika B. Bessette (Embrace Autism).",
     reverseItems: [3, 12, 19, 22, 24],
     higherIsBetter: false,
     questions: [
@@ -2768,13 +2768,11 @@ export const scales: Scale[] = [
     },
     scoring: {
       ranges: [
-        { min: 25, max: 99, interpretation: "Sous le seuil de 100 indiqué par Embrace Autism" },
-        { min: 100, max: 175, interpretation: "Score ≥ 100 : camouflage de traits autistiques (seuil indiqué par Embrace Autism)" },
+        { min: 25, max: 175, interpretation: "Pas de seuil clinique fourni par les auteurs." },
       ],
       maxScore: 175,
       method:
-        "Inversez les items 3, 12, 19, 22 et 24 (1↔7, 2↔6, 3↔5), puis additionnez les 25 items : le score total varie de 25 à 175. Sous-scores : compensation (items 1, 4, 5, 8, 11, 14, 17, 20, 23), masquage (2, 6, 9, 12, 15, 18, 21, 24), assimilation (3, 7, 10, 13, 16, 19, 22, 25). Seuil de 100 indiqué par Embrace Autism.",
-      thresholdsSource: "Seuil indiqué par Embrace Autism (non publié par les auteurs)",
+        "Inversez les items 3, 12, 19, 22 et 24 (1↔7, 2↔6, 3↔5), puis additionnez les 25 items : le score total varie de 25 à 175. Sous-scores : compensation (items 1, 4, 5, 8, 11, 14, 17, 20, 23), masquage (2, 6, 9, 12, 15, 18, 21, 24), assimilation (3, 7, 10, 13, 16, 19, 22, 25). Pas de seuil clinique : les auteurs déconseillent tout score seuil (Hannon et al., 2026).",
     },
   },
   {
@@ -2790,7 +2788,7 @@ export const scales: Scale[] = [
     category: "Burn-out",
     estimatedTime: "5 minutes",
     longDescription:
-      "Le Burnout Assessment Tool (BAT ; Schaufeli, De Witte et Desart, KU Leuven, 2019-2020) évalue les plaintes de burn-out. Version version travail : 23 items de symptômes primaires (épuisement, distance mentale, déficience cognitive, déficience émotionnelle) et 10 items de symptômes secondaires (plaintes psychiques et psychosomatiques), cotés de 1 (jamais) à 5 (toujours). Le score de référence est la moyenne des 23 items primaires (1 à 5), comparée aux seuils cliniques flamands : vert (pas de risque), orange (risque de burn-out), rouge (risque très élevé). Melya affiche la somme équivalente (23 à 115). Le BAT n'est pas un outil diagnostique. Seuils des sous-échelles (moyennes) : épuisement 3,06 / 3,31 ; distance mentale 2,50 / 3,10 ; déficience émotionnelle 2,10 / 2,90 ; déficience cognitive 2,70 / 3,10 ; symptômes secondaires 2,85 / 3,35 (début des zones orange / rouge).",
+      "Le Burnout Assessment Tool (BAT ; Schaufeli, De Witte et Desart, KU Leuven, 2019-2020) évalue les plaintes de burn-out. Version travail : 23 items de symptômes primaires (épuisement, distance mentale, déficience cognitive, déficience émotionnelle) et 10 items de symptômes secondaires (plaintes psychiques et psychosomatiques), cotés de 1 (jamais) à 5 (toujours). Le score de référence est la moyenne des 23 items primaires (1 à 5), comparée aux seuils cliniques flamands : vert (pas de risque), orange (risque de burn-out), rouge (risque très élevé). Melya affiche la somme équivalente (23 à 115). Le BAT n'est pas un outil diagnostique. Seuils des sous-échelles (moyennes) : épuisement 3,06 / 3,31 ; distance mentale 2,50 / 3,10 ; déficience émotionnelle 2,10 / 2,90 ; déficience cognitive 2,70 / 3,10 ; symptômes secondaires 2,85 / 3,35 (début des zones orange / rouge).",
     instructions:
       "Les énoncés suivants sont liés à votre situation de travail et à la manière dont vous la vivez. Veuillez indiquer la fréquence à laquelle chaque déclaration s'applique à vous.",
     persistentInstructions:
@@ -2867,7 +2865,7 @@ export const scales: Scale[] = [
     category: "Burn-out",
     estimatedTime: "5 minutes",
     longDescription:
-      "Le Burnout Assessment Tool (BAT ; Schaufeli, De Witte et Desart, KU Leuven, 2019-2020) évalue les plaintes de burn-out. Version version générale : 22 items de symptômes primaires (épuisement, distance mentale, déficience cognitive, déficience émotionnelle) et 10 items de symptômes secondaires (plaintes psychiques et psychosomatiques), cotés de 1 (jamais) à 5 (toujours). Le score de référence est la moyenne des 22 items primaires (1 à 5), comparée aux seuils cliniques flamands : vert (pas de risque), orange (risque de burn-out), rouge (risque très élevé). Melya affiche la somme équivalente (22 à 110). Le BAT n'est pas un outil diagnostique. Version destinée aux personnes qui ne travaillent pas actuellement ; seuils pour les personnes flamandes sans emploi. Seuils des sous-échelles (moyennes) : épuisement 3,31 / 3,81 ; distance mentale 2,50 / 3,10 ; déficience émotionnelle 2,10 / 3,50 ; déficience cognitive 2,70 / 3,50 (début des zones orange / rouge).",
+      "Le Burnout Assessment Tool (BAT ; Schaufeli, De Witte et Desart, KU Leuven, 2019-2020) évalue les plaintes de burn-out. Version générale : 22 items de symptômes primaires (épuisement, distance mentale, déficience cognitive, déficience émotionnelle) et 10 items de symptômes secondaires (plaintes psychiques et psychosomatiques), cotés de 1 (jamais) à 5 (toujours). Le score de référence est la moyenne des 22 items primaires (1 à 5), comparée aux seuils cliniques flamands : vert (pas de risque), orange (risque de burn-out), rouge (risque très élevé). Melya affiche la somme équivalente (22 à 110). Le BAT n'est pas un outil diagnostique. Version destinée aux personnes qui ne travaillent pas actuellement ; seuils pour les personnes flamandes ne travaillant pas. Seuils des sous-échelles (moyennes) : épuisement 3,31 / 3,81 ; distance mentale 2,50 / 3,10 ; déficience émotionnelle 2,10 / 3,50 ; déficience cognitive 2,70 / 3,50 (début des zones orange / rouge).",
     instructions:
       "Les énoncés suivants sont liés à ce que vous ressentez et à la manière dont vous la vivez. Veuillez indiquer la fréquence à laquelle chaque déclaration s'applique à vous.",
     persistentInstructions:
@@ -2926,7 +2924,7 @@ export const scales: Scale[] = [
       ],
       maxScore: 110,
       method:
-        "Le score total additionne les 22 items de symptômes primaires (1-5), soit 22 à 110. Il équivaut à la moyenne du manuel (somme ÷ 22, arrondie à 2 décimales) : moyenne ≤ 2,58 = zone verte, 2,59 à 3,01 = zone orange, ≥ 3,02 = zone rouge. Les 10 items de symptômes secondaires (plaintes psychiques et psychosomatiques) forment un sous-score à part, hors total. Version destinée aux personnes qui ne travaillent pas actuellement ; seuils pour les personnes flamandes sans emploi. Seuils des sous-échelles (moyennes) : épuisement 3,31 / 3,81 ; distance mentale 2,50 / 3,10 ; déficience émotionnelle 2,10 / 3,50 ; déficience cognitive 2,70 / 3,50 (début des zones orange / rouge).",
+        "Le score total additionne les 22 items de symptômes primaires (1-5), soit 22 à 110. Il équivaut à la moyenne du manuel (somme ÷ 22, arrondie à 2 décimales) : moyenne ≤ 2,58 = zone verte, 2,59 à 3,01 = zone orange, ≥ 3,02 = zone rouge. Les 10 items de symptômes secondaires (plaintes psychiques et psychosomatiques) forment un sous-score à part, hors total. Version destinée aux personnes qui ne travaillent pas actuellement ; seuils pour les personnes flamandes ne travaillant pas. Seuils des sous-échelles (moyennes) : épuisement 3,31 / 3,81 ; distance mentale 2,50 / 3,10 ; déficience émotionnelle 2,10 / 3,50 ; déficience cognitive 2,70 / 3,50 (début des zones orange / rouge).",
       thresholdsSource: "Seuils cliniques flamands du manuel BAT 2.0 (moyennes converties en sommes)",
     },
   },
@@ -2945,7 +2943,7 @@ export const scales: Scale[] = [
     longDescription:
       "L'échelle brève d'évaluation du stress, issue des travaux du psychiatre Charly Cungi, comporte 11 questions sur les manifestations émotionnelles, comportementales et physiques du stress. Chaque question est cotée de 1 (pas du tout) à 6 (extrêmement) ; le score total varie de 11 à 66 : niveau de stress très bas, bas, élevé ou très élevé. Texte repris d'une source secondaire, à confronter à l'ouvrage de référence (Cungi, Savoir gérer son stress).",
     instructions:
-      "Pour chacune des questions, choisissez la réponse appropriée selon l'échelle suivante : 1 - Pas du tout, 2 - Faiblement, 3 - Un peu, 4 - Assez, 5 - Beaucoup, 6 - Extrêmement.",
+      "Pour chacune des questions, choisissez la réponse appropriée selon l'échelle suivante : 1 - Non pas du tout, 2 - Faiblement, 3 - Un peu, 4 - Assez, 5 - Beaucoup, 6 - Extrêmement.",
     copyrightAttribution:
       "Échelle brève d'évaluation du stress — issue des travaux de Charly Cungi (Savoir gérer son stress, Retz). Version reprise de Lefebvre Dalloz Compétences.",
     higherIsBetter: false,
@@ -2964,7 +2962,7 @@ export const scales: Scale[] = [
     ],
     answerScales: {
       intensity: [
-        { value: 1, label: "Pas du tout" },
+        { value: 1, label: "Non pas du tout" },
         { value: 2, label: "Faiblement" },
         { value: 3, label: "Un peu" },
         { value: 4, label: "Assez" },
@@ -2974,14 +2972,14 @@ export const scales: Scale[] = [
     },
     scoring: {
       ranges: [
-        { min: 11, max: 18, interpretation: "Niveau de stress très bas" },
-        { min: 19, max: 29, interpretation: "Niveau de stress bas" },
-        { min: 30, max: 45, interpretation: "Niveau de stress élevé" },
+        { min: 11, max: 19, interpretation: "Niveau de stress très bas" },
+        { min: 20, max: 30, interpretation: "Niveau de stress bas" },
+        { min: 31, max: 45, interpretation: "Niveau de stress élevé" },
         { min: 46, max: 66, interpretation: "Niveau de stress très élevé" },
       ],
       maxScore: 66,
       method:
-        "Additionnez les 11 réponses (1-6) : le score total varie de 11 à 66. Entre 11 et 19 : stress très bas ; entre 19 et 30 : bas ; entre 30 et 45 : élevé ; au-dessus de 45 : très élevé (bornes de la source ; Melya retient 11-18, 19-29, 30-45, 46-66).",
+        "Additionnez les 11 réponses (1-6) : le score total varie de 11 à 66. Entre 11 et 19 : stress très bas ; entre 19 et 30 : bas ; entre 30 et 45 : élevé ; au-dessus de 45 : très élevé (bornes de la source, qui se chevauchent ; Melya retient 11-19, 20-30, 31-45, 46-66, borne haute incluse comme l'impose « au-dessus de 45 »).",
       thresholdsSource: "Bornes de la source (Lefebvre Dalloz, d'après Cungi), chevauchements tranchés par Melya",
     },
   },
@@ -2989,7 +2987,7 @@ export const scales: Scale[] = [
     id: "ders",
     acronym: "DERS",
     label: "Échelle des difficultés de régulation émotionnelle",
-    patientIntroSubtitle: "Difficulties in Emotion Regulation Scale",
+    patientIntroSubtitle: "Echelle de régulation émotionnelle",
     domain: "humeur",
     formType: "single-scale",
     title: "DERS - Échelle des difficultés de régulation émotionnelle",
@@ -3063,9 +3061,8 @@ export const scales: Scale[] = [
   },
   {
     id: "atq",
-    acronym: "QPA-30",
+    acronym: "QPA",
     label: "Questionnaire des pensées automatiques",
-    patientIntroSubtitle: "Automatic Thoughts Questionnaire (ATQ)",
     domain: "humeur",
     formType: "single-scale",
     title: "QPA-30 - Questionnaire des pensées automatiques",

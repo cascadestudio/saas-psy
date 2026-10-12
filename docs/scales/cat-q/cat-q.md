@@ -81,6 +81,14 @@ Consigne, 7 libellés, graduation 100, mention « Seuil indiqué par Embrace Aut
 
 **Mentaal** (même jeu T5) : 100/175 et sous-scores 36 / 32 / 32 identiques. Mentaal n'affiche pas de seuil mais des moyennes de référence par genre.
 
+
+### Repasse « regard neuf » (12/10/2026)
+
+- **Corrigé (erreur)** : le seuil de 100 (Embrace Autism) est **supprimé**. Les auteurs du CAT-Q écrivent : « there are no threshold or cutoff scores on the CAT-Q » et « nor should cut-off scores be applied to classify individuals as ‘high’ or ‘low’ camouflagers » (Hannon, Hull, Lai, Magiati & Mandy, 2026, *Autism in Adulthood*, manuscrit accepté UCL Discovery — archivé `CAT-Q_Hannon-Hull-et-al-2026_UseAndMisuse_UCL.pdf`). Bande unique « Pas de seuil clinique fourni par les auteurs. » ; la méthode affichée au praticien le précise.
+- **Corrigé** : la mention CC BY 4.0 porte sur l'article original ; la traduction de M. B. Bessette n'a pas de licence explicite (statut ❓ pour la traduction).
+- **Vigilance** : les auteurs déconseillent aussi l'usage du CAT-Q comme outil de dépistage ou de suivi d'intervention — à dire au praticien (description).
+- La ligne « Seuil » du §10 et le §13 « garder le seuil de 100 » sont caducs.
+
 ## 11-12. Contrat technique et historique
 
 Entrée `cat-q` (1-7, `reverseItems`), scorer `cat-q.ts` (inversion + somme + 3 sous-scores), tests `cat-q.spec.ts`. 11/10/2026 — Claude (mission n°3) : création et implémentation, tests 6/6.

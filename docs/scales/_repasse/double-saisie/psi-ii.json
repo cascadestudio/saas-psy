@@ -1,0 +1,128 @@
+{
+ "source_used": "docs/scales/ww-ii/psi-ii.pdf, pages 1-4 (PSI-II, UQO)",
+ "title": "PSI-II",
+ "instructions": "Vous retrouvez ci-dessous une série d'énoncés qui peuvent se rapporter aux inquiétudes. En vous référant aux moments où vous vous inquiétez, veuillez indiquer jusqu'à quel point les énoncés suivants vous semblent vrais en encerclant le numéro correspondant (1 à 5).",
+ "reminder": null,
+ "items": [
+  "Si je ne m'inquiétais pas, je serais insouciant(e) et irresponsable.",
+  "Si je m'inquiète, je serai moins ébranlé(e) lorsque des événements imprévus se produiront.",
+  "Je m'inquiète dans le but de savoir quoi faire.",
+  "Si je m'inquiète à l'avance, je serai moins déçu(e) si quelque chose de grave se produit.",
+  "Le fait de m'inquiéter m'aide à planifier mes actions pour résoudre un problème.",
+  "Le simple fait de m'inquiéter peut empêcher les malheurs d'arriver.",
+  "Si je ne m'inquiétais pas, cela ferait de moi une personne négligente.",
+  "C'est en m'inquiétant que je finis par entreprendre le travail que j'ai à faire.",
+  "Je m'inquiète parce que je pense que cela peut m'aider à trouver une solution à mon problème.",
+  "Le fait de m'inquiéter prouve que je suis une personne qui voit à ses affaires.",
+  "Trop penser à des choses positives peut les empêcher de se produire.",
+  "Le fait de m'inquiéter confirme que je suis une personne prévoyante.",
+  "Si un malheur arrive, je me sentirai moins responsable si je m'en suis inquiété auparavant.",
+  "En m'inquiétant, je peux trouver une meilleure façon de faire.",
+  "L'inquiétude me stimule et me rend plus efficace.",
+  "Le fait de m'inquiéter m'incite à passer à l'action.",
+  "Le simple fait de m'inquiéter diminue le risque que quelque chose de grave arrive.",
+  "En m'inquiétant, je fais certaines choses que je ne me déciderais pas à faire autrement.",
+  "Le fait de m'inquiéter me motive à faire les choses que je dois faire.",
+  "Mes inquiétudes à elles seules peuvent diminuer les risques de danger.",
+  "En m'inquiétant, j'augmente mes chances de trouver la meilleure solution.",
+  "Le fait de m'inquiéter me permettra de me sentir moins coupable si quelque chose de grave se produit.",
+  "Si je m'inquiète, je serai moins triste lorsqu'un événement négatif se produira.",
+  "En ne s'inquiétant pas, on peut attirer les malheurs.",
+  "Le fait de m'inquiéter démontre que je suis une bonne personne."
+ ],
+ "answers": [
+  [
+   1,
+   "Pas du tout vrai"
+  ],
+  [
+   2,
+   "Un peu vrai"
+  ],
+  [
+   3,
+   "Assez vrai"
+  ],
+  [
+   4,
+   "Très vrai"
+  ],
+  [
+   5,
+   "Tout à fait"
+  ]
+ ],
+ "answers_note": "Mêmes 5 modalités pour tous les items.",
+ "reverse_items": [],
+ "subscales": [
+  [
+   "S'inquiéter aide à résoudre les problèmes",
+   [
+    3,
+    5,
+    9,
+    14,
+    21
+   ]
+  ],
+  [
+   "S'inquiéter aide à se motiver",
+   [
+    8,
+    15,
+    16,
+    18,
+    19
+   ]
+  ],
+  [
+   "S'inquiéter aide l'individu à se prémunir de vivre des émotions difficiles si un événement s'avère négatif",
+   [
+    2,
+    4,
+    13,
+    22,
+    23
+   ]
+  ],
+  [
+   "S'inquiéter en soi prévient les événements négatifs",
+   [
+    6,
+    11,
+    17,
+    20,
+    24
+   ]
+  ],
+  [
+   "S'inquiéter est un trait de personnalité positif",
+   [
+    1,
+    7,
+    10,
+    12,
+    25
+   ]
+  ]
+ ],
+ "total_method": "Aucun score total indiqué ; cinq sous-échelles, chacune : somme des réponses aux items listés.",
+ "score_range": [
+  25,
+  125
+ ],
+ "thresholds": [],
+ "thresholds_source": "Aucun seuil dans la source.",
+ "alerts": null,
+ "copyright_text": "Gosselin, P., Ladouceur, R., Langlois, F., Freeston, M. H., Dugas, M. J., & Bertrand, J. (2003). Revue Européenne de Psychologie Appliquée, 53 (3-4), 199-211. (pas de mention de copyright)",
+ "doubts": [
+  "Pas de score total défini par la source ; score_range [25,125] est la somme théorique, déduite.",
+  "Sous-échelle 3 : libellé « S'inquiéter aide l'individu à se prémunir de vivre des émotions difficiles si un événement s'avère négatif ».",
+  "Pas de cadre temporel autre que « aux moments où vous vous inquiétez ».",
+  "Pas de seuils, pas d'items inversés.",
+  "Pagination PDF : en-têtes « Page 2 de 3 » et « Page 3 de 3 » mais PDF de 4 pages avec cotation.",
+  "Apostrophes droites par moi, la source utilise ' et ’.",
+  "Mise en page du texte extrait brouillée aux items 6, 7, 9, 11, 19, 20, 24, 25 (points de suite)."
+ ],
+ "id": "psi-ii"
+}

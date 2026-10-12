@@ -221,6 +221,12 @@ Consigne et rappel « Au cours des 12 derniers mois… », 5 libellés, graduati
 
 ---
 
+
+### Repasse « regard neuf » (12/10/2026)
+
+- **Corrigé** : « Outil de repérage recommandé par la HAS » retiré de la description — la HAS diffuse l'ancienne version oui/non, pas la version OFDT 0-4 utilisée ici.
+- **Vigilance** : un non-consommateur obtient « Usage sans risque » (pas de question filtre).
+
 ## 11. Contrat technique
 
 - Entrée `cast` dans `packages/core/src/scales/index.ts` : `single-scale`, clés `intensity_0` … `intensity_5`, `answerScales.intensity` 0-4, `instructions` = `persistentInstructions` = « Au cours des 12 derniers mois… », `patientIntroSubtitle: null`, trois bandes, `thresholdsSource`.

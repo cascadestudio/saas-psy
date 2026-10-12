@@ -1,0 +1,62 @@
+{
+ "id": "ftnd",
+ "source_used": "FTND_HAS.pdf p.2 (Test de Fagerström en six questions, HAS octobre 2014) pour items/réponses ; seuils : FTND_RESPADD.pdf et FTND_Unicancer.pdf (identiques entre eux, 5 niveaux) ; comparaison avec p.1 HAS (version simplifiée 2 questions)",
+ "title": "Test de Fagerström en six questions",
+ "instructions": null,
+ "reminder": null,
+ "items": [
+  "Le matin, combien de temps après être réveillé(e), fumez-vous votre première cigarette ?",
+  "Trouvez-vous qu’il est difficile de vous abstenir de fumer dans les endroits où c’est interdit ? (ex. : cinémas, bibliothèques)",
+  "À quelle cigarette renonceriez-vous le plus difficilement ?",
+  "Combien de cigarettes fumez-vous par jour, en moyenne ?",
+  "Fumez-vous à intervalles plus rapprochés durant les premières heures de la matinée que durant le reste de la journée ?",
+  "Fumez-vous lorsque vous êtes malade au point de devoir rester au lit presque toute la journée ?"
+ ],
+ "answers": [],
+ "answers_note": "Modalités par item (HAS, points à droite). Q1 : a. Dans les 5 minutes = 3 ; b. 6 - 30 minutes = 2 ; c. 31 - 60 minutes = 1 ; d. Plus de 60 minutes = 0. Q2 : a. Oui = 1 ; b. Non = 0. Q3 : a. À la première de la journée = 1 ; b. À une autre = 0. Q4 : a. 10 ou moins = 0 ; b. 11 à 20 = 1 ; c. 21 à 30 = 2 ; d. 31 ou plus = 3. Q5 : a. Oui = 1 ; b. Non = 0. Q6 : a. Oui = 1 ; b. Non = 0. (RESPADD : Q1 Plus de 60 minutes (0) / Entre 31 et 60 minutes (1) / Entre 6 et 30 minutes (2) / Moins de 5 minutes (3) ; Q4 10 ou moins (0) / Entre 11 et 20 (1) / Entre 21 et 30 (2) / Plus de 31 (3) ; Q3 La première de la journée (1) / N’importe quelle autre (0).)",
+ "reverse_items": [],
+ "subscales": [],
+ "total_method": "Somme des points des 6 questions (HAS/Unicancer/RESPADD ne donnent pas de phrase de calcul explicite ; « Vous avez obtenu : _____ » dans RESPADD).",
+ "score_range": [
+  0,
+  10
+ ],
+ "thresholds": [
+  [
+   0,
+   2,
+   "Très faible"
+  ],
+  [
+   3,
+   4,
+   "Faible"
+  ],
+  [
+   5,
+   5,
+   "Moyenne"
+  ],
+  [
+   6,
+   7,
+   "Forte"
+  ],
+  [
+   8,
+   10,
+   "Très forte"
+  ]
+ ],
+ "thresholds_source": "Unicancer : « Interprétation : Dépendance : Très faible 0-2 ; Faible 3-4 ; Moyenne 5 ; Forte 6-7 ; Très forte 8-10 ». RESPADD : « 0 à 2 Très faible dépendance ; 3 ou 4 Faible dépendance ; 5 dépendance moyenne ; 6 à 7 Forte dépendance ; 8 à 10 Très forte dépendance ». HAS (différent) : « entre 0 et 2 : pas de dépendance ; entre 3 et 4 : dépendance faible ; entre 5 et 6 : dépendance moyenne ; entre 7 et 10 : dépendance forte ou très forte ».",
+ "alerts": null,
+ "copyright_text": "© Haute Autorité de Santé – 2014 (HAS / Service des bonnes pratiques professionnelles / octobre 2014). Références : Heatherton et coll., 1991, Fagerström 2012. RESPADD cite Heatherton TF, Kozlowski LT, Frecker RC, Fagerstrom KO, British Journal of Addictions 1991;86:1119-27.",
+ "doubts": [
+  "Divergence de seuils : HAS 4 niveaux (0-2 pas de dépendance ; 3-4 faible ; 5-6 moyenne ; 7-10 forte ou très forte) vs RESPADD/Unicancer 5 niveaux (0-2 très faible ; 3-4 faible ; 5 moyenne ; 6-7 forte ; 8-10 très forte). J’ai retenu RESPADD/Unicancer pour les seuils (concordants entre eux), HAS pour le texte des items.",
+  "Coquilles : RESPADD « Nictoine » (référence), « Fagerstrom » ; RESPADD Q4 « Plus de 31 » (HAS/Unicancer « 31 ou plus ») ; Unicancer Q6 « lorsque vous êtes malades » (pluriel) ; Unicancer « A quelle cigarette » sans accent.",
+  "Libellés divergents entre sources : HAS Q1 « Le matin, combien de temps après être réveillé(e) » vs Unicancer « après vous être réveillé » vs RESPADD « Combien de temps s’écoule entre votre réveil et votre première cigarette? » ; Q5 RESPADD « Fumez-vous davantage durant les premières heures suivant le réveil qu’au cours du reste de la journée? » ; Q6 RESPADD « Fumez-vous même quand vous êtes malade au lit presque toute la journée? » ; Q4 RESPADD sans « en moyenne » ; Q2 RESPADD « là où c’est interdit » sans exemples. Bornes : HAS « Dans les 5 minutes » / RESPADD « Moins de 5 minutes ».",
+  "Ordre des modalités inversé dans RESPADD (0 en premier, par ex. Q1, Q2, Q5, Q6 Non puis Oui).",
+  "HAS p.1 : version simplifiée 2 questions (cigarettes/jour : 10 ou moins 0 ; 11 à 20 1 ; 21 à 30 2 ; 31 ou plus 3 ; délai : Moins de 5 minutes 3 ; 6 à 30 minutes 2 ; 31 à 60 minutes 1 ; Après plus d’1 heure 0 ; seuils 0-1 pas de dépendance, 2-3 modérée, 4-5-6 forte) : hors périmètre (c’est le HSI). Pas de trou : 5 minutes pile et 6 minutes (HAS « 6 - 30 » après « Dans les 5 minutes ») ; la minute 5-6 n’est pas couverte.",
+  "Plage 0-10 déduite ; aucune consigne patient ni cadre temporel ; pas d’alertes."
+ ]
+}

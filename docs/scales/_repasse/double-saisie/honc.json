@@ -1,0 +1,59 @@
+{
+ "id": "honc",
+ "source_used": "docs/scales/honc/HONC_LaRevueDuPraticien_2026-10-11.txt (encadré complet)",
+ "title": "Test HONC de mise en évidence de la dépendance tabagique",
+ "instructions": null,
+ "reminder": "Quand vous essayez d’arrêter ou quand vous n’avez pas fumé depuis un certain temps :",
+ "items": [
+  "Avez-vous déjà essayé d’arrêter de fumer sans y parvenir ?",
+  "Fumez-vous actuellement parce que c’est vraiment difficile d’arrêter ?",
+  "Pensez-vous être dépendant(e) du tabac ?",
+  "Avez-vous déjà eu des envies impérieuses de fumer ?",
+  "Avez-vous déjà eu un grand besoin d’une cigarette ?",
+  "Est-ce difficile de ne pas fumer aux endroits où c’est interdit, comme à l’école ?",
+  "Était-il difficile de vous concentrer ?",
+  "Avez-vous été plus irritable parce que vous ne pouviez pas fumer ?",
+  "Avez-vous senti un besoin urgent, une envie impérieuse de fumer ?",
+  "Vous êtes-vous senti(e) nerveux(se), incapable de rester tranquille ou angoissé(e) parce que vous ne pouviez pas fumer ?"
+ ],
+ "answers": [
+  [
+   1,
+   "Oui"
+  ],
+  [
+   0,
+   "Non"
+  ]
+ ],
+ "answers_note": "Cases « □ Oui □ Non » pour les 10 items. Valeur 1 point par réponse positive (« 1 point par réponse positive »), 0 pour Non (déduit). Item 7 : la source l'écrit « Quand vous essayez d’arrêter ou quand vous n’avez pas fumé depuis un certain temps : Était-il difficile de vous concentrer ?  » ; ce préambule est ici placé dans reminder.",
+ "reverse_items": [],
+ "subscales": [],
+ "total_method": "Plus le score est élevé (1 point par réponse positive), plus il fait évoquer une perte d’autonomie, donc une dépendance.",
+ "score_range": [
+  0,
+  10
+ ],
+ "thresholds": [
+  [
+   1,
+   10,
+   "Une réponse positive à un seul item suffit à indiquer une perte d’autonomie liée à la consommation de tabac"
+  ],
+  [
+   7,
+   10,
+   "Un score supérieur ou égal à 7 indique un niveau de forte dépendance à la nicotine"
+  ]
+ ],
+ "thresholds_source": "« Une réponse positive à un seul item suffit à indiquer une perte d’autonomie liée à la consommation de tabac. ... Un score supérieur ou égal à 7 indique un niveau de forte dépendance à la nicotine. »",
+ "alerts": null,
+ "copyright_text": null,
+ "doubts": [
+  "Le préambule « Quand vous essayez d’arrêter ou quand vous n’avez pas fumé depuis un certain temps : » est collé à l'item 7 dans le texte ; il s'applique vraisemblablement aux items 7 à 10 (non explicité). Dans la liste, l'item 7 est donné sans préambule et le préambule en reminder.",
+  "Source secondaire : encadré de La Revue du Praticien (« Tabac et adolescents »), texte extrait via Chrome, « mise en forme simplifiée » ; pas la version originale DiFranza et al. Référence : « D’après DiFranza JR, Savageau JA, Fletcher K, et al. Arch Pediatr Adolesc Med 2002 ;156(4) :397 - 403. »",
+  "Aucune consigne patient, aucune période temporelle, aucune mention de droits d'auteur dans le texte.",
+  "Seuils : les deux phrases se recoupent (≥ 1 : perte d'autonomie ; ≥ 7 : forte dépendance) ; pas de bornes intermédiaires. Plage 0-10 déduite.",
+  "Item 6 : « comme à l’école » (population jeune) ; population cible : « jeunes fumeurs ». Pas d'alerte ni de sous-échelle."
+ ]
+}

@@ -6,9 +6,9 @@
 
 | Champ | Valeur |
 | --- | --- |
-| **Nom court** | QPA-30 (id `atq`) |
+| **Nom court** | QPA (id `atq`) |
 | **Libellé** | Questionnaire des pensées automatiques |
-| **Sous-titre patient** | Automatic Thoughts Questionnaire (ATQ) |
+| **Sous-titre patient** | — (libellé) |
 | **Thème** | Dépression (domaine Humeur) |
 | **Items** | 30 (1-5), somme 30-150 |
 | **Durée** | 15 minutes (fiche de la source) |
@@ -57,11 +57,18 @@ Aucune dans la source. L'item 19 (« Je souhaite disparaître ») n'est pas une 
 | Consigne | « en indiquer » → « et indiquer » | Type 2, leçon de la source secondaire | haute |
 | Consigne | « cochez la colonne correspondante » → « choisissez la réponse correspondante » | Type 1 | haute |
 | Seuil | Aucun ; repères déprimés / contrôles dans la méthode | La source ne donne que des moyennes | haute |
-| Acronyme | « QPA-30 » (sous-titre ATQ) | Sigle français de la source | moyenne |
+| Acronyme | « QPA », sans sous-titre anglais (révisé le 12/10/2026) | Sigle de la source principale ; « QPA-30 » et le sous-titre anglais n'apparaissaient dans aucune source | haute |
 
 ### Recette
 
 À compléter après déploiement sur staging.
+
+
+### Repasse « regard neuf » (12/10/2026)
+
+- **Corrigé** : sigle « QPA » (source) au lieu de « QPA-30 » ; sous-titre anglais retiré (absent des sources) ; apostrophes harmonisées.
+- **Références trouvées** (HAL, https://hal.univ-lorraine.fr/hal-03197078/document) : traduction Cottraux, Bouvard & Légeron (1985) ; validation française Bouvard et al. (1992), *Journal de thérapie comportementale et cognitive*, 2(2), 25-28 — origine probable des repères 95,7 / 46,24.
+- **Reste** : item 14 « Qu'y a-t-il » non attesté en ligne (correction Melya, type 2) ; confrontation au livre (MEL-368).
 
 ## 11-12. Contrat technique et historique
 

@@ -232,6 +232,13 @@ L'item 7 « J'étais inquiet pour la sécurité des autres. » est conservé san
 
 ---
 
+
+### Repasse « regard neuf » (12/10/2026)
+
+- **Corrigé** : « Domaine public (INSPQ) » retiré de la mention affichée — la fiche Cn2r archivée porte « ©2001 » et la page INSPQ (non archivée) vise la variante québécoise. Statut des droits : ❓ jusqu'à preuve.
+- **À valider** : le seuil ≥ 15 est conservé ; l'étude de Guardia et al. (2013) propose 14 — citer les deux en §7.
+- **Suggestion** : « entourer » → « choisir » (plus fidèle que « choisissez »).
+
 ## 11. Contrat technique
 
 - Entrée `pdi` dans `packages/core/src/scales/index.ts` : `single-scale`, clés `intensity_0` … `intensity_12`, `answerScales.intensity` 0-4, `persistentInstructions` = rappel court, deux bandes 0-14 / 15-52, `thresholdsSource` « Seuil de la fiche descriptive Cn2r ».

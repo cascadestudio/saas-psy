@@ -1,0 +1,138 @@
+{
+ "id": "cat-q",
+ "source_used": "docs/scales/cat-q/CAT-Q_EmbraceAutism_FR_2026-10-11.txt (traduction Marika B. Bessette, Embrace Autism)",
+ "title": "Le CAT-Q",
+ "instructions": "Lisez les énoncés suivants et choisissez les réponses qui correspondent le plus fidèlement possible à vos expériences personnelles lors d’interactions sociales.",
+ "reminder": null,
+ "items": [
+  "Lorsque j'interagis avec quelqu'un, je copie délibérément son langage corporel ou ses expressions faciales.",
+  "Je surveille mon langage corporel ou mes expressions faciales afin de paraître détendu.",
+  "Je ressens rarement le besoin de jouer la comédie pour m'en sortir dans une situation sociale.",
+  "J'ai développé un script à suivre dans les situations sociales.",
+  "Je répète des phrases que j'ai entendues dire par d'autres personnes, exactement de la même manière que je les ai entendues.",
+  "J'adapte mon langage corporel ou mes expressions faciales de manière à paraître intéressé par la personne avec laquelle j'interagis.",
+  "Dans les situations sociales, j'ai l'impression de « performer » plutôt que d'être moi-même.",
+  "Dans mes propres interactions sociales, j'utilise des comportements que j'ai appris en regardant d'autres personnes interagir.",
+  "Je pense toujours à l'impression que je donne aux autres.",
+  "J'ai besoin du soutien d'autres personnes pour m'aider à socialiser.",
+  "Je pratique mes expressions faciales et mon langage corporel pour m'assurer qu'ils ont l'air naturels.",
+  "Je ne ressens pas le besoin d'établir un contact visuel avec d'autres personnes si je n'en ai pas envie.",
+  "Je dois me forcer à interagir avec les gens lorsque je suis dans des situations sociales.",
+  "J'ai essayé d'améliorer ma compréhension des compétences sociales en observant d'autres personnes.",
+  "Je surveille mon langage corporel ou mes expressions faciales afin de paraître intéressé par la personne avec laquelle j'interagis.",
+  "Dans les situations sociales, j'essaie de trouver des moyens d'éviter d'interagir avec les autres.",
+  "J'ai fait des recherches sur « les règles des interactions sociales » pour améliorer mes propres compétences sociales.",
+  "Je suis toujours conscient de l'impression que je donne aux autres.",
+  "Je me sens libre d'être moi-même lorsque je suis avec d'autres personnes.",
+  "J'apprends comment les gens utilisent leur corps et leur visage pour interagir en regardant la télévision ou des films, ou en lisant des ouvrages de fiction.",
+  "J'adapte mon langage corporel ou mes expressions faciales de manière à paraître détendu.",
+  "Lorsque je parle à d'autres personnes, j'ai l'impression que la conversation se déroule naturellement.",
+  "J'ai passé du temps à apprendre les compétences sociales à partir d'émissions de télévision et de films, et j'essaie de les utiliser dans mes interactions.",
+  "Dans les interactions sociales, je ne fais pas attention à ce que font mon visage ou mon corps.",
+  "Dans les situations sociales, j'ai l'impression de faire semblant d'être « normal »."
+ ],
+ "answers": [
+  [
+   1,
+   "Totalement en désaccord"
+  ],
+  [
+   2,
+   "Pas d’accord"
+  ],
+  [
+   3,
+   "Un peu en désaccord"
+  ],
+  [
+   4,
+   "Ni d’accord ni en désaccord"
+  ],
+  [
+   5,
+   "Plutôt d’accord"
+  ],
+  [
+   6,
+   "D’accord"
+  ],
+  [
+   7,
+   "Tout à fait d’accord"
+  ]
+ ],
+ "answers_note": "Libellés du formulaire (test). Valeurs 1-7 non imprimées dans la source : déduites de l'échelle 25 à 175. Libellés du texte de présentation différents : Pas du tout d’accord / En désaccord / Plutôt en désaccord / Ni d’accord, ni en désaccord / Plutôt d’accord / D’accord / Tout à fait d’accord.",
+ "reverse_items": [
+  3,
+  12,
+  19,
+  22,
+  24
+ ],
+ "subscales": [
+  [
+   "Compensation",
+   [
+    1,
+    4,
+    5,
+    8,
+    11,
+    14,
+    17,
+    20,
+    23
+   ]
+  ],
+  [
+   "Masquage",
+   [
+    2,
+    6,
+    9,
+    12,
+    15,
+    18,
+    21,
+    24
+   ]
+  ],
+  [
+   "Assimilation",
+   [
+    3,
+    7,
+    10,
+    13,
+    16,
+    19,
+    22,
+    25
+   ]
+  ]
+ ],
+ "total_method": "Auto-résultat : inverser 3, 12, 19, 22, 24 ; total = somme 1-25",
+ "score_range": [
+  25,
+  175
+ ],
+ "thresholds": [
+  [
+   100,
+   175,
+   "Un score total de 100 ou plus indique que vous camouflez des traits autistiques."
+  ]
+ ],
+ "thresholds_source": "Résultats : « Échelle de résultats : 25 à 175 ; Seuil : 100 ; « Un score total de 100 ou plus indique que vous camouflez des traits autistiques. » »",
+ "subscale_thresholds": [],
+ "alerts": null,
+ "copyright_text": "« Cet article est distribué sous les termes de la licence internationale Creative Commons Attribution 4.0, qui permet une utilisation libre, une distribution et une reproduction sans restriction sur tout support, à condition que vous accordiez le crédit approprié aux auteurs originaux et à la source, fournissez un lien vers le Licence Creative Commons, et indiquez si des modifications ont été apportées. »",
+ "doubts": [
+  "Deux jeux de libellés de réponses (présentation vs formulaire) : j'ai retenu ceux du formulaire.",
+  "Aucun seuil par sous-échelle dans la source : subscale_thresholds=[].",
+  "Les sous-échelles Masquage (12, 24) et Assimilation (3, 19, 22) contiennent des items inversés.",
+  "Items 7 et 25 : guillemets anglais « performer » / « normal » de la page ; apostrophes droites dans les items.",
+  "Source = extraction de page web (commentaires omis) ; titre « Le CAT-Q » ; infos : 25 énoncés, 5 à 10 minutes, adultes (16 ans et +), Hull et al. 2018 ; aucune consigne de période.",
+  "Item 3, 12, 19, 22, 24 inversés ; pas d'alertes cliniques."
+ ]
+}

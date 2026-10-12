@@ -1,0 +1,60 @@
+{
+ "source_used": "docs/scales/qap/QAP_UQO.pdf, pages 1-3",
+ "title": "QAP",
+ "instructions": "Les gens peuvent réagir de différentes façons lorsqu'ils font face à des problèmes de la vie quotidienne (ex: problèmes de santé, disputes, manques de temps, etc.). Veuillez utiliser l'échelle ci-dessous pour exprimer jusqu'à quel point chacun des énoncés suivants correspond à votre façon de réagir ou de penser lorsque vous êtes confronté(e) à un problème. Encerclez le chiffre qui correspond à votre choix.",
+ "reminder": null,
+ "items": [
+  "Je perçois les problèmes comme étant menaçant pour mon bien-être.",
+  "Je doute souvent de mes capacités à résoudre les problèmes .",
+  "Souvent, avant même d'avoir essayé de trouver une solution, je me dis qu'il est difficile de résoudre un problème.",
+  "Les problèmes qui m'arrivent me semblent souvent insurmontables.",
+  "Lorsque je tente de résoudre un problème, je remets souvent en question mes habiletés.",
+  "Souvent, j'ai l'impression que les problèmes qui m'arrivent ne peuvent pas être résolus.",
+  "Même si j'arrive à voir certaines solutions à mes problèmes, je doute qu'ils pourront se régler facilement.",
+  "J'ai tendance à voir les problèmes comme un danger.",
+  "Ma première réaction devant un problème est de remettre en question mes habiletés.",
+  "Je perçois souvent mes problèmes comme étant plus gros qu'ils le sont en réalité.",
+  "Même si j'ai regardé un problème sous tous les angles possibles, je me demande encore si la solution que j'ai retenue va être efficace.",
+  "Je considère les problèmes comme des obstacles qui perturbent mon fontionnement."
+ ],
+ "answers": [
+  [
+   1,
+   "Pas du tout correspondant"
+  ],
+  [
+   2,
+   "Un peu correspondant"
+  ],
+  [
+   3,
+   "Assez correspondant"
+  ],
+  [
+   4,
+   "Très correspondant"
+  ],
+  [
+   5,
+   "Extrêmement correspondant"
+  ]
+ ],
+ "answers_note": "Mêmes modalités pour tous les items.",
+ "reverse_items": [],
+ "subscales": [],
+ "total_method": "Le QAP est une mesure unifactorielle sans question inversée. Pour calculer le score total, faites la somme des réponses de tous les items.",
+ "score_range": [
+  12,
+  60
+ ],
+ "thresholds": [],
+ "thresholds_source": "Aucun seuil dans la source.",
+ "alerts": null,
+ "copyright_text": "Gosselin, P., Pelletier O., & Ladouceur, R. (2001, juillet). Affiche presenté au congrès mondiale du thérapies comportementale et cognitive, Vancouver, C-B. (pas de mention de copyright)",
+ "doubts": [
+  "Coquilles source conservées : « menaçant » (item 1, accord), « fontionnement » (item 12), espace avant le point item 2 (« problèmes . »), « presenté », « mondiale du thérapies » dans la référence.",
+  "score_range [12,60] déduit.",
+  "Pas de seuils."
+ ],
+ "id": "qap"
+}

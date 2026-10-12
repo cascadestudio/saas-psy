@@ -1,0 +1,38 @@
+{
+  "id": "rses",
+  "source_used": "docs/scales/rses/RSES_Vallieres_1990.pdf, p.1 (titre/description), p.2 (consigne, ancres, 10 items, copyright), p.3 (clé de codification). Source unique.",
+  "title": "ÉCHELLE D'ESTIME DE SOI (ÉES-10)",
+  "instructions": "Pour chacune des caractéristiques ou descriptions suivantes, indiquez à quel point chacune est vraie pour vous en encerclant le chiffre approprié.",
+  "reminder": null,
+  "items": [
+    "Je pense que je suis une personne de valeur, au moins égale à n'importe qui d'autre.",
+    "Je pense que je possède un certain nombre de belles qualités.",
+    "Tout bien considéré, je suis porté-e à me considérer comme un-e raté-e.",
+    "Je suis capable de faire les choses aussi bien que la majorité des gens.",
+    "Je sens peu de raisons d'être fier-e de moi.",
+    "J'ai une attitude positive vis-à-vis moi-même.",
+    "Dans l'ensemble, je suis satisfait-e de moi.",
+    "J'aimerais avoir plus de respect pour moi-même.",
+    "Parfois je me sens vraiment inutile.",
+    "Il m'arrive de penser que je suis un-e bon-ne à rien."
+  ],
+  "answers": [[1, "Tout à fait en désaccord"], [2, "Plutôt en désaccord"], [3, "Plutôt en accord"], [4, "Tout à fait en accord"]],
+  "answers_note": null,
+  "reverse_items": [3, 5, 8, 9, 10],
+  "subscales": [["Estime de soi", [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]]],
+  "total_method": "Clé de codification ÉES-10 : « # 1, 2, 3*, 4, 5*, 6, 7, 8*, 9*, 10* Estime de soi » ; « * Énoncé formulé négativement, inverser la cote d'évaluation ». La source ne dit pas explicitement « somme » (somme des 10 cotes après inversion implicite).",
+  "score_range": [10, 40],
+  "thresholds": [],
+  "thresholds_source": "Aucun seuil d'interprétation dans la source.",
+  "alerts": null,
+  "copyright_text": "© Évelyne F. Vallières et Robert J. Vallerand, 1990.",
+  "doubts": [
+    "Titre de la page du questionnaire : « PERCEPTION PERSONNEL » (coquille probable pour « PERSONNELLE ») ; le titre de l'échelle retenu est celui de la p.1.",
+    "La consigne mentionne « en encerclant le chiffre approprié » (format papier).",
+    "Item 6 : « vis-à-vis moi-même » (sans « de »), verbatim.",
+    "Apostrophes droites (') dans la source.",
+    "Aucun seuil d'interprétation ni plage de score explicite dans la source ; [10, 40] déduit (10 items × 1-4).",
+    "La méthode de calcul (somme) n'est pas énoncée explicitement ; seule l'inversion des items 3, 5, 8, 9, 10 est indiquée.",
+    "Le texte anglais p.1 dit « five positive and five negative » ; cohérent avec 5 items inversés."
+  ]
+}

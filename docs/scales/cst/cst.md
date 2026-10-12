@@ -19,6 +19,7 @@
 
 - **Source (classe B, secondaire)** : Lefebvre Dalloz Compétences (organisme de formation), « Test : échelle brève d'évaluation du stress » — texte archivé `CST_Lefebvre-Dalloz_2026-10-11.txt` (page Cloudflare, lue via Chrome), 11/10/2026.
 - **Seconde source (trouvée par la recherche complémentaire du 11/10/2026)** : Centre neuchâtelois de psychiatrie (CNP, établissement public suisse), PDF « Échelle brève d'évaluation du stress - Cungi 1997 » — archivé `CST_CNP-Neuchatel_Cungi1997.pdf`. Texte identique à Lefebvre Dalloz, mêmes bornes chevauchantes, sauf : 1re modalité « Non pas du tout » ; item 10 « un problème de tension artérielle » au lieu de « un problème de cholestérol » ; écriture inclusive (émotif·ve, fatigué·e). L'item 8 a la même virgule manquante.
+- **Troisième source (repasse du 12/10/2026)** : PDF « Échelle brève d'évaluation du stress (Cungi 1997) » publié en 2008 (over-blog) — archivé `CST_overblog-2008_Cungi.pdf` : « cholestérol » à l'item 10, virgule à l'item 8, 1re modalité « Non pas du tout ».
 - **Référence papier à confronter** : Charly Cungi, *Savoir gérer son stress* (Retz) — édition et pages à vérifier (action documentaire).
 - **Écart avec Mentaal** : Mentaal (`/send/cungi-stress`, n°60) propose 19 questions → probablement une autre version (complète) de l'échelle de Cungi.
 - **Journal de recherche** : « échelle de stress de Cungi questionnaire texte items » → Lefebvre Dalloz ; pages INRS (autres outils) ; aucun PDF institutionnel de l'échelle trouvé.
@@ -44,7 +45,7 @@
 
 ## 6-7. Scoring et seuils
 
-Somme 11-66. Source : « Entre 11 et 19 : très bas ; entre 19 et 30 : bas ; entre 30 et 45 : élevé ; au-dessus de 45 : très élevé ». Bandes Melya : 11-18 très bas · 19-29 bas · 30-45 élevé · 46-66 très élevé.
+Somme 11-66. Source : « Entre 11 et 19 : très bas ; entre 19 et 30 : bas ; entre 30 et 45 : élevé ; au-dessus de 45 : très élevé ». Bandes Melya (révisées le 12/10/2026) : 11-19 très bas · 20-30 bas · 31-45 élevé · 46-66 très élevé (borne haute incluse, la seule lecture compatible avec « au-dessus de 45 »).
 
 ## 8. Alertes
 
@@ -52,16 +53,16 @@ Aucune.
 
 ## 9. Cas de test (`cst.spec.ts`, 9/9)
 
-11, 18, 19, 29, 30, 45, 46, 66 (chaque bord de bande).
+11, 18, 19, 20, 29, 30, 31, 45, 46, 66 (chaque bord de bande, des deux côtés).
 
 ## 10. Choix et arbitrages méthodologiques
 
 | Sujet | Choix | Justification | Confiance |
 | --- | --- | --- | --- |
 | Source | Lefebvre Dalloz (secondaire) | Seule version en ligne ; classe B, à confronter au livre de Cungi | basse |
-| Bornes des bandes | 19 → « bas », 30 → « élevé », 45 → « élevé » | La source chevauche (« entre 11 et 19 », « entre 19 et 30 ») ; lecture en intervalles semi-ouverts, « au-dessus de 45 » strict | basse |
-| Item 10 | « problème de cholestérol » (Lefebvre Dalloz) conservé | Les deux sources divergent (CNP : « tension artérielle », redondant avec « hypertension artérielle » qui suit) ; la leçon Lefebvre Dalloz évite la redondance ; à trancher sur le livre | basse |
-| 1re modalité | « Pas du tout » (Lefebvre Dalloz) | CNP : « Non pas du tout » ; différence mineure, à trancher sur le livre | moyenne |
+| Bornes des bandes | 11-19 / 20-30 / 31-45 / 46-66 (révisé le 12/10/2026) | La source chevauche ; « au-dessus de 45 » impose que 45 reste dans « entre 30 et 45 », donc borne haute incluse partout (la grille du 11/10 mélangeait deux conventions) | moyenne |
+| Item 10 | « problème de cholestérol » (Lefebvre Dalloz, confirmé par le PDF de 2008) conservé | Les deux sources divergent (CNP : « tension artérielle », redondant avec « hypertension artérielle » qui suit) ; la leçon Lefebvre Dalloz évite la redondance ; à trancher sur le livre | basse |
+| 1re modalité | « Non pas du tout » (révisé le 12/10/2026) | 2 sources sur 3 (CNP, PDF 2008) ; Lefebvre Dalloz : « Pas du tout » | moyenne |
 | Item 8 | « des allergies de l'eczéma » → « des allergies, de l'eczéma » | Type 2 : virgule manquante évidente | moyenne |
 | Consigne | « faites une croix dans la case appropriée » → « choisissez la réponse appropriée » | Type 1 | moyenne |
 | Domaine | Anxiété, catégorie « Stress » | Stress général (pas spécifiquement professionnel) | moyenne |
@@ -84,6 +85,13 @@ Aucune.
 Consigne adaptée, 6 libellés, graduations 19, 30 et 46, mention « Bornes de la source (Lefebvre Dalloz, d'après Cungi), chevauchements tranchés par Melya », 11 items et mention : conformes.
 
 **Mentaal** : leur « Stress de Cungi » compte 19 questions (autre version) ; pas de comparaison possible.
+
+
+### Repasse « regard neuf » (12/10/2026)
+
+- **Corrigé** : bandes 11-19 / 20-30 / 31-45 / 46-66 (convention unique) ; 1re modalité « Non pas du tout » (2 sources sur 3) ; tests de bord ajoutés (20, 31).
+- **Confirmé** : item 10 « cholestérol » et virgule de l'item 8 (3e source indépendante).
+- **Reste** : confrontation au livre (MEL-368).
 
 ## 11-12. Contrat technique et historique
 

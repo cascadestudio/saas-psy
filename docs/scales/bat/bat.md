@@ -108,6 +108,13 @@ Aucune.
 
 Affichage (les deux versions) : consigne, 5 libellés, graduations des zones (60 et 70 pour BAT-W, 57 et 67 pour BAT-G), mention « Seuils cliniques flamands du manuel BAT 2.0 (moyennes converties en sommes) », 5 sous-scores (dont symptômes secondaires hors total), 33 et 32 items et copyright : conformes.
 
+
+### Repasse « regard neuf » (12/10/2026)
+
+- **Corrigé** : coquille « Version version » dans les descriptions ; « personnes flamandes sans emploi » → « ne travaillant pas » (le manuel dit « non-working », arrêts prolongés compris).
+- **Confirmé** : fusion des plaintes psychiques et psychosomatiques en un seul sous-score secondaire — le manuel 2.0 (§1.1.3) les additionne et les interprète ensemble.
+- **Suggestions (non bloquantes)** : confiance « haute » pour le titre patient et l'item 11 ; consigner le retrait des astérisques ; archiver la page de licence du site BAT.
+
 ## 11-12. Contrat technique et historique
 
 Entrées `bat-w` et `bat-g` (`single-scale`, 1-5, total sur les items primaires via `TOTAL_ITEMS`), scorers `bat-w.ts` / `bat-g.ts`, tests associés ; domaine `burnout` ajouté à `ScaleDomain`, `DOMAIN_ORDER`, `DOMAIN_APPEARANCE`. 11/10/2026 — Claude (mission n°3) : création et implémentation.

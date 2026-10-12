@@ -3,7 +3,7 @@ import { collectByPrefix, resolveSeverity } from './helpers';
 
 /**
  * CAT-Q (Hull et al. 2018, CC BY 4.0 ; trad. Bessette, Embrace Autism).
- * 25 items 1-7, items 3, 12, 19, 22, 24 inversés ; somme 25-175 ; seuil 100 (Embrace Autism).
+ * 25 items 1-7, items 3, 12, 19, 22, 24 inversés ; somme 25-175 ; pas de seuil (les auteurs déconseillent tout score seuil, Hannon et al. 2026).
  * Sous-scores compensation, masquage, assimilation.
  */
 const REVERSED = new Set([3, 12, 19, 22, 24]); // numéros d'items (1-based)

@@ -3,7 +3,7 @@ import { collectByPrefix, resolveSeverity } from './helpers';
 
 /**
  * Échelle brève d'évaluation du stress (Cungi), 11 items 1-6, somme 11-66.
- * Bandes 11-18 / 19-29 / 30-45 / 46-66 (bornes de la source chevauchantes, tranchées par Melya).
+ * Bandes 11-19 / 20-30 / 31-45 / 46-66 (bornes de la source chevauchantes, tranchées par Melya).
  */
 export function scoreCst(
   scale: Scale,

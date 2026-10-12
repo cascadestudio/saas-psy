@@ -1,0 +1,67 @@
+{
+ "id": "cudit-r",
+ "source_used": "CUDIT-R_RESPADD.pdf (CUDIT-R-Fr, RESPADD octobre 2021) ; comparaison avec CUDIT-R_CCSA-Connaitre-ses-limites-2022.pdf p.5-7 (CCDUS)",
+ "title": "CANNABIS USE DISORDER IDENTIFICATION TEST - REVISED - version française (CUDIT-R-Fr)",
+ "instructions": "Avez-vous consommé du cannabis au cours des 6 derniers mois ? OUI NON. Si OUI, répondre aux questions suivantes relatives à votre consommation de cannabis en entourant la réponse qui correspond le plus à votre consommation au cours des 6 derniers mois. Veuillez répondre à toutes les questions.",
+ "reminder": "au cours des 6 derniers mois",
+ "items": [
+  "À quelle fréquence consommez-vous du cannabis ?",
+  "Combien d’heures êtes-vous « défoncé » un jour typique où vous consommez du cannabis ?",
+  "Au cours des 6 derniers mois, à quelle fréquence avez-vous constaté que vous n’étiez plus capable de vous arrêter de fumer du cannabis une fois que vous aviez commencé ?",
+  "Au cours des 6 derniers mois, combien de fois votre consommation de cannabis vous a-t-elle empêché de faire ce qui était normalement attendu de vous ?",
+  "Au cours des 6 derniers mois, combien de fois avez-vous passé une grande partie de votre temps à chercher à vous procurer ou à consommer du cannabis, ou à vous remettre des effets du cannabis ?",
+  "Au cours des 6 derniers mois, combien de fois avez-vous éprouvé des problèmes de mémoire ou de concentration après avoir fumé du cannabis ?",
+  "À quelle fréquence consommez-vous du cannabis dans des situations qui pourraient entraîner un danger, par exemple conduire un véhicule, utiliser une machine, ou s’occuper d’enfants ?",
+  "Avez-vous déjà envisagé de réduire ou d’arrêter votre consommation de cannabis ?"
+ ],
+ "answers": [],
+ "answers_note": "Variables par item (RESPADD). Q1 : 0 Jamais ; 1 ≤ 1 fois/mois ; 2 2 à 4 fois/mois ; 3 2 à 3 fois/semaine ; 4 ≥ 4 fois/semaine. Q2 : 0 < 1 heure ; 1 1 ou 2 heures ; 2 3 ou 4 heures ; 3 5 ou 6 heures ; 4 7 heures ou plus. Q3 à Q7 : 0 Jamais ; 1 < 1 fois/mois ; 2 Environ 1 fois/mois ; 3 Environ 1 fois/semaine ; 4 Tous les jours ou presque. Q8 (3 modalités) : 0 Jamais ; 2 Oui, mais pas au cours des 6 derniers mois ; 4 Oui, au cours des 6 derniers mois.",
+ "reverse_items": [],
+ "subscales": [
+  [
+   "SOUS-TOTAL 1 (ST1)",
+   [
+    1,
+    2,
+    3,
+    4
+   ]
+  ],
+  [
+   "SOUS-TOTAL 2 (ST2)",
+   [
+    5,
+    6,
+    7,
+    8
+   ]
+  ]
+ ],
+ "total_method": "Total des points des 8 questions. ST1 + ST2 = …",
+ "score_range": [
+  0,
+  32
+ ],
+ "thresholds": [
+  [
+   8,
+   10,
+   "Votre consommation de cannabis peut être problématique. N’hésitez pas à demander conseil au professionnel de votre choix."
+  ],
+  [
+   11,
+   32,
+   "Il est possible que vous présentiez un trouble important de l’usage de cannabis. Celui-ci peut être psychologique si vous ressentez un besoin de consommer malgré les inconvénients de cette consommation et/ou physique si la diminution ou l’arrêt de votre consommation entraîne des signes de “manque”. N’hésitez pas à faire appel à un professionnel de santé ou consultez les ressources ci-dessous."
+  ]
+ ],
+ "thresholds_source": "RESPADD : « De 8 à 10 points » et « Au-delà de 10 points ». CCSA p.6 (différent) : « 0 à 7 FAIBLE », « 8 à 11 MOYEN », « 12 et + ÉLEVÉ ».",
+ "alerts": null,
+ "copyright_text": "RESPADD – Bernard Artal Graphisme – Octobre 2021 ; validation FR : Luquiens A, … Drug Alcohol Rev. 2021 ; validation EN : Adamson SJ, … Drug Alcohol Depend 2010;110:137-43. CCSA : « © Centre canadien sur les dépendances et l’usage de substances, 2022 … Ce guide est offert gratuitement et ne peut être modifié qu’avec une autorisation écrite du titulaire des droits d’auteur et une mention de la source… »",
+ "doubts": [
+  "Divergence de seuils : RESPADD (version retenue) 8-10 / au-delà de 10 ; CCSA 0-7 FAIBLE / 8-11 MOYEN / 12 et + ÉLEVÉ. Dans RESPADD, aucun libellé pour 0-7 (pas de libellé « faible »). « Au-delà de 10 » interprété comme ≥ 11 dans mes bornes.",
+  "Divergences RESPADD vs CCSA : Q1 « ≤ 1 fois/mois » / « ≥ 4 fois/semaine » (CCSA « Moins de 1 fois par mois », « 4 fois par semaine ou plus ») ; Q2 « < 1 heure … 7 heures ou plus » (CCSA « Moins de 1 h … 7 h ou plus ») ; Q3-7 « < 1 fois/mois » (CCSA « Moins de 1 fois par mois »), « Environ 1 fois/semaine » (CCSA idem avec « par semaine »). Q3 CCSA « Au cours des 6 derniers mois, à quelle fréquence… » identique. Q5 CCSA « chercher à vous procurer ou consommer » (sans « à »). Q1 et Q2 et Q7 et Q8 n’ont pas « Au cours des 6 derniers mois » dans le libellé (couvert par la consigne). Q8 CCSA identique.",
+  "Le total « Total des points des 8 questions » est une indication de calcul, sans plage explicite (0-32 déduite).",
+  "Question filtre « Avez-vous consommé du cannabis au cours des 6 derniers mois ? » OUI/NON : non cotée. Ressources d’aide (Drogues info service 0 800 23 13 13 ; Écoute cannabis 0 980 980 940) dans RESPADD. Rendu des points « … » = champs vides.",
+  "CCSA : mention « Votre score n’est pas un diagnostic… » ; guide soumis à autorisation pour modification/traduction/adaptation (permissions@ccsa.ca). Sous-totaux ST1/ST2 : usage de calcul seulement."
+ ]
+}

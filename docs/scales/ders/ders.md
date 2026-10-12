@@ -8,7 +8,7 @@
 | --- | --- |
 | **Nom court** | DERS (id `ders`) |
 | **Libellé** | Échelle des difficultés de régulation émotionnelle |
-| **Sous-titre patient** | Difficulties in Emotion Regulation Scale |
+| **Sous-titre patient** | Echelle de régulation émotionnelle (titre du PDF UNIGE, verbatim) |
 | **Thème** | Régulation émotionnelle (domaine Humeur, provisoire — MEL-348) |
 | **Items** | 36 (1-5), 11 inversés, 6 sous-scores |
 | **Durée** | 10 minutes (estimation Melya) |
@@ -74,6 +74,13 @@ Aucune.
 ### Recette
 
 À compléter après déploiement sur staging.
+
+
+### Repasse « regard neuf » (12/10/2026)
+
+- **Corrigé** : sous-titre patient « Echelle de régulation émotionnelle » (titre de la source), au lieu du titre anglais absent de la source.
+- **Vérifié** : cotation et inversions exactes (relecture critique + double saisie à l'aveugle).
+- **Mentaal** (12/10/2026) : même texte DERS-F, avec les mêmes corrections des items 3 et 14 que Melya.
 
 ## 11-12. Contrat technique et historique
 

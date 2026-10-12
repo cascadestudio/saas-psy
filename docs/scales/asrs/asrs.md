@@ -212,6 +212,12 @@ La traduction de Mentaal n'est pas la version française NYU (probablement une t
 
 ---
 
+
+### Repasse « regard neuf » (12/10/2026)
+
+- **Corrigé** : la citation exigée par la licence NYU est affichée **verbatim en anglais** en tête de la mention (« The 6-question Adult Self-Report Scale-Version1.1 (ASRS-V1.1) Screener is a subset of … © New York University and the President and Fellows of Harvard College. »), suivie des précisions françaises.
+- **Archivé** : page de licence NYU (`ASRS_licence_NYU_2026-10-12.txt`) — « freely available for clinical and non-clinical use, including commercial use, but does require attribution ».
+
 ## 11. Contrat technique
 
 - Entrée `asrs` dans `packages/core/src/scales/index.ts` : `single-scale`, clés `intensity_0` … `intensity_5`, valeurs 0-4, `persistentInstructions`, `patientIntroSubtitle`, bandes 0-3 / 4-6, `maxScore` 6, domaine `neurodeveloppement` (ajouté à `ScaleDomain`).

@@ -1,0 +1,110 @@
+{
+ "id": "echelle-d-anxiete-sociale-de-liebowitz",
+ "source_used": "LSAS_Boulenger.pdf p.1-5 (VF de référence ; items p.4-5, fiche et cotation p.1-2) ; LSAS_Liebowitz_2003.pdf (guidelines anglaises, p.1-9) consulté pour période, seuils et conventions, non utilisé pour le texte des items",
+ "title": "Echelle d'Anxiété Sociale de Liebowitz (Liebowitz Social Anxiety Scale) LSAS ; en-tête de l'outil : SOCIAL ANXIETY SCALE, M. LIEBOWITZ M.D., Traduction française : J.P. LÉPINE, H. CARDOT (1990)",
+ "instructions": null,
+ "reminder": null,
+ "items": [
+  "Téléphoner en public (P)",
+  "Participer au sein d'un petit groupe (P)",
+  "Manger dans un lieu public (P)",
+  "Boire en compagnie dans un lieu public (P)",
+  "Parler à des gens qui détiennent une autorité (S)",
+  "Jouer, donner une représentation ou une conférence devant un public (P)",
+  "Aller à une soirée (S)",
+  "Travailler en étant observé (P)",
+  "Ecrire en étant observé (P)",
+  "Contacter par téléphone quelqu'un que vous ne connaissez pas très bien (S)",
+  "Parler à des gens que vous ne connaissez pas très bien (S)",
+  "Rencontrer des inconnus (S)",
+  "Uriner dans les toilettes publiques (P)",
+  "Entrer dans une pièce alors que tout le monde est déjà assis (P)",
+  "Etre le centre d'attention (S)",
+  "Prendre la parole à une réunion (P)",
+  "Passer un examen (P)",
+  "Exprimer son désaccord ou sa désapprobation à des gens que vous ne connaissez pas très bien (S)",
+  "Regarder dans les yeux des gens que vous ne connaissez pas très bien (S)",
+  "Faire un compte-rendu à un groupe (P)",
+  "Essayer de \"draguer\" quelqu'un (P)",
+  "Rapporter des marchandises dans un magasin (S)",
+  "Donner une soirée (S)",
+  "Résister aux pressions d'un vendeur insistant (S)"
+ ],
+ "answers": [
+  [
+   0,
+   "Aucun"
+  ],
+  [
+   1,
+   "Légère"
+  ],
+  [
+   2,
+   "Moyenne"
+  ],
+  [
+   3,
+   "Sévère"
+  ]
+ ],
+ "answers_note": "Double cotation de chaque item (hétéro-évaluation, grille à deux colonnes). Colonne PEUR OU ANXIETE : 0 Aucun, 1 Légère, 2 Moyenne, 3 Sévère. Colonne EVITEMENT : 0 Jamais, 1 Occasionnel (0-33%), 2 Fréquent (34-66 %), 3 Habituel (67-100 %). Chaque item est coté 0-3 pour l'anxiété ET 0-3 pour l'évitement. Items marqués (P) = performance, (S) = social dans le texte source (libellés recopiés avec leur suffixe). Ligne 'AUTRES' (vide) et ligne 'TOTAL A= ... C= ...' en bas de grille. Texte Boulenger p.1 : anxiété 'de 0, absente, à 3, sévère' ; évitement 'de 0, jamais, à 3, habituel'.",
+ "reverse_items": [],
+ "subscales": [
+  [
+   "anxiété de performance (13 items, (P))",
+   [
+    1,
+    2,
+    3,
+    4,
+    6,
+    8,
+    9,
+    13,
+    14,
+    16,
+    17,
+    20,
+    21
+   ]
+  ],
+  [
+   "anxiété liée aux interactions sociales (11 items, (S))",
+   [
+    5,
+    7,
+    10,
+    11,
+    12,
+    15,
+    18,
+    19,
+    22,
+    23,
+    24
+   ]
+  ]
+ ],
+ "total_method": "Source VF (Boulenger) : 'Chaque item est coté entre 0 et 3 soit en fonction de l'intensité de l'anxiété soit en fonction de la fréquence de l'évitement.' Fiche : 'TOTAL A= C='. Aucune formule de somme explicite dans le VF. Guidelines Liebowitz 2003 §15 : '1) one global score totaling anxiety and avoidance for all 24 items ... 2) separate anxiety and avoidance sub-scores for all 24 items ... 3) separate performance and social sub-scores that combine anxiety and avoidance totals over the relevant items ... 4) four separate sub-scores for performance anxiety, performance avoidance, social anxiety and social avoidance.' Total = somme anxiété (A) + somme évitement (C).",
+ "score_range": [
+  0,
+  144
+ ],
+ "thresholds": [],
+ "thresholds_source": "VF Boulenger p.2 : « En l'absence de valeur-seuil démontrée par les recherches psychométriques, la LSAS ne saurait être utilisée dans un but diagnostique chez les phobiques sociaux ; cependant son utilisation dans le dépistage de ces troubles anxieux a pu être préconisée par certains auteurs (Mennin et al, 2002). » ; p.2 : « les patients phobiques sociaux présentent habituellement des scores totaux de 80 à 95 lors de l'inclusion ». Liebowitz 2003 p.1 : « an LSAS total score of 30 accurately classified persons with social anxiety disorder ... a score of 60 accurately discriminated between persons with the generalized and non-generalized forms » ; §16 p.5 : « scores above 50, and especially above 60, on the total LSAS would be suggestive of generalized social anxiety disorder » (source anglaise secondaire, non retenue comme seuils car absents de la VF).",
+ "alerts": null,
+ "copyright_text": "Aucune mention de copyright dans le VF Boulenger ; pied de page : « CD-Rom Évaluation Clinique Standardisée en Psychiatrie ». Guidelines anglaises : « ©2003 Liebowitz MR   Version Date: June 5, 2003 ».",
+ "doubts": [
+  "Plage 0-144 déduite (24 items x 3 x 2), non écrite explicitement dans le VF.",
+  "VF = hétéro-évaluation (« L'échelle doit être remplie par un clinicien »), pas d'auto-questionnaire ; aucune consigne patient dans le VF.",
+  "Période de cotation absente du VF ; Liebowitz 2003 §II.8 : « The time period for rating each item is the subject's experience during the past week », et pour une situation non rencontrée imaginer la réaction. Seul le VF Boulenger p.2 dit d'imaginer la réaction si la situation n'a pas été rencontrée.",
+  "Artefact d'extraction p.5 du PDF : à l'item 14 le texte brut montre un '2' parasite dans la grille (cases 0 1 [2] 3 anxiété) ; probablement coquille de mise en page, pas une modalité.",
+  "Item 14 : le libellé se poursuit sur 2 lignes « ... déjà assis (P) » ; item 21 : « draguer » entre guillemets droits ; l'anglais original est « Trying to pick someone up » (Liebowitz 2003 convention 21 signale la mauvaise traduction 'lift someone off the ground').",
+  "Libellés d'items VF (Lépine/Cardot) : le suffixe (P)/(S) fait partie du texte source ; item 9 'Ecrire' (E sans accent) et 15 'Etre' (idem), recopiés tels quels.",
+  "Colonnes anxiété/évitement : l'en-tête brut du PDF est éclaté ; libellé 'Fréquent (34-66 %)' avec espace avant % alors que 'Occasionnel (0-33%)' et 'Habituel (67-100 %)' diffèrent d'espacement : recopié tel quel. Guidelines anglaises : 'often' pour 2, 'usually' pour 3, 'occasionally' pour 1.",
+  "Résumé VF p.1 dit 'de 24 items' ; 'L'échelle peut être décomposée en deux dimensions : anxiété de performance (13 items) et anxiété liée aux interactions sociales (11 items)' ; la répartition est portée par les suffixes (P)/(S) (13 P, 11 S vérifiés).",
+  "Fiche VF : une ligne 'AUTRES' vide existe sous l'item 24 (hors score). Coquille VF : 'héréro-évaluation' p.1.",
+  "Pas d'item inversé, pas d'item d'alerte, pas de seuil dans le VF ; seuils 30/50/60 uniquement dans Liebowitz 2003 (anglais)."
+ ]
+}

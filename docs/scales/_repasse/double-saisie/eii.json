@@ -1,0 +1,114 @@
+{
+ "id": "eii",
+ "source_used": "IUS_EII_UQO.pdf p.1-3 (items) + page de cotation",
+ "title": "ÉII",
+ "instructions": "Voici une série d'énoncés qui représentent comment les gens peuvent réagir à l'incertitude dans la vie. Veuillez encercler le numéro (1 à 5) approprié pour exprimer jusqu'à quel point chacun des énoncés suivants correspond à vous.",
+ "reminder": null,
+ "items": [
+  "L'incertitude m'empêche de prendre position.",
+  "Être incertain(e) veut dire qu'on est une personne désorganisée.",
+  "L'incertitude rend la vie intolérable.",
+  "C'est injuste de ne pas avoir de garanties dans la vie.",
+  "Je ne peux pas avoir l'esprit tranquille tant que je ne sais pas ce qui va arriver le lendemain.",
+  "L'incertitude me rend mal à l'aise, anxieux(se) ou stressé(e).",
+  "Les imprévus me dérangent énormément.",
+  "Ça me frustre de ne pas avoir toute l'information dont j'ai besoin",
+  "L'incertitude m'empêche de profiter pleinement de la vie.",
+  "On devrait tout prévenir pour éviter les surprises.",
+  "Un léger imprévu peut tout gâcher, même la meilleure des planifications.",
+  "Lorsque c'est le temps d'agir, l'incertitude me paralyse.",
+  "Être incertain(e) veut dire que je ne suis pas à la hauteur.",
+  "Lorsque je suis incertain(e), je ne peux pas aller de l'avant.",
+  "Lorsque je suis incertain(e), je ne peux pas bien fonctionner.",
+  "Contrairement à moi, les autres semblent toujours savoir où ils vont dans la vie.",
+  "L'incertitude me rend vulnérable, malheureux(se) ou triste.",
+  "Je veux toujours savoir ce que l'avenir me réserve.",
+  "Je déteste être pris(e) au dépourvu.",
+  "Le moindre doute peut m'empêcher d'agir.",
+  "Je devrais être capable de tout organiser à l'avance.",
+  "Être incertain(e), ça veut dire que je manque de confiance.",
+  "Je trouve injuste que d'autres personnes semblent certaines face à leur avenir.",
+  "L'incertitude m'empêche de bien dormir.",
+  "Je dois me retirer de toute situation incertaine.",
+  "Les ambiguïtés de la vie me stressent.",
+  "Je ne tolère pas d'être indécis(e) au sujet de mon avenir."
+ ],
+ "answers": [
+  [
+   1,
+   "Pas du tout correspondant"
+  ],
+  [
+   2,
+   "Un peu correspondant"
+  ],
+  [
+   3,
+   "Assez correspondant"
+  ],
+  [
+   4,
+   "Très correspondant"
+  ],
+  [
+   5,
+   "Tout à fait correspondant"
+  ]
+ ],
+ "answers_note": "Identiques pour tous les items (en-tête répété en haut de chaque page).",
+ "reverse_items": [],
+ "subscales": [
+  [
+   "Facteur 1 : l’incertitude a des implications négatives sur la perception de soi et les comportements",
+   [
+    1,
+    2,
+    3,
+    9,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    20,
+    22,
+    23,
+    24
+   ]
+  ],
+  [
+   "Facteur 2 : l’incertitude est injuste et gâche tout",
+   [
+    4,
+    5,
+    6,
+    7,
+    8,
+    10,
+    11,
+    18,
+    19,
+    21,
+    26,
+    27
+   ]
+  ]
+ ],
+ "total_method": "Pour coter l’ÉII comme instrument unifactoriel, calculez la somme des réponses de tous les items.",
+ "score_range": [
+  27,
+  135
+ ],
+ "thresholds": [],
+ "thresholds_source": "Aucun seuil dans la source.",
+ "alerts": null,
+ "copyright_text": "Freeston, M.H., Rhéaume, J., Letarte, H., Dugas, M.J., & Ladouceur, R. (1994). Personality and Individual Differences, 17 , 791-802.",
+ "doubts": [
+  "Item 25 (« Je dois me retirer de toute situation incertaine. ») n’appartient à aucun des deux facteurs dans les listes de la source (F1 : 14 items, F2 : 12 items = 26 items sur 27).",
+  "Plage 27-135 déduite (27 items cotés 1 à 5), non écrite dans la source. Aucun seuil ni alerte.",
+  "Item 8 sans point final dans la source. Mise en page extraite avec points de suite ; texte des items reconstitué en joignant les retours à la ligne (« indé- cis(e) » → « indécis(e) »). Page de cotation : « Cotation / Instructions pour la cotation » ; pas de sous-échelles nommées autrement que Facteur 1 / Facteur 2. Facteur 2 : « 26 et 27 » (avec « et »).",
+  "Référence citée uniquement en p.3 ; pas de cadre temporel ; le titre est seulement « ÉII » (pas de titre développé dans la source). Sexton & Dugas (2009) cité pour le modèle bifactoriel.",
+  "Numéro de dossier et date à remplir en en-tête (non repris)."
+ ]
+}

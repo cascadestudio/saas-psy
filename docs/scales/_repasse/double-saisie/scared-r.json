@@ -1,0 +1,198 @@
+{
+ "id": "scared-r",
+ "source_used": "docs/scales/scared-r/SCARED-R-51_Martin-Gosselin-2011_Pittsburgh.pdf (3 pages d'items + tableau des sous-échelles) ; article Bouvard et al. 2013 (Psychologica Belgica 53/2) consulté pour le principe de cotation et les sous-échelles",
+ "title": "SCARED-R-51",
+ "instructions": "Voici des peurs que les personnes de ton âge peuvent avoir. Regarde chacune des phrases attentivement et indique à quel point tu as vécu ces peurs durant les 3 derniers mois. Il n’y a pas de bonne ou mauvaise réponse. Coche la réponse qui te ressemble le plus.",
+ "reminder": "durant les 3 derniers mois",
+ "items": [
+  "Quand j’ai peur, j’ai de la difficulté à respirer.",
+  "J’ai peur des hauteurs.",
+  "J’ai des maux de tête ou de ventre quand je suis à l’école.",
+  "Je n’aime pas être avec des gens que je ne connais pas.",
+  "Quand je vois du sang, je me sens étourdi.",
+  "Je tiens à ce que les choses soient rangées ou en ordre.",
+  "J’ai peur quand je dors ailleurs qu’à la maison.",
+  "J’ai peur que les autres ne n’aiment pas.",
+  "Quand j’ai peur, je me sens comme si j’allais m’évanouir.",
+  "Je suis mes parents peu importe où ils vont.",
+  "Je me sens nerveux avec les gens que je ne connais pas bien.",
+  "J’ai peur d’aller chez le médecin.",
+  "Je n’aime pas aller à l’école.",
+  "Quand j’ai peur, je me sens comme si j’allais devenir fou.",
+  "Je m’inquiète à l’idée de dormir seul.",
+  "J’ai peur d’aller chez le dentiste.",
+  "Je m’inquiète de ne pas être aussi bon que les autres.",
+  "J’ai peur d’un animal qui n’est pas réellement dangereux.",
+  "J’ai peur quand il y a du tonnerre dans l’air.",
+  "Je fais les choses plus d’une fois en ligne pour vérifier si je les ai bien faites.",
+  "Je fais des rêves effrayants à propos d’un événement très négatif que j’ai vécu.",
+  "Je veux que les choses soient propres et en ordre.",
+  "J’aurais peur si j’avais à prendre l’avion.",
+  "Je fais des cauchemars à propos de choses négatives qui arrivent à mes parents.",
+  "Je m’inquiète à l’idée d’aller à l’école.",
+  "J’ai peur quand je reçois une piqûre.",
+  "Je me sens faible et tremblotant.",
+  "J’ai tellement peur d’un animal qui n’est pas dangereux que je n’ose pas lui toucher.",
+  "Je m’inquiète à propos de ce qui va m’arriver.",
+  "Je suis une personne inquiète.",
+  "J’essaie de ne pas penser à un événement négatif que j’ai déjà vécu.",
+  "J’ai peur d’être seul à la maison.",
+  "J’ai peur quand je repense à un événement très négatif que j’ai vécu.",
+  "Il est difficile pour moi de parler à des personnes que je connais peu.",
+  "Quand j’ai peur, je me sens comme si j’étouffais.",
+  "Les gens me disent que je m’inquiète trop.",
+  "Je n’aime pas être loin de ma famille.",
+  "Je m’inquiète qu’il puisse arriver quelque chose de mal à mes parents.",
+  "Je suis gêné avec les gens que je ne connais pas bien.",
+  "Sans le vouloir, j’ai des pensées dans lesquelles je blesse d’autres personnes.",
+  "Je m’inquiète à propos de ce qui va arriver dans le futur.",
+  "Quand j’ai peur, je me sens comme si j’allais vomir.",
+  "Je m’inquiète à propos de mes résultats.",
+  "J’ai peur d’aller à l’école.",
+  "Quand j’ai peur, je me sens étourdi.",
+  "J’ai peur dans les endroits petits et fermés.",
+  "J’ai des pensées que je ne voudrais pas avoir.",
+  "J’ai peur du noir.",
+  "J’ai des pensées qui arrivent sans raison dans ma tête à propos d’un événement négative que j’ai vécu.",
+  "J’ai peur d’un animal dont la plupart des enfants n’ont pas peur.",
+  "Je n’aime pas être dans un hôpital."
+ ],
+ "answers": [
+  [
+   0,
+   "Jamais ou presque jamais"
+  ],
+  [
+   1,
+   "Quelques fois"
+  ],
+  [
+   2,
+   "Souvent"
+  ]
+ ],
+ "answers_note": "Mêmes 3 modalités pour tous les items (colonnes 0/1/2 répétées en tête de chaque page). Article Bouvard : 0 = almost never, 1 = sometimes, 2 = often.",
+ "reverse_items": [],
+ "subscales": [
+  [
+   "Trouble panique",
+   [
+    1,
+    9,
+    14,
+    27,
+    35,
+    42,
+    45
+   ]
+  ],
+  [
+   "Trouble d’anxiété généralisée",
+   [
+    8,
+    17,
+    29,
+    30,
+    36,
+    41,
+    43
+   ]
+  ],
+  [
+   "Anxiété de séparation",
+   [
+    7,
+    10,
+    15,
+    24,
+    32,
+    37,
+    38
+   ]
+  ],
+  [
+   "Phobie sociale",
+   [
+    4,
+    11,
+    34,
+    39
+   ]
+  ],
+  [
+   "Trouble obsessionnel-compulsif",
+   [
+    6,
+    20,
+    22,
+    40,
+    47
+   ]
+  ],
+  [
+   "Trouble de stress-post-traumatique",
+   [
+    21,
+    31,
+    33,
+    49
+   ]
+  ],
+  [
+   "Phobie scolaire",
+   [
+    3,
+    13,
+    25,
+    44
+   ]
+  ],
+  [
+   "Phobie des animaux",
+   [
+    18,
+    28,
+    50
+   ]
+  ],
+  [
+   "Phobie de type situationnel",
+   [
+    2,
+    19,
+    23,
+    46,
+    48
+   ]
+  ],
+  [
+   "Phobie des soins médicaux",
+   [
+    5,
+    12,
+    16,
+    26,
+    51
+   ]
+  ]
+ ],
+ "total_method": "Non indiqué dans le PDF Martin & Gosselin. Article Bouvard 2013 : « SCARED-R total score and subscale scores are derived by summing relevant items. » (somme des 51 items)",
+ "score_range": [
+  0,
+  102
+ ],
+ "thresholds": [],
+ "thresholds_source": "Aucun seuil dans le PDF 51 items ni dans l'article Bouvard 2013 (recherche de seuil/cut-off : rien de tel pour la version française).",
+ "subscale_thresholds": [],
+ "alerts": null,
+ "copyright_text": "© Martin, A. et Gosselin, P. (2011).",
+ "doubts": [
+  "Aucun seuil (total ou sous-échelle) dans les sources : thresholds=[] et subscale_thresholds=[].",
+  "score_range 0-102 déduit (51 x 2), non imprimé.",
+  "Coquilles conservées : item 8 « J’ai peur que les autres ne n’aiment pas. » ; item 49 « un événement négative » ; item 20 « plus d’une fois en ligne pour vérifier » (probable « en ligne » pour « en lieu »/'de suite', à vérifier).",
+  "Le PDF titre « SCARED-R-51 » sans libellé long ; pas de nom/date.",
+  "Le bloc de sous-échelles est introduit par « Symptôme du/de la : » ; libellés tels que « Trouble de stress-post-traumatique », « Anxiété de séparation: ».",
+  "Article Bouvard 2013 : version 62 items et 9 sous-échelles (exclut les 4 items de phobie scolaire) sur une version de 66 items ; diffère du SCARED-R-51 (10 sous-échelles incl. phobie scolaire). Je n'ai pas repris les compositions de l'article, seulement celles du PDF 51 items.",
+  "Les items 1-51 du PDF diffèrent du SCARED (ex. item 3 « maux de tête ou de ventre »). Pas d'alertes cliniques signalées."
+ ]
+}

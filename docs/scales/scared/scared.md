@@ -85,6 +85,12 @@ Consigne enfant complète, 3 libellés, graduations 25 et 31, mention « Seuils 
 
 **Mentaal** (même jeu T7, version parent chez Mentaal) : total 32/82 et 5 sous-scores (7, 9, 5, 8, 3) identiques. **Écart Mentaal** : tranches 0-24 / 25-29 / 30-82, alors que la source donne « ≥ 25 » et « > 30 » ; Melya garde 25-30 / 31-82 (un score de 30 reste dans la tranche ≥ 25).
 
+
+### Repasse « regard neuf » (12/10/2026)
+
+- **Corrigé** : item 26 « …avec des gens que je ne connais pas bien. » — leçon de la version parent archivée (« qu'il ne connaît pas bien », comme l'original anglais et les items 3, 10, 32, 40), au lieu de la correction Melya « que je connais peu ».
+- **Confirmé** : seuil « > 30 » (original anglais de Pittsburgh).
+
 ## 11. Contrat technique
 
 Entrée `scared` (`single-scale`, 0-2, 3 bandes, `thresholdsSource`), scorer `scared.ts` (somme + 5 sous-scores), tests `scared.spec.ts`.

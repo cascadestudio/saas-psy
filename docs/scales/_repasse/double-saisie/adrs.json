@@ -1,0 +1,67 @@
+{
+ "source_used": "Version retenue : ADRS_SFD.pdf (page 1, auto-questionnaire 10 items, textes des items et cotation) ; croisé avec ADRS_BMC-Psychiatry-2007.pdf (Table 2, p.3 ; seuils p.6-7), ADRS_medecin-ado.pdf (p.1), ADRS_SPF-EnCLASS-2024.pdf (méthodo p.4) et ADRS_ORSaG-EnCLASS-2023.pdf (méthodo)",
+ "title": "REPERAGE DE LA DEPRESSION DE L'ADOLESCENT – ADRS (Adolescent Depression Rating Scale), version patient en 10 items",
+ "instructions": "Je coche « vrai » si la phrase correspond à ce que je vis, ou « faux » si elle ne correspond pas.",
+ "reminder": "Médecin-ado : « Les questions doivent bien préciser que l'état demandé doit être constant depuis 14 jours au moins pour être noté « vrai ». Si la réponse est « ça dépend » elle n'est pas noté « vrai » » (absent du questionnaire SFD).",
+ "items": [
+  "Je n'ai pas d'énergie pour l'école, pour le travail",
+  "J'ai du mal à réfléchir",
+  "je sens que la tristesse, le cafard me débordent en ce moment",
+  "Il n'y a rien qui m'intéresse, plus rien ne m'amuse",
+  "Ce que je fais ne sert à rien",
+  "Au fond, quand c'est comme ça, j'ai envie de mourir",
+  "Je ne supporte pas grand‐chose",
+  "Je me sens découragé (e)",
+  "Je dors très mal",
+  "A l'école, au boulot, je n'y arrive pas"
+ ],
+ "answers": [
+  [
+   1,
+   "VRAI"
+  ],
+  [
+   0,
+   "FAUX"
+  ]
+ ],
+ "answers_note": "Vrai/Faux. VRAI = 1, FAUX = 0 (source medecin-ado).",
+ "reverse_items": [],
+ "subscales": [],
+ "total_method": "Le score est déterminé par le nombre de réponses vraies. Le total est compris entre 0 et 10. (medecin-ado)",
+ "score_range": [
+  0,
+  10
+ ],
+ "thresholds": [
+  [
+   0,
+   3,
+   "niveau de risque faible"
+  ],
+  [
+   4,
+   6,
+   "modéré"
+  ],
+  [
+   7,
+   10,
+   "patent/évident de dépression (risque important)"
+  ]
+ ],
+ "thresholds_source": "ORSaG-EnCLASS 2023 : « niveau de risque faible (score de 0 à 3), modéré (score de 4 à 6), patent/évident de dépression (score de 7 à 10). [...] Un score supérieur ou égal à 7 est interprété comme un risque important de dépression. » SPF 2024 : « un score supérieur ou égal à 7 définit ainsi un risque important de dépression ». BMC 2007 : « the cut-off corresponding to the clinical judgment of depression was 3 and the cut-off corresponding to the DSM-IV was 4 ». medecin-ado : « Score = 3 : dépression clinique / Score = 4 : dépression selon le DSM 4 ». SFD : « Le score d'ADRS compris entre (10-10), permet l'identification d'un risque de dépression - Modéré pour une valeur < 4 et <8 - Ou important pour un score > 8 [...] utilisée ici comme une variable qualitative, décrivant un risque de dépression au seuil >4 ».",
+ "alerts": "Item 6 (« Au fond, quand c'est comme ça, j'ai envie de mourir ») : idéation suicidaire ; la source ne le signale pas explicitement comme item d'alerte (SPF 2024 le rapporte seulement comme item individuel).",
+ "copyright_text": null,
+ "doubts": [
+  "SOURCES DIVERGENTES SUR LES SEUILS : SFD (« < 4 et <8 » modéré, « > 8 » important, « (10-10) », risque au seuil >4) incohérent/coquilles ; ORSaG 0-3/4-6/7-10 ; SPF ≥7 ; BMC 3 (clinique) et 4 (DSM-IV) ; medecin-ado idem (« = 3 », « = 4 »). Le mien : retenu ORSaG/SPF (enquêtes) pour les paliers, mais cut-offs cliniques BMC 3/4 distincts ; à arbitrer.",
+  "Textes variables : SFD item 8 « découragé (e) », BMC « découragé » ; SFD item 3 « je » minuscule ; SFD item 4 « plus rien ne m'amuse » vs BMC « plus rien qui m'amuse. » ; SFD item 10 « je n'y arrive pas » vs BMC « j'y arrive pas » ; SPF 2024 item 1 « Je n'ai pas d'énergie pour l'école » (sans « travail ») et « me déborde ».",
+  "Trait d'union insécable ‐ (U+2010) dans « grand‐chose » (SFD) conservé ; BMC « grand-chose ».",
+  "Ordre des items : SFD et BMC identiques ; medecin-ado utilise un ordre différent (tristesse, intérêt, énergie, école, supporte, sommeil, réfléchir, ne sert à rien, découragé, mourir).",
+  "Cadre temporel 14 jours uniquement dans medecin-ado, absent de l'auto-questionnaire SFD.",
+  "Aucune mention de copyright ; références : Revah-Levy, Birmaher, Gasquet, Falissard, BMC Psychiatry 2007, 7:2.",
+  "BMC mentionne aussi la version 11 items clinicien (ADRSc) et 44 items (ADRSip) : non retenues.",
+  "SFD cote 'VRAI/FAUX' sans valeurs numériques ; 1/0 vient de medecin-ado."
+ ],
+ "id": "adrs"
+}

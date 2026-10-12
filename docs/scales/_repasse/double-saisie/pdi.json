@@ -1,0 +1,70 @@
+{
+ "id": "pdi",
+ "source_used": "docs/scales/pdi/PDI_Cn2r.pdf, p.1 (questionnaire) et p.2 (fiche descriptive)",
+ "title": "Inventaire de Détresse Péritraumatique (PDI)",
+ "instructions": "Complétez s’il vous plaît les énoncés qui suivent en entourant le nombre qui correspond au mieux à ce que vous avez ressenti pendant et immédiatement après l’événement critique. Si une proposition ne s’applique pas à votre expérience de l’événement, alors entourer la réponse « Pas du tout vrai ».",
+ "reminder": null,
+ "items": [
+  "Je me sentais totalement incapable de faire quoi que ce soit.",
+  "Je ressentais de la tristesse et du chagrin",
+  "Je me sentais frustré(e) et en colère car je ne pouvais rien faire de plus.",
+  "J’avais peur pour ma propre sécurité",
+  "Je me sentais coupable",
+  "J’avais honte de mes réactions émotionnelles.",
+  "J’étais inquiet pour la sécurité des autres.",
+  "J’avais l’impression de perdre le contrôle de mes émotions.",
+  "J’avais envie d’uriner et d’aller à la selle.",
+  "J’étais horrifié(e) par ce que j’avais vu.",
+  "J’avais des réactions physiques comme des sueurs, des tremblements et des palpitations.",
+  "J’étais sur le point de m’évanouir.",
+  "Je pensais que j’allais mourir."
+ ],
+ "answers": [
+  [
+   0,
+   "Pas du tout vrai"
+  ],
+  [
+   1,
+   "Un peu vrai"
+  ],
+  [
+   2,
+   "Plutôt vrai"
+  ],
+  [
+   3,
+   "Très vrai"
+  ],
+  [
+   4,
+   "Extrêmement vrai"
+  ]
+ ],
+ "answers_note": "Mêmes modalités pour les 13 items (nombres 0 à 4 à entourer). Libellés lus dans l'en-tête de colonnes pivoté, ordre gauche-droite.",
+ "reverse_items": [],
+ "subscales": [],
+ "total_method": "Le score total est la somme des items (fiche descriptive, rubrique Cotation : « Echelle de Likert en 5 points allant de 0 (pas du tout vrai) à 4 (extrêmement vrai) / Le score total est la somme des items »)",
+ "score_range": [
+  0,
+  52
+ ],
+ "thresholds": [
+  [
+   15,
+   52,
+   "Un score total ≥ 15 indique une détresse péritraumatique significative"
+  ]
+ ],
+ "thresholds_source": "p.2, rubrique « Seuil ou indication » : « Un score total ≥ 15 indique une détresse péritraumatique significative »",
+ "alerts": null,
+ "copyright_text": "Brunet et al. (2001) ©2001 ; Traduction française et validation par Jehel et al.(2005) ; Mise en page par le Centre national de ressources et de résilience",
+ "doubts": [
+  "Plage 0-52 déduite (13 items x 4), non imprimée dans la source.",
+  "Ponctuation hétérogène : items 2, 4, 5 sans point final, les autres avec.",
+  "Libellés de réponse en en-tête pivoté : ordre Pas du tout vrai / Un peu vrai / Plutôt vrai / Très vrai / Extrêmement vrai déduit de la mise en page.",
+  "Pas de sous-échelle, pas d'item inversé ni d'alerte clinique dans la source.",
+  "Fiche p.2 : « Âge : Adultes », « Temps de passation : 5 min ». Fenêtre temporelle : « pendant et immédiatement après l’événement critique » (pas de période en jours).",
+  "Texte de la fiche : « La détresse péritraumatique est présente jusqu’à 72h après l’évènement traumatogène »."
+ ]
+}

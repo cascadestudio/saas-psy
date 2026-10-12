@@ -1,0 +1,59 @@
+{
+ "id": "qcs-tag",
+ "source_used": "docs/scales/qcs-tag/QCS-TAG_UQO.pdf, p.1-2 (version française retenue) ; GAD-SBQ_UQO_EN.pdf comparée",
+ "title": "QCS-TAG",
+ "instructions": "Les énoncés suivants présentent des comportements sécurisants rapportés par des personnes ayant un trouble d’anxiété généralisée. Veuillez indiquer jusqu’à quel point chacun de ces comportements est typique de vous au cours du dernier mois en encerclant le chiffre approprié (1 à 5). Il n’y a pas de bonne ou mauvaise réponse.",
+ "reminder": "au cours du dernier mois",
+ "items": [
+  "J’évite fréquemment des situations dont l’issue pourrait être négative.",
+  "À répétition, je refais ou change des choses à des tâches que j’ai déjà terminées.",
+  "Je cherche beaucoup d’information afin de me sentir rassuré(e).",
+  "J’évite de m’engager totalement dans un emploi, un projet ou une relation parce que je ne suis pas certain(e) de comment ça va se passer.",
+  "Je cherche constamment de la rassurance à cause de mes inquiétudes.",
+  "Je vérifie constamment pour m’assurer que j’ai bien fait une tâche ou un projet correctement.",
+  "Je remets souvent une prise de décision ou un comportement à cause de mes inquiétudes.",
+  "J’évite constamment des situations dans lesquelles je me sens incertain(e).",
+  "Je recherche souvent des gens en particulier, des objets ou des routines dans le but de me sentir plus « certain(e) ».",
+  "Je prends beaucoup de temps et d’effort pour me préparer à des situations pour lesquelles un résultat négatif peut arriver"
+ ],
+ "answers": [
+  [
+   1,
+   "Pas du tout typique de moi"
+  ],
+  [
+   2,
+   "Un peu typique de moi"
+  ],
+  [
+   3,
+   "Modérément typique de moi"
+  ],
+  [
+   4,
+   "Plutôt typique de moi"
+  ],
+  [
+   5,
+   "Extrêmement typique de moi"
+  ]
+ ],
+ "answers_note": "Libellés de la page 1 (items 1-5). La page 2 (items 6-10) imprime des libellés différents : 1 « Pas du tout typique de moi », 2 « Peu typique de moi », 3 « Assez typique de moi », 4 « Très typique de moi », 5 « Extrêmement typique de moi ». Chiffres 1 à 5 à encercler.",
+ "reverse_items": [],
+ "subscales": [],
+ "total_method": null,
+ "score_range": null,
+ "thresholds": [],
+ "thresholds_source": null,
+ "alerts": null,
+ "copyright_text": null,
+ "doubts": [
+  "Aucune méthode de cotation, aucun score total, aucun seuil dans les deux PDF (FR et EN). Plage 1-5 par item imprimée ; total 10-50 non imprimé.",
+  "Libellés de réponse DIFFÉRENTS entre p.1 (items 1-5 : Pas du tout / Un peu / Modérément / Plutôt / Extrêmement typique de moi) et p.2 (items 6-10 : Pas du tout / Peu / Assez / Très / Extrêmement typique de moi). Version EN : constante, « Not at all / A little / Moderately / Mostly / Extremely typical of me » sur les deux pages, ce qui correspond à la p.1 FR (« Plutôt » = Mostly).",
+  "Chaque item est suivi d'un exemple « Ex : ... » (non inclus dans items) : 1 « Éviter d’aller manger dans un nouveau restaurant » ; 2 « Reprendre un projet que j’ai déjà fini et y apporter des changements. » ; 3 « Vérifier les rapports de circulation afin de savoir s’il y a eu un accident sur la route qu’emprunte mon conjoint(e). » ; 4 « Refuser de m’impliquer dans un projet ambitieux au travail. » ; 5 « Demander à mon (ma) conjoint(e) de me rassurer à propos de mes inquiétudes face à notre relation. » ; 6 « Vérifier un courriel plusieurs fois pour m’assurer que j’y ai joint le bon document. » ; 7 « Retarder un appel téléphonique à cause de mes inquiétudes. » ; 8 « Éviter des fêtes où des gens que je ne connais pas sont présents. » ; 9 « Me rendre seulement à une fête si un(e) tel(le) ami(e) s’y rend avec moi. » ; 10 « Avant un rendez-vous chez le médecin, passer des heures à faire des recherches sur internet à propos de symptômes. »",
+  "Item 10 sans point final ; item 5 : « de la rassurance ». Item 2 : formulation « refais ou change des choses à des tâches » (telle quelle).",
+  "Écarts FR/EN de nuance : item 1 FR « fréquemment » / EN « markedly » ; item 5 FR « constamment » / EN « repeatedly » ; item 7 FR « souvent » / EN « markedly » ; item 8 FR « constamment » / EN « repeatedly ».",
+  "Sources : version originale Hebert & Dugas (2019) ; version abrégée Marcotte-Beaumier, Hebert & Dugas (2020), validation en échantillon clinique. Pas de mention de copyright explicite ; le PDF contient champs Nom/Date.",
+  "Pas de sous-échelle ni d'alerte."
+ ]
+}
