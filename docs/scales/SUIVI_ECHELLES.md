@@ -11,7 +11,7 @@
 
 ## Tableau de bord
 
-**✅ 12 validées · 🔵 25 implémentées · 🚧 4 en cours · 📋 1 prévues · 🔍 79 à instruire · ⬜ 17 non planifiées · 🚫 29 écartées** (167 échelles, dont 83 ajoutées depuis le catalogue « Apprendre la psychologie » le 10/10/2026)
+**✅ 12 validées · 🔵 26 implémentées · 🚧 4 en cours · 📋 1 prévues · 🔍 78 à instruire · ⬜ 17 non planifiées · 🚫 29 écartées** (167 échelles, dont 83 ajoutées depuis le catalogue « Apprendre la psychologie » le 10/10/2026)
 
 ### Potentiel publiable : où en sont les 167 échelles ? (11/10/2026, fin de mission n°3)
 
@@ -188,7 +188,7 @@ sortie ; les auteurs flaggés seront contactés en une fois, plus tard.
 | ACQ | Questionnaire des cognitions agoraphobiques (Chambless) | 🔍 | ❓ | 🚫 | — | Catalogue | — | [ALP] domaine anxiété |
 | MIA | Inventaire de mobilité pour l'agoraphobie (Chambless) | 🔍 | ❓ | 🚫 | — | Catalogue | — | [ALP] domaine anxiété ; ⛔ **mécanisme (mission 3)** : double cotation « accompagné / seul » (libellés dual-scale figés sur la LSAS), demi-points, items « non applicable », score = moyenne sur ≥ 23 items → évolution Adrien (MEL-356) ; texte trouvé (gmfulevis) |
 | TAPIS | Test des pensées en interaction sociale (Glass) | 🔍 | ❓ | 🚫 | — | Absent | — | [ALP] domaine anxiété |
-| Échelle d'infériorité | Échelle d'infériorité (Yao) | 🔍 | ❓ | 🚫 | — | Absent | — | [ALP] original français |
+| Échelle d'infériorité | Échelle d'infériorité (Yao) | 🔵 | ❓ | 🚫 | 🟢 A | Absent | 3 pts | [ALP] original français ; fiche `edi/edi.md` (id `edi`) ; thèse Yao (Lyon 2, 1999) : formulaire + codage ; 34 items, EDI-soi / EDI-autres, pas de seuil (repères) ; implémentée par Claude (12/10/2026, mission 3), recette staging à confirmer |
 | Sociotropie-autonomie | Échelle de sociotropie-autonomie (Beck) | 🔍 | ❓ | 🚫 | — | Absent | — | [ALP] domaine humeur |
 | PDI | Inventaire de détresse péritraumatique | 🔵 | ✅ | 📥 | 🟢 A | Catalogue | 3 pts | [ALP] fiche `pdi/pdi.md` ; fiche Cn2r (version Jehel 2005), 13 items 0-4, seuil ≥ 15 ; implémentée par Claude (11/10/2026) ; recette Claude staging conforme, recette Clément à faire |
 | CPTS-RI | Index de réaction au stress post-traumatique de l'enfant | 🔍 | ❓ | 🚫 | — | Catalogue | — | [ALP] domaine trauma ; enfant |
