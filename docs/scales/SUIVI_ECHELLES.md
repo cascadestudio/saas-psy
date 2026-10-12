@@ -11,7 +11,7 @@
 
 ## Tableau de bord
 
-**✅ 12 validées · 🔵 24 implémentées · 🚧 4 en cours · 📋 1 prévues · 🔍 80 à instruire · ⬜ 17 non planifiées · 🚫 29 écartées** (167 échelles, dont 83 ajoutées depuis le catalogue « Apprendre la psychologie » le 10/10/2026)
+**✅ 12 validées · 🔵 25 implémentées · 🚧 4 en cours · 📋 1 prévues · 🔍 79 à instruire · ⬜ 17 non planifiées · 🚫 29 écartées** (167 échelles, dont 83 ajoutées depuis le catalogue « Apprendre la psychologie » le 10/10/2026)
 
 ### Potentiel publiable : où en sont les 167 échelles ? (11/10/2026, fin de mission n°3)
 
@@ -170,7 +170,7 @@ sortie ; les auteurs flaggés seront contactés en une fois, plus tard.
 | ECAP | Échelle comportementale d'anxiété et phobie de Véra | 🔍 | ❓ | 🚫 | — | Catalogue | — | [ALP] |
 | DAS | Échelle d'attitudes dysfonctionnelles (Weissman et Beck) | 🔍 | ❓ | 🚫 | — | Catalogue | — | [ALP] |
 | MAAS | Échelle d'attention et de pleine conscience | 🔍 | 🔒 | 🚫 | — | Catalogue | — | [ALP] domaine à définir (pleine conscience) |
-| FFMQ | Questionnaire des cinq facettes de la pleine conscience | 🔍 | ❓ | 🚫 | — | Absent | — | [ALP] domaine à définir (pleine conscience) |
+| FFMQ | Questionnaire des cinq facettes de la pleine conscience | 🔵 | ❓ | 🔗 | 🟡 B | Absent | 3 pts | [ALP] fiche `ffmq/ffmq.md` ; VF Heeren et al. 2011 (PDF UCLouvain, cotation p. 4) trouvée par la recherche complémentaire ; 39 items, 5 facettes, pas de seuil ; **nouveau domaine Pleine conscience** ; implémentée par Claude (12/10/2026, mission 3), recette staging à confirmer |
 | Fusion pensée-forme | Échelle de fusion pensée-forme | 🔍 | 🔒 | 🚫 | — | Absent | — | [ALP] domaine Troubles alimentaires (validé, pas encore créé) |
 | DBAS | Échelle des croyances et attitudes dysfonctionnelles à propos du sommeil | 🔍 | 🔒 | 🚫 | — | Catalogue | — | [ALP] « CAS » chez Mentaal ; **🔒 explicite (mission 3, 11/10/2026)** : distribuée par Mapi Research Trust (ePROVIDE), « commercial users & IT companies: Fees may apply… license agreement » ; VF CIRRIS « © Morin 1993, reproduit avec permission » → MEL-351 |
 | MEQ-SA | Questionnaire de chronotype révisé | 🔍 | 🔒 | 🚫 | — | Absent | — | [ALP] **🔒 (mission 3, 11/10/2026)** : la fiche ATS indique « Freely available for non-profit use » (contact : J. Horne) → usage commercial non couvert, MEL-351 ; de plus VF bloquée : validation Taillard et al. 2004 inaccessible, deux traductions divergentes (CHU Besançon avec erreur à l'item 9 ; Réseau Morphée) |
@@ -373,7 +373,7 @@ Statut de droits de **chacune des 167 échelles** du tableau, établi par recher
 | EDQ | ❓ | « Dépendance affective » (Mentaal) — auteur non identifié | Aucune source identifiée | Non trouvée | À identifier |
 | ERD | ❓ | D. Widlöcher 1981 | Aucune source de licence en ligne | Originale FR, texte non trouvé en accès libre | À identifier ; hétéro-évaluation |
 | ERT | ❓ | J. Cottraux 1995 | Publiée dans un ouvrage de J. Cottraux ; éditeur et licence non établis | Non trouvée en accès libre | À identifier |
-| FFMQ | ❓ | Baer et al. 2006 | Aucune phrase de licence trouvée ; VF hébergée par l'ACBS (contextualscience.org) | VF Heeren et al. 2011 (contextualscience.org) | À identifier |
+| FFMQ | ❓ | Baer et al. 2006 | Aucune phrase de licence trouvée ; VF hébergée par l'ACBS (contextualscience.org) | Heeren et al. 2011 (PDF UCLouvain) | Implémentée (mission 3) |
 | FMPS | ❓ | R. O. Frost 1990 | Droits non établis | VF Rhéaume et al. non accessible | À identifier |
 | FQ | ❓ | Marks & Mathews 1979 | Droits non établis | VF Cottraux 1987, publiée seulement dans Guelfi (1997) | Bloquée (VF) ; à identifier |
 | GAD-SBQ | ✅ | Marcotte-Beaumier, Hébert & Dugas 2020 / laboratoire Dugas (UQO) | « peuvent être téléchargés et utilisés gratuitement » (uqo.ca/anxiete/outils, 11/10/2026) | Originale FR (QCS-TAG, UQO) | Implémentée (mission 3) |

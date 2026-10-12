@@ -50,7 +50,8 @@ export type ScaleDomain =
   | "addictions"
   | "hypersensibilite"
   | "neurodeveloppement"
-  | "burnout";
+  | "burnout"
+  | "pleine-conscience";
 
 export interface Scale {
   id: string;
@@ -3127,6 +3128,85 @@ export const scales: Scale[] = [
       maxScore: 150,
       method:
         "Additionnez les 30 items (1 à 5) : le score varie de 30 à 150 ; plus il est élevé, plus les pensées automatiques négatives sont fréquentes. Pas de seuil clinique ; repères de la version française : sujets déprimés 95,7 (écart-type 23), sujets contrôles 46,24 (écart-type 12).",
+    },
+  },
+  {
+    id: "ffmq",
+    acronym: "FFMQ",
+    label: "Questionnaire des cinq facettes de la pleine conscience",
+    patientIntroSubtitle: null,
+    domain: "pleine-conscience",
+    formType: "single-scale",
+    title: "FFMQ - Questionnaire des cinq facettes de la pleine conscience",
+    description:
+      "Un questionnaire de 39 items évaluant cinq facettes de la pleine conscience (observation, description, action consciente, non-réactivité, non-jugement)",
+    category: "Pleine conscience",
+    estimatedTime: "10 minutes",
+    longDescription:
+      "Le FFMQ (Five Facets Mindfulness Questionnaire, Baer et al., 2006-2008) mesure la tendance à la pleine conscience au quotidien selon cinq facettes : observation, description de l'expérience, action en pleine conscience, non-réactivité aux évènements privés et non-jugement. 39 items cotés de 1 (jamais ou très rarement vrai) à 5 (très souvent ou toujours vrai), dont 19 inversés. Le score global (39 à 195) additionne les cinq facettes ; plus il est élevé, plus la pleine conscience est marquée. Adaptation et validation francophone : Heeren et al. (2011), Université catholique de Louvain.",
+    instructions:
+      "Evaluez chacune des propositions ci-dessous en utilisant l'échelle proposée. Choisissez la réponse qui correspond le mieux à ce qui est généralement vrai pour vous.",
+    copyrightAttribution:
+      "FFMQ — version originale : Baer et al. (2008). Adaptation et validation francophone : Heeren et al. (2011), Université catholique de Louvain.",
+    reverseItems: [3, 5, 8, 10, 12, 13, 14, 16, 17, 18, 22, 23, 25, 28, 30, 34, 35, 38, 39],
+    higherIsBetter: true,
+    questions: [
+      "Quand je marche, je prends délibérément conscience des sensations de mon corps en mouvement.",
+      "Je suis doué(e) pour trouver les mots qui décrivent mes sentiments.",
+      "Je me critique lorsque j'ai des émotions irrationnelles ou inappropriées.",
+      "Je perçois mes émotions et sentiments sans devoir y réagir.",
+      "Quand je fais quelque chose, mon esprit s'égare et je suis facilement distrait(e).",
+      "Lorsque je prends une douche ou un bain, je reste attentif(ve) aux sensations de l'eau sur mon corps.",
+      "Je peux facilement verbaliser mes croyances, opinions et attentes.",
+      "Je ne fais pas attention à ce que je fais car je suis dans la lune, je me tracasse ou suis de quelconque façon distrait(e).",
+      "J'observe mes sentiments sans me laisser emporter par eux.",
+      "Je me dis que je ne devrais pas ressentir mes émotions comme je les ressens.",
+      "Je remarque comment la nourriture et les boissons influencent mes pensées, mes sensations corporelles et mes émotions.",
+      "Il m'est difficile de trouver les mots qui décrivent ce à quoi je pense.",
+      "Je suis facilement distrait(e)",
+      "Je crois que certaines de mes pensées sont anormales ou mauvaises et que je ne devrais pas penser de cette manière.",
+      "Je prête attention aux sensations, comme le vent dans mes cheveux ou le soleil sur mon visage.",
+      "J'éprouve des difficultés à trouver les mots justes pour exprimer la manière dont je ressens les choses.",
+      "Je pose des jugements quant à savoir si mes pensées sont bonnes ou mauvaises.",
+      "J'ai des difficultés à rester centré(e) sur ce qui se passe dans le moment présent.",
+      "Lorsque j'ai des pensées ou des images pénibles, je prends du recul et suis conscient(e) de la pensée ou image, sans me laisser envahir par elle.",
+      "Je fais attention aux sons, comme le tintement des cloches, le sifflement des oiseaux ou le passage des voitures.",
+      "Dans les situations difficiles, je suis capable de faire une pause sans réagir immédiatement.",
+      "Lorsque j'éprouve une sensation dans mon corps, il m'est difficile de la décrire car je n'arrive pas à trouver les mots justes.",
+      "On dirait que je fonctionne en mode \"automatique\" sans prendre vraiment conscience de ce que je fais.",
+      "Lorsque j'ai des pensées ou images pénibles, je me sens calme peu de temps après.",
+      "Je me dis que je ne devrais pas penser de la manière dont je pense.",
+      "Je remarque les odeurs et les arômes des choses.",
+      "Même lorsque je me sens terriblement bouleversé(e), je parviens à trouver une manière de le transposer en mots.",
+      "Je me précipite dans des activités sans y être réellement attentif(ve).",
+      "Lorsque j'ai des pensées ou images pénibles, je suis capable de simplement les remarquer sans y réagir.",
+      "Je pense que certaines de mes émotions sont mauvaises ou inappropriées et que je ne devrais pas les ressentir.",
+      "Je remarque les détails visuels dans l'art ou la nature, comme les couleurs, les formes, les textures ou les patterns d'ombres et de lumières.",
+      "Ma tendance naturelle est de traduire mes expériences en mots.",
+      "Lorsque j'ai des pensées ou images pénibles, je les remarque et les laisse passer.",
+      "Je réalise mes travaux ou les tâches automatiquement sans être conscient(e) de ce que je fais.",
+      "Lorsque j'ai des pensées ou images pénibles, je me juge bon ou mauvais, en fonction de ce que suggère cette pensée/image.",
+      "Je prête attention à la manière dont mes émotions affectent mes pensées et mon comportement.",
+      "Je peux habituellement décrire la manière dont je me sens au moment présent avec des détails considérables.",
+      "Je me retrouve en train de faire des choses sans y prêter attention.",
+      "Je me désapprouve lorsque j'ai des idées irrationnelles.",
+    ],
+    answerScales: {
+      intensity: [
+        { value: 1, label: "Jamais ou très rarement vrai" },
+        { value: 2, label: "Rarement vrai" },
+        { value: 3, label: "Parfois vrai" },
+        { value: 4, label: "Souvent vrai" },
+        { value: 5, label: "Très souvent ou toujours vrai" },
+      ],
+    },
+    scoring: {
+      ranges: [
+        { min: 39, max: 195, interpretation: "Pas de seuil clinique fourni par les auteurs." },
+      ],
+      maxScore: 195,
+      method:
+        "Inversez les items 3, 5, 8, 10, 12, 13, 14, 16, 17, 18, 22, 23, 25, 28, 30, 34, 35, 38 et 39 (1↔5, 2↔4). Chaque facette est la somme de ses items : observation (1, 6, 11, 15, 20, 26, 31, 36), description de l'expérience (2, 7, 12, 16, 22, 27, 32, 37), action en pleine conscience (5, 8, 13, 18, 23, 28, 34, 38), non-réactivité aux évènements privés (4, 9, 19, 21, 24, 29, 33), non-jugement (3, 10, 14, 17, 25, 30, 35, 39). Le score global « Mindfulness » additionne les cinq facettes (39 à 195). Pas de seuil clinique publié.",
     },
   },
 ];
