@@ -66,7 +66,7 @@ Aucune.
 | T3 tout à 3 | 117 ; 24/24/24/21/24 | conforme |
 | T4 1-5 en boucle (parcours patient) | 99 ; 16/23/21/24/15 | conforme |
 
-Écran d'intro (consigne verbatim adaptée), 5 libellés, bande unique « Pas de seuil… » : conformes. **Mentaal** : FFMQ absent de leur catalogue disponible (non vérifié en passation).
+Écran d'intro (consigne verbatim adaptée), 5 libellés, bande unique « Pas de seuil… » : conformes. **Mentaal** : non vérifié (pas de contre-passation faite).
 
 ## 11-12. Contrat technique et historique
 

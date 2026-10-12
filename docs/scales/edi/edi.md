@@ -65,7 +65,7 @@ Aucune.
 | T3 tout à 3 | 102 ; 51/51 | conforme |
 | T4 1-5 en boucle (parcours patient) | 100 ; 52/48 | conforme |
 
-Écran d'intro « EDI - Échelle d'infériorité » + consigne, 5 libellés, bande unique « Pas de seuil… » : conformes. **Mentaal** : absent de leur catalogue.
+Écran d'intro « EDI - Échelle d'infériorité » + consigne, 5 libellés, bande unique « Pas de seuil… » : conformes. **Mentaal** : non vérifié (pas de contre-passation faite).
 
 ## 11-12. Contrat technique et historique
 
