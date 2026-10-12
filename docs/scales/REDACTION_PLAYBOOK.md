@@ -456,9 +456,32 @@ arbitrer avec lui — ça ne passe pas avant les fiches.
 
 ---
 
+## 10 bis. Règles communes de portage — matrice de cohérence (repasse du 12/10/2026)
+
+> Établie par Claude lors de la repasse « regard neuf » de toutes les échelles implémentées (36 au 12/10/2026). Chaque ligne : la règle retenue, son état dans le catalogue, et ce qui reste à harmoniser. Les écarts sur une échelle **✅ validée** ne sont pas corrigés d'office : ils sont listés « à revalider » pour Clément.
+
+| Sujet | Règle commune | État au 12/10/2026 | À harmoniser |
+| --- | --- | --- | --- |
+| **Consigne papier → écran** | « cochez / encerclez / faites une croix » → « choisissez / sélectionnez la réponse » (écart de type 1, consigné en §10) | Appliqué sur toutes les échelles récentes ; formulations variables (« en choisissant », « en sélectionnant ») | Rien : la variation suit le texte de chaque source |
+| **Majuscules accentuées** | **Verbatim** : on garde « A » si la source écrit « A », « À » si elle écrit « À » (pas de modernisation typographique) | ADRS « À » (source Santé publique France) ; ASRS « A quelle fréquence » et BAT « A la fin » (sources NYU / BAT) | Rien (cohérent avec la règle). Si Clément préfère moderniser partout, c'est une décision globale, pas échelle par échelle |
+| **Apostrophes** | Apostrophe **droite** (') dans les textes de l'app | Toutes les échelles ; QPA-30 harmonisée le 12/10/2026 | — |
+| **Écriture inclusive** | « (e) » ajouté seulement quand la source l'emploie ailleurs dans la même échelle, ou validé par Clément (CUDIT-R « défoncé(e) », PSI-II « inquiété(e) ») ; sinon verbatim | Conforme | Rien |
+| **Rappel au-dessus des items** (`persistentInstructions`) | Seulement un **extrait verbatim** de la source (cadre temporel ou amorce) ; jamais une question reformulée | Conforme après correction PCL-S (11/10/2026) ; ponctuation finale variable selon la source (« : », « … », « . ») | Rien |
+| **Sous-titre patient** (`patientIntroSubtitle`) | Absent = libellé ; `null` = acronyme seul ; texte = titre exact de la source | 3 usages coexistent, chacun justifié en §10 | Rien |
+| **Échelle sans seuil** | Une seule bande « Pas de seuil clinique fourni par les auteurs. » | Mission 2-3 : conforme (PSI-II, QAP, QEC, QCS-TAG, SCARED-R, DERS, QPA-30). **Anciennes ✅** : RSES, ÉII, QIA ont un libellé descriptif (« Plus le score est élevé, plus… ») | **À revalider (Clément)** : aligner RSES, ÉII et QIA sur le libellé commun, ou garder leur libellé (validé) |
+| **Bornes chevauchantes dans la source** | Intervalles semi-ouverts ; borne commune rattachée à la bande supérieure ; consigné en §10 (confiance basse) | CST (11/10/2026) | Rien |
+| **Source des seuils** (`thresholdsSource`) | Toujours renseignée quand il y a un seuil | Renseignée sur toutes les échelles depuis la mission 2 ; **absente sur les ✅ anciennes** (LSAS, PHQ-9, GAD-7, PCL-5, Y-BOCS, AUDIT…) où la source est dans la fiche | Facultatif : reporter la source en une ligne (sans changer les seuils) |
+| **Durée estimée** | Reprise de la source si elle en donne une ; sinon estimation Melya signalée en §1 | Majorité = estimation Melya | Rien (signalé en §1) |
+| **Alertes cliniques** | Aujourd'hui : alerte « idéation suicidaire » sur PHQ-9 item 9 (usage clinique établi) et ADRS item 6 (**choix Melya** sur le modèle du PHQ-9, aucune règle d'alerte dans les sources) | PHQ-9, ADRS : alerte ; QPA-30 item 19 (« Je souhaite disparaître »), PCL-5 / PCL-S, CRIES-13 : pas d'alerte | **À décider (Clément)** : une politique commune (alerte seulement si une source la prévoit, ou alerte Melya sur tout item d'idéation suicidaire explicite, documentée comme choix produit) |
+| **Colonne PDF** (📥 / 🔗 / 🚫) | 📥 si licence de rediffusion ; 🔗 si PDF public chez le diffuseur ; 🚫 sinon | Renseignée pour toutes les échelles | Rien |
+| **Coquilles de la source** | Corrigées seulement si indiscutables (type 2), avec la leçon d'une source secondaire quand elle existe | Conforme (double saisie à l'aveugle du 12/10/2026 : tous les écarts de texte retrouvés sont consignés en §10) | Rien |
+
+---
+
 ## 11. Historique du playbook
 
 | Date | Auteur | Modification |
 | --- | --- | --- |
 | 28/08/2026 | Clément (avec Claude) | Création. Formalise le passage d'un rédacteur unique (Clément) à trois rédacteurs (Clément relecteur, James hors repo, Adrien en repo) : pipeline E0→E6, règles d'or, instruction des droits, dossier de sources, 4 déviations autorisées, points STOP, grille de relecture, lots initiaux. |
 | 24/09/2026 | Clément (avec Claude) | Implémentation partagée : Clément implémente les échelles en réutilisation pure, Adrien le net-new (`RECETTE_PLAYBOOK.md` §0). Statuts reportés aussi dans Linear. |
+| 12/10/2026 | Claude (mission n°3) | Ajout du §10 bis : matrice de cohérence des règles de portage, issue de la repasse « regard neuf » (double saisie à l'aveugle + relecture méthodologique). |
