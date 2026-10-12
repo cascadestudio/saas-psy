@@ -87,3 +87,14 @@ Entrée `scared-r`, scorer `scared-r.ts` (somme + 10 sous-scores), tests `scared
 - [ ] **Arbitrage à valider** : porter la version québécoise 51 items (Martin & Gosselin) sous la ligne SCARED-R.
 - [ ] **Relecture** : item 20 (« en ligne »).
 - [ ] **Action documentaire (optionnelle)** : Bouvard, *Échelles et questionnaires d'évaluation chez l'enfant et l'adolescent* (2e éd. 2025) pour le SCARED-R 66 items validé en France, si on préfère la version française de France.
+
+#### Ajouts de la repasse « regard neuf » (12/10/2026)
+
+- [ ] **Recette** : Recette manuelle sur staging (parcours patient + page résultat), puis passage en ✅ dans Linear et SUIVI.
+- [ ] **Arbitrage à valider** : Arbitrage à valider : porter la version québécoise 51 items (Martin & Gosselin) sous la ligne SCARED-R.
+- [ ] **Relecture** : Relecture : item 20 (« en ligne »).
+- [ ] **Action documentaire** : Action documentaire (optionnelle) : Bouvard, *Échelles et questionnaires d'évaluation chez l'enfant et l'adolescent* (2e éd. 2025) pour le SCARED-R 66 items validé en France, si on préfère la version française de France.
+- [ ] **Arbitrage à valider** : Libellé « Grille d'évaluation des troubles anxieux chez l'enfant (SCARED-R, 51 items) » — la fiche le reconnaît : il vient de `SUIVI_ECHELLES.md`, et le PDF ne porte que « SCARED-R-51 ». C'est donc un titre Melya sans source, repris dans `label` et `title`. Le patient ne voit que l'acronyme (`patientIntroSubtitle: null`), mais le libellé reste visible dans le catalogue et sur les rapports. Il n'est consigné nulle part en §10. — Option recommandée : un libellé construit à partir des seules sources, par ex. « SCARED-R-51 — Screen for Child Anxiety Related Emotional Disorders – Revised (version française de Martin et Gosselin, 51 items) », ou au minimum consigner le libellé en §10 comme choix Melya, avec une confiance basse. — confiance : basse en l'état.
+- [ ] **Arbitrage à valider** : Identité et validation de l'instrument (§10, confiance moyenne) — le SCARED-R de Muris compte 66 items (Bouvard et al. 2013, archivé : « It contains 66 items »). Le SCARED-R-51 de Martin & Gosselin est une version abrégée ou adaptée, sans publication de validation retrouvée : aucune référence dans le PDF, et la recherche « SCARED-R 51 items Martin Gosselin 2011 » ne renvoie que le PDF de Pittsburgh et l'article Bouvard 2013 (https://doaj.org/article/96292a43eb1c4366bcfe117d17947e14). Le §1 et `longDescription` présentent l'outil comme « version française … du SCARED-R (Muris et al.) » sans dire qu'il est **raccourci et non validé**. — Ajouter dans `longDescription` (texte praticien) : « version en 51 items dont la validation n'a pas été retrouvée ; le SCARED-R original compte 66 items » ; garder la confiance moyenne. L'action documentaire « Bouvard 2025 » (66 items validés en France) reste la vraie alternative de fond.
+
+Suivi interactif : [dossier de recette](https://claude.ai/artifact/RLrDZwNayBy3gQCFcMDwPB).

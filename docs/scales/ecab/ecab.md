@@ -135,3 +135,13 @@ Entrée `ecab` (`single-scale`, Vrai 1 / Faux 0, `reverseItems: [10]`), scorer `
 - [ ] **Arbitrage à valider** : champ « Nom du médicament concerné » non repris.
 - [ ] **Relecture** : consigne adaptée (« choisissez » au lieu de « cochez la case »).
 - [ ] **Action documentaire (optionnelle)** : article Pélissolo & Naja 1996 (Synapse) pour recouper les items.
+
+#### Ajouts de la repasse « regard neuf » (12/10/2026)
+
+- [ ] **Recette** : Recette manuelle sur staging (parcours patient + page résultat), puis passage en ✅ dans Linear et SUIVI.
+- [ ] **Arbitrage à valider** : Arbitrage à valider : champ « Nom du médicament concerné » non repris.
+- [ ] **Relecture** : Relecture : consigne adaptée (« choisissez » au lieu de « cochez la case »).
+- [ ] **Action documentaire** : Action documentaire (optionnelle) : article Pélissolo & Naja 1996 (Synapse) pour recouper les items.
+- [ ] **Arbitrage à valider** : Champ « Nom du médicament concerné » non repris (§10, confiance moyenne) — source : « Nom du médicament concerné : …… » juste avant les items, qui disent tous « ce médicament ». Sans ce champ, « ce médicament » n'a pour référent que la consigne (« les médicaments tranquillisants et/ou somnifères que vous prenez », au pluriel) : un patient sous deux molécules (ex. BZD anxiolytique + hypnotique Z) peut répondre pour l'une ou l'autre, et le praticien ne saura pas laquelle. L'arbitrage est défendable techniquement, mais la perte n'est pas neutre. — Option recommandée : (a) court terme, garder l'arbitrage mais le signaler au praticien dans `longDescription`/notice (« la version papier comporte un champ "Nom du médicament concerné" : précisez-le au patient avant l'envoi »), texte praticien et non patient, donc pas un ajout interdit ; (b) à terme, un champ texte libre non coté (le même mécanisme servirait à d'autres échelles). — confiance : moyenne (justifiée).
+
+Suivi interactif : [dossier de recette](https://claude.ai/artifact/RLrDZwNayBy3gQCFcMDwPB).

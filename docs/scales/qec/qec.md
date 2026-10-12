@@ -243,3 +243,9 @@ Aucun écart de cotation.
 | --- | --- | --- |
 | 11/10/2026 | Claude (lot autonome) | Création de la fiche et implémentation : formulaire UQO en autorité unique, 25 items verbatim, total 25-125 et 5 sous-scores, sans seuil. Tests 5/5. |
 | 11/10/2026 | Claude (lot autonome) | Recette staging (min, max, R1) conforme ; comparaison Mentaal (75 et sous-scores identiques). |
+
+## 13. Reste à faire avant prod
+
+<!-- Généré le 12/10/2026 depuis la repasse « regard neuf » ; suivi interactif : https://claude.ai/artifact/RLrDZwNayBy3gQCFcMDwPB -->
+
+- [ ] **Recette** : Recette manuelle sur staging (parcours patient + page résultat), puis passage en ✅ dans Linear et SUIVI.

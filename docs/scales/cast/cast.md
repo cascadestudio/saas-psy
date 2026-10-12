@@ -240,3 +240,10 @@ Consigne et rappel « Au cours des 12 derniers mois… », 5 libellés, graduati
 | --- | --- | --- |
 | 11/10/2026 | Claude (lot autonome) | Création de la fiche et implémentation : Note OFDT 2013-02 en autorité unique (version définitive 12 mois, 0-4), seuils < 3 / 3-6 / ≥ 7 ; version HAS oui/non documentée et écartée. Tests 7/7. |
 | 11/10/2026 | Claude (lot autonome) | Recette staging conforme (0, 4, 24). |
+
+## 13. Reste à faire avant prod
+
+<!-- Généré le 12/10/2026 depuis la repasse « regard neuf » ; suivi interactif : https://claude.ai/artifact/RLrDZwNayBy3gQCFcMDwPB -->
+
+- [ ] **Recette** : Recette manuelle sur staging (parcours patient + page résultat), puis passage en ✅ dans Linear et SUIVI.
+- [ ] **Arbitrage à valider** : Question filtre retirée et interprétation d'un score de 0 — La source précise : « Le score est calculé parmi ceux qui ont […] précisé avoir consommé du cannabis au cours de l'année avant de répondre au test ». Un non-consommateur qui reçoit le CAST obtient 0 et voit « Usage sans risque », ce qui lui attribue un « usage » inexistant. L'impact clinique est faible, mais le libellé est faux pour ce cas. — Option recommandée, sans mécanisme nouveau : écrire dans `scoring.method` (texte praticien) « Le score n'est interprétable que chez une personne ayant consommé du cannabis au cours des 12 derniers mois (question filtre de l'OFDT, non reprise) ». Garder l'arbitrage. — Confiance « moyenne » inchangée.

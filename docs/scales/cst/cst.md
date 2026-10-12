@@ -104,3 +104,14 @@ Entrée `cst` (1-6, 4 bandes), scorer `cst.ts` (somme), tests `cst.spec.ts`. 11/
 - [ ] **Arbitrage à valider** : item 10 (« cholestérol » ou « tension artérielle ») et 1re modalité (« Pas du tout » ou « Non pas du tout ») — à trancher avec le livre.
 - [ ] **Décision produit** : ajouter l'« Échelle brève d'évaluation des stresseurs » (8 items, Cungi 1997) qui, avec ces 11 items, forme la version à 19 items de Mentaal (texte en ligne, pas de seuil sourcé).
 - [ ] **Vigilance** : source non clinique (organisme de formation).
+
+#### Ajouts de la repasse « regard neuf » (12/10/2026)
+
+- [ ] **Recette** : Recette manuelle sur staging (parcours patient + page résultat), puis passage en ✅ dans Linear et SUIVI.
+- [ ] **Action documentaire** : Action documentaire : Cungi, *Savoir gérer son stress* (Retz) — photographier l'échelle (consigne, 11 items, cotation, bornes) ; vérifier s'il s'agit de la version courte et repérer la version à 19 items (Mentaal).
+- [ ] **Arbitrage à valider** : Arbitrage à valider : bornes des bandes (chevauchement présent dans les deux sources).
+- [ ] **Arbitrage à valider** : Arbitrage à valider : item 10 (« cholestérol » ou « tension artérielle ») et 1re modalité (« Pas du tout » ou « Non pas du tout ») — à trancher avec le livre.
+- [ ] **Arbitrage à valider** : Décision produit : ajouter l'« Échelle brève d'évaluation des stresseurs » (8 items, Cungi 1997) qui, avec ces 11 items, forme la version à 19 items de Mentaal (texte en ligne, pas de seuil sourcé).
+- [ ] **Vigilance** : Vigilance : source non clinique (organisme de formation).
+
+Suivi interactif : [dossier de recette](https://claude.ai/artifact/RLrDZwNayBy3gQCFcMDwPB).

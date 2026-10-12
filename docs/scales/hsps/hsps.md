@@ -153,3 +153,11 @@ Vérifiés dans le script de recette (40/40 PASS, 16/07/2026).
 |------|--------|--------------|
 | 16/07/2026 | Adrien (avec Claude) | Création : entrée `Scale` (single-scale OUI/NON), scorer somme 0-23 (seuil 12), icône placeholder, spec. Version = auto-test du livre (23 items), décision explicite d'Adrien malgré droits de traduction fragiles (documenté §3). |
 | 29/09/2026 | Clément (avec Claude) | §10 réécrite en « Choix et arbitrages méthodologiques » : fin de la validation clinique externe, les arbitrages sont tranchés par l'équipe. Points ouverts reformulés en décisions d'équipe, avec la règle « on n'invente rien » (écarts à la source repris de la source secondaire). |
+
+## 13. Reste à faire avant prod
+
+<!-- Généré le 12/10/2026 depuis la repasse « regard neuf » ; suivi interactif : https://claude.ai/artifact/RLrDZwNayBy3gQCFcMDwPB -->
+
+- [ ] **Recette** : Recette manuelle sur staging (parcours patient + page résultat), puis passage en ✅ dans Linear et SUIVI.
+- [ ] **Arbitrage à valider** : §10 ne liste que le point final de l'item 13 ; l'item 20 (« …les subtiles œuvres d'art. ») perd aussi son point final dans l'app. Écart typographique licite, à consigner (item 13 et 20) — confiance haute.
+- [ ] **Arbitrage à valider** : Le PDF archivé est une feuille du site tiers « psypersensible.com » qui cite le livre en note ; ni le livre ni la 2e édition ne sont archivés. Le §3/§10 présentent la traduction des Éditions de l'Homme comme source primaire : indiquer que le texte est vérifié sur une reproduction web (la fidélité au livre n'est pas prouvée) — confiance moyenne.

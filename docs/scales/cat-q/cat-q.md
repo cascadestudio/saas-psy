@@ -98,3 +98,13 @@ Entrée `cat-q` (1-7, `reverseItems`), scorer `cat-q.ts` (inversion + somme + 3 
 - [ ] **Action documentaire** : article de validation française Bureau et al. 2024 (JADD) — comparer les items et décider de basculer sur la version validée.
 - [ ] **Arbitrage à valider** : seuil de 100 (source associative, pas les auteurs) — le garder, ou bande unique sans seuil.
 - [ ] **Relecture** : libellés de réponse du formulaire vs ceux du texte de présentation.
+
+#### Ajouts de la repasse « regard neuf » (12/10/2026)
+
+- [ ] **Recette** : Recette manuelle sur staging (parcours patient + page résultat), puis passage en ✅ dans Linear et SUIVI.
+- [ ] **Action documentaire** : Action documentaire : article de validation française Bureau et al. 2024 (JADD) — comparer les items et décider de basculer sur la version validée.
+- [ ] **Relecture** : Relecture : libellés de réponse du formulaire vs ceux du texte de présentation.
+- [ ] **Arbitrage à valider** : Choix de la traduction (§10, confiance moyenne ; §13 « action documentaire ») — la validation française existe : Bureau et al. (2024), *J Autism Dev Disord*, « French validation of the Camouflaging Autistic Traits Questionnaire (CAT-Q) », 1 227 participants (744 autistes), structure à 3 facteurs confirmée (résumé : https://behavioristbookclub.com/aba-research/assessment-research/french-validation-of-the-camouflaging-autistic-traits-questionnaire--c/). La page Embrace Autism ne la mentionne pas, et rien n'indique que la traduction Bessette soit celle validée. — Ajouter l'URL en §2 ; chercher un accès au texte (preprint, auteur R. Bureau : https://independent.academia.edu/RavenBureau) pour comparer les items avant la beta ; en attendant, garder Bessette avec la mention « traduction non validée » (déjà dans `longDescription`). Confiance moyenne justifiée.
+- [ ] **Arbitrage à valider** : Statut ✅ (§3) — la phrase CC BY 4.0 de la page (« Cet **article** est distribué sous les termes de la licence … CC BY 4.0 … indiquez si des modifications ont été apportées ») reproduit la notice de l'article original de Hull et al. (Springer). Elle couvre l'instrument anglais. La page ne donne **aucune licence propre pour la traduction** de M. B. Bessette (vérifié sur la page en ligne : seul le crédit « Traduction de Marika B. Bessette »). Statut exact : ✅ original / ❓ traduction (go par la règle pragmatique). Par ailleurs, CC BY exige le lien vers la licence et l'indication des modifications, absents de `copyrightAttribution`. — Mettre la mention à jour : « … licence CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/). Traduction française : Marika B. Bessette (Embrace Autism). » — confiance haute.
+
+Suivi interactif : [dossier de recette](https://claude.ai/artifact/RLrDZwNayBy3gQCFcMDwPB).

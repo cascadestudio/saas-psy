@@ -321,3 +321,10 @@ scoreAudit(scale, responses) → {
 | 29/09/2026 | Clément (avec Claude) | Infographie de résultat simplifiée : 3 tranches OFDT (0-5 / 6-12 / 13-40) au lieu de 4 ; la tranche d'un point (score 6, « chez la femme ») est supprimée. Note en petit sous la jauge : seuils OFDT complets (6 femme, 7 homme, dépendance > 12). |
 | 29/09/2026 | Clément (avec Claude) | Infographie : le repère du mésusage affiche les deux seuils OFDT (« 6 F / 7 H ») ; note des seuils déplacée sous le libellé d'interprétation (elle le chevauchait). |
 | 29/09/2026 | Clément | Recette manuelle passée : échelle validée (✅). |
+
+## 13. Reste à faire avant prod
+
+<!-- Généré le 12/10/2026 depuis la repasse « regard neuf » ; suivi interactif : https://claude.ai/artifact/RLrDZwNayBy3gQCFcMDwPB -->
+
+- [ ] **À revalider (✅)** : Bande unique 6-12 « Évocateur d'un mésusage » appliquée aux deux sexes : un homme à 6 est étiqueté mésusage alors que l'OFDT/SFA fixe ≥ 7 chez l'homme (faux positif possible). Choix consigné et compensé par `thresholdLabel` « 6 F / 7 H » et la note ; acceptable, mais à valider humainement (alternative : demander le sexe/la référence côté praticien) — confiance moyenne.
+- [ ] **À revalider (✅)** : « Un verre standard = 10 g d'alcool pur. » est un ajout absent de l'OMS FR et de l'OFDT, repris de Michaud & Lécallier 2003 (vérifié dans le PDF archivé : « Un verre standard = 10 g d'alcool pur. »). C'est une 4e catégorie d'écart (ajout sourcé) non prévue par la règle projet à trois types ; consignée en §10, sourcée, recommandation OMS — acceptable si l'équipe l'admet explicitement — confiance moyenne.

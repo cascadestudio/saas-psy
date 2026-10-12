@@ -316,3 +316,10 @@ Entrée : tableau de 9 nombres (un par item scoré, dans l'ordre des items 1 à 
 | 25/04/2026 | Clément (avec Claude) | Ajout des trois champs structurés "Source liée" pour traçabilité directe : subscores (sans objet), seuils (Kroenke 2001 avec URL PubMed Central), alerte item 9 (choix Melya documenté avec justification du seuil ≥ 1). |
 | 24/04/2026 | Clément (avec Claude) | Création initiale du spec selon le template canonique Melya. Alignement des libellés d'items sur la version officielle Pfizer "French for France" (ajout virgule item 7). Clarification du statut de l'item d'impact fonctionnel (non scoré, à valider avec Renata). Documentation de l'exception de sourcing (autorité unique Pfizer). |
 | 29/09/2026 | Clément (avec Claude) | §10 réécrite en « Choix et arbitrages méthodologiques » : fin de la validation clinique externe, les arbitrages sont tranchés par l'équipe. Points ouverts reformulés en décisions d'équipe, avec la règle « on n'invente rien » (écarts à la source repris de la source secondaire). |
+
+## 13. Reste à faire avant prod
+
+<!-- Généré le 12/10/2026 depuis la repasse « regard neuf » ; suivi interactif : https://claude.ai/artifact/RLrDZwNayBy3gQCFcMDwPB -->
+
+- [ ] **À revalider (✅)** : §10 « Aucun écart » alors que la relance fonctionnelle de l'app dit « Si vous avez *indiqué* au moins un des problèmes » ; la source dit « Si vous avez *coché* ». La consigne « (Veuillez cocher (✔) votre réponse) » est aussi omise. Ce sont des adaptations papier→écran licites mais non consignées en §10 — consigner (confiance haute).
+- [ ] **À revalider (✅)** : Libellés de bande « Dépression minimale/légère/modérée/modérément sévère/sévère » : absents du PDF Pfizer (qui ne donne aucune bande) ; bornes 5/10/15/20 conformes à Kroenke 2001. Déjà en « questions ouvertes » §10 ; sourcer ou assumer comme libellé Melya (confiance moyenne).

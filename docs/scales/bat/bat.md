@@ -125,3 +125,13 @@ Entrées `bat-w` et `bat-g` (`single-scale`, 1-5, total sur les items primaires 
 - [ ] **Arbitrage à valider** : seuils flamands faute de normes françaises.
 - [ ] **Design** : teinte sable du domaine Burn-out (MEL-356).
 - [ ] **Évolution (Adrien)** : interprétation par sous-échelle (seuils orange/rouge par dimension), même besoin que DASS-21 et SCARED.
+
+#### Ajouts de la repasse « regard neuf » (12/10/2026)
+
+- [ ] **Recette** : Recette manuelle sur staging (parcours patient + page résultat), puis passage en ✅ dans Linear et SUIVI.
+- [ ] **Arbitrage à valider** : Arbitrage à valider : affichage de la somme (avec la moyenne expliquée) plutôt que de la moyenne du manuel.
+- [ ] **Arbitrage à valider** : Arbitrage à valider : seuils flamands faute de normes françaises.
+- [ ] **Évolution (Adrien)** : Design : teinte sable du domaine Burn-out (MEL-356).
+- [ ] **Évolution (Adrien)** : Évolution (Adrien) : interprétation par sous-échelle (seuils orange/rouge par dimension), même besoin que DASS-21 et SCARED.
+
+Suivi interactif : [dossier de recette](https://claude.ai/artifact/RLrDZwNayBy3gQCFcMDwPB).

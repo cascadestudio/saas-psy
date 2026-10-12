@@ -190,3 +190,13 @@ Vérifiés dans le script de recette (40/40 PASS, 16/07/2026).
 |------|--------|--------------|
 | 16/07/2026 | Adrien (avec Claude) | Création : entrée `Scale` (id `qia`, `options` 0-8 + `openingTextItem`), scorer somme 0-80 + criteriaCheck TAG, nouvelle brique texte libre (core + API relay + runner + résultats), icône placeholder, spec. Correction du classement benchmark (criteria, pas simple somme). |
 | 29/09/2026 | Clément (avec Claude) | §10 réécrite en « Choix et arbitrages méthodologiques » : fin de la validation clinique externe, les arbitrages sont tranchés par l'équipe. Points ouverts reformulés en décisions d'équipe, avec la règle « on n'invente rien » (écarts à la source repris de la source secondaire). |
+
+## 13. Reste à faire avant prod
+
+<!-- Généré le 12/10/2026 depuis la repasse « regard neuf » ; suivi interactif : https://claude.ai/artifact/RLrDZwNayBy3gQCFcMDwPB -->
+
+- [ ] **Recette** : Recette manuelle sur staging (parcours patient + page résultat), puis passage en ✅ dans Linear et SUIVI.
+- [ ] **Arbitrage à valider** : ERREUR · Consigne d'introduction : « Ce questionnaire porte sur vos inquiétudes et votre anxiété au cours des six derniers mois. Vous listerez d'abord les sujets… » est une rédaction Melya ; la source ne dit que « Pour les numéros suivants, encerclez le chiffre correspondant (0 à 8) » (la période de six mois n'apparaît que dans les items 3 et 5). Ajout interdit, admis en §10 (« Formulation Melya ⚠️ ») et question ouverte 1. Recommandé : ne garder que la phrase source adaptée (« choisissez le chiffre correspondant (0 à 8) ») — confiance haute.
+- [ ] **Arbitrage à valider** : ERREUR · `openingTextItem.helperText` « Listez jusqu'à six sujets (par exemple : santé, travail, famille, finances…). » : texte et exemples absents de la source (a-f seulement) et **non consignés en §10** ; les exemples peuvent orienter la réponse. Supprimer (ou garder « jusqu'à six » si on veut refléter les champs a-f) — confiance haute.
+- [ ] **Arbitrage à valider** : Sous-consigne des sensations : app « …Cotez chaque sensation de 0 à 8. » vs source « …Cotez chaque sensation en encerclant un chiffre (0 à 8). » : adaptation papier->écran licite, mais §10 affirme « mot pour mot » — consigner — confiance haute.
+- [ ] **Arbitrage à valider** : Cotation par critères : le PDF distingue aussi trois catégories (critère cognitif ; critère somatique ; aucun critère) en plus du TAG complet ; l'app n'affiche que le contrôle global TAG (4 lignes). Pas d'erreur, mais la formulation des lignes (question ouverte 2) reste à valider ; la ligne « interférence » (item 6) fait partie des critères TAG complets seulement (conforme) — confiance moyenne.

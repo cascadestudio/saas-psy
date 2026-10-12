@@ -206,3 +206,9 @@ Règle suivie : les textes affichés au patient reprennent mot pour mot la fiche
 | 16/07/2026 | Adrien (avec Claude) | Création : entrée `Scale`, scorer somme 10-50 (seuil ≥ 15), icône placeholder, spec. Items verbatim fiche Cn2r (2 coquilles source corrigées, documentées §2). |
 | 29/09/2026 | Clément (avec Claude) | §10 réécrite en « Choix et arbitrages méthodologiques » : fin de la validation clinique externe, les arbitrages sont tranchés par l'équipe. Points ouverts reformulés en décisions d'équipe, avec la règle « on n'invente rien » (écarts à la source repris de la source secondaire). |
 | 29/09/2026 | Clément (avec Claude) | **Recette.** Source secondaire ajoutée (URPS-ML PACA, Brunet & Routhier 1999) : elle confirme les corrections de l'item 5, de la consigne et des items 9-10. Item 2 : guillemets français « » conservés (typographie, décision de Clément). Rappel au-dessus des items conservé (extrait de la consigne). Mention copyright complétée (Brunet & Routhier 1999). Items listés en §5, tests automatisés (5/5). Recette manuelle passée par Clément : échelle validée (✅). |
+
+## 13. Reste à faire avant prod
+
+<!-- Généré le 12/10/2026 depuis la repasse « regard neuf » ; suivi interactif : https://claude.ai/artifact/RLrDZwNayBy3gQCFcMDwPB -->
+
+

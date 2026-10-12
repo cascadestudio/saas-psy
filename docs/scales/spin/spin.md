@@ -268,3 +268,13 @@ scoreSpin(scale, responses) → {
 |------|--------|--------------|
 | 15/07/2026 | Adrien (avec Claude) | Création de l'échelle SPIN : entrée `Scale` dans `packages/core`, scorer `spin.ts` + enregistrement, icône placeholder, spec. Items anglais issus des 3 PDF fournis (concordants). Version FR = traduction Melya non validée, corrigeant les divergences d'une paraphrase en ligne (items 11/13/17). Seuils standard 5 niveaux (0–20 / 21–30 / 31–40 / 41–50 / 51–68). Copyright propriétaire (Davidson) : intégration décidée par Adrien malgré la restriction, à régulariser avant diffusion réelle. |
 | 29/09/2026 | Clément (avec Claude) | §10 réécrite en « Choix et arbitrages méthodologiques » : fin de la validation clinique externe, les arbitrages sont tranchés par l'équipe. Points ouverts reformulés en décisions d'équipe, avec la règle « on n'invente rien » (écarts à la source repris de la source secondaire). |
+
+## 13. Reste à faire avant prod
+
+<!-- Généré le 12/10/2026 depuis la repasse « regard neuf » ; suivi interactif : https://claude.ai/artifact/RLrDZwNayBy3gQCFcMDwPB -->
+
+- [ ] **Recette** : Recette manuelle sur staging (parcours patient + page résultat), puis passage en ✅ dans Linear et SUIVI.
+- [ ] **Arbitrage à valider** : ERREUR · Aucune source archivée dans `docs/scales/spin/` (seul spin.md) : ni la version anglaise Connor 2000 / Davidson, ni aucune version française. Impossible de vérifier le texte sur pièce. Archiver le formulaire Davidson (même s'il n'est pas redistribuable) — confiance haute.
+- [ ] **Arbitrage à valider** : ERREUR · Tout le texte patient (17 items, consigne, 5 modalités) est une traduction Melya (§10 le reconnaît : « non conforme à la règle actuelle »). Contrôle de bon sens contre l'anglais Connor 2000 (de mémoire) : items, ordre, consigne et ancres sont fidèles, aucun contresens. Mais ajout non sourcé = interdit par la règle. Options : traduction française publiée, sinon (c) assumer « traduction non validée » signalée au praticien — confiance basse.
+- [ ] **Arbitrage à valider** : Incohérence interne : `lsas.md` §13 cite une « version française disponible (Radomsky et al. 2006) » du SPIN, alors que `spin.md` §10 dit « aucune version française publiée identifiée ». Vérifier Radomsky 2006 (Canadian French, J. Anxiety Disord.) avant de conclure — confiance moyenne.
+- [ ] **Arbitrage à valider** : `copyrightAttribution` : l'app affiche « Toute reproduction est soumise à l'autorisation… » alors que la décision est « go » sans autorisation obtenue ; risque de droits (restriction explicite « may not be reproduced or transmitted »). Décision déjà prise par Adrien (15/07/2026), à régulariser.

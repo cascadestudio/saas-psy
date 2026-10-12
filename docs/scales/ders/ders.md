@@ -92,3 +92,13 @@ Entrée `ders` (`single-scale`, 1-5, `reverseItems`, 1 bande), scorer `ders.ts` 
 - [ ] **Arbitrage à valider** : domaine Humeur / catégorie « Régulation émotionnelle » (MEL-348).
 - [ ] **Coordination** : James avait l'issue MEL-325 « In Progress » — vérifier qu'il n'y a pas de travail parallèle.
 - [ ] **Évolution (Adrien)** : aucun seuil ; un « profil de sous-scores » serait plus parlant que le total (MEL-356).
+
+#### Ajouts de la repasse « regard neuf » (12/10/2026)
+
+- [ ] **Recette** : Recette manuelle sur staging (parcours patient + page résultat), puis passage en ✅ dans Linear et SUIVI.
+- [ ] **Relecture** : Relecture : 36 items contre le PDF UNIGE (corrections des items 3 et 14).
+- [ ] **Arbitrage à valider** : Arbitrage à valider : domaine Humeur / catégorie « Régulation émotionnelle » (MEL-348).
+- [ ] **Vigilance** : Coordination : James avait l'issue MEL-325 « In Progress » — vérifier qu'il n'y a pas de travail parallèle.
+- [ ] **Évolution (Adrien)** : Évolution (Adrien) : aucun seuil ; un « profil de sous-scores » serait plus parlant que le total (MEL-356).
+
+Suivi interactif : [dossier de recette](https://claude.ai/artifact/RLrDZwNayBy3gQCFcMDwPB).

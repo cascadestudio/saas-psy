@@ -80,3 +80,13 @@ Entrée `atq` (`single-scale`, 1-5, 1 bande), scorer `atq.ts` (somme), tests `at
 - [ ] **Arbitrage à valider** : correction de l'item 14.
 - [ ] **Vigilance clinique** : item 19 « Je souhaite disparaître » — pas d'alerte dans la source ; à décider (pas d'ajout sans source).
 - [ ] **Coordination** : MEL-323 était assignée à James.
+
+#### Ajouts de la repasse « regard neuf » (12/10/2026)
+
+- [ ] **Recette** : Recette manuelle sur staging (parcours patient + page résultat), puis passage en ✅ dans Linear et SUIVI.
+- [ ] **Action documentaire** : Action documentaire : confronter au livre de Bouvard & Cottraux (MEL-368).
+- [ ] **Arbitrage à valider** : Arbitrage à valider : correction de l'item 14.
+- [ ] **Vigilance** : Vigilance clinique : item 19 « Je souhaite disparaître » — pas d'alerte dans la source ; à décider (pas d'ajout sans source).
+- [ ] **Vigilance** : Coordination : MEL-323 était assignée à James.
+
+Suivi interactif : [dossier de recette](https://claude.ai/artifact/RLrDZwNayBy3gQCFcMDwPB).

@@ -201,3 +201,15 @@ Mentaal (`/send/gad-sbq`) : 10 items, mêmes libellés de réponse (page 1) ; it
 - [ ] **Relecture** : affichage des exemples à la suite de l'item (lisibilité sur mobile).
 - [ ] **Action documentaire (optionnelle)** : article Marcotte-Beaumier et al. 2020 (Revue canadienne des sciences du comportement) pour confirmer la cotation et l'absence de seuil.
 - [ ] **Droits** : contact groupé laboratoire Dugas (MEL-351, bloc ✉️), non bloquant.
+
+#### Ajouts de la repasse « regard neuf » (12/10/2026)
+
+- [ ] **Recette** : Recette manuelle sur staging (parcours patient + page résultat), puis passage en ✅ dans Linear et SUIVI.
+- [ ] **Arbitrage à valider** : Arbitrage à valider : libellés de réponse de la page 1 (le PDF change de libellés page 2).
+- [ ] **Arbitrage à valider** : Arbitrage à valider : cotation en somme sans instruction écrite de la source (article de validation non consulté).
+- [ ] **Relecture** : Relecture : affichage des exemples à la suite de l'item (lisibilité sur mobile).
+- [ ] **Action documentaire** : Action documentaire (optionnelle) : article Marcotte-Beaumier et al. 2020 (Revue canadienne des sciences du comportement) pour confirmer la cotation et l'absence de seuil.
+- [ ] **Droits** : Droits : contact groupé laboratoire Dugas (MEL-351, bloc ✉️), non bloquant.
+- [ ] **Arbitrage à valider** : Libellés de réponse, page 1 contre page 2 : un argument manque au §10 — Le PDF français alterne « Un peu / Modérément / Plutôt » (p. 1) et « Peu / Assez / Très » (p. 2). La version anglaise du laboratoire, archivée dans le dossier (`GAD-SBQ_UQO_EN.pdf`), porte sur **ses deux pages** « Not at all / A little / Moderately / Mostly / Extremely typical of me ». C'est l'équivalent exact de la page 1 française. Cet argument tranche l'incohérence en faveur de la page 1, comme l'a fait l'app ; c'est un écart du type 3 (erreur de la source corrigée par une source secondaire). — Option : garder la page 1, ajouter l'argument au §10, monter la confiance de moyenne à **haute**.
+
+Suivi interactif : [dossier de recette](https://claude.ai/artifact/RLrDZwNayBy3gQCFcMDwPB).

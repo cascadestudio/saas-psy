@@ -170,3 +170,12 @@ Vérifiés dans le script de recette (40/40 PASS, 16/07/2026).
 |------|--------|--------------|
 | 16/07/2026 | Adrien (avec Claude) | Création : entrée `Scale` (id `eii`), scorer somme 27-135 + sous-scores bifactoriels, icône placeholder, spec. Items verbatim UQO. Décision : pas de bandes de sévérité (aucun cutoff établi). |
 | 29/09/2026 | Clément (avec Claude) | §10 réécrite en « Choix et arbitrages méthodologiques » : fin de la validation clinique externe, les arbitrages sont tranchés par l'équipe. Points ouverts reformulés en décisions d'équipe, avec la règle « on n'invente rien » (écarts à la source repris de la source secondaire). |
+
+## 13. Reste à faire avant prod
+
+<!-- Généré le 12/10/2026 depuis la repasse « regard neuf » ; suivi interactif : https://claude.ai/artifact/RLrDZwNayBy3gQCFcMDwPB -->
+
+- [ ] **Recette** : Recette manuelle sur staging (parcours patient + page résultat), puis passage en ✅ dans Linear et SUIVI.
+- [ ] **Arbitrage à valider** : ERREUR · `persistentInstructions` « Jusqu'à quel point cet énoncé correspond-il à vous ? » : texte absent du formulaire UQO (ajout interdit, admis en §10 question ouverte 1). Supprimer — confiance haute.
+- [ ] **Arbitrage à valider** : Libellé du facteur 1 : l'app affiche « Implications négatives sur la perception de soi et les comportements » (raccourci Melya) au lieu de « l'incertitude a des implications négatives sur la perception de soi et les comportements » (UQO). Même chose pour le facteur 2 dans le scorer : « L'incertitude est injuste et gâche tout » est correct. Reprendre le libellé UQO (déjà §10 question 2) — confiance haute.
+- [ ] **Arbitrage à valider** : Item 25 rattaché au facteur 1 : la liste UQO du facteur 1 s'arrête à l'item 24 (14 items) ; l'item 25 n'est dans aucune liste du PDF. Rattachement reconstitué (consigné, 15 + 12 = 27) ; le scorer le présente comme « source UQO » (commentaire du code) ce qui est inexact — corriger le commentaire — confiance moyenne.

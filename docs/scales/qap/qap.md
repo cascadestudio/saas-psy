@@ -222,3 +222,9 @@ Consigne complète à l'écran d'intro, rappel au-dessus de chaque item, 5 libel
 | --- | --- | --- |
 | 11/10/2026 | Claude (lot autonome) | Création de la fiche et implémentation : formulaire UQO en autorité unique, 12 items (3 corrections typographiques ou d'accord), score total 12-60 sans seuil. Tests 4/4. |
 | 11/10/2026 | Claude (lot autonome) | Recette staging (min, max) conforme ; comparaison Mentaal (35/60 identique, seuil 48 non sourcé chez Mentaal). |
+
+## 13. Reste à faire avant prod
+
+<!-- Généré le 12/10/2026 depuis la repasse « regard neuf » ; suivi interactif : https://claude.ai/artifact/RLrDZwNayBy3gQCFcMDwPB -->
+
+- [ ] **Recette** : Recette manuelle sur staging (parcours patient + page résultat), puis passage en ✅ dans Linear et SUIVI.

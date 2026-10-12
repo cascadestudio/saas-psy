@@ -212,3 +212,9 @@ Aucune.
 | 29/09/2026 | Clément (avec Claude) | **Recette (partie documentaire).** Source secondaire ajoutée (CCSA 2022). Consigne reformulée et question-porte conservées (choix de Clément). Libellés des tranches repris des sources (« important » rétabli, tranche 0-7 d'après le CCSA). Sous-titre patient aligné sur la source (« version française »). Rappel, abréviations développées, « défoncé(e) » et nom au catalogue conservés et consignés en §10. Tests automatisés 7/7. Recette manuelle à passer. |
 | 10/10/2026 | Clément (avec Claude) | Recette manuelle confirmée : passée par Clément le 29/09/2026 (Linear MEL-334 Done). Passage en ✅ dans `SUIVI_ECHELLES.md`. |
 | 10/10/2026 | Clément (avec Claude) | Répétition à blanc du process autonome. Recette staging : jeu 4-4-3-0-0-0-0-0 → 11/32, « Trouble important de l'usage de cannabis possible » (= T5), aucun score côté patient, consigne et items conformes. Sources re-téléchargées : identiques aux PDF archivés. Tests jest 32/32, cas §9 recalculés en Python. Comparaison Mentaal ajoutée en §2 (même score, écarts à la source côté Mentaal sur consigne, nom et libellés des tranches). |
+
+## 13. Reste à faire avant prod
+
+<!-- Généré le 12/10/2026 depuis la repasse « regard neuf » ; suivi interactif : https://claude.ai/artifact/RLrDZwNayBy3gQCFcMDwPB -->
+
+

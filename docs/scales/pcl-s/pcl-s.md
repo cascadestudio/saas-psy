@@ -94,3 +94,14 @@ Entrée `pcl-s` (1-5, `persistentInstructions`, `patientIntroSubtitle`, 2 bandes
 - [ ] **Arbitrage à valider** : seuil 44 (population générale) par défaut.
 - [ ] **Évolution (Adrien)** : rendre `CriteriaCheckBlock` générique pour afficher la méthode par critères DSM-IV (MEL-356).
 - [ ] **Vigilance** : champ « événement stressant » non repris (version « spécifique ») — l'identifier en séance.
+
+#### Ajouts de la repasse « regard neuf » (12/10/2026)
+
+- [ ] **Recette** : Recette manuelle sur staging (parcours patient + page résultat), puis passage en ✅ dans Linear et SUIVI.
+- [ ] **Arbitrage à valider** : Arbitrage à valider : seuil 44 (population générale) par défaut.
+- [ ] **Évolution (Adrien)** : Évolution (Adrien) : rendre `CriteriaCheckBlock` générique pour afficher la méthode par critères DSM-IV (MEL-356).
+- [ ] **Vigilance** : Vigilance : champ « événement stressant » non repris (version « spécifique ») — l'identifier en séance.
+- [ ] **Arbitrage à valider** : Champ « L'événement stressant que vous avez vécu était (décrivez-le en une phrase) / Date de l'événement » non repris (§10, confiance moyenne) — pour une version **spécifique**, ce champ fixe le référent de tous les items (« cet épisode stressant », « cet événement »). La perte est plus lourde que pour la PCL-5 : la consigne retenue (« à la suite d'un épisode de vie stressant ») ne désigne aucun événement précis, si bien qu'un patient poly-exposé peut répondre pour un autre événement que celui visé par le praticien. — Même recommandation que pour l'ECAB : (a) dans le texte praticien (`longDescription` ou notice d'envoi), « identifiez avec le patient l'événement de référence avant l'envoi (champ de la version papier non repris) » ; (b) champ libre non coté à terme (mécanisme mutualisable avec l'ECAB). — confiance : moyenne (justifiée).
+- [ ] **Arbitrage à valider** : Libellé « Échelle de l'état de stress post-traumatique, version spécifique » (§1 : « libellé ALP / Cottraux ») — la fiche ALP n'est **pas archivée** (le dossier ne contient que l'INSPQ et Salmona), et l'INSPQ titre en anglais. Le libellé n'a donc pas de pièce justificative dans le dépôt, et il n'est pas consigné en §10. — Archiver la fiche ALP (texte + URL + date) ou prendre le titre de l'article de validation cité par l'INSPQ (« Évaluation des états de stress post-traumatique : validation d'une échelle, la PCLS ») ; ajouter une ligne en §10. — confiance actuelle : basse → haute après archivage.
+
+Suivi interactif : [dossier de recette](https://claude.ai/artifact/RLrDZwNayBy3gQCFcMDwPB).

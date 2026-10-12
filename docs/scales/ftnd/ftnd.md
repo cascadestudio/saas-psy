@@ -375,3 +375,9 @@ Pas de validation spécifique (cf. §9.5) : comportement commun à toutes les é
 | 24/09/2026 | Clément (avec Claude) | Implémentation E5 par réutilisation (données `packages/core`, scorer patron CUDIT-R, icône addictions, tests §9 automatisés avec Jest, hors CI). Arbitrages : aucun intitulé court par item (absent de la source HAS) — titres d'items retirés de §5 ; §9.5 et §11 alignés sur le comportement existant (pas de validation serveur spécifique). |
 | 24/09/2026 | Clément (avec Claude) | Correctif : la description longue praticien s'affichait sur l'écran d'intro patient (fallback API `instructions ?? longDescription`, le FTND étant la seule échelle sans consigne). Fallback retiré : le patient ne voit aucun texte avant les items, conformément à la source HAS. |
 | 29/09/2026 | Clément (avec Claude) | §10 réécrite en « Choix et arbitrages méthodologiques » : fin de la validation clinique externe, les arbitrages sont tranchés par l'équipe. Points ouverts reformulés en décisions d'équipe, avec la règle « on n'invente rien » (écarts à la source repris de la source secondaire). |
+
+## 13. Reste à faire avant prod
+
+<!-- Généré le 12/10/2026 depuis la repasse « regard neuf » ; suivi interactif : https://claude.ai/artifact/RLrDZwNayBy3gQCFcMDwPB -->
+
+

@@ -455,3 +455,11 @@ Couplages cliniques pertinents pour la LSAS dans la pratique TCC francophone, à
 - **STAI** — anxiété générale/de trait, complémentaire pour distinguer anxiété sociale spécifique vs anxiété générale élevée.
 
 À discuter en revue de roadmap après accumulation d'un noyau de specs (10-15) pour décider quelles échelles satellites ajouter au catalogue.
+
+#### Ajouts de la repasse « regard neuf » (12/10/2026)
+
+- [ ] **À revalider (✅)** : Consigne : traduction Melya de Heimberg & Becker 2002 (aucune source française, aucun fichier archivé ne la contient) ; elle est consignée en §10 et reconnue question ouverte. Texte sans source primaire archivée -> à traiter comme ajout tant que non validé. Option : consigne minimale tirée de Boulenger/Liebowitz 2003 (« demander d'imaginer la réaction si confronté ») ou assumer explicitement — confiance basse.
+- [ ] **À revalider (✅)** : §10 affirme la grille 0-29/30-49/50-64/65-79/80-94/≥95 « validée empiriquement (Mennin 2002, Rytwinski 2009) » ; les sources archivées (Liebowitz 2003) ne citent que les points de coupe 30 et 60 ; les autres bornes (50, 65, 80, 95) ne sont pas validées par ces études. Boulenger (archivé) dit « en l'absence de valeur-seuil démontrée… ne saurait être utilisée dans un but diagnostique ». Ajuster la formulation de la justification, et le libellé « Pas d'anxiété sociale » (< 30) est plus affirmatif que la source — confiance moyenne.
+- [ ] **À revalider (✅)** : Sous-échelles 12 P / 12 S (item 21 en S d'après Yao 1999 / Retz) : les deux sources archivées (Boulenger, Liebowitz 2003) donnent 13 P + 11 S. Le choix est consigné et sourcé via Retz (non archivé) ; vérifier que la citation Retz est bien dans le dossier, sinon la cataloguer. Le scorer est cohérent avec le choix (indices 21 -> S) — confiance moyenne.
+
+Suivi interactif : [dossier de recette](https://claude.ai/artifact/RLrDZwNayBy3gQCFcMDwPB).

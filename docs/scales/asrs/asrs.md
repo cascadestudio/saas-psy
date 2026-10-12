@@ -232,3 +232,9 @@ La traduction de Mentaal n'est pas la version française NYU (probablement une t
 | --- | --- | --- |
 | 11/10/2026 | Claude (lot autonome) | Création de la fiche et implémentation : version française NYU du dépistage en 6 questions, cotation par cases grisées (≥ 4), nouveau domaine Neurodéveloppement. Tests 7/7. |
 | 11/10/2026 | Claude (lot autonome) | Recette staging conforme (0, 3, 4, 6) ; Mentaal partie A identique (4/6), traduction et périmètre différents. |
+
+## 13. Reste à faire avant prod
+
+<!-- Généré le 12/10/2026 depuis la repasse « regard neuf » ; suivi interactif : https://claude.ai/artifact/RLrDZwNayBy3gQCFcMDwPB -->
+
+- [ ] **Recette** : Recette manuelle sur staging (parcours patient + page résultat), puis passage en ✅ dans Linear et SUIVI.

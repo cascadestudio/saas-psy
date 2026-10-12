@@ -327,3 +327,9 @@ La liste des items à inverser (`[3, 5, 8, 9, 10]` en 1-indexé, ou `[2, 4, 7, 8
 ## 13. Échelles connexes à prioriser
 
 Aucun couplage explicitement recommandé dans les sources consultées au 30/04/2026 (V&V 1990, Schmitt & Allik 2005, IFEMDR, Outils Psy, Mentaal, Delbrouck & Ladouceur 2011, articles PMC). La RSES est généralement utilisée seule comme indicateur d'estime de soi globale. Conformément à la règle projet « ne rien inventer », aucune échelle connexe n'est listée ici. À actualiser si une recommandation officielle de co-administration est identifiée ultérieurement (HAS, NICE, manuels de référence TCC français).
+
+#### Ajouts de la repasse « regard neuf » (12/10/2026)
+
+- [ ] **À revalider (✅)** : §10 consigne l'écart « cliquant sur le chiffre approprié », mais l'app dit « en *sélectionnant* la réponse appropriée » (et la source « en encerclant le chiffre approprié »). Écart licite, mais la fiche et l'app divergent : aligner le §10 sur le texte réel — confiance haute.
+
+Suivi interactif : [dossier de recette](https://claude.ai/artifact/RLrDZwNayBy3gQCFcMDwPB).

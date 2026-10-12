@@ -108,3 +108,14 @@ Entrée `scared` (`single-scale`, 0-2, 3 bandes, `thresholdsSource`), scorer `sc
 - [ ] **Décision produit** : ajouter la version parent (PDF archivé) comme échelle distincte ?
 - [ ] **Évolution (Adrien)** : interprétation par sous-échelle (seuils 7, 9, 5, 8, 3), même besoin que la DASS-21 (MEL-356).
 - [ ] **Vigilance** : traduction québécoise non validée en France ; 8-11 ans → adulte présent.
+
+#### Ajouts de la repasse « regard neuf » (12/10/2026)
+
+- [ ] **Recette** : Recette manuelle sur staging (parcours patient + page résultat), puis passage en ✅ dans Linear et SUIVI.
+- [ ] **Arbitrage à valider** : Arbitrage à valider : seuil « > 30 » (questionnaire) plutôt que « > 40 » (feuille d'évaluation).
+- [ ] **Arbitrage à valider** : Arbitrage à valider : correction de l'item 26.
+- [ ] **Arbitrage à valider** : Décision produit : ajouter la version parent (PDF archivé) comme échelle distincte ?
+- [ ] **Évolution (Adrien)** : Évolution (Adrien) : interprétation par sous-échelle (seuils 7, 9, 5, 8, 3), même besoin que la DASS-21 (MEL-356).
+- [ ] **Vigilance** : Vigilance : traduction québécoise non validée en France ; 8-11 ans → adulte présent.
+
+Suivi interactif : [dossier de recette](https://claude.ai/artifact/RLrDZwNayBy3gQCFcMDwPB).

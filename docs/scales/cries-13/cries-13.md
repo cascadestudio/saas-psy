@@ -182,3 +182,14 @@ Entrée `cries-13` (`single-scale`, valeurs 0/1/3/5, `persistentInstructions`, `
 - [ ] **Vigilance** : traduction « non validée entièrement » (Cn2r) — à mentionner aux praticiens ?
 - [ ] **Droits** : confirmer auprès de la Children and War Foundation que l'usage dans une plateforme payante est admis (la clause « do not charge for its use » vise les traducteurs) — MEL-351, non bloquant.
 - [ ] **Vigilance UX** : passation par un enfant de 8 ans et plus (lisibilité, tutoiement) ; badge « Public » (MEL-356).
+
+#### Ajouts de la repasse « regard neuf » (12/10/2026)
+
+- [ ] **Recette** : Recette manuelle sur staging (parcours patient + page résultat), puis passage en ✅ dans Linear et SUIVI.
+- [ ] **Arbitrage à valider** : Arbitrage à valider : sous-titre patient en anglais (titre du PDF) ou `null`.
+- [ ] **Vigilance** : Vigilance : traduction « non validée entièrement » (Cn2r) — à mentionner aux praticiens ?
+- [ ] **Droits** : Droits : confirmer auprès de la Children and War Foundation que l'usage dans une plateforme payante est admis (la clause « do not charge for its use » vise les traducteurs) — MEL-351, non bloquant.
+- [ ] **Vigilance** : Vigilance UX : passation par un enfant de 8 ans et plus (lisibilité, tutoiement) ; badge « Public » (MEL-356).
+- [ ] **Droits** : Droits §3 : citation non archivée — la phrase « do not charge for its use » citée en §3 ne figure dans aucune source du dossier (le PDF CW archivé ne contient que « These instruments are provided free of costs thanks to the generosity of our donors » et « © Children and War Foundation, 1998 »). Elle vient de la page « Measures » du site, lue mais non archivée (§2, journal). — Archiver la page « Measures » de childrenandwar.org (texte + date) dans `docs/scales/cries-13/` pour que le statut ✉️ repose sur une pièce consultable. — confiance du statut ✉️ : moyenne tant que la page n'est pas archivée.
+
+Suivi interactif : [dossier de recette](https://claude.ai/artifact/RLrDZwNayBy3gQCFcMDwPB).

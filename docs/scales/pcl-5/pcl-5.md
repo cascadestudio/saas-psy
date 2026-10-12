@@ -499,3 +499,10 @@ Sous le score total de chaque entrée d'historique (`apps/web/app/(app)/passatio
 - **Générique** : conditionné à la présence de subscores → fonctionnera automatiquement pour LSAS, Y-BOCS, etc. quand ils auront le même affichage.
 
 À implémenter dans une tâche ultérieure dédiée à l'UX longitudinale multi-échelles. À retirer de cette section une fois implémentée.
+
+#### Ajouts de la repasse « regard neuf » (12/10/2026)
+
+- [ ] **À revalider (✅)** : §10 affirme « items et consigne repris mot pour mot », or la consigne de l'app n'est pas la source. App : « Lisez chacun des énoncés en gardant à l'esprit le pire évènement que vous avez vécu ; celui qui vous perturbe le plus actuellement. Puis indiquez à quel point vous avez été perturbé(e) par ce problème au cours du dernier mois. » Source (p.2) : « A présent, lisez chacun des énoncés de la page suivante en gardant à l'esprit ce pire événement, puis encerclez le chiffre qui indique à quel point vous avez été perturbé(e) par ce problème au cours du dernier mois. » L'app fusionne deux phrases de la p.1 et de la p.2 (« ce pire événement » devenu « le pire évènement que vous avez vécu ; celui qui… ») et omet la présentation de l'événement (critère A). Recommandé : reprendre la phrase p.2 avec adaptations (« de la page suivante » -> supprimé, « encerclez » -> « choisissez »), consigner en §10 ; sinon consigner la recomposition comme arbitrage — confiance moyenne.
+- [ ] **À revalider (✅)** : Libellés d'interprétation « Pas de TSPT / Présence de TSPT au seuil de dépistage » : absents de la source (qui dit « permet le dépistage du TSPT »), déjà en question ouverte. Formulation « Présence de TSPT » est plus affirmative que la source (dépistage ≠ diagnostic). Suggestion « Score sous / au-dessus du seuil de dépistage (32) » — confiance moyenne.
+
+Suivi interactif : [dossier de recette](https://claude.ai/artifact/RLrDZwNayBy3gQCFcMDwPB).

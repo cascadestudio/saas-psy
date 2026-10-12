@@ -300,3 +300,10 @@ scorePswq(scale, responses) → {
 | 16/07/2026 | Adrien (avec Claude) | Bascule de l'acronyme public **QIPS → PSWQ** partout (app, landing, docs, code, noms de fichiers : `pswq.ts`/`scorePswq`, `pswq.svg`, dossier `docs/scales/pswq/`). Id technique interne conservé à `qips` (clé DB/Sanity, non migrée). « QIPS » conservé uniquement pour désigner la VF validée (Gosselin 2001). |
 | 16/07/2026 | Adrien (avec Claude) | Recoche contre la source primaire (`gosselin-ea-2001.pdf`, annexe 1) : échelle de réponse corrigée « caractéristique » → « **correspondant** » (verbatim validé), items 1/5/11/12/14 alignés sur l'annexe 1, consigne alignée (« correspond à vous »), item 16 conservé en « terminés » (adaptation FR-France documentée). Mention de copyright enrichie (© Gosselin et al., Université Laval, tous droits réservés). Ajout des données normatives (non clinique ≈ 44,5 / TAG ≈ 62,6) + alerte sur le libellé de la bande 40–54. `psi-ii.pdf` (source WW-II, mal rangé ici) déplacé vers `docs/scales/ww-ii/`. |
 | 29/09/2026 | Clément (avec Claude) | §10 réécrite en « Choix et arbitrages méthodologiques » : fin de la validation clinique externe, les arbitrages sont tranchés par l'équipe. Points ouverts reformulés en décisions d'équipe, avec la règle « on n'invente rien » (écarts à la source repris de la source secondaire). |
+
+## 13. Reste à faire avant prod
+
+<!-- Généré le 12/10/2026 depuis la repasse « regard neuf » ; suivi interactif : https://claude.ai/artifact/RLrDZwNayBy3gQCFcMDwPB -->
+
+- [ ] **À revalider (✅)** : ERREUR · Bandes 16-39 / 40-54 / 55-80 et libellé « Inquiétude élevée (évocatrice d'un TAG) » : aucune source (Gosselin 2001 ne donne aucun seuil ; §10 question ouverte 1 admet « construction Melya »). Contraire à la règle « pas de seuil si la source n'en donne pas ». Recommandé : option (a) score brut sans bandes (moyennes de réf. 44,5 non clinique / TAG ≈ 62 en repère) — confiance haute.
+- [ ] **À revalider (✅)** : ERREUR · `persistentInstructions` « Jusqu'à quel point cet énoncé vous correspond-il ? » : ajout de texte absent de l'annexe 1 (§10 question 2 l'admet). Supprimer — confiance haute.
