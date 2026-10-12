@@ -56,7 +56,16 @@ Aucune.
 
 ### Recette
 
-À compléter après déploiement sur staging.
+**Staging (12/10/2026, Claude)** — patient « Patient Test » : **conforme** (4 jeux sur 4). Dernier jeu saisi par le parcours patient complet, les autres par l'endpoint du portail ; relecture côté praticien.
+
+| Jeu | Attendu (total ; EDI-soi / EDI-autres) | Obtenu |
+| --- | --- | --- |
+| T1 min | 34 ; 17/17 | conforme |
+| T2 max | 170 ; 85/85 | conforme |
+| T3 tout à 3 | 102 ; 51/51 | conforme |
+| T4 1-5 en boucle (parcours patient) | 100 ; 52/48 | conforme |
+
+Écran d'intro « EDI - Échelle d'infériorité » + consigne, 5 libellés, bande unique « Pas de seuil… » : conformes. **Mentaal** : absent de leur catalogue.
 
 ## 11-12. Contrat technique et historique
 

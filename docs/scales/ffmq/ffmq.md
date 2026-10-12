@@ -57,7 +57,16 @@ Aucune.
 
 ### Recette
 
-À compléter après déploiement sur staging.
+**Staging (12/10/2026, Claude)** — patient « Patient Test » : **conforme** (4 jeux sur 4). Dernier jeu saisi par le parcours patient complet, les autres par l'endpoint du portail ; relecture côté praticien.
+
+| Jeu | Attendu (total ; facettes obs./descr./action/non-réact./non-jug.) | Obtenu |
+| --- | --- | --- |
+| T1 min (inversés à 5) | 39 ; 8/8/8/7/8 | conforme |
+| T2 max (inversés à 1) | 195 ; 40/40/40/35/40 | conforme |
+| T3 tout à 3 | 117 ; 24/24/24/21/24 | conforme |
+| T4 1-5 en boucle (parcours patient) | 99 ; 16/23/21/24/15 | conforme |
+
+Écran d'intro (consigne verbatim adaptée), 5 libellés, bande unique « Pas de seuil… » : conformes. **Mentaal** : FFMQ absent de leur catalogue disponible (non vérifié en passation).
 
 ## 11-12. Contrat technique et historique
 
