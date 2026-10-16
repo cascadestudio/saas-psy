@@ -1,0 +1,53 @@
+{
+ "id": "gad-7",
+ "source_used": "docs/scales/gad-7/GAD7_French-for-France.pdf, page 1 (unique page, version « French for France »).",
+ "title": "GAD-7",
+ "instructions": "Au cours des 2 dernières semaines, selon quelle fréquence avez-vous été gêné(e) par les problèmes suivants ? (Veuillez cocher (✔) votre réponse)",
+ "reminder": "Au cours des 2 dernières semaines",
+ "items": [
+  "Un sentiment de nervosité, d’anxiété ou de tension",
+  "Une incapacité à arrêter de s’inquiéter ou à contrôler ses inquiétudes",
+  "Une inquiétude excessive à propos de différentes choses",
+  "Des difficultés à se détendre",
+  "Une agitation telle qu’il est difficile à tenir en place",
+  "Une tendance à être facilement contrarié(e) ou irritable",
+  "Un sentiment de peur comme si quelque chose de terrible risquait de se produire"
+ ],
+ "answers": [
+  [
+   0,
+   "Jamais"
+  ],
+  [
+   1,
+   "Plusieurs jours"
+  ],
+  [
+   2,
+   "Plus de la moitié du temps"
+  ],
+  [
+   3,
+   "Presque tous les jours"
+  ]
+ ],
+ "answers_note": "Même échelle 0-3 pour les 7 items. Libellés de colonnes : « Jamais », « Plusieurs jours », « Plus de la moitié du temps », « Presque tous les jours ».",
+ "reverse_items": [],
+ "subscales": [],
+ "total_method": "Somme des 7 items : « (For office coding: Total Score T____ = ____ + ____ + ____ ) ».",
+ "score_range": [
+  0,
+  21
+ ],
+ "thresholds": [],
+ "thresholds_source": "Aucun seuil dans la source (formulaire seul, une page).",
+ "alerts": null,
+ "copyright_text": "Développé par les Dr Robert L. Spitzer, Janet B.W. Williams, Kurt Kroenke et leurs collègues grâce à une allocation d’études de Pfizer Inc. La reproduction, la traduction, l’affichage ou la distribution de ce document sont autorisés.",
+ "doubts": [
+  "La source ne donne aucun seuil d’interprétation (les seuils usuels 5/10/15 ne figurent pas dans le PDF).",
+  "Pas de question de retentissement fonctionnel dans cette version française (contrairement à certaines versions anglaises du GAD-7).",
+  "« 2 dernières semaines » est souligné dans la source.",
+  "Item 5 : « Une agitation telle qu’il est difficile à tenir en place » — tournure maladroite (« difficile de tenir en place » attendu), conservée verbatim.",
+  "Le bloc de cotation est en anglais : « For office coding: Total Score T____ »."
+ ]
+}

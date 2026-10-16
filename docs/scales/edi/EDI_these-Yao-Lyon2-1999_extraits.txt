@@ -1,0 +1,395 @@
+Source : S.-N. Yao, thèse de doctorat, Université Lumière Lyon 2 (1999), en ligne : https://theses.univ-lyon2.fr/documents/lyon2/1999/syao (sections getpart.php?id=lyon2.1999.syao&part=N)
+Extraits archivés le 12/10/2026 (texte brut des pages HTML) : part=9212 (formulaire EDI, annexe), 9211 (construction), 9213 (codage), 9214-9215 (pré-résultats), 9216 (validation, Yao et coll. 1998b).
+
+===== part=9212
+
+Echelle d’Infériorité (EDI)
+ | Prénom : _______________ 
+ | Age: ___________
+ | Sexe: _______________
+ | Date de l'examen: ___________________
+ Instructions: 
+ Vous trouverez ci-dessous une liste de pensées. Pour chacun des énoncés, veuillez encercler le chiffre de 1 à 5 qui correspond le mieux à votre façon de penser selon l’échelle suivante: 
+ | 1
+ | 2
+ | 3
+ | 4
+ | 5
+ | Ne correspond pas du tout
+ | Correspond faiblement
+ | Correspond moyennement
+ | Correspond assez fortement
+ | Correspond exactement
+ | 1. J’ai souvent peur d’être moins bien que les autres.
+ | 1
+ | 2
+ | 3
+ | 4
+ | 5
+ | 2. J’ai peur que si les choses sont mal faites, on va croire que je suis moins compétent(e) que les autres.
+ | 1
+ | 2
+ | 3
+ | 4
+ | 5
+ | 3. J’ai toujours l’impression que l’on ne voit pas mes qualités.
+ | 1
+ | 2
+ | 3
+ | 4
+ | 5
+ | 4. Il faut que je sois toujours à la hauteur, sinon, je suis inférieur(e) à tout le monde. 
+ | 1
+ | 2
+ | 3
+ | 4
+ | 5
+ | 5. J’ai souvent peur que l’on ait une mauvaise image de moi.
+ | 1
+ | 2
+ | 3
+ | 4
+ | 5
+ | 6. Même si j’ai beaucoup de qualités, j’ai toujours l’impression que je n’en ai pas. 
+ | 1
+ | 2
+ | 3
+ | 4
+ | 5 
+ | 7. Je supporte mal d’être fatigué, car cela me diminue. 
+ | 1
+ | 2
+ | 3
+ | 4
+ | 5
+ | 8. Si les autres me font un compliment, ils vont s’apercevoir que je ne le méritais pas.
+ | 1
+ | 2
+ | 3
+ | 4
+ | 5
+ | 9. J’ai peur d’apparaître ridicule car cela va me diminuer.
+ | 1
+ | 2
+ | 3
+ | 4
+ | 5
+ | 10. Même si je peux réussir certaines choses difficiles, je me sens toujours moins compétent(e) que les autres.
+ | 1
+ | 2
+ | 3
+ | 4
+ | 5
+ | 11. Si j’apparais maladroit, je serai mal considéré(e) par les autres. 
+ | 1
+ | 2
+ | 3
+ | 4
+ | 5
+ | 12. Il faut que je fasse toujours mieux que les autres, sinon, je serai sous-estimé(e) par tout le monde.
+ | 1
+ | 2
+ | 3
+ | 4
+ | 5
+ | 13. Si je suis critiqué(e) par les autres, je me sens rabaissé(e). 
+ | 1
+ | 2
+ | 3
+ | 4
+ | 5
+ | 14. Si les autres voient mes faiblesses, ils vont croire que je suis quelqu’un d’incapable. 
+ | 1
+ | 2
+ | 3
+ | 4
+ | 5
+ | 15. Je voudrais toujours que toutes les choses soient bien faites, sinon, je suis inférieur(e) aux autres. 
+ | 1
+ | 2
+ | 3
+ | 4
+ | 5
+ | 16. Si on me critique cela veut dire que je suis mal jugé(e) par les autres.
+ | 1
+ | 2
+ | 3
+ | 4
+ | 5
+ | 1
+ | 2
+ | 3
+ | 4
+ | 5
+ | Ne correspond pas du tout
+ | Correspond faiblement
+ | Correspond moyennement
+ | Correspond assez fortement
+ | Correspond exactement
+ | 17. Il faut au moins que je sache tout ce que les autres savent pour être apprécié(e) d’eux.
+ | 1
+ | 2
+ | 3
+ | 4
+ | 5
+ | 18. Je me sens diminué(e) si je demande de l’aide.
+ | 1
+ | 2
+ | 3
+ | 4
+ | 5
+ | 19. J’ai peur de ne pas être à la hauteur, car je ne serai pas apprécié(e) par tout le monde.
+ | 1
+ | 2
+ | 3
+ | 4
+ | 5
+ | 20. J’ai peur de faire la moindre erreur, car je risque de donner une mauvaise image de moi aux autres.
+ | 1
+ | 2
+ | 3
+ | 4
+ | 5
+ | 21. Si je montre le moindre signe d’anxiété, je vais être pris(e) pour quelqu’un de moins fort.
+ | 1
+ | 2
+ | 3
+ | 4
+ | 5
+ | 22. J’ai l’impression que l’on remarque souvent mes fautes ou mes faiblesses pour me dévaloriser. 
+ | 1
+ | 2
+ | 3
+ | 4
+ | 5
+ | 23. Il faut que je fasse toujours plus de choses que les autres, sinon j’ai moins de valeur qu’eux.
+ | 1
+ | 2
+ | 3
+ | 4
+ | 5
+ | 24. Je ne vois que mes faiblesses, alors je me sens diminué(e).
+ | 1
+ | 2
+ | 3
+ | 4
+ | 5
+ | 25. Si, pour une raison quelconque, je ne peux pas faire ce que l’on me demande, on va me croire incapable.
+ | 1
+ | 2
+ | 3
+ | 4
+ | 5
+ | 26. Si je ne sais pas répondre à toutes les questions qu’on me pose, je me trouve moins intelligent(e) que les autres.
+ | 1
+ | 2
+ | 3
+ | 4
+ | 5
+ | 27. Si j’accepte mes faiblesses je risque de diminuer mes qualités. 
+ | 1
+ | 2
+ | 3
+ | 4
+ | 5
+ | 28. Je me sens souvent inférieur car les gens me jugent négativement.
+ | 1
+ | 2
+ | 3
+ | 4
+ | 5
+ | 29. Même si on me fait un compliment, j’ai toujours l’impression que je n’ai pas assez bien fait.
+ | 1
+ | 2
+ | 3
+ | 4
+ | 5
+ | 30. Si je commets une seule erreur, je serai mal vu(e) par les autres.
+ | 1
+ | 2
+ | 3
+ | 4
+ | 5
+ | 31. Je ne me sens jamais content(e) de ce que j’ai réussi, car les autres trouvent que c’est banal. 
+ | 1
+ | 2
+ | 3
+ | 4
+ | 5
+ | 32. Si je ne réussis pas une chose que je veux faire, je me vois faible dans tous les domaines. 
+ | 1
+ | 2
+ | 3
+ | 4
+ | 5 
+ | 33. Je me compare toujours avec les gens qui sont meilleurs, alors je me sens toujours inférieur(e). 
+ | 1
+ | 2
+ | 3
+ | 4
+ | 5
+ | 34. Si je n’arrive pas à faire tout ce que l’on attend de moi, on me jugera incompétent(e).
+ | 1
+ | 2
+ | 3
+ | 4
+ | 5 
+ | SCORE TOTAL: __ __ __
+ point de vue nous semble montrer un sentiment d’infériorité aux yeux des autres.
+ Au niveau de la formulation des phrases, elles sont formulées selon les différentes types de distorsions cognitives chez des patients anxieux. Par exemple, « J’ai souvent peur d’être moins bien que les autres » -- inférence arbitraire; « Je ne vois que mes faiblesses, alors je me sens diminué(e). » -- sélection négative; « Si je ne réussis pas une chose que je veux faire, je me vois faible dans tous les domaines. » -- maximalisation; « Même si j’ai beaucoup de qualités, j’ai toujours l’impression que je n’en ai pas. » -- minimisation; « Si je suis critiqué par les autres, je me sens rabaissé. » -- personnalisation. 
+ Il est demandé au sujet de remplir ce questionnaire en encerclant un chiffre de 1 à 5 pour chaque énoncé qui correspond le mieux à sa façon de penser, c’est-à-dire, de « ne correspond pas du tout » à « correspond exactement » (voir l’annexe). 
+
+
+===== part=9211
+
+ 2.2.2. Echelle d’Infériorité (EDI, Yao et coll., 1998b) (voir page 85-86):
+ 2.2.2.1. Développement de l’EDI:
+ 1) La construction du questionnaire:
+ Cette échelle, basée sur notre expérience clinique, est essentiellement construite pour évaluer le sentiment d’infériorité chez les sujets anxieux. C’est une mesure d’auto-évaluation qui comprend 34 items mesurant un sentiment d’infériorité dans plusieurs domaines. 
+ Selon le contenu, il y a 15 items concernant les événements négatifs (ex. faiblesse, fatigue, erreur, échec, critique, etc.), 15 items concernant les événements positifs (ex. qualité, bien faire, réussite, compliment, etc.) et 4 items les sentiments absolus (ex. « J’ai souvent. peur d’être moins bien que les autres. »). 
+ De plus, 17 items mesurant le jugement que le sujet porte sur lui-même (auto-jugement) ( ex. « Je voudrais toujours que toutes les choses soient bien faites, sinon, je suis inférieur(e) aux autres. ») et, d’autre part, 17 items mesurant l’auto-évaluation du jugement des autres sur lui (jugement des autres) (ex. « Si on me critique cela veut dire que je suis mal jugé(e) par les autres. »). Le premier point de vue concerne pour nous un sentiment d’infériorité aux yeux de soi-même et le deuxième 
+
+
+===== part=9213
+
+ 2). Le codage:
+ D’abord, on code au moyen de 1 score total de sentiment d’infériorité (EDI-T) en additionnant tous les scores des items, et de deux sous-scores concernant l’un le sentiment d’infériorité aux yeux de soi-même (EDI- soi: items 1, 4, 6, 7, 9, 10, 13, 15, 18, 20, 23, 24, 26, 27, 29, 32, 33) et l’autre le sentiment d’infériorité aux yeux des autres (EDI- autres: items 2, 3, 5, 8, 11, 12, 14, 16, 17, 19, 21, 22, 25, 28, 30, 31, 34).
+
+
+===== part=9214
+
+ 2.2.2.2. Pré-résultats sur l’échantillon d’étudiants:
+ Nous avons fait passer au même groupe d’étudiants l’Echelle d’Infériorité (EDI) avec le QPII-r. Nous leur avons demandé suivant les consignes de remplir le questionnaire de façon anonyme. Nous avons 81 sujets ; 68 sont des femmes. Leur âge moyen est de 24,01 ans (SD = 4,76). Les scores moyens de l’EDI sont présentés dans le tableau 10:
+ Tableau 10. Statistiques descriptives des scores de l’EDI dans l’échantillon d’étudiants (n = 81)
+ | 
+ Nous avons examiné la distribution des fréquences pour le score total de l’Echelle d’Infériorité (EDI). Le graphe de la distribution est gaussien (voir tableau 11). Etant donné que la distribution est proche de normal mais que la distribution du score est assez dispersée: étendue : de 35 minimum à 123 maximum, nous avons donc divisé l’échantillon en 2 groupes selon la médiane du score total de l’EDI: 64, afin de comparer les étudiants ayant une haute infériorité avec les étudiants ayant une basse infériorité.
+ Tableau 11. Distribution des fréquences pour le score total de l’EDI 
+ | 
+ Nous avons examiné l’âge des deux groupes avec l’ANOVA et le sexe des deux groupes avec le Chi 2. Ils sont comparables quant à l’âge et au sexe (voir tableau 12). Nous avons aussi comparé ces deux groupes sur les scores de l’EDI avec l’ANOVA.
+ Tableau 12. Comparaison des deux groupes dans l’échantillon d’étudiants (n=81) (score moyen et déviation standard)
+ | 
+ | Groupe 1
+(n = 41)
+ (Basse infériorité) 
+ | Groupe 2
+(n = 40) 
+(Haute infériorité)
+ | p
+ | Age moyen (ans)
+ | 24,73
+(5,21)
+ | 23,45
+(4,28)
+ | p = 0,23
+ | femme / homme (nombre)
+ | 35 / 6
+ | 33 / 7
+ | p = 0,96
+ | 
+ EDI - T
+ | 52,81
+(7,75)
+ | 80,8
+(13,16)
+ | p< 0,0001
+ | EDI - soi
+ | 27,46
+(4,94)
+ | 41,78
+(8,0)
+ | p< 0,0001
+ | EDI - autres
+ | 25,34
+(3,88)
+ | 39,02
+(7,01)
+ | p< 0,0001
+ | 
+ EDI-T : le score total de sentiment d’infériorité; EDI- soi: le sous-scores du sentiment d’infériorité aux yeux de soi-même; EDI- autres: le sous-scores du sentiment d’infériorité aux yeux des autres.
+ Le résultat montre que le groupe 2 avec haute infériorité a obtenu des scores de l’EDI significativement plus élevés que le groupe 1 avec basse infériorité. Cela suggère que l’EDI différencie bien les sujets avec haute infériorité des sujets avec basse infériorité.
+ Comme nous avons fait passer en même temps le QPII-r et l’EDI sur le même échantillon, nous avons pu étudier la relation entre ces deux questionnaires dans les pré-résultats afin de voir la relation de l’infériorité avec les pensées intrusives et les interprétations irrationnelles. Le résultat montre que le score total de l’EDI (EDI-T) est significativement corrélé aux scores du QPII-r, c’est à dire: score total des pensées intrusives (PI-T), score total des interprétations irrationnelles (Int-T) et les trois sous-scores des interprétations (Int-R, Int-C, Int-I). Le tableau 13 montre les résultats obtenus:
+ Tableau 13. Corrélations entre EDI et QPII-r dans l’échantillon d’étudiants (n = 79)
+ | 
+ | PI-T
+ | Int-T
+ | Int-R
+ | Int-C
+ | Int-I
+ | EDI-T
+ | 0,607
+ | 0,563
+ | 0,487
+ | 0,428
+ | 0,544
+ | p
+ | <0,0001
+ | <0,0001
+ | <0,0001
+ | <0,0001
+ | <0,0001
+ | 
+ EDI-T : le score total de sentiment d’infériorité; PI-T: pensées intrusives totales; Int-T: le score total sur interprétations des pensées intrusives; Int-R: interprétations de responsabilité; Int-C: interprétations de culpabilité; Int-I: interprétations d’infériorité.
+
+
+===== part=9215
+
+2.2.2.3. Pré-résultats sur l’échantillon des patients anxieux et d’autres sujets non-cliniques
+ Nous avons fait passer l’EDI chez des patients anxieux ( 3 malades atteints de TOC et 4 malades atteints de phobie sociale ) et chez des sujets non-cliniques (n=17). Le résultat montre que les patients anxieux ont des scores significativement plus élevés de l’EDI que les sujets non-cliniques (p=0,0002); il n’existe pas de différence sur l’EDI entre les malades atteints de TOC et les malades atteints de phobie sociale (ex. sur l’EDI-T, TOC/Phobie sociale = 120,7/104,5, p=0,40), (voir tableau 14). Ainsi donc, l’EDI différencie les sujets anxieux des sujets normaux mais pas les obsessionnels des phobiques sociaux.
+ Tableau 14. Comparaison entre des patients anxieux et d’autres sujets non-cliniques (score moyen et déviation standard)
+ | 
+ | TOC
+(n = 3)
+ | Phobie sociale
+(n = 4) 
+ | sujets non-cliniques
+(n = 17) 
+ | p
+ | Age moyen 
+ | 52,67
+(13,65)
+ | 43,5
+(14,82)
+ | 38,71
+(13,21)
+ | p = 0,26
+ | femme / homme
+ | 1/2
+ | 0/4
+ | 13/4
+ | p = 0,01
+ | 
+ EDI - T
+ | 120,67
+(45,96)
+ | 104,5
+(26,44)
+ | 54,59
+(20,26)
+ | p= 0,0002
+ | EDI - soi
+ | 62,33
+(23,76)
+ | 53,0
+(11,34)
+ | 28,06
+(10,18)
+ | p= 0,0001
+ | EDI - autres
+ | 58,33
+(22,72)
+ | 51,5
+(15,16)
+ | 26,53
+(10,52)
+ | p= 0,0004
+ | 
+ EDI-T : le score total de sentiment d’infériorité; EDI-soi: le sous-scores du sentiment d’infériorité aux yeux de soi-même; EDI-autres: le sous-scores du sentiment d’infériorité aux yeux des autres.
+ A travers les pré-résultats de ces deux pré-études, nous constatons que les scores de l’EDI chez les sujets non-cliniques (EDI-Total : 54,6; EDI-soi: 28,1; EDI-autres: 26,5) sont similaires à ceux observés dans le groupe d’étudiants avec basse infériorité (EDI-Total : 52,8; EDI-soi: 27,5; EDI-autres: 25,3). Cela nous suggère que les étudiants avec basse infériorité sont proches des sujets non-cliniques, dit normaux.
+
+
+===== part=9216
+
+2.2.2.4. L’étude de la validation de l’EDI
+ L’étude publiée sur la validation de l’Echelle d’Infériorité (Yao et coll., 1998b) a montré que l’EDI possède une bonne validité empirique et fiabilité. Elle distingue bien les sujets atteints de TOC ou phobiques sociaux des sujets normaux. Le score moyen de l’EDI total chez les normaux est de 58,8 (SD 12,6), alors que chez les phobiques sociaux et chez les TOC il est de 109,3 (SD=22) et de 105,8 (SD=35,8). En d’autres termes, le score moyen de l’EDI total chez les gens normaux est environ au dessous de 70 et chez les sujets anxieux, il est de supérieur à 70 environ. La corrélation de test-retest montre une stabilité très satisfaisante, r = 0,84, p<0,0001. Le coefficient alpha de Cronbach pour l’EDI a également montré une bonne cohérence interne: = 0,95. L’analyse factorielle a montré cinq facteurs. Le premier facteur est plutôt un facteur général, le deuxième facteur reflète une mauvaise image liée à la critique, le troisième facteur s’avère une minimisation des réussites et des qualités, le quatrième facteur montre une croyance de jugement négatif par les autres et le cinquième facteur reflète une basse tolérance à la fatigue.
+ En somme, les deux pré-études et l’étude de la validation de l’EDI nous montrent des résultats identiques: l’Echelle d’Infériorité possède une bonne validité empirique. Elle distingue les sujets anxieux ou les sujets avec haute infériorité des sujets dit normaux ou des sujets avec basse infériorité. Nous prenons cette échelle comme une mesure de sentiment d’infériorité dans notre étude pour le groupe de TOC, le groupe de phobie sociale et le groupe contrôle normal.
+

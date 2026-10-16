@@ -1,0 +1,355 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Cartes d'échelle — sigle + description</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* Vraies fontes de l'app : Gelica (titres, local /public/fonts) + Rethink Sans (corps, Google) */
+  @font-face{font-family:"Gelica";src:url("/fonts/Gelica-Regular.otf") format("opentype");font-weight:400;font-style:normal;font-display:swap;}
+  @font-face{font-family:"Gelica";src:url("/fonts/Gelica-Medium.otf") format("opentype");font-weight:500;font-style:normal;font-display:swap;}
+  @font-face{font-family:"Gelica";src:url("/fonts/Gelica-Semi-Bold.otf") format("opentype");font-weight:600;font-style:normal;font-display:swap;}
+  @font-face{font-family:"Gelica";src:url("/fonts/Gelica-Bold.otf") format("opentype");font-weight:700;font-style:normal;font-display:swap;}
+
+  *{margin:0;padding:0;box-sizing:border-box}
+  img,svg{display:block;max-width:100%}
+
+  :root{
+    --bg:#F2EEE6;
+    --surface:#FBF8F2;
+    --surface-2:#EBE6DB;
+    --border:#E0D9CB;
+    --border-strong:#CFC6B3;
+    --text:#2C271F;
+    --text-muted:#6E6656;
+    --text-faint:#9A9080;
+    --accent:#DB6A45;
+    --shadow:0 1px 2px rgba(44,39,31,.05),0 6px 20px rgba(44,39,31,.06);
+    --shadow-hover:0 3px 8px rgba(44,39,31,.10),0 14px 34px rgba(44,39,31,.12);
+
+    /* Palette du color-picker (capture) */
+    --c-gold:#F2C33E;      --c-salmon:#F0A883;   --c-terracotta:#DB6A45;
+    --c-ochre:#A66A24;     --c-green:#23380F;    --c-navy:#12213F;
+    --c-blue:#2E62C3;      --c-bluelight:#C8DCEA;--c-sage:#CBD8CE;
+    --c-sand:#DBCEB8;      --c-blush:#F1D4BD;    --c-paleblue:#D7E4EF;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#1A1815;--surface:#232019;--surface-2:#1E1B15;--border:#38332A;
+      --border-strong:#4A4436;--text:#EFE9DC;--text-muted:#A79E8B;--text-faint:#736A58;
+      --accent:#E8814F;
+      --shadow:0 1px 2px rgba(0,0,0,.3),0 6px 20px rgba(0,0,0,.32);
+      --shadow-hover:0 3px 8px rgba(0,0,0,.4),0 16px 36px rgba(0,0,0,.48);
+    }
+  }
+  :root[data-theme="light"]{
+    --bg:#F2EEE6;--surface:#FBF8F2;--surface-2:#EBE6DB;--border:#E0D9CB;--border-strong:#CFC6B3;
+    --text:#2C271F;--text-muted:#6E6656;--text-faint:#9A9080;--accent:#DB6A45;
+    --shadow:0 1px 2px rgba(44,39,31,.05),0 6px 20px rgba(44,39,31,.06);
+    --shadow-hover:0 3px 8px rgba(44,39,31,.10),0 14px 34px rgba(44,39,31,.12);
+  }
+  :root[data-theme="dark"]{
+    --bg:#1A1815;--surface:#232019;--surface-2:#1E1B15;--border:#38332A;--border-strong:#4A4436;
+    --text:#EFE9DC;--text-muted:#A79E8B;--text-faint:#736A58;--accent:#E8814F;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 6px 20px rgba(0,0,0,.32);
+    --shadow-hover:0 3px 8px rgba(0,0,0,.4),0 16px 36px rgba(0,0,0,.48);
+  }
+
+  body{
+    background:var(--bg);color:var(--text);
+    font-family:"Rethink Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.5;-webkit-font-smoothing:antialiased;
+  }
+  .serif{font-family:"Gelica",Georgia,serif;font-weight:400;}
+
+  .wrap{max-width:1000px;margin:0 auto;padding:0 24px;}
+
+  header.top{position:sticky;top:0;z-index:40;border-bottom:1px solid var(--border);
+    background:color-mix(in srgb,var(--bg) 84%,transparent);backdrop-filter:blur(8px);}
+  .top-inner{max-width:1000px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:-.01em;}
+  .brand .dot{width:12px;height:12px;border-radius:50%;background:var(--accent);}
+  .brand small{font-weight:500;color:var(--text-muted);font-size:13px;}
+  .theme-toggle{border:1px solid var(--border-strong);background:var(--surface);color:var(--text);
+    border-radius:999px;padding:7px 14px;font-size:13px;font-weight:600;cursor:pointer;}
+  .theme-toggle:hover{border-color:var(--accent);}
+
+  .hero{padding:52px 0 30px;}
+  .eyebrow{text-transform:uppercase;letter-spacing:.14em;font-size:12px;font-weight:700;color:var(--accent);}
+  .hero h1{font-size:clamp(30px,5vw,44px);line-height:1.06;letter-spacing:-.02em;margin:14px 0 0;font-weight:600;text-wrap:balance;}
+  .hero p.lede{font-size:17.5px;color:var(--text-muted);max-width:60ch;margin:16px 0 0;}
+
+  section{padding:36px 0;border-top:1px solid var(--border);}
+  .sec-head{margin-bottom:24px;}
+  .sec-num{font-size:13px;font-weight:700;color:var(--text-faint);letter-spacing:.04em;}
+  .sec-head h2{font-size:clamp(21px,3vw,28px);letter-spacing:-.015em;margin:6px 0 0;font-weight:600;}
+  .sec-head p{color:var(--text-muted);max-width:66ch;margin:10px 0 0;font-size:15px;}
+  .label{text-transform:uppercase;letter-spacing:.1em;font-size:11.5px;font-weight:700;color:var(--text-faint);}
+
+  /* ============ SCALE CARD (sigle + description, bloc couleur plein) ============ */
+  .card-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;}
+  @media (min-width:640px){.card-grid{grid-template-columns:repeat(3,1fr);}}
+  .scale-card{
+    --ink:#23201C;--sub:rgba(0,0,0,.66);
+    position:relative;display:flex;flex-direction:column;min-height:158px;
+    background:var(--cbg,var(--surface-2));border-radius:18px;padding:18px 18px 16px;
+    cursor:pointer;text-decoration:none;color:var(--ink);
+    transition:transform .16s ease,box-shadow .16s ease,filter .16s ease;
+  }
+  .scale-card.dark-ink{--ink:#FCF9F3;--sub:rgba(255,255,255,.78);}
+  .scale-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-hover);filter:saturate(1.04);}
+  .scale-card:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
+  .scale-card .sigle{font-family:"Gelica",Georgia,serif;
+    font-weight:600;font-size:26px;letter-spacing:-.01em;line-height:1;font-variant-numeric:tabular-nums;}
+  .scale-card .desc{margin-top:10px;font-size:13.5px;line-height:1.4;color:var(--sub);
+    display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden;}
+
+  /* hero single card */
+  .hero-card-row{display:flex;gap:22px;align-items:center;flex-wrap:wrap;}
+  .hero-card-row .demo{width:230px;}
+  .hero-card-row .demo .scale-card{min-height:172px;}
+  .hero-card-row .expl{flex:1;min-width:240px;color:var(--text-muted);font-size:14.5px;}
+  .hero-card-row .expl b{color:var(--text);}
+
+  /* ============ palette legend ============ */
+  .legend-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;}
+  @media (min-width:620px){.legend-grid{grid-template-columns:repeat(4,1fr);}}
+  .legend-item{display:flex;align-items:center;gap:11px;background:var(--surface);border:1px solid var(--border);
+    border-radius:13px;padding:11px 12px;}
+  .legend-item .sw{width:34px;height:34px;border-radius:9px;flex-shrink:0;}
+  .legend-item .dn{font-weight:700;font-size:13.5px;letter-spacing:-.01em;}
+  .legend-item .dc{font-size:11.5px;color:var(--text-faint);}
+
+  /* ============ library mockup ============ */
+  .app-frame{background:var(--surface);border:1px solid var(--border);border-radius:22px;overflow:hidden;box-shadow:var(--shadow);}
+  .app-topbar{display:flex;align-items:center;gap:8px;padding:12px 18px;border-bottom:1px solid var(--border);background:var(--surface-2);}
+  .app-topbar .tl{display:flex;gap:6px;}
+  .app-topbar .tl span{width:11px;height:11px;border-radius:50%;background:var(--border-strong);}
+  .app-topbar .url{font-size:12.5px;color:var(--text-faint);margin-left:8px;}
+  .app-body{padding:26px 24px 30px;}
+  .app-body .page-title{font-size:30px;letter-spacing:-.02em;margin:0 0 18px;font-weight:600;}
+
+  .searchbar{position:relative;margin-bottom:14px;}
+  .searchbar svg{position:absolute;left:15px;top:50%;transform:translateY(-50%);width:18px;height:18px;color:var(--text-faint);}
+  .searchbar input{width:100%;padding:12px 15px 12px 44px;border-radius:12px;border:1px solid var(--border-strong);
+    background:var(--bg);color:var(--text);font-size:15px;font-family:inherit;}
+  .searchbar input:focus{outline:2px solid var(--accent);outline-offset:1px;border-color:transparent;}
+  .searchbar input::placeholder{color:var(--text-faint);}
+
+  .filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:6px;}
+  .chipbtn{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:600;padding:6px 12px 6px 10px;
+    border-radius:999px;cursor:pointer;border:1px solid var(--border-strong);background:var(--surface);color:var(--text-muted);
+    font-family:inherit;transition:all .12s ease;}
+  .chipbtn .sw{width:11px;height:11px;border-radius:4px;}
+  .chipbtn:hover{border-color:var(--accent);color:var(--text);}
+  .chipbtn[aria-pressed="true"]{background:var(--text);border-color:var(--text);color:var(--bg);}
+  .chipbtn[aria-pressed="true"] .sw{outline:2px solid var(--bg);outline-offset:-1px;}
+
+  .result-count{font-size:13px;color:var(--text-faint);margin:14px 2px 12px;font-weight:600;}
+  .no-results{padding:44px;text-align:center;color:var(--text-faint);font-size:14px;}
+
+  footer{padding:36px 0 60px;color:var(--text-faint);font-size:13.5px;border-top:1px solid var(--border);}
+  footer .wrap{display:flex;flex-direction:column;gap:6px;}
+  footer strong{color:var(--text-muted);}
+  code{font-family:"SF Mono",ui-monospace,Menlo,monospace;font-size:12.5px;background:var(--surface-2);padding:1px 5px;border-radius:5px;}
+
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;}}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-inner">
+    <div class="brand"><span class="dot"></span> Melya <small>· design review</small></div>
+    <button class="theme-toggle" id="themeBtn">◐ Thème</button>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="hero">
+    <div class="eyebrow">Bibliothèque d'échelles · 100+ scales</div>
+    <h1 class="serif">Sigle + description.<br>Rien d'autre.</h1>
+    <p class="lede">Version simplifiée : chaque échelle est un bloc de couleur pleine, avec le <strong>sigle</strong> en typographie forte et sa <strong>description</strong>. La couleur vient de la palette de ta capture, attribuée par domaine. Pas de logo, pas de forme, pas de badge — juste ce qu'il faut pour reconnaître et parcourir.</p>
+  </div>
+</div>
+
+<!-- ============ 01 · LA CARTE ============ -->
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-num">01 — La carte</div>
+      <h2 class="serif">Le bloc</h2>
+      <p>Fond = couleur du domaine (palette capture). Sigle en serif, gros. Description en dessous, discrète. Le contraste du texte s'adapte à la teinte (clair sur foncé, foncé sur clair).</p>
+    </div>
+    <div class="hero-card-row">
+      <div class="demo">
+        <a class="scale-card dark-ink" style="--cbg:var(--c-blue)">
+          <div class="sigle">GAD-7</div>
+          <div class="desc">Trouble anxieux généralisé</div>
+        </a>
+      </div>
+      <div class="expl">
+        <b>Le sigle est l'identité</b> — c'est ainsi qu'un psy nomme et reconnaît une échelle. La description confirme, sans surcharger.<br><br>La couleur groupe visuellement les échelles d'un même domaine : en scrollant, on repère « la zone bleue = anxiété » sans lire.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 02 · PALETTE / DOMAINES ============ -->
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-num">02 — La palette</div>
+      <h2 class="serif">Une teinte par domaine</h2>
+      <p>Les 12 couleurs de ta capture, dont 8 assignées aux domaines actuels. Il reste 4 teintes libres (sable, blush, bleu clair/pâle) pour les futurs domaines.</p>
+    </div>
+    <div class="legend-grid" id="legend"></div>
+  </div>
+</section>
+
+<!-- ============ 03 · BIBLIOTHÈQUE ============ -->
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-num">03 — La bibliothèque</div>
+      <h2 class="serif">Parcourir & rechercher</h2>
+      <p>Recherche sur sigle, description et synonymes (tape « beck », « penn state », « phq »…), + filtre par domaine (couleur). Grille de blocs, comme la vue « Library » de ta capture.</p>
+    </div>
+
+    <div class="app-frame">
+      <div class="app-topbar">
+        <div class="tl"><span></span><span></span><span></span></div>
+        <div class="url">melya.app / app / échelles</div>
+      </div>
+      <div class="app-body">
+        <h2 class="page-title serif">Échelles</h2>
+        <div class="searchbar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+          <input id="searchInput" type="text" autocomplete="off" placeholder="Rechercher : sigle, nom, ou synonyme (ex. « beck », « penn state »…)">
+        </div>
+        <div class="filters" id="filters"></div>
+        <div class="result-count" id="resultCount"></div>
+        <div class="card-grid" id="results"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div><strong>Fonts :</strong> fallbacks système (serif ≈ Gelica, sans ≈ Rethink Sans). En prod, le sigle prendra la vraie Gelica.</div>
+    <div><strong>Données :</strong> échelles réelles de <code>packages/core</code>. La couleur se dérivera d'un champ <code>domain</code> (enum fermé), ce qui permet de supprimer <code>icon</code>/<code>color</code>/<code>colorLight</code> par échelle.</div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  // theme
+  document.getElementById('themeBtn').addEventListener('click',function(){
+    var r=document.documentElement,c=r.getAttribute('data-theme');
+    if(!c)c=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';
+    r.setAttribute('data-theme',c==='dark'?'light':'dark');
+  });
+
+  // domaine -> couleur palette + contraste texte
+  var DOMAINS={
+    anx:   {name:'Anxiété',            desc:'GAD, phobie sociale, inquiétude', c:'--c-blue',       ink:'dark'},
+    mood:  {name:'Humeur',             desc:'Dépression, bipolarité',          c:'--c-navy',       ink:'dark'},
+    trauma:{name:'Trauma',             desc:'TSPT, dissociation',              c:'--c-terracotta', ink:'dark'},
+    ocd:   {name:'TOC',                desc:'Obsessions, compulsions',         c:'--c-sage',       ink:'light'},
+    addic: {name:'Addictions',         desc:'Alcool, cannabis, écrans',        c:'--c-ochre',      ink:'dark'},
+    self:  {name:'Estime & personnalité',desc:'Estime de soi, traits',         c:'--c-gold',       ink:'light'},
+    hsp:   {name:'Hypersensibilité',   desc:'Sensorialité, HPI/HPE',           c:'--c-green',      ink:'dark'},
+    neuro: {name:'Neuro-développement',desc:'TDAH, TSA (à venir)',             c:'--c-salmon',     ink:'light'}
+  };
+  var DORDER=['anx','mood','trauma','ocd','addic','self','hsp','neuro'];
+
+  // legend
+  var legend=document.getElementById('legend');
+  DORDER.forEach(function(k){
+    var d=DOMAINS[k],el=document.createElement('div');
+    el.className='legend-item';
+    el.innerHTML='<div class="sw" style="background:var('+d.c+')"></div>'+
+      '<div><div class="dn">'+d.name+'</div><div class="dc">'+d.desc+'</div></div>';
+    legend.appendChild(el);
+  });
+
+  // scales (réelles)
+  var SCALES=[
+    {ac:'PHQ-9',  label:'Questionnaire sur la santé du patient (dépression)', dom:'mood',  kw:'depression humeur beck'},
+    {ac:'GAD-7',  label:'Trouble anxieux généralisé',                         dom:'anx',   kw:'anxiete spitzer tag'},
+    {ac:'QIPS',   label:'Questionnaire sur les inquiétudes du Penn State',    dom:'anx',   kw:'penn state worry pswq inquietude'},
+    {ac:'ÉII',    label:'Échelle d’intolérance à l’incertitude',              dom:'anx',   kw:'incertitude ius intolerance'},
+    {ac:'QIA',    label:'Questionnaire sur l’inquiétude et l’anxiété',        dom:'anx',   kw:'waq dugas inquietude anxiete'},
+    {ac:'LSAS',   label:'Échelle d’anxiété sociale de Liebowitz',             dom:'anx',   kw:'liebowitz phobie sociale'},
+    {ac:'SPIN',   label:'Inventaire de phobie sociale',                       dom:'anx',   kw:'phobie sociale connor'},
+    {ac:'PCL-5',  label:'Liste de vérification du TSPT (DSM-5)',              dom:'trauma',kw:'tspt ptsd trauma checklist'},
+    {ac:'PDEQ',   label:'Dissociation péritraumatique',                       dom:'trauma',kw:'dissociation peritraumatique'},
+    {ac:'Y-BOCS', label:'Échelle d’obsession-compulsion de Yale-Brown',       dom:'ocd',   kw:'yale brown toc obsession compulsion'},
+    {ac:'AUDIT',  label:'Troubles liés à l’usage de l’alcool',                dom:'addic', kw:'alcool addiction oms who'},
+    {ac:'CUDIT-R',label:'Troubles liés à l’usage du cannabis',               dom:'addic', kw:'cannabis addiction'},
+    {ac:'RSES',   label:'Échelle d’estime de soi de Rosenberg',               dom:'self',  kw:'rosenberg estime self esteem'},
+    {ac:'HSPS',   label:'Questionnaire d’hypersensibilité (Elaine Aron)',     dom:'hsp',   kw:'aron hypersensibilite sensory'}
+  ];
+
+  function cardHTML(s){
+    var d=DOMAINS[s.dom];
+    return '<a class="scale-card'+(d.ink==='dark'?' dark-ink':'')+'" style="--cbg:var('+d.c+')" tabindex="0">'+
+      '<div class="sigle">'+s.ac+'</div>'+
+      '<div class="desc">'+s.label+'</div></a>';
+  }
+
+  // library state
+  var state={q:'',dom:null};
+  var input=document.getElementById('searchInput');
+  var results=document.getElementById('results');
+  var count=document.getElementById('resultCount');
+  var filters=document.getElementById('filters');
+
+  // filter chips
+  var allBtn=document.createElement('button');
+  allBtn.className='chipbtn';allBtn.textContent='Tous';allBtn.setAttribute('aria-pressed','true');
+  allBtn.addEventListener('click',function(){state.dom=null;syncChips();render();});
+  filters.appendChild(allBtn);
+  DORDER.forEach(function(k){
+    var d=DOMAINS[k],b=document.createElement('button');
+    b.className='chipbtn';b.setAttribute('data-dom',k);b.setAttribute('aria-pressed','false');
+    b.innerHTML='<span class="sw" style="background:var('+d.c+')"></span>'+d.name;
+    b.addEventListener('click',function(){state.dom=(state.dom===k?null:k);syncChips();render();});
+    filters.appendChild(b);
+  });
+  function syncChips(){
+    allBtn.setAttribute('aria-pressed',state.dom===null?'true':'false');
+    filters.querySelectorAll('[data-dom]').forEach(function(b){
+      b.setAttribute('aria-pressed',b.getAttribute('data-dom')===state.dom?'true':'false');
+    });
+  }
+
+  input.addEventListener('input',function(){state.q=this.value.toLowerCase().trim();render();});
+
+  function match(s){
+    if(state.dom&&s.dom!==state.dom)return false;
+    if(state.q){
+      var hay=(s.ac+' '+s.label+' '+s.kw+' '+DOMAINS[s.dom].name).toLowerCase();
+      if(hay.indexOf(state.q)===-1)return false;
+    }
+    return true;
+  }
+  function render(){
+    var m=SCALES.filter(match);
+    count.textContent=m.length+' échelle'+(m.length>1?'s':'');
+    if(!m.length){
+      results.innerHTML='<div class="no-results" style="grid-column:1/-1">Aucune échelle ne correspond. Essaie un autre terme ou retire le filtre.</div>';
+      return;
+    }
+    results.innerHTML=m.map(cardHTML).join('');
+  }
+  render();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+{
+ "id": "traumatismes-pcl5",
+ "source_used": "PCL-5_Cn2r.pdf p.1-3 (consigne p.1, items p.2, fiche descriptive p.3)",
+ "title": "Post-Traumatic Stress Disorder Checklist for DSM-5 (PCL-5) ; sous-titre : Weathers, Litz, Keane, Palmieri, Marx & Schnurr (2013) National Centre for PTSD ©2013 ; Traduction française et validation par Ashbaugh et al. (2016)",
+ "instructions": "Consigne : Ce questionnaire porte sur des problèmes que vous pouvez avoir eu à la suite d’une expérience très stressante ayant impliqué une mort ou une menace de mort, une blessure grave, ou de la violence sexuelle. Il peut s’agir de quelque chose qui vous est arrivé directement, de quelque chose dont vous avez été témoin, ou de quelque chose qui a été porté à votre connaissance au sujet d’un membre de votre famille ou d’un(e) ami(e) proche. Voici quelques exemples de ce genre d’expériences : accident grave ; incendie ; catastrophe naturelle comme un ouragan, une tornade, un tremblement de terre ou une inondation ; agression physique ou sexuelle ; guerre ; homicide ; ou suicide. // Pour débuter, veuillez SVP répondre à quelques questions concernant le pire évènement que vous avez vécu ; celui qui vous perturbe le plus actuellement. Il peut s’agir d’un des exemples décrit ci-dessus ou d’une toute autre expérience très stressante. En outre, il peut s’agir d’un seul événement (par exemple, un accident de voiture) ou de plusieurs événements similaires (par exemple, des événements stressants répétés dans une zone de guerre ou des agressions sexuelles répétées). // [questions préliminaires : « Identifiez brièvement le pire événement (si vous vous sentez en mesure de le faire) : » ; « Cela fait combien de temps que c’est arrivé ? (SVP, donnez une estimation si vous n’en êtes pas certain(e)) » ; « Cet événement a-t-il impliqué une mort ou une menace de mort, une blessure grave ou de la violence sexuelle ? » OUI / NON ; « Comment avez-vous vécu cet événement ? » (Cela m’est arrivé directement / J’en ai été témoin / J’ai appris que c’est arrivé à un membre de ma famille ou à un(e) ami(e) proche / J’ai été exposé(e) de façon répétée à des aspects de cet événement dans le cadre de mon travail (par exemple : ambulancier, policier, militaire ou autre intervenant d’urgence) / Autre (SVP décrivez) :) ; « Si cet événement est relié à la mort d’un membre de votre famille ou d’un(e) ami(e) proche, était-ce dû à un accident ou à un acte de violence ou était-ce dû à des causes naturelles (vieillesse, arrêt cardiaque, cancer, etc.) ? » (Accident ou acte de violence / Causes naturelles (vieillesse, arrêt cardiaque, cancer, etc.) / Ne s’applique pas (l’événement n’a pas impliqué la mort d’un membre de ma famille ou d’un(e) ami(e) proche))] // A présent, lisez chacun des énoncés de la page suivante en gardant à l’esprit ce pire événement, puis encerclez le chiffre qui indique à quel point vous avez été perturbé(e) par ce problème au cours du dernier mois.",
+ "reminder": "Dans le dernier mois, dans quelle mesure avez-vous été affecté par :",
+ "items": [
+  "Des souvenirs indésirables, perturbants et répétitifs de l’expérience stressante ?",
+  "Des rêves répétés et pénibles de l’expérience stressante ?",
+  "Se sentir ou agir soudainement comme si vous viviez à nouveau l’expérience stressante ?",
+  "Se sentir mal quand quelque chose vous rappelle l’événement ?",
+  "Avoir de fortes réactions physiques lorsque quelque chose vous rappelle l’événement (accélération cardiaque, difficulté respiratoire, sudation) ?",
+  "Essayer d’éviter les souvenirs, pensées, et sentiments liés à l’événement ?",
+  "Essayer d’éviter les personnes et les choses qui vous rappellent l’expérience stressante (lieux, personnes, activités, objets) ?",
+  "Des difficultés à vous rappeler des parties importantes de l’événement ?",
+  "Des croyances négatives sur vous-même, les autres, le monde (des croyances comme : je suis mauvais, j’ai quelque chose qui cloche, je ne peux avoir confiance en personne, le monde est dangereux) ?",
+  "Vous blâmer ou blâmer quelqu’un d’autre pour l’événement ou ce qui s’est produit ensuite ?",
+  "Avoir des sentiments négatifs intenses tels que peur, horreur, colère, culpabilité, ou honte ?",
+  "Perdre de l’intérêt pour des activités que vous aimiez auparavant ?",
+  "Vous sentir distant ou coupé des autres ?",
+  "Avoir du mal à éprouver des sentiments positifs (par exemple être incapable de ressentir de la joie ou de l’amour envers vos proches) ?",
+  "Comportement irritable, explosions de colère, ou agir agressivement ?",
+  "Prendre des risques inconsidérés ou encore avoir des conduites qui pourraient vous mettre en danger ?",
+  "Être en état de « super-alerte », hyper vigilant ou sur vos gardes ?",
+  "Sursauter facilement ?",
+  "Avoir du mal à vous concentrer ?",
+  "Avoir du mal à trouver le sommeil ou à rester endormi ?"
+ ],
+ "answers": [
+  [
+   0,
+   "Pas du tout"
+  ],
+  [
+   1,
+   "Un peu"
+  ],
+  [
+   2,
+   "Modérément"
+  ],
+  [
+   3,
+   "Beaucoup"
+  ],
+  [
+   4,
+   "Extrêmement"
+  ]
+ ],
+ "answers_note": "Même échelle 0-4 pour les 20 items. Fiche p.3 : « Echelle de Likert en 5 points allant de 0 (pas du tout) à 4 (extrêmement) ».",
+ "reverse_items": [],
+ "subscales": [],
+ "total_method": "Fiche p.3 : « Somme des items comprise entre 0 et 52 » (somme des 20 items). Aucun sous-score ni regroupement par critère DSM-5 (B, C, D, E) n'est indiqué dans la source.",
+ "score_range": [
+  0,
+  80
+ ],
+ "thresholds": [
+  [
+   32,
+   null,
+   "Un score total ≥ 32 permet le dépistage du TSPT"
+  ]
+ ],
+ "thresholds_source": "Fiche descriptive p.3, « Seuil ou indication : Un score total ≥ 32 permet le dépistage du TSPT »",
+ "alerts": "Aucun item d'alerte signalé par la source (item 16 « Prendre des risques inconsidérés... » et exposition au suicide non marqués comme alerte).",
+ "copyright_text": "En-tête p.1 : « Weathers, Litz, Keane, Palmieri, Marx & Schnurr (2013) National Centre for PTSD ©2013 ». Pied : « Mise en page par le Centre national de ressources et de résilience » ; références : « U.S. Department of Veterans Affairs. (2017). PTSD Checklist for DSM-5 (PCL-5). To Obtain Scale. ».",
+ "doubts": [
+  "INCOHÉRENCE SOURCE : la fiche p.3 dit « Somme des items comprise entre 0 et 52 » alors que 20 items cotés 0-4 donnent 0-80. score_range [0,80] retenu par calcul ; 52 est vraisemblablement une coquille.",
+  "Seuil : « ≥ 32 » sans borne haute ; le seuil recopié vise le dépistage, pas de niveaux de sévérité. La source anglaise usuelle indique 31-33 : non utilisée.",
+  "Coquille fiche p.3 : « Ashbaug, et al. (2016) » (le nom correct est Ashbaugh, écrit correctement dans les références) ; « Type de d’évaluation » ; « évènement » vs « événement » mélangés dans la consigne ; « exemples décrit ci-dessus ».",
+  "Item 3 : le texte brut colle « 0 » après « l’expérience » (fin de ligne) : artefact de grille, pas du libellé. Même artefact aux items 5, 7, 9, 10, 11, 14, 16.",
+  "Item 9 : ponctuation « (des croyances comme : je suis mauvais... ») ; l'extraction brute donne « comme 0 ... : je suis mauvais » ; recopié selon la logique de lecture (« comme : »).",
+  "Les questions préliminaires sur le pire événement (nom, date, type d'exposition, décès) ne sont pas des items cotés.",
+  "Item 17 : guillemets « super-alerte » recopiés ; item 15 sans verbe d'introduction (« Comportement irritable, ... »).",
+  "Les items sont précédés de l'amorce « Dans le dernier mois, dans quelle mesure avez-vous été affecté par : » placée dans l'en-tête de grille, d'où 'reminder'. Pas de regroupement par critères DSM dans la source.",
+  "Fiche : « Âge : Adolescents-Adultes » ; « Temps de passation : 5-10 min »."
+ ]
+}

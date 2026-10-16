@@ -1,0 +1,14 @@
+Source : Université de Coimbra (CINEICC), « Difficulties in Emotion Regulation Scale (DERS) », https://www.uc.pt/cineicc/assessment-tools/ders/
+Consulté le 11/10/2026 via Chrome. Extrait (clé de cotation de la version originale, Gratz & Roemer 2004) :
+
+The scale consists of 36-items which statements should be rated on a 5-point Likert scale ranging from 1 (almost never) to 5 (almost always). The scale is composed by 6 dimensions:
+Nonacceptance of emotional responses: 11, 12, 21, 23, 25, 29;
+Difficulty engaging in Goal-directed behaviour: 13, 18, 20R, 26, 33;
+Impulse control difficulties: 3, 14, 19, 24R, 27, 32;
+Lack of emotional awareness: 2R, 6R, 8R, 10R, 17R, 34R;
+Limited access to emotion regulation strategies: 15, 16, 22R, 28, 30, 31, 35, 36;
+Lack of emotional clarity: 1R, 4, 5, 7R, 9 (R= Reverse-scored items).
+After recoding the inverse items it is possible to obtain a total score (adding all the 36 items) or a score for each subscale. Higher scores indicated greater difficulties in emotion regulation.
+
+Référence : Gratz, K.L., & Roemer, L. (2004). Multidimensional Assessment of Emotion Regulation and Dysregulation: Development, Factor Structure, and Initial Validation of the Difficulties in Emotion Regulation Scale, Journal of Psychopathology and Behavioral Assessment, 26(1), 41-54.
+Validation française (structure à 6 facteurs confirmée, phi de Tucker .98 avec l'original) : Dan-Glauser, E. S., & Scherer, K. R. (2013). Swiss Journal of Psychology, 72(1), 5-11.

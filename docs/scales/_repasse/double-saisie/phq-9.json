@@ -1,0 +1,56 @@
+{
+ "id": "phq-9",
+ "source_used": "docs/scales/phq-9/PHQ9_French-for-France.pdf, page 1 (unique page, version « French for France » du questionnaire patient).",
+ "title": "QUESTIONNAIRE SUR LA SANTÉ DU PATIENT – 9 (PHQ-9)",
+ "instructions": "Au cours des 2 dernières semaines, selon quelle fréquence avez-vous été gêné(e) par les problèmes suivants ? (Veuillez cocher (✔) votre réponse)",
+ "reminder": "Au cours des 2 dernières semaines",
+ "items": [
+  "Peu d’intérêt ou de plaisir à faire les choses",
+  "Être triste, déprimé(e) ou désespéré(e)",
+  "Difficultés à s’endormir ou à rester endormi(e), ou dormir trop",
+  "Se sentir fatigué(e) ou manquer d’énergie",
+  "Avoir peu d’appétit ou manger trop",
+  "Avoir une mauvaise opinion de soi-même, ou avoir le sentiment d’être nul(le), ou d’avoir déçu sa famille ou s’être déçu(e) soi-même",
+  "Avoir du mal à se concentrer, par exemple, pour lire le journal ou regarder la télévision",
+  "Bouger ou parler si lentement que les autres auraient pu le remarquer. Ou au contraire, être si agité(e) que vous avez eu du mal à tenir en place par rapport à d’habitude",
+  "Penser qu’il vaudrait mieux mourir ou envisager de vous faire du mal d’une manière ou d’une autre"
+ ],
+ "answers": [
+  [
+   0,
+   "Jamais"
+  ],
+  [
+   1,
+   "Plusieurs jours"
+  ],
+  [
+   2,
+   "Plus de la moitié du temps"
+  ],
+  [
+   3,
+   "Presque tous les jours"
+  ]
+ ],
+ "answers_note": "Les 9 items partagent la même échelle 0-3. Une question complémentaire non cotée suit les items : « Si vous avez coché au moins un des problèmes évoqués, à quel point ce(s) problème(s) a-t-il (ont-ils) rendu votre travail, vos tâches à la maison ou votre capacité à vous entendre avec les autres difficile(s) ? » avec 4 modalités sans valeur numérique : « Pas du tout difficile(s) », « Assez difficile(s) », « Très difficile(s) », « Extrêmement difficile(s) ».",
+ "reverse_items": [],
+ "subscales": [],
+ "total_method": "Somme des 9 items : « FOR OFFICE CODING 0 + ______ + ______ + ______ =Total Score: ______ » (somme des colonnes).",
+ "score_range": [
+  0,
+  27
+ ],
+ "thresholds": [],
+ "thresholds_source": "Aucun seuil dans la source (formulaire seul, une page).",
+ "alerts": null,
+ "copyright_text": "Développé par les Dr Robert L. Spitzer, Janet B.W. Williams, Kurt Kroenke et leurs collègues grâce à une allocation d’études de Pfizer Inc. La reproduction, la traduction, l’affichage ou la distribution de ce document sont autorisés.",
+ "doubts": [
+  "La source ne donne aucun seuil d’interprétation (les seuils usuels 5/10/15/20 ne figurent pas dans le PDF).",
+  "La source ne signale pas explicitement l’item 9 (idées de mort / de se faire du mal) comme item d’alerte ; c’est cliniquement l’item à risque mais rien dans le PDF ne le dit.",
+  "Le bloc de cotation est en anglais dans la VF : « FOR OFFICE CODING » et « =Total Score: ».",
+  "Le titre est réparti sur trois lignes : « QUESTIONNAIRE SUR LA SANTÉ DU PATIENT » / « – 9 » / « (PHQ-9) ».",
+  "La question de retentissement fonctionnelle (difficulté) n’est pas cotée et ne fait pas partie du total.",
+  "Item 8 : double espace après « remarquer. » dans le PDF (rendu visuel), conservé en espace simple ici."
+ ]
+}

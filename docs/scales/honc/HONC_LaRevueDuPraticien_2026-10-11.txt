@@ -1,0 +1,22 @@
+Source : https://www.larevuedupraticien.fr/outil/test-honc-de-mise-en-evidence-de-la-dependance-tabagique
+Consulté le 11/10/2026 (texte extrait de la page via Chrome, mise en forme simplifiée). Encadré extrait de : « Tabac et adolescents ».
+
+ENCADRE
+Test HONC de mise en évidence de la dépendance tabagique
+
+Le test HONC (Hooked on Nicotine Checklist) est un test en dix items qui permet de mettre en évidence la perte de contrôle vis-à-vis de la consommation de tabac chez les jeunes fumeurs.
+
+Une réponse positive à un seul item suffit à indiquer une perte d’autonomie liée à la consommation de tabac. Plus le score est élevé (1 point par réponse positive), plus il fait évoquer une perte d’autonomie, donc une dépendance. Un score supérieur ou égal à 7 indique un niveau de forte dépendance à la nicotine.
+
+Avez-vous déjà essayé d’arrêter de fumer sans y parvenir ?  □ Oui □ Non
+Fumez-vous actuellement parce que c’est vraiment difficile d’arrêter ?  □ Oui □ Non
+Pensez-vous être dépendant(e) du tabac ?  □ Oui □ Non
+Avez-vous déjà eu des envies impérieuses de fumer ?  □ Oui □ Non
+Avez-vous déjà eu un grand besoin d’une cigarette ?  □ Oui □ Non
+Est-ce difficile de ne pas fumer aux endroits où c’est interdit, comme à l’école ?  □ Oui □ Non
+Quand vous essayez d’arrêter ou quand vous n’avez pas fumé depuis un certain temps : Était-il difficile de vous concentrer ?  □ Oui □ Non
+Avez-vous été plus irritable parce que vous ne pouviez pas fumer ?  □ Oui □ Non
+Avez-vous senti un besoin urgent, une envie impérieuse de fumer ?  □ Oui □ Non
+Vous êtes-vous senti(e) nerveux(se), incapable de rester tranquille ou angoissé(e) parce que vous ne pouviez pas fumer ?  □ Oui □ Non
+
+D’après DiFranza JR, Savageau JA, Fletcher K, et al. Arch Pediatr Adolesc Med 2002 ;156(4) :397 - 403.

@@ -1,0 +1,95 @@
+{
+ "source_used": "docs/scales/waq-qia/WAQ_QIA_UQO.pdf, pages 1-3 (QIA, UQO)",
+ "title": "QIA",
+ "instructions": "Pour les numéros suivants, encerclez le chiffre correspondant (0 à 8).",
+ "reminder": "Item 3 et 5 : « Durant les derniers six mois ». Item 5 : « Cotez chaque sensation en encerclant un chiffre (0 à 8). »",
+ "items": [
+  "Quels sont les sujets à propos desquels vous vous inquiétez le plus souvent? (champs libres a) à f))",
+  "Est-ce que vos inquiétudes vous semblent excessives ou exagérées?",
+  "Durant les derniers six mois, combien de jours avez-vous été troublé-e par des inquiétudes excessives?",
+  "Est-ce que vous avez de la difficulté à contrôler vos inquiétudes? Par exemple, lorsque vous commencez à vous inquiéter à propos de quelque chose, avez-vous de la difficulté à vous arrêter?",
+  "Durant les derniers six mois, avez-vous souvent été troublé-e par une ou l'autre des sensations suivantes lorsque vous étiez inquiet-ète ou anxieux-se? Cotez chaque sensation en encerclant un chiffre (0 à 8). [5a-5f ci-dessous]",
+  "À quel point est-ce que l'anxiété ou l'inquiétude interfère avec votre vie, c'est-à-dire votre travail, activités sociales, famille, etc?"
+ ],
+ "answers": [
+  [
+   0,
+   "0"
+  ],
+  [
+   1,
+   "1"
+  ],
+  [
+   2,
+   "2"
+  ],
+  [
+   3,
+   "3"
+  ],
+  [
+   4,
+   "4"
+  ],
+  [
+   5,
+   "5"
+  ],
+  [
+   6,
+   "6"
+  ],
+  [
+   7,
+   "7"
+  ],
+  [
+   8,
+   "8"
+  ]
+ ],
+ "answers_note": "Échelle 0 à 8 avec ancres uniquement. Item 1 : 6 champs texte libres a)-f), non coté. Item 2 : 0 « Aucunement excessives », 4 (milieu) « Modérément excessives », 8 « Complètement excessives ». Item 3 : 0 « Jamais », milieu « 1 jour sur 2 », 8 « À tous les jours » [source : « À tous les jours » sur deux lignes « À tous / les jours »]. Item 4 : 0 « Aucune difficulté », milieu « Difficulté modérée », 8 « Difficulté extrême ». Item 5 a-f et item 6 : 0 « Aucunement », milieu « Modérément », 8 « Très sévèrement ». Sous-items 5 : a) Agité-e, surexcité-e ou avoir les nerfs à vif ; b) Facilement fatigué-e ; c) Difficulté à se concentrer ou blanc de mémoire ; d) Irritabilité ; e) Tensions musculaires ; f) Problèmes de sommeil (difficulté à tomber ou rester endormi-e ou sommeil agité et insatisfaisant). Donc 10 items cotés : 2, 3, 4, 5a-5f, 6 (items numérotés 1-6 dans la source, l'item 1 non coté).",
+ "reverse_items": [],
+ "subscales": [
+  [
+   "Critère cognitif (score de '4' ou plus aux items 2, 3 et 4)",
+   [
+    2,
+    3,
+    4
+   ]
+  ],
+  [
+   "Critère somatique (score de '4' ou plus sur au moins 3 des 6 symptômes somatiques de l'item 5)",
+   [
+    "5a",
+    "5b",
+    "5c",
+    "5d",
+    "5e",
+    "5f"
+   ]
+  ]
+ ],
+ "total_method": "Pour calculer le score total au QIA, faire la somme des réponses de tous les items (sauf les réponses à l'item 1).",
+ "score_range": [
+  0,
+  72
+ ],
+ "thresholds": [],
+ "thresholds_source": "Page 3 : « Pour rencontrer les critères du TAG pour le QIA, la personne doit rapporter au moins un thème d'inquiétude, indiquer un score de '4' ou plus aux items 2, 3, 4 et 6, en plus d'indiquer un score de '4' ou plus sur au moins 3 des 6 symptômes somatiques (item 5). Trois autres catégories de critères peuvent être rencontrées: -Critère cognitif (score de '4' ou plus aux items 2, 3 et 4) -Critère somatique (score de '4' ou plus sur au moins 3 des 6 symptômes somatiques de l'item 5) -Aucun critère (ne rencontre aucun des critères précédents)\". Catégories : TAG / cognitif / somatique / aucun critère, pas de seuils sur le total.",
+ "alerts": null,
+ "copyright_text": "Dugas, M. J., Freeston, M. H., Provencher, M. D., Lachance, S., Ladouceur, R., & Gosselin, P. (2001). Journal de Thérapie Comportementale et Cognitive, 11(1), 31-36. (pas de mention de copyright explicite)",
+ "doubts": [
+  "score_range [0,72] déduit : 10 items cotés (2,3,4,5a-f,6) x 8 ; non écrit dans la source.",
+  "Libellé item 3 ancre droite : « À tous les jours » (reconstitué de « À tous / les jours »); ancre milieu « 1 jour sur 2 ».",
+  "Seuils de la source: critères catégoriels, aucun seuil sur le score total.",
+  "Les ancres du milieu (Modérément) sont placées au centre, sans chiffre précis, supposé 4.",
+  "Mots « Cotation » : Dans la cotation, le critère TAG exige 'au moins un thème' (item 1) + 4 ou plus aux items 2,3,4 et 6 + 3 sur 6 en 5.",
+  "Page 1 : « No. Dossier » et « Date » champs administratifs.",
+  "Mention du titre « QIA » ; le dossier est nommé WAQ mais la source ne contient pas ce sigle (seulement Review of the Worry and Anxiety Questionnaire en bibliographie).",
+  "Quand le total est calculé, l'item 5 compte pour six sous-items (a-f)."
+ ],
+ "id": "qia"
+}

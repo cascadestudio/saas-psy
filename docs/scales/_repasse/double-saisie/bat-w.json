@@ -1,0 +1,172 @@
+{
+ "id": "bat-w",
+ "source_used": "docs/scales/bat/BAT_Francais-France.pdf, p.1-2 (Version travail du BAT) ; recoupé avec BAT_Francais-Belgique.pdf (mêmes sections) ; cotation/seuils : BAT_User-Manual-v2.0_EN.pdf p.7, 11-18 ; version retenue : France",
+ "title": "BURNOUT ASSESSMENT TOOL — Version travail du BAT (FRANÇAIS (FRANCE))",
+ "instructions": "Les énoncés suivants sont liés à votre situation de travail et à la manière dont vous la vivez. Veuillez indiquer la fréquence à laquelle chaque déclaration s’applique à vous.",
+ "reminder": null,
+ "items": [
+  "Au travail, je me sens épuisé/e mentalement",
+  "Tout ce que je fais au travail me demande beaucoup d’efforts",
+  "Après une journée au travail, il m’est difficile de retrouver mon énergie",
+  "Au travail, je me sens épuisé physiquement",
+  "Quand je me lève le matin, je manque d’énergie pour commencer une nouvelle journée de travail",
+  "Je veux être actif/ve au travail, mais il m’est impossible d’y arriver",
+  "Quand je fais beaucoup d’efforts au travail, je me fatigue plus que d’habitude",
+  "A la fin de ma journée de travail, je me sens épuisé et vidé mentalement",
+  "J’ai du mal à être enthousiaste à propos de mon travail",
+  "Au travail, je ne réfléchis pas à ce que je fais et je fonctionne en pilote automatique",
+  "Je ressens une profonde aversion pour mon travail",
+  "Je ressens de l’indifférence à propos de mon travail",
+  "Je ne pense pas que les autres accordent de l’importance à mon travail",
+  "Au travail, j’ai du mal à rester attentif/ve",
+  "Au travail, il m’est difficile de penser de manière claire",
+  "J’oublie des choses et je suis distrait/e au travail",
+  "Quand je travaille, j’ai du mal à me concentrer",
+  "Je fais des erreurs dans mon travail car mon esprit est ailleurs",
+  "Au travail, je me sens incapable de contrôler mes émotions",
+  "Je ne me reconnais pas dans mes réactions émotionnelles au travail",
+  "Quand je suis au travail, je deviens irritable quand les choses ne se passent pas comme je voudrais",
+  "Il m’arrive d’être en colère ou triste au travail sans vraiment savoir pourquoi",
+  "Au travail, il m’arrive de réagir avec excès sans en avoir l’intention",
+  "J’ai du mal à m’endormir ou je me réveille en pleine nuit",
+  "J’ai tendance à m’inquiéter",
+  "Je me sens tendu et stressé",
+  "Je me sens anxieux et/ou je souffre d’attaques de panique",
+  "Le bruit et la foule me dérangent",
+  "Je souffre de palpitations et de douleurs de poitrine",
+  "Je souffre de douleurs d’estomac et/ou intestinales",
+  "Je souffre de migraines",
+  "Je souffre de douleurs musculaires, par exemple dans le cou, l’épaule ou le dos",
+  "Je tombe souvent malade"
+ ],
+ "answers": [
+  [
+   1,
+   "Jamais"
+  ],
+  [
+   2,
+   "Rarement"
+  ],
+  [
+   3,
+   "Parfois"
+  ],
+  [
+   4,
+   "Souvent"
+  ],
+  [
+   5,
+   "Toujours"
+  ]
+ ],
+ "answers_note": "Mêmes 5 modalités pour tous les items, fréquence : Jamais 1, Rarement 2, Parfois 3, Souvent 4, Toujours 5 (ligne « Scoring »). Le PDF nomme les sections « Symptômes primaires » (23 items) et « Symptômes secondaires » (10 items).",
+ "reverse_items": [],
+ "subscales": [
+  [
+   "Épuisement",
+   [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+   ]
+  ],
+  [
+   "Distance mental",
+   [
+    9,
+    10,
+    11,
+    12,
+    13
+   ]
+  ],
+  [
+   "Déficience cognitive",
+   [
+    14,
+    15,
+    16,
+    17,
+    18
+   ]
+  ],
+  [
+   "Déficience émotionnelle",
+   [
+    19,
+    20,
+    21,
+    22,
+    23
+   ]
+  ],
+  [
+   "Plaintes psychique",
+   [
+    24,
+    25,
+    26,
+    27,
+    28
+   ]
+  ],
+  [
+   "Plaintes psychosomatiques",
+   [
+    29,
+    30,
+    31,
+    32,
+    33
+   ]
+  ]
+ ],
+ "total_method": "Moyenne : somme des scores des items / nombre d'items, arrondie à 2 décimales (manuel p.11-12 : « add each score of each item to calculate the total sum score. Next, divide this sum score by the number of items - in this case 23 - and round to 2 decimals »). Total-core = items 1 à 23 (23 items, moyenne 1-5) ; scores par dimension = moyenne des items de la dimension ; symptômes secondaires (items 24 à 33) = moyenne des 10 items, interprétée à part : « The same procedure is mutatis mutandis followed for calculating the total score of the 10 secondary symptoms. »",
+ "score_range": [
+  1,
+  5
+ ],
+ "thresholds": [
+  [
+   1.0,
+   2.58,
+   "Green (1.00 – 2.58) : no risk of burnout"
+  ],
+  [
+   2.59,
+   3.01,
+   "Orange (2.59 – 3.01) : at risk for burnout"
+  ],
+  [
+   3.02,
+   5.0,
+   "Red (3.02 – 5.00) : very high risk of burnout"
+  ]
+ ],
+ "thresholds_source": "BAT_User-Manual-v2.0_EN.pdf p.16 (manuel p.16-17), Table 5 « Cut-off values for Flemish employees (BAT-23) » (Manual BAT v2.0 Table 66, p.113), colonne Total-core : Green 1.00 – 2.58 ; Orange 2.59 – 3.01 ; Red 3.02 – 5.00. Sous-échelles (Table 5) : Exhaustion Green 1.00 – 3.05 / Orange 3.06 – 3.30 / Red 3.31 – 5.00 ; Mental distance Green 1.00 – 2.49 / Orange 2.50 – 3.09 / Red 3.10 – 5.00 ; Emotional impairment Green 1.00 – 2.09 / Orange 2.10 – 2.89 / Red 2.90 – 5.00 ; Cognitive impairment Green 1.00 – 2.69 / Orange 2.70 – 3.09 / Red 3.10 – 5.00 ; Secondary symptoms Green 1.00 – 2.84 / Orange 2.85 – 3.34 / Red 3.35 – 5.00. Libellés p.13 : « green (no risk of burnout), orange (at risk for burnout) or red (very high risk of burnout) ». Pays de la norme : Flandre (Belgique), travailleurs flamands.",
+ "alerts": null,
+ "copyright_text": "Citation: Schaufeli, W.B., De Witte, H. & Desart, S. (2019). Handleiding Burnout Assessment Tool (BAT). KU Leuven, België: Intern rapport.\nAvec l’aide de dr. Ilona Boniwell – General Manager @ Positran",
+ "doubts": [
+  "Astérisques « * » (version abrégée BAT-12) présents dans les items du PDF source, retirés du texte des items ; la version abrégée n'est pas utilisée ici.",
+  "Coquilles de la source France conservées : « Distance mental » (au lieu de « mentale »), « Plaintes psychique » (au lieu de « psychiques »), « Version abgrégéé » / « Version abrégéé » dans la note de bas de page (travail : « Note: * = Version abrégéé » ; générale : « Note: * = Version abgrégéé »).",
+  "Les en-têtes de dimensions (Épuisement, Distance mental, Déficience cognitive, Déficience émotionnelle, Plaintes psychique, Plaintes psychosomatiques) sont visibles dans le PDF ; le manuel recommande de ne pas afficher les intitulés (« burnout », « Exhaustion ») au patient.",
+  "Le PDF France indique aussi « Symptômes primaires » / « Symptômes secondaires » comme titres de sections.",
+  "Pas d'item inversé : tous les items sont cotés dans le même sens (1 Jamais à 5 Toujours), aucun item inversé dans le manuel.",
+  "Aucune mention d'items à risque / alerte suicidaire dans les sources ; le manuel (Principle 1) précise que le BAT ne permet pas de poser un diagnostic de burnout.",
+  "Le manuel v2.0 (EN) donne la cotation en MOYENNES (somme des items / nombre d'items, arrondi à 2 décimales), pas en somme. Pas de score total unique des 33/32 items : le total « core » = 23 (travail) ou 22 (général) items primaires ; symptômes secondaires = score à part (10 items, moyenne).",
+  "Seuils : le manuel donne (a) des normes statistiques (Flandre, Pays-Bas ; bas/moyen/élevé/très élevé) et (b) des seuils cliniques vert/orange/rouge disponibles pour la Flandre uniquement. Aucune norme ni seuil France/Belgique francophone ; le manuel recommande des normes locales (note 3). Normes statistiques non reportées dans thresholds.",
+  "Divergence France/Belgique : les deux PDF sont des traductions différentes, pas des variantes mineures (ex. item 3 Belgique travail « Je n'arrive pas à trouver le repos après le travail » vs France « Après une journée au travail, il m’est difficile de retrouver mon énergie » ; item 8 secondaire « maux de tête » (BE) vs « migraines » (FR) ; item 10 sec. « Je tombe rapidement malade » (BE) vs « souvent » (FR) ; item 12 BE « Mon travail me laisse indifférent/e » ; item 13 BE « Je suis cynique à propos de ce que mon travail représente pour d'autres » vs FR « Je ne pense pas que les autres accordent de l’importance à mon travail » ; BE : « Avec l’aide de Securex », FR : « Avec l’aide de dr. Ilona Boniwell – General Manager @ Positran »). Nombre d'items et ordre identiques. Version retenue : France.",
+  "Le texte du manuel EN liste 6 items en « Psychological distress » (1 et 6 dupliqués « I have trouble falling or staying asleep ») : coquille du manuel ; les PDF français ont 5 items psychiques + 5 psychosomatiques = 10, cohérent avec « 10 secondary symptoms ».",
+  "Le manuel mentionne que les items sont sur papier ; les titres « work experience survey » (travail) / « well-being survey » (général) sont suggérés comme titres neutres. Titre du PDF : « BURNOUT ASSESSMENT TOOL … FRANÇAIS (FRANCE) ».",
+  "Seuils cliniques (Flandre, travailleurs) ; pas de seuil France. Normes statistiques (Table 1, Flandre ; Table 3, Pays-Bas) différentes des seuils cliniques ; Total-core statistique Flandre : Low 1.00 – 1.60, Average 1.61 – 2.40, High 2.41 – 3.29, Very high 3.30 – 5.00 ; Pays-Bas : Low 1.00 – 1.55, Average 1.56 – 2.79, High 2.80 – 3.64, Very high 3.65 – 5.00. Seuils BAT-12 (version courte) non repris.",
+  "Item 17 du PDF France (« Quand je travaille, j’ai du mal à me concentrer ») a une case « ☒ » (Jamais) pré-cochée : artefact de mise en page, ignoré.",
+  "Items 10 sec. « Je tombe souvent malade » conforme au manuel (« I often get sick »)."
+ ]
+}

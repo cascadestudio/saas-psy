@@ -275,7 +275,7 @@ export class EmailService {
       scaleName,
     } = params;
 
-    const sessionUrl = `${this.appUrl}/passation/${sessionId}`;
+    const sessionUrl = `${this.appUrl}/app/passation/${sessionId}`;
     const subject = `${patientFirstName} ${patientLastName} a complété ${scaleName}`;
 
     const html = buildPractitionerCompletionEmailHtml({
@@ -380,7 +380,7 @@ export class EmailService {
       </p>
       <p style="${p}">
         Ton accès est actif. Tu peux dès maintenant accéder à
-        <a href="${appUrl}/dashboard" style="color: #D6591F; font-weight: 600;">ton tableau de bord</a>.
+        <a href="${appUrl}/app/dashboard" style="color: #D6591F; font-weight: 600;">ton tableau de bord</a>.
       </p>
       <p style="${p}">Pour démarrer, trois choses simples :</p>
       <p style="margin: 0 0 8px 0; color: #374151; font-size: 16px; line-height: 26px;">→ Crée ton premier patient</p>

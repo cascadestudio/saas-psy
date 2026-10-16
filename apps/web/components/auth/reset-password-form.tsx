@@ -61,7 +61,7 @@ export function ResetPasswordForm({ token }: ResetPasswordFormProps) {
           </p>
         </div>
 
-        <Link href="/dashboard?login=true" className="block mt-2">
+        <Link href="/app/dashboard?login=true" className="block mt-2">
           <Button className="w-full">
             Se reconnecter
           </Button>
@@ -139,7 +139,7 @@ export function ResetPasswordForm({ token }: ResetPasswordFormProps) {
 
         <div className="text-center">
           <Link
-            href="/dashboard"
+            href="/app/dashboard"
             className="text-sm text-muted-foreground hover:underline"
           >
             Retour à l'application

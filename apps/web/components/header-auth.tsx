@@ -21,7 +21,7 @@ export default function AuthButton() {
   return user ? (
     <div className="flex items-center gap-2">
       <Button asChild variant="secondary" size="sm">
-        <Link href="/dashboard">
+        <Link href="/app/dashboard">
           <Interfaces.User />
           Tableau de bord
         </Link>
@@ -32,7 +32,7 @@ export default function AuthButton() {
     </div>
   ) : (
     <Button asChild size="sm" variant="default">
-      <Link href="/dashboard">Accéder à l&apos;app</Link>
+      <Link href="/app/dashboard">Accéder à l&apos;app</Link>
     </Button>
   );
 }

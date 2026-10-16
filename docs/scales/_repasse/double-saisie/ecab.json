@@ -1,0 +1,56 @@
+{
+ "id": "ecab",
+ "source_used": "docs/scales/ecab/ECAB_HAS-2007_via-OMEDIT-Grand-Est.pdf, p.1 (retenue) ; HAS_2007_arret-BZD_argumentaire.pdf p.19 et annexe p.138-139 comparée",
+ "title": "Échelle ECAB",
+ "instructions": "Les questions ci-dessous concernent certaines idées que vous pouvez avoir sur les médicaments tranquillisants et/ou somnifères que vous prenez. Si une proposition correspond à ce que vous pensez, cochez la case « vrai » ; cochez la case « faux » dans le cas contraire. Il est indispensable de répondre à toutes les propositions avec une seule réponse « vrai » ou « faux », même si vous n’êtes pas très sûr(e) de votre réponse.",
+ "reminder": "Nom du médicament concerné : (champ à compléter)",
+ "items": [
+  "Où que j’aille, j’ai besoin d’avoir ce médicament avec moi",
+  "Ce médicament est pour moi comme une drogue",
+  "Je pense souvent que je ne pourrai jamais arrêter ce médicament",
+  "J’évite de dire à mes proches que je prends ce médicament",
+  "J’ai l’impression de prendre beaucoup trop de ce médicament",
+  "J’ai parfois peur à l’idée de manquer de ce médicament",
+  "Lorsque j’arrête ce médicament, je me sens très malade",
+  "Je prends ce médicament parce que je ne peux plus m’en passer",
+  "Je prends ce médicament parce que je vais mal quand j’arrête",
+  "Je ne prends ce médicament que lorsque j’en ressens le besoin"
+ ],
+ "answers": [
+  [
+   1,
+   "Vrai"
+  ],
+  [
+   0,
+   "Faux"
+  ]
+ ],
+ "answers_note": "Items 1-9 : Vrai = 1, Faux = 0. Item 10 inversé : Vrai = 0, Faux = 1. Titre de la page : « Échelle cognitive d’attachement aux benzodiazépines (attribuer 1 point en cas de réponse « vrai », sauf question 10 = 1 point en cas de réponse « faux »)».",
+ "reverse_items": [
+  10
+ ],
+ "subscales": [],
+ "total_method": "Le questionnaire ECAB est constitué de 10 items cotés 1 ou 0. Le score total au questionnaire est obtenu par la somme des points aux différents items.",
+ "score_range": [
+  0,
+  10
+ ],
+ "thresholds": [
+  [
+   6,
+   10,
+   "Un score ≥ 6 permet de différencier les patients dépendants des patients non dépendants avec une sensibilité de 94 % et une spécificité de 81 %"
+  ]
+ ],
+ "thresholds_source": "p.1 : « Un score ≥ 6 permet de différencier les patients dépendants des patients non dépendants avec une sensibilité de 94 % et une spécificité de 81 %. » (argumentaire §2.4 : « Avec un score supérieur ou égal à 6, la sensibilité était estimée à 94 % et la spécificité à 81 %, avec les critères de la CIM 10 comme test de référence »)",
+ "alerts": null,
+ "copyright_text": "Ce document a été validé par le Collège de la Haute Autorité de Santé en octobre 2007 - © Haute Autorité de santé – 2007",
+ "doubts": [
+  "Argumentaire annexe (p.139) : intitulé « Échelle Ecab (Échelle cognitive d’attachement aux benzodiazépines) d’aprés Pélissolo et Naja, 1996 » (coquille « d’aprés ») ; « Les questions ci-dessous concernant » (coquille, vs « concernent ») ; « Médicaments concernés : » (vs « Nom du médicament concerné : ») ; item 8 « ce médicaments » (coquille) ; colonnes Vrai/Faux sans points imprimés.",
+  "Argumentaire §2.4 : validation sur 52 patients psychiatriques (36, soit 70 %, répondant aux critères CIM 10 de la dépendance) ; « autoquestionnaire en français (26) ».",
+  "Argumentaire annexe : même texte d'items sinon (points de suite supprimés). Ponctuation : points de conduite retirés des items ; aucun item ne se termine par un point dans la source.",
+  "Argumentaire p.19 §2.5 : échelle « pas validée dans la langue française » est dit de la Bendep-SRQ (non de l'ECAB).",
+  "Plage 0-10 déduite. Pas de sous-échelle ni d'alerte."
+ ]
+}

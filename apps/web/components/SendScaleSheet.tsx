@@ -1,7 +1,6 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
@@ -22,6 +21,7 @@ import { scales } from "@/app/scalesData";
 import { Interfaces } from "doodle-icons";
 import { toast } from "sonner";
 import { CreatePatientSheet } from "@/components/CreatePatientSheet";
+import { ScaleTile } from "@/components/scale/ScaleTile";
 import { buildBatchEmailHtml } from "@melya/core";
 
 type Step = "patient" | "scales" | "message" | "confirm";
@@ -334,47 +334,26 @@ export function SendScaleSheet({
                   return (
                     <div
                       key={scale.id}
-                      className={`relative flex overflow-hidden cursor-pointer transition-all ${
-                        isSelected ? "ring-2 ring-primary" : "hover:opacity-90"
+                      className={`cursor-pointer rounded-2xl transition-all ${
+                        isSelected ? "ring-2 ring-primary ring-offset-2" : "hover:opacity-90"
                       }`}
-                      style={{ borderRadius: 16, height: 88 }}
                       onClick={() => handleToggleScale(scale.id)}
                     >
-                      <div
-                        className="flex items-center justify-center flex-shrink-0"
-                        style={{
-                          backgroundColor: scale.color,
-                          aspectRatio: "1 / 1",
-                          height: "100%",
-                        }}
-                      >
-                        <Image
-                          src={scale.icon}
-                          alt={scale.acronym}
-                          width={40}
-                          height={40}
-                          className="w-3/5 h-3/5 object-contain"
-                        />
-                      </div>
-                      <div
-                        className="flex flex-col justify-center px-4 flex-1 min-w-0"
-                        style={{ backgroundColor: scale.colorLight }}
-                      >
-                        <p className="font-heading font-bold text-black leading-tight text-lg">
-                          {scale.acronym}
-                        </p>
-                        <p className="font-body text-black/70 text-xs leading-snug mt-0.5 truncate">
-                          {scale.label}
-                        </p>
-                      </div>
-                      {isSelected && (
-                        <div className="absolute top-2 right-2 w-5 h-5 rounded-full bg-primary flex items-center justify-center">
-                          <Interfaces.Tick
-                            className="h-3 w-3 text-white"
-                            fill="white"
-                          />
-                        </div>
-                      )}
+                      <ScaleTile
+                        domain={scale.domain}
+                        acronym={scale.acronym}
+                        subtitle={scale.label}
+                        size="sm"
+                        className="h-[88px] rounded-2xl px-4 py-0"
+                        subtitleClassName="mt-1.5 truncate"
+                        aside={
+                          isSelected && (
+                            <div className="flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-primary">
+                              <Interfaces.Tick className="h-3 w-3 text-white" fill="white" />
+                            </div>
+                          )
+                        }
+                      />
                     </div>
                   );
                 })}

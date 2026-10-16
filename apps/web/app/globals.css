@@ -191,12 +191,12 @@
   }
 
   /* Retire toutes les couleurs de fond sauf exceptions */
-  *:not(.scale-logo-bg):not(.subscore-bar-track):not(.subscore-bar-fill) {
+  *:not(.print-keep-bg):not(.subscore-bar-track):not(.subscore-bar-fill) {
     background-color: transparent !important;
     background-image: none !important;
   }
 
-  .scale-logo-bg,
+  .print-keep-bg,
   .subscore-bar-track,
   .subscore-bar-fill {
     -webkit-print-color-adjust: exact !important;

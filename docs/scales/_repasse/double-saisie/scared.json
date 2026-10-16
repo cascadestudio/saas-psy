@@ -1,0 +1,196 @@
+{
+ "id": "scared",
+ "source_used": "docs/scales/scared/SCARED_enfant_fr-CA_Pittsburgh.pdf, pages 1-2 du questionnaire + feuille d'évaluation (page 3), version ENFANT ; version parent consultée seulement pour recouper la cotation (mêmes énoncés/seuils)",
+ "title": "Dépistage des troubles liés à l’anxiété chez l’enfant (Screen for Child Anxiety Related Disorders [SCARED]) — Version de l’ENFANT",
+ "instructions": "Tu trouveras ci-dessous une liste de phrases qui décrivent ce que les gens ressentent. Lis chaque énoncé et décide s’il est « Pas vrai ou presque jamais vrai » ou « Plutôt vrai ou parfois vrai » ou « Très vrai ou souvent vrai » pour toi. Ensuite, pour chaque phrase, remplis un cercle qui correspond à la réponse qui semble te décrire au cours des 3 derniers mois.",
+ "reminder": "au cours des 3 derniers mois",
+ "items": [
+  "Quand j’ai peur, j’ai du mal à respirer.",
+  "J’ai des maux de tête lorsque je suis à l’école.",
+  "Je n’aime pas être avec des gens que je ne connais pas bien.",
+  "J’ai peur quand je dors ailleurs qu’à la maison.",
+  "J’ai peur que les autres ne m’aiment pas.",
+  "Quand j’ai peur, je me sens comme si j’allais m’évanouir.",
+  "Je suis nerveux.",
+  "Je suis ma mère ou mon père partout où ils vont.",
+  "Les gens me disent que j’ai l’air nerveux.",
+  "Je me sens nerveux avec les gens que je ne connais pas bien.",
+  "J’ai des maux de ventre quand je suis à l’école.",
+  "Quand j’ai peur, j’ai l’impression de devenir fou.",
+  "Je m’inquiète à l’idée de dormir seul.",
+  "Je m’inquiète de ne pas être aussi bon que les autres enfants.",
+  "Quand j’ai peur, j’ai l’impression que les choses ne sont pas réelles.",
+  "Je fais des cauchemars à propos de choses négatives qui arrivent à mes parents.",
+  "Je m’inquiète à l’idée d’aller à l’école.",
+  "Quand j’ai peur, mon cœur bat vite.",
+  "Je tremble.",
+  "Je fais des cauchemars à propos de quelque chose de négatif qui m’arrive.",
+  "Je m’inquiète à propos de ce qui va m’arriver.",
+  "Quand j’ai peur, je transpire beaucoup.",
+  "Je m’inquiète.",
+  "J’ai vraiment peur sans aucune raison.",
+  "J’ai peur d’être seul dans la maison.",
+  "C’est difficile pour moi de parler avec des gens que je ne connais peu.",
+  "Quand j’ai peur, je me sens comme si j’étouffais.",
+  "Les gens me disent que je m’inquiète trop.",
+  "Je n’aime pas être loin de ma famille.",
+  "J’ai peur d’avoir des crises d’anxiété (ou de panique).",
+  "Je m’inquiète qu’il puisse arriver quelque chose de mal à mes parents.",
+  "Je suis gêné avec les gens que je ne connais pas bien.",
+  "Je m’inquiète à propos de ce qui va arriver dans le futur.",
+  "Quand j’ai peur, je me sens comme si j’allais vomir.",
+  "Je m’inquiète de la façon dont je fais les choses.",
+  "J’ai peur d’aller à l’école.",
+  "Je m’inquiète des choses qui se sont déjà passées.",
+  "Quand j’ai peur, je me sens étourdi.",
+  "Je me sens nerveux lorsque je suis avec d’autres enfants ou adultes et je dois faire quelque chose pendant qu’ils me surveillent (par exemple : lire à voix haute, parler, jouer à un jeu, jouer à un sport).",
+  "Je me sens nerveux quand je vais à des fêtes, à des danses ou à tout autre endroit où il y aura des gens que je ne connais pas bien.",
+  "Je suis timide."
+ ],
+ "answers": [
+  [
+   0,
+   "Pas vrai ou presque jamais vrai"
+  ],
+  [
+   1,
+   "Plutôt vrai ou parfois vrai"
+  ],
+  [
+   2,
+   "Très vrai ou souvent vrai"
+  ]
+ ],
+ "answers_note": "Mêmes 3 modalités (0/1/2) pour tous les items. En marge du questionnaire, chaque item porte un code de sous-échelle (PN, RSA, PS, TAS, TAG).",
+ "reverse_items": [],
+ "subscales": [
+  [
+   "Trouble panique ou symptômes somatiques importants (PN)",
+   [
+    1,
+    6,
+    9,
+    12,
+    15,
+    18,
+    19,
+    22,
+    24,
+    27,
+    30,
+    34,
+    38
+   ]
+  ],
+  [
+   "Trouble d’anxiété généralisée (TAG)",
+   [
+    5,
+    7,
+    14,
+    21,
+    23,
+    28,
+    33,
+    35,
+    37
+   ]
+  ],
+  [
+   "Trouble d’anxiété de séparation (TAS)",
+   [
+    4,
+    8,
+    13,
+    16,
+    20,
+    25,
+    29,
+    31
+   ]
+  ],
+  [
+   "Phobie sociale (PS)",
+   [
+    3,
+    10,
+    26,
+    32,
+    39,
+    40,
+    41
+   ]
+  ],
+  [
+   "Refus scolaire anxieux (RSA)",
+   [
+    2,
+    11,
+    17,
+    36
+   ]
+  ]
+ ],
+ "total_method": "Feuille d'évaluation : « Additionnez les scores dans chaque colonne et saisissez le total au bas de la colonne. Additionnez les scores dans la rangée « TOTAL » pour calculer le score global. » (somme des 41 items)",
+ "score_range": [
+  0,
+  82
+ ],
+ "thresholds": [
+  [
+   25,
+   82,
+   "Un score total ≥ 25 peut indiquer la présence d’un trouble anxieux (questionnaire)"
+  ],
+  [
+   31,
+   82,
+   "Les scores supérieurs à 30 sont plus spécifiques (questionnaire)"
+  ],
+  [
+   26,
+   82,
+   "Un score total > 25 peut indiquer la présence d’un trouble anxieux (feuille d’évaluation)"
+  ],
+  [
+   41,
+   82,
+   "Les scores supérieurs à 40 sont plus spécifiques (feuille d’évaluation)"
+  ]
+ ],
+ "thresholds_source": "Questionnaire, bloc SCORE (page 2) : « Un score total ≥ 25 peut indiquer la présence d’un trouble anxieux. Les scores supérieurs à 30 sont plus spécifiques. » ; Feuille d’évaluation (page 3) : « Un score total > 25 peut indiquer la présence d’un trouble anxieux. Les scores supérieurs à 40 sont plus spécifiques. »",
+ "subscale_thresholds": [
+  [
+   "Trouble panique ou symptômes somatiques importants (PN)",
+   "Un score de 7 pour les énoncés 1, 6, 9, 12, 15, 18, 19, 22, 24, 27, 30, 34, 38 peut indiquer un trouble panique ou des symptômes somatiques significatifs. (feuille d'évaluation : « symptômes somatiques importants »)"
+  ],
+  [
+   "Trouble d’anxiété généralisée (TAG)",
+   "Un score de 9 pour les énoncés 5, 7, 14, 21, 23, 28, 33, 35, 37 peut indiquer un trouble d’anxiété généralisée."
+  ],
+  [
+   "Trouble d’anxiété de séparation (TAS)",
+   "Un score de 5 pour les énoncés 4, 8, 13, 16, 20, 25, 29, 31 peut indiquer un trouble d’anxiété de séparation."
+  ],
+  [
+   "Phobie sociale (PS)",
+   "Un score de 8 pour les énoncés 3, 10, 26, 32, 39, 40, 41 peut indiquer une phobie sociale."
+  ],
+  [
+   "Refus scolaire anxieux (RSA)",
+   "Un score de 3 pour les énoncés 2, 11, 17, 36 peut indiquer un refus scolaire anxieux."
+  ]
+ ],
+ "alerts": null,
+ "copyright_text": "Élaboré par Boris Birmaher, M.D., Suneeta Khetarpal, M.D., Marlane Cully, M.Ed., David Brent, M.D. et Sandra McKenzie, Ph.D., Western Psychiatric Institute and Clinic, University of Pittsburgh (octobre 1995). / « L’étude SCARED est offerte gratuitement à l’adresse www.wpic.pitt.edu/research sous Tools and Assessments (Outils et évaluations), ou à l’adresse www.pediatricbipolar.pitt.edu sous Instruments. » / daté 27 mars 2012",
+ "doubts": [
+  "DEUX SEUILS DIVERGENTS pour le total : questionnaire « ≥ 25 » et « supérieurs à 30 plus spécifiques » ; feuille d'évaluation « > 25 » et « supérieurs à 40 plus spécifiques ». Les thresholds recopient les quatre phrases ; la borne 26/31/41 est ma traduction de « > ».",
+  "Seuils de sous-échelles formulés « Un score de N » (sans ≥) ; la source ne précise pas 'égal ou supérieur' ; recopiés tels quels.",
+  "Coquille item 26 : « avec des gens que je ne connais peu » (conservée).",
+  "Item 12 : « devenir fou » ; item 8 : « Je suis ma mère ou mon père » (conservés).",
+  "Libellé de sous-échelle PN : questionnaire « trouble panique ou des symptômes somatiques significatifs » vs feuille « symptômes somatiques importants ».",
+  "Pas de score_range imprimé : 0-82 déduit (41 items x 2).",
+  "Pas de mention de total 'moyen'/pas d'item inversé ; pas d'alertes cliniques dans la source. Phrase de fin : 8-11 ans, le clinicien explique les questions ou l'enfant répond assis avec un adulte.",
+  "Version parent recoupée : mêmes seuils et sous-échelles, énoncés reformulés (« Mon enfant ... »), directives au vouvoiement."
+ ]
+}

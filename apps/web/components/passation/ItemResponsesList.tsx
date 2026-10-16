@@ -6,7 +6,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import type { Scale, ScoreAlertSeverity } from "@melya/core";
+import { getItemScore, type Scale, type ScoreAlertSeverity } from "@melya/core";
 
 type FlaggedItem = { index: number; severity: ScoreAlertSeverity };
 
@@ -38,7 +38,13 @@ type Row = {
   index: number;
   label: string;
   prompt?: string;
-  values: { dimension?: string; value: number; modalityLabel: string }[];
+  values: {
+    dimension?: string;
+    value: number;
+    modalityLabel: string;
+    score: number;
+    reversed: boolean;
+  }[];
 };
 
 type Section = {
@@ -62,6 +68,7 @@ function getRows(scale: Scale, responses: Record<string, number>): Row[] {
           dimension: "Anxiété",
           value: a,
           modalityLabel: anxietyScale.find((m) => m.value === a)?.label ?? "",
+          ...getItemScore(scale, i, a),
         });
       }
       if (b !== undefined) {
@@ -69,6 +76,7 @@ function getRows(scale: Scale, responses: Record<string, number>): Row[] {
           dimension: "Évitement",
           value: b,
           modalityLabel: avoidanceScale.find((m) => m.value === b)?.label ?? "",
+          ...getItemScore(scale, i, b),
         });
       }
       return { index: i, label: text, values };
@@ -84,7 +92,10 @@ function getRows(scale: Scale, responses: Record<string, number>): Row[] {
         index: i,
         label: q.title ?? q.text ?? "",
         prompt: q.prompt,
-        values: value !== undefined ? [{ value, modalityLabel }] : [],
+        values:
+          value !== undefined
+            ? [{ value, modalityLabel, ...getItemScore(scale, i, value) }]
+            : [],
       };
     });
   }
@@ -101,7 +112,10 @@ function getRows(scale: Scale, responses: Record<string, number>): Row[] {
     return {
       index: i,
       label: text,
-      values: value !== undefined ? [{ value, modalityLabel }] : [],
+      values:
+        value !== undefined
+          ? [{ value, modalityLabel, ...getItemScore(scale, i, value) }]
+          : [],
     };
   });
 }
@@ -206,6 +220,45 @@ export function ScaleLegend({ scale }: { scale: Scale }) {
   );
 }
 
+function formatPoints(score: number): string {
+  return `${score} ${Math.abs(score) > 1 ? "pts" : "pt"}`;
+}
+
+function ItemScoreBadge({
+  value,
+  score,
+  reversed,
+  flagged,
+}: {
+  value: number;
+  score: number;
+  reversed: boolean;
+  flagged: boolean;
+}) {
+  const badge = (
+    <span
+      className={`inline-flex items-center whitespace-nowrap text-[10px] font-semibold not-italic tabular-nums rounded px-1.5 py-0.5 ${
+        flagged ? "bg-background/70" : "bg-foreground/10 text-foreground/80"
+      } ${reversed ? "cursor-help" : ""}`}
+    >
+      {formatPoints(score)}
+      {reversed && <span className="font-normal ml-1">inversé</span>}
+    </span>
+  );
+  if (!reversed) return badge;
+  return (
+    <TooltipProvider delayDuration={150}>
+      <Tooltip>
+        <TooltipTrigger asChild>{badge}</TooltipTrigger>
+        <TooltipContent className="max-w-xs">
+          Item inversé : réponse brute {value}, recodée en {score} avant
+          sommation.
+        </TooltipContent>
+      </Tooltip>
+    </TooltipProvider>
+  );
+}
+
 function ItemRow({
   scale,
   row,
@@ -288,7 +341,15 @@ function ItemRow({
                   {v.dimension}
                 </span>
               )}
-              <span className="text-sm italic text-right">{v.modalityLabel}</span>
+              <div className="flex items-center gap-1.5">
+                <span className="text-sm italic text-right">{v.modalityLabel}</span>
+                <ItemScoreBadge
+                  value={v.value}
+                  score={v.score}
+                  reversed={v.reversed}
+                  flagged={!!flagSeverity}
+                />
+              </div>
             </div>
           ))
         )}
@@ -313,9 +374,39 @@ export function ItemResponsesList({
       ? followUp.options.find((o) => o.value === followUpValue)?.label ?? ""
       : "";
 
+  const openingText = scale.openingTextItem;
+  const openingTextValue = openingText
+    ? (responses as Record<string, unknown>)[openingText.key]
+    : undefined;
+  const openingTextDisplay =
+    typeof openingTextValue === "string" && openingTextValue.trim().length > 0
+      ? openingTextValue.trim()
+      : null;
+
   return (
     <>
       <div className="space-y-6">
+        {openingText && (
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-1.5">
+              {openingText.questionText}{" "}
+              <span className="font-normal normal-case tracking-normal">
+                (non scoré)
+              </span>
+            </p>
+            <div className="bg-muted rounded-2xl p-3">
+              {openingTextDisplay ? (
+                <p className="text-sm whitespace-pre-wrap">
+                  {openingTextDisplay}
+                </p>
+              ) : (
+                <span className="text-xs text-muted-foreground italic">
+                  Sans réponse
+                </span>
+              )}
+            </div>
+          </div>
+        )}
         {sections.map((section, sIdx) => (
           <div key={sIdx}>
             {section.title && (

@@ -1,0 +1,77 @@
+{
+ "id": "cast",
+ "source_used": "docs/scales/cast/CAST_Collectivite_de_Corse.pdf (libellés des items et modalités, p.1) + CAST_OFDT_Note2013-02.pdf (p.3 et p.7 : cotation et seuils, référence) ; HAS_fiche_outil_RPIB_2021.pdf p.2 seulement décrite en doubts",
+ "title": "Cannabis Abuse Screening Test (CAST)",
+ "instructions": null,
+ "reminder": "Au cours des 12 derniers mois (1 seule réponse par ligne)",
+ "items": [
+  "Avez-vous fumé du cannabis avant midi ?",
+  "Avez-vous fumé du cannabis lorsque vous étiez seul(e) ?",
+  "Avez-vous eu des problèmes de mémoire lorsque vous fumiez du cannabis ?",
+  "Des amis ou des membres de votre famille vous ont-ils dit que vous devriez réduire votre consommation ?",
+  "Avez-vous essayé d’arrêter ou de réduire votre consommation de cannabis sans y parvenir ?",
+  "Avez-vous eu des problèmes à cause de votre consommation de cannabis (dispute, bagarre, accident, mauvais résultats scolaires…) Lesquels ?"
+ ],
+ "answers": [
+  [
+   0,
+   "Jamais"
+  ],
+  [
+   1,
+   "Rarement"
+  ],
+  [
+   2,
+   "De temps en temps"
+  ],
+  [
+   3,
+   "Assez souvent"
+  ],
+  [
+   4,
+   "Très souvent"
+  ]
+ ],
+ "answers_note": "Mêmes modalités pour les 6 items. Libellés issus de la fiche Collectivité de Corse (en-tête : Jamais / Rarement / De temps en temps / Assez souvent / Très souvent, 0 à 4). La note OFDT ne donne que « modalités codées de 0 à 4 » et cite « assez souvent » ou « très souvent ».",
+ "reverse_items": [],
+ "subscales": [],
+ "total_method": "Pour calculer un score, les modalités sont codées de 0 à 4. En fonction du total obtenu (qui peut donc varier de 0 à 24) (OFDT p.3) ; Corse : « Pour calculer un score, les modalités sont codées de 0 à 4. Les résultats peuvent donc varier de 0 à 24. »",
+ "score_range": [
+  0,
+  24
+ ],
+ "thresholds": [
+  [
+   0,
+   2,
+   "usagers sans risque lorsqu’ils présentent un score inférieur à 3"
+  ],
+  [
+   3,
+   6,
+   "usagers avec un risque faible pour un score égal à 3 et inférieur à 7"
+  ],
+  [
+   7,
+   24,
+   "risque élevé de dépendance pour un score égal ou supérieur à 7"
+  ]
+ ],
+ "thresholds_source": "OFDT p.3 : « on définit les usagers sans risque lorsqu’ils présentent un score inférieur à 3, les usagers avec un risque faible pour un score égal à 3 et inférieur à 7 et enfin ceux avec un risque élevé de dépendance pour un score égal ou supérieur à 7 ». Corse : « SCORE moins de 3 : Sans risque / SCORE entre 3 et 7 : risque faible / SCORE + de 7 : Risque élevé de dépendance »",
+ "alerts": null,
+ "copyright_text": null,
+ "doubts": [
+  "La note OFDT (référence) ne reproduit PAS le questionnaire complet : seulement un résumé des 6 questions (p.2) et le Tableau 1 (libellés abrégés : « A fumé du cannabis seul », « A fumé du cannabis avant midi », « Des proches ... ont demandé de réduire la consommation », « A tenté de réduire ou d’arrêter sa consommation sans y arriver », « A eu des problèmes de mémoire en fumant du cannabis », « A eu des problèmes à cause de sa consommation »). Les libellés d'items viennent donc de la fiche Corse.",
+  "Ordre des items : Tableau 1 OFDT (seul d'abord) et Corse (avant midi d'abord) divergent ; ordre Corse retenu.",
+  "Corse item 6 : se termine par « Lesquels ? » (champ libre), sans point d'interrogation avant « Lesquels ».",
+  "Corse item 4 : « réduire votre consommation ? » sans « de cannabis ».",
+  "Corse : les libellés « consomma-tion » sont coupés par un trait d'union de mise en page ; recollés.",
+  "Seuils : Corse « entre 3 et 7 » et « + de 7 » sont ambigus (le score 7 tombe dans les deux ?) ; OFDT dit « égal ou supérieur à 7 » pour le risque élevé et « égal à 3 et inférieur à 7 » pour faible. Bornes entières 3-6 déduites. « 0<score <3 » du Tableau 2 est une catégorie statistique, pas un seuil.",
+  "OFDT p.7 : « Actuellement, les seuils ne sont pas définitivement arrêtés » ; « le CAST surestime les prévalences des usages à risque sévère ou de dépendance » ; « ne saurait se substituer ... à un diagnostic clinique ». Note : score calculé seulement chez ceux ayant consommé du cannabis au cours de l’année.",
+  "OFDT : « initialement, les items proposés se référaient à la vie entière alors que désormais le test se rapporte au 12 derniers mois » (coquille « au 12 »).",
+  "Aucune consigne patient autre que la période (« Au cours des 12 derniers mois (1 seule réponse par ligne) »). Corse : fiche de prévention d'une association (Addictions France), avec intitulé « VOUS POUVEZ FAIRE LE TEST CAST (Cannabis Abuse Screening Test) » ; aucune mention de droits d'auteur sur le test.",
+  "AUTRE VERSION HAS 2021 (fiche RPIB, p.2) : items différents dans la forme, avec « déjà » (vie entière, pas 12 mois) : 1 « Avez-vous déjà fumé du cannabis avant midi ? » 2 « ... lorsque vous étiez seul(e) ? » 3 « Avez-vous déjà eu des problèmes de mémoire quand vous fumez du cannabis ? » 4 « Des amis ou des membres de votre famille vous ont-ils déjà dit que vous devriez réduire votre consommation de cannabis ? » 5 « Avez-vous déjà essayé de réduire ou d’arrêter votre consommation de cannabis sans y parvenir ? » 6 « Avez-vous déjà eu des problèmes à cause de votre consommation de cannabis (dispute, bagarre, accident, mauvais résultat à l’école...) ? ». Pas d'échelle 0-4 : réponse positive/négative ; interprétation : « Une réponse positive : information minimale sur les risques / Deux réponses positives au test doivent amener à s’interroger sérieusement sur les conséquences de la consommation : intervention brève. / Trois réponses positives ou plus doivent amener à proposer une consultation d’addictologie. » Incompatible avec la cotation 0-24 de l'OFDT."
+ ]
+}

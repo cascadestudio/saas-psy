@@ -1,0 +1,14 @@
+Source : NYU Langone Health — Technology Opportunities & Ventures, « ASRS v1.1 6-Question Screener », https://license.tov.med.nyu.edu/product/asrs6Qscreener
+Consulté le 12/10/2026 via Chrome (extrait verbatim).
+
+The screener is freely available for clinical and non-clinical use, including commercial use, but does require attribution. This is an evidence-based tool, and as such no other modifications, other than creating electronic versions, are permitted.
+
+The ASRS v1.1 6Q Screener is not a standalone diagnostic tool. It is designed to help clinicians identify individuals who may be at higher risk for adult ADHD.
+
+To be clear, diagnosis or prescription should never been made solely on the basis of a score from the screener tool.
+
+The appropriate citation for the screener is:
+
+The 6-question Adult Self-Report Scale-Version1.1 (ASRS-V1.1) Screener is a subset of the 18-question Adult ADHD Self-Report Scale-Version1.1 (Adult ASRSV1.1) Symptom Checklist. © New York University and the President and Fellows of Harvard College.
+
+The ASRS v1.1 Screener was created by Dr. Lenard Adler of NYU and Dr. Ronald Kessler of Harvard.

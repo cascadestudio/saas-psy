@@ -1,0 +1,126 @@
+{
+ "id": "pcl-s",
+ "source_used": "docs/scales/pcl-s/PCL-S_INSPQ_2026-10-11.txt (référence) ; recoupé avec docs/scales/pcl-s/PCL-S_Salmona_avocatparis.pdf (1 page)",
+ "title": "Questionnaire 6 - Posttraumatic Stress Disorder Checklist for DSM-IV (PCL-S; PCL-C; PCL-M)",
+ "instructions": "Veuillez trouver ci-dessous une liste de problèmes et de symptômes fréquents à la suite d’un épisode de vie stressant. Veuillez lire chaque problème avec soin puis veuillez entourer un chiffre à droite pour indiquer à quel point vous avez été perturbé par ce problème dans le mois précédent.",
+ "reminder": "dans le mois précédent ; « L’événement stressant que vous avez vécu était (décrivez-le en une phrase) : ____ Date de l’événement : __/__/__ »",
+ "items": [
+  "Être perturbé(e) par des souvenirs, des pensées ou des images en relation avec cet épisode stressant.\n",
+  "Être perturbé(e) par des rêves répétés en relation avec cet événement.\n",
+  "Brusquement agir ou sentir comme si l'épisode stressant se reproduisait (comme si vous étiez en train de le revivre).\n",
+  "Se sentir très bouleversé(e) lorsque quelque chose vous rappelle l'épisode stressant.\n",
+  "Avoir des réactions physiques, par exemple battements de cœur, difficultés à respirer, sueurs lorsque quelque chose vous a rappelé l'épisode stressant.\n",
+  "Éviter de penser ou de parler de votre épisode stressant ou éviter des sentiments qui sont en relation avec lui.\n",
+  "Éviter des activités ou des situations parce qu'elles vous rappellent votre épisode stressant.\n",
+  "Avoir des difficultés à se souvenir de parties importantes de l'expérience stressante.\n",
+  "Perte d'intérêt dans des activités qui habituellement vous faisaient plaisir.\n",
+  "Se sentir distant ou coupé(e) des autres personnes.\n",
+  "Se sentir émotionnellement anesthésié(e) ou être incapable d'avoir des sentiments d'amour pour ceux qui sont proches de vous.\n",
+  "Se sentir comme si votre avenir était en quelque sorte raccourci.\n",
+  "Avoir des difficultés pour vous endormir ou rester endormi(e).\n",
+  "Se sentir irritable ou avoir des bouffées de colère.\n",
+  "Avoir des difficultés à vous concentrer.\n",
+  "Être en état de super-alarme, sur la défensive, ou sur vos gardes.\n",
+  "Se sentir énervé(e) ou sursauter facilement.\n"
+ ],
+ "answers": [
+  [
+   1,
+   "Pas du tout"
+  ],
+  [
+   2,
+   "Un peu"
+  ],
+  [
+   3,
+   "Parfois"
+  ],
+  [
+   4,
+   "Souvent"
+  ],
+  [
+   5,
+   "Très souvent"
+  ]
+ ],
+ "answers_note": "Mêmes modalités pour les 17 items.",
+ "reverse_items": [],
+ "subscales": [
+  [
+   "Critère B (items 1 à 5)",
+   [
+    1,
+    2,
+    3,
+    4,
+    5
+   ]
+  ],
+  [
+   "Critère C (items 6 à 12)",
+   [
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12
+   ]
+  ],
+  [
+   "Critère D (items 13 à 17)",
+   [
+    13,
+    14,
+    15,
+    16,
+    17
+   ]
+  ]
+ ],
+ "total_method": "Non formulé explicitement ; somme des 17 items (Salmona : « Score total »; « Plancher : 17 – plafond : 85 »)",
+ "score_range": [
+  17,
+  85
+ ],
+ "thresholds": [
+  [
+   44,
+   85,
+   "Un seuil de 44 est recommandé pour dépister un trouble de stress post-traumatique (TSPT) dans la population générale"
+  ],
+  [
+   50,
+   85,
+   "C’est un seuil de 50 qui est recommandé dans une population de militaires"
+  ]
+ ],
+ "thresholds_source": "INSPQ : « Un seuil de 44 est recommandé pour dépister un trouble de stress post-traumatique (TSPT) dans la population générale, quoique ce seuil diffère considérablement dans la littérature (de 30 à 50). C’est un seuil de 50 qui est recommandé dans une population de militaires. » Salmona : « 44 = Seuil pour un ESPT classique tel que décrit dans le DSM »",
+ "subscale_thresholds": [
+  [
+   "Critère B (items 1 à 5)",
+   "au moins 1 item coté 3 (modérément) ou plus"
+  ],
+  [
+   "Critère C (items 6 à 12)",
+   "3 items cotés 3 (modérément) ou plus"
+  ],
+  [
+   "Critère D (items 13 à 17)",
+   "2 items cotés 3 (modérément) ou plus"
+  ]
+ ],
+ "alerts": null,
+ "copyright_text": "INSPQ : « Conditions d’utilisation : Domaine public. Il faut mentionner la source (Weathers et al., 1994). »",
+ "doubts": [
+  "Seconde méthode INSPQ (critères) : « si au moins 1 item du critère B (items 1 à 5), 3 items du critère C (items 6 à 12) et 2 items du critère D (items 13 à 17) sont cotés 3 (modérément) ou plus, il est possible de faire un diagnostic provisionnel de TSPT » (« cotés 3 » = valeur 3 « Parfois » ; l'étiquette « modérément » n'existe pas dans les libellés).",
+  "Seuil de 44 : « de 30 à 50 » dans la littérature ; 50 pour les militaires.",
+  "Divergences Salmona vs INSPQ : item 5 « par exemple, battements » sans point final / « lorsque quelque chose vous a rappelé » ; item 9 « Perte d’intérêt pour des activités » (INSPQ « dans ») ; item 11 « ou incapable » (INSPQ « ou être incapable ») ; item 12 « Se sentir comme si l’avenir était raccourci ou bouché. » (INSPQ « Se sentir comme si votre avenir était en quelque sorte raccourci. ») ; item 16 « sur la défensive en permanence » (INSPQ « ou sur vos gardes »/ « Être en état de super-alarme ») ; majuscules « Etre/Eviter » sans accent chez Salmona.",
+  "Consigne Salmona très différente (ajout sur évènements anciens/absence de mémoire) ; non retenue ; échelle Salmona : « pas du tout un peu parfois souvent très souvent » 1-5.",
+  "Source INSPQ : colonnes anglaises omises, apostrophes normalisées. Items 3 et 5 du fichier sont retranscrits avec apostrophe droite (« l'épisode »).",
+  "Pas d'alertes cliniques signalées ; pas d'item inversé."
+ ]
+}

@@ -29,7 +29,7 @@ export function PatientRow({
   onSendClick?: (e: React.MouseEvent) => void;
 }) {
   const rowClassName =
-    "flex items-center justify-between p-3 border-t border-border/50 first:border-t-0 hover:bg-background/50 transition-colors";
+    "flex items-center justify-between rounded-xl bg-muted-foreground/5 px-4 py-2.5 transition-colors hover:bg-muted-foreground/10";
   const inner = (
     <>
       <div className="flex items-center gap-2">

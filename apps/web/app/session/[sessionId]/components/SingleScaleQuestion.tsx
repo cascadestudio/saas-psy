@@ -26,6 +26,8 @@ interface SingleScaleQuestionProps {
   selectedValue?: number;
   onSelect: (value: number) => void;
   onSkip?: () => void;
+  /** Taille de question réduite, pour les échelles à questions très longues (PDSS). */
+  compact?: boolean;
 }
 
 export default function SingleScaleQuestion({
@@ -37,7 +39,12 @@ export default function SingleScaleQuestion({
   selectedValue,
   onSelect,
   onSkip,
+  compact = false,
 }: SingleScaleQuestionProps) {
+  const titleClassName = compact
+    ? "font-body text-base sm:text-lg font-semibold text-gray-900 leading-relaxed"
+    : "font-body text-xl sm:text-2xl lg:text-3xl font-semibold text-gray-900 leading-tight";
+
   const hasLongConsigne =
     !!persistentConsigne &&
     persistentConsigne.length > PERSISTENT_CONSIGNE_MODAL_THRESHOLD;
@@ -91,14 +98,10 @@ export default function SingleScaleQuestion({
             <p className="text-xs font-medium uppercase tracking-wider text-gray-500">
               {questionText}
             </p>
-            <h2 className="font-body text-xl sm:text-2xl lg:text-3xl font-semibold text-gray-900 leading-tight">
-              {questionPrompt}
-            </h2>
+            <h2 className={titleClassName}>{questionPrompt}</h2>
           </>
         ) : (
-          <h2 className="font-body text-xl sm:text-2xl lg:text-3xl font-semibold text-gray-900 leading-tight">
-            {questionText}
-          </h2>
+          <h2 className={titleClassName}>{questionText}</h2>
         )}
       </div>
 

@@ -6,8 +6,10 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
+    "prebuild": "npm run build --workspace=@melya/core",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+    "prestart:dev": "npm run build --workspace=@melya/core",
     "start": "nest start",
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",

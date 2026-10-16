@@ -1,0 +1,86 @@
+{
+ "id": "cst",
+ "source_used": "docs/scales/cst/CST_Lefebvre-Dalloz_2026-10-11.txt (texte, valeurs 1-6, seuils) ; docs/scales/cst/CST_CNP-Neuchatel_Cungi1997.pdf (1 page, document d'origine CNP Neuchâtel) ; version retenue pour items : Lefebvre-Dalloz (pas de numérotation ni valeurs dans le PDF), écarts listés en doubts",
+ "title": "Échelle brève d'évaluation du stress - Cungi 1997",
+ "instructions": "Pour chacune des questions, faites une croix dans la case appropriée selon l’échelle suivante :\n1 - Pas du tout / 2 - Faiblement / 3 - Un peu / 4 - Assez / 5 - Beaucoup / 6 – Extrêmement",
+ "reminder": null,
+ "items": [
+  "Suis-je émotif, sensible aux remarques, aux critiques d’autrui ?",
+  "Suis-je colérique ou rapidement irritable ?",
+  "Suis-je perfectionniste, ai-je tendance à ne pas être satisfait de ce que j’ai fait ou de ce que les autres ont fait ?",
+  "Ai-je le cœur qui bat vite, de la transpiration, des tremblements, des secousses musculaires, par exemple au niveau du visage, des paupières ?",
+  "Est-ce que je me sens tendu au niveau des muscles, ai-je une sensation de crispation au niveau des mâchoires, du visage, du corps en général ?",
+  "Ai-je des problèmes de sommeil ?",
+  "Suis-je anxieux, est-ce que je me fais souvent du souci ?",
+  "Ai-je des manifestations corporelles comme un trouble digestif, des douleurs, des maux de tête, des allergies de l’eczéma ?",
+  "Est-ce que je suis fatigué ?",
+  "Ai-je des problèmes de santé plus importants comme un ulcère d’estomac, une maladie de peau, un problème de cholestérol, de l’hypertension artérielle, un trouble cardio-vasculaire ?",
+  "Est-ce que je fume ou bois de l’alcool pour me stimuler ou me calmer ? Est-ce que j’utilise d’autres produits ou des médicaments dans ce but ?"
+ ],
+ "answers": [
+  [
+   1,
+   "Pas du tout"
+  ],
+  [
+   2,
+   "Faiblement"
+  ],
+  [
+   3,
+   "Un peu"
+  ],
+  [
+   4,
+   "Assez"
+  ],
+  [
+   5,
+   "Beaucoup"
+  ],
+  [
+   6,
+   "Extrêmement"
+  ]
+ ],
+ "answers_note": "Mêmes 6 modalités pour tous les items. Les valeurs 1 à 6 viennent du texte Lefebvre-Dalloz ; le PDF CNP Neuchâtel n'affiche que les libellés de colonnes (« Non pas du tout / Faiblement / Un peu / Assez / Beaucoup / Extrêmement ») et une ligne « Total par colonne », « Total général ».",
+ "reverse_items": [],
+ "subscales": [],
+ "total_method": "Somme des 11 items (« Total par colonne / Total général » ; le texte ne décrit pas explicitement l'addition, mais les seuils sont exprimés en total général de 11 à 66).",
+ "score_range": [
+  11,
+  66
+ ],
+ "thresholds": [
+  [
+   11,
+   19,
+   "mon niveau de stress est très bas"
+  ],
+  [
+   19,
+   30,
+   "mon niveau de stress est bas"
+  ],
+  [
+   30,
+   45,
+   "mon niveau de stress est élevé"
+  ],
+  [
+   45,
+   null,
+   "mon niveau de stress est très élevé"
+  ]
+ ],
+ "thresholds_source": "Lefebvre-Dalloz : « Entre 11 et 19 : mon niveau de stress est très bas / Entre 19 et 30 : mon niveau de stress est bas / Entre 30 et 45 : mon niveau de stress est élevé / Au-dessus de 45 : mon niveau de stress est très élevé ». PDF CNP : « Entre 11 et 19 : mon niveau de stress est très bas. Entre 19 et 30 : mon niveau de stress est bas. Entre 30 et 45 : mon score est élevé. Au-dessus de 45 : je suis soumis·e à un niveau très élevé de stress. »",
+ "alerts": "Aucune alerte désignée par la source. Item 11 (consommation de tabac, alcool, produits ou médicaments) et item 10 (problèmes de santé) sont des items de santé, non signalés comme risque.",
+ "copyright_text": "Source : Lefebvre Dalloz Compétences, « Test : échelle brève d’évaluation du stress », https://formation.lefebvre-dalloz.fr/actualite/test-echelle-breve-devaluation-du-stress ; « Ce test issu des travaux du psychiatre Charly Cungi permet d’évaluer son niveau de stress. » PDF : « Échelle brève d'évaluation du stress - Cungi 1997 » (aucune mention de copyright explicite)",
+ "doubts": [
+  "Bornes de seuils chevauchantes (« Entre 11 et 19 » puis « Entre 19 et 30 » puis « Entre 30 et 45 » puis « Au-dessus de 45 ») : 19, 30 et 45 appartiennent à deux classes ; non tranché par la source. Reproduit tel quel (19 à la fois max de très bas et min de bas, etc.).",
+  "Le maximum du score (66) n'est pas indiqué par la source : déduit de 11 items x 6.",
+  "Écarts Lefebvre-Dalloz vs PDF CNP : item 1 « émotif » vs « émotif·ve » ; item 9 « fatigué » vs « fatigué·e » ; item 10 Lefebvre « un problème de cholestérol, de l’hypertension artérielle » vs PDF « un problème de tension artérielle, de l’hypertension artérielle » (le PDF n'a pas « cholestérol ») ; seuil « élevé » : Lefebvre « mon niveau de stress est élevé » vs PDF « mon score est élevé » ; seuil « très élevé » : Lefebvre « mon niveau de stress est très élevé » vs PDF « je suis soumis·e à un niveau très élevé de stress ». Items retenus : Lefebvre (écriture non inclusive).",
+  "En-tête colonne PDF « Non pas du tout » (coquille probable) vs Lefebvre « Pas du tout ». Item 8 « des allergies de l’eczéma » (sic, les deux sources) conservé. Consigne PDF : « Faites une croix dans la case vous correspondant » (pas de consigne détaillée ni de cadre temporel).",
+  "Pas de cadre temporel (période de référence) dans les deux sources. Pas de sous-échelles. Les titres « très bas / bas / élevé / très élevé » : aucun libellé clinique supplémentaire."
+ ]
+}

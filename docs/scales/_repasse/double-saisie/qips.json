@@ -1,0 +1,74 @@
+{
+ "id": "qips",
+ "source_used": "gosselin-ea-2001.pdf (L'Encéphale 2001;XXVII:475-84), Annexe 1 (p.~484) pour le texte ; description p.478-479 pour inversions et cotation ; discussion p.480 pour la moyenne",
+ "title": "Questionnaire sur les inquiétudes de Penn State (QIPS) ; article : « Évaluation des inquiétudes : validation d'une traduction française du Penn State Worry Questionnaire »",
+ "instructions": "Veuillez utiliser l’échelle ci-dessous pour exprimer jusqu’à quel point chacun des énoncés suivants correspond à vous (écrivez le numéro vous représentant, à l’avant de chacun des énoncés).",
+ "reminder": null,
+ "items": [
+  "Si je n’ai pas assez de temps pour tout faire, je ne m’inquiète pas.",
+  "Mes inquiétudes me submergent.",
+  "Je n’ai pas tendance à m’inquiéter à propos des choses.",
+  "Plusieurs situations m’amènent à m’inquiéter.",
+  "Je sais que je ne devrais pas m’inquiéter mais je n’y peux rien.",
+  "Quand je suis sous pression, je m’inquiète beaucoup.",
+  "Je m’inquiète continuellement à propos de tout.",
+  "Il m’est facile de me débarrasser de pensées inquiétantes.",
+  "Aussitôt que j’ai fini une tâche, je commence immédiatement à m’inquiéter au sujet de toutes les autres choses que j’ai encore à faire.",
+  "Je ne m’inquiète jamais.",
+  "Quand je n’ai plus rien à faire au sujet d’un tracas, je ne m’en inquiète plus.",
+  "J’ai été inquiet tout au long de ma vie.",
+  "Je remarque que je m’inquiète pour certains sujets.",
+  "Quand je commence à m’inquiéter, je ne peux pas m’arrêter.",
+  "Je m’inquiète tout le temps.",
+  "Je m’inquiète au sujet de mes projets jusqu’à ce qu’ils soient complétés."
+ ],
+ "answers": [
+  [
+   1,
+   "Pas du tout correspondant"
+  ],
+  [
+   2,
+   "Un peu correspondant"
+  ],
+  [
+   3,
+   "Assez correspondant"
+  ],
+  [
+   4,
+   "Très correspondant"
+  ],
+  [
+   5,
+   "Extrêmement correspondant"
+  ]
+ ],
+ "answers_note": "Même échelle de 1 à 5 pour tous les items (la réponse est écrite à l'avant de chaque énoncé). Texte p.478 : « échelle de type Likert en 5 points (« pas du tout correspondant » à « extrêmement correspondant »)».",
+ "reverse_items": [
+  1,
+  3,
+  8,
+  10,
+  11
+ ],
+ "subscales": [],
+ "total_method": "Non décrit explicitement dans l'article. Texte : « Cinq items du questionnaire sont inversés (les items 1, 3, 8, 10 et 11) » ; structure « à un facteur » ; « le résultat total ». Total = somme des 16 items après inversion des items 1, 3, 8, 10, 11 (inversion 6 - x, déduite).",
+ "score_range": [
+  16,
+  80
+ ],
+ "thresholds": [],
+ "thresholds_source": "Aucun seuil dans la source. Seule mention : « le résultat moyen au QIPS obtenu par les participants non cliniques se situe autour de 45 » (p.480, discussion étude 1) ; l'article indique aussi que les patients TAG obtiennent un résultat total plus élevé (p.~482) sans seuil chiffré recopié.",
+ "alerts": null,
+ "copyright_text": "© Tous droits réservés. Patrick Gosselin, Michel J. Dugas, Robert Ladouceur et Mark H. Freeston (2001). Université Laval, Québec (Qc), Canada.",
+ "doubts": [
+  "Plage 16-80 déduite (16 items x 1 à 5), non écrite dans la source.",
+  "Méthode de calcul du total et formule d'inversion non écrites : seuls les numéros des items inversés sont donnés (1, 3, 8, 10, 11).",
+  "Pas de cadre temporel ni de consigne de période dans l'annexe (le PSWQ mesure la tendance générale).",
+  "Aucun seuil clinique dans l'article ; moyenne non clinique ~45 uniquement (pas un seuil).",
+  "Extraction texte de l'annexe : la numérotation 1-16 et les libellés sont dissociés dans le texte brut, ordre vérifié en alignant 1 à 16 ; item 9 est sur 2 lignes dans le PDF.",
+  "Apostrophes typographiques ’ conservées. Item 12 « J’ai été inquiet tout au long de ma vie. » (masculin générique) ; item 13 « Je remarque que je m’inquiète pour certains sujets. » recopiés tels quels.",
+  "L'annexe ne comporte pas de titre en tête de page autre que « ANNEXE 1 / Questionnaire sur les inquiétudes de Penn State »."
+ ]
+}

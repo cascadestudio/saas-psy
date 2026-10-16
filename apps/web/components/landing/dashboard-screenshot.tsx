@@ -2,12 +2,13 @@
 
 import { useScrollAnimation } from "./use-scroll-animation";
 import { Interfaces, Files } from "doodle-icons";
+import type { ScaleDomain } from "@melya/core";
+import { ScaleTag } from "@/components/scale/ScaleTag";
 import Image from "next/image";
 
 type SessionRowData = {
   acronym: string;
-  color: string;
-  icon: string;
+  domain: ScaleDomain;
   patient: string;
   rightLabel?: string;
   badge?: { label: string; className: string };
@@ -18,24 +19,21 @@ type SessionRowData = {
 const inProgressRows: SessionRowData[] = [
   {
     acronym: "PHQ-9",
-    color: "#CBCADB",
-    icon: "/images/scales/phq-9.svg",
+    domain: "humeur",
     patient: "Marie Dupont",
     badge: { label: "À relancer", className: "bg-fuchsia-100 text-fuchsia-700 ring-1 ring-fuchsia-500/30" },
     rightLabel: "il y a 8 j",
   },
   {
     acronym: "GAD-7",
-    color: "#6A9BCC",
-    icon: "/images/scales/gad-7.svg",
+    domain: "anxiete",
     patient: "Jean Martin",
     badge: { label: "Envoyée", className: "bg-blue-100 text-blue-700" },
     rightLabel: "hier",
   },
   {
     acronym: "PCL-5",
-    color: "#C46686",
-    icon: "/images/scales/pcl-5.svg",
+    domain: "trauma",
     patient: "Sophie Bernard",
     badge: { label: "En cours", className: "bg-amber-100 text-amber-700" },
     rightLabel: "aujourd'hui",
@@ -45,8 +43,7 @@ const inProgressRows: SessionRowData[] = [
 const recentResultsRows: SessionRowData[] = [
   {
     acronym: "LSAS",
-    color: "#6A9BCC",
-    icon: "/images/scales/lsas.svg",
+    domain: "anxiete",
     patient: "Lucas Moreau",
     badge: { label: "Non lu", className: "bg-violet-100 text-violet-700" },
     score: "62",
@@ -54,8 +51,7 @@ const recentResultsRows: SessionRowData[] = [
   },
   {
     acronym: "RSES",
-    color: "#E7BC92",
-    icon: "/images/scales/rses.svg",
+    domain: "estime",
     patient: "Camille Petit",
     score: "28",
     interpretation: "Estime de soi élevée",
@@ -65,24 +61,12 @@ const recentResultsRows: SessionRowData[] = [
 function Row({ row }: { row: SessionRowData }) {
   return (
     <div className="flex items-center gap-2 px-2.5 py-2 border-t border-border/50 first:border-t-0">
-      <div
-        className="flex items-center justify-center flex-shrink-0 rounded-md"
-        style={{ backgroundColor: row.color, width: 24, height: 24 }}
-      >
-        <Image
-          src={row.icon}
-          alt={row.acronym}
-          width={16}
-          height={16}
-          className="w-3/5 h-3/5 object-contain"
-        />
-      </div>
       <div className="flex-1 min-w-0">
         <p className="text-[10px] font-sans font-bold text-foreground leading-tight truncate">
           {row.patient}
         </p>
         <p className="text-[8px] font-body text-muted-foreground leading-snug truncate">
-          {row.acronym}
+          <ScaleTag domain={row.domain} acronym={row.acronym} className="gap-1" />
         </p>
       </div>
       <div className="flex items-center gap-1.5 flex-shrink-0">

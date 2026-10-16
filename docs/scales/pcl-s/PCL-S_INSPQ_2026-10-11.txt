@@ -1,0 +1,33 @@
+Source : INSPQ, Boîte à outils pour la surveillance post-sinistre des impacts sur la santé mentale — « Questionnaire 6 - Posttraumatic Stress Disorder Checklist for DSM-IV (PCL-S; PCL-C; PCL-M) »
+URL : https://www.inspq.qc.ca/boite-outils-pour-la-surveillance-post-sinistre-des-impacts-sur-la-sante-mentale/instruments-de-mesure-standardises/questionnaires/symptomes-de-stress-post-traumatique
+Fiche : …/fiches-pour-les-instruments-de-mesure-standardises-recommandes/symptomes-de-stress-post-traumatique
+Consulté le 11/10/2026 (page protégée par Cloudflare, texte extrait via Chrome ; colonnes anglaises omises). Apostrophes typographiques normalisées.
+
+Consigne : Veuillez trouver ci-dessous une liste de problèmes et de symptômes fréquents à la suite d’un épisode de vie stressant. Veuillez lire chaque problème avec soin puis veuillez entourer un chiffre à droite pour indiquer à quel point vous avez été perturbé par ce problème dans le mois précédent.
+L’événement stressant que vous avez vécu était (décrivez-le en une phrase) : ____  Date de l’événement : __/__/__
+
+Réponses : 1 Pas du tout · 2 Un peu · 3 Parfois · 4 Souvent · 5 Très souvent
+
+1. Être perturbé(e) par des souvenirs, des pensées ou des images en relation avec cet épisode stressant.
+2. Être perturbé(e) par des rêves répétés en relation avec cet événement.
+3. Brusquement agir ou sentir comme si l'épisode stressant se reproduisait (comme si vous étiez en train de le revivre).
+4. Se sentir très bouleversé(e) lorsque quelque chose vous rappelle l'épisode stressant.
+5. Avoir des réactions physiques, par exemple battements de cœur, difficultés à respirer, sueurs lorsque quelque chose vous a rappelé l'épisode stressant.
+6. Éviter de penser ou de parler de votre épisode stressant ou éviter des sentiments qui sont en relation avec lui.
+7. Éviter des activités ou des situations parce qu'elles vous rappellent votre épisode stressant.
+8. Avoir des difficultés à se souvenir de parties importantes de l'expérience stressante.
+9. Perte d'intérêt dans des activités qui habituellement vous faisaient plaisir.
+10. Se sentir distant ou coupé(e) des autres personnes.
+11. Se sentir émotionnellement anesthésié(e) ou être incapable d'avoir des sentiments d'amour pour ceux qui sont proches de vous.
+12. Se sentir comme si votre avenir était en quelque sorte raccourci.
+13. Avoir des difficultés pour vous endormir ou rester endormi(e).
+14. Se sentir irritable ou avoir des bouffées de colère.
+15. Avoir des difficultés à vous concentrer.
+16. Être en état de super-alarme, sur la défensive, ou sur vos gardes.
+17. Se sentir énervé(e) ou sursauter facilement.
+
+Item 17 sur la page : « Se sentir énervé(e) ou sursauter facilement » (sans point final).
+
+Fiche INSPQ : « Conditions d’utilisation : Domaine public. Il faut mentionner la source (Weathers et al., 1994). » ; « Un seuil de 44 est recommandé pour dépister un trouble de stress post-traumatique (TSPT) dans la population générale, quoique ce seuil diffère considérablement dans la littérature (de 30 à 50). C’est un seuil de 50 qui est recommandé dans une population de militaires. La deuxième méthode pour faire un dépistage est d’utiliser les critères (cluster) de sévérité. Ainsi, si au moins 1 item du critère B (items 1 à 5), 3 items du critère C (items 6 à 12) et 2 items du critère D (items 13 à 17) sont cotés 3 (modérément) ou plus, il est possible de faire un diagnostic provisionnel de TSPT. »
+
+Sources citées : Yao, S. N., Cottraux, J., Note, I., De Mey-Guillard, C., Mollard, E. et Ventureyra, V. (2003). Évaluation des états de stress post-traumatique : validation d’une échelle, la PCLS. L’Encéphale, 29(3), 232-238. — Weathers, F., Litz, B., Herman, D., Huska, J. et Keane, T. (1994). PCL-S. Washington : National Center for PTSD.

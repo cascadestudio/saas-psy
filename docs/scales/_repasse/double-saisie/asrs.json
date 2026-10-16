@@ -1,0 +1,64 @@
+{
+ "id": "asrs",
+ "source_used": "docs/scales/asrs/ASRS_6Q_French_NYU.pdf, p.2 (questionnaire, ombrage lu sur l'image) et p.2-3 texte",
+ "title": "Test de dépistage et d’auto-évaluation des troubles déficitaires de l’attention avec hyperactivité de l’adulte V1.1 (ASRS-V1.1)",
+ "instructions": "Cochez la case qui décrit le mieux ce que vous avez ressenti et comment vous vous êtes comporté au cours des 6 derniers mois. Veuillez remettre le questionnaire rempli à votre médecin ou un autre professionnel lors de votre prochain rendez-vous afin d’en discuter les résultats.",
+ "reminder": "au cours des 6 derniers mois",
+ "items": [
+  "A quelle fréquence vous arrive-t-il d'avoir des difficultés à finaliser les derniers détails d'un projet une fois que les parties les plus stimulantes ont été faites ?",
+  "A quelle fréquence vous arrive-t-il d'avoir des difficultés à mettre les choses en ordre lorsque vous devez faire quelque chose qui demande de l'organisation ?",
+  "A quelle fréquence vous arrive-t-il d'avoir des difficultés à vous rappeler vos rendez-vous ou vos obligations ?",
+  "Quand vous devez faire quelque chose qui demande beaucoup de réflexion, à quelle fréquence vous arrive-t-il d'éviter de le faire ou de le remettre à plus tard ?",
+  "A quelle fréquence vous arrive-t-il de remuer ou de tortiller les mains ou les pieds lorsque vous devez rester assis pendant une période prolongée ?",
+  "A quelle fréquence vous arrive-t-il de vous sentir excessivement actif et contraint de faire quelque chose, comme si vous étiez entraîné malgré vous par un moteur ?"
+ ],
+ "answers": [
+  [
+   null,
+   "Jamais"
+  ],
+  [
+   null,
+   "Rarement"
+  ],
+  [
+   null,
+   "Quelquefois"
+  ],
+  [
+   null,
+   "Souvent"
+  ],
+  [
+   null,
+   "Très souvent"
+  ]
+ ],
+ "answers_note": "Mêmes 5 colonnes pour les 6 items, aucune valeur numérique imprimée. Cases « très ombrées » (lues sur l'image) : items 1, 2, 3 = Quelquefois, Souvent, Très souvent ; items 4, 5, 6 = Souvent, Très souvent (Jamais et Rarement non ombrées ; Quelquefois non ombrée pour 4-6).",
+ "reverse_items": [],
+ "subscales": [],
+ "total_method": "Additionnez le nombre de cases très ombrées que vous avez cochées.",
+ "score_range": [
+  0,
+  6
+ ],
+ "thresholds": [
+  [
+   4,
+   6,
+   "Quatre (4) cases cochées ou plus indiquent que les symptômes que vous présentez peuvent correspondre à ceux des troubles déficitaires de l’attention avec hyperactivité de l’adulte."
+  ]
+ ],
+ "thresholds_source": "p.2 : « Quatre (4) cases cochées ou plus indiquent que les symptômes que vous présentez peuvent correspondre à ceux des troubles déficitaires de l’attention avec hyperactivité de l’adulte. Vous devriez en parler avec votre médecin et demander une évaluation. »",
+ "alerts": null,
+ "copyright_text": "© New York University and President and Fellows of Harvard College.",
+ "doubts": [
+  "Aucune valeur numérique 0-4 imprimée ; le score est un décompte de cases ombrées (items 1-3 : ≥ Quelquefois ; items 4-6 : ≥ Souvent), déduit de l'image (l'extraction texte ne montre pas l'ombrage).",
+  "Plage 0-6 déduite.",
+  "Typographie : « A quelle » sans accent, apostrophes droites dans les items, « entraîné » ; « ASRS-V1.1 » ; parenthèses vides « () » dans le titre de l'encadré.",
+  "Texte de l'item 4 : commence par « Quand vous devez... » (formulation différente des autres).",
+  "Item 5 et 6 : « excessivement actif et contraint de faire quelque chose, comme si vous étiez entraîné malgré vous par un moteur ».",
+  "Le document inclut un texte d'introduction grand public et une page d'informations pour professionnels (OMS, Adler, Kessler, Spencer ; critères DSM-IV ; « Le dépistage prend moins de 5 minutes ») ; ne concerne que les 6 questions (partie A) ; destiné à « 18 ans et plus ».",
+  "Pas de seuils multiples, pas d'alerte clinique, pas de sous-échelle."
+ ]
+}
