@@ -2944,7 +2944,15 @@ export const scales: Scale[] = [
     longDescription:
       "L'échelle brève d'évaluation du stress, issue des travaux du psychiatre Charly Cungi, comporte 11 questions sur les manifestations émotionnelles, comportementales et physiques du stress. Chaque question est cotée de 1 (pas du tout) à 6 (extrêmement) ; le score total varie de 11 à 66 : niveau de stress très bas, bas, élevé ou très élevé. Texte repris d'une source secondaire, à confronter à l'ouvrage de référence (Cungi, Savoir gérer son stress).",
     instructions:
-      "Pour chacune des questions, choisissez la réponse appropriée selon l'échelle suivante : 1 - Non pas du tout, 2 - Faiblement, 3 - Un peu, 4 - Assez, 5 - Beaucoup, 6 - Extrêmement.",
+      "Pour chacune des questions, choisissez la réponse appropriée selon l'échelle suivante :\n" +
+      "1 - Non pas du tout\n" +
+      "2 - Faiblement\n" +
+      "3 - Un peu\n" +
+      "4 - Assez\n" +
+      "5 - Beaucoup\n" +
+      "6 - Extrêmement",
+    persistentInstructions:
+      "Pour chacune des questions, choisissez la réponse appropriée.",
     copyrightAttribution:
       "Échelle brève d'évaluation du stress — issue des travaux de Charly Cungi (Savoir gérer son stress, Retz). Version reprise de Lefebvre Dalloz Compétences.",
     higherIsBetter: false,
