@@ -1,4 +1,4 @@
-import { Scale, ScoreResult } from '@melya/core';
+import { ASRS_SHADED_FROM, Scale, ScoreResult } from '@melya/core';
 import { collectByPrefix, resolveSeverity } from './helpers';
 
 /**
@@ -7,15 +7,14 @@ import { collectByPrefix, resolveSeverity } from './helpers';
  * dans la zone grisée du formulaire : questions 1-3 à partir de
  * « Quelquefois » (2), questions 4-6 à partir de « Souvent » (3).
  * 0-6 ; ≥ 4 = symptômes pouvant correspondre à un TDAH de l'adulte.
+ * Seuils de la zone grisée : `ASRS_SHADED_FROM` (@melya/core).
  */
-const SHADED_FROM = [2, 2, 2, 3, 3, 3];
-
 export function scoreAsrs(
   scale: Scale,
   responses: Record<string, unknown>,
 ): ScoreResult {
   const values = collectByPrefix(responses, 'intensity_');
-  const totalScore = SHADED_FROM.reduce(
+  const totalScore = ASRS_SHADED_FROM.reduce(
     (count, threshold, i) => count + ((values[i] ?? 0) >= threshold ? 1 : 0),
     0,
   );

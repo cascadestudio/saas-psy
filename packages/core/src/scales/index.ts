@@ -3287,3 +3287,40 @@ export const scales: Scale[] = [
 export function getScaleById(id: string): Scale | undefined {
   return scales.find((s) => s.id === id);
 }
+
+/**
+ * ASRS-V1.1 partie A : seuil de la zone grisée par item (questions 1-3 à
+ * partir de « Quelquefois » (2), questions 4-6 à partir de « Souvent » (3)).
+ * Chaque item dans la zone grisée vaut 1 point.
+ */
+export const ASRS_SHADED_FROM = [2, 2, 2, 3, 3, 3];
+
+/**
+ * Score d'un item tel qu'il entre dans la sommation (vue praticien).
+ * Diffère de la valeur brute pour les items inversés (`reverseItems`,
+ * recodés min + max − valeur) et pour l'ASRS (0/1 selon la zone grisée).
+ * Doit rester aligné avec les scorers de l'API (cf. item-score.spec.ts).
+ */
+export function getItemScore(
+  scale: Scale,
+  itemIndex: number,
+  value: number,
+): { score: number; reversed: boolean } {
+  if (scale.id === "asrs") {
+    const threshold = ASRS_SHADED_FROM[itemIndex];
+    return {
+      score: threshold !== undefined && value >= threshold ? 1 : 0,
+      reversed: false,
+    };
+  }
+  if (scale.reverseItems?.includes(itemIndex + 1)) {
+    const values = (scale.answerScales?.intensity ?? []).map((m) => m.value);
+    if (values.length > 0) {
+      return {
+        score: Math.min(...values) + Math.max(...values) - value,
+        reversed: true,
+      };
+    }
+  }
+  return { score: value, reversed: false };
+}
