@@ -7,6 +7,7 @@ import Link from "next/link";
 import { useUser } from "@/app/context/UserContext";
 
 const navLinks = [
+  { href: "/echelles", label: "Échelles" },
   { href: "/#fonctionnalites", label: "Fonctionnalités" },
   { href: "/#comment-ca-marche", label: "Comment ça marche" },
   // { href: "#tarifs", label: "Tarifs" },

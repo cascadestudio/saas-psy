@@ -9,6 +9,8 @@ import { questionCount } from "@/app/utils/utils";
 import { allScaleSlugs, getScaleBySlug } from "@/lib/scale-slug";
 import { getScaleLandingPage } from "@/sanity/lib/queries";
 import { pageMetadata } from "@/lib/seo";
+import { getScaleGuide } from "@/content/echelles";
+import { ScaleGuide } from "@/components/scale-guide/ScaleGuide";
 import { DomainDot } from "@/components/scale/ScaleTag";
 
 export const revalidate = 60;
@@ -25,6 +27,16 @@ export async function generateMetadata({
   const { slug } = await params;
   const scale = getScaleBySlug(slug);
   if (!scale) return {};
+
+  const guide = getScaleGuide(scale.id);
+  if (guide) {
+    return pageMetadata({
+      title: guide.seoTitle,
+      description: guide.seoDescription,
+      path: `/echelles/${slug}`,
+      openGraph: { type: "article", modifiedTime: guide.updatedAt },
+    });
+  }
 
   const content = await getScaleLandingPage(scale.id);
   const title =
@@ -48,10 +60,20 @@ export default async function ScaleLandingPage({
   const scale = getScaleBySlug(slug);
   if (!scale) notFound();
 
+  const guide = getScaleGuide(scale.id);
+  if (guide) {
+    return (
+      <>
+        <Navbar />
+        <ScaleGuide scale={scale} content={guide} />
+        <Footer />
+      </>
+    );
+  }
+
   const content = await getScaleLandingPage(scale.id);
 
-  const heading =
-    content?.heading ?? `${scale.acronym} — ${scale.label}`;
+  const heading = content?.heading ?? `${scale.acronym} — ${scale.label}`;
   const intro = content?.intro ?? scale.longDescription;
   const ctaLabel = content?.ctaLabel ?? "Essayer Melya gratuitement";
 
@@ -125,9 +147,7 @@ export default async function ScaleLandingPage({
             <h2 className="font-title text-2xl md:text-3xl">
               Cotation et interprétation
             </h2>
-            <p className="mt-4 text-muted-foreground">
-              {scale.scoring.method}
-            </p>
+            <p className="mt-4 text-muted-foreground">{scale.scoring.method}</p>
 
             <table className="mt-6 w-full text-left text-sm">
               <thead>

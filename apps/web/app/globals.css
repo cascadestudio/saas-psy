@@ -7,7 +7,7 @@
 @layer base {
   :root {
     /* Melya Brand Colors */
-    --background: 39 18% 92%;           /* cream-light #EFEBE3 */
+    --background: 40 25% 95%;           /* cream-lighter #F5F3EF */
     --foreground: 0 0% 10%;             /* warm-black #1A1A1A */
 
     --card: 40 33% 97%;                 /* off-white #FAF8F5 */
