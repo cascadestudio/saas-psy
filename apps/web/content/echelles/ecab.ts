@@ -91,6 +91,11 @@ export const ecab: ScaleGuideContent = {
         "Non. La fiche de la HAS de 2007 porte sur le patient âgé, mais l'échelle a été validée en psychiatrie générale et s'utilise chez l'adulte.",
     },
     {
+      question: "Peut-on faire passer l'ECAB en ligne ?",
+      answer:
+        "Oui. Avec Melya, vous envoyez l'ECAB à votre patient par email : il y répond en ligne, le score est calculé automatiquement et chaque passation est conservée dans son historique.",
+    },
+    {
       question: "Comment citer l'ECAB ?",
       answer:
         "Pélissolo, A., & Naja, W. J. (1996). Évaluation de la dépendance aux benzodiazépines à l'aide d'une échelle cognitive. Synapse, 131, 37–40.",

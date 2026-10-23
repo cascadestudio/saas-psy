@@ -92,6 +92,11 @@ export const pdeq: ScaleGuideContent = {
         "Les deux portent sur les réactions pendant et juste après l'événement : le PDEQ évalue la dissociation, l'inventaire de détresse péritraumatique (PDI) la détresse émotionnelle (peur, impuissance, culpabilité…). Ils sont souvent utilisés ensemble.",
     },
     {
+      question: "Peut-on faire passer le PDEQ en ligne ?",
+      answer:
+        "Oui. Avec Melya, vous envoyez le PDEQ à votre patient par email : il y répond en ligne, le score est calculé automatiquement et chaque passation est conservée dans son historique.",
+    },
+    {
       question: "Comment citer le PDEQ ?",
       answer:
         "Citez Marmar, Weiss et Metzler (1997) pour l'instrument et Birmes et al. (2005) pour la validation française.",

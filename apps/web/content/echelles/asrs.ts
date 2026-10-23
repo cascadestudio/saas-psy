@@ -92,9 +92,19 @@ export const asrs: ScaleGuideContent = {
         "Oui. La version de dépistage en 6 questions est libre d'utilisation, y compris commerciale, avec mention de la source. Vous pouvez télécharger la version française officielle depuis cette page. L'échelle complète en 18 questions est soumise à licence.",
     },
     {
-      question: "Quelle différence entre l'ASRS en 6 et en 18 questions ?",
+      question: "Quelle différence entre l'ASRS en 6 questions et l'ASRS-18 ?",
       answer:
         "Les 6 questions de dépistage forment la partie A de l'échelle en 18 questions ; ce sont celles qui prédisent le mieux un TDAH. La partie B (12 questions) apporte des informations complémentaires mais n'entre pas dans la règle de dépistage.",
+    },
+    {
+      question: "L'ASRS peut-elle être utilisée chez l'enfant ?",
+      answer:
+        "Non. L'ASRS v1.1 a été conçue et validée pour les adultes (18 ans et plus). Chez l'enfant et l'adolescent, le TDAH s'évalue avec d'autres outils, en recueillant aussi le point de vue des parents et des enseignants.",
+    },
+    {
+      question: "Peut-on faire passer l'ASRS v1.1 en ligne ?",
+      answer:
+        "Oui. Avec Melya, vous envoyez l'ASRS v1.1 à votre patient par email : il y répond en ligne, le score est calculé automatiquement et chaque passation est conservée dans son historique.",
     },
     {
       question: "Comment citer l'ASRS ?",

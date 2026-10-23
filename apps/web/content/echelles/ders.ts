@@ -96,6 +96,16 @@ export const ders: ScaleGuideContent = {
         "La DERS-F est la version française validée de la DERS (Dan-Glauser et Scherer, 2013, Université de Genève), avec les mêmes 36 items et la même structure en 6 facteurs.",
     },
     {
+      question: "Existe-t-il des versions courtes de la DERS ?",
+      answer:
+        "Oui, plusieurs : la DERS-16 (Bjureberg et al., 2016), la DERS-18 (Victor et Klonsky, 2016) et la DERS-SF (Kaufman et al., 2016). Leurs scores ne se comparent pas à ceux de la version en 36 items, que propose Melya.",
+    },
+    {
+      question: "Peut-on faire passer la DERS en ligne ?",
+      answer:
+        "Oui. Avec Melya, vous envoyez la DERS à votre patient par email : il y répond en ligne, le score est calculé automatiquement et chaque passation est conservée dans son historique.",
+    },
+    {
       question: "Comment citer la DERS ?",
       answer:
         "Citez Gratz et Roemer (2004) pour l'échelle et Dan-Glauser et Scherer (2013) pour la version française.",
@@ -122,6 +132,21 @@ export const ders: ScaleGuideContent = {
       citation:
         "Dan-Glauser, E. S., & Scherer, K. R. (2013). The Difficulties in Emotion Regulation Scale (DERS): Factor structure and consistency of a French translation. Swiss Journal of Psychology, 72(1), 5–11.",
       url: "https://doi.org/10.1024/1421-0185/a000093",
+    },
+    {
+      citation:
+        "Bjureberg, J., Ljótsson, B., Tull, M. T., Hedman, E., Sahlin, H., Lundh, L.-G., Bjärehed, J., DiLillo, D., Messman-Moore, T., Gumpert, C. H., & Gratz, K. L. (2016). Development and validation of a brief version of the Difficulties in Emotion Regulation Scale: The DERS-16. Journal of Psychopathology and Behavioral Assessment, 38(2), 284–296.",
+      url: "https://doi.org/10.1007/s10862-015-9514-x",
+    },
+    {
+      citation:
+        "Victor, S. E., & Klonsky, E. D. (2016). Validation of a brief version of the Difficulties in Emotion Regulation Scale (DERS-18) in five samples. Journal of Psychopathology and Behavioral Assessment, 38(4), 582–589.",
+      url: "https://doi.org/10.1007/s10862-016-9547-9",
+    },
+    {
+      citation:
+        "Kaufman, E. A., Xia, M., Fosco, G., Yaptangco, M., Skidmore, C. R., & Crowell, S. E. (2016). The Difficulties in Emotion Regulation Scale Short Form (DERS-SF): Validation and replication in adolescent and adult samples. Journal of Psychopathology and Behavioral Assessment, 38(3), 443–455.",
+      url: "https://doi.org/10.1007/s10862-015-9529-3",
     },
   ],
   apaCitation:

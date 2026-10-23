@@ -89,6 +89,11 @@ export const scaredR: ScaleGuideContent = {
         "Le SCARED (41 items) dépiste 5 dimensions de l'anxiété avec des seuils. Le SCARED-R, version révisée de Muris, ajoute le TOC, le stress post-traumatique et des phobies spécifiques ; la version française de Martin et Gosselin compte 51 items.",
     },
     {
+      question: "Peut-on faire passer le SCARED-R-51 en ligne ?",
+      answer:
+        "Oui. Avec Melya, vous envoyez le SCARED-R-51 à votre patient par email : il y répond en ligne, le score est calculé automatiquement et chaque passation est conservée dans son historique.",
+    },
+    {
       question: "Comment citer le SCARED-R ?",
       answer:
         "Citez Muris et al. (1998) pour l'instrument révisé, et Martin et Gosselin (2011) pour la version française en 51 items.",

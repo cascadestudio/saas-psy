@@ -120,6 +120,21 @@ export const ybocs: ScaleGuideContent = {
         "Melya ne diffuse pas le questionnaire : sa numérisation est soumise à licence. La traduction française de référence est celle de Mollard, Cottraux et Bouvard (1989), publiée dans L'Encéphale.",
     },
     {
+      question: "À quoi sert la liste de symptômes (checklist) de la Y-BOCS ?",
+      answer:
+        "Elle accompagne l'échelle et recense les principaux types d'obsessions et de compulsions. Elle sert à identifier les symptômes cibles du patient avant de coter leur sévérité ; elle ne donne pas de score. Melya propose l'échelle de sévérité en 10 items.",
+    },
+    {
+      question: "Existe-t-il une Y-BOCS pour les enfants ?",
+      answer:
+        "Oui : la CY-BOCS (Children's Yale-Brown Obsessive Compulsive Scale, Scahill et al., 1997) est la version pour enfants et adolescents. Melya propose la version adulte.",
+    },
+    {
+      question: "Peut-on faire passer la Y-BOCS en ligne ?",
+      answer:
+        "Oui. Avec Melya, vous envoyez la Y-BOCS à votre patient par email : il y répond en ligne, le score est calculé automatiquement et chaque passation est conservée dans son historique.",
+    },
+    {
       question: "Comment citer la Y-BOCS ?",
       answer:
         "Citez Goodman et al. (1989) pour l'échelle originale et Mollard, Cottraux et Bouvard (1989) pour la version française.",
@@ -166,6 +181,11 @@ export const ybocs: ScaleGuideContent = {
       citation:
         "Mataix-Cols, D., Fernández de la Cruz, L., Nordsletten, A. E., Lenhard, F., Isomura, K., & Simpson, H. B. (2016). Towards an international expert consensus for defining treatment response, remission, recovery and relapse in obsessive-compulsive disorder. World Psychiatry, 15(1), 80–81.",
       url: "https://doi.org/10.1002/wps.20299",
+    },
+    {
+      citation:
+        "Scahill, L., Riddle, M. A., McSwiggin-Hardin, M., Ort, S. I., King, R. A., Goodman, W. K., Cicchetti, D., & Leckman, J. F. (1997). Children's Yale-Brown Obsessive Compulsive Scale: Reliability and validity. Journal of the American Academy of Child & Adolescent Psychiatry, 36(6), 844–852.",
+      url: "https://doi.org/10.1097/00004583-199706000-00023",
     },
   ],
   apaCitation:

@@ -114,14 +114,19 @@ export const gad7: ScaleGuideContent = {
 
   faq: [
     {
-      question: "Le GAD-7 est-il libre de droits ?",
+      question: "Qu'est-ce que le GAD-7 ?",
+      answer:
+        "Le GAD-7 (Generalized Anxiety Disorder-7) est un auto-questionnaire de 7 questions qui évalue la sévérité des symptômes d'anxiété généralisée sur les 2 dernières semaines. Il sert au dépistage du trouble anxieux généralisé et au suivi ; il repère aussi assez bien le trouble panique, l'anxiété sociale et le TSPT.",
+    },
+    {
+      question: "Le GAD-7 est-il gratuit et libre de droits ?",
       answer:
         "Oui. Le formulaire officiel indique que la reproduction, la traduction, l'affichage et la distribution sont autorisés sans demande préalable. La mention des auteurs (Spitzer, Williams, Kroenke et collègues, avec une allocation d'études de Pfizer Inc.) doit être conservée.",
     },
     {
       question: "Où trouver le GAD-7 en français (PDF) ?",
       answer:
-        "La version de référence en France est la traduction « French for France » distribuée par Pfizer. Vous pouvez la télécharger depuis cette page, dans la section « Questionnaire officiel et sources ».",
+        "La version de référence en France est la traduction « French for France » distribuée par Pfizer. Vous pouvez la télécharger depuis cette page, dans la section des sources, en bas de page.",
     },
     {
       question: "Que signifie un score de 10 au GAD-7 ?",
@@ -143,6 +148,11 @@ export const gad7: ScaleGuideContent = {
       question: "À quelle fréquence repasser le GAD-7 ?",
       answer:
         "Au moins 2 semaines entre deux passations, puisque la consigne porte sur cette période. Une passation toutes les 2 à 4 séances suffit en général ; une variation de 4 points ou plus est cliniquement significative.",
+    },
+    {
+      question: "Peut-on faire passer le GAD-7 en ligne ?",
+      answer:
+        "Oui. Avec Melya, vous envoyez le GAD-7 à votre patient par email : il y répond en ligne, le score est calculé automatiquement et chaque passation est conservée dans son historique.",
     },
     {
       question: "Comment citer le GAD-7 ?",

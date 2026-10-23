@@ -86,6 +86,11 @@ export const rses: ScaleGuideContent = {
 
   faq: [
     {
+      question: "Qu'est-ce que l'estime de soi selon Rosenberg ?",
+      answer:
+        "Rosenberg (1965) définit l'estime de soi comme une attitude, positive ou négative, envers soi-même : la valeur globale que la personne s'accorde. C'est cette estime de soi globale que mesure son échelle, et non l'estime de soi dans un domaine précis.",
+    },
+    {
       question: "Comment interpréter le score de l'échelle de Rosenberg ?",
       answer:
         "Le score va de 10 à 40 : plus il est élevé, plus l'estime de soi est élevée. Il n'existe pas de seuil validé, ni dans la validation française ni au niveau international. Interprétez-le de façon continue et suivez son évolution.",
@@ -110,7 +115,17 @@ export const rses: ScaleGuideContent = {
     {
       question: "Où trouver l'échelle de Rosenberg en français ?",
       answer:
-        "La version française validée de Vallières et Vallerand (1990) est diffusée par le laboratoire des auteurs (UQAM) : le lien figure dans la section « Questionnaire officiel et sources ».",
+        "La version française validée de Vallières et Vallerand (1990) est diffusée par le laboratoire des auteurs (UQAM) : le lien figure dans la section des sources, en bas de page.",
+    },
+    {
+      question: "Peut-on utiliser l'échelle de Rosenberg avec des enfants ?",
+      answer:
+        "Elle a été construite auprès de lycéens et s'utilise chez l'adolescent et l'adulte. Chez l'enfant plus jeune, la compréhension de certains énoncés n'est pas garantie et elle n'a pas de validation française pour cet âge : préférez un outil conçu pour l'enfant.",
+    },
+    {
+      question: "Peut-on faire passer l'échelle de Rosenberg en ligne ?",
+      answer:
+        "Oui. Avec Melya, vous envoyez l'échelle de Rosenberg à votre patient par email : il y répond en ligne, le score est calculé automatiquement et chaque passation est conservée dans son historique.",
     },
     {
       question: "Comment citer l'échelle de Rosenberg ?",

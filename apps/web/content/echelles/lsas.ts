@@ -128,9 +128,14 @@ export const lsas: ScaleGuideContent = {
         "Melya ne diffuse pas le questionnaire : les conditions de licence de la LSAS ne sont pas documentées publiquement. La version française a été publiée par Yao et al. (1999) ; avec Melya, vous pouvez la faire passer en ligne sans PDF.",
     },
     {
+      question: "Peut-on faire passer la LSAS en ligne ?",
+      answer:
+        "Oui. Avec Melya, vous envoyez la LSAS à votre patient par email : il y répond en ligne, le score est calculé automatiquement et chaque passation est conservée dans son historique.",
+    },
+    {
       question: "Comment citer la LSAS ?",
       answer:
-        "Citez l'article original de Liebowitz (1987) et, pour la version française, Yao et al. (1999). La référence complète figure dans la section « Questionnaire officiel et sources ».",
+        "Citez l'article original de Liebowitz (1987) et, pour la version française, Yao et al. (1999). La référence complète figure dans la section des sources, en bas de page.",
     },
   ],
 

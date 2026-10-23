@@ -86,6 +86,11 @@ export const qec: ScaleGuideContent = {
         "C'est le même questionnaire : le QEC est l'original en français (Gosselin et al., 2002), le Cognitive Avoidance Questionnaire (CAQ) sa traduction anglaise (Sexton et Dugas, 2008).",
     },
     {
+      question: "Peut-on faire passer le QEC en ligne ?",
+      answer:
+        "Oui. Avec Melya, vous envoyez le QEC à votre patient par email : il y répond en ligne, le score est calculé automatiquement et chaque passation est conservée dans son historique.",
+    },
+    {
       question: "Comment citer le QEC ?",
       answer:
         "Gosselin, P., Langlois, F., Freeston, M. H., Ladouceur, R., Dugas, M. J., & Pelletier, O. (2002). Le Questionnaire d'évitement cognitif (QEC) : développement et validation auprès d'adultes et d'adolescents. Journal de thérapie comportementale et cognitive, 12, 24–37.",

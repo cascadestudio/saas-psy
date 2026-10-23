@@ -78,6 +78,11 @@ export const atq: ScaleGuideContent = {
         "C'est le même questionnaire : l'ATQ (Automatic Thoughts Questionnaire) de Hollon et Kendall (1980), traduit en français par Jean Cottraux sous le nom de QPA.",
     },
     {
+      question: "Peut-on faire passer le QPA en ligne ?",
+      answer:
+        "Oui. Avec Melya, vous envoyez le QPA à votre patient par email : il y répond en ligne, le score est calculé automatiquement et chaque passation est conservée dans son historique.",
+    },
+    {
       question: "Comment citer le QPA ?",
       answer:
         "Hollon, S. D., & Kendall, P. C. (1980). Cognitive self-statements in depression: Development of an automatic thoughts questionnaire. Cognitive Therapy and Research, 4(4), 383–395.",

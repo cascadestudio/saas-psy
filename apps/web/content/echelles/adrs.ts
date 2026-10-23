@@ -89,6 +89,11 @@ export const adrs: ScaleGuideContent = {
         "Oui. L'article de validation est publié en accès libre sous licence CC BY : l'échelle peut être utilisée en citant la source. Vous pouvez télécharger l'article depuis cette page.",
     },
     {
+      question: "Peut-on faire passer l'ADRS en ligne ?",
+      answer:
+        "Oui. Avec Melya, vous envoyez l'ADRS à votre patient par email : il y répond en ligne, le score est calculé automatiquement et chaque passation est conservée dans son historique.",
+    },
+    {
       question: "Comment citer l'ADRS ?",
       answer:
         "Revah-Lévy, A., Birmaher, B., Gasquet, I., & Falissard, B. (2007). The Adolescent Depression Rating Scale (ADRS): A validation study. BMC Psychiatry, 7, 2.",

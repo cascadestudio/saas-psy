@@ -94,6 +94,11 @@ export const pdss: ScaleGuideContent = {
         "Oui, dans sa version auto-questionnaire (PDSS-SR), dont la fiabilité a été établie et qui a une validation française. La version d'origine est un entretien clinicien.",
     },
     {
+      question: "Peut-on faire passer la PDSS en ligne ?",
+      answer:
+        "Oui. Avec Melya, vous envoyez la PDSS à votre patient par email : il y répond en ligne, le score est calculé automatiquement et chaque passation est conservée dans son historique.",
+    },
+    {
       question: "Comment citer la PDSS ?",
       answer:
         "Citez Shear et al. (1997) pour l'échelle, Houck et al. (2002) pour la version auto-questionnaire et Roberge et al. (2022) pour la version française.",

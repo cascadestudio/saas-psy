@@ -90,6 +90,11 @@ export const honc: ScaleGuideContent = {
         "Oui, il a été conçu et validé auprès d'adolescents (étude DANDY), puis chez l'adulte.",
     },
     {
+      question: "Peut-on faire passer le test HONC en ligne ?",
+      answer:
+        "Oui. Avec Melya, vous envoyez le test HONC à votre patient par email : il y répond en ligne, le score est calculé automatiquement et chaque passation est conservée dans son historique.",
+    },
+    {
       question: "Comment citer le test HONC ?",
       answer:
         "DiFranza, J. R., Savageau, J. A., Fletcher, K., et al. (2002). Measuring the loss of autonomy over nicotine use in adolescents: The DANDY study. Archives of Pediatrics & Adolescent Medicine, 156(4), 397–403.",

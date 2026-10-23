@@ -96,6 +96,11 @@ export const qia: ScaleGuideContent = {
         "C'est le même questionnaire : le QIA est l'original en français (Dugas et al., 2001), le WAQ (Worry and Anxiety Questionnaire) sa version anglaise.",
     },
     {
+      question: "Peut-on faire passer le QIA en ligne ?",
+      answer:
+        "Oui. Avec Melya, vous envoyez le QIA à votre patient par email : il y répond en ligne, le score est calculé automatiquement et chaque passation est conservée dans son historique.",
+    },
+    {
       question: "Comment citer le QIA ?",
       answer:
         "Dugas, M. J., Freeston, M. H., Provencher, M. D., Lachance, S., Ladouceur, R., & Gosselin, P. (2001). Le Questionnaire sur l'Inquiétude et l'Anxiété : validation dans des échantillons non cliniques et cliniques. Journal de Thérapie Comportementale et Cognitive, 11(1), 31–36.",

@@ -114,9 +114,19 @@ export const pswq: ScaleGuideContent = {
         "Non. Il mesure une tendance générale et durable à s'inquiéter, sans période de référence. Pour l'intensité des symptômes anxieux récents, le GAD-7 est plus adapté.",
     },
     {
+      question: "Existe-t-il un PSWQ pour les enfants ?",
+      answer:
+        "Oui : le PSWQ-C (Chorpita et al., 1997) est une adaptation en 14 items pour les enfants et les adolescents. Melya propose la version adulte ; ses repères ne s'appliquent pas au PSWQ-C.",
+    },
+    {
+      question: "Peut-on faire passer le PSWQ en ligne ?",
+      answer:
+        "Oui. Avec Melya, vous envoyez le PSWQ à votre patient par email : il y répond en ligne, le score est calculé automatiquement et chaque passation est conservée dans son historique.",
+    },
+    {
       question: "Comment citer le PSWQ ?",
       answer:
-        "Citez l'article original (Meyer et al., 1990) et, pour la version française, Gosselin et al. (2001). Les références complètes figurent dans la section « Questionnaire officiel et sources ».",
+        "Citez l'article original (Meyer et al., 1990) et, pour la version française, Gosselin et al. (2001). Les références complètes figurent dans la section des sources, en bas de page.",
     },
   ],
 
@@ -141,6 +151,11 @@ export const pswq: ScaleGuideContent = {
       citation:
         "Gosselin, P., Dugas, M. J., Ladouceur, R., & Freeston, M. H. (2001). Évaluation des inquiétudes : validation d'une traduction française du Penn State Worry Questionnaire. L'Encéphale, 27(5), 475–484.",
       url: "https://pubmed.ncbi.nlm.nih.gov/11760697/",
+    },
+    {
+      citation:
+        "Chorpita, B. F., Tracey, S. A., Brown, T. A., Collica, T. J., & Barlow, D. H. (1997). Assessment of worry in children and adolescents: An adaptation of the Penn State Worry Questionnaire. Behaviour Research and Therapy, 35(6), 569–581.",
+      url: "https://doi.org/10.1016/S0005-7967(96)00116-7",
     },
   ],
   apaCitation:

@@ -103,6 +103,11 @@ export const eii: ScaleGuideContent = {
         "Dans le modèle de Dugas, l'intolérance à l'incertitude alimente les inquiétudes excessives du trouble anxieux généralisé. Elle est une cible directe de la thérapie cognitive et comportementale du TAG.",
     },
     {
+      question: "Peut-on faire passer l'ÉII en ligne ?",
+      answer:
+        "Oui. Avec Melya, vous envoyez l'ÉII à votre patient par email : il y répond en ligne, le score est calculé automatiquement et chaque passation est conservée dans son historique.",
+    },
+    {
       question: "Comment citer l'ÉII ?",
       answer:
         "Freeston, M. H., Rhéaume, J., Letarte, H., Dugas, M. J., & Ladouceur, R. (1994). Why do people worry? Personality and Individual Differences, 17(6), 791–802.",

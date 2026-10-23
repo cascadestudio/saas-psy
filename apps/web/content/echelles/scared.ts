@@ -97,6 +97,11 @@ export const scared: ScaleGuideContent = {
         "Le SCARED (41 items, Birmaher) couvre 5 dimensions de l'anxiété. Le SCARED-R (Muris) est une version révisée qui ajoute notamment le TOC, le stress post-traumatique et des phobies spécifiques.",
     },
     {
+      question: "Peut-on faire passer le SCARED en ligne ?",
+      answer:
+        "Oui. Avec Melya, vous envoyez le SCARED à votre patient par email : il y répond en ligne, le score est calculé automatiquement et chaque passation est conservée dans son historique.",
+    },
+    {
       question: "Comment citer le SCARED ?",
       answer:
         "Birmaher, B., Khetarpal, S., Brent, D., Cully, M., Balach, L., Kaufman, J., & Neer, S. M. (1997). The Screen for Child Anxiety Related Emotional Disorders (SCARED): Scale construction and psychometric characteristics. Journal of the American Academy of Child & Adolescent Psychiatry, 36(4), 545–553.",

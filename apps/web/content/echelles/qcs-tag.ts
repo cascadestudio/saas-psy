@@ -78,6 +78,11 @@ export const qcsTag: ScaleGuideContent = {
         "Le GAD-SBQ (Generalized Anxiety Disorder-Safety Behaviors Questionnaire) est la version anglaise ; le QCS-TAG en est la version française abrégée à 10 items, validée en échantillon clinique.",
     },
     {
+      question: "Peut-on faire passer le QCS-TAG en ligne ?",
+      answer:
+        "Oui. Avec Melya, vous envoyez le QCS-TAG à votre patient par email : il y répond en ligne, le score est calculé automatiquement et chaque passation est conservée dans son historique.",
+    },
+    {
       question: "Comment citer le QCS-TAG ?",
       answer:
         "Marcotte-Beaumier, G., Hébert, E. A., & Dugas, M. J. (2020). Le Questionnaire sur les comportements sécurisants du trouble d'anxiété généralisée (QCS-TAG) : validation auprès d'un échantillon clinique. Revue canadienne des sciences du comportement, 52, 324–330.",

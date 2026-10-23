@@ -116,6 +116,16 @@ function batGuide(version: {
           "Le Maslach Burnout Inventory (MBI) est l'outil historique, payant. Le BAT a été conçu plus récemment pour mieux couvrir les symptômes du burn-out (dont les déficiences cognitive et émotionnelle) et il est libre d'utilisation.",
       },
       {
+        question: "Existe-t-il une version courte du BAT (BAT-12) ?",
+        answer:
+          "Oui. Le manuel propose une version courte en 12 items, qui couvre les 4 dimensions principales du burn-out et sert surtout aux enquêtes. Ses seuils lui sont propres : ses scores ne se comparent pas à ceux de la version complète, que propose Melya.",
+      },
+      {
+        question: "Peut-on faire passer le BAT en ligne ?",
+        answer:
+          "Oui. Avec Melya, vous envoyez le BAT à votre patient par email : il y répond en ligne, le score est calculé automatiquement et chaque passation est conservée dans son historique.",
+      },
+      {
         question: "Comment citer le BAT ?",
         answer:
           "Schaufeli, W. B., Desart, S., & De Witte, H. (2020). Burnout Assessment Tool (BAT): Development, validity, and reliability. International Journal of Environmental Research and Public Health, 17(24), 9495.",

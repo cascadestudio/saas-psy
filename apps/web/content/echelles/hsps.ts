@@ -84,6 +84,23 @@ export const hsps: ScaleGuideContent = {
         "Le test grand public compte 23 questions oui/non. L'échelle de recherche HSPS (Aron et Aron, 1997) compte 27 items cotés sur une échelle graduée et a fait l'objet de validations, dont une en français.",
     },
     {
+      question:
+        "Le test d'Elaine Aron est-il le test officiel d'hypersensibilité ?",
+      answer:
+        "C'est le test d'origine, publié par la chercheuse qui a décrit le trait ; la plupart des tests d'hypersensibilité en ligne en dérivent, souvent sans validation. Il n'existe pas de test « officiel » au sens d'un diagnostic, puisque l'hypersensibilité n'est pas un trouble.",
+    },
+    {
+      question: "Existe-t-il un test d'hypersensibilité pour enfant ?",
+      answer:
+        "Elaine Aron a publié un questionnaire destiné aux parents dans The Highly Sensitive Child (2002). Le test pour adultes proposé ici ne s'adresse pas aux enfants.",
+    },
+    {
+      question:
+        "Peut-on faire passer le questionnaire d'hypersensibilité en ligne ?",
+      answer:
+        "Oui. Avec Melya, vous envoyez le questionnaire d'hypersensibilité à votre patient par email : il y répond en ligne, le score est calculé automatiquement et chaque passation est conservée dans son historique.",
+    },
+    {
       question: "Comment citer ce questionnaire ?",
       answer:
         "Aron, E. N. (1996). The Highly Sensitive Person. Broadway Books. Pour l'échelle de recherche : Aron, E. N., & Aron, A. (1997), Journal of Personality and Social Psychology, 73(2), 345–368.",

@@ -96,6 +96,11 @@ export const pcl5: ScaleGuideContent = {
 
   faq: [
     {
+      question: "Qu'est-ce que la PCL-5 ?",
+      answer:
+        "La PCL-5 (PTSD Checklist for DSM-5) est un auto-questionnaire de 20 items, développé par le National Center for PTSD, qui mesure la sévérité des symptômes de trouble de stress post-traumatique au cours du dernier mois, selon les critères du DSM-5. Elle sert au dépistage, au diagnostic provisoire et au suivi.",
+    },
+    {
       question: "Quel est le seuil de la PCL-5 ?",
       answer:
         "32 pour la version française validée (Ashbaugh et al., 2016). Les études anglophones retiennent un seuil entre 31 et 33. Un score au-dessus du seuil indique un TSPT probable, à confirmer en entretien.",
@@ -106,7 +111,7 @@ export const pcl5: ScaleGuideContent = {
         "Un score de 45 dépasse nettement le seuil de dépistage de 32 : un TSPT est probable. La PCL-5 n'a pas de grille de sévérité standardisée, mais plus le score est élevé, plus les symptômes sont marqués. Regardez les sous-scores et confirmez par une évaluation structurée.",
     },
     {
-      question: "La PCL-5 est-elle libre de droits ?",
+      question: "La PCL-5 est-elle gratuite et libre de droits ?",
       answer:
         "Oui. L'instrument du National Center for PTSD est dans le domaine public, et la traduction française d'Ashbaugh et al. (2016) est publiée sous licence CC BY. Vous pouvez télécharger la version française depuis cette page.",
     },
@@ -119,6 +124,11 @@ export const pcl5: ScaleGuideContent = {
       question: "Quelle différence entre la PCL-5 et la PCL-S ?",
       answer:
         "La PCL-S est l'ancienne version (17 items), alignée sur le DSM-IV. La PCL-5 (20 items) suit les critères du DSM-5, avec un groupe de symptômes « cognitions et humeur » ajouté. Pour un nouveau suivi, la PCL-5 est la référence actuelle.",
+    },
+    {
+      question: "Peut-on faire passer la PCL-5 en ligne ?",
+      answer:
+        "Oui. Avec Melya, vous envoyez la PCL-5 à votre patient par email : il y répond en ligne, le score est calculé automatiquement et chaque passation est conservée dans son historique.",
     },
     {
       question: "Comment citer la PCL-5 ?",

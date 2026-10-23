@@ -88,6 +88,11 @@ export const cast: ScaleGuideContent = {
         "Le CAST (6 questions, 12 mois) est l'outil de l'OFDT, très utilisé chez les jeunes. Le CUDIT-R (8 questions, 6 mois) est construit sur les critères du trouble de l'usage. Les deux repèrent un usage problématique de cannabis.",
     },
     {
+      question: "Peut-on faire passer le CAST en ligne ?",
+      answer:
+        "Oui. Avec Melya, vous envoyez le CAST à votre patient par email : il y répond en ligne, le score est calculé automatiquement et chaque passation est conservée dans son historique.",
+    },
+    {
       question: "Comment citer le CAST ?",
       answer:
         "Citez Legleye et al. (2007) pour la validation, et la note de l'OFDT n° 2013-02 pour le questionnaire et la cotation.",

@@ -101,6 +101,11 @@ export const cuditR: ScaleGuideContent = {
         "Le CUDIT-R est la version révisée et raccourcie (8 items) de l'ancien CUDIT, qui comptait 10 items. Ce sont deux instruments distincts, avec des seuils différents.",
     },
     {
+      question: "Peut-on faire passer le CUDIT-R en ligne ?",
+      answer:
+        "Oui. Avec Melya, vous envoyez le CUDIT-R à votre patient par email : il y répond en ligne, le score est calculé automatiquement et chaque passation est conservée dans son historique.",
+    },
+    {
       question: "Comment citer le CUDIT-R ?",
       answer:
         "Citez Adamson et al. (2010) pour l'instrument et Luquiens et al. (2021) pour la version française.",

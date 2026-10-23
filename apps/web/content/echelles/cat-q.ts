@@ -99,6 +99,11 @@ export const catQ: ScaleGuideContent = {
         "Oui. Une validation française a été publiée (Bureau et al., 2024). Une traduction de Marika B. Bessette est aussi diffusée en accès libre par Embrace Autism.",
     },
     {
+      question: "Peut-on faire passer le CAT-Q en ligne ?",
+      answer:
+        "Oui. Avec Melya, vous envoyez le CAT-Q à votre patient par email : il y répond en ligne, le score est calculé automatiquement et chaque passation est conservée dans son historique.",
+    },
+    {
       question: "Comment citer le CAT-Q ?",
       answer:
         "Hull, L., Mandy, W., Lai, M.-C., Baron-Cohen, S., Allison, C., Smith, P., & Petrides, K. V. (2019). Development and validation of the Camouflaging Autistic Traits Questionnaire (CAT-Q). Journal of Autism and Developmental Disorders, 49(3), 819–833.",

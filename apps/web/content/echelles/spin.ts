@@ -115,6 +115,11 @@ export const spin: ScaleGuideContent = {
         "Aucune version française validée n'a été identifiée. Des traductions circulent en ligne, mais certaines déforment le sens des items originaux. Pour une évaluation de l'anxiété sociale avec une validation française, la LSAS est une alternative.",
     },
     {
+      question: "Peut-on faire passer le SPIN en ligne ?",
+      answer:
+        "Oui. Avec Melya, vous envoyez le SPIN à votre patient par email : il y répond en ligne, le score est calculé automatiquement et chaque passation est conservée dans son historique.",
+    },
+    {
       question: "Comment citer le SPIN ?",
       answer:
         "Connor, K. M., Davidson, J. R. T., Churchill, L. E., Sherwood, A., Foa, E., & Weisler, R. H. (2000). Psychometric properties of the Social Phobia Inventory (SPIN): New self-rating scale. British Journal of Psychiatry, 176(4), 379–386.",

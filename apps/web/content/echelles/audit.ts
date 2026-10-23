@@ -122,6 +122,11 @@ export const audit: ScaleGuideContent = {
         "En France, un verre standard contient 10 g d'alcool pur : un verre de vin de 10 cl, un demi de bière de 25 cl ou 3 cl de spiritueux, tels que servis au bar.",
     },
     {
+      question: "Peut-on faire passer le test AUDIT en ligne ?",
+      answer:
+        "Oui. Avec Melya, vous envoyez le test AUDIT à votre patient par email : il y répond en ligne, le score est calculé automatiquement et chaque passation est conservée dans son historique.",
+    },
+    {
       question: "Comment citer le test AUDIT ?",
       answer:
         "Citez Saunders et al. (1993) pour l'instrument de l'OMS et Gache et al. (2005) pour la validation de la version française.",

@@ -171,10 +171,14 @@ export function ScaleGuide({
     })),
   ];
 
+  // « pdf » et « français » reviennent dans les suggestions Google de presque
+  // toutes les échelles.
+  const sourcesTitle = `Questionnaire ${scale.acronym} en français${content.questionnaire.kind === "download" ? " (PDF)" : ""} et sources`;
+
   const toc = [
     ...sections.map(({ id, section }) => ({ id, title: section.title })),
     { id: "faq", title: "Questions fréquentes" },
-    { id: "sources", title: "Questionnaire officiel et sources" },
+    { id: "sources", title: sourcesTitle },
   ];
 
   const related = content.related
@@ -362,7 +366,7 @@ export function ScaleGuide({
                   </div>
                 </Section>
 
-                <Section id="sources" title="Questionnaire officiel et sources">
+                <Section id="sources" title={sourcesTitle}>
                   <div className="space-y-8">
                     <div className="rounded-xl border p-5">
                       <h3 className="font-semibold">Questionnaire officiel</h3>

@@ -113,14 +113,19 @@ export const phq9: ScaleGuideContent = {
 
   faq: [
     {
-      question: "Le PHQ-9 est-il libre de droits ?",
+      question: "Qu'est-ce que le PHQ-9 ?",
+      answer:
+        "Le PHQ-9 (Patient Health Questionnaire-9) est un auto-questionnaire de 9 questions qui évalue la sévérité des symptômes dépressifs sur les 2 dernières semaines. Chaque question correspond à un critère de l'épisode dépressif caractérisé du DSM. Il sert au dépistage et au suivi de la dépression.",
+    },
+    {
+      question: "Le PHQ-9 est-il gratuit et libre de droits ?",
       answer:
         "Oui. Le formulaire officiel l'indique : la reproduction, la traduction, l'affichage et la distribution du PHQ-9 sont autorisés sans demande préalable. La mention des auteurs (Spitzer, Williams, Kroenke et collègues, avec une allocation d'études de Pfizer Inc.) doit être conservée.",
     },
     {
       question: "Où trouver le PHQ-9 en français (PDF) ?",
       answer:
-        "La version de référence en France est la traduction officielle « French for France » distribuée par Pfizer. Vous pouvez la télécharger depuis cette page, dans la section « Questionnaire officiel et sources ».",
+        "La version de référence en France est la traduction officielle « French for France » distribuée par Pfizer. Vous pouvez la télécharger depuis cette page, dans la section des sources, en bas de page.",
     },
     {
       question: "Que signifie un score de 10 au PHQ-9 ?",

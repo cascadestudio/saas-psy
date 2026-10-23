@@ -108,6 +108,17 @@ export const ftnd: ScaleGuideContent = {
         "Oui. Il peut être reproduit sans autorisation, et la version française est diffusée par la HAS.",
     },
     {
+      question:
+        "Le test de Fagerström s'applique-t-il à la cigarette électronique ?",
+      answer:
+        "Non. Il a été conçu pour la cigarette et ses questions (nombre de cigarettes, première cigarette du matin) ne se transposent pas directement au vapotage. Des questionnaires spécifiques existent pour la cigarette électronique, comme le Penn State Electronic Cigarette Dependence Index (Foulds et al., 2015).",
+    },
+    {
+      question: "Peut-on faire passer le test de Fagerström en ligne ?",
+      answer:
+        "Oui. Avec Melya, vous envoyez le test de Fagerström à votre patient par email : il y répond en ligne, le score est calculé automatiquement et chaque passation est conservée dans son historique.",
+    },
+    {
       question: "Comment citer le test de Fagerström ?",
       answer:
         "Heatherton, T. F., Kozlowski, L. T., Frecker, R. C., & Fagerström, K. O. (1991). The Fagerström Test for Nicotine Dependence: A revision of the Fagerström Tolerance Questionnaire. British Journal of Addiction, 86(9), 1119–1127.",
@@ -141,6 +152,11 @@ export const ftnd: ScaleGuideContent = {
       citation:
         "Haute Autorité de santé. (2014). Test de Fagerström en six questions. Outil associé à la recommandation « Arrêt de la consommation de tabac : du dépistage individuel au maintien de l'abstinence ».",
       url: "https://www.has-sante.fr/upload/docs/application/pdf/2014-11/outil_tests_fagerstrom.pdf",
+    },
+    {
+      citation:
+        "Foulds, J., Veldheer, S., Yingst, J., Hrabovsky, S., Wilson, S. J., Nichols, T. T., & Eissenberg, T. (2015). Development of a questionnaire for assessing dependence on electronic cigarettes among a large sample of ex-smoking e-cigarette users. Nicotine & Tobacco Research, 17(2), 186–192.",
+      url: "https://doi.org/10.1093/ntr/ntu204",
     },
   ],
   apaCitation:

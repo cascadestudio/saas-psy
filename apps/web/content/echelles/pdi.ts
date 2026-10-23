@@ -79,7 +79,7 @@ export const pdi: ScaleGuideContent = {
         "Un score total ≥ 15 indique une détresse péritraumatique significative (fiche descriptive du Cn2r). L'INSPQ cite un seuil de 14 : traitez un score de 14 avec la même attention.",
     },
     {
-      question: "La PDI est-elle libre de droits ?",
+      question: "La PDI est-elle gratuite et libre de droits ?",
       answer:
         "Oui. Selon l'INSPQ, l'instrument est dans le domaine public, à condition de citer les sources (Brunet et al., 2001 ; Jehel et al., 2005). Vous pouvez télécharger la version française diffusée par le Cn2r depuis cette page.",
     },
@@ -87,6 +87,11 @@ export const pdi: ScaleGuideContent = {
       question: "Quelle différence entre la PDI et le PDEQ ?",
       answer:
         "Les deux portent sur les réactions pendant et juste après l'événement. La PDI mesure la détresse émotionnelle et physique, le PDEQ la dissociation. Ils sont souvent utilisés ensemble pour repérer le risque de TSPT.",
+    },
+    {
+      question: "Peut-on faire passer la PDI en ligne ?",
+      answer:
+        "Oui. Avec Melya, vous envoyez la PDI à votre patient par email : il y répond en ligne, le score est calculé automatiquement et chaque passation est conservée dans son historique.",
     },
     {
       question: "Comment citer la PDI ?",

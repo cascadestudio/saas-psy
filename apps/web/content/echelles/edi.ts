@@ -87,6 +87,17 @@ export const edi: ScaleGuideContent = {
         "Ce sont deux échelles sans rapport. L'EDI (Échelle d'infériorité) mesure le sentiment d'infériorité ; l'EDI-2 (Eating Disorder Inventory) évalue les troubles du comportement alimentaire.",
     },
     {
+      question:
+        "L'Échelle d'infériorité est-elle un test du complexe d'infériorité ?",
+      answer:
+        "Elle mesure le sentiment d'infériorité, ce que l'on appelle couramment « complexe d'infériorité ». Ce n'est pas un diagnostic : l'EDI en donne une mesure chiffrée, utile pour repérer les pensées de dévalorisation et suivre leur évolution en thérapie.",
+    },
+    {
+      question: "Peut-on faire passer l'EDI en ligne ?",
+      answer:
+        "Oui. Avec Melya, vous envoyez l'EDI à votre patient par email : il y répond en ligne, le score est calculé automatiquement et chaque passation est conservée dans son historique.",
+    },
+    {
       question: "Comment citer l'EDI ?",
       answer:
         "Citez Yao et al. (1998) pour la validation, et la thèse de S.-N. Yao (Université Lumière Lyon 2, 1999), qui reproduit le formulaire et sa cotation.",

@@ -82,6 +82,11 @@ export const cst: ScaleGuideContent = {
         "Aucune étude de validation publiée n'a été identifiée. C'est un outil d'auto-évaluation issu d'un ouvrage de vulgarisation clinique, utile pour objectiver le ressenti et suivre son évolution.",
     },
     {
+      question: "Peut-on faire passer l'échelle de stress de Cungi en ligne ?",
+      answer:
+        "Oui. Avec Melya, vous envoyez l'échelle de stress de Cungi à votre patient par email : il y répond en ligne, le score est calculé automatiquement et chaque passation est conservée dans son historique.",
+    },
+    {
       question: "Comment citer l'échelle de Cungi ?",
       answer:
         "Citez l'ouvrage de Charly Cungi, Savoir gérer son stress (Retz), dont l'échelle est issue.",

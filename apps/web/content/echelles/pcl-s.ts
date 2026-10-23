@@ -97,9 +97,14 @@ export const pclS: ScaleGuideContent = {
         "Ce sont trois versions de la même échelle DSM-IV : la PCL-S porte sur un événement spécifique, la PCL-C sur des expériences stressantes en général (version civile), la PCL-M sur des expériences militaires.",
     },
     {
-      question: "La PCL-S est-elle libre de droits ?",
+      question: "La PCL-S est-elle gratuite et libre de droits ?",
       answer:
         "Oui. Selon l'INSPQ, elle est dans le domaine public, à condition de citer la source (Weathers et al.).",
+    },
+    {
+      question: "Peut-on faire passer la PCL-S en ligne ?",
+      answer:
+        "Oui. Avec Melya, vous envoyez la PCL-S à votre patient par email : il y répond en ligne, le score est calculé automatiquement et chaque passation est conservée dans son historique.",
     },
     {
       question: "Comment citer la PCL-S ?",

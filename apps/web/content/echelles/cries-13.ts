@@ -107,6 +107,11 @@ export const cries13: ScaleGuideContent = {
         "Oui. La Children and War Foundation diffuse gratuitement ses questionnaires, dont la version française, sur son site.",
     },
     {
+      question: "Peut-on faire passer la CRIES-13 en ligne ?",
+      answer:
+        "Oui. Avec Melya, vous envoyez la CRIES-13 à votre patient par email : il y répond en ligne, le score est calculé automatiquement et chaque passation est conservée dans son historique.",
+    },
+    {
       question: "Comment citer la CRIES-13 ?",
       answer:
         "Perrin, S., Meiser-Stedman, R., & Smith, P. (2005). The Children's Revised Impact of Event Scale (CRIES): Validity as a screening instrument for PTSD. Behavioural and Cognitive Psychotherapy, 33(4), 487–498.",

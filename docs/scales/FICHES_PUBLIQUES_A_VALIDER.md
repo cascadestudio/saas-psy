@@ -58,6 +58,16 @@ au-delà du cercle de bêta-testeurs.
   - ASRS : `validated: true` repose sur Caci et al. 2014 (texte non lu) ;
   - GAD-7 : `validated: true` repose sur Micoulaud-Franchi et al. 2016
     (validation en population épileptique).
+- [ ] **FAQ ajoutées le 23/10 d'après les suggestions Google** (les
+  références nouvelles sont vérifiées sur CrossRef, les autres affirmations
+  sont de mémoire) :
+  - BAT : la version courte BAT-12 (12 items, seuils propres) ;
+  - HSPS : questionnaire parents dans *The Highly Sensitive Child* (Aron,
+    2002) ;
+  - Rosenberg : échelle construite auprès de lycéens, pas pour l'enfant ;
+  - GAD-7 : repère aussi le trouble panique, l'anxiété sociale et le TSPT ;
+  - Y-BOCS : rôle de la checklist de symptômes ;
+  - toutes les fiches : FAQ « Peut-on faire passer … en ligne ? ».
 
 ## 3. Références incomplètes ou à vérifier
 

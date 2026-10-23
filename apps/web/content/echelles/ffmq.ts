@@ -90,6 +90,16 @@ export const ffmq: ScaleGuideContent = {
         "Oui, il a été adapté et validé en français par Heeren et al. (2011) ; le questionnaire est diffusé par le laboratoire de l'Université catholique de Louvain.",
     },
     {
+      question: "Existe-t-il une version courte du FFMQ ?",
+      answer:
+        "Oui : le FFMQ-SF en 24 items (Bohlmeijer et al., 2011) et le FFMQ-15 (Gu et al., 2016). Leurs scores ne se comparent pas à ceux de la version en 39 items, que propose Melya.",
+    },
+    {
+      question: "Peut-on faire passer le FFMQ en ligne ?",
+      answer:
+        "Oui. Avec Melya, vous envoyez le FFMQ à votre patient par email : il y répond en ligne, le score est calculé automatiquement et chaque passation est conservée dans son historique.",
+    },
+    {
       question: "Comment citer le FFMQ ?",
       answer:
         "Citez Baer et al. (2006, 2008) pour l'échelle et Heeren et al. (2011) pour la version française.",
@@ -122,6 +132,16 @@ export const ffmq: ScaleGuideContent = {
       citation:
         "Heeren, A., Douilliez, C., Peschard, V., Debrauwere, L., & Philippot, P. (2011). Cross-cultural validity of the Five Facets Mindfulness Questionnaire: Adaptation and validation in a French-speaking sample. European Review of Applied Psychology, 61(3), 147–151.",
       url: "https://doi.org/10.1016/j.erap.2011.02.001",
+    },
+    {
+      citation:
+        "Bohlmeijer, E., ten Klooster, P. M., Fledderus, M., Veehof, M., & Baer, R. (2011). Psychometric properties of the Five Facet Mindfulness Questionnaire in depressed adults and development of a short form. Assessment, 18(3), 308–320.",
+      url: "https://doi.org/10.1177/1073191111408231",
+    },
+    {
+      citation:
+        "Gu, J., Strauss, C., Crane, C., Barnhofer, T., Karl, A., Cavanagh, K., & Kuyken, W. (2016). Examining the factor structure of the 39-item and 15-item versions of the Five Facet Mindfulness Questionnaire before and after mindfulness-based cognitive therapy for people with recurrent depression. Psychological Assessment, 28(7), 791–802.",
+      url: "https://doi.org/10.1037/pas0000263",
     },
   ],
   apaCitation:

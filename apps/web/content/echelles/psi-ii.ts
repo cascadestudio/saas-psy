@@ -94,6 +94,11 @@ export const psiII: ScaleGuideContent = {
         "C'est le même questionnaire : le PSI-II est l'original en français (Gosselin et al., 2003), le Why Worry-II (WW-II) son équivalent anglais.",
     },
     {
+      question: "Peut-on faire passer le PSI-II en ligne ?",
+      answer:
+        "Oui. Avec Melya, vous envoyez le PSI-II à votre patient par email : il y répond en ligne, le score est calculé automatiquement et chaque passation est conservée dans son historique.",
+    },
+    {
       question: "Comment citer le PSI-II ?",
       answer:
         "Gosselin, P., Ladouceur, R., Langlois, F., Freeston, M. H., Dugas, M. J., & Bertrand, J. (2003). Développement et validation d'un nouvel instrument évaluant les croyances erronées à l'égard des inquiétudes. Revue européenne de psychologie appliquée, 53(3–4), 199–211.",

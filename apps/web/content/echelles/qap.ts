@@ -72,6 +72,11 @@ export const qap: ScaleGuideContent = {
         "Non, les auteurs ne fournissent pas de seuil clinique. Le score se lit de façon continue et dans le temps.",
     },
     {
+      question: "Peut-on faire passer le QAP en ligne ?",
+      answer:
+        "Oui. Avec Melya, vous envoyez le QAP à votre patient par email : il y répond en ligne, le score est calculé automatiquement et chaque passation est conservée dans son historique.",
+    },
+    {
       question: "Comment citer le QAP ?",
       answer:
         "Gosselin, P., Ladouceur, R., & Pelletier, O. (2005). Évaluation de l'attitude d'un individu face aux différents problèmes de vie : le Questionnaire d'attitude face aux problèmes (QAP). Journal de thérapie comportementale et cognitive, 15(4), 141–153.",
