@@ -6,16 +6,17 @@ import { Navbar } from "@/components/landing/navbar";
 import { Footer } from "@/components/landing/footer";
 import { questionCount } from "@/app/utils/utils";
 import { scaleSlug } from "@/lib/scale-slug";
+import { pageMetadata } from "@/lib/seo";
 import { ScaleTag } from "@/components/scale/ScaleTag";
 
 export const revalidate = 60;
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Échelles psychométriques en ligne | Melya",
   description:
     "PHQ-9, GAD-7, LSAS, PCL-5, Y-BOCS, RSES : envoyez vos échelles à vos patients, recevez les résultats cotés automatiquement. Hébergement HDS en France.",
-  alternates: { canonical: "https://www.melya.app/echelles" },
-};
+  path: "/echelles",
+});
 
 export default function ScalesIndexPage() {
   return (

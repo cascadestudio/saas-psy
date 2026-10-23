@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import { LegalPage, LegalSection } from "@/components/landing/legal-page";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Mentions légales — Melya",
   description: "Informations légales de l'éditeur de Melya.",
-  alternates: { canonical: "https://melya.app/mentions-legales" },
-};
+  path: "/mentions-legales",
+});
 
 export default function MentionsLegalesPage() {
   return (

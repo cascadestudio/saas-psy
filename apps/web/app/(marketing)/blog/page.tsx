@@ -4,15 +4,16 @@ import Link from "next/link";
 import { Navbar } from "@/components/landing/navbar";
 import { Footer } from "@/components/landing/footer";
 import { getBlogPosts } from "@/sanity/lib/queries";
+import { pageMetadata } from "@/lib/seo";
 
 export const revalidate = 60;
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Le blog de Melya — psychométrie et pratique clinique",
   description:
     "Guides pratiques sur les échelles psychométriques, le suivi longitudinal, le scoring et la conformité RGPD, pour les psychologues.",
-  alternates: { canonical: "https://www.melya.app/blog" },
-};
+  path: "/blog",
+});
 
 const dateFormatter = new Intl.DateTimeFormat("fr-FR", {
   day: "numeric",

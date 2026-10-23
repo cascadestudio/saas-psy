@@ -12,24 +12,14 @@ import { FAQ } from "@/components/landing/faq";
 import { faqItems } from "@/components/landing/faq-items";
 import { FinalCTA } from "@/components/landing/final-cta";
 import { Footer } from "@/components/landing/footer";
+import { pageMetadata, SITE_URL } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Melya — Automatisez la passation de vos échelles psychologiques",
   description:
     "Envoyez vos échelles en 2 minutes, recevez les résultats cotés automatiquement. Melya simplifie la passation des questionnaires psychométriques pour les psychologues. Hébergé en France sur serveur certifié HDS.",
-  openGraph: {
-    title: "Melya — Automatisez la passation de vos échelles psychologiques",
-    description:
-      "Envoyez vos échelles en 2 minutes, recevez les résultats cotés automatiquement.",
-    url: "https://www.melya.app",
-    images: ["/opengraph-image.png"],
-  },
-  alternates: {
-    canonical: "https://www.melya.app",
-  },
-};
-
-const SITE_URL = "https://www.melya.app";
+  path: "",
+});
 
 const jsonLd = {
   "@context": "https://schema.org",

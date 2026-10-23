@@ -26,7 +26,6 @@ export const metadata = {
     title: "Melya",
     description:
       "Plateforme d'échelles psychométriques pour psychologue·s. Envoi, passation en ligne, scoring automatique et suivi longitudinal.",
-    url: "https://www.melya.app",
     siteName: "Melya",
     locale: "fr_FR",
     type: "website",

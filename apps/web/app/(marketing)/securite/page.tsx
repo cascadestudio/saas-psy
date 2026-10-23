@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import { LegalPage, LegalSection } from "@/components/landing/legal-page";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Sécurité — Melya",
   description:
     "Hébergement HDS en France, chiffrement AES-256-GCM des données sensibles, conformité RGPD. Les engagements de sécurité de Melya pour les données de santé.",
-  alternates: { canonical: "https://melya.app/securite" },
-};
+  path: "/securite",
+});
 
 export default function SecuritePage() {
   return (

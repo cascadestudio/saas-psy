@@ -6,11 +6,27 @@ import { scales, type Scale } from "@melya/core";
  * Les `id` de `@melya/core` sont hétérogènes pour des raisons historiques
  * (`phq-9` mais aussi `echelle-d-anxiete-sociale-de-liebowitz`) et servent de
  * clé interne. Les URLs publiques, elles, doivent reprendre ce que le psy tape
- * dans Google : l'acronyme.
+ * dans Google : l'acronyme, sans accents (`ÉII` → `eii`) : Next ne retrouve
+ * pas un slug accentué une fois encodé dans l'URL, la page tombait en 404.
  */
 export function scaleSlug(scale: Scale): string {
-  return scale.acronym.toLowerCase();
+  return (
+    SLUG_OVERRIDES[scale.id] ??
+    scale.acronym
+      .normalize("NFD")
+      .replace(/[̀-ͯ]/g, "")
+      .toLowerCase()
+  );
 }
+
+/**
+ * Échelles qui partagent un acronyme : sans slug dédié, la seconde n'a pas de
+ * page publique (`getScaleBySlug` renvoie toujours la première).
+ */
+const SLUG_OVERRIDES: Record<string, string> = {
+  "bat-w": "bat-travail",
+  "bat-g": "bat-general",
+};
 
 export function getScaleBySlug(slug: string): Scale | undefined {
   return scales.find((scale) => scaleSlug(scale) === slug);

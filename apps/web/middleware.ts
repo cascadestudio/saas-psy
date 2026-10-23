@@ -1,7 +1,17 @@
 import { type NextRequest, NextResponse } from "next/server";
 
+const PRODUCTION_HOST = "www.melya.app";
+
 export async function middleware(request: NextRequest) {
-  return NextResponse.next();
+  const response = NextResponse.next();
+
+  // staging.melya.app et les previews Vercel servent le même code que la
+  // prod, robots.txt compris : sans ce header, Google les indexe.
+  if (request.headers.get("host") !== PRODUCTION_HOST) {
+    response.headers.set("X-Robots-Tag", "noindex, nofollow");
+  }
+
+  return response;
 }
 
 export const config = {

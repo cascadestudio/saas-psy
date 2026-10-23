@@ -6,6 +6,7 @@ import { Navbar } from "@/components/landing/navbar";
 import { Footer } from "@/components/landing/footer";
 import { CtaButton } from "@/components/landing/cta-button";
 import { getBlogPost, getBlogPosts } from "@/sanity/lib/queries";
+import { pageMetadata } from "@/lib/seo";
 
 export const revalidate = 60;
 
@@ -23,19 +24,12 @@ export async function generateMetadata({
   const post = await getBlogPost(slug);
   if (!post) return {};
 
-  const url = `https://www.melya.app/blog/${slug}`;
-  return {
+  return pageMetadata({
     title: post.seoTitle ?? post.title,
-    description: post.seoDescription,
-    alternates: { canonical: url },
-    openGraph: {
-      title: post.seoTitle ?? post.title,
-      description: post.seoDescription,
-      url,
-      type: "article",
-      publishedTime: post.publishedAt,
-    },
-  };
+    description: post.seoDescription ?? post.excerpt,
+    path: `/blog/${slug}`,
+    openGraph: { type: "article", publishedTime: post.publishedAt },
+  });
 }
 
 const dateFormatter = new Intl.DateTimeFormat("fr-FR", {
