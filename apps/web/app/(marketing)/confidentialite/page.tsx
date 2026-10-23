@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import { LegalPage, LegalSection } from "@/components/landing/legal-page";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Politique de confidentialité — Melya",
   description:
     "Comment Melya collecte, traite et protège vos données et celles de vos patient·e·s. Conformité RGPD et HDS.",
-  alternates: { canonical: "https://melya.app/confidentialite" },
-};
+  path: "/confidentialite",
+});
 
 export default function ConfidentialitePage() {
   return (

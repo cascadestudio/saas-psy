@@ -8,6 +8,7 @@ import { CtaButton } from "@/components/landing/cta-button";
 import { questionCount } from "@/app/utils/utils";
 import { allScaleSlugs, getScaleBySlug } from "@/lib/scale-slug";
 import { getScaleLandingPage } from "@/sanity/lib/queries";
+import { pageMetadata } from "@/lib/seo";
 import { DomainDot } from "@/components/scale/ScaleTag";
 
 export const revalidate = 60;
@@ -29,14 +30,13 @@ export async function generateMetadata({
   const title =
     content?.seoTitle ?? `${scale.acronym} — ${scale.label} en ligne | Melya`;
   const description = content?.seoDescription ?? scale.description;
-  const url = `https://www.melya.app/echelles/${slug}`;
 
-  return {
+  return pageMetadata({
     title,
     description,
-    alternates: { canonical: url },
-    openGraph: { title, description, url, type: "article" },
-  };
+    path: `/echelles/${slug}`,
+    openGraph: { type: "article" },
+  });
 }
 
 export default async function ScaleLandingPage({
